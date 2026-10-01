@@ -25,7 +25,7 @@ Shared UI: `src/components/ui` (primitives: Button, Input/Select/Textarea/Field,
 - Server Components by default; add `"use client"` only for interactivity.
 - Pages other than home start with `<PageHeader>` (it clears the fixed header).
 - Authorization is enforced on the server in every action and in every protected `page.tsx`, not just by hiding UI. A layout check alone is NOT enough: Next.js can render a page without re-running its layout (client-side RSC refetch), so each admin/account page calls `requireAdmin()`/`requireUser()` itself.
-- Motion: use the toolkit in `src/components/motion` (Reveal variants, SplitWords, CountUp, Marquee, Tilt, Magnetic) and React `<ViewTransition>` for route/shared-element transitions. Content must be visible in server HTML (never ship `opacity: 0` from the server), everything must respect `prefers-reduced-motion`, and no new animation libraries.
+- Motion: use the toolkit in `src/components/motion` (Reveal variants, SplitWords, CountUp, Marquee, Tilt, Magnetic) and React `<ViewTransition>` for route/shared-element transitions; scroll effects use CSS scroll-driven animations (`animation-timeline`). Content must be visible in server HTML (never ship `opacity: 0` from the server), everything must respect `prefers-reduced-motion`, and no new animation libraries.
 - Business dates (lead time, "today") use `Asia/Jakarta`, never the server time zone.
 - Zod messages are keys under `errors.fields` (e.g. `"required"`, `"email"`); `parseInput` translates them.
 - Design tokens live in `src/app/globals.css` (`bg-sand-50`, `text-ink`, `bg-terracotta`, `bg-indigo`, `text-muted`, `border-line`, `font-display`, `.eyebrow`, `.grain`, `rounded-(--radius-card)`).

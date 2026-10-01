@@ -4,7 +4,7 @@ Marketplace tur budaya Indonesia: jelajahi destinasi dan paket tur etnik yang di
 
 ## Stack
 
-Next.js 16 (App Router, Server Components, Server Actions) · TypeScript · Tailwind CSS v4 · PostgreSQL + Drizzle ORM · Better Auth · Zod · next-intl · lucide-react · Motion · Vitest
+Next.js 16 (App Router, Server Components, Server Actions) · TypeScript · Tailwind CSS v4 · PostgreSQL + Drizzle ORM · Better Auth · Zod · next-intl · lucide-react · Vitest · Playwright (animasi: CSS + React ViewTransition, tanpa library animasi)
 
 ## Menjalankan secara lokal
 
