@@ -84,4 +84,14 @@ describe("pricing and codes", () => {
       expect(generateBookingCode()).toMatch(/^EJ-[A-HJ-NP-Z2-9]{6}$/);
     }
   });
+
+  it("maps every byte value onto the 32-character alphabet evenly", () => {
+    const counts = new Map<string, number>();
+    for (let byte = 0; byte < 256; byte++) {
+      const code = generateBookingCode(() => new Uint8Array(6).fill(byte)).slice(3, 4);
+      counts.set(code, (counts.get(code) ?? 0) + 1);
+    }
+    expect(counts.size).toBe(32);
+    expect(new Set(counts.values())).toEqual(new Set([8]));
+  });
 });
