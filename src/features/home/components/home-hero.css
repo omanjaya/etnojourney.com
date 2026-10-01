@@ -1,0 +1,40 @@
+/*
+ * Hero parallax with CSS scroll-driven animations (no JS library).
+ * The section exposes a view timeline; as it scrolls out, the photo drifts
+ * down and the content fades. Browsers without support keep a static hero.
+ */
+.hero {
+  view-timeline-name: --hero;
+}
+
+@keyframes hero-drift {
+  to {
+    translate: 0 18%;
+  }
+}
+
+@keyframes hero-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+@supports (animation-timeline: --hero) {
+  .hero-drift {
+    animation: hero-drift linear both;
+    animation-timeline: --hero;
+    animation-range: exit 0% exit 100%;
+  }
+  .hero-fade {
+    animation: hero-fade linear both;
+    animation-timeline: --hero;
+    animation-range: exit 0% exit 70%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-drift,
+  .hero-fade {
+    animation: none !important;
+  }
+}

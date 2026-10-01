@@ -33,7 +33,7 @@ export async function generateMetadata({
     locale,
     path: "/tours",
     title,
-    description: t("description"),
+    description: page > 1 ? t("descriptionPaged", { page }) : t("description"),
   });
   return page > 1 ? withPageParam(metadata, page) : metadata;
 }

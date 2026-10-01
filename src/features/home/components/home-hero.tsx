@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown, ArrowRight, Search } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRef, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Container } from "@/components/layout/container";
 import { CountUp, Magnetic, SplitWords } from "@/components/motion";
 import { Button } from "@/components/ui/button";
+import "./home-hero.css";
 
 const HERO_IMAGE = "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=2400&q=80";
 
@@ -26,13 +26,7 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
   const t = useTranslations("home.hero");
   const locale = useLocale();
   const router = useRouter();
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLElement>(null);
   const [query, setQuery] = useState("");
-
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "18%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, reduce ? 1 : 0]);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -42,19 +36,18 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
 
   return (
     <section
-      ref={ref}
-      className="bg-indigo relative flex min-h-[100svh] flex-col overflow-hidden text-white"
+      className="hero bg-indigo relative flex min-h-[100svh] flex-col overflow-hidden text-white"
     >
-      {/* Parallax (motion) on the outer layer, Ken Burns (CSS) on the inner one. */}
-      <motion.div className="absolute inset-0 scale-110" style={{ y: imageY }}>
+      {/* Scroll-driven parallax (CSS) on the outer layer, Ken Burns on the inner one. */}
+      <div className="hero-drift absolute inset-0 scale-110">
         <div className="animate-ken-burns absolute inset-0">
           <Image src={HERO_IMAGE} alt="" fill preload sizes="100vw" className="object-cover" />
         </div>
-      </motion.div>
+      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/15 to-black/75" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
 
-      <motion.div style={{ opacity: contentOpacity }} className="relative flex flex-1 flex-col">
+      <div className="hero-fade relative flex flex-1 flex-col">
         <Container className="flex flex-1 flex-col justify-center pt-32 pb-12">
           <p
             style={delay(0)}
@@ -159,7 +152,7 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
             </div>
           </Container>
         </div>
-      </motion.div>
+      </div>
 
       <p className="absolute right-4 bottom-40 hidden max-w-[45vh] origin-bottom-right -rotate-90 truncate text-[10px] tracking-[0.25em] text-white/50 uppercase md:block">
         {t("photoCredit")}

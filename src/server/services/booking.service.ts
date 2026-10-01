@@ -126,11 +126,13 @@ export const bookingService = {
    * never holds the whole table in memory.
    */
   async *exportRows(filters: AdminBookingFilters, batchSize = 500) {
-    for (let offset = 0; ; offset += batchSize) {
-      const batch = await bookingRepository.exportBatch(filters, batchSize, offset);
+    let beforeId: number | undefined;
+    for (;;) {
+      const batch = await bookingRepository.exportBatch(filters, batchSize, beforeId);
       if (batch.length === 0) return;
       yield batch;
       if (batch.length < batchSize) return;
+      beforeId = batch[batch.length - 1].id;
     }
   },
 

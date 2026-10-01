@@ -177,6 +177,11 @@ test.describe("public tours pagination", () => {
     await expect(page).not.toHaveURL(/page=/);
 
     // Out-of-range pages redirect to the last real page (keeping filters).
+    // Must be a real HTTP redirect (not a streamed 200 + meta refresh), so
+    // crawlers never index an out-of-range page under a false canonical.
+    const raw = await page.request.get("/tours?page=999", { maxRedirects: 0 });
+    expect([307, 308]).toContain(raw.status());
+    expect(raw.headers().location).toMatch(/\/tours\?page=2$/);
     await page.goto("/tours?page=999");
     await expect(page).toHaveURL(/\/tours\?page=2$/);
     expect(await page.locator("article").count()).toBeGreaterThan(0);

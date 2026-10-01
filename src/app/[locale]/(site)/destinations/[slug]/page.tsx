@@ -43,10 +43,11 @@ export async function generateMetadata({
   const locale = rawLocale as Locale;
   const data = await destinationService.getWithTours(slug).catch(() => null);
   if (!data) return {};
+  const t = await getTranslations({ locale, namespace: "destinations.meta" });
   return pageMetadata({
     locale,
     path: `/destinations/${data.destination.slug}`,
-    title: data.destination.name,
+    title: t("detailTitle", { name: data.destination.name, province: data.destination.province }),
     description: localize(data.destination.tagline, locale),
     image: absoluteImage(data.destination.heroImage),
   });
@@ -95,15 +96,24 @@ export default async function DestinationPage({
       />
       <section className="bg-indigo relative flex min-h-[78vh] items-end overflow-hidden text-white">
         <ViewTransition name={destinationMorphName(destination.slug)} share="morph" default="none">
-          <Image
-            src={destination.heroImage}
-            alt={destination.name}
-            fill
-            preload
-            fetchPriority="high"
-            sizes="100vw"
-            className="animate-ken-burns object-cover"
-          />
+          {/* Small cached copy underneath so the morph never shows an empty box
+              while the full-size hero is still loading. */}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(/_next/image?url=${encodeURIComponent(destination.heroImage)}&w=640&q=75)`,
+            }}
+          >
+            <Image
+              src={destination.heroImage}
+              alt={destination.name}
+              fill
+              preload
+              fetchPriority="high"
+              sizes="100vw"
+              className="animate-ken-burns object-cover"
+            />
+          </div>
         </ViewTransition>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/30" />
         <Container className="relative pt-40 pb-16 md:pb-24">

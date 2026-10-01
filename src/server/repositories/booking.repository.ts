@@ -8,6 +8,7 @@ import {
   gte,
   ilike,
   inArray,
+  lt,
   lte,
   or,
   sql,
@@ -186,7 +187,12 @@ export const bookingRepository = {
   },
 
   /** Flat rows for CSV export, read in batches by the caller. */
-  exportBatch(filters: AdminBookingFilters, limit: number, offset: number) {
+  /**
+   * Keyset-paginated export batch (newest id first). Unlike OFFSET, each batch
+   * seeks straight past the previous one, so exports stay linear and rows
+   * can't shift between batches when new bookings arrive mid-export.
+   */
+  exportBatch(filters: AdminBookingFilters, limit: number, beforeId?: number) {
     return db
       .select({
         code: bookings.code,
@@ -201,14 +207,16 @@ export const bookingRepository = {
         participants: bookings.participants,
         totalPrice: bookings.totalPrice,
         createdAt: bookings.createdAt,
+        id: bookings.id,
       })
       .from(bookings)
       .innerJoin(tours, eq(bookings.tourId, tours.id))
       .innerJoin(user, eq(bookings.userId, user.id))
-      .where(adminConditions(filters))
-      .orderBy(...adminOrder(filters.sort))
-      .limit(limit)
-      .offset(offset);
+      .where(
+        and(adminConditions(filters), beforeId === undefined ? undefined : lt(bookings.id, beforeId)),
+      )
+      .orderBy(desc(bookings.id))
+      .limit(limit);
   },
 
   async stats() {
