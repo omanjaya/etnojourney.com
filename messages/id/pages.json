@@ -1,0 +1,338 @@
+{
+  "about": {
+    "meta": {
+      "title": "Tentang kami",
+      "description": "EtnoJourney merancang perjalanan budaya kecil yang dipandu langsung oleh warga desa, dengan pembagian hasil yang adil dan hormat pada tradisi."
+    },
+    "eyebrow": "Tentang kami",
+    "title": "Perjalanan yang dipimpin oleh tuan rumahnya",
+    "description": "Kami percaya cara terbaik mengenal sebuah budaya adalah lewat orang-orang yang menghidupinya setiap hari, bukan lewat panggung yang disiapkan untuk wisatawan.",
+    "mission": {
+      "eyebrow": "Misi",
+      "title": "Membuka pintu, bukan memajang tradisi",
+      "body": [
+        "EtnoJourney menghubungkan pelancong dengan komunitas adat dan desa di seluruh Nusantara. Setiap perjalanan dirancang bersama warga setempat: mereka yang menentukan apa yang boleh dibagikan, kapan, dan dengan cara apa.",
+        "Kami sengaja menjaga perjalanan tetap kecil dan lambat. Tujuannya bukan mengumpulkan sebanyak mungkin tempat, melainkan memberi waktu untuk duduk, mendengar, dan belajar dari tuan rumah."
+      ]
+    },
+    "principles": {
+      "eyebrow": "Cara kami bekerja",
+      "title": "Empat prinsip yang tidak kami tawar",
+      "items": {
+        "fair": {
+          "title": "Pembagian hasil yang adil",
+          "body": "Pemandu dan keluarga tuan rumah dibayar langsung untuk waktu dan keahlian mereka, dan sebagian harga setiap perjalanan dialokasikan untuk kebutuhan desa yang mereka tentukan sendiri."
+        },
+        "small": {
+          "title": "Kelompok kecil",
+          "body": "Setiap tur punya batas peserta. Kelompok kecil berarti percakapan yang lebih jujur dan beban yang lebih ringan bagi desa."
+        },
+        "consent": {
+          "title": "Izin untuk setiap upacara",
+          "body": "Upacara adalah milik komunitas. Kami hanya mengajak tamu hadir bila tuan rumah mengizinkan, dan kami mengikuti aturan mereka soal pakaian, foto, dan batas yang tidak boleh dilewati."
+        },
+        "real": {
+          "title": "Tanpa pertunjukan yang dibuat-buat",
+          "body": "Kami tidak menggelar ritual khusus untuk tamu. Yang kamu temui adalah kehidupan sehari-hari: dapur, ladang, sanggar, dan upacara yang memang sedang berlangsung."
+        }
+      }
+    },
+    "responsible": {
+      "eyebrow": "Wisata bertanggung jawab",
+      "title": "Hal-hal yang kami minta dari setiap tamu",
+      "items": [
+        "Berpakaian sopan dan mengikuti arahan tuan rumah, terutama di pura, rumah adat, dan saat upacara.",
+        "Bertanya sebelum memotret orang, dan menerima jawaban tidak dengan lapang.",
+        "Membawa pulang sampah sendiri dan menghemat air, terutama di desa yang airnya terbatas.",
+        "Membeli kerajinan langsung dari pembuatnya dan menghargai harga yang mereka tetapkan."
+      ]
+    },
+    "partners": {
+      "eyebrow": "Mitra desa",
+      "title": "Bagaimana kami memilih dan mendampingi mitra",
+      "body": [
+        "Kami bekerja dengan desa yang warganya sendiri ingin menerima tamu. Sebelum sebuah perjalanan dibuka, kami berdiskusi dengan tetua dan pengelola desa tentang jumlah tamu, jadwal yang tidak mengganggu kegiatan adat, dan pembagian hasil.",
+        "Kemitraan ditinjau ulang secara berkala. Jika desa merasa perlu jeda, misalnya saat musim upacara besar atau panen, perjalanan kami hentikan sementara."
+      ]
+    },
+    "cta": {
+      "title": "Siap menjadi tamu yang baik?",
+      "body": "Lihat perjalanan yang sedang dibuka dan pilih yang paling sesuai dengan ritmemu.",
+      "button": "Jelajahi paket tur"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Pertanyaan umum",
+      "description": "Jawaban seputar booking, pembayaran, persiapan perjalanan, etika budaya, dan akun EtnoJourney."
+    },
+    "eyebrow": "Bantuan",
+    "title": "Pertanyaan yang sering diajukan",
+    "description": "Belum menemukan jawabannya? Hubungi kami lewat kontak di bagian bawah halaman.",
+    "groups": {
+      "booking": {
+        "title": "Booking dan pembayaran",
+        "items": [
+          {
+            "q": "Seberapa jauh hari saya harus memesan?",
+            "a": "Booking bisa dilakukan paling cepat 3 hari sebelum tanggal perjalanan, dihitung berdasarkan waktu Indonesia Barat (WIB). Waktu ini kami perlukan agar tuan rumah bisa bersiap."
+          },
+          {
+            "q": "Bagaimana cara membayar?",
+            "a": "Setelah booking dibuat, tekan Bayar sekarang. Kamu akan diarahkan ke halaman pembayaran Midtrans untuk memilih metode seperti transfer bank, e-wallet, atau QRIS. Begitu pembayaran berhasil, booking otomatis terkonfirmasi."
+          },
+          {
+            "q": "Apakah booking saya langsung pasti?",
+            "a": "Kursi kamu tercatat sejak booking dibuat, dan booking menjadi terkonfirmasi segera setelah pembayaran diterima. Selama belum dibayar, statusnya Menunggu."
+          },
+          {
+            "q": "Bisakah saya membatalkan sendiri?",
+            "a": "Bisa, selama booking belum dibayar. Buka Akun saya, pilih booking, lalu tekan Batalkan. Untuk booking yang sudah dibayar, pembatalan dan pengembalian dana diproses manual oleh tim kami sesuai Kebijakan pembatalan."
+          },
+          {
+            "q": "Saya sudah membayar tapi ingin mengubah tanggal. Apa yang harus dilakukan?",
+            "a": "Hubungi kami dengan menyertakan kode booking (formatnya EJ-XXXXXX). Perubahan bergantung pada ketersediaan tuan rumah di tanggal baru."
+          }
+        ]
+      },
+      "travel": {
+        "title": "Sebelum berangkat",
+        "items": [
+          {
+            "q": "Di mana titik temunya?",
+            "a": "Titik temu tercantum di halaman setiap tur dan di halaman detail booking kamu."
+          },
+          {
+            "q": "Apa yang sudah termasuk dalam harga?",
+            "a": "Setiap tur mencantumkan daftar Yang termasuk, misalnya pemandu lokal, makan, atau transportasi. Hal yang tidak tercantum di daftar itu tidak termasuk dalam harga."
+          },
+          {
+            "q": "Bagaimana jika ada kebutuhan khusus, misalnya alergi makanan?",
+            "a": "Tuliskan di kolom catatan saat booking. Kami akan meneruskannya kepada tuan rumah sebelum perjalanan."
+          }
+        ]
+      },
+      "etiquette": {
+        "title": "Etika budaya",
+        "items": [
+          {
+            "q": "Pakaian apa yang pantas?",
+            "a": "Pakaian sopan yang menutup bahu dan lutut. Untuk kunjungan ke pura di Bali, kain dan selendang biasanya disediakan bila tercantum di daftar Yang termasuk."
+          },
+          {
+            "q": "Bolehkah saya memotret upacara?",
+            "a": "Selalu tanyakan dulu kepada pemandu. Beberapa bagian upacara tidak boleh difoto sama sekali, dan aturan ini wajib dihormati."
+          },
+          {
+            "q": "Apakah upacaranya diadakan khusus untuk tamu?",
+            "a": "Tidak. Kami tidak menggelar ritual untuk wisatawan. Jika sebuah upacara sedang berlangsung dan tuan rumah mengizinkan, kamu diajak hadir sebagai tamu yang menyaksikan dengan hormat."
+          }
+        ]
+      },
+      "account": {
+        "title": "Akun",
+        "items": [
+          {
+            "q": "Kapan saya bisa menulis ulasan?",
+            "a": "Setelah perjalanan berstatus Selesai. Tombol Tulis ulasan muncul di halaman Akun saya, dan setiap booking bisa diulas satu kali."
+          },
+          {
+            "q": "Dalam bahasa apa email dari EtnoJourney dikirim?",
+            "a": "Sesuai bahasa yang kamu pilih di Akun saya, menu Pengaturan. Pilihan yang tersedia adalah Bahasa Indonesia dan English."
+          },
+          {
+            "q": "Saya lupa kata sandi.",
+            "a": "Gunakan tautan Lupa kata sandi di halaman masuk. Kami akan mengirim tautan untuk membuat kata sandi baru, yang berlaku selama 1 jam."
+          }
+        ]
+      }
+    }
+  },
+  "legal": {
+    "templateNotice": "Dokumen ini adalah templat yang disusun dari cara kerja sistem EtnoJourney saat ini. Dokumen wajib ditinjau oleh konsultan hukum dan dilengkapi data badan usaha sebelum situs diluncurkan.",
+    "updated": "Terakhir diperbarui {date}",
+    "toc": "Daftar isi",
+    "contactTitle": "Kontak",
+    "contactBody": "Pertanyaan tentang dokumen ini dapat dikirim ke [Email layanan pelanggan] atau ke alamat [Alamat terdaftar]."
+  },
+  "cancellation": {
+    "meta": {
+      "title": "Kebijakan pembatalan",
+      "description": "Ketentuan pembatalan, perubahan jadwal, dan pengembalian dana untuk perjalanan EtnoJourney."
+    },
+    "eyebrow": "Kebijakan",
+    "title": "Kebijakan pembatalan",
+    "description": "Bagaimana pembatalan dan pengembalian dana ditangani, untuk booking yang belum maupun sudah dibayar.",
+    "sections": [
+      {
+        "id": "unpaid",
+        "title": "Booking yang belum dibayar",
+        "paragraphs": [
+          "Selama booking berstatus Menunggu dan belum dibayar, kamu bisa membatalkannya sendiri kapan saja dari halaman Akun saya tanpa biaya."
+        ]
+      },
+      {
+        "id": "paid",
+        "title": "Booking yang sudah dibayar",
+        "paragraphs": [
+          "Booking yang sudah dibayar tidak dapat dibatalkan sendiri dari situs. Ajukan pembatalan dengan menghubungi kami dan menyertakan kode booking.",
+          "Besaran pengembalian dana ditentukan berdasarkan jarak waktu pengajuan terhadap tanggal perjalanan: [Ketentuan persentase pengembalian dana, misalnya per rentang hari]."
+        ]
+      },
+      {
+        "id": "operator",
+        "title": "Pembatalan oleh EtnoJourney atau tuan rumah",
+        "paragraphs": [
+          "Perjalanan dapat dibatalkan oleh kami bila terjadi kondisi yang membahayakan keselamatan, bencana alam, atau bila desa memutuskan menutup kunjungan karena kegiatan adat. Dalam kondisi ini kamu dapat memilih jadwal pengganti atau pengembalian dana penuh."
+        ]
+      },
+      {
+        "id": "refunds",
+        "title": "Proses pengembalian dana",
+        "paragraphs": [
+          "Pengembalian dana diproses secara manual ke metode pembayaran yang dipakai, melalui Midtrans. Lama dana diterima bergantung pada bank atau penyedia e-wallet: [Perkiraan waktu proses]."
+        ]
+      },
+      {
+        "id": "changes",
+        "title": "Perubahan jadwal",
+        "paragraphs": [
+          "Permintaan perubahan tanggal untuk booking yang sudah dibayar diproses sesuai ketersediaan tuan rumah. Tanggal baru tetap harus minimal 3 hari dari hari pengajuan."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "meta": {
+      "title": "Kebijakan privasi",
+      "description": "Data apa yang dikumpulkan EtnoJourney, untuk apa, dan bagaimana kamu dapat mengendalikannya."
+    },
+    "eyebrow": "Kebijakan",
+    "title": "Kebijakan privasi",
+    "description": "Kami hanya menyimpan data yang diperlukan untuk menjalankan booking dan akunmu.",
+    "sections": [
+      {
+        "id": "controller",
+        "title": "Pengelola data",
+        "paragraphs": [
+          "Data pribadi di situs ini dikelola oleh [Nama badan usaha], beralamat di [Alamat terdaftar]."
+        ]
+      },
+      {
+        "id": "data",
+        "title": "Data yang kami simpan",
+        "paragraphs": ["Kami menyimpan data berikut:"],
+        "items": [
+          "Data akun: nama, alamat email, kata sandi dalam bentuk hash (bukan teks asli), dan pilihan bahasa email.",
+          "Data booking: tur, tanggal perjalanan, jumlah peserta, nama dan nomor telepon kontak, catatan yang kamu tulis, serta harga.",
+          "Status pembayaran: status, metode pembayaran, jumlah, dan waktu pembayaran yang dilaporkan oleh Midtrans.",
+          "Ulasan yang kamu tulis beserta nama dan negara asal yang kamu cantumkan.",
+          "Data sesi: alamat IP dan user agent perangkat yang digunakan untuk masuk, demi keamanan akun."
+        ]
+      },
+      {
+        "id": "payments",
+        "title": "Data kartu dan pembayaran",
+        "paragraphs": [
+          "Pembayaran diproses oleh Midtrans. Nomor kartu, data rekening, dan kredensial e-wallet dimasukkan langsung di halaman Midtrans dan tidak pernah disimpan di sistem kami."
+        ]
+      },
+      {
+        "id": "usage",
+        "title": "Penggunaan data",
+        "paragraphs": ["Data digunakan untuk:"],
+        "items": [
+          "Membuat dan mengelola booking, termasuk meneruskan kebutuhan khusus kepada tuan rumah.",
+          "Mengirim email transaksi: konfirmasi booking, perubahan status, pembayaran, dan reset kata sandi.",
+          "Menjaga keamanan akun, misalnya membatasi percobaan masuk yang berulang."
+        ]
+      },
+      {
+        "id": "cookies",
+        "title": "Cookie",
+        "paragraphs": [
+          "Kami hanya memakai dua jenis cookie: cookie sesi agar kamu tetap masuk, dan cookie bahasa untuk mengingat pilihan bahasa situs. Saat ini kami tidak memakai cookie analitik, iklan, atau pelacak pihak ketiga."
+        ]
+      },
+      {
+        "id": "sharing",
+        "title": "Pihak ketiga",
+        "paragraphs": [
+          "Data dibagikan hanya kepada pihak yang diperlukan untuk menjalankan layanan:"
+        ],
+        "items": [
+          "Midtrans, untuk memproses pembayaran.",
+          "Penyedia layanan email, untuk mengirim email transaksi.",
+          "Tuan rumah dan pemandu perjalananmu, sebatas nama kontak, jumlah peserta, dan catatan yang relevan."
+        ]
+      },
+      {
+        "id": "rights",
+        "title": "Hak kamu",
+        "paragraphs": [
+          "Kamu dapat mengubah nama dan pilihan bahasa kapan saja di Akun saya. Untuk meminta salinan atau penghapusan data, hubungi kami. Data booking tertentu mungkin perlu disimpan lebih lama untuk keperluan pembukuan: [Masa retensi data]."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "meta": {
+      "title": "Syarat dan ketentuan",
+      "description": "Ketentuan penggunaan situs dan layanan booking perjalanan EtnoJourney."
+    },
+    "eyebrow": "Kebijakan",
+    "title": "Syarat dan ketentuan",
+    "description": "Aturan dasar yang berlaku saat kamu memakai situs ini dan memesan perjalanan.",
+    "sections": [
+      {
+        "id": "service",
+        "title": "Layanan",
+        "paragraphs": [
+          "EtnoJourney, dioperasikan oleh [Nama badan usaha], menyediakan pemesanan perjalanan budaya yang dipandu oleh komunitas lokal. Dengan memakai situs ini, kamu menyetujui ketentuan berikut."
+        ]
+      },
+      {
+        "id": "account",
+        "title": "Akun",
+        "paragraphs": [
+          "Kamu bertanggung jawab menjaga kerahasiaan kata sandi dan atas aktivitas yang terjadi di akunmu. Data yang kamu berikan harus benar dan terkini."
+        ]
+      },
+      {
+        "id": "booking",
+        "title": "Booking dan harga",
+        "paragraphs": [
+          "Harga ditampilkan dalam Rupiah per orang dan dihitung ulang oleh sistem saat booking dibuat. Booking dapat dibuat paling cepat 3 hari sebelum tanggal perjalanan dan tunduk pada kapasitas tur. Booking terkonfirmasi setelah pembayaran diterima."
+        ]
+      },
+      {
+        "id": "conduct",
+        "title": "Perilaku selama perjalanan",
+        "paragraphs": [
+          "Tamu wajib mengikuti arahan pemandu dan aturan adat setempat. Tuan rumah berhak menghentikan partisipasi tamu yang melanggar aturan tersebut atau membahayakan orang lain, tanpa pengembalian dana."
+        ]
+      },
+      {
+        "id": "reviews",
+        "title": "Ulasan",
+        "paragraphs": [
+          "Ulasan hanya dapat ditulis untuk perjalanan yang sudah selesai, satu kali per booking. Kami dapat menyembunyikan ulasan yang mengandung ujaran kebencian, data pribadi orang lain, atau konten yang tidak berkaitan dengan perjalanan."
+        ]
+      },
+      {
+        "id": "liability",
+        "title": "Tanggung jawab",
+        "paragraphs": [
+          "[Ketentuan batas tanggung jawab dan asuransi perjalanan, untuk dilengkapi oleh konsultan hukum]."
+        ]
+      },
+      {
+        "id": "law",
+        "title": "Hukum yang berlaku",
+        "paragraphs": [
+          "Ketentuan ini tunduk pada hukum Republik Indonesia. [Ketentuan penyelesaian sengketa]."
+        ]
+      }
+    ]
+  }
+}

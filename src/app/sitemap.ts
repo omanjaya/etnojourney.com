@@ -6,6 +6,9 @@ import { tourService } from "@/server/services/tour.service";
 
 export const dynamic = "force-dynamic";
 
+/** Static editorial and legal pages. */
+const CONTENT_PAGES = ["/about", "/faq", "/cancellation-policy", "/privacy", "/terms"] as const;
+
 function entry(href: string, lastModified?: Date): MetadataRoute.Sitemap[number] {
   const url = (locale: (typeof routing.locales)[number]) => localizedUrl(href, locale);
   return {
@@ -21,11 +24,15 @@ function entry(href: string, lastModified?: Date): MetadataRoute.Sitemap[number]
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [tours, destinations] = await Promise.all([tourService.search({}), destinationService.list()]);
+  const [tours, destinations] = await Promise.all([
+    tourService.search({}),
+    destinationService.list(),
+  ]);
   return [
     entry("/"),
     entry("/tours"),
     entry("/destinations"),
+    ...CONTENT_PAGES.map((href) => entry(href)),
     ...tours.map(({ tour }) => entry(`/tours/${tour.slug}`, tour.updatedAt)),
     ...destinations.map((d) => entry(`/destinations/${d.slug}`, d.updatedAt)),
   ];

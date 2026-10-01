@@ -55,7 +55,12 @@
     "partners": "Mitra desa",
     "rights": "Hak cipta dilindungi.",
     "madeIn": "Dibuat dengan hormat untuk budaya Nusantara.",
-    "statement": "Perjalanan kecil, dipandu warga, dengan hormat pada tradisi."
+    "statement": "Perjalanan kecil, dipandu warga, dengan hormat pada tradisi.",
+    "help": "Bantuan",
+    "faq": "Pertanyaan umum",
+    "cancellation": "Kebijakan pembatalan",
+    "privacy": "Kebijakan privasi",
+    "terms": "Syarat & ketentuan"
   },
   "notFound": {
     "title": "Jalan ini belum dipetakan",

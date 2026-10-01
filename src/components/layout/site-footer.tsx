@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { hasAnyContact, siteContact } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 import { Reveal, SplitWords } from "@/components/motion";
 import { Logo } from "@/components/shared/logo";
@@ -7,6 +8,7 @@ import { Container } from "./container";
 
 export async function SiteFooter() {
   const t = await getTranslations("common");
+  const contact = siteContact();
   const year = new Date().getFullYear();
 
   return (
@@ -42,74 +44,86 @@ export async function SiteFooter() {
         </Reveal>
       </Container>
 
-      <Container className="relative grid gap-12 py-16 md:grid-cols-12">
-        <Reveal className="md:col-span-5" delay={0}>
+      <Container className="relative grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
+        <Reveal className="sm:col-span-2 lg:col-span-4" delay={0}>
           <Logo inverted />
           <p className="text-sand-100/70 mt-6 max-w-sm leading-relaxed">{t("footer.about")}</p>
         </Reveal>
 
-        <Reveal className="md:col-span-2" delay={0.08}>
+        <Reveal className="lg:col-span-2" delay={0.08}>
           <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.explore")}
           </h3>
-          <ul className="mt-5 space-y-1.5 text-sm">
-            <li>
-              <Link
-                href="/tours"
-                className="inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white"
-              >
-                {t("nav.tours")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/destinations"
-                className="inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white"
-              >
-                {t("nav.destinations")}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/account"
-                className="inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white"
-              >
-                {t("nav.bookings")}
-              </Link>
-            </li>
-          </ul>
+          <FooterLinks
+            links={[
+              { href: "/tours", label: t("nav.tours") },
+              { href: "/destinations", label: t("nav.destinations") },
+              { href: "/account", label: t("nav.bookings") },
+            ]}
+          />
         </Reveal>
 
-        <Reveal className="md:col-span-2" delay={0.16}>
+        <Reveal className="lg:col-span-2" delay={0.16}>
           <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.company")}
           </h3>
-          <ul className="text-sand-100/80 mt-5 space-y-3 text-sm">
-            <li>{t("footer.ourStory")}</li>
-            <li>{t("footer.responsible")}</li>
-            <li>{t("footer.partners")}</li>
-          </ul>
+          <FooterLinks
+            links={[
+              { href: "/about", label: t("footer.ourStory") },
+              { href: "/about#responsible", label: t("footer.responsible") },
+              { href: "/about#partners", label: t("footer.partners") },
+            ]}
+          />
         </Reveal>
 
-        <Reveal className="md:col-span-3" delay={0.24}>
+        <Reveal className="lg:col-span-2" delay={0.24}>
           <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
-            {t("footer.contact")}
+            {t("footer.help")}
           </h3>
-          <ul className="text-sand-100/80 mt-5 space-y-3 text-sm">
-            <li className="flex gap-3">
-              <MapPin className="text-gold size-4 shrink-0" aria-hidden />
-              Jl. Raya Ubud No. 18, Gianyar, Bali
-            </li>
-            <li className="flex gap-3">
-              <Phone className="text-gold size-4 shrink-0" aria-hidden />
-              +62 361 975 018
-            </li>
-            <li className="flex gap-3">
-              <Mail className="text-gold size-4 shrink-0" aria-hidden />
-              halo@etnojourney.id
-            </li>
-          </ul>
+          <FooterLinks
+            links={[
+              { href: "/faq", label: t("footer.faq") },
+              { href: "/cancellation-policy", label: t("footer.cancellation") },
+              { href: "/privacy", label: t("footer.privacy") },
+              { href: "/terms", label: t("footer.terms") },
+            ]}
+          />
         </Reveal>
+
+        {hasAnyContact(contact) && (
+          <Reveal className="lg:col-span-2" delay={0.32}>
+            <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+              {t("footer.contact")}
+            </h3>
+            <ul className="text-sand-100/80 mt-5 space-y-3 text-sm">
+              {contact.address && (
+                <li className="flex gap-3">
+                  <MapPin className="text-gold size-4 shrink-0" aria-hidden />
+                  {contact.address}
+                </li>
+              )}
+              {contact.phone && (
+                <li className="flex gap-3">
+                  <Phone className="text-gold size-4 shrink-0" aria-hidden />
+                  <a
+                    href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}
+                    className="hover:text-white"
+                  >
+                    {contact.phone}
+                  </a>
+                </li>
+              )}
+              {contact.email && (
+                <li className="flex gap-3">
+                  <Mail className="text-gold size-4 shrink-0" aria-hidden />
+                  <a href={`mailto:${contact.email}`} className="hover:text-white">
+                    {contact.email}
+                  </a>
+                </li>
+              )}
+            </ul>
+          </Reveal>
+        )}
       </Container>
 
       <Container className="text-sand-100/60 relative flex flex-col gap-2 border-t border-white/10 py-8 text-xs md:flex-row md:justify-between">
@@ -119,5 +133,22 @@ export async function SiteFooter() {
         <p>{t("footer.madeIn")}</p>
       </Container>
     </footer>
+  );
+}
+
+const linkClass =
+  "inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white";
+
+function FooterLinks({ links }: { links: { href: string; label: string }[] }) {
+  return (
+    <ul className="text-sand-100/80 mt-5 space-y-1.5 text-sm">
+      {links.map((link) => (
+        <li key={link.href}>
+          <Link href={link.href} className={linkClass}>
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }

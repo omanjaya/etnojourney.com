@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { localizedUrl, siteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/shared/json-ld";
+import { siteContact } from "@/config/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -28,7 +29,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     metadataBase: new URL(siteUrl()),
     title: { default: `EtnoJourney | ${t("tagline")}`, template: "%s | EtnoJourney" },
     description: t("footer.about"),
-    openGraph: { siteName: "EtnoJourney", type: "website", locale: locale === "en" ? "en_US" : "id_ID" },
+    openGraph: {
+      siteName: "EtnoJourney",
+      type: "website",
+      locale: locale === "en" ? "en_US" : "id_ID",
+    },
     twitter: { card: "summary_large_image" },
   };
 }
@@ -41,6 +46,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   setRequestLocale(locale);
   const [t, tc] = await Promise.all([getTranslations("common.nav"), getTranslations("common")]);
   const base = siteUrl();
+  const contact = siteContact();
   const organization = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
@@ -49,15 +55,12 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     url: localizedUrl("/", locale),
     logo: `${base}/icon.svg`,
     description: tc("footer.about"),
-    email: "halo@etnojourney.id",
-    telephone: "+62 361 975 018",
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Jl. Raya Ubud No. 18",
-      addressLocality: "Gianyar",
-      addressRegion: "Bali",
-      addressCountry: "ID",
-    },
+    // Only real, configured contact details (see src/config/site.ts).
+    ...(contact.email && { email: contact.email }),
+    ...(contact.phone && { telephone: contact.phone }),
+    ...(contact.address && {
+      address: { "@type": "PostalAddress", streetAddress: contact.address, addressCountry: "ID" },
+    }),
   };
   const website = {
     "@context": "https://schema.org",
@@ -69,7 +72,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     publisher: { "@id": `${base}/#organization` },
     potentialAction: {
       "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: `${localizedUrl("/tours", locale)}?q={search_term_string}` },
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${localizedUrl("/tours", locale)}?q={search_term_string}`,
+      },
       "query-input": "required name=search_term_string",
     },
   };
@@ -79,7 +85,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       <body className="min-h-dvh">
         <a
           href="#main"
-          className="sr-only z-[100] rounded-full bg-ink px-4 py-2 text-sand-50 focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+          className="bg-ink text-sand-50 sr-only z-[100] rounded-full px-4 py-2 focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
         >
           {t("skipToContent")}
         </a>

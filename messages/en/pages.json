@@ -1,0 +1,336 @@
+{
+  "about": {
+    "meta": {
+      "title": "About us",
+      "description": "EtnoJourney designs small cultural journeys led by village hosts, with a fair share for communities and respect for tradition."
+    },
+    "eyebrow": "About us",
+    "title": "Journeys led by the people who host them",
+    "description": "We believe the best way to understand a culture is through the people who live it every day, not through a stage set up for tourists.",
+    "mission": {
+      "eyebrow": "Mission",
+      "title": "Opening doors, not putting traditions on display",
+      "body": [
+        "EtnoJourney connects travellers with customary and village communities across Indonesia. Every journey is designed together with local hosts: they decide what can be shared, when, and how.",
+        "We deliberately keep journeys small and slow. The goal is not to collect as many places as possible, but to make time to sit, listen and learn from your hosts."
+      ]
+    },
+    "principles": {
+      "eyebrow": "How we work",
+      "title": "Four principles we don't compromise on",
+      "items": {
+        "fair": {
+          "title": "A fair share",
+          "body": "Guides and host families are paid directly for their time and expertise, and part of every booking goes to village needs that the community decides for itself."
+        },
+        "small": {
+          "title": "Small groups",
+          "body": "Every tour has a participant limit. Small groups mean more honest conversations and a lighter footprint on the village."
+        },
+        "consent": {
+          "title": "Consent for every ceremony",
+          "body": "Ceremonies belong to the community. Guests only attend when hosts allow it, and we follow their rules on dress, photography and boundaries that must not be crossed."
+        },
+        "real": {
+          "title": "No staged performances",
+          "body": "We never hold rituals just for guests. What you meet is everyday life: kitchens, fields, workshops and ceremonies that are genuinely taking place."
+        }
+      }
+    },
+    "responsible": {
+      "eyebrow": "Responsible travel",
+      "title": "What we ask of every guest",
+      "items": [
+        "Dress modestly and follow your hosts' guidance, especially at temples, customary houses and ceremonies.",
+        "Ask before photographing people, and accept a no gracefully.",
+        "Take your rubbish home and use water sparingly, especially in villages where it is scarce.",
+        "Buy crafts directly from their makers and respect the prices they set."
+      ]
+    },
+    "partners": {
+      "eyebrow": "Village partners",
+      "title": "How we choose and support our partners",
+      "body": [
+        "We work with villages whose residents themselves want to welcome guests. Before a journey opens, we agree with elders and village managers on group sizes, schedules that don't interfere with customary activities, and how income is shared.",
+        "Partnerships are reviewed regularly. If a village needs a pause, for example during a major ceremony season or the harvest, we put journeys on hold."
+      ]
+    },
+    "cta": {
+      "title": "Ready to be a good guest?",
+      "body": "See the journeys that are open now and choose the one that suits your pace.",
+      "button": "Explore tours"
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "FAQ",
+      "description": "Answers about booking, payment, preparing for your trip, cultural etiquette and your EtnoJourney account."
+    },
+    "eyebrow": "Help",
+    "title": "Frequently asked questions",
+    "description": "Can't find what you need? Reach us through the contact details at the bottom of the page.",
+    "groups": {
+      "booking": {
+        "title": "Booking and payment",
+        "items": [
+          {
+            "q": "How far in advance do I need to book?",
+            "a": "You can book up to 3 days before the travel date at the latest, counted in Western Indonesia Time (WIB). Hosts need that time to prepare."
+          },
+          {
+            "q": "How do I pay?",
+            "a": "Once your booking is created, select Pay now. You'll be taken to the Midtrans payment page to choose a method such as bank transfer, e-wallet or QRIS. As soon as the payment succeeds, the booking is confirmed automatically."
+          },
+          {
+            "q": "Is my booking guaranteed straight away?",
+            "a": "Your seats are held from the moment you book, and the booking is confirmed as soon as payment is received. Until then its status is Pending."
+          },
+          {
+            "q": "Can I cancel myself?",
+            "a": "Yes, as long as the booking hasn't been paid. Go to My Account, choose the booking and select Cancel. For paid bookings, cancellations and refunds are handled manually by our team under the Cancellation policy."
+          },
+          {
+            "q": "I've already paid but want to change the date. What should I do?",
+            "a": "Contact us with your booking code (in the format EJ-XXXXXX). Changes depend on the hosts' availability on the new date."
+          }
+        ]
+      },
+      "travel": {
+        "title": "Before you travel",
+        "items": [
+          {
+            "q": "Where is the meeting point?",
+            "a": "The meeting point is listed on each tour page and on your booking detail page."
+          },
+          {
+            "q": "What's included in the price?",
+            "a": "Every tour lists What's included, such as a local guide, meals or transport. Anything not on that list isn't included in the price."
+          },
+          {
+            "q": "What if I have special needs, such as food allergies?",
+            "a": "Add them in the notes field when you book. We pass them on to your hosts before the trip."
+          }
+        ]
+      },
+      "etiquette": {
+        "title": "Cultural etiquette",
+        "items": [
+          {
+            "q": "What should I wear?",
+            "a": "Modest clothing that covers shoulders and knees. For temple visits in Bali, a sarong and sash are usually provided when listed under What's included."
+          },
+          {
+            "q": "May I photograph ceremonies?",
+            "a": "Always ask your guide first. Some parts of a ceremony may not be photographed at all, and that must be respected."
+          },
+          {
+            "q": "Are ceremonies held especially for guests?",
+            "a": "No. We never stage rituals for tourists. If a ceremony is taking place and the hosts allow it, you're invited to attend as a respectful guest."
+          }
+        ]
+      },
+      "account": {
+        "title": "Account",
+        "items": [
+          {
+            "q": "When can I write a review?",
+            "a": "Once the trip's status is Completed. The Write a review button appears in My Account, and each booking can be reviewed once."
+          },
+          {
+            "q": "Which language are EtnoJourney emails sent in?",
+            "a": "The language you choose under My Account, Settings. Bahasa Indonesia and English are available."
+          },
+          {
+            "q": "I forgot my password.",
+            "a": "Use the Forgot password link on the sign-in page. We'll email you a link to create a new password, valid for 1 hour."
+          }
+        ]
+      }
+    }
+  },
+  "legal": {
+    "templateNotice": "This document is a template based on how the EtnoJourney system currently works. It must be reviewed by a legal professional and completed with the company's details before the site launches.",
+    "updated": "Last updated {date}",
+    "toc": "Contents",
+    "contactTitle": "Contact",
+    "contactBody": "Questions about this document can be sent to [Customer service email] or to [Registered address]."
+  },
+  "cancellation": {
+    "meta": {
+      "title": "Cancellation policy",
+      "description": "Terms for cancellations, date changes and refunds for EtnoJourney trips."
+    },
+    "eyebrow": "Policy",
+    "title": "Cancellation policy",
+    "description": "How cancellations and refunds are handled, for both unpaid and paid bookings.",
+    "sections": [
+      {
+        "id": "unpaid",
+        "title": "Unpaid bookings",
+        "paragraphs": [
+          "While a booking is Pending and unpaid, you can cancel it yourself at any time from My Account, free of charge."
+        ]
+      },
+      {
+        "id": "paid",
+        "title": "Paid bookings",
+        "paragraphs": [
+          "Paid bookings can't be cancelled from the site. Request a cancellation by contacting us with your booking code.",
+          "The refund amount depends on how far ahead of the travel date the request is made: [Refund percentage terms, e.g. by number of days]."
+        ]
+      },
+      {
+        "id": "operator",
+        "title": "Cancellation by EtnoJourney or the hosts",
+        "paragraphs": [
+          "We may cancel a trip in case of safety risks, natural disasters, or if the village decides to close visits for customary activities. In that case you can choose a replacement date or a full refund."
+        ]
+      },
+      {
+        "id": "refunds",
+        "title": "How refunds are processed",
+        "paragraphs": [
+          "Refunds are processed manually to the original payment method through Midtrans. How long they take to arrive depends on your bank or e-wallet provider: [Estimated processing time]."
+        ]
+      },
+      {
+        "id": "changes",
+        "title": "Date changes",
+        "paragraphs": [
+          "Requests to change the date of a paid booking are handled according to the hosts' availability. The new date must still be at least 3 days from the day of the request."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy policy",
+      "description": "What data EtnoJourney collects, why, and how you can control it."
+    },
+    "eyebrow": "Policy",
+    "title": "Privacy policy",
+    "description": "We only keep the data needed to run your bookings and your account.",
+    "sections": [
+      {
+        "id": "controller",
+        "title": "Data controller",
+        "paragraphs": [
+          "Personal data on this site is managed by [Company name], located at [Registered address]."
+        ]
+      },
+      {
+        "id": "data",
+        "title": "Data we store",
+        "paragraphs": ["We store the following data:"],
+        "items": [
+          "Account data: name, email address, a hashed password (never the plain text) and your email language.",
+          "Booking data: tour, travel date, number of travellers, contact name and phone number, the notes you write, and the price.",
+          "Payment status: status, payment method, amount and payment time as reported by Midtrans.",
+          "Reviews you write, with the name and country you provide.",
+          "Session data: IP address and user agent of the device used to sign in, for account security."
+        ]
+      },
+      {
+        "id": "payments",
+        "title": "Card and payment data",
+        "paragraphs": [
+          "Payments are processed by Midtrans. Card numbers, bank details and e-wallet credentials are entered directly on the Midtrans page and are never stored on our systems."
+        ]
+      },
+      {
+        "id": "usage",
+        "title": "How we use data",
+        "paragraphs": ["We use data to:"],
+        "items": [
+          "Create and manage bookings, including passing special needs on to your hosts.",
+          "Send transactional emails: booking confirmations, status changes, payments and password resets.",
+          "Keep accounts secure, for example by limiting repeated sign-in attempts."
+        ]
+      },
+      {
+        "id": "cookies",
+        "title": "Cookies",
+        "paragraphs": [
+          "We only use two kinds of cookie: a session cookie to keep you signed in, and a language cookie to remember your site language. We currently use no analytics, advertising or third-party tracking cookies."
+        ]
+      },
+      {
+        "id": "sharing",
+        "title": "Third parties",
+        "paragraphs": ["Data is shared only with parties needed to provide the service:"],
+        "items": [
+          "Midtrans, to process payments.",
+          "Our email provider, to send transactional emails.",
+          "Your hosts and guides, limited to the contact name, number of travellers and relevant notes."
+        ]
+      },
+      {
+        "id": "rights",
+        "title": "Your rights",
+        "paragraphs": [
+          "You can change your name and language at any time in My Account. To request a copy or deletion of your data, contact us. Some booking data may need to be kept longer for accounting purposes: [Data retention period]."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms and conditions",
+      "description": "Terms for using the EtnoJourney site and its trip booking service."
+    },
+    "eyebrow": "Policy",
+    "title": "Terms and conditions",
+    "description": "The basic rules that apply when you use this site and book a trip.",
+    "sections": [
+      {
+        "id": "service",
+        "title": "The service",
+        "paragraphs": [
+          "EtnoJourney, operated by [Company name], offers bookings for cultural journeys guided by local communities. By using this site, you agree to the terms below."
+        ]
+      },
+      {
+        "id": "account",
+        "title": "Your account",
+        "paragraphs": [
+          "You're responsible for keeping your password confidential and for activity on your account. The information you provide must be accurate and up to date."
+        ]
+      },
+      {
+        "id": "booking",
+        "title": "Bookings and prices",
+        "paragraphs": [
+          "Prices are shown in Indonesian rupiah per person and recalculated by the system when the booking is made. Bookings can be made up to 3 days before the travel date at the latest and are subject to tour capacity. A booking is confirmed once payment is received."
+        ]
+      },
+      {
+        "id": "conduct",
+        "title": "Conduct during the trip",
+        "paragraphs": [
+          "Guests must follow their guide's directions and local customary rules. Hosts may end the participation of guests who break those rules or endanger others, without a refund."
+        ]
+      },
+      {
+        "id": "reviews",
+        "title": "Reviews",
+        "paragraphs": [
+          "Reviews can only be written for completed trips, once per booking. We may hide reviews containing hate speech, other people's personal data, or content unrelated to the trip."
+        ]
+      },
+      {
+        "id": "liability",
+        "title": "Liability",
+        "paragraphs": [
+          "[Limitation of liability and travel insurance terms, to be completed by a legal professional]."
+        ]
+      },
+      {
+        "id": "law",
+        "title": "Governing law",
+        "paragraphs": [
+          "These terms are governed by the laws of the Republic of Indonesia. [Dispute resolution terms]."
+        ]
+      }
+    ]
+  }
+}

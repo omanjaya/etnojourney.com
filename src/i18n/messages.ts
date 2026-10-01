@@ -18,6 +18,7 @@ export const namespaces = [
   "reviews",
   "media",
   "emails",
+  "pages",
 ] as const;
 
 export async function loadMessages(locale: Locale) {

@@ -1,0 +1,39 @@
+/* FAQ accordion: native <details> with a smooth height transition where supported. */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.45s var(--ease-editorial),
+    content-visibility 0.45s allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+.faq-item > summary {
+  list-style: none;
+}
+
+.faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item .faq-chevron {
+  transition: rotate 0.35s var(--ease-editorial);
+}
+
+.faq-item[open] .faq-chevron {
+  rotate: 45deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content,
+  .faq-item .faq-chevron {
+    transition: none;
+  }
+}

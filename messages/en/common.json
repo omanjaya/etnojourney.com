@@ -55,7 +55,12 @@
     "partners": "Village partners",
     "rights": "All rights reserved.",
     "madeIn": "Made with respect for Indonesian cultures.",
-    "statement": "Small journeys, led by locals, with respect for tradition."
+    "statement": "Small journeys, led by locals, with respect for tradition.",
+    "help": "Help",
+    "faq": "FAQ",
+    "cancellation": "Cancellation policy",
+    "privacy": "Privacy policy",
+    "terms": "Terms & conditions"
   },
   "notFound": {
     "title": "This path isn't on the map",

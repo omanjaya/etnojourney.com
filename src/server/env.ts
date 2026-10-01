@@ -26,6 +26,7 @@ const schema = z.object({
   MIDTRANS_SERVER_KEY: optionalString,
   MIDTRANS_IS_PRODUCTION: booleanString.default("false"),
   RESEND_API_KEY: optionalString,
+  CONTACT_EMAIL: optionalString,
   MAIL_FROM: optionalString,
   UPLOAD_DIR: optionalString,
   TRUST_PROXY: booleanString.default("false"),
@@ -61,6 +62,11 @@ export function checkEnv(source: Record<string, string | undefined>): EnvCheck {
     }
     if (!env.MIDTRANS_SERVER_KEY) {
       warnings.push("MIDTRANS_SERVER_KEY is not set; online payments will be refused");
+    }
+    if (!env.CONTACT_EMAIL) {
+      warnings.push(
+        "CONTACT_EMAIL is not set; the site shows no contact details (FAQ and policies refer guests to contact you)",
+      );
     }
     if (!env.RESEND_API_KEY) {
       warnings.push("RESEND_API_KEY is not set; emails will not be delivered");

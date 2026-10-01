@@ -12,6 +12,7 @@ import type payment from "../messages/id/payment.json";
 import type reviews from "../messages/id/reviews.json";
 import type media from "../messages/id/media.json";
 import type emails from "../messages/id/emails.json";
+import type pages from "../messages/id/pages.json";
 
 declare module "next-intl" {
   interface AppConfig {
@@ -30,6 +31,7 @@ declare module "next-intl" {
       reviews: typeof reviews;
       media: typeof media;
       emails: typeof emails;
+      pages: typeof pages;
     };
   }
 }

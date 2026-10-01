@@ -1,6 +1,6 @@
 {
   "greeting": "Hi {name},",
-  "footer": "You're receiving this email because you have an EtnoJourney account. Jl. Raya Ubud No. 18, Gianyar, Bali.",
+  "footer": "You're receiving this email because you have an EtnoJourney account.",
   "viewBooking": "View my booking",
   "details": {
     "code": "Booking code",
