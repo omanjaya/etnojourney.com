@@ -55,11 +55,20 @@ export function calculateTotal(unitPrice: number, participants: number): number 
   return unitPrice * participants;
 }
 
+/** 32 unambiguous characters (no 0/O, 1/I). Must stay a power of two, see below. */
 const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const CODE_LENGTH = 6;
 
-/** Human-friendly booking reference, e.g. `EJ-7K2Q9A`. Avoids ambiguous characters. */
-export function generateBookingCode(random: () => number = Math.random): string {
+/**
+ * Human-friendly booking reference, e.g. `EJ-7K2Q9A`, from the platform CSPRNG.
+ * Each random byte is masked with `& 31`: because the alphabet has exactly 32
+ * characters this is uniform (no modulo or float-rounding bias).
+ */
+export function generateBookingCode(
+  randomBytes: (length: number) => Uint8Array = (length) =>
+    crypto.getRandomValues(new Uint8Array(length)),
+): string {
   let code = "";
-  for (let i = 0; i < 6; i++) code += CODE_ALPHABET[Math.floor(random() * CODE_ALPHABET.length)];
+  for (const byte of randomBytes(CODE_LENGTH)) code += CODE_ALPHABET[byte & 31];
   return `EJ-${code}`;
 }

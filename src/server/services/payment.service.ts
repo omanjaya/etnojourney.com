@@ -1,4 +1,5 @@
 import "server-only";
+import { logValue } from "@/lib/log";
 import { siteUrl } from "@/lib/seo";
 import { getEnv } from "@/server/env";
 import { db } from "@/server/db";
@@ -148,10 +149,9 @@ export const paymentService = {
         if (!payment) return { result: "ignored", reason: "unknown order" };
         if (payment.status === "paid") return { result: "ignored", reason: "already paid" };
         if (!amountMatches(notification.gross_amount, payment.amount)) {
+          // Values come from the request body: neutralize them before logging.
           console.warn(
-            "[payment] amount mismatch",
-            notification.order_id,
-            notification.gross_amount,
+            `[payment] amount mismatch order=${logValue(notification.order_id)} gross=${logValue(notification.gross_amount)}`,
           );
           return { result: "ignored", reason: "amount mismatch" };
         }
