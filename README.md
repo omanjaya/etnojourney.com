@@ -121,6 +121,21 @@ Di dashboard Midtrans (Settings > Payment):
 
 Jalankan di belakang reverse proxy (Nginx, Caddy, Cloudflare) yang menangani HTTPS. Set `TRUST_PROXY=true` **hanya** jika app tidak bisa diakses langsung selain lewat proxy, lalu pastikan proxy menimpa header `X-Forwarded-For`, atau isi `TRUSTED_PROXIES` dengan IP proxy. Jika tidak, header bisa dipalsukan untuk menghindari rate limit login.
 
+Tanpa `TRUST_PROXY`, rate limit tetap berjalan per akun (email), tetapi tidak per IP. Sengaja tidak ada batas bersama untuk semua pengunjung, karena batas seperti itu bisa dipakai penyerang untuk mengunci login semua user. Endpoint HTTP Better Auth untuk login, daftar, dan reset password juga ditutup; aplikasi memakainya lewat server action.
+
+Jika folder upload di-*bind mount* dari host (bukan named volume), pastikan bisa ditulis oleh user aplikasi di container (uid 1001): `sudo chown -R 1001:1001 /path/di/host`.
+
+### Checklist sebelum peluncuran
+
+- [ ] `SITE_URL`, `BETTER_AUTH_URL` (https), `BETTER_AUTH_SECRET` baru (`openssl rand -base64 32`).
+- [ ] `CONTACT_EMAIL` (wajib secara praktis), `CONTACT_PHONE`, `CONTACT_ADDRESS`: tanpa ini situs tidak menampilkan kontak sama sekali, padahal FAQ dan kebijakan merujuk tamu untuk menghubungi kamu.
+- [ ] Midtrans production: `MIDTRANS_SERVER_KEY`, `MIDTRANS_IS_PRODUCTION=true`, URL notifikasi dan finish di dashboard.
+- [ ] Resend: `RESEND_API_KEY`, domain pengirim terverifikasi, `MAIL_FROM`.
+- [ ] Halaman Kebijakan pembatalan, Privasi, dan Syarat ditinjau ahli hukum; ganti placeholder `[Nama badan usaha]` dan `[Alamat terdaftar]` di `messages/*/pages.json`.
+- [ ] Ganti akun demo hasil seed (atau jangan jalankan seed di production) dan ulasan contoh.
+- [ ] Foto: ganti foto Unsplash dengan foto asli dari desa mitra lewat panel admin.
+- [ ] `TRUST_PROXY` sesuai topologi deploy (lihat di atas).
+
 ### Backup
 
 Yang perlu di-backup secara rutin:
