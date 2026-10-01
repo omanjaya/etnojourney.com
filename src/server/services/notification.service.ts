@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
+import { paymentMethodLabel } from "@/lib/payment-method";
 import { mailer } from "@/server/mail/mailer";
 import {
   bookingCreatedEmail,
@@ -71,14 +72,6 @@ async function loadBooking(bookingId: number) {
   return { booking, recipient, data, locale };
 }
 
-function humanizeMethod(method: string | null | undefined): string {
-  if (!method) return "-";
-  return method
-    .split(/[_-]/)
-    .map((part) => (part.length <= 4 ? part.toUpperCase() : part[0].toUpperCase() + part.slice(1)))
-    .join(" ");
-}
-
 export const notificationService = {
   async bookingCreated(bookingId: number): Promise<void> {
     await safely("bookingCreated", async () => {
@@ -101,12 +94,13 @@ export const notificationService = {
     await safely("paymentSucceeded", async () => {
       const { booking, recipient, data, locale } = await loadBooking(bookingId);
       const payment = await notificationRepository.latestPaidPayment(bookingId);
+      const methods = await getTranslations({ locale, namespace: "payment.methods" });
       await deliver(
         recipient.email,
         paymentSucceededEmail(await translator(locale), {
           ...data,
           amount: formatCurrency(payment?.amount ?? booking.totalPrice, locale),
-          method: humanizeMethod(payment?.method),
+          method: paymentMethodLabel(payment?.method, (code) => methods(code)),
         }),
       );
     });

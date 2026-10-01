@@ -7,6 +7,11 @@ import { useRef, useState, ViewTransition, type CSSProperties, type KeyboardEven
 import { cn } from "@/lib/utils";
 import "../view-transitions.css";
 
+/** Small rendition through the Next image optimizer (same URL shape cards request). */
+function underlaySrc(src: string): string {
+  return `/_next/image?url=${encodeURIComponent(src)}&w=640&q=75`;
+}
+
 /**
  * Editorial photo mosaic with a lightbox built on the native `<dialog>`:
  * `showModal()` traps focus, makes the page inert and closes on Esc.
@@ -82,15 +87,23 @@ export function TourGallery({
                 share={morphName ? "morph" : undefined}
                 default="none"
               >
-                <Image
-                  src={src}
-                  alt={alt}
-                  fill
-                  preload
-                  fetchPriority="high"
-                  sizes="(min-width: 1280px) 900px, (min-width: 768px) 75vw, 100vw"
-                  className="animate-ken-burns object-cover transition-[scale] duration-[1.4s] ease-(--ease-editorial) group-hover:scale-[1.04]"
-                />
+                {/* The underlay is the card-sized rendition the visitor most likely
+                    already has cached, so the morph snapshot is never an empty box
+                    while the large hero image is still loading. */}
+                <div
+                  className="bg-sand-200 absolute inset-0 bg-cover bg-center"
+                  style={{ backgroundImage: `url("${underlaySrc(src)}")` }}
+                >
+                  <Image
+                    src={src}
+                    alt={alt}
+                    fill
+                    preload
+                    fetchPriority="high"
+                    sizes="(min-width: 1280px) 900px, (min-width: 768px) 75vw, 100vw"
+                    className="animate-ken-burns object-cover transition-[scale] duration-[1.4s] ease-(--ease-editorial) group-hover:scale-[1.04]"
+                  />
+                </div>
               </ViewTransition>
             ) : (
               <Image

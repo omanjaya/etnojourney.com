@@ -2,7 +2,8 @@
   "meta": {
     "title": "Cultural Tours",
     "description": "Find cultural tours in Bali, Java, Nusa Penida and Raja Ampat: ceremonies, crafts, heritage cuisine and village life.",
-    "titlePaged": "Cultural Tours, page {page}"
+    "titlePaged": "Cultural Tours, page {page}",
+    "descriptionPaged": "Page {page} of EtnoJourney's cultural tours: ceremonies, crafts, heritage cuisine and village life."
   },
   "list": {
     "eyebrow": "Tours",

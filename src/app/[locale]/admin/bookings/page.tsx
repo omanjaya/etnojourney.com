@@ -66,7 +66,7 @@ export default async function AdminBookingsPage({
               href={withStatus(filter.value)}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+                "inline-flex min-h-10 shrink-0 items-center rounded-full border px-4 text-sm font-medium transition-colors",
                 active
                   ? "border-ink bg-ink text-sand-50"
                   : "border-line text-ink-soft hover:border-sand-300 bg-white",

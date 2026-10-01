@@ -110,7 +110,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 <span
                   className={cn(
                     "font-display px-8 text-4xl whitespace-nowrap italic md:px-12 md:text-6xl",
-                    i % 2 === 0 ? "text-ink/80" : "text-muted/70",
+                    i % 2 === 0 ? "text-ink/80" : "text-muted",
                   )}
                 >
                   {item}

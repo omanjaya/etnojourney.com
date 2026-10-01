@@ -75,7 +75,7 @@
         "items": [
           {
             "q": "How far in advance do I need to book?",
-            "a": "You can book up to 3 days before the travel date at the latest, counted in Western Indonesia Time (WIB). Hosts need that time to prepare."
+            "a": "Book at least 3 days before your travel date, counted in Western Indonesia Time (WIB). Hosts need that time to prepare."
           },
           {
             "q": "How do I pay?",
@@ -300,7 +300,7 @@
         "id": "booking",
         "title": "Bookings and prices",
         "paragraphs": [
-          "Prices are shown in Indonesian rupiah per person and recalculated by the system when the booking is made. Bookings can be made up to 3 days before the travel date at the latest and are subject to tour capacity. A booking is confirmed once payment is received."
+          "Prices are shown in Indonesian rupiah per person and recalculated by the system when the booking is made. Bookings must be made at least 3 days before the travel date and are subject to tour capacity. A booking is confirmed once payment is received."
         ]
       },
       {

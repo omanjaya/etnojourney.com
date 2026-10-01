@@ -73,7 +73,6 @@
     "payment": "Pembayaran",
     "paymentNone": "Belum ada pembayaran",
     "method": "Metode",
-    "paidOn": "Dibayar {date}",
     "contact": "Kontak",
     "contactName": "Nama",
     "contactPhone": "Telepon",
@@ -82,6 +81,7 @@
     "day": "Hari {day}",
     "viewTour": "Lihat halaman tur",
     "receiptTitle": "Ringkasan booking",
-    "receiptNote": "Tunjukkan kode booking ini kepada pemandu di titik temu."
+    "receiptNote": "Tunjukkan kode booking ini kepada pemandu di titik temu.",
+    "paidAt": "Dibayar pada"
   }
 }

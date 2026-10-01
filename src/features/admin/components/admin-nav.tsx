@@ -89,11 +89,11 @@ function NavFooter({ user }: { user: { name: string; email: string } }) {
         <p className="text-sand-50 truncate font-medium">{user.name}</p>
         <p className="text-sand-100/60 truncate text-xs">{user.email}</p>
       </div>
-      <Link href="/" className="text-sand-100/70 hover:text-sand-50 inline-flex items-center gap-2">
+      <Link href="/" className="text-sand-100/70 hover:text-sand-50 inline-flex min-h-10 items-center gap-2">
         <ArrowLeft className="size-4" aria-hidden />
         {t("backToSite")}
       </Link>
-      <SignOutButton className="text-sand-100/70 hover:text-sand-50" />
+      <SignOutButton className="text-sand-100/70 hover:text-sand-50 min-h-10" />
     </div>
   );
 }

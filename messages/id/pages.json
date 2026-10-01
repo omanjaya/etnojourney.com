@@ -75,7 +75,7 @@
         "items": [
           {
             "q": "Seberapa jauh hari saya harus memesan?",
-            "a": "Booking bisa dilakukan paling cepat 3 hari sebelum tanggal perjalanan, dihitung berdasarkan waktu Indonesia Barat (WIB). Waktu ini kami perlukan agar tuan rumah bisa bersiap."
+            "a": "Booking paling lambat 3 hari sebelum tanggal perjalanan, dihitung berdasarkan waktu Indonesia Barat (WIB). Waktu ini kami perlukan agar tuan rumah bisa bersiap."
           },
           {
             "q": "Bagaimana cara membayar?",
@@ -302,7 +302,7 @@
         "id": "booking",
         "title": "Booking dan harga",
         "paragraphs": [
-          "Harga ditampilkan dalam Rupiah per orang dan dihitung ulang oleh sistem saat booking dibuat. Booking dapat dibuat paling cepat 3 hari sebelum tanggal perjalanan dan tunduk pada kapasitas tur. Booking terkonfirmasi setelah pembayaran diterima."
+          "Harga ditampilkan dalam Rupiah per orang dan dihitung ulang oleh sistem saat booking dibuat. Booking dapat dibuat paling lambat 3 hari sebelum tanggal perjalanan dan tunduk pada kapasitas tur. Booking terkonfirmasi setelah pembayaran diterima."
         ]
       },
       {

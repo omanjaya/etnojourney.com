@@ -6,7 +6,6 @@ import {
   ArrowUpRight,
   CalendarDays,
   Clock,
-  CreditCard,
   MapPin,
   Phone,
   StickyNote,
@@ -19,6 +18,8 @@ import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
+import { paymentMethodLabel } from "@/lib/payment-method";
+import { cn } from "@/lib/utils";
 import { pageMetadata } from "@/lib/seo";
 import { Reveal } from "@/components/motion";
 import { Button } from "@/components/ui/button";
@@ -84,12 +85,13 @@ export default async function BookingDetailPage({
   const user = await requireUser();
   const { code } = await params;
   const booking = await loadBooking(user.id, code);
-  const [payments, reviewed, locale, t, tc] = await Promise.all([
+  const [payments, reviewed, locale, t, tc, methods] = await Promise.all([
     paymentService.latestByBookingIds([booking.id]),
     reviewService.reviewedBookingIds(user.id),
     getLocale(),
     getTranslations("account.bookingDetail"),
     getTranslations("common"),
+    getTranslations("payment.methods"),
   ]);
 
   const { tour } = booking;
@@ -113,7 +115,7 @@ export default async function BookingDetailPage({
       <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
         <Link
           href="/account"
-          className="group text-ink-soft hover:text-ink inline-flex items-center gap-2 text-sm font-medium"
+          className="group text-ink-soft hover:text-ink -ml-2 inline-flex min-h-10 items-center gap-2 rounded-full px-2 text-sm font-medium"
         >
           <ArrowLeft
             className="size-4 transition-transform group-hover:-translate-x-0.5"
@@ -207,11 +209,9 @@ export default async function BookingDetailPage({
             <dl className="space-y-3 text-sm">
               <Row label={t("unitPrice")}>{formatCurrency(booking.unitPrice, locale)}</Row>
               <Row label={t("participants")}>&times; {booking.participants}</Row>
-              <div className="border-line border-t pt-3">
-                <Row label={t("total")} strong>
-                  {formatCurrency(booking.totalPrice, locale)}
-                </Row>
-              </div>
+              <Row label={t("total")} strong className="border-line border-t pt-3">
+                {formatCurrency(booking.totalPrice, locale)}
+              </Row>
             </dl>
           </Card>
         </Reveal>
@@ -223,20 +223,19 @@ export default async function BookingDetailPage({
                 <Row label={t("status")}>
                   <PaymentStatusBadge status={payment.status} />
                 </Row>
-                <Row label={t("method")}>{humanizeMethod(payment.method)}</Row>
+                <Row label={t("method")}>
+                  {paymentMethodLabel(payment.method, (code) => methods(code))}
+                </Row>
                 {payment.paidAt && (
-                  <p className="text-muted flex items-center gap-2">
-                    <CreditCard className="size-4" aria-hidden />
-                    {t("paidOn", {
-                      date: formatDate(payment.paidAt, locale, {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      }),
+                  <Row label={t("paidAt")}>
+                    {formatDate(payment.paidAt, locale, {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
                     })}
-                  </p>
+                  </Row>
                 )}
               </dl>
             ) : (
@@ -295,15 +294,6 @@ export default async function BookingDetailPage({
   );
 }
 
-/** "bank_transfer" -> "Bank Transfer"; short codes such as "qris" stay uppercase. */
-function humanizeMethod(method: string | null): string {
-  if (!method) return "-";
-  return method
-    .split(/[_-]/)
-    .map((part) => (part.length <= 4 ? part.toUpperCase() : part[0].toUpperCase() + part.slice(1)))
-    .join(" ");
-}
-
 function Card({ title, children }: { title: string; children: ReactNode }) {
   return (
     <section className="border-line h-full rounded-(--radius-card) border bg-white p-6 md:p-7 print:break-inside-avoid print:border-0 print:p-0">
@@ -315,17 +305,20 @@ function Card({ title, children }: { title: string; children: ReactNode }) {
   );
 }
 
+/** One `<dt>/<dd>` pair. The wrapping div is valid inside `<dl>`; style it via `className`. */
 function Row({
   label,
   children,
   strong = false,
+  className,
 }: {
   label: string;
   children: ReactNode;
   strong?: boolean;
+  className?: string;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4">
+    <div className={cn("flex items-center justify-between gap-4", className)}>
       <dt className={strong ? "font-semibold" : "text-muted"}>{label}</dt>
       <dd className={strong ? "font-display text-xl font-semibold" : "font-medium"}>{children}</dd>
     </div>

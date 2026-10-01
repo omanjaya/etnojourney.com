@@ -39,7 +39,7 @@ export function LocaleSwitcher({ className }: { className?: string }) {
           lang={l}
           className={cn(
             "inline-grid min-h-9 min-w-9 place-items-center rounded-full px-2.5 uppercase transition-colors",
-            l === locale ? "bg-current/10" : "opacity-60 hover:opacity-100",
+            l === locale ? "bg-current/10" : "opacity-80 hover:opacity-100",
           )}
         >
           {/* Accessible name ("ID Indonesia") starts with the visible text for voice control. */}

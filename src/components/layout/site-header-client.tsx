@@ -190,18 +190,18 @@ export function SiteHeaderClient({
           <div className="bg-line my-6 h-px" />
           {user ? (
             <div className="flex flex-col gap-4 text-base">
-              <Link href="/account" className="inline-flex items-center gap-3">
+              <Link href="/account" className="inline-flex min-h-11 items-center gap-3">
                 <Ticket className="text-terracotta size-5" aria-hidden /> {t("bookings")}
               </Link>
-              <Link href="/account/wishlist" className="inline-flex items-center gap-3">
+              <Link href="/account/wishlist" className="inline-flex min-h-11 items-center gap-3">
                 <Heart className="text-terracotta size-5" aria-hidden /> {t("wishlist")}
               </Link>
               {user.isAdmin && (
-                <Link href="/admin" className="inline-flex items-center gap-3">
+                <Link href="/admin" className="inline-flex min-h-11 items-center gap-3">
                   <LayoutDashboard className="text-terracotta size-5" aria-hidden /> {t("admin")}
                 </Link>
               )}
-              <SignOutButton className="text-muted" />
+              <SignOutButton className="text-muted min-h-11" />
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-3">

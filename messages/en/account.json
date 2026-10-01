@@ -73,7 +73,6 @@
     "payment": "Payment",
     "paymentNone": "No payment yet",
     "method": "Method",
-    "paidOn": "Paid {date}",
     "contact": "Contact",
     "contactName": "Name",
     "contactPhone": "Phone",
@@ -82,6 +81,7 @@
     "day": "Day {day}",
     "viewTour": "View tour page",
     "receiptTitle": "Booking summary",
-    "receiptNote": "Show this booking code to your guide at the meeting point."
+    "receiptNote": "Show this booking code to your guide at the meeting point.",
+    "paidAt": "Paid on"
   }
 }

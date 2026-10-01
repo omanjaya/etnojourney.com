@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { formatCurrency } from "@/lib/format";
+import { paymentMethodLabel } from "@/lib/payment-method";
 import { pageMetadata } from "@/lib/seo";
 import { localize } from "@/lib/i18n-text";
 import { cn } from "@/lib/utils";
@@ -42,6 +43,7 @@ export default async function PaymentFinishPage({
 
   const user = await requireUser();
   const t = await getTranslations("payment.finish");
+  const methods = await getTranslations("payment.methods");
   const query = await searchParams;
   const orderId = typeof query.order_id === "string" ? query.order_id.slice(0, 64) : "";
 
@@ -112,8 +114,8 @@ export default async function PaymentFinishPage({
                 <dd className="mt-1 flex items-center gap-2">
                   <PaymentStatusBadge status={found.payment.status} />
                   {found.payment.method && (
-                    <span className="text-ink-soft capitalize">
-                      {found.payment.method.replaceAll("_", " ")}
+                    <span className="text-ink-soft">
+                      {paymentMethodLabel(found.payment.method, (code) => methods(code))}
                     </span>
                   )}
                 </dd>

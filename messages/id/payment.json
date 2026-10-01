@@ -33,5 +33,16 @@
     "success": "Bayar berhasil",
     "failure": "Gagal",
     "processed": "Pembayaran ini sudah diproses."
+  },
+  "methods": {
+    "bank_transfer": "Transfer bank (Virtual Account)",
+    "echannel": "Mandiri Bill",
+    "credit_card": "Kartu kredit/debit",
+    "gopay": "GoPay",
+    "shopeepay": "ShopeePay",
+    "qris": "QRIS",
+    "cstore": "Gerai ritel (Indomaret/Alfamart)",
+    "akulaku": "Akulaku",
+    "simulator": "Simulator (pengembangan)"
   }
 }

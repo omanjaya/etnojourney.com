@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Destinasi Budaya",
-    "description": "Jelajahi destinasi budaya Nusantara bersama EtnoJourney: Ubud, Tabanan, Tengger, Yogyakarta, Nusa Penida, dan Raja Ampat."
+    "description": "Jelajahi destinasi budaya Nusantara bersama EtnoJourney: Ubud, Tabanan, Tengger, Yogyakarta, Nusa Penida, dan Raja Ampat.",
+    "detailTitle": "Tur budaya di {name}, {province}"
   },
   "list": {
     "eyebrow": "Destinasi",

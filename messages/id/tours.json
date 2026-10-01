@@ -2,7 +2,8 @@
   "meta": {
     "title": "Paket Tur Budaya",
     "description": "Temukan paket tur budaya di Bali, Jawa, Nusa Penida, dan Raja Ampat: upacara adat, kriya, kuliner tradisi, dan hidup di desa.",
-    "titlePaged": "Paket Tur Budaya, halaman {page}"
+    "titlePaged": "Paket Tur Budaya, halaman {page}",
+    "descriptionPaged": "Halaman {page} dari koleksi paket tur budaya EtnoJourney: upacara adat, kriya, kuliner tradisi, dan hidup di desa."
   },
   "list": {
     "eyebrow": "Paket tur",

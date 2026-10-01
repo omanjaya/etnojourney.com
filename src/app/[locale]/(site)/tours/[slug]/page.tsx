@@ -165,7 +165,7 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
         <nav aria-label="Breadcrumb" className="text-muted mb-6 text-sm">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li>
-              <Link href="/" className="hover:text-ink">
+              <Link href="/" className="hover:text-ink inline-flex min-h-10 items-center">
                 {t("breadcrumbHome")}
               </Link>
             </li>
@@ -173,7 +173,7 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
               <ChevronRight className="size-3.5" />
             </li>
             <li>
-              <Link href="/tours" className="hover:text-ink">
+              <Link href="/tours" className="hover:text-ink inline-flex min-h-10 items-center">
                 {t("breadcrumbTours")}
               </Link>
             </li>
@@ -181,7 +181,7 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
               <ChevronRight className="size-3.5" />
             </li>
             <li>
-              <Link href={`/destinations/${tour.destination.slug}`} className="hover:text-ink">
+              <Link href={`/destinations/${tour.destination.slug}`} className="hover:text-ink inline-flex min-h-10 items-center">
                 {tour.destination.name}
               </Link>
             </li>
@@ -353,6 +353,7 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
                 durationDays: tour.durationDays,
               }}
               isAuthenticated={Boolean(user)}
+              defaultContactName={user?.name}
             />
           </div>
         </aside>

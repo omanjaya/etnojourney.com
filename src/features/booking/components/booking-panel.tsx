@@ -32,9 +32,12 @@ type BookingPanelTour = {
 export function BookingPanel({
   tour,
   isAuthenticated,
+  defaultContactName,
 }: {
   tour: BookingPanelTour;
   isAuthenticated: boolean;
+  /** Prefills "Nama kontak", typically the signed-in user's name. */
+  defaultContactName?: string;
 }) {
   const t = useTranslations("booking");
   const tc = useTranslations("common");
@@ -57,7 +60,7 @@ export function BookingPanel({
       <div className="bg-line my-6 h-px" />
 
       {isAuthenticated ? (
-        <BookingForm tour={tour} />
+        <BookingForm tour={tour} defaultContactName={defaultContactName} />
       ) : (
         <div className="text-center">
           <span className="bg-terracotta-light text-terracotta mx-auto grid size-12 place-items-center rounded-full">
@@ -85,7 +88,13 @@ export function BookingPanel({
   );
 }
 
-function BookingForm({ tour }: { tour: BookingPanelTour }) {
+function BookingForm({
+  tour,
+  defaultContactName,
+}: {
+  tour: BookingPanelTour;
+  defaultContactName?: string;
+}) {
   const t = useTranslations("booking");
   const locale = useLocale();
   const [state, action, pending] = useActionState(createBookingAction, null);
@@ -248,6 +257,7 @@ function BookingForm({ tour }: { tour: BookingPanelTour }) {
             id="contactName"
             name="contactName"
             autoComplete="name"
+            defaultValue={defaultContactName}
             required
             {...describedBy("contactName")}
           />
