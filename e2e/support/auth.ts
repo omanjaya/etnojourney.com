@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { expect, type Page } from "@playwright/test";
 
 /** Signs in through the real login form and waits until we've left /login. */
@@ -11,7 +12,7 @@ export async function login(page: Page, email: string, password: string, next?: 
 
 /** Registers a brand-new traveller through the UI and returns the credentials. */
 export async function registerNewUser(page: Page, prefix = "e2e") {
-  const email = `${prefix}-${Date.now()}-${Math.floor(Math.random() * 1e6)}@example.test`;
+  const email = `${prefix}-${randomUUID()}@example.test`;
   const password = "E2e-Password-123";
   await page.goto("/register");
   await page.locator("#name").fill("E2E Tester");

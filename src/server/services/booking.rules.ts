@@ -58,7 +58,10 @@ export function calculateTotal(unitPrice: number, participants: number): number 
 const CODE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
 /** Human-friendly booking reference, e.g. `EJ-7K2Q9A`. Avoids ambiguous characters. */
-export function generateBookingCode(random: () => number = Math.random): string {
+/** Uniform value in [0, 1) from the platform CSPRNG (Node 24 and browsers). */
+const secureRandom = () => crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32;
+
+export function generateBookingCode(random: () => number = secureRandom): string {
   let code = "";
   for (let i = 0; i < 6; i++) code += CODE_ALPHABET[Math.floor(random() * CODE_ALPHABET.length)];
   return `EJ-${code}`;
