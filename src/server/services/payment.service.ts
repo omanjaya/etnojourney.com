@@ -1,4 +1,6 @@
 import "server-only";
+import { siteUrl } from "@/lib/seo";
+import { getEnv } from "@/server/env";
 import { db } from "@/server/db";
 import type { Payment } from "@/server/db/schema";
 import {
@@ -23,9 +25,12 @@ import {
 export type PaymentProvider = "midtrans" | "mock";
 
 function midtransConfig(): MidtransConfig | null {
-  const serverKey = process.env.MIDTRANS_SERVER_KEY;
-  if (!serverKey) return null;
-  return { serverKey, isProduction: process.env.MIDTRANS_IS_PRODUCTION === "true" };
+  const env = getEnv();
+  if (!env.MIDTRANS_SERVER_KEY) return null;
+  return {
+    serverKey: env.MIDTRANS_SERVER_KEY,
+    isProduction: env.MIDTRANS_IS_PRODUCTION === "true",
+  };
 }
 
 /** The dev-only simulator is never available in production builds. */
@@ -39,8 +44,9 @@ function activeProvider(): PaymentProvider {
   throw new DomainError("paymentUnavailable");
 }
 
+/** Public URL the gateway sends the traveller back to (SITE_URL first). */
 function appUrl(path: string): string {
-  return new URL(path, process.env.BETTER_AUTH_URL ?? "http://localhost:3000").toString();
+  return new URL(path, `${siteUrl()}/`).toString();
 }
 
 export type NotificationOutcome =

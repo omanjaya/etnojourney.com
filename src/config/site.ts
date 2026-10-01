@@ -1,4 +1,5 @@
 import "server-only";
+import { getEnv } from "@/server/env";
 
 /**
  * Public business contact details, from env so real values are configured per
@@ -12,13 +13,12 @@ export type SiteContact = {
   address: string | null;
 };
 
-const clean = (value: string | undefined) => value?.trim() || null;
-
 export function siteContact(): SiteContact {
+  const env = getEnv();
   return {
-    email: clean(process.env.CONTACT_EMAIL),
-    phone: clean(process.env.CONTACT_PHONE),
-    address: clean(process.env.CONTACT_ADDRESS),
+    email: env.CONTACT_EMAIL ?? null,
+    phone: env.CONTACT_PHONE ?? null,
+    address: env.CONTACT_ADDRESS ?? null,
   };
 }
 

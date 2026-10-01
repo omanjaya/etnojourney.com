@@ -27,6 +27,8 @@ const schema = z.object({
   MIDTRANS_IS_PRODUCTION: booleanString.default("false"),
   RESEND_API_KEY: optionalString,
   CONTACT_EMAIL: optionalString,
+  CONTACT_PHONE: optionalString,
+  CONTACT_ADDRESS: optionalString,
   MAIL_FROM: optionalString,
   UPLOAD_DIR: optionalString,
   TRUST_PROXY: booleanString.default("false"),
@@ -36,8 +38,7 @@ const schema = z.object({
 export type Env = z.infer<typeof schema>;
 
 export type EnvCheck =
-  | { ok: true; env: Env; warnings: string[] }
-  | { ok: false; errors: string[]; warnings: string[] };
+  { ok: true; env: Env; warnings: string[] } | { ok: false; errors: string[]; warnings: string[] };
 
 /** Pure validation (no side effects), used by startup and tests. */
 export function checkEnv(source: Record<string, string | undefined>): EnvCheck {

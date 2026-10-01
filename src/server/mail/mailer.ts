@@ -1,4 +1,5 @@
 import "server-only";
+import { getEnv } from "@/server/env";
 
 export type MailMessage = {
   to: string;
@@ -53,13 +54,13 @@ class DroppingMailer implements Mailer {
 }
 
 function createMailer(): Mailer {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (apiKey)
+  const env = getEnv();
+  if (env.RESEND_API_KEY)
     return new ResendMailer(
-      apiKey,
-      process.env.MAIL_FROM ?? "EtnoJourney <noreply@etnojourney.id>",
+      env.RESEND_API_KEY,
+      env.MAIL_FROM ?? "EtnoJourney <noreply@etnojourney.id>",
     );
-  if (process.env.NODE_ENV === "production") {
+  if (env.NODE_ENV === "production") {
     console.warn("[mail] RESEND_API_KEY is not set; emails will not be delivered.");
     return new DroppingMailer();
   }

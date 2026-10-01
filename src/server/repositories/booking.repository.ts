@@ -213,7 +213,10 @@ export const bookingRepository = {
       .innerJoin(tours, eq(bookings.tourId, tours.id))
       .innerJoin(user, eq(bookings.userId, user.id))
       .where(
-        and(adminConditions(filters), beforeId === undefined ? undefined : lt(bookings.id, beforeId)),
+        and(
+          adminConditions(filters),
+          beforeId === undefined ? undefined : lt(bookings.id, beforeId),
+        ),
       )
       .orderBy(desc(bookings.id))
       .limit(limit);

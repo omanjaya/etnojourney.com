@@ -1,5 +1,6 @@
 import "server-only";
 import { getTranslations } from "next-intl/server";
+import { localizedUrl } from "@/lib/seo";
 import type { Locale } from "@/i18n/routing";
 import { routing } from "@/i18n/routing";
 import { formatCurrency, formatDate } from "@/lib/format";
@@ -25,15 +26,6 @@ import { notificationRepository } from "@/server/repositories/notification.repos
  */
 function asLocale(value: string | null | undefined): Locale {
   return routing.locales.find((l) => l === value) ?? routing.defaultLocale;
-}
-
-function baseUrl(): string {
-  return (process.env.BETTER_AUTH_URL ?? "http://localhost:3000").replace(/\/$/, "");
-}
-
-function localizedUrl(path: string, locale: Locale): string {
-  const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
-  return `${baseUrl()}${prefix}${path}`;
 }
 
 async function translator(locale: Locale): Promise<EmailTranslator> {
