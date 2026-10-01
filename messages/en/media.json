@@ -1,0 +1,39 @@
+{
+  "dropzone": {
+    "title": "Drag a photo here",
+    "or": "or",
+    "browse": "choose from your device",
+    "hint": "JPEG, PNG, WebP or AVIF. Max. 8 MB.",
+    "uploading": "Uploading and optimizing...",
+    "replace": "Replace photo",
+    "remove": "Remove photo",
+    "preview": "Photo preview"
+  },
+  "gallery": {
+    "add": "Add photo",
+    "count": "{count, plural, =0 {No photos yet} other {# of {max} photos}}",
+    "moveLeft": "Move left",
+    "moveRight": "Move right",
+    "remove": "Remove photo {position}",
+    "position": "Photo {position}",
+    "full": "The gallery is full."
+  },
+  "url": {
+    "toggle": "Or paste an Unsplash URL",
+    "label": "Image URL",
+    "placeholder": "https://images.unsplash.com/photo-...",
+    "add": "Use URL",
+    "invalid": "Only URLs from images.unsplash.com are accepted."
+  },
+  "errors": {
+    "empty": "Choose an image file.",
+    "tooLarge": "The file is larger than 8 MB.",
+    "unsupported": "Unsupported format. Use JPEG, PNG, WebP or AVIF.",
+    "tooManyPixels": "The image resolution is too large (max. 40 megapixels).",
+    "corrupt": "The image file is damaged or unreadable."
+  },
+  "form": {
+    "sectionHint": "Upload your own photos or use URLs from images.unsplash.com. Photos are converted to WebP and location metadata is removed.",
+    "galleryHint": "Up to 12 photos. The first one is shown largest on the tour page."
+  }
+}

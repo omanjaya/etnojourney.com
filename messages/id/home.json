@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "Perjalanan budaya bersama masyarakat adat Nusantara",
+    "description": "Ikuti upacara, belajar kriya, memasak di dapur desa, dan berjalan bersama warga lokal di Bali, Jawa, hingga Papua."
+  },
+  "hero": {
+    "eyebrow": "Wisata budaya, dipandu warga lokal",
+    "titleStart": "Pulang membawa",
+    "titleAccent": "cerita,",
+    "titleEnd": "bukan sekadar foto.",
+    "description": "Perjalanan kecil ke desa-desa adat Nusantara. Ikut upacara, belajar menenun, memasak di dapur keluarga, dan mendengar kisah yang tak tertulis di buku panduan.",
+    "searchLabel": "Cari tur atau destinasi",
+    "searchPlaceholder": "Coba \"tenun\", \"Bromo\", atau \"Ubud\"",
+    "searchCta": "Cari",
+    "explore": "Jelajahi paket tur",
+    "scroll": "Gulir",
+    "photoCredit": "Pura Ulun Danu Beratan, Tabanan"
+  },
+  "stats": {
+    "destinations": "Destinasi",
+    "tours": "Paket tur",
+    "reviews": "Ulasan tamu",
+    "rating": "Rata-rata ulasan"
+  },
+  "categories": {
+    "eyebrow": "Cara menjelajah",
+    "title": "Pilih cara kamu mengenal Nusantara"
+  },
+  "featured": {
+    "eyebrow": "Pilihan kurator",
+    "title": "Perjalanan yang paling dikenang",
+    "description": "Rombongan kecil, pemandu dari komunitas setempat, dan jadwal yang mengikuti ritme desa, bukan sebaliknya."
+  },
+  "destinations": {
+    "eyebrow": "Destinasi",
+    "title": "Dari pura di tepi danau hingga kampung di atas laut"
+  },
+  "values": {
+    "eyebrow": "Cara kami berjalan",
+    "title": "Wisata yang memberi kembali",
+    "items": {
+      "local": {
+        "title": "Dipandu warga lokal",
+        "body": "Setiap tur dipimpin oleh tuan rumah dari komunitas itu sendiri: pemangku pura, penenun, nelayan, atau juru masak desa."
+      },
+      "small": {
+        "title": "Rombongan kecil",
+        "body": "Maksimal belasan orang per keberangkatan, agar kunjungan tidak mengganggu keseharian warga."
+      },
+      "fair": {
+        "title": "Bagi hasil yang adil",
+        "body": "Sebagian besar biaya tur langsung diterima keluarga dan kelompok adat yang menjadi tuan rumah."
+      },
+      "respect": {
+        "title": "Hormat pada adat",
+        "body": "Kami memberi panduan etika sebelum berangkat: busana, kapan boleh memotret, dan bagaimana ikut serta dengan sopan."
+      }
+    }
+  },
+  "story": {
+    "eyebrow": "Catatan perjalanan",
+    "title": "Pagi di Subak, ketika air dibagi dengan doa",
+    "body": "Sebelum matahari terbit, pekaseh membuka pintu air dan meletakkan canang di ujung pematang. Sistem subak sudah mengatur sawah Bali sejak abad ke-11, dan ia masih bekerja karena orang-orangnya masih percaya. Di perjalanan kami, kamu tidak hanya melihat terasering. Kamu berjalan di belakang petani yang menjaganya.",
+    "quote": "Air itu bukan milik saya. Saya hanya bertugas membaginya.",
+    "quoteAuthor": "Ungkapan para pekaseh, Subak Tegallalang",
+    "cta": "Jelajahi Ubud",
+    "imageAlt": "Sawah berundak Tegallalang di pagi hari"
+  },
+  "testimonials": {
+    "eyebrow": "Kata mereka",
+    "title": "Dari para pelancong"
+  },
+  "cta": {
+    "title": "Siap untuk perjalanan yang berbeda?",
+    "description": "Buat akun gratis, simpan tur favorit, lalu pesan dan bayar online. Booking langsung terkonfirmasi begitu pembayaran diterima.",
+    "primary": "Mulai menjelajah",
+    "secondary": "Buat akun"
+  },
+  "marquee": {
+    "label": "Destinasi dan pengalaman EtnoJourney"
+  }
+}

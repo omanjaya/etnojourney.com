@@ -1,0 +1,87 @@
+{
+  "metaTitle": "Akun saya",
+  "eyebrow": "Akun saya",
+  "greeting": "Halo, {name}",
+  "description": "Pantau perjalanan yang sudah kamu pesan dan tur yang kamu simpan.",
+  "tabs": {
+    "bookings": "Booking saya",
+    "wishlist": "Wishlist",
+    "settings": "Pengaturan"
+  },
+  "bookings": {
+    "metaTitle": "Booking saya",
+    "count": "{count, plural, =0 {Belum ada booking} one {# booking} other {# booking}}",
+    "travelDate": "Tanggal",
+    "participants": "Peserta",
+    "total": "Total",
+    "code": "Kode",
+    "bookedOn": "Dipesan {date}",
+    "viewTour": "Lihat tur",
+    "emptyTitle": "Belum ada perjalanan",
+    "emptyDescription": "Jelajahi tur budaya kami dan pesan pengalaman pertamamu bersama warga lokal.",
+    "emptyCta": "Jelajahi tur",
+    "payHint": "Selesaikan pembayaran agar booking langsung terkonfirmasi. Kamu masih bisa membatalkan selama belum membayar.",
+    "viewDetail": "Lihat detail"
+  },
+  "wishlist": {
+    "metaTitle": "Wishlist",
+    "count": "{count, plural, =0 {Belum ada tur tersimpan} one {# tur tersimpan} other {# tur tersimpan}}",
+    "emptyTitle": "Wishlist masih kosong",
+    "emptyDescription": "Tekan ikon hati pada tur mana pun untuk menyimpannya di sini.",
+    "emptyCta": "Cari inspirasi"
+  },
+  "settings": {
+    "metaTitle": "Pengaturan akun",
+    "profile": {
+      "title": "Profil",
+      "description": "Nama ini tampil di akunmu dan di email dari kami.",
+      "email": "Email",
+      "emailHint": "Email dipakai untuk masuk dan tidak bisa diubah di sini.",
+      "name": "Nama lengkap",
+      "language": "Bahasa email",
+      "languageHint": "Konfirmasi booking dan pembayaran akan dikirim dalam bahasa ini.",
+      "submit": "Simpan profil",
+      "saved": "Profil tersimpan."
+    },
+    "password": {
+      "title": "Kata sandi",
+      "description": "Setelah diganti, kamu akan otomatis keluar dari perangkat lain.",
+      "currentPassword": "Kata sandi saat ini",
+      "newPassword": "Kata sandi baru",
+      "confirmPassword": "Ulangi kata sandi baru",
+      "submit": "Ganti kata sandi",
+      "saved": "Kata sandi berhasil diganti.",
+      "wrongCurrent": "Kata sandi saat ini salah.",
+      "tooManyAttempts": "Terlalu banyak percobaan. Coba lagi dalam beberapa menit."
+    }
+  },
+  "bookingDetail": {
+    "metaTitle": "Booking {code}",
+    "back": "Semua booking",
+    "print": "Cetak",
+    "code": "Kode booking",
+    "bookedOn": "Dipesan {date}",
+    "trip": "Perjalanan",
+    "travelDate": "Tanggal berangkat",
+    "duration": "Durasi",
+    "meetingPoint": "Titik temu",
+    "price": "Rincian harga",
+    "unitPrice": "Harga per orang",
+    "participants": "Peserta",
+    "total": "Total",
+    "status": "Status booking",
+    "payment": "Pembayaran",
+    "paymentNone": "Belum ada pembayaran",
+    "method": "Metode",
+    "paidOn": "Dibayar {date}",
+    "contact": "Kontak",
+    "contactName": "Nama",
+    "contactPhone": "Telepon",
+    "notes": "Catatan",
+    "itinerary": "Rencana perjalanan",
+    "day": "Hari {day}",
+    "viewTour": "Lihat halaman tur",
+    "receiptTitle": "Ringkasan booking",
+    "receiptNote": "Tunjukkan kode booking ini kepada pemandu di titik temu."
+  }
+}

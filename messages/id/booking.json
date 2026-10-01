@@ -1,0 +1,45 @@
+{
+  "panel": {
+    "priceLabel": "Harga per orang",
+    "date": "Tanggal perjalanan",
+    "dateHint": "Paling cepat {days} hari dari sekarang.",
+    "participants": "Jumlah peserta",
+    "decrease": "Kurangi peserta",
+    "increase": "Tambah peserta",
+    "maxHint": "Maksimal {count} orang per tanggal.",
+    "contactName": "Nama kontak",
+    "contactPhone": "Nomor WhatsApp",
+    "phonePlaceholder": "08xx atau +62xx",
+    "notes": "Catatan (opsional)",
+    "notesPlaceholder": "Alergi makanan, kebutuhan khusus, dan sebagainya.",
+    "subtotal": "{price} x {count}",
+    "total": "Total",
+    "submit": "Pesan sekarang",
+    "loginTitle": "Masuk untuk memesan",
+    "loginDescription": "Buat akun gratis untuk memesan tur dan memantau status booking.",
+    "loginCta": "Masuk dan pesan",
+    "registerCta": "Belum punya akun? Daftar",
+    "paymentNote": "Bayar online setelah memesan. Booking langsung terkonfirmasi begitu pembayaran diterima."
+  },
+  "success": {
+    "title": "Booking diterima",
+    "description": "Selesaikan pembayaran sekarang agar tempatmu langsung terkonfirmasi.",
+    "codeLabel": "Kode booking",
+    "viewBookings": "Lihat booking saya",
+    "bookAnother": "Pesan tanggal lain",
+    "payHint": "Pembayaran aman lewat Midtrans. Kamu juga bisa membayar nanti dari halaman Booking Saya."
+  },
+  "cancel": {
+    "trigger": "Batalkan",
+    "confirm": "Yakin batalkan booking ini?",
+    "yes": "Ya, batalkan",
+    "no": "Tidak",
+    "done": "Booking dibatalkan."
+  },
+  "wishlist": {
+    "add": "Simpan ke wishlist",
+    "remove": "Hapus dari wishlist",
+    "saved": "Tersimpan",
+    "save": "Simpan"
+  }
+}

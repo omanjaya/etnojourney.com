@@ -1,0 +1,72 @@
+{
+  "write": {
+    "trigger": "Tulis ulasan",
+    "title": "Bagaimana perjalananmu?",
+    "subtitle": "Ulasan untuk {tour}",
+    "close": "Tutup",
+    "ratingLabel": "Penilaian",
+    "ratingOption": "{count, plural, one {# bintang} other {# bintang}}",
+    "ratingHints": {
+      "1": "Kurang memuaskan",
+      "2": "Perlu banyak perbaikan",
+      "3": "Cukup baik",
+      "4": "Sangat baik",
+      "5": "Luar biasa"
+    },
+    "country": "Negara asal",
+    "countryPlaceholder": "Indonesia",
+    "body": "Ceritakan pengalamanmu",
+    "bodyPlaceholder": "Apa yang paling berkesan? Bagaimana tuan rumah dan pemandumu?",
+    "counter": "{count} / {max} karakter",
+    "submit": "Kirim ulasan",
+    "thanksTitle": "Terima kasih",
+    "thanksBody": "Ulasanmu sudah tayang dan membantu pelancong lain mengenal desa mitra kami.",
+    "done": "Selesai",
+    "reviewed": "Ulasan terkirim"
+  },
+  "errors": {
+    "notFound": "Booking tidak ditemukan.",
+    "notOwner": "Kamu hanya bisa mengulas perjalananmu sendiri.",
+    "notCompleted": "Ulasan dapat ditulis setelah perjalanan selesai.",
+    "alreadyReviewed": "Kamu sudah mengulas perjalanan ini."
+  },
+  "fields": {
+    "rating": "Pilih 1 sampai 5 bintang.",
+    "bodyMin": "Ulasan minimal 20 karakter.",
+    "bodyMax": "Ulasan maksimal 1000 karakter.",
+    "countryMax": "Nama negara maksimal 56 karakter."
+  },
+  "tourNote": "Ulasan dapat ditulis setelah perjalanan selesai, dari halaman Akun.",
+  "admin": {
+    "nav": "Ulasan",
+    "eyebrow": "Moderasi",
+    "title": "Ulasan",
+    "description": "Tinjau ulasan dari tamu dan sembunyikan yang tidak pantas. Rating tur dihitung ulang otomatis.",
+    "filterLabel": "Saring ulasan",
+    "filters": {
+      "all": "Semua",
+      "traveller": "Dari tamu",
+      "curated": "Kurasi",
+      "hidden": "Disembunyikan"
+    },
+    "columns": {
+      "tour": "Tur",
+      "author": "Penulis",
+      "rating": "Rating",
+      "review": "Ulasan",
+      "date": "Tanggal",
+      "source": "Sumber",
+      "published": "Tayang"
+    },
+    "source": {
+      "traveller": "Traveller",
+      "curated": "Kurasi"
+    },
+    "toggle": "Tayangkan ulasan dari {author}",
+    "ratingLabel": "{rating} dari 5 bintang",
+    "empty": {
+      "title": "Belum ada ulasan",
+      "description": "Ulasan dari tamu akan muncul di sini setelah perjalanan mereka selesai."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "dropzone": {
+    "title": "Seret foto ke sini",
+    "or": "atau",
+    "browse": "pilih dari perangkat",
+    "hint": "JPEG, PNG, WebP, atau AVIF. Maks. 8 MB.",
+    "uploading": "Mengunggah dan mengoptimalkan...",
+    "replace": "Ganti foto",
+    "remove": "Hapus foto",
+    "preview": "Pratinjau foto"
+  },
+  "gallery": {
+    "add": "Tambah foto",
+    "count": "{count, plural, =0 {Belum ada foto} other {# dari {max} foto}}",
+    "moveLeft": "Geser ke kiri",
+    "moveRight": "Geser ke kanan",
+    "remove": "Hapus foto {position}",
+    "position": "Foto {position}",
+    "full": "Galeri sudah penuh."
+  },
+  "url": {
+    "toggle": "Atau tempel URL Unsplash",
+    "label": "URL gambar",
+    "placeholder": "https://images.unsplash.com/photo-...",
+    "add": "Pakai URL",
+    "invalid": "Hanya URL dari images.unsplash.com yang diterima."
+  },
+  "errors": {
+    "empty": "Pilih sebuah file gambar.",
+    "tooLarge": "Ukuran file melebihi 8 MB.",
+    "unsupported": "Format tidak didukung. Gunakan JPEG, PNG, WebP, atau AVIF.",
+    "tooManyPixels": "Resolusi gambar terlalu besar (maks. 40 megapiksel).",
+    "corrupt": "File gambar rusak atau tidak bisa dibaca."
+  },
+  "form": {
+    "sectionHint": "Unggah foto sendiri atau pakai URL dari images.unsplash.com. Foto diubah otomatis ke WebP dan metadata lokasinya dihapus.",
+    "galleryHint": "Maksimal 12 foto. Urutan pertama tampil paling besar di halaman tur."
+  }
+}

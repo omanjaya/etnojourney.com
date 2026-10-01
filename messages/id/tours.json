@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "Paket Tur Budaya",
+    "description": "Temukan paket tur budaya di Bali, Jawa, Nusa Penida, dan Raja Ampat: upacara adat, kriya, kuliner tradisi, dan hidup di desa."
+  },
+  "list": {
+    "eyebrow": "Paket tur",
+    "title": "Semua perjalanan",
+    "description": "Saring berdasarkan cara menjelajah, destinasi, durasi, atau anggaran. Semua tur dipandu warga lokal dalam rombongan kecil.",
+    "results": "{count, plural, =0 {Tidak ada tur} one {# tur ditemukan} other {# tur ditemukan}}",
+    "emptyTitle": "Belum ada tur yang cocok",
+    "emptyDescription": "Coba longgarkan filter atau gunakan kata kunci lain.",
+    "reset": "Atur ulang filter",
+    "resultsHeading": "Hasil pencarian"
+  },
+  "filters": {
+    "search": "Cari",
+    "searchPlaceholder": "Nama tur atau destinasi",
+    "category": "Kategori",
+    "allCategories": "Semua kategori",
+    "destination": "Destinasi",
+    "allDestinations": "Semua destinasi",
+    "maxPrice": "Anggaran per orang",
+    "anyPrice": "Berapa pun",
+    "upTo": "Hingga {price}",
+    "maxDays": "Durasi",
+    "anyDuration": "Berapa pun",
+    "upToDays": "Hingga {count} hari",
+    "sort": "Urutkan",
+    "sortOptions": {
+      "popular": "Terpopuler",
+      "priceAsc": "Harga terendah",
+      "priceDesc": "Harga tertinggi",
+      "duration": "Durasi tersingkat"
+    },
+    "toggle": "Filter",
+    "clear": "Hapus"
+  },
+  "detail": {
+    "breadcrumbHome": "Beranda",
+    "breadcrumbTours": "Paket Tur",
+    "duration": "Durasi",
+    "groupSize": "Rombongan",
+    "groupSizeValue": "Maks. {count} orang",
+    "category": "Kategori",
+    "language": "Bahasa",
+    "languageValue": "Indonesia, Inggris",
+    "overview": "Tentang perjalanan ini",
+    "highlights": "Yang akan kamu alami",
+    "itinerary": "Rencana perjalanan",
+    "day": "Hari {day}",
+    "included": "Sudah termasuk",
+    "meetingPoint": "Titik kumpul",
+    "reviews": "Ulasan pelancong",
+    "reviewsSummary": "{rating} dari 5 berdasarkan {count, plural, one {# ulasan} other {# ulasan}}",
+    "noReviews": "Belum ada ulasan untuk tur ini.",
+    "related": "Perjalanan serupa yang mungkin kamu suka",
+    "gallery": "Galeri foto",
+    "photo": "Foto {index} dari {total}",
+    "viewPhotos": "Lihat {count} foto",
+    "close": "Tutup",
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "hostedBy": "Dipandu oleh komunitas lokal di {destination}",
+    "bookCta": "Pesan sekarang"
+  }
+}

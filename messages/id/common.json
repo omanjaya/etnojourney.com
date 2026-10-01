@@ -1,0 +1,70 @@
+{
+  "brand": "EtnoJourney",
+  "tagline": "Perjalanan budaya bersama masyarakat adat Nusantara",
+  "nav": {
+    "home": "Beranda",
+    "tours": "Paket Tur",
+    "destinations": "Destinasi",
+    "account": "Akun Saya",
+    "bookings": "Booking Saya",
+    "wishlist": "Wishlist",
+    "admin": "Panel Admin",
+    "login": "Masuk",
+    "register": "Daftar",
+    "logout": "Keluar",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu",
+    "skipToContent": "Langsung ke konten"
+  },
+  "locale": {
+    "label": "Bahasa",
+    "id": "Indonesia",
+    "en": "English"
+  },
+  "categories": {
+    "ritual": "Ritual & Upacara",
+    "craft": "Kriya & Wastra",
+    "culinary": "Kuliner Tradisi",
+    "village": "Hidup di Desa",
+    "trekking": "Jelajah Alam"
+  },
+  "bookingStatus": {
+    "pending": "Menunggu",
+    "confirmed": "Terkonfirmasi",
+    "cancelled": "Dibatalkan",
+    "completed": "Selesai"
+  },
+  "days": "{count, plural, one {# hari} other {# hari}}",
+  "maxPeople": "Maks. {count}",
+  "people": "{count, plural, one {# orang} other {# orang}}",
+  "from": "Mulai",
+  "perPerson": "/ orang",
+  "tourCount": "{count, plural, =0 {Segera hadir} one {# paket tur} other {# paket tur}}",
+  "ratingLabel": "Rating {rating} dari 5",
+  "viewAll": "Lihat semua",
+  "back": "Kembali",
+  "save": "Simpan",
+  "cancel": "Batal",
+  "footer": {
+    "about": "Kami merancang perjalanan kecil yang dipandu langsung oleh warga lokal, agar setiap kunjungan memberi ruang bagi tradisi untuk tetap hidup.",
+    "explore": "Jelajahi",
+    "company": "EtnoJourney",
+    "contact": "Kontak",
+    "ourStory": "Cerita kami",
+    "responsible": "Wisata bertanggung jawab",
+    "partners": "Mitra desa",
+    "rights": "Hak cipta dilindungi.",
+    "madeIn": "Dibuat dengan hormat untuk budaya Nusantara.",
+    "statement": "Perjalanan kecil, dipandu warga, dengan hormat pada tradisi."
+  },
+  "notFound": {
+    "title": "Jalan ini belum dipetakan",
+    "description": "Halaman yang kamu cari tidak ditemukan. Mungkin sudah dipindah, atau alamatnya keliru.",
+    "cta": "Kembali ke beranda"
+  },
+  "error": {
+    "title": "Ada yang tidak beres",
+    "description": "Terjadi kesalahan saat memuat halaman ini. Silakan coba lagi.",
+    "retry": "Coba lagi"
+  }
+}

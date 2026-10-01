@@ -1,0 +1,37 @@
+{
+  "pay": "Pay now",
+  "redirecting": "Redirecting to payment...",
+  "status": {
+    "pending": "Awaiting payment",
+    "paid": "Paid",
+    "failed": "Payment failed",
+    "expired": "Expired"
+  },
+  "finish": {
+    "metaTitle": "Payment status",
+    "eyebrow": "Payment",
+    "paidTitle": "Payment received",
+    "paidBody": "Thank you. Booking {code} is confirmed. We've sent the trip details to your email.",
+    "pendingTitle": "Awaiting payment",
+    "pendingBody": "We haven't received payment confirmation for booking {code} yet. If you chose bank transfer or QRIS, complete the payment as instructed. The status updates automatically.",
+    "failedTitle": "Payment not completed",
+    "failedBody": "Payment for booking {code} failed or expired. You can try again from My Bookings.",
+    "notFoundTitle": "Payment not found",
+    "notFoundBody": "We couldn't find this payment on your account. Make sure you're signed in with the account you booked with.",
+    "orderId": "Order ID",
+    "amount": "Amount",
+    "method": "Method",
+    "tour": "Tour",
+    "toAccount": "Go to My Bookings",
+    "toTours": "Explore other tours"
+  },
+  "simulate": {
+    "metaTitle": "Payment simulator",
+    "eyebrow": "Development mode",
+    "title": "Payment simulator",
+    "description": "Midtrans isn't configured, so payments are simulated. This page is not available in production.",
+    "success": "Pay successfully",
+    "failure": "Fail",
+    "processed": "This payment has already been processed."
+  }
+}

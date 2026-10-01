@@ -1,0 +1,70 @@
+{
+  "brand": "EtnoJourney",
+  "tagline": "Cultural journeys with Indonesia's indigenous communities",
+  "nav": {
+    "home": "Home",
+    "tours": "Tours",
+    "destinations": "Destinations",
+    "account": "My Account",
+    "bookings": "My Bookings",
+    "wishlist": "Wishlist",
+    "admin": "Admin Panel",
+    "login": "Sign in",
+    "register": "Sign up",
+    "logout": "Sign out",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content"
+  },
+  "locale": {
+    "label": "Language",
+    "id": "Indonesia",
+    "en": "English"
+  },
+  "categories": {
+    "ritual": "Rituals & Ceremonies",
+    "craft": "Crafts & Textiles",
+    "culinary": "Heritage Cuisine",
+    "village": "Village Life",
+    "trekking": "Nature Trails"
+  },
+  "bookingStatus": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled",
+    "completed": "Completed"
+  },
+  "days": "{count, plural, one {# day} other {# days}}",
+  "maxPeople": "Max. {count}",
+  "people": "{count, plural, one {# person} other {# people}}",
+  "from": "From",
+  "perPerson": "/ person",
+  "tourCount": "{count, plural, =0 {Coming soon} one {# tour} other {# tours}}",
+  "ratingLabel": "Rated {rating} out of 5",
+  "viewAll": "View all",
+  "back": "Back",
+  "save": "Save",
+  "cancel": "Cancel",
+  "footer": {
+    "about": "We design small journeys led by local hosts, so every visit makes room for traditions to stay alive.",
+    "explore": "Explore",
+    "company": "EtnoJourney",
+    "contact": "Contact",
+    "ourStory": "Our story",
+    "responsible": "Responsible travel",
+    "partners": "Village partners",
+    "rights": "All rights reserved.",
+    "madeIn": "Made with respect for Indonesian cultures.",
+    "statement": "Small journeys, led by locals, with respect for tradition."
+  },
+  "notFound": {
+    "title": "This path isn't on the map",
+    "description": "The page you're looking for doesn't exist. It may have moved, or the address is wrong.",
+    "cta": "Back to home"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "We couldn't load this page. Please try again.",
+    "retry": "Try again"
+  }
+}

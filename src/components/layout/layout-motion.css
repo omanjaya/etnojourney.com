@@ -1,0 +1,161 @@
+/*
+ * Layout-level motion owned by the layout components (header anchoring for
+ * route transitions, nav indicators). Imported by the (site), (auth) and
+ * admin layouts. Toolkit-wide motion lives in globals.css.
+ */
+
+/* Keep fixed chrome still while page content crossfades. */
+::view-transition-group(site-header),
+::view-transition-group(admin-nav) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header),
+::view-transition-old(admin-nav) {
+  display: none;
+}
+::view-transition-new(site-header),
+::view-transition-new(admin-nav) {
+  animation: none;
+}
+
+/* Clicks during a short transition still reach the live page. */
+::view-transition {
+  pointer-events: none;
+}
+
+/* Page content: soft rise on enter, quick fade on exit. */
+::view-transition-old(.page-content) {
+  animation: 180ms var(--ease-editorial) both page-fade-out;
+}
+::view-transition-new(.page-content) {
+  animation: 420ms var(--ease-editorial) 80ms both page-rise-in;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-rise-in {
+  from {
+    opacity: 0;
+    translate: 0 12px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Logo kawung motif turns slowly while its link is hovered. */
+@keyframes kawung-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+.logo-link svg > g {
+  transform-origin: 16px 16px;
+  transform-box: view-box;
+}
+.logo-link:hover svg > g,
+.logo-link:focus-visible svg > g {
+  animation: kawung-spin 6s linear infinite;
+}
+
+/*
+ * Auth pages: the page's top-level blocks and the form's fields rise in
+ * sequence on load. Elements inserted later (error alerts) slide in once.
+ */
+@keyframes stagger-rise {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+.auth-stagger > *,
+.auth-stagger form > * {
+  animation: stagger-rise 0.7s var(--ease-editorial) both;
+}
+.auth-stagger > :nth-child(2) {
+  animation-delay: 60ms;
+}
+.auth-stagger > :nth-child(3) {
+  animation-delay: 120ms;
+}
+.auth-stagger > :nth-child(4) {
+  animation-delay: 180ms;
+}
+.auth-stagger > :nth-child(5) {
+  animation-delay: 240ms;
+}
+.auth-stagger > :nth-child(n + 6) {
+  animation-delay: 300ms;
+}
+.auth-stagger form > :nth-child(1) {
+  animation-delay: 220ms;
+}
+.auth-stagger form > :nth-child(2) {
+  animation-delay: 280ms;
+}
+.auth-stagger form > :nth-child(3) {
+  animation-delay: 340ms;
+}
+.auth-stagger form > :nth-child(4) {
+  animation-delay: 400ms;
+}
+.auth-stagger form > :nth-child(n + 5) {
+  animation-delay: 460ms;
+}
+
+/* Error/success alerts appearing after a submit. */
+.auth-stagger [role="alert"],
+.auth-stagger [role="status"] {
+  animation: stagger-rise 0.45s var(--ease-editorial) both;
+}
+
+/* Admin: rows and cards rise quickly in sequence (kept under 0.3s total). */
+.admin-stagger > * {
+  animation: stagger-rise 0.4s var(--ease-editorial) both;
+}
+.admin-stagger > :nth-child(2) {
+  animation-delay: 30ms;
+}
+.admin-stagger > :nth-child(3) {
+  animation-delay: 60ms;
+}
+.admin-stagger > :nth-child(4) {
+  animation-delay: 90ms;
+}
+.admin-stagger > :nth-child(5) {
+  animation-delay: 120ms;
+}
+.admin-stagger > :nth-child(6) {
+  animation-delay: 150ms;
+}
+.admin-stagger > :nth-child(n + 7) {
+  animation-delay: 180ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-stagger > *,
+  .auth-stagger form > *,
+  .auth-stagger [role="alert"],
+  .auth-stagger [role="status"],
+  .admin-stagger > * {
+    animation: none;
+  }
+  ::view-transition-old(.page-content),
+  ::view-transition-new(.page-content) {
+    animation: none;
+  }
+  .logo-link:hover svg > g,
+  .logo-link:focus-visible svg > g {
+    animation: none;
+  }
+}

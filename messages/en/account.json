@@ -1,0 +1,87 @@
+{
+  "metaTitle": "My account",
+  "eyebrow": "My account",
+  "greeting": "Hello, {name}",
+  "description": "Keep track of the journeys you've booked and the tours you've saved.",
+  "tabs": {
+    "bookings": "My bookings",
+    "wishlist": "Wishlist",
+    "settings": "Settings"
+  },
+  "bookings": {
+    "metaTitle": "My bookings",
+    "count": "{count, plural, =0 {No bookings yet} one {# booking} other {# bookings}}",
+    "travelDate": "Date",
+    "participants": "Travellers",
+    "total": "Total",
+    "code": "Code",
+    "bookedOn": "Booked {date}",
+    "viewTour": "View tour",
+    "emptyTitle": "No journeys yet",
+    "emptyDescription": "Explore our cultural tours and book your first experience with local hosts.",
+    "emptyCta": "Explore tours",
+    "payHint": "Complete payment to confirm your booking instantly. You can still cancel until you pay.",
+    "viewDetail": "View details"
+  },
+  "wishlist": {
+    "metaTitle": "Wishlist",
+    "count": "{count, plural, =0 {No saved tours} one {# saved tour} other {# saved tours}}",
+    "emptyTitle": "Your wishlist is empty",
+    "emptyDescription": "Tap the heart on any tour to save it here.",
+    "emptyCta": "Find inspiration"
+  },
+  "settings": {
+    "metaTitle": "Account settings",
+    "profile": {
+      "title": "Profile",
+      "description": "This name appears on your account and in our emails.",
+      "email": "Email",
+      "emailHint": "Your email is used to sign in and can't be changed here.",
+      "name": "Full name",
+      "language": "Email language",
+      "languageHint": "Booking and payment confirmations will be sent in this language.",
+      "submit": "Save profile",
+      "saved": "Profile saved."
+    },
+    "password": {
+      "title": "Password",
+      "description": "After changing it, you'll be signed out on other devices.",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Repeat new password",
+      "submit": "Change password",
+      "saved": "Password changed.",
+      "wrongCurrent": "Your current password is incorrect.",
+      "tooManyAttempts": "Too many attempts. Please try again in a few minutes."
+    }
+  },
+  "bookingDetail": {
+    "metaTitle": "Booking {code}",
+    "back": "All bookings",
+    "print": "Print",
+    "code": "Booking code",
+    "bookedOn": "Booked {date}",
+    "trip": "Trip",
+    "travelDate": "Departure date",
+    "duration": "Duration",
+    "meetingPoint": "Meeting point",
+    "price": "Price breakdown",
+    "unitPrice": "Price per person",
+    "participants": "Travellers",
+    "total": "Total",
+    "status": "Booking status",
+    "payment": "Payment",
+    "paymentNone": "No payment yet",
+    "method": "Method",
+    "paidOn": "Paid {date}",
+    "contact": "Contact",
+    "contactName": "Name",
+    "contactPhone": "Phone",
+    "notes": "Notes",
+    "itinerary": "Itinerary",
+    "day": "Day {day}",
+    "viewTour": "View tour page",
+    "receiptTitle": "Booking summary",
+    "receiptNote": "Show this booking code to your guide at the meeting point."
+  }
+}

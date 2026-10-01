@@ -1,0 +1,32 @@
+{
+  "unexpected": "Terjadi kesalahan tak terduga. Silakan coba lagi.",
+  "validation": "Periksa kembali isian yang ditandai.",
+  "unauthorized": "Silakan masuk terlebih dahulu.",
+  "notFound": "Data tidak ditemukan.",
+  "forbidden": "Kamu tidak memiliki akses untuk tindakan ini.",
+  "dateTooSoon": "Tanggal perjalanan minimal 3 hari dari hari ini.",
+  "invalidParticipants": "Jumlah peserta tidak sesuai kapasitas tur.",
+  "capacityExceeded": "Kuota pada tanggal tersebut tidak mencukupi. Pilih tanggal lain.",
+  "invalidTransition": "Perubahan status ini tidak diizinkan.",
+  "notCancellable": "Booking ini sudah tidak bisa dibatalkan.",
+  "slugTaken": "Slug sudah dipakai. Gunakan slug lain.",
+  "notPayable": "Booking ini tidak bisa dibayar. Pastikan statusnya masih menunggu dan tanggal perjalanan belum lewat.",
+  "alreadyPaid": "Booking ini sudah dibayar.",
+  "paymentUnavailable": "Pembayaran online sedang tidak tersedia. Silakan hubungi kami.",
+  "paymentGateway": "Gagal terhubung ke layanan pembayaran. Coba beberapa saat lagi.",
+  "fields": {
+    "invalid": "Nilai tidak valid.",
+    "required": "Wajib diisi.",
+    "email": "Format email tidak valid.",
+    "passwordMin": "Kata sandi minimal 8 karakter.",
+    "passwordMismatch": "Konfirmasi kata sandi tidak cocok.",
+    "nameMin": "Nama minimal 2 karakter.",
+    "phone": "Nomor telepon tidak valid.",
+    "date": "Tanggal tidak valid.",
+    "participants": "Jumlah peserta tidak valid.",
+    "notesMax": "Catatan maksimal 500 karakter.",
+    "slug": "Gunakan huruf kecil, angka, dan tanda hubung.",
+    "url": "URL gambar tidak valid.",
+    "positive": "Harus lebih dari 0."
+  }
+}

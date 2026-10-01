@@ -1,0 +1,60 @@
+{
+  "greeting": "Halo {name},",
+  "footer": "Kamu menerima email ini karena memiliki akun EtnoJourney. Jl. Raya Ubud No. 18, Gianyar, Bali.",
+  "viewBooking": "Lihat booking saya",
+  "details": {
+    "code": "Kode booking",
+    "tour": "Paket tur",
+    "date": "Tanggal perjalanan",
+    "participants": "Peserta",
+    "total": "Total",
+    "amount": "Jumlah dibayar",
+    "method": "Metode pembayaran"
+  },
+  "bookingCreated": {
+    "subject": "Booking {code} sudah kami terima",
+    "preheader": "Terima kasih telah memesan {tour}.",
+    "heading": "Booking kamu sudah kami terima",
+    "intro": "Terima kasih telah memilih perjalanan bersama EtnoJourney. Berikut ringkasan pesananmu.",
+    "next": "Tim kami dan tuan rumah di desa akan memeriksa ketersediaan. Kamu akan menerima email lagi begitu booking dikonfirmasi."
+  },
+  "statusChanged": {
+    "subject": "Booking {code}: {status}",
+    "preheader": "Status booking kamu sekarang {status}.",
+    "heading": "Status booking: {status}"
+  },
+  "status": {
+    "pending": {
+      "label": "Menunggu",
+      "explanation": "Booking kamu sedang menunggu konfirmasi dari tim kami dan tuan rumah di desa."
+    },
+    "confirmed": {
+      "label": "Terkonfirmasi",
+      "explanation": "Kabar baik, booking kamu sudah terkonfirmasi. Tuan rumah sudah bersiap menyambutmu. Detail titik temu ada di halaman tur."
+    },
+    "cancelled": {
+      "label": "Dibatalkan",
+      "explanation": "Booking ini telah dibatalkan. Jika kamu sudah melakukan pembayaran, tim kami akan menghubungimu untuk proses pengembalian dana."
+    },
+    "completed": {
+      "label": "Selesai",
+      "explanation": "Terima kasih sudah berjalan bersama kami. Ceritakan pengalamanmu dengan menulis ulasan dari halaman akun, agar tamu berikutnya dan desa mitra bisa ikut belajar."
+    }
+  },
+  "paymentSucceeded": {
+    "subject": "Pembayaran booking {code} berhasil",
+    "preheader": "Kami telah menerima pembayaran {amount}.",
+    "heading": "Pembayaran diterima",
+    "intro": "Pembayaran untuk {tour} sudah kami terima. Simpan email ini sebagai bukti pembayaran."
+  },
+  "passwordReset": {
+    "subject": "Atur ulang kata sandi EtnoJourney",
+    "preheader": "Gunakan tautan ini untuk membuat kata sandi baru.",
+    "heading": "Atur ulang kata sandi",
+    "intro": "Kami menerima permintaan untuk mengatur ulang kata sandi akunmu. Klik tombol di bawah untuk membuat kata sandi baru.",
+    "button": "Buat kata sandi baru",
+    "fallback": "Jika tombol tidak berfungsi, salin tautan ini ke browser:",
+    "expires": "Tautan ini berlaku selama 1 jam dan hanya bisa dipakai sekali.",
+    "ignore": "Jika kamu tidak meminta pengaturan ulang, abaikan email ini. Kata sandimu tidak akan berubah."
+  }
+}

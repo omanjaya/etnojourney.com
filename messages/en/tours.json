@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "Cultural Tours",
+    "description": "Find cultural tours in Bali, Java, Nusa Penida and Raja Ampat: ceremonies, crafts, heritage cuisine and village life."
+  },
+  "list": {
+    "eyebrow": "Tours",
+    "title": "All journeys",
+    "description": "Filter by travel style, destination, duration or budget. Every tour is led by local hosts in small groups.",
+    "results": "{count, plural, =0 {No tours} one {# tour found} other {# tours found}}",
+    "emptyTitle": "No matching tours yet",
+    "emptyDescription": "Try loosening the filters or searching for something else.",
+    "reset": "Reset filters",
+    "resultsHeading": "Search results"
+  },
+  "filters": {
+    "search": "Search",
+    "searchPlaceholder": "Tour or destination name",
+    "category": "Category",
+    "allCategories": "All categories",
+    "destination": "Destination",
+    "allDestinations": "All destinations",
+    "maxPrice": "Budget per person",
+    "anyPrice": "Any",
+    "upTo": "Up to {price}",
+    "maxDays": "Duration",
+    "anyDuration": "Any",
+    "upToDays": "Up to {count, plural, one {# day} other {# days}}",
+    "sort": "Sort by",
+    "sortOptions": {
+      "popular": "Most popular",
+      "priceAsc": "Lowest price",
+      "priceDesc": "Highest price",
+      "duration": "Shortest first"
+    },
+    "toggle": "Filters",
+    "clear": "Clear"
+  },
+  "detail": {
+    "breadcrumbHome": "Home",
+    "breadcrumbTours": "Tours",
+    "duration": "Duration",
+    "groupSize": "Group size",
+    "groupSizeValue": "Max. {count} people",
+    "category": "Category",
+    "language": "Language",
+    "languageValue": "Indonesian, English",
+    "overview": "About this journey",
+    "highlights": "What you'll experience",
+    "itinerary": "Itinerary",
+    "day": "Day {day}",
+    "included": "What's included",
+    "meetingPoint": "Meeting point",
+    "reviews": "Traveller reviews",
+    "reviewsSummary": "{rating} out of 5 from {count, plural, one {# review} other {# reviews}}",
+    "noReviews": "No reviews for this tour yet.",
+    "related": "Similar journeys you may like",
+    "gallery": "Photo gallery",
+    "photo": "Photo {index} of {total}",
+    "viewPhotos": "View {count} photos",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "hostedBy": "Hosted by the local community in {destination}",
+    "bookCta": "Book now"
+  }
+}

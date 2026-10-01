@@ -1,0 +1,72 @@
+{
+  "write": {
+    "trigger": "Write a review",
+    "title": "How was your journey?",
+    "subtitle": "Review for {tour}",
+    "close": "Close",
+    "ratingLabel": "Rating",
+    "ratingOption": "{count, plural, one {# star} other {# stars}}",
+    "ratingHints": {
+      "1": "Disappointing",
+      "2": "Needs a lot of work",
+      "3": "Good",
+      "4": "Very good",
+      "5": "Exceptional"
+    },
+    "country": "Country",
+    "countryPlaceholder": "Indonesia",
+    "body": "Tell us about your experience",
+    "bodyPlaceholder": "What stayed with you? How were your hosts and guide?",
+    "counter": "{count} / {max} characters",
+    "submit": "Submit review",
+    "thanksTitle": "Thank you",
+    "thanksBody": "Your review is live and helps other travellers get to know our partner villages.",
+    "done": "Done",
+    "reviewed": "Review submitted"
+  },
+  "errors": {
+    "notFound": "We couldn't find that booking.",
+    "notOwner": "You can only review your own trips.",
+    "notCompleted": "You can write a review once your trip is completed.",
+    "alreadyReviewed": "You've already reviewed this trip."
+  },
+  "fields": {
+    "rating": "Choose 1 to 5 stars.",
+    "bodyMin": "Reviews need at least 20 characters.",
+    "bodyMax": "Reviews can be at most 1000 characters.",
+    "countryMax": "Country must be 56 characters or fewer."
+  },
+  "tourNote": "You can write a review from your Account once your trip is completed.",
+  "admin": {
+    "nav": "Reviews",
+    "eyebrow": "Moderation",
+    "title": "Reviews",
+    "description": "Check guest reviews and hide anything inappropriate. Tour ratings are recalculated automatically.",
+    "filterLabel": "Filter reviews",
+    "filters": {
+      "all": "All",
+      "traveller": "From guests",
+      "curated": "Curated",
+      "hidden": "Hidden"
+    },
+    "columns": {
+      "tour": "Tour",
+      "author": "Author",
+      "rating": "Rating",
+      "review": "Review",
+      "date": "Date",
+      "source": "Source",
+      "published": "Live"
+    },
+    "source": {
+      "traveller": "Traveller",
+      "curated": "Curated"
+    },
+    "toggle": "Publish review by {author}",
+    "ratingLabel": "{rating} out of 5 stars",
+    "empty": {
+      "title": "No reviews yet",
+      "description": "Guest reviews will appear here once their trips are completed."
+    }
+  }
+}

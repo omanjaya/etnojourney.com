@@ -1,0 +1,60 @@
+{
+  "greeting": "Hi {name},",
+  "footer": "You're receiving this email because you have an EtnoJourney account. Jl. Raya Ubud No. 18, Gianyar, Bali.",
+  "viewBooking": "View my booking",
+  "details": {
+    "code": "Booking code",
+    "tour": "Tour",
+    "date": "Travel date",
+    "participants": "Travellers",
+    "total": "Total",
+    "amount": "Amount paid",
+    "method": "Payment method"
+  },
+  "bookingCreated": {
+    "subject": "We've received booking {code}",
+    "preheader": "Thank you for booking {tour}.",
+    "heading": "We've received your booking",
+    "intro": "Thank you for travelling with EtnoJourney. Here's a summary of your booking.",
+    "next": "Our team and your village hosts will check availability. You'll get another email as soon as the booking is confirmed."
+  },
+  "statusChanged": {
+    "subject": "Booking {code}: {status}",
+    "preheader": "Your booking is now {status}.",
+    "heading": "Booking status: {status}"
+  },
+  "status": {
+    "pending": {
+      "label": "Pending",
+      "explanation": "Your booking is waiting for confirmation from our team and your village hosts."
+    },
+    "confirmed": {
+      "label": "Confirmed",
+      "explanation": "Good news, your booking is confirmed. Your hosts are getting ready to welcome you. Meeting point details are on the tour page."
+    },
+    "cancelled": {
+      "label": "Cancelled",
+      "explanation": "This booking has been cancelled. If you've already paid, our team will contact you about the refund."
+    },
+    "completed": {
+      "label": "Completed",
+      "explanation": "Thank you for travelling with us. Share your experience by writing a review from your account page, so future guests and our partner villages can learn from it."
+    }
+  },
+  "paymentSucceeded": {
+    "subject": "Payment for booking {code} received",
+    "preheader": "We've received your payment of {amount}.",
+    "heading": "Payment received",
+    "intro": "We've received your payment for {tour}. Keep this email as your receipt."
+  },
+  "passwordReset": {
+    "subject": "Reset your EtnoJourney password",
+    "preheader": "Use this link to create a new password.",
+    "heading": "Reset your password",
+    "intro": "We received a request to reset your account password. Click the button below to choose a new one.",
+    "button": "Choose a new password",
+    "fallback": "If the button doesn't work, copy this link into your browser:",
+    "expires": "This link is valid for 1 hour and can be used once.",
+    "ignore": "If you didn't request a reset, you can ignore this email. Your password won't change."
+  }
+}

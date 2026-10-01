@@ -1,0 +1,45 @@
+{
+  "panel": {
+    "priceLabel": "Price per person",
+    "date": "Travel date",
+    "dateHint": "At least {days} days from today.",
+    "participants": "Travellers",
+    "decrease": "Remove a traveller",
+    "increase": "Add a traveller",
+    "maxHint": "Up to {count} people per date.",
+    "contactName": "Contact name",
+    "contactPhone": "WhatsApp number",
+    "phonePlaceholder": "08xx or +62xx",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Food allergies, special needs, and so on.",
+    "subtotal": "{price} x {count}",
+    "total": "Total",
+    "submit": "Book now",
+    "loginTitle": "Sign in to book",
+    "loginDescription": "Create a free account to book tours and follow your booking status.",
+    "loginCta": "Sign in to book",
+    "registerCta": "No account yet? Sign up",
+    "paymentNote": "Pay online after booking. Your booking is confirmed as soon as payment is received."
+  },
+  "success": {
+    "title": "Booking received",
+    "description": "Complete payment now to confirm your spot instantly.",
+    "codeLabel": "Booking code",
+    "viewBookings": "View my bookings",
+    "bookAnother": "Book another date",
+    "payHint": "Secure payment via Midtrans. You can also pay later from My Bookings."
+  },
+  "cancel": {
+    "trigger": "Cancel",
+    "confirm": "Cancel this booking?",
+    "yes": "Yes, cancel",
+    "no": "No",
+    "done": "Booking cancelled."
+  },
+  "wishlist": {
+    "add": "Save to wishlist",
+    "remove": "Remove from wishlist",
+    "saved": "Saved",
+    "save": "Save"
+  }
+}

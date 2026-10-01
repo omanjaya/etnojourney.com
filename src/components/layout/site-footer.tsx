@@ -1,0 +1,123 @@
+import { Mail, MapPin, Phone } from "lucide-react";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { Reveal, SplitWords } from "@/components/motion";
+import { Logo } from "@/components/shared/logo";
+import { Container } from "./container";
+
+export async function SiteFooter() {
+  const t = await getTranslations("common");
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="bg-indigo text-sand-100 relative overflow-hidden">
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute -right-24 -bottom-24 size-[28rem] animate-[spin_160s_linear_infinite] text-white/[0.04]"
+        viewBox="0 0 100 100"
+      >
+        <defs>
+          <pattern id="kawung" width="20" height="20" patternUnits="userSpaceOnUse">
+            <g fill="currentColor">
+              <ellipse cx="10" cy="4" rx="3" ry="4.5" />
+              <ellipse cx="10" cy="16" rx="3" ry="4.5" />
+              <ellipse cx="4" cy="10" rx="4.5" ry="3" />
+              <ellipse cx="16" cy="10" rx="4.5" ry="3" />
+            </g>
+          </pattern>
+        </defs>
+        <circle cx="50" cy="50" r="50" fill="url(#kawung)" />
+      </svg>
+
+      <Container className="relative border-b border-white/10 pt-20 pb-14">
+        <Reveal variant="mask-left">
+          <Reveal variant="none">
+            <SplitWords
+              as="p"
+              text={t("footer.statement")}
+              stagger={45}
+              className="font-display max-w-4xl text-4xl leading-[1.05] text-white md:text-6xl"
+            />
+          </Reveal>
+        </Reveal>
+      </Container>
+
+      <Container className="relative grid gap-12 py-16 md:grid-cols-12">
+        <Reveal className="md:col-span-5" delay={0}>
+          <Logo inverted />
+          <p className="text-sand-100/70 mt-6 max-w-sm leading-relaxed">{t("footer.about")}</p>
+        </Reveal>
+
+        <Reveal className="md:col-span-2" delay={0.08}>
+          <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+            {t("footer.explore")}
+          </h3>
+          <ul className="mt-5 space-y-1.5 text-sm">
+            <li>
+              <Link
+                href="/tours"
+                className="inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white"
+              >
+                {t("nav.tours")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/destinations"
+                className="inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white"
+              >
+                {t("nav.destinations")}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/account"
+                className="inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white"
+              >
+                {t("nav.bookings")}
+              </Link>
+            </li>
+          </ul>
+        </Reveal>
+
+        <Reveal className="md:col-span-2" delay={0.16}>
+          <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+            {t("footer.company")}
+          </h3>
+          <ul className="text-sand-100/80 mt-5 space-y-3 text-sm">
+            <li>{t("footer.ourStory")}</li>
+            <li>{t("footer.responsible")}</li>
+            <li>{t("footer.partners")}</li>
+          </ul>
+        </Reveal>
+
+        <Reveal className="md:col-span-3" delay={0.24}>
+          <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+            {t("footer.contact")}
+          </h3>
+          <ul className="text-sand-100/80 mt-5 space-y-3 text-sm">
+            <li className="flex gap-3">
+              <MapPin className="text-gold size-4 shrink-0" aria-hidden />
+              Jl. Raya Ubud No. 18, Gianyar, Bali
+            </li>
+            <li className="flex gap-3">
+              <Phone className="text-gold size-4 shrink-0" aria-hidden />
+              +62 361 975 018
+            </li>
+            <li className="flex gap-3">
+              <Mail className="text-gold size-4 shrink-0" aria-hidden />
+              halo@etnojourney.id
+            </li>
+          </ul>
+        </Reveal>
+      </Container>
+
+      <Container className="text-sand-100/60 relative flex flex-col gap-2 border-t border-white/10 py-8 text-xs md:flex-row md:justify-between">
+        <p>
+          &copy; {year} EtnoJourney. {t("footer.rights")}
+        </p>
+        <p>{t("footer.madeIn")}</p>
+      </Container>
+    </footer>
+  );
+}

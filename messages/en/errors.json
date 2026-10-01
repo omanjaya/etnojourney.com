@@ -1,0 +1,32 @@
+{
+  "unexpected": "Something unexpected happened. Please try again.",
+  "validation": "Please check the highlighted fields.",
+  "unauthorized": "Please sign in first.",
+  "notFound": "We couldn't find that.",
+  "forbidden": "You don't have access to do this.",
+  "dateTooSoon": "Travel date must be at least 3 days from today.",
+  "invalidParticipants": "Number of travellers doesn't fit this tour's capacity.",
+  "capacityExceeded": "Not enough seats left on that date. Please choose another.",
+  "invalidTransition": "This status change isn't allowed.",
+  "notCancellable": "This booking can no longer be cancelled.",
+  "slugTaken": "That slug is already in use. Choose another one.",
+  "notPayable": "This booking can't be paid. Make sure it is still pending and the travel date hasn't passed.",
+  "alreadyPaid": "This booking has already been paid.",
+  "paymentUnavailable": "Online payment is currently unavailable. Please contact us.",
+  "paymentGateway": "Couldn't reach the payment service. Please try again shortly.",
+  "fields": {
+    "invalid": "Invalid value.",
+    "required": "This field is required.",
+    "email": "Enter a valid email.",
+    "passwordMin": "Password must be at least 8 characters.",
+    "passwordMismatch": "Passwords don't match.",
+    "nameMin": "Name must be at least 2 characters.",
+    "phone": "Enter a valid phone number.",
+    "date": "Enter a valid date.",
+    "participants": "Invalid number of travellers.",
+    "notesMax": "Notes must be 500 characters or fewer.",
+    "slug": "Use lowercase letters, numbers and hyphens.",
+    "url": "Enter a valid image URL.",
+    "positive": "Must be greater than 0."
+  }
+}

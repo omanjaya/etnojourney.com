@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+/*
+ * EtnoJourney design tokens.
+ * Earthy editorial palette: sand paper backgrounds, ink text,
+ * terracotta as the primary action colour, batik indigo for depth.
+ */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --color-sand-50: #fbf8f3;
+  --color-sand-100: #f5eee3;
+  --color-sand-200: #ebdfcc;
+  --color-sand-300: #dbc8aa;
+
+  --color-ink: #1d1a16;
+  --color-ink-soft: #4a443c;
+  --color-muted: #7a7166;
+  --color-line: #e4d9c8;
+
+  --color-terracotta: #b4532a;
+  --color-terracotta-dark: #8e3e1d;
+  --color-terracotta-light: #f3dfd2;
+
+  --color-indigo: #1e2a44;
+  --color-indigo-light: #2d3d5f;
+
+  --color-leaf: #4e6a43;
+  --color-leaf-light: #e2eadb;
+  --color-gold: #c4963f;
+  --color-gold-light: #f6ecd6;
+  --color-danger: #a3332b;
+  --color-danger-light: #f6dedb;
+
+  --radius-card: 1.25rem;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --ease-cinematic: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-fade-up: fade-up 0.8s var(--ease-editorial) both;
+  --animate-fade-in: fade-in 0.6s var(--ease-editorial) both;
+  /* Slow zoom-out for hero photography. */
+  --animate-ken-burns: ken-burns 14s var(--ease-editorial) both;
+  /* Infinite horizontal scroll; pair with a duplicated track. */
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes ken-burns {
+    from {
+      transform: scale(1.15);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes word-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.6em) rotate(2deg);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-sand-50 font-sans text-ink antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-balance;
+    font-variation-settings: "opsz" 144, "SOFT" 50;
+  }
+
+  ::selection {
+    @apply bg-terracotta text-sand-50;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-terracotta;
+  }
+}
+
+@layer utilities {
+  /* Small uppercase label used above section headings. */
+  .eyebrow {
+    @apply text-xs font-semibold tracking-[0.22em] text-terracotta uppercase;
+  }
+
+  /* Subtle paper grain over sand sections. */
+  .grain {
+    background-image: radial-gradient(rgb(29 26 22 / 0.035) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion toolkit (see src/components/motion). All states are driven   */
+/* by data attributes so server HTML stays fully visible without JS.  */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  /* <SplitWords>: each word rises in sequence. `--i` is the word index. */
+  .split-words > [data-word] {
+    display: inline-block;
+    white-space: pre;
+  }
+  .split-words[data-play="load"] > [data-word],
+  [data-reveal="done"] .split-words > [data-word],
+  .split-words[data-reveal="done"] > [data-word] {
+    animation: word-rise 0.9s var(--ease-editorial) both;
+    animation-delay: calc(var(--split-delay, 0s) + var(--i) * var(--split-stagger, 60ms));
+  }
+  [data-reveal="pending"] .split-words > [data-word],
+  .split-words[data-reveal="pending"] > [data-word] {
+    opacity: 0;
+  }
+
+  /* <Reveal variant>: hidden only while `pending`, which is set client-side. */
+  [data-reveal] {
+    transition-property: opacity, translate, scale, clip-path;
+    transition-duration: 0.9s;
+    transition-timing-function: var(--ease-editorial);
+  }
+  [data-reveal="pending"][data-variant="fade-up"] {
+    opacity: 0;
+    translate: 0 1.5rem;
+  }
+  [data-reveal="pending"][data-variant="fade"] {
+    opacity: 0;
+  }
+  [data-reveal="pending"][data-variant="scale"] {
+    opacity: 0;
+    scale: 0.94;
+  }
+  [data-reveal][data-variant^="mask"] {
+    transition-duration: 1.2s;
+    transition-timing-function: var(--ease-cinematic);
+  }
+  [data-reveal="pending"][data-variant="mask-left"] {
+    clip-path: inset(0 100% 0 0);
+  }
+  [data-reveal="pending"][data-variant="mask-up"] {
+    clip-path: inset(100% 0 0 0);
+  }
+  [data-reveal="done"][data-variant^="mask"] {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* <Tilt>: rotation comes from CSS variables set on pointer move. */
+  .tilt {
+    transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition: transform 0.5s var(--ease-editorial);
+    transform-style: preserve-3d;
+  }
+  .tilt[data-tilting] {
+    transition-duration: 0.12s;
+  }
+
+  /* <Magnetic>: the child follows the pointer slightly. */
+  .magnetic {
+    display: inline-block;
+    translate: var(--mag-x, 0) var(--mag-y, 0);
+    transition: translate 0.4s var(--ease-editorial);
+  }
+
+  /* <Marquee>: pause on hover/focus for readability. */
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Route transitions (React <ViewTransition>): a soft crossfade. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--ease-editorial);
+}
+::view-transition-group(*) {
+  animation-duration: 520ms;
+  animation-timing-function: var(--ease-cinematic);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+  [data-reveal="pending"] {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+    clip-path: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    /* Staggered entrances hide content during their delay; skip it entirely. */
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

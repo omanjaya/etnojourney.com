@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "Cultural journeys with Indonesia's indigenous communities",
+    "description": "Join ceremonies, learn traditional crafts, cook in village kitchens and walk with local hosts from Bali and Java to Papua."
+  },
+  "hero": {
+    "eyebrow": "Cultural travel, led by local hosts",
+    "titleStart": "Come home with",
+    "titleAccent": "stories,",
+    "titleEnd": "not just photos.",
+    "description": "Small journeys into Indonesia's customary villages. Join a ceremony, learn to weave, cook in a family kitchen and hear the stories no guidebook has written down.",
+    "searchLabel": "Search tours or destinations",
+    "searchPlaceholder": "Try \"weaving\", \"Bromo\" or \"Ubud\"",
+    "searchCta": "Search",
+    "explore": "Explore tours",
+    "scroll": "Scroll",
+    "photoCredit": "Ulun Danu Beratan Temple, Tabanan"
+  },
+  "stats": {
+    "destinations": "Destinations",
+    "tours": "Curated tours",
+    "reviews": "Guest reviews",
+    "rating": "Average rating"
+  },
+  "categories": {
+    "eyebrow": "Ways to travel",
+    "title": "Choose how you want to know Indonesia"
+  },
+  "featured": {
+    "eyebrow": "Curator's picks",
+    "title": "The journeys people remember",
+    "description": "Small groups, guides from the community itself, and schedules that follow the rhythm of the village rather than the other way round."
+  },
+  "destinations": {
+    "eyebrow": "Destinations",
+    "title": "From lakeside temples to villages above the sea"
+  },
+  "values": {
+    "eyebrow": "How we travel",
+    "title": "Travel that gives back",
+    "items": {
+      "local": {
+        "title": "Led by local hosts",
+        "body": "Every tour is led by someone from the community itself: temple priests, weavers, fishermen or village cooks."
+      },
+      "small": {
+        "title": "Small groups",
+        "body": "A dozen or so travellers per departure at most, so visits never overwhelm daily village life."
+      },
+      "fair": {
+        "title": "Fair revenue sharing",
+        "body": "Most of what you pay goes directly to the host families and customary groups."
+      },
+      "respect": {
+        "title": "Respect for custom",
+        "body": "We brief you on etiquette before you go: what to wear, when photos are welcome and how to take part politely."
+      }
+    }
+  },
+  "story": {
+    "eyebrow": "Field notes",
+    "title": "Morning in the Subak, when water is shared with prayer",
+    "body": "Before sunrise the pekaseh opens the sluice and lays an offering at the edge of the dyke. The subak system has governed Bali's rice fields since the 11th century, and it still works because its people still believe in it. On our journey you don't just look at terraces. You walk behind the farmers who keep them.",
+    "quote": "The water isn't mine. My job is only to share it.",
+    "quoteAuthor": "A saying among the pekaseh of Subak Tegallalang",
+    "cta": "Explore Ubud",
+    "imageAlt": "Tegallalang rice terraces in the morning"
+  },
+  "testimonials": {
+    "eyebrow": "Kind words",
+    "title": "From our travellers"
+  },
+  "cta": {
+    "title": "Ready for a different kind of trip?",
+    "description": "Create a free account, save the tours you love, then book and pay online. Your booking is confirmed the moment payment arrives.",
+    "primary": "Start exploring",
+    "secondary": "Create account"
+  },
+  "marquee": {
+    "label": "EtnoJourney destinations and experiences"
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "meta": {
+    "title": "Panel Admin"
+  },
+  "nav": {
+    "label": "Navigasi admin",
+    "overview": "Ringkasan",
+    "bookings": "Booking",
+    "tours": "Tur",
+    "backToSite": "Kembali ke situs",
+    "openMenu": "Buka menu admin",
+    "closeMenu": "Tutup menu admin",
+    "signedInAs": "Masuk sebagai",
+    "destinations": "Destinasi"
+  },
+  "overview": {
+    "eyebrow": "Panel Admin",
+    "title": "Selamat datang, {name}",
+    "description": "Pantau booking yang masuk dan kelola paket tur dari satu tempat.",
+    "stats": {
+      "pending": "Menunggu konfirmasi",
+      "confirmed": "Terkonfirmasi",
+      "completed": "Selesai",
+      "cancelled": "Dibatalkan",
+      "revenue": "Pendapatan",
+      "revenueHint": "Dari booking terkonfirmasi dan selesai",
+      "publishedTours": "Tur tayang"
+    },
+    "recent": "Booking terbaru",
+    "viewAll": "Lihat semua booking"
+  },
+  "bookings": {
+    "eyebrow": "Operasional",
+    "title": "Booking",
+    "description": "Konfirmasi, selesaikan, atau batalkan booking wisatawan.",
+    "filterLabel": "Filter status booking",
+    "all": "Semua",
+    "empty": {
+      "title": "Belum ada booking",
+      "description": "Booking dengan status ini akan muncul di sini."
+    },
+    "columns": {
+      "code": "Kode",
+      "customer": "Pemesan",
+      "tour": "Tur",
+      "travelDate": "Tanggal",
+      "participants": "Peserta",
+      "total": "Total",
+      "status": "Status",
+      "created": "Dibuat",
+      "actions": "Aksi"
+    },
+    "noActions": "Final",
+    "actions": {
+      "confirmed": "Konfirmasi",
+      "completed": "Tandai selesai",
+      "cancelled": "Batalkan",
+      "pending": "Tunda"
+    },
+    "confirmCancel": "Batalkan booking {code}? Tindakan ini tidak bisa diurungkan."
+  },
+  "tours": {
+    "eyebrow": "Katalog",
+    "title": "Paket tur",
+    "description": "Kelola paket tur, publikasi, dan tur unggulan di beranda.",
+    "new": "Tur baru",
+    "edit": "Ubah",
+    "view": "Lihat di situs",
+    "empty": {
+      "title": "Belum ada tur",
+      "description": "Buat paket tur pertama untuk mulai menerima booking."
+    },
+    "columns": {
+      "tour": "Tur",
+      "category": "Kategori",
+      "price": "Harga / orang",
+      "published": "Tayang",
+      "featured": "Unggulan",
+      "actions": "Aksi"
+    },
+    "togglePublished": "Tayangkan {title}",
+    "toggleFeatured": "Jadikan {title} unggulan"
+  },
+  "form": {
+    "newEyebrow": "Katalog",
+    "newTitle": "Buat tur baru",
+    "editTitle": "Ubah tur",
+    "backToList": "Kembali ke daftar tur",
+    "create": "Buat tur",
+    "save": "Simpan perubahan",
+    "lang": {
+      "id": "ID",
+      "en": "EN"
+    },
+    "sections": {
+      "basics": "Informasi dasar",
+      "basicsHint": "Judul, ringkasan, dan deskripsi tampil di halaman publik dalam dua bahasa.",
+      "details": "Detail perjalanan",
+      "detailsHint": "Harga dihitung per orang dalam Rupiah.",
+      "media": "Foto",
+      "lists": "Sorotan dan fasilitas",
+      "listsHint": "Satu item per baris. Jumlah baris ID dan EN harus sama.",
+      "itinerary": "Itinerary",
+      "itineraryHint": "Urutan hari mengikuti urutan baris di bawah.",
+      "visibility": "Visibilitas"
+    },
+    "fields": {
+      "title": "Judul",
+      "summary": "Ringkasan",
+      "description": "Deskripsi",
+      "slug": "Slug URL",
+      "slugHint": "Diisi otomatis dari judul bahasa Indonesia.",
+      "destination": "Destinasi",
+      "selectDestination": "Pilih destinasi",
+      "category": "Kategori",
+      "durationDays": "Durasi (hari)",
+      "pricePerPerson": "Harga per orang (IDR)",
+      "maxParticipants": "Maks. peserta",
+      "meetingPoint": "Titik kumpul",
+      "coverImage": "Foto sampul",
+      "gallery": "Galeri",
+      "highlights": "Sorotan",
+      "included": "Termasuk",
+      "isPublished": "Tayangkan di situs",
+      "isPublishedHint": "Tur draf tidak terlihat oleh wisatawan.",
+      "isFeatured": "Tur unggulan",
+      "isFeaturedHint": "Tampil di bagian unggulan beranda."
+    },
+    "itinerary": {
+      "day": "Hari {day}",
+      "add": "Tambah hari",
+      "remove": "Hapus hari {day}",
+      "empty": "Belum ada hari. Tambahkan minimal satu hari perjalanan.",
+      "dayTitle": "Judul hari",
+      "dayDescription": "Kegiatan"
+    }
+  },
+  "destinations": {
+    "eyebrow": "Katalog",
+    "title": "Destinasi",
+    "description": "Kelola destinasi yang menaungi paket tur, lengkap dengan foto dan deskripsi dua bahasa.",
+    "new": "Destinasi baru",
+    "edit": "Ubah",
+    "view": "Lihat di situs",
+    "empty": {
+      "title": "Belum ada destinasi",
+      "description": "Tambahkan destinasi pertama sebelum membuat paket tur."
+    },
+    "columns": {
+      "destination": "Destinasi",
+      "province": "Provinsi",
+      "tours": "Tur tayang",
+      "actions": "Aksi"
+    },
+    "tourCount": "{published} tayang dari {total}"
+  },
+  "destinationForm": {
+    "newEyebrow": "Katalog",
+    "newTitle": "Buat destinasi baru",
+    "editTitle": "Ubah destinasi",
+    "backToList": "Kembali ke daftar destinasi",
+    "create": "Buat destinasi",
+    "save": "Simpan perubahan",
+    "slugTaken": "Slug sudah dipakai destinasi lain.",
+    "sections": {
+      "basics": "Informasi dasar",
+      "basicsHint": "Nama dan provinsi tampil apa adanya. Tagline dan deskripsi tampil dalam dua bahasa.",
+      "media": "Foto utama",
+      "mediaHint": "Dipakai di kartu destinasi dan hero halaman destinasi. Gunakan foto lanskap."
+    },
+    "fields": {
+      "name": "Nama destinasi",
+      "slug": "Slug URL",
+      "slugHint": "Diisi otomatis dari nama.",
+      "province": "Provinsi",
+      "tagline": "Tagline",
+      "taglineHint": "Satu kalimat pendek untuk kartu destinasi.",
+      "description": "Deskripsi",
+      "descriptionHint": "Pisahkan paragraf dengan baris kosong.",
+      "heroImage": "Foto utama"
+    },
+    "delete": {
+      "title": "Hapus destinasi",
+      "trigger": "Hapus destinasi",
+      "hint": "Destinasi hanya bisa dihapus jika tidak ada paket tur di dalamnya.",
+      "blocked": "{count, plural, one {Masih ada # paket tur di destinasi ini. Pindahkan atau hapus tur tersebut terlebih dahulu.} other {Masih ada # paket tur di destinasi ini. Pindahkan atau hapus tur tersebut terlebih dahulu.}}",
+      "confirmTitle": "Hapus {name}?",
+      "confirmBody": "Destinasi ini akan dihapus permanen dari situs. Tindakan ini tidak bisa dibatalkan.",
+      "confirm": "Ya, hapus",
+      "cancel": "Batal",
+      "inUse": "Destinasi ini masih dipakai paket tur, jadi tidak bisa dihapus."
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "pay": "Bayar sekarang",
+  "redirecting": "Mengalihkan ke pembayaran...",
+  "status": {
+    "pending": "Menunggu pembayaran",
+    "paid": "Lunas",
+    "failed": "Pembayaran gagal",
+    "expired": "Kedaluwarsa"
+  },
+  "finish": {
+    "metaTitle": "Status pembayaran",
+    "eyebrow": "Pembayaran",
+    "paidTitle": "Pembayaran diterima",
+    "paidBody": "Terima kasih. Booking {code} sudah terkonfirmasi. Detail perjalanan kami kirim ke email kamu.",
+    "pendingTitle": "Menunggu pembayaran",
+    "pendingBody": "Kami belum menerima konfirmasi pembayaran untuk booking {code}. Jika kamu memilih transfer bank atau QRIS, selesaikan pembayaran sesuai instruksi. Status akan diperbarui otomatis.",
+    "failedTitle": "Pembayaran belum berhasil",
+    "failedBody": "Pembayaran untuk booking {code} gagal atau kedaluwarsa. Kamu bisa mencoba lagi dari halaman Booking Saya.",
+    "notFoundTitle": "Pembayaran tidak ditemukan",
+    "notFoundBody": "Kami tidak menemukan pembayaran ini di akunmu. Pastikan kamu masuk dengan akun yang sama saat memesan.",
+    "orderId": "ID pesanan",
+    "amount": "Jumlah",
+    "method": "Metode",
+    "tour": "Tur",
+    "toAccount": "Ke Booking Saya",
+    "toTours": "Jelajahi tur lain"
+  },
+  "simulate": {
+    "metaTitle": "Simulator pembayaran",
+    "eyebrow": "Mode pengembangan",
+    "title": "Simulator pembayaran",
+    "description": "Midtrans belum dikonfigurasi, jadi pembayaran disimulasikan. Halaman ini tidak tersedia di production.",
+    "success": "Bayar berhasil",
+    "failure": "Gagal",
+    "processed": "Pembayaran ini sudah diproses."
+  }
+}

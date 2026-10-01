@@ -1,0 +1,194 @@
+{
+  "meta": {
+    "title": "Admin Panel"
+  },
+  "nav": {
+    "label": "Admin navigation",
+    "overview": "Overview",
+    "bookings": "Bookings",
+    "tours": "Tours",
+    "backToSite": "Back to site",
+    "openMenu": "Open admin menu",
+    "closeMenu": "Close admin menu",
+    "signedInAs": "Signed in as",
+    "destinations": "Destinations"
+  },
+  "overview": {
+    "eyebrow": "Admin Panel",
+    "title": "Welcome back, {name}",
+    "description": "Track incoming bookings and manage tour packages in one place.",
+    "stats": {
+      "pending": "Awaiting confirmation",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "revenue": "Revenue",
+      "revenueHint": "From confirmed and completed bookings",
+      "publishedTours": "Live tours"
+    },
+    "recent": "Latest bookings",
+    "viewAll": "View all bookings"
+  },
+  "bookings": {
+    "eyebrow": "Operations",
+    "title": "Bookings",
+    "description": "Confirm, complete, or cancel traveller bookings.",
+    "filterLabel": "Filter bookings by status",
+    "all": "All",
+    "empty": {
+      "title": "No bookings yet",
+      "description": "Bookings with this status will appear here."
+    },
+    "columns": {
+      "code": "Code",
+      "customer": "Customer",
+      "tour": "Tour",
+      "travelDate": "Date",
+      "participants": "Guests",
+      "total": "Total",
+      "status": "Status",
+      "created": "Created",
+      "actions": "Actions"
+    },
+    "noActions": "Final",
+    "actions": {
+      "confirmed": "Confirm",
+      "completed": "Mark completed",
+      "cancelled": "Cancel",
+      "pending": "Hold"
+    },
+    "confirmCancel": "Cancel booking {code}? This can't be undone."
+  },
+  "tours": {
+    "eyebrow": "Catalogue",
+    "title": "Tour packages",
+    "description": "Manage tour packages, publishing, and featured tours on the home page.",
+    "new": "New tour",
+    "edit": "Edit",
+    "view": "View on site",
+    "empty": {
+      "title": "No tours yet",
+      "description": "Create your first tour package to start taking bookings."
+    },
+    "columns": {
+      "tour": "Tour",
+      "category": "Category",
+      "price": "Price / person",
+      "published": "Live",
+      "featured": "Featured",
+      "actions": "Actions"
+    },
+    "togglePublished": "Publish {title}",
+    "toggleFeatured": "Feature {title}"
+  },
+  "form": {
+    "newEyebrow": "Catalogue",
+    "newTitle": "Create a new tour",
+    "editTitle": "Edit tour",
+    "backToList": "Back to tours",
+    "create": "Create tour",
+    "save": "Save changes",
+    "lang": {
+      "id": "ID",
+      "en": "EN"
+    },
+    "sections": {
+      "basics": "Basics",
+      "basicsHint": "Title, summary and description appear on the public page in both languages.",
+      "details": "Trip details",
+      "detailsHint": "Price is per person, in Indonesian Rupiah.",
+      "media": "Photos",
+      "lists": "Highlights and inclusions",
+      "listsHint": "One item per line. ID and EN must have the same number of lines.",
+      "itinerary": "Itinerary",
+      "itineraryHint": "Days follow the order of the rows below.",
+      "visibility": "Visibility"
+    },
+    "fields": {
+      "title": "Title",
+      "summary": "Summary",
+      "description": "Description",
+      "slug": "URL slug",
+      "slugHint": "Filled in automatically from the Indonesian title.",
+      "destination": "Destination",
+      "selectDestination": "Choose a destination",
+      "category": "Category",
+      "durationDays": "Duration (days)",
+      "pricePerPerson": "Price per person (IDR)",
+      "maxParticipants": "Max. guests",
+      "meetingPoint": "Meeting point",
+      "coverImage": "Cover photo",
+      "gallery": "Gallery",
+      "highlights": "Highlights",
+      "included": "Included",
+      "isPublished": "Publish on site",
+      "isPublishedHint": "Draft tours are hidden from travellers.",
+      "isFeatured": "Featured tour",
+      "isFeaturedHint": "Shown in the featured section on the home page."
+    },
+    "itinerary": {
+      "day": "Day {day}",
+      "add": "Add day",
+      "remove": "Remove day {day}",
+      "empty": "No days yet. Add at least one day of travel.",
+      "dayTitle": "Day title",
+      "dayDescription": "Activities"
+    }
+  },
+  "destinations": {
+    "eyebrow": "Catalogue",
+    "title": "Destinations",
+    "description": "Manage the destinations your tours belong to, with photos and bilingual descriptions.",
+    "new": "New destination",
+    "edit": "Edit",
+    "view": "View on site",
+    "empty": {
+      "title": "No destinations yet",
+      "description": "Add your first destination before creating tours."
+    },
+    "columns": {
+      "destination": "Destination",
+      "province": "Province",
+      "tours": "Live tours",
+      "actions": "Actions"
+    },
+    "tourCount": "{published} live of {total}"
+  },
+  "destinationForm": {
+    "newEyebrow": "Catalogue",
+    "newTitle": "Create a destination",
+    "editTitle": "Edit destination",
+    "backToList": "Back to destinations",
+    "create": "Create destination",
+    "save": "Save changes",
+    "slugTaken": "That slug is already used by another destination.",
+    "sections": {
+      "basics": "Basics",
+      "basicsHint": "Name and province are shown as-is. Tagline and description appear in both languages.",
+      "media": "Main photo",
+      "mediaHint": "Used on the destination card and the destination page hero. Use a landscape photo."
+    },
+    "fields": {
+      "name": "Destination name",
+      "slug": "URL slug",
+      "slugHint": "Filled automatically from the name.",
+      "province": "Province",
+      "tagline": "Tagline",
+      "taglineHint": "One short sentence for the destination card.",
+      "description": "Description",
+      "descriptionHint": "Separate paragraphs with a blank line.",
+      "heroImage": "Main photo"
+    },
+    "delete": {
+      "title": "Delete destination",
+      "trigger": "Delete destination",
+      "hint": "A destination can only be deleted when it has no tours.",
+      "blocked": "{count, plural, one {This destination still has # tour. Move or delete it first.} other {This destination still has # tours. Move or delete them first.}}",
+      "confirmTitle": "Delete {name}?",
+      "confirmBody": "This destination will be permanently removed from the site. This can't be undone.",
+      "confirm": "Yes, delete",
+      "cancel": "Cancel",
+      "inUse": "This destination is still used by tours, so it can't be deleted."
+    }
+  }
+}

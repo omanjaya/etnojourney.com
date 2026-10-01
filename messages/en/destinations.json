@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "title": "Cultural Destinations",
+    "description": "Explore Indonesia's cultural destinations with EtnoJourney: Ubud, Tabanan, Tengger, Yogyakarta, Nusa Penida and Raja Ampat."
+  },
+  "list": {
+    "eyebrow": "Destinations",
+    "title": "Places where tradition is still alive",
+    "description": "Each destination is home to a community that keeps its customs. Pick one, then meet your hosts.",
+    "gridHeading": "All destinations"
+  },
+  "detail": {
+    "eyebrow": "Destination in {province}",
+    "about": "About {name}",
+    "tours": "Tours in {name}",
+    "toursCount": "{count, plural, =0 {No tours yet} one {# tour available} other {# tours available}}",
+    "emptyTitle": "Tours coming soon",
+    "emptyDescription": "We're preparing journeys with the community here.",
+    "allDestinations": "All destinations",
+    "browseTours": "Browse all tours",
+    "breadcrumbHome": "Home"
+  }
+}
