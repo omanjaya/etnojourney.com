@@ -57,7 +57,30 @@
       "cancelled": "Batalkan",
       "pending": "Tunda"
     },
-    "confirmCancel": "Batalkan booking {code}? Tindakan ini tidak bisa diurungkan."
+    "confirmCancel": "Batalkan booking {code}? Tindakan ini tidak bisa diurungkan.",
+    "filters": {
+      "searchLabel": "Cari booking",
+      "searchPlaceholder": "Kode, nama, atau email",
+      "clear": "Hapus pencarian",
+      "from": "Berangkat dari",
+      "to": "Sampai",
+      "sort": "Urutkan",
+      "sortCreated": "Terbaru dibuat",
+      "sortTravel": "Tanggal berangkat",
+      "reset": "Reset filter",
+      "export": "Ekspor CSV"
+    },
+    "summary": "{total, plural, =0 {Tidak ada booking} one {# booking} other {# booking}}",
+    "pagination": {
+      "label": "Halaman booking",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "page": "Halaman {page}"
+    },
+    "noMatch": {
+      "title": "Tidak ada booking yang cocok",
+      "description": "Coba kata kunci lain atau ubah rentang tanggal."
+    }
   },
   "tours": {
     "eyebrow": "Katalog",
@@ -189,6 +212,21 @@
       "confirm": "Ya, hapus",
       "cancel": "Batal",
       "inUse": "Destinasi ini masih dipakai paket tur, jadi tidak bisa dihapus."
+    }
+  },
+  "lists": {
+    "searchLabel": "Cari",
+    "clear": "Hapus pencarian",
+    "previous": "Sebelumnya",
+    "next": "Berikutnya",
+    "page": "Halaman {page}",
+    "noMatchTitle": "Tidak ada hasil",
+    "noMatchDescription": "Coba kata kunci lain.",
+    "summary": "{total, plural, =0 {Tidak ada data} other {# data}}",
+    "placeholders": {
+      "tours": "Cari judul, slug, atau destinasi",
+      "destinations": "Cari nama, provinsi, atau slug",
+      "reviews": "Cari penulis, tur, atau isi ulasan"
     }
   }
 }

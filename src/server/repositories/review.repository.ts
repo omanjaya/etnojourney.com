@@ -1,6 +1,19 @@
 import "server-only";
-import { and, count, desc, eq, gte, isNotNull, sql } from "drizzle-orm";
+import {
+  and,
+  count,
+  desc,
+  eq,
+  gte,
+  ilike,
+  isNotNull,
+  isNull,
+  or,
+  sql,
+  type SQL,
+} from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
+import { likePattern } from "@/server/db/like";
 import { bookings, destinations, reviews, tours } from "@/server/db/schema";
 
 export const reviewRepository = {
@@ -112,4 +125,55 @@ export const reviewRepository = {
       .innerJoin(tours, eq(reviews.tourId, tours.id))
       .orderBy(desc(reviews.createdAt));
   },
+
+  /** Admin moderation list, filtered and paginated in SQL. */
+  listAdmin(filters: AdminReviewFilters, limit: number, offset: number) {
+    return db
+      .select({
+        review: reviews,
+        tour: { id: tours.id, slug: tours.slug, title: tours.title },
+      })
+      .from(reviews)
+      .innerJoin(tours, eq(reviews.tourId, tours.id))
+      .where(adminReviewConditions(filters))
+      .orderBy(desc(reviews.createdAt), desc(reviews.id))
+      .limit(limit)
+      .offset(offset);
+  },
+
+  countAdmin(filters: AdminReviewFilters): Promise<number> {
+    return db
+      .select({ total: count() })
+      .from(reviews)
+      .innerJoin(tours, eq(reviews.tourId, tours.id))
+      .where(adminReviewConditions(filters))
+      .then((rows) => rows[0]?.total ?? 0);
+  },
 };
+
+export type AdminReviewFilters = {
+  /** traveller = written via a booking; curated = imported; hidden = unpublished. */
+  source?: "traveller" | "curated" | "hidden";
+  q?: string;
+};
+
+function adminReviewConditions(filters: AdminReviewFilters): SQL | undefined {
+  const traveller = or(isNotNull(reviews.userId), isNotNull(reviews.bookingId));
+  const pattern = filters.q ? likePattern(filters.q) : undefined;
+  return and(
+    filters.source === "traveller" ? traveller : undefined,
+    filters.source === "curated"
+      ? and(isNull(reviews.userId), isNull(reviews.bookingId))
+      : undefined,
+    filters.source === "hidden" ? eq(reviews.isPublished, false) : undefined,
+    pattern
+      ? or(
+          ilike(reviews.authorName, pattern),
+          ilike(sql`${reviews.body}->>'id'`, pattern),
+          ilike(sql`${reviews.body}->>'en'`, pattern),
+          ilike(sql`${tours.title}->>'id'`, pattern),
+          ilike(sql`${tours.title}->>'en'`, pattern),
+        )
+      : undefined,
+  );
+}

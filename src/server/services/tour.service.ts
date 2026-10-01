@@ -1,4 +1,5 @@
 import "server-only";
+import { paginate, type Paginated } from "@/lib/pagination";
 import { db } from "@/server/db";
 import { isUniqueViolation } from "@/server/db/errors";
 import type { NewTour } from "@/server/db/schema";
@@ -10,6 +11,8 @@ import {
 import { DomainError } from "./errors";
 
 export type { TourFilters, TourSort } from "@/server/repositories/tour.repository";
+
+export type TourListItem = Awaited<ReturnType<typeof tourRepository.searchPage>>[number];
 
 export type TourInput = Omit<
   NewTour,
@@ -31,6 +34,20 @@ async function withSlugGuard<T>(fn: () => Promise<T>): Promise<T> {
 export const tourService = {
   search: (filters: TourFilters) => tourRepository.search(filters),
 
+  /** Public `/tours` list: one page plus the total for the same filters. */
+  searchPage(
+    filters: TourFilters,
+    page: number,
+    pageSize: number,
+  ): Promise<Paginated<TourListItem>> {
+    return paginate({
+      page,
+      pageSize,
+      count: () => tourRepository.countSearch(filters),
+      load: (limit, offset) => tourRepository.searchPage(filters, limit, offset),
+    });
+  },
+
   featured: (limit = 6) => tourRepository.findFeatured(limit),
 
   priceCeiling: () => tourRepository.findPriceCeiling(),
@@ -47,7 +64,16 @@ export const tourService = {
 
   /* -------------------------- admin -------------------------- */
 
-  listAll: () => tourRepository.search({ includeUnpublished: true, sort: "popular" }),
+  /** Admin list: unpublished included, optional text search. */
+  listForAdmin(query: string | undefined, page: number, pageSize: number) {
+    const filters: TourFilters = { includeUnpublished: true, sort: "popular", query };
+    return paginate({
+      page,
+      pageSize,
+      count: () => tourRepository.countSearch(filters),
+      load: (limit, offset) => tourRepository.searchPage(filters, limit, offset),
+    });
+  },
 
   async getForEdit(id: number) {
     const tour = await tourRepository.findById(id);

@@ -1,6 +1,7 @@
 import "server-only";
-import { and, asc, count, eq, sql } from "drizzle-orm";
+import { and, asc, count, eq, ilike, or, sql, type SQL } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
+import { likePattern } from "@/server/db/like";
 import { destinations, tours } from "@/server/db/schema";
 
 export type NewDestination = typeof destinations.$inferInsert;
@@ -22,7 +23,8 @@ export const destinationRepository = {
   },
 
   /** Admin list: published and total tour counts (total decides whether delete is allowed). */
-  findAllForAdmin() {
+  /** Admin list page with tour counts; optional text search, paginated. */
+  findPageForAdmin(query: string | undefined, limit: number, offset: number) {
     return db
       .select({
         destination: destinations,
@@ -31,8 +33,19 @@ export const destinationRepository = {
       })
       .from(destinations)
       .leftJoin(tours, eq(tours.destinationId, destinations.id))
+      .where(adminSearch(query))
       .groupBy(destinations.id)
-      .orderBy(asc(destinations.name));
+      .orderBy(asc(destinations.name), asc(destinations.id))
+      .limit(limit)
+      .offset(offset);
+  },
+
+  countForAdmin(query: string | undefined): Promise<number> {
+    return db
+      .select({ total: count() })
+      .from(destinations)
+      .where(adminSearch(query))
+      .then((rows) => rows[0]?.total ?? 0);
   },
 
   findAll() {
@@ -100,3 +113,13 @@ export const destinationRepository = {
     return tx.delete(destinations).where(eq(destinations.id, id));
   },
 };
+
+function adminSearch(query: string | undefined): SQL | undefined {
+  if (!query) return undefined;
+  const pattern = likePattern(query);
+  return or(
+    ilike(destinations.name, pattern),
+    ilike(destinations.province, pattern),
+    ilike(destinations.slug, pattern),
+  );
+}

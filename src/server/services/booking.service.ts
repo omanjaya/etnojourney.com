@@ -2,10 +2,14 @@ import "server-only";
 import { db, type DbExecutor } from "@/server/db";
 import { isUniqueViolation } from "@/server/db/errors";
 import type { Booking, BookingStatus, bookings } from "@/server/db/schema";
-import { bookingRepository } from "@/server/repositories/booking.repository";
+import {
+  bookingRepository,
+  type AdminBookingFilters,
+} from "@/server/repositories/booking.repository";
 import { paymentRepository } from "@/server/repositories/payment.repository";
 import { tourRepository } from "@/server/repositories/tour.repository";
 import { isoDateFromToday } from "@/lib/format";
+import { paginate } from "@/lib/pagination";
 import {
   assertCapacity,
   assertTransition,
@@ -14,6 +18,11 @@ import {
   generateBookingCode,
 } from "./booking.rules";
 import { DomainError } from "./errors";
+
+export type {
+  AdminBookingFilters,
+  AdminBookingSort,
+} from "@/server/repositories/booking.repository";
 
 export type CreateBookingInput = {
   tourId: number;
@@ -101,6 +110,29 @@ export const bookingService = {
   /* -------------------------- admin -------------------------- */
 
   listAll: (status?: BookingStatus) => bookingRepository.listAll(status),
+
+  /** Admin bookings page: filtered, sorted and paginated. */
+  listForAdmin(filters: AdminBookingFilters, page: number, pageSize: number) {
+    return paginate({
+      page,
+      pageSize,
+      count: () => bookingRepository.countAdmin(filters),
+      load: (limit, offset) => bookingRepository.listAdmin(filters, limit, offset),
+    });
+  },
+
+  /**
+   * Every booking matching the filters, yielded in batches so an export
+   * never holds the whole table in memory.
+   */
+  async *exportRows(filters: AdminBookingFilters, batchSize = 500) {
+    for (let offset = 0; ; offset += batchSize) {
+      const batch = await bookingRepository.exportBatch(filters, batchSize, offset);
+      if (batch.length === 0) return;
+      yield batch;
+      if (batch.length < batchSize) return;
+    }
+  },
 
   /** Admin status change, validated against the current status under a row lock. */
   changeStatus(bookingId: number, status: BookingStatus) {

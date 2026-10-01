@@ -1,4 +1,4 @@
-import { MessageSquareText } from "lucide-react";
+import { MessageSquareText, SearchX } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { formatDate } from "@/lib/format";
@@ -11,6 +11,10 @@ import { Stars } from "@/components/ui/stars";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { ReviewPublishToggle } from "@/features/reviews/components/review-publish-toggle";
 import { reviewFilterSchema } from "@/features/reviews/schemas";
+import { AdminSearchBox } from "@/features/admin/components/admin-search-box";
+import { parseAdminListQuery } from "@/features/admin/schemas";
+import { Pagination } from "@/components/ui/pagination";
+import { PAGE_SIZE, parsePage } from "@/lib/pagination";
 import { requireAdmin } from "@/server/auth/guards";
 
 export async function generateMetadata() {
@@ -23,21 +27,18 @@ export default async function AdminReviewsPage({
 }: PageProps<"/[locale]/admin/reviews">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin();
-  const { filter: rawFilter } = await searchParams;
-  const filter = reviewFilterSchema.parse(rawFilter);
+  const raw = await searchParams;
+  const filter = reviewFilterSchema.parse(Array.isArray(raw.filter) ? raw.filter[0] : raw.filter);
+  const { q } = parseAdminListQuery(raw);
 
-  const [all, t, locale] = await Promise.all([
-    reviewService.listAll(),
+  const [result, t, tl, locale] = await Promise.all([
+    reviewService.listForAdmin({ source: filter, q }, parsePage(raw.page), PAGE_SIZE.admin),
     getTranslations("reviews.admin"),
+    getTranslations("admin.lists"),
     getLocale(),
   ]);
-
-  const rows = all.filter(({ review }) => {
-    if (filter === "traveller") return review.userId !== null || review.bookingId !== null;
-    if (filter === "curated") return review.userId === null && review.bookingId === null;
-    if (filter === "hidden") return !review.isPublished;
-    return true;
-  });
+  const rows = result.items;
+  const current = { filter, q };
 
   const filters = [
     { value: undefined, label: t("filters.all") },
@@ -52,6 +53,19 @@ export default async function AdminReviewsPage({
     <>
       <AdminPageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
 
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <AdminSearchBox
+          pathname="/admin/reviews"
+          query={current}
+          label={tl("searchLabel")}
+          placeholder={tl("placeholders.reviews")}
+          clearLabel={tl("clear")}
+        />
+        <p className="text-muted text-sm" aria-live="polite">
+          {tl("summary", { total: result.total })}
+        </p>
+      </div>
+
       <nav
         aria-label={t("filterLabel")}
         className="mb-6 flex scrollbar-none gap-2 overflow-x-auto pb-1"
@@ -61,11 +75,12 @@ export default async function AdminReviewsPage({
           return (
             <Link
               key={item.value ?? "all"}
-              href={
-                item.value
-                  ? { pathname: "/admin/reviews", query: { filter: item.value } }
-                  : "/admin/reviews"
-              }
+              href={{
+                pathname: "/admin/reviews",
+                query: Object.fromEntries(
+                  Object.entries({ filter: item.value, q }).filter(([, v]) => v),
+                ) as Record<string, string>,
+              }}
               aria-current={active ? "page" : undefined}
               className={cn(
                 "shrink-0 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
@@ -210,7 +225,26 @@ export default async function AdminReviewsPage({
               </tbody>
             </table>
           </div>
+          <Pagination
+            className="mt-8"
+            pathname="/admin/reviews"
+            query={current}
+            page={result.page}
+            pageCount={result.pageCount}
+            labels={{
+              nav: t("title"),
+              previous: tl("previous"),
+              next: tl("next"),
+              page: (page) => tl("page", { page }),
+            }}
+          />
         </>
+      ) : q ? (
+        <EmptyState
+          icon={SearchX}
+          title={tl("noMatchTitle")}
+          description={tl("noMatchDescription")}
+        />
       ) : (
         <EmptyState
           icon={MessageSquareText}

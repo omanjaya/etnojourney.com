@@ -1,4 +1,5 @@
 import "server-only";
+import { paginate } from "@/lib/pagination";
 import { db } from "@/server/db";
 import { isUniqueViolation } from "@/server/db/errors";
 import {
@@ -34,7 +35,17 @@ export const destinationService = {
 
   /* -------------------------- admin -------------------------- */
 
-  listForAdmin: () => destinationRepository.findAllForAdmin(),
+  listForAdmin(query: string | undefined, page: number, pageSize: number) {
+    return paginate({
+      page,
+      pageSize,
+      count: () => destinationRepository.countForAdmin(query),
+      load: (limit, offset) => destinationRepository.findPageForAdmin(query, limit, offset),
+    });
+  },
+
+  /** Tours (published or not) still attached; deletion is blocked while > 0. */
+  tourCount: (id: number) => destinationRepository.countTours(db, id),
 
   async getForEdit(id: number) {
     const destination = await destinationRepository.findById(id);

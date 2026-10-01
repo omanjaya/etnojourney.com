@@ -1,15 +1,74 @@
 import "server-only";
-import { and, count, desc, eq, inArray, sql, sum } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  gte,
+  ilike,
+  inArray,
+  lte,
+  or,
+  sql,
+  sum,
+  type SQL,
+} from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
+import { likePattern } from "@/server/db/like";
 import {
   bookings,
   destinations,
+  payments,
   tours,
   user,
   type Booking,
   type BookingStatus,
 } from "@/server/db/schema";
 import { ACTIVE_STATUSES } from "@/server/services/booking.rules";
+
+export type AdminBookingSort = "created" | "travel";
+
+export type AdminBookingFilters = {
+  /** Matches booking code, customer name or customer email. */
+  q?: string;
+  status?: BookingStatus;
+  /** Travel date range, inclusive, YYYY-MM-DD. */
+  from?: string;
+  to?: string;
+  sort?: AdminBookingSort;
+};
+
+function adminConditions(filters: AdminBookingFilters): SQL | undefined {
+  const pattern = filters.q ? likePattern(filters.q) : undefined;
+  return and(
+    filters.status ? eq(bookings.status, filters.status) : undefined,
+    filters.from ? gte(bookings.travelDate, filters.from) : undefined,
+    filters.to ? lte(bookings.travelDate, filters.to) : undefined,
+    pattern
+      ? or(
+          ilike(bookings.code, pattern),
+          ilike(user.name, pattern),
+          ilike(user.email, pattern),
+          ilike(bookings.contactName, pattern),
+        )
+      : undefined,
+  );
+}
+
+function adminOrder(sort: AdminBookingSort | undefined): SQL[] {
+  return sort === "travel"
+    ? [asc(bookings.travelDate), desc(bookings.id)]
+    : [desc(bookings.createdAt), desc(bookings.id)];
+}
+
+/** Paid attempt first, otherwise the most recent one. */
+const latestPaymentStatus = sql<string | null>`(
+  select ${payments.status} from ${payments}
+  where ${payments.bookingId} = ${bookings.id}
+  order by (${payments.status} = 'paid') desc, ${payments.createdAt} desc
+  limit 1
+)`;
 
 export const bookingRepository = {
   /**
@@ -98,6 +157,58 @@ export const bookingRepository = {
       .innerJoin(user, eq(bookings.userId, user.id))
       .where(status ? eq(bookings.status, status) : undefined)
       .orderBy(desc(bookings.createdAt));
+  },
+
+  /** Admin list page: one page of bookings matching the filters. */
+  listAdmin(filters: AdminBookingFilters, limit: number, offset: number) {
+    return db
+      .select({
+        booking: bookings,
+        tour: { id: tours.id, slug: tours.slug, title: tours.title },
+        customer: { id: user.id, name: user.name, email: user.email },
+      })
+      .from(bookings)
+      .innerJoin(tours, eq(bookings.tourId, tours.id))
+      .innerJoin(user, eq(bookings.userId, user.id))
+      .where(adminConditions(filters))
+      .orderBy(...adminOrder(filters.sort))
+      .limit(limit)
+      .offset(offset);
+  },
+
+  countAdmin(filters: AdminBookingFilters): Promise<number> {
+    return db
+      .select({ total: count() })
+      .from(bookings)
+      .innerJoin(user, eq(bookings.userId, user.id))
+      .where(adminConditions(filters))
+      .then((rows) => rows[0]?.total ?? 0);
+  },
+
+  /** Flat rows for CSV export, read in batches by the caller. */
+  exportBatch(filters: AdminBookingFilters, limit: number, offset: number) {
+    return db
+      .select({
+        code: bookings.code,
+        status: bookings.status,
+        paymentStatus: latestPaymentStatus,
+        customerName: user.name,
+        customerEmail: user.email,
+        contactName: bookings.contactName,
+        contactPhone: bookings.contactPhone,
+        tourTitle: tours.title,
+        travelDate: bookings.travelDate,
+        participants: bookings.participants,
+        totalPrice: bookings.totalPrice,
+        createdAt: bookings.createdAt,
+      })
+      .from(bookings)
+      .innerJoin(tours, eq(bookings.tourId, tours.id))
+      .innerJoin(user, eq(bookings.userId, user.id))
+      .where(adminConditions(filters))
+      .orderBy(...adminOrder(filters.sort))
+      .limit(limit)
+      .offset(offset);
   },
 
   async stats() {

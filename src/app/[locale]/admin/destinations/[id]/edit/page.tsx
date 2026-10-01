@@ -27,12 +27,11 @@ export default async function EditDestinationPage({
   const id = Number(rawId);
   if (!Number.isInteger(id) || id < 1) notFound();
 
-  const [destination, rows, t] = await Promise.all([
+  const [destination, tourCount, t] = await Promise.all([
     loadDestination(id),
-    destinationService.listForAdmin(),
+    destinationService.tourCount(id),
     getTranslations("admin.destinationForm"),
   ]);
-  const tourCount = rows.find((row) => row.destination.id === id)?.totalTours ?? 0;
 
   return (
     <>

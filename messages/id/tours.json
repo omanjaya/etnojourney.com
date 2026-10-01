@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Paket Tur Budaya",
-    "description": "Temukan paket tur budaya di Bali, Jawa, Nusa Penida, dan Raja Ampat: upacara adat, kriya, kuliner tradisi, dan hidup di desa."
+    "description": "Temukan paket tur budaya di Bali, Jawa, Nusa Penida, dan Raja Ampat: upacara adat, kriya, kuliner tradisi, dan hidup di desa.",
+    "titlePaged": "Paket Tur Budaya, halaman {page}"
   },
   "list": {
     "eyebrow": "Paket tur",
@@ -11,7 +12,14 @@
     "emptyTitle": "Belum ada tur yang cocok",
     "emptyDescription": "Coba longgarkan filter atau gunakan kata kunci lain.",
     "reset": "Atur ulang filter",
-    "resultsHeading": "Hasil pencarian"
+    "resultsHeading": "Hasil pencarian",
+    "pageOf": "menampilkan {from}–{to}, halaman {page} dari {pageCount}",
+    "pagination": {
+      "label": "Halaman hasil tur",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "page": "Halaman {page}"
+    }
   },
   "filters": {
     "search": "Cari",

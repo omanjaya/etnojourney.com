@@ -1,7 +1,8 @@
 import "server-only";
 import { db } from "@/server/db";
 import type { Locale } from "@/i18n/routing";
-import { reviewRepository } from "@/server/repositories/review.repository";
+import { paginate } from "@/lib/pagination";
+import { reviewRepository, type AdminReviewFilters } from "@/server/repositories/review.repository";
 import { DomainError } from "./errors";
 import { applyReviewDelta, reviewEligibility, type ReviewEligibility } from "./review.rules";
 
@@ -67,6 +68,16 @@ export const reviewService = {
   /* -------------------------- admin -------------------------- */
 
   listAll: () => reviewRepository.listAll(),
+
+  /** Admin moderation list, filtered and paginated in SQL. */
+  listForAdmin(filters: AdminReviewFilters, page: number, pageSize: number) {
+    return paginate({
+      page,
+      pageSize,
+      count: () => reviewRepository.countAdmin(filters),
+      load: (limit, offset) => reviewRepository.listAdmin(filters, limit, offset),
+    });
+  },
 
   /** Hides or restores a review and adjusts the tour aggregate accordingly. */
   async setPublished(reviewId: number, isPublished: boolean) {

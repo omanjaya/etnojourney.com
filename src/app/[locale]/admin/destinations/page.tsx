@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ExternalLink, MapPin, Pencil, Plus } from "lucide-react";
+import { ExternalLink, MapPin, Pencil, Plus, SearchX } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin } from "@/server/auth/guards";
@@ -7,15 +7,25 @@ import { destinationService } from "@/server/services/destination.service";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
+import { Pagination } from "@/components/ui/pagination";
+import { PAGE_SIZE, parsePage } from "@/lib/pagination";
+import { AdminSearchBox } from "@/features/admin/components/admin-search-box";
+import { parseAdminListQuery } from "@/features/admin/schemas";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 
-export default async function AdminDestinationsPage() {
+export default async function AdminDestinationsPage({
+  searchParams,
+}: PageProps<"/[locale]/admin/destinations">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin();
-  const [rows, t] = await Promise.all([
-    destinationService.listForAdmin(),
+  const raw = await searchParams;
+  const { q } = parseAdminListQuery(raw);
+  const [result, t, tl] = await Promise.all([
+    destinationService.listForAdmin(q, parsePage(raw.page), PAGE_SIZE.admin),
     getTranslations("admin.destinations"),
+    getTranslations("admin.lists"),
   ]);
+  const rows = result.items;
 
   const newButton = (
     <Button asChild>
@@ -39,7 +49,26 @@ export default async function AdminDestinationsPage() {
         action={newButton}
       />
 
-      {rows.length === 0 ? (
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <AdminSearchBox
+          pathname="/admin/destinations"
+          query={{ q }}
+          label={tl("searchLabel")}
+          placeholder={tl("placeholders.destinations")}
+          clearLabel={tl("clear")}
+        />
+        <p className="text-muted text-sm" aria-live="polite">
+          {tl("summary", { total: result.total })}
+        </p>
+      </div>
+
+      {rows.length === 0 && q ? (
+        <EmptyState
+          icon={SearchX}
+          title={tl("noMatchTitle")}
+          description={tl("noMatchDescription")}
+        />
+      ) : rows.length === 0 ? (
         <EmptyState
           icon={MapPin}
           title={t("empty.title")}
@@ -148,6 +177,19 @@ export default async function AdminDestinationsPage() {
               </tbody>
             </table>
           </div>
+          <Pagination
+            className="mt-8"
+            pathname="/admin/destinations"
+            query={{ q }}
+            page={result.page}
+            pageCount={result.pageCount}
+            labels={{
+              nav: t("title"),
+              previous: tl("previous"),
+              next: tl("next"),
+              page: (page) => tl("page", { page }),
+            }}
+          />
         </>
       )}
     </>

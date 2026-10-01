@@ -57,7 +57,30 @@
       "cancelled": "Cancel",
       "pending": "Hold"
     },
-    "confirmCancel": "Cancel booking {code}? This can't be undone."
+    "confirmCancel": "Cancel booking {code}? This can't be undone.",
+    "filters": {
+      "searchLabel": "Search bookings",
+      "searchPlaceholder": "Code, name or email",
+      "clear": "Clear search",
+      "from": "Travel from",
+      "to": "Until",
+      "sort": "Sort by",
+      "sortCreated": "Newest first",
+      "sortTravel": "Travel date",
+      "reset": "Reset filters",
+      "export": "Export CSV"
+    },
+    "summary": "{total, plural, =0 {No bookings} one {# booking} other {# bookings}}",
+    "pagination": {
+      "label": "Booking pages",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page}"
+    },
+    "noMatch": {
+      "title": "No matching bookings",
+      "description": "Try another keyword or change the date range."
+    }
   },
   "tours": {
     "eyebrow": "Catalogue",
@@ -189,6 +212,21 @@
       "confirm": "Yes, delete",
       "cancel": "Cancel",
       "inUse": "This destination is still used by tours, so it can't be deleted."
+    }
+  },
+  "lists": {
+    "searchLabel": "Search",
+    "clear": "Clear search",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {page}",
+    "noMatchTitle": "No results",
+    "noMatchDescription": "Try a different keyword.",
+    "summary": "{total, plural, =0 {Nothing found} one {# item} other {# items}}",
+    "placeholders": {
+      "tours": "Search title, slug or destination",
+      "destinations": "Search name, province or slug",
+      "reviews": "Search author, tour or review text"
     }
   }
 }

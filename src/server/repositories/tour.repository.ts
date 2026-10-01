@@ -1,6 +1,7 @@
 import "server-only";
-import { and, asc, desc, eq, ilike, lte, or, sql, type SQL } from "drizzle-orm";
+import { and, asc, count, desc, eq, ilike, lte, or, sql, type SQL } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
+import { likePattern } from "@/server/db/like";
 import {
   destinations,
   itineraryDays,
@@ -32,33 +33,59 @@ const orderings: Record<TourSort, SQL[]> = {
   duration: [asc(tours.durationDays)],
 };
 
+function searchConditions(filters: TourFilters): SQL | undefined {
+  const conditions: (SQL | undefined)[] = [
+    filters.includeUnpublished ? undefined : eq(tours.isPublished, true),
+    filters.category ? eq(tours.category, filters.category) : undefined,
+    filters.destinationSlug ? eq(destinations.slug, filters.destinationSlug) : undefined,
+    filters.maxPrice ? lte(tours.pricePerPerson, filters.maxPrice) : undefined,
+    filters.maxDays ? lte(tours.durationDays, filters.maxDays) : undefined,
+  ];
+
+  if (filters.query) {
+    const pattern = likePattern(filters.query);
+    conditions.push(
+      or(
+        ilike(sql`${tours.title}->>'id'`, pattern),
+        ilike(sql`${tours.title}->>'en'`, pattern),
+        ilike(destinations.name, pattern),
+        ilike(tours.slug, pattern),
+      ),
+    );
+  }
+  return and(...conditions);
+}
+
 export const tourRepository = {
+  /** All matching tours (sitemap, destination pages). Prefer `searchPage` for lists. */
   search(filters: TourFilters = {}) {
-    const conditions: (SQL | undefined)[] = [
-      filters.includeUnpublished ? undefined : eq(tours.isPublished, true),
-      filters.category ? eq(tours.category, filters.category) : undefined,
-      filters.destinationSlug ? eq(destinations.slug, filters.destinationSlug) : undefined,
-      filters.maxPrice ? lte(tours.pricePerPerson, filters.maxPrice) : undefined,
-      filters.maxDays ? lte(tours.durationDays, filters.maxDays) : undefined,
-    ];
-
-    if (filters.query) {
-      const pattern = `%${filters.query.replace(/[%_\\]/g, "\\$&")}%`;
-      conditions.push(
-        or(
-          ilike(sql`${tours.title}->>'id'`, pattern),
-          ilike(sql`${tours.title}->>'en'`, pattern),
-          ilike(destinations.name, pattern),
-        ),
-      );
-    }
-
     return db
       .select({ tour: tours, destination: destinations })
       .from(tours)
       .innerJoin(destinations, eq(tours.destinationId, destinations.id))
-      .where(and(...conditions))
+      .where(searchConditions(filters))
       .orderBy(...orderings[filters.sort ?? "popular"]);
+  },
+
+  /** One page of matching tours. `tours.id` breaks ties so pages never overlap. */
+  searchPage(filters: TourFilters, limit: number, offset: number) {
+    return db
+      .select({ tour: tours, destination: destinations })
+      .from(tours)
+      .innerJoin(destinations, eq(tours.destinationId, destinations.id))
+      .where(searchConditions(filters))
+      .orderBy(...orderings[filters.sort ?? "popular"], asc(tours.id))
+      .limit(limit)
+      .offset(offset);
+  },
+
+  countSearch(filters: TourFilters): Promise<number> {
+    return db
+      .select({ total: count() })
+      .from(tours)
+      .innerJoin(destinations, eq(tours.destinationId, destinations.id))
+      .where(searchConditions(filters))
+      .then((rows) => rows[0]?.total ?? 0);
   },
 
   findFeatured(limit: number) {

@@ -1,7 +1,8 @@
 {
   "meta": {
     "title": "Cultural Tours",
-    "description": "Find cultural tours in Bali, Java, Nusa Penida and Raja Ampat: ceremonies, crafts, heritage cuisine and village life."
+    "description": "Find cultural tours in Bali, Java, Nusa Penida and Raja Ampat: ceremonies, crafts, heritage cuisine and village life.",
+    "titlePaged": "Cultural Tours, page {page}"
   },
   "list": {
     "eyebrow": "Tours",
@@ -11,7 +12,14 @@
     "emptyTitle": "No matching tours yet",
     "emptyDescription": "Try loosening the filters or searching for something else.",
     "reset": "Reset filters",
-    "resultsHeading": "Search results"
+    "resultsHeading": "Search results",
+    "pageOf": "showing {from}–{to}, page {page} of {pageCount}",
+    "pagination": {
+      "label": "Tour results pages",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page}"
+    }
   },
   "filters": {
     "search": "Search",

@@ -35,8 +35,59 @@ export const toggleTourSchema = z.object({
   value: z.boolean(),
 });
 
-/** Optional `?status=` filter on the admin bookings page; invalid values fall back to all. */
-export const bookingFilterSchema = bookingStatusSchema.optional().catch(undefined);
+/* ---------------------------------------------------------------- */
+/* List filters (URL search params)                                  */
+/* ---------------------------------------------------------------- */
+
+type RawParams = Record<string, string | string[] | undefined>;
+
+/** Each param is validated on its own; an invalid one is dropped, not fatal. */
+const optionalParam = <T extends z.ZodType>(schema: T) => schema.optional().catch(undefined);
+
+const flatten = (raw: RawParams) =>
+  Object.fromEntries(
+    Object.entries(raw).map(([key, value]) => [key, Array.isArray(value) ? value[0] : value]),
+  );
+
+/** A real calendar date in YYYY-MM-DD (rejects 2026-02-30). */
+const isoDate = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/)
+  .refine((value) => {
+    const date = new Date(`${value}T00:00:00Z`);
+    return !Number.isNaN(date.getTime()) && date.toISOString().startsWith(value);
+  });
+
+const searchText = z.string().trim().min(1).max(100);
+
+export const ADMIN_BOOKING_SORTS = ["created", "travel"] as const;
+
+const adminBookingQuerySchema = z.object({
+  q: optionalParam(searchText),
+  status: optionalParam(bookingStatusSchema),
+  from: optionalParam(isoDate),
+  to: optionalParam(isoDate),
+  sort: optionalParam(z.enum(ADMIN_BOOKING_SORTS)),
+});
+
+export type AdminBookingQuery = z.infer<typeof adminBookingQuerySchema>;
+
+/** Admin bookings filters from the URL (page and export share this). */
+export function parseAdminBookingQuery(raw: RawParams): AdminBookingQuery {
+  const query = adminBookingQuerySchema.parse(flatten(raw));
+  // A reversed range is almost certainly a typo; swap rather than show nothing.
+  if (query.from && query.to && query.from > query.to) {
+    return { ...query, from: query.to, to: query.from };
+  }
+  return query;
+}
+
+const adminListQuerySchema = z.object({ q: optionalParam(searchText) });
+
+/** `?q=` on the simpler admin lists (tours, reviews, destinations). */
+export function parseAdminListQuery(raw: RawParams): { q?: string } {
+  return adminListQuerySchema.parse(flatten(raw));
+}
 
 export const tourFormSchema = z.object({
   slug: z
