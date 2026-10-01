@@ -42,23 +42,12 @@ export const authRateLimits = {
 } satisfies Record<AuthAction, RateLimitRule>;
 
 /**
- * One bucket shared by every caller, used when no trustworthy client IP is
- * available (no trusted proxy). Generous, since all users share it; the
- * per-account limits below do the real work against password guessing.
- */
-export const sharedRateLimits = {
-  signIn: { max: 100, windowMs: 60_000 },
-  signUp: { max: 30, windowMs: 60_000 },
-  forgotPassword: { max: 30, windowMs: 10 * 60_000 },
-  resetPassword: { max: 60, windowMs: 10 * 60_000 },
-} satisfies Record<AuthAction, RateLimitRule>;
-
-/**
  * Per target account (normalized email, or the reset token for resets).
  * Rotating IPs doesn't help an attacker against these.
  */
 export const accountRateLimits = {
   signIn: { max: 10, windowMs: 15 * 60_000 },
+  signUp: { max: 3, windowMs: 60 * 60_000 },
   forgotPassword: { max: 3, windowMs: 60 * 60_000 },
   resetPassword: { max: 5, windowMs: 10 * 60_000 },
 } satisfies Partial<Record<AuthAction, RateLimitRule>>;
@@ -73,19 +62,21 @@ export const authRateLimiter = createRateLimiter();
 export type RateLimitCheck = { key: string; rule: RateLimitRule };
 
 /**
- * Buckets a request counts against: the client IP (or one shared bucket when
- * the IP can't be trusted) plus, when known, the target account.
+ * Buckets a request counts against: the client IP when it comes from a
+ * trusted proxy, plus the target account when known.
+ *
+ * Without a trustworthy IP there is deliberately NO shared bucket: a single
+ * site-wide counter would let anyone lock every user out by flooding the
+ * form. Per-account limits still stop password guessing; set TRUST_PROXY in
+ * production behind a proxy to also get per-IP limits.
  */
 export function rateLimitChecks(
   action: AuthAction,
   clientIp: string | null,
   account?: string,
 ): RateLimitCheck[] {
-  const checks: RateLimitCheck[] = [
-    clientIp
-      ? { key: `${action}:ip:${clientIp}`, rule: authRateLimits[action] }
-      : { key: `${action}:shared`, rule: sharedRateLimits[action] },
-  ];
+  const checks: RateLimitCheck[] = [];
+  if (clientIp) checks.push({ key: `${action}:ip:${clientIp}`, rule: authRateLimits[action] });
   const accountRule = (accountRateLimits as Partial<Record<AuthAction, RateLimitRule>>)[action];
   if (account && accountRule)
     checks.push({ key: `${action}:account:${account}`, rule: accountRule });

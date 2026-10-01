@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { ViewTransition } from "react";
 import { Quote } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link, redirect } from "@/i18n/navigation";
@@ -10,6 +9,7 @@ import { getCurrentUser } from "@/server/auth/guards";
 import { destinationService } from "@/server/services/destination.service";
 import { reviewService } from "@/server/services/review.service";
 import "@/components/layout/layout-motion.css";
+import { RouteTransition } from "@/components/layout/route-transition";
 
 const ASIDE_IMAGE =
   "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=1600&q=80&auto=format&fit=crop";
@@ -88,9 +88,9 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
           <LocaleSwitcher />
         </div>
         <div className="flex flex-1 items-center justify-center px-6 pb-16 sm:px-10">
-          <ViewTransition default="page-content">
+          <RouteTransition>
             <div className="auth-stagger w-full max-w-md">{children}</div>
-          </ViewTransition>
+          </RouteTransition>
         </div>
       </main>
     </div>

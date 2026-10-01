@@ -82,9 +82,9 @@ export async function signUpAction(
 ): Promise<ActionResult> {
   const parsed = await parseInput(signUpSchema, Object.fromEntries(formData));
   if (!parsed.success) return parsed.result;
-  const limited = await rateLimited("signUp");
-  if (limited) return limited;
   const { name, email, password, next } = parsed.data;
+  const limited = await rateLimited("signUp", normalizeEmail(email));
+  if (limited) return limited;
 
   try {
     await auth.api.signUpEmail({ body: { name, email, password }, headers: await headers() });

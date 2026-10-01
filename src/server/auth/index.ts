@@ -76,6 +76,18 @@ export const auth = betterAuth({
     expiresIn: 60 * 60 * 24 * 7,
     updateAge: 60 * 60 * 24,
   },
+  // The UI only uses these through server actions (`auth.api.*`), which apply our
+  // own per-account/per-IP limits. Better Auth's HTTP limiter is skipped when no
+  // trusted proxy IP is available, so the raw HTTP routes would allow unlimited
+  // password guessing; close them. `disabledPaths` only affects the HTTP router,
+  // and `/reset-password/:token` (the emailed link) stays available.
+  disabledPaths: [
+    "/sign-in/email",
+    "/sign-up/email",
+    "/request-password-reset",
+    "/reset-password",
+    "/change-password",
+  ],
   rateLimit: {
     enabled: true,
     window: 60,

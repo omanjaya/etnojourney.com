@@ -38,11 +38,15 @@ import { reviewService } from "@/server/services/review.service";
  * Print stylesheet for the receipt view. The site chrome (header, footer,
  * account page header and tabs) lives in layouts this page doesn't own, so it
  * is hidden here for print only.
+ *
+ * React keeps hoisted <style> tags after navigating away, so every rule is
+ * scoped to `body:has([data-print-receipt])` and stops applying on other pages.
  */
+const SCOPE = "body:has([data-print-receipt])";
 const PRINT_CSS = `@media print {
-  body > a[href="#main"], header, footer, main#main > section:first-of-type { display: none !important; }
-  body { background: #fff !important; }
-  [data-reveal] { opacity: 1 !important; translate: none !important; scale: none !important; clip-path: none !important; }
+  ${SCOPE} > a[href="#main"], ${SCOPE} header, ${SCOPE} footer, ${SCOPE} main#main > section:first-of-type { display: none !important; }
+  ${SCOPE} { background: #fff !important; }
+  ${SCOPE} [data-reveal] { opacity: 1 !important; translate: none !important; scale: none !important; clip-path: none !important; }
 }`;
 
 /** Owner-scoped lookup; unknown codes and other users' bookings both 404. */
@@ -101,7 +105,7 @@ export default async function BookingDetailPage({
   });
 
   return (
-    <div className="flex flex-col gap-8">
+    <div data-print-receipt className="flex flex-col gap-8">
       <style href="booking-print" precedence="default">
         {PRINT_CSS}
       </style>

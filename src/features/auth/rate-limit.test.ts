@@ -5,7 +5,6 @@ import {
   createRateLimiter,
   normalizeEmail,
   rateLimitChecks,
-  sharedRateLimits,
 } from "./rate-limit";
 
 describe("createRateLimiter", () => {
@@ -28,10 +27,17 @@ describe("rateLimitChecks", () => {
     expect(ip.rule).toBe(authRateLimits.signIn);
   });
 
-  it("falls back to one shared bucket without a trusted IP", () => {
-    const [shared] = rateLimitChecks("signIn", null);
-    expect(shared.key).toBe("signIn:shared");
-    expect(shared.rule).toBe(sharedRateLimits.signIn);
+  it("has no site-wide bucket without a trusted IP, so flooding cannot lock everyone out", () => {
+    const limiter = createRateLimiter(() => 0);
+    // An attacker floods sign-in with junk accounts...
+    for (let i = 0; i < 500; i++) {
+      for (const c of rateLimitChecks("signIn", null, `junk${i}@x.test`))
+        limiter.hit(c.key, c.rule);
+    }
+    // ...and a real user is still allowed.
+    const real = rateLimitChecks("signIn", null, "real@x.test");
+    expect(real.map((c) => c.key)).toEqual(["signIn:account:real@x.test"]);
+    expect(real.every((c) => limiter.hit(c.key, c.rule))).toBe(true);
   });
 
   it("adds a per-account bucket that rotating IPs cannot escape", () => {
@@ -47,7 +53,9 @@ describe("rateLimitChecks", () => {
     expect(allowed.at(-1)).toBe(false);
   });
 
-  it("has no account bucket for sign-up", () => {
-    expect(rateLimitChecks("signUp", null, "a@b.c")).toHaveLength(1);
+  it("limits sign-up per email", () => {
+    expect(rateLimitChecks("signUp", null, "a@b.c")).toEqual([
+      { key: "signUp:account:a@b.c", rule: accountRateLimits.signUp },
+    ]);
   });
 });
