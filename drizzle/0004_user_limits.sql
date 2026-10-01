@@ -1,0 +1,2 @@
+ALTER TABLE "user" ADD CONSTRAINT "user_name_length" CHECK (char_length("user"."name") between 1 and 120);--> statement-breakpoint
+ALTER TABLE "user" ADD CONSTRAINT "user_image_length" CHECK ("user"."image" is null or char_length("user"."image") <= 2048);

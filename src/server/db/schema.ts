@@ -45,7 +45,12 @@ export const user = pgTable(
     locale: text("locale").notNull().default("id"),
     ...timestamps,
   },
-  (t) => [check("user_locale_valid", sql`${t.locale} in ('id', 'en')`)],
+  (t) => [
+    check("user_locale_valid", sql`${t.locale} in ('id', 'en')`),
+    // Defense in depth: forms cap names at 80; reject anything absurd at the DB.
+    check("user_name_length", sql`char_length(${t.name}) between 1 and 120`),
+    check("user_image_length", sql`${t.image} is null or char_length(${t.image}) <= 2048`),
+  ],
 );
 
 export const session = pgTable(
@@ -238,6 +243,9 @@ export const bookings = pgTable(
   (t) => [
     index("bookings_user_idx").on(t.userId),
     index("bookings_tour_date_idx").on(t.tourId, t.travelDate),
+    // Admin list default order (newest first) without a full sort. NULLS FIRST
+    // matches plain `ORDER BY ... DESC`; otherwise Postgres cannot use the index.
+    index("bookings_created_idx").on(t.createdAt.desc().nullsFirst(), t.id.desc().nullsFirst()),
     check("bookings_participants_positive", sql`${t.participants} > 0`),
   ],
 );
