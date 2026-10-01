@@ -1,0 +1,129 @@
+/*
+ * Motion for tours, destinations and their cards.
+ * Imported by the shared cards and the detail pages, so it is present on
+ * both sides of a shared-element morph.
+ */
+
+/* ---------------------------------------------------------------- */
+/* Shared-element morph: card image <-> detail hero                  */
+/* (React <ViewTransition share="morph">)                            */
+/* ---------------------------------------------------------------- */
+
+::view-transition-group(.morph) {
+  animation-duration: 620ms;
+  animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  border-radius: 1.25rem;
+  overflow: clip;
+}
+
+/* Card and hero have different aspect ratios: crop instead of stretching. */
+::view-transition-old(.morph),
+::view-transition-new(.morph) {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* A touch of blur mid-flight hides interpolation artifacts. */
+::view-transition-image-pair(.morph) {
+  animation-name: ej-morph-blur;
+}
+
+@keyframes ej-morph-blur {
+  40% {
+    filter: blur(2px);
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Load-time entrances (CSS only: they finish even without JS)       */
+/* ---------------------------------------------------------------- */
+
+/* Secondary gallery tiles open like a curtain, one after another. */
+.ej-curtain {
+  animation: ej-curtain 1.2s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation-delay: var(--ej-delay, 0s);
+}
+
+@keyframes ej-curtain {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Booking panel glides in after the hero has settled. */
+.ej-glide-in {
+  animation: ej-glide-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+@keyframes ej-glide-in {
+  from {
+    opacity: 0;
+    translate: 1.5rem 0;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Mobile booking bar rises from the bottom edge once the page has loaded. */
+.ej-rise-in {
+  animation: ej-rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
+}
+
+@keyframes ej-rise-in {
+  from {
+    translate: 0 100%;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Itinerary timeline: the line draws down, days follow it            */
+/* Driven by an ancestor <Reveal variant="none"> (data-reveal).       */
+/* ---------------------------------------------------------------- */
+
+.ej-timeline-line {
+  transform-origin: top;
+  transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.ej-timeline-item {
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(0.25s + var(--i, 0) * 0.22s);
+}
+
+[data-reveal="pending"] .ej-timeline-line {
+  transform: scaleY(0);
+}
+
+[data-reveal="pending"] .ej-timeline-item {
+  opacity: 0;
+  translate: 0 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ej-curtain,
+  .ej-glide-in,
+  .ej-rise-in {
+    animation: none;
+  }
+  .ej-timeline-line,
+  .ej-timeline-item {
+    transition: none;
+  }
+  [data-reveal="pending"] .ej-timeline-line {
+    transform: none;
+  }
+  [data-reveal="pending"] .ej-timeline-item {
+    opacity: 1;
+    translate: none;
+  }
+}

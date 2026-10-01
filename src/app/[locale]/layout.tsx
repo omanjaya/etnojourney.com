@@ -1,0 +1,91 @@
+import type { Metadata, Viewport } from "next";
+import { Fraunces, Inter } from "next/font/google";
+import { notFound } from "next/navigation";
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
+import { localizedUrl, siteUrl } from "@/lib/seo";
+import { JsonLd } from "@/components/shared/json-ld";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  axes: ["opsz"],
+  display: "swap",
+});
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale: locale as "id", namespace: "common" });
+  // Canonical and hreflang alternates are page-specific: see `pageMetadata` in `@/lib/seo`.
+  return {
+    metadataBase: new URL(siteUrl()),
+    title: { default: `EtnoJourney | ${t("tagline")}`, template: "%s | EtnoJourney" },
+    description: t("footer.about"),
+    openGraph: { siteName: "EtnoJourney", type: "website", locale: locale === "en" ? "en_US" : "id_ID" },
+    twitter: { card: "summary_large_image" },
+  };
+}
+
+export const viewport: Viewport = { themeColor: "#fbf8f3" };
+
+export default async function LocaleLayout({ children, params }: LayoutProps<"/[locale]">) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) notFound();
+  setRequestLocale(locale);
+  const [t, tc] = await Promise.all([getTranslations("common.nav"), getTranslations("common")]);
+  const base = siteUrl();
+  const organization = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "@id": `${base}/#organization`,
+    name: "EtnoJourney",
+    url: localizedUrl("/", locale),
+    logo: `${base}/icon.svg`,
+    description: tc("footer.about"),
+    email: "halo@etnojourney.id",
+    telephone: "+62 361 975 018",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Jl. Raya Ubud No. 18",
+      addressLocality: "Gianyar",
+      addressRegion: "Bali",
+      addressCountry: "ID",
+    },
+  };
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${base}/#website`,
+    name: "EtnoJourney",
+    url: localizedUrl("/", locale),
+    inLanguage: locale,
+    publisher: { "@id": `${base}/#organization` },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: { "@type": "EntryPoint", urlTemplate: `${localizedUrl("/tours", locale)}?q={search_term_string}` },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  return (
+    <html lang={locale} className={`${fraunces.variable} ${inter.variable}`}>
+      <body className="min-h-dvh">
+        <a
+          href="#main"
+          className="sr-only z-[100] rounded-full bg-ink px-4 py-2 text-sand-50 focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+        >
+          {t("skipToContent")}
+        </a>
+        <JsonLd data={[organization, website]} />
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

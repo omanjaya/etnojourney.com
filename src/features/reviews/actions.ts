@@ -1,0 +1,61 @@
+"use server";
+
+import { getLocale, getTranslations } from "next-intl/server";
+import { fail, type ActionResult } from "@/lib/action-result";
+import { getCurrentUser } from "@/server/auth/guards";
+import { DomainError } from "@/server/services/errors";
+import { reviewService } from "@/server/services/review.service";
+import { revalidate } from "@/features/shared/revalidate";
+import { parseInput, runAction } from "@/features/shared/run-action";
+import { createReviewSchema, setReviewPublishedSchema } from "./schemas";
+
+export async function createReviewAction(
+  _prev: ActionResult<{ tourSlug: string }> | null,
+  formData: FormData,
+): Promise<ActionResult<{ tourSlug: string }>> {
+  const user = await getCurrentUser();
+  if (!user) return fail((await getTranslations("errors"))("unauthorized"));
+
+  const parsed = await parseInput(createReviewSchema, Object.fromEntries(formData), {
+    fieldsNamespace: "reviews.fields",
+  });
+  if (!parsed.success) return parsed.result;
+
+  // Explain *why* a booking can't be reviewed instead of a generic "forbidden".
+  const verdict = await reviewService.eligibility(user.id, parsed.data.bookingId);
+  if (verdict !== "ok") {
+    const t = await getTranslations("reviews.errors");
+    return fail(t(verdict));
+  }
+
+  const locale = await getLocale();
+  return runAction(async () => {
+    const { tourSlug } = await reviewService.create(
+      { id: user.id, name: user.name },
+      { ...parsed.data, language: locale },
+    );
+    revalidate.tourDetails();
+    revalidate.account();
+    revalidate.home();
+    return { tourSlug };
+  });
+}
+
+export async function setReviewPublishedAction(
+  reviewId: number,
+  isPublished: boolean,
+): Promise<ActionResult<{ isPublished: boolean }>> {
+  const parsed = await parseInput(setReviewPublishedSchema, { reviewId, isPublished });
+  if (!parsed.success) return parsed.result;
+
+  return runAction(async () => {
+    const user = await getCurrentUser();
+    if (!user || user.role !== "admin") throw new DomainError("forbidden");
+    const { review } = await reviewService.setPublished(
+      parsed.data.reviewId,
+      parsed.data.isPublished,
+    );
+    revalidate.everything();
+    return { isPublished: review.isPublished };
+  });
+}
