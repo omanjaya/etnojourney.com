@@ -29,6 +29,16 @@ updates:
         update-types: [version-update:semver-major]
       - dependency-name: drizzle-orm
         update-types: [version-update:semver-major]
+      # Blocked upstream (Oct 2026): typescript-eslint doesn't support TS 7 and
+      # eslint-plugin-react (via eslint-config-next) breaks on ESLint 10.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      # Node types must match the runtime (Node 24 LTS in Docker, CI and dev).
+      # Upgrade Node as one change across Dockerfile, CI and @types/node.
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
     directory: /
@@ -46,3 +56,8 @@ updates:
       interval: weekly
       day: monday
       timezone: Asia/Jakarta
+    ignore:
+      # Stay on the Node 24 LTS line; CI does not build the image, so a major
+      # Node bump must be a deliberate change together with CI and @types/node.
+      - dependency-name: node
+        update-types: [version-update:semver-major]
