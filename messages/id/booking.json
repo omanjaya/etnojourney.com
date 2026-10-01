@@ -19,7 +19,8 @@
     "loginDescription": "Buat akun gratis untuk memesan tur dan memantau status booking.",
     "loginCta": "Masuk dan pesan",
     "registerCta": "Belum punya akun? Daftar",
-    "paymentNote": "Bayar online setelah memesan. Booking langsung terkonfirmasi begitu pembayaran diterima."
+    "paymentNote": "Bayar online setelah memesan. Booking langsung terkonfirmasi begitu pembayaran diterima.",
+    "seatsHint": "{count, plural, one {Sisa # kursi pada tanggal ini.} other {Sisa # kursi pada tanggal ini.}}"
   },
   "success": {
     "title": "Booking diterima",
@@ -41,5 +42,27 @@
     "remove": "Hapus dari wishlist",
     "saved": "Tersimpan",
     "save": "Simpan"
+  },
+  "calendar": {
+    "prevMonth": "Bulan sebelumnya",
+    "nextMonth": "Bulan berikutnya",
+    "keyboardHint": "Gunakan tombol panah untuk berpindah tanggal, Page Up dan Page Down untuk berpindah bulan.",
+    "loading": "Memuat ketersediaan...",
+    "loadError": "Ketersediaan tanggal gagal dimuat.",
+    "retry": "Coba lagi",
+    "seatsShort": "Sisa {count}",
+    "full": "Penuh",
+    "legendAvailable": "Tersedia",
+    "legendLimited": "Hampir penuh",
+    "legendFull": "Penuh",
+    "selected": "Dipilih: {date}",
+    "noneSelected": "Belum ada tanggal dipilih.",
+    "day": {
+      "available": "{date}, tersedia, sisa {count} kursi",
+      "limited": "{date}, sisa {count} kursi",
+      "full": "{date}, penuh",
+      "past": "{date}, sudah lewat",
+      "tooSoon": "{date}, belum bisa dipesan"
+    }
   }
 }

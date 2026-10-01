@@ -1,13 +1,14 @@
 import { expect, test } from "@playwright/test";
 import { ACCOUNTS, STORAGE_STATE } from "../support/env";
 import { bookingStatus, createBooking, jakartaDate } from "../support/db";
+import { forceTravelDate, pickTravelDate } from "../support/calendar";
 
 test.use({ storageState: STORAGE_STATE.traveler });
 
 test.describe("booking", () => {
   test("a traveller books a tour and is offered payment right away", async ({ page }) => {
     await page.goto("/tours/trekking-subak-jatiluwih");
-    await page.locator("#travelDate").fill(jakartaDate(40 + Math.floor(Math.random() * 200)));
+    await pickTravelDate(page, jakartaDate(40 + Math.floor(Math.random() * 200)));
     await page.locator("#contactName").fill("Nadia Putri");
     await page.locator("#contactPhone").fill("081234567890");
     await page
@@ -29,11 +30,10 @@ test.describe("booking", () => {
 
   test("the server rejects dates inside the minimum lead time", async ({ page }) => {
     await page.goto("/tours/trekking-subak-jatiluwih");
-    // Bypass the date picker's `min` to prove the rule is enforced server-side.
-    await page.locator("#travelDate").evaluate((el) => el.removeAttribute("min"));
-    await page.locator("#travelDate").fill(jakartaDate(1));
     await page.locator("#contactName").fill("Nadia Putri");
     await page.locator("#contactPhone").fill("081234567890");
+    // Bypass the calendar's rules to prove the lead time is enforced server-side.
+    await forceTravelDate(page, jakartaDate(1));
     await page
       .getByRole("button", { name: "Pesan sekarang" })
       .filter({ visible: true })

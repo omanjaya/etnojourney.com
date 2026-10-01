@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  ArrowRight,
-  CalendarDays,
-  CircleCheck,
-  LockKeyhole,
-  Minus,
-  Plus,
-  ShieldCheck,
-} from "lucide-react";
+import { ArrowRight, CircleCheck, LockKeyhole, Minus, Plus, ShieldCheck } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   startTransition,
@@ -19,11 +11,13 @@ import {
   type FormEvent,
 } from "react";
 import { Link } from "@/i18n/navigation";
-import { formatCurrency, isoDateFromToday } from "@/lib/format";
+import { formatCurrency, formatDate } from "@/lib/format";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Textarea } from "@/components/ui/form-controls";
+import { AvailabilityCalendar } from "@/features/availability/components/availability-calendar";
 import { PayButton } from "@/features/payment/components/pay-button";
+import type { DayAvailability } from "@/server/services/availability.rules";
 import { MIN_LEAD_DAYS } from "@/server/services/booking.rules";
 import { createBookingAction } from "../actions";
 
@@ -95,11 +89,16 @@ function BookingForm({ tour }: { tour: BookingPanelTour }) {
   const t = useTranslations("booking");
   const locale = useLocale();
   const [state, action, pending] = useActionState(createBookingAction, null);
-  const [participants, setParticipants] = useState(1);
+  const [requested, setRequested] = useState(1);
+  const [selectedDay, setSelectedDay] = useState<DayAvailability | null>(null);
   const [dismissed, setDismissed] = useState(false);
-  const minDate = isoDateFromToday(MIN_LEAD_DAYS);
   const errors = state && !state.ok ? state.fieldErrors : undefined;
+  // Never offer more seats than the chosen date still has.
+  const maxForDate = Math.min(tour.maxParticipants, selectedDay?.seatsLeft ?? tour.maxParticipants);
+  const participants = Math.max(1, Math.min(requested, maxForDate));
   const total = tour.pricePerPerson * participants;
+  // A failed submit (e.g. the date filled up meanwhile) refreshes the calendar.
+  const calendarRefreshKey = state && !state.ok ? state : null;
   const formRef = useRef<HTMLFormElement>(null);
   const alertRef = useRef<HTMLDivElement>(null);
 
@@ -155,7 +154,13 @@ function BookingForm({ tour }: { tour: BookingPanelTour }) {
     errors?.[name] ? { "aria-invalid": true, "aria-describedby": `${name}-error` } : {};
 
   return (
-    <form method="post" ref={formRef} onSubmit={onSubmit} className="flex flex-col gap-5" noValidate>
+    <form
+      method="post"
+      ref={formRef}
+      onSubmit={onSubmit}
+      className="flex flex-col gap-5"
+      noValidate
+    >
       {state && !state.ok && (
         <div ref={alertRef} tabIndex={-1} className="outline-none">
           <Alert>{state.error}</Alert>
@@ -163,40 +168,54 @@ function BookingForm({ tour }: { tour: BookingPanelTour }) {
       )}
       <input type="hidden" name="tourId" value={tour.id} />
 
-      <Field
-        label={t("panel.date")}
-        htmlFor="travelDate"
-        error={errors?.travelDate?.[0]}
-        hint={t("panel.dateHint", { days: MIN_LEAD_DAYS })}
-      >
-        <div className="relative">
-          <CalendarDays
-            className="text-muted pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2"
-            aria-hidden
-          />
-          <Input
-            id="travelDate"
-            name="travelDate"
-            type="date"
-            min={minDate}
-            defaultValue={minDate}
-            required
-            className="pl-11"
-            {...describedBy("travelDate")}
-          />
-        </div>
-      </Field>
+      <fieldset className="flex flex-col gap-2">
+        <legend id="travelDate-label" className="text-ink-soft mb-2 text-sm font-medium">
+          {t("panel.date")}
+        </legend>
+        <AvailabilityCalendar
+          tourId={tour.id}
+          value={selectedDay?.date ?? null}
+          onChange={setSelectedDay}
+          refreshKey={calendarRefreshKey}
+          labelledBy="travelDate-label"
+          invalid={Boolean(errors?.travelDate)}
+          describedBy={errors?.travelDate ? "travelDate-error" : "travelDate-hint"}
+        />
+        <input type="hidden" name="travelDate" value={selectedDay?.date ?? ""} />
+        {errors?.travelDate ? (
+          <p id="travelDate-error" className="text-danger text-xs" role="alert">
+            {errors.travelDate[0]}
+          </p>
+        ) : (
+          <p id="travelDate-hint" className="text-muted text-xs" aria-live="polite">
+            {selectedDay
+              ? t("calendar.selected", {
+                  date: formatDate(selectedDay.date, locale, {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  }),
+                })
+              : `${t("calendar.noneSelected")} ${t("panel.dateHint", { days: MIN_LEAD_DAYS })}`}
+          </p>
+        )}
+      </fieldset>
 
       <Field
         label={t("panel.participants")}
         htmlFor="participants"
         error={errors?.participants?.[0]}
-        hint={t("panel.maxHint", { count: tour.maxParticipants })}
+        hint={
+          selectedDay?.state === "limited"
+            ? t("panel.seatsHint", { count: selectedDay.seatsLeft })
+            : t("panel.maxHint", { count: tour.maxParticipants })
+        }
       >
         <div className="border-line flex h-12 items-center justify-between rounded-xl border bg-white px-2">
           <button
             type="button"
-            onClick={() => setParticipants((n) => Math.max(1, n - 1))}
+            onClick={() => setRequested(Math.max(1, participants - 1))}
             disabled={participants <= 1}
             aria-label={t("panel.decrease")}
             className="hover:bg-sand-100 grid size-10 place-items-center rounded-full transition-colors disabled:opacity-30"
@@ -209,8 +228,8 @@ function BookingForm({ tour }: { tour: BookingPanelTour }) {
           <input type="hidden" name="participants" value={participants} />
           <button
             type="button"
-            onClick={() => setParticipants((n) => Math.min(tour.maxParticipants, n + 1))}
-            disabled={participants >= tour.maxParticipants}
+            onClick={() => setRequested(Math.min(maxForDate, participants + 1))}
+            disabled={participants >= maxForDate}
             aria-label={t("panel.increase")}
             className="hover:bg-sand-100 grid size-10 place-items-center rounded-full transition-colors disabled:opacity-30"
           >

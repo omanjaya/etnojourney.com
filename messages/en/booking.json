@@ -19,7 +19,8 @@
     "loginDescription": "Create a free account to book tours and follow your booking status.",
     "loginCta": "Sign in to book",
     "registerCta": "No account yet? Sign up",
-    "paymentNote": "Pay online after booking. Your booking is confirmed as soon as payment is received."
+    "paymentNote": "Pay online after booking. Your booking is confirmed as soon as payment is received.",
+    "seatsHint": "{count, plural, one {# seat left on this date.} other {# seats left on this date.}}"
   },
   "success": {
     "title": "Booking received",
@@ -41,5 +42,27 @@
     "remove": "Remove from wishlist",
     "saved": "Saved",
     "save": "Save"
+  },
+  "calendar": {
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "keyboardHint": "Use the arrow keys to move between dates, Page Up and Page Down to change month.",
+    "loading": "Loading availability...",
+    "loadError": "We couldn't load availability.",
+    "retry": "Try again",
+    "seatsShort": "{count} left",
+    "full": "Full",
+    "legendAvailable": "Available",
+    "legendLimited": "Almost full",
+    "legendFull": "Full",
+    "selected": "Selected: {date}",
+    "noneSelected": "No date selected yet.",
+    "day": {
+      "available": "{date}, available, {count, plural, one {# seat} other {# seats}} left",
+      "limited": "{date}, {count, plural, one {# seat} other {# seats}} left",
+      "full": "{date}, full",
+      "past": "{date}, in the past",
+      "tooSoon": "{date}, not bookable yet"
+    }
   }
 }
