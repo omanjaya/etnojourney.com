@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: etnojourney
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d etnojourney"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Production-like app container: `docker compose up --build app`.
+  # Needs a .env with BETTER_AUTH_SECRET, BETTER_AUTH_URL and SITE_URL.
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/etnojourney
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - uploads:/app/storage/uploads
+    profiles: ["app"]
+
+volumes:
+  pgdata:
+  uploads:
