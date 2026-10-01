@@ -29,7 +29,11 @@ describe("checkEnv", () => {
 
   it("lists every invalid variable by name without echoing values", () => {
     const secret = "short-secret";
-    const result = checkEnv({ DATABASE_URL: "mysql://x", BETTER_AUTH_SECRET: secret, BETTER_AUTH_URL: "nope" });
+    const result = checkEnv({
+      DATABASE_URL: "mysql://x",
+      BETTER_AUTH_SECRET: secret,
+      BETTER_AUTH_URL: "nope",
+    });
     expect(result.ok).toBe(false);
     if (!result.ok) {
       const text = result.errors.join("\n");

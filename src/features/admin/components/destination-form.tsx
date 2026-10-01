@@ -10,7 +10,9 @@ import { ImageUploader } from "@/features/media/components/image-uploader";
 import type { LocalizedText } from "@/lib/i18n-text";
 import { createDestinationAction, updateDestinationAction } from "../actions";
 import type { DestinationFormValues } from "../schemas";
-import { BilingualField, Section, slugify } from "./tour-form";
+import { BilingualField } from "./form-parts/bilingual-field";
+import { Section } from "./form-parts/section";
+import { slugify } from "./form-parts/slug";
 
 export type DestinationFormDefaults = {
   slug: string;
