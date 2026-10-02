@@ -1,0 +1,42 @@
+{
+  "whatsapp": {
+    "ask": "Tanya via WhatsApp",
+    "askLabel": "Tanya via WhatsApp tentang tur ini (membuka tab baru)",
+    "askHint": "Ada pertanyaan sebelum memesan? Kami balas di jam kerja (WIB).",
+    "tourMessage": "Halo EtnoJourney, saya ingin bertanya tentang tur \"{tour}\": {url}",
+    "generalMessage": "Halo EtnoJourney, saya ingin bertanya:",
+    "footerLabel": "Chat WhatsApp dengan EtnoJourney di {number} (membuka tab baru)",
+    "footerText": "WhatsApp {number}",
+    "faqTitle": "Pertanyaanmu belum terjawab?",
+    "faqBody": "Tanyakan langsung ke tim kami lewat WhatsApp. Kami balas di jam kerja (WIB)."
+  },
+  "photos": {
+    "label": "Foto (opsional)",
+    "hint": "Hingga {max} foto dari perjalananmu. JPEG, PNG, WebP, atau AVIF, maks. 8 MB per foto. Metadata lokasi dihapus otomatis.",
+    "add": "Tambah foto",
+    "uploading": "Mengunggah foto...",
+    "count": "{count} dari {max} foto",
+    "remove": "Hapus foto {position}",
+    "preview": "Foto {position} yang akan diunggah",
+    "alt": "Foto dari {author}",
+    "open": "Lihat foto {index} dari {total} dari {author}",
+    "lightbox": "Foto ulasan dari {author}",
+    "counter": "Foto {index} dari {total}",
+    "close": "Tutup",
+    "previous": "Foto sebelumnya",
+    "next": "Foto berikutnya",
+    "errors": {
+      "tooMany": "Maksimal 4 foto per ulasan.",
+      "invalid": "Foto tidak dapat dipakai. Hapus lalu unggah ulang fotonya.",
+      "rateLimited": "Terlalu banyak unggahan dalam waktu singkat. Coba lagi nanti."
+    }
+  },
+  "admin": {
+    "photos": "Foto dari tamu",
+    "hidden": "Disembunyikan",
+    "hide": "Sembunyikan",
+    "show": "Tampilkan",
+    "hideLabel": "Sembunyikan foto {index} dari {author}",
+    "showLabel": "Tampilkan foto {index} dari {author}"
+  }
+}

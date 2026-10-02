@@ -16,11 +16,14 @@ export function RecordRefundDialog({
   paymentId,
   code,
   amountLabel,
+  detail,
 }: {
   paymentId: number;
   code: string;
-  /** Pre-formatted amount, e.g. "Rp 1.400.000". */
+  /** Pre-formatted amount to send back, e.g. "Rp 1.400.000". */
   amountLabel: string;
+  /** Pre-formatted line confirming the amount, e.g. "Refund Rp 700.000 of Rp 1.400.000, 50% per policy". */
+  detail?: string;
 }) {
   const t = useTranslations("adminPayments.refund");
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -85,6 +88,14 @@ export function RecordRefundDialog({
             {t("title")} <span className="font-mono text-base">{code}</span>
           </h2>
           <p className="text-ink-soft mt-2 text-sm">{t("body", { amount: amountLabel })}</p>
+          {detail && (
+            <p
+              data-testid="refund-dialog-amount"
+              className="border-line mt-3 rounded-lg border bg-white px-3 py-2 text-sm font-medium"
+            >
+              {detail}
+            </p>
+          )}
 
           <Field
             className="short:mt-4 mt-6"

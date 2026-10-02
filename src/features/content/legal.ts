@@ -1,5 +1,10 @@
-/** Date the legal templates were last revised (YYYY-MM-DD). Update when the text changes. */
-export const LEGAL_UPDATED = "2026-10-01";
+/** Date each legal document was last revised (YYYY-MM-DD). Update when its text changes. */
+export const LEGAL_UPDATED = {
+  privacy: "2026-10-01",
+  terms: "2026-10-01",
+  // Refund tiers and self-service cancel/reschedule.
+  cancellation: "2026-10-02",
+} as const;
 
 export type LegalSection = {
   id: string;

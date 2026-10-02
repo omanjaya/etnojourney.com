@@ -1,0 +1,59 @@
+{
+  "panel": {
+    "rescheduleBlocked": {
+      "limit": "Jadwal booking ini sudah diubah {max} kali, batas maksimal. Hubungi kami bila perlu perubahan lagi.",
+      "tooLate": "Perubahan jadwal ditutup {days} hari sebelum tanggal perjalanan. Hubungi kami bila butuh bantuan."
+    },
+    "policyLink": "Kebijakan pembatalan dan perubahan jadwal"
+  },
+  "tier": {
+    "atLeast": "{from} hari atau lebih sebelum perjalanan",
+    "between": "{from} sampai {to} hari sebelum perjalanan",
+    "under": "Kurang dari {days} hari sebelum perjalanan",
+    "refund": "{percent, plural, =100 {Pengembalian dana penuh} =0 {Tidak ada pengembalian dana} other {Pengembalian dana #%}}"
+  },
+  "cancel": {
+    "trigger": "Batalkan booking",
+    "triggerFor": "Batalkan booking {code}",
+    "title": "Batalkan booking {code}?",
+    "timing": "{days, plural, =0 {Perjalananmu hari ini.} other {Perjalananmu tinggal # hari lagi.}} Sesuai kebijakan pembatalan, pembatalan ini masuk ketentuan:",
+    "refundLabel": "Pengembalian dana",
+    "refundAmount": "{amount} dari {paid} yang sudah kamu bayar",
+    "noRefund": "Pembatalan sedekat ini dengan tanggal perjalanan tidak mendapat pengembalian dana.",
+    "processing": "Pengembalian dana dikirim secara manual ke metode pembayaran yang kamu pakai. Lama dana diterima bergantung pada bank atau e-wallet; kami akan mengabarimu lewat email begitu dana dikirim.",
+    "irreversible": "Booking yang sudah dibatalkan tidak bisa dipulihkan. Kursimu langsung tersedia lagi untuk orang lain.",
+    "keep": "Jangan batalkan",
+    "confirm": "Ya, batalkan booking",
+    "done": "Booking kamu sudah dibatalkan. Konfirmasinya sudah kami kirim ke emailmu."
+  },
+  "reschedule": {
+    "trigger": "Ubah tanggal",
+    "triggerFor": "Ubah tanggal booking {code}",
+    "title": "Pilih tanggal baru",
+    "body": "Harga tetap seperti saat booking. Tanggal bisa diubah {max} kali per booking, paling lambat {days} hari sebelum tanggal perjalanan saat ini.",
+    "current": "Tanggal sekarang: {date}",
+    "calendarLabel": "Tanggal perjalanan baru",
+    "selected": "Tanggal baru: {date}",
+    "noneSelected": "Pilih tanggal yang tersedia di kalender.",
+    "sameDate": "Itu tanggal perjalananmu sekarang. Pilih tanggal lain.",
+    "notEnoughSeats": "Tanggal ini hanya tersisa {count} kursi, tidak cukup untuk {participants}.",
+    "keep": "Tetap tanggal sekarang",
+    "confirm": "Pindahkan booking",
+    "done": "Tanggal perjalananmu sekarang {date}. Konfirmasinya sudah kami kirim ke emailmu."
+  },
+  "policy": {
+    "tiersCaption": "Pengembalian dana menurut berapa hari sebelum tanggal perjalanan kamu membatalkan (waktu Asia/Jakarta)",
+    "tierColumn": "Waktu pembatalan",
+    "refundColumn": "Pengembalian dana",
+    "rounding": "Pengembalian dana sebagian dibulatkan ke bawah ke rupiah terdekat.",
+    "rescheduleTitle": "Mengubah tanggal sendiri",
+    "rescheduleMax": "Tanggal bisa diubah paling banyak {max} kali per booking.",
+    "rescheduleClose": "Perubahan tanggal ditutup {days} hari sebelum tanggal perjalanan saat ini.",
+    "rescheduleLead": "Tanggal baru minimal {days} hari dari hari pengajuan, dan masih dibuka dengan kursi yang cukup untuk semua peserta dalam booking.",
+    "reschedulePrice": "Harga tetap seperti saat booking, baik untuk booking yang sudah maupun belum dibayar."
+  },
+  "adminRefund": {
+    "partial": "Refund {amount} dari {paid}, {percent}% sesuai kebijakan",
+    "full": "Refund penuh {amount}"
+  }
+}

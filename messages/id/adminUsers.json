@@ -144,7 +144,9 @@
     "actions": {
       "booking": {
         "status_changed": "Mengubah status pemesanan",
-        "note_added": "Menambahkan catatan pemesanan"
+        "note_added": "Menambahkan catatan pemesanan",
+        "cancelled_by_traveller": "Dibatalkan oleh wisatawan",
+        "rescheduled": "Jadwal diubah"
       },
       "payment": {
         "refund_required": "Menandai perlu refund",
@@ -166,7 +168,9 @@
       "review": {
         "published": "Menerbitkan ulasan",
         "hidden": "Menyembunyikan ulasan",
-        "replied": "Membalas ulasan"
+        "replied": "Membalas ulasan",
+        "photo_hidden": "Menyembunyikan foto ulasan",
+        "photo_shown": "Menampilkan foto ulasan"
       },
       "closure": {
         "created": "Menutup tanggal",

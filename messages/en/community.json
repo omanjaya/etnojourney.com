@@ -1,0 +1,42 @@
+{
+  "whatsapp": {
+    "ask": "Ask on WhatsApp",
+    "askLabel": "Ask on WhatsApp about this tour (opens in a new tab)",
+    "askHint": "Questions before booking? We reply during office hours (WIB).",
+    "tourMessage": "Hello EtnoJourney, I have a question about the tour \"{tour}\": {url}",
+    "generalMessage": "Hello EtnoJourney, I have a question:",
+    "footerLabel": "Chat with EtnoJourney on WhatsApp at {number} (opens in a new tab)",
+    "footerText": "WhatsApp {number}",
+    "faqTitle": "Didn't find your answer?",
+    "faqBody": "Ask our team directly on WhatsApp. We reply during office hours (WIB)."
+  },
+  "photos": {
+    "label": "Photos (optional)",
+    "hint": "Up to {max} photos from your trip. JPEG, PNG, WebP or AVIF, max. 8 MB each. Location metadata is removed automatically.",
+    "add": "Add photos",
+    "uploading": "Uploading photo...",
+    "count": "{count} of {max} photos",
+    "remove": "Remove photo {position}",
+    "preview": "Photo {position} to be uploaded",
+    "alt": "Photo by {author}",
+    "open": "View photo {index} of {total} by {author}",
+    "lightbox": "Review photos by {author}",
+    "counter": "Photo {index} of {total}",
+    "close": "Close",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "errors": {
+      "tooMany": "A review can have at most 4 photos.",
+      "invalid": "That photo can't be used. Remove it and upload it again.",
+      "rateLimited": "Too many uploads in a short time. Please try again later."
+    }
+  },
+  "admin": {
+    "photos": "Guest photos",
+    "hidden": "Hidden",
+    "hide": "Hide",
+    "show": "Show",
+    "hideLabel": "Hide photo {index} by {author}",
+    "showLabel": "Show photo {index} by {author}"
+  }
+}

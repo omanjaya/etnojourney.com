@@ -144,7 +144,9 @@
     "actions": {
       "booking": {
         "status_changed": "Changed booking status",
-        "note_added": "Added a booking note"
+        "note_added": "Added a booking note",
+        "cancelled_by_traveller": "Cancelled by the traveller",
+        "rescheduled": "Rescheduled"
       },
       "payment": {
         "refund_required": "Flagged a refund as required",
@@ -166,7 +168,9 @@
       "review": {
         "published": "Published a review",
         "hidden": "Hid a review",
-        "replied": "Replied to a review"
+        "replied": "Replied to a review",
+        "photo_hidden": "Hid a review photo",
+        "photo_shown": "Showed a review photo"
       },
       "closure": {
         "created": "Closed dates",

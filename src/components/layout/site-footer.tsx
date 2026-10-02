@@ -1,14 +1,19 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { hasAnyContact, siteContact } from "@/config/site";
+import { whatsAppLink } from "@/lib/whatsapp";
 import { Link } from "@/i18n/navigation";
 import { Reveal, SplitWords } from "@/components/motion";
 import { Logo } from "@/components/shared/logo";
 import { Container } from "./container";
 
 export async function SiteFooter() {
-  const t = await getTranslations("common");
+  const [t, tw] = await Promise.all([
+    getTranslations("common"),
+    getTranslations("community.whatsapp"),
+  ]);
   const contact = siteContact();
+  const whatsappHref = whatsAppLink(contact.whatsapp, tw("generalMessage"));
   const year = new Date().getFullYear();
 
   return (
@@ -111,6 +116,20 @@ export async function SiteFooter() {
                     className="inline-flex min-h-10 items-center hover:text-white"
                   >
                     {contact.phone}
+                  </a>
+                </li>
+              )}
+              {contact.whatsapp && whatsappHref && (
+                <li className="flex items-center gap-3">
+                  <MessageCircle className="text-gold size-4 shrink-0" aria-hidden />
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={tw("footerLabel", { number: `+${contact.whatsapp}` })}
+                    className="inline-flex min-h-10 items-center hover:text-white"
+                  >
+                    {tw("footerText", { number: `+${contact.whatsapp}` })}
                   </a>
                 </li>
               )}

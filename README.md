@@ -141,6 +141,7 @@ Jika port 5432 dipakai Postgres lokal, isi `DB_HOST_PORT=5544` di `.env`; compos
 | `RESEND_API_KEY`, `MAIL_FROM` | Disarankan | Tanpa key, email tidak terkirim |
 | `UPLOAD_DIR` | Tidak | Default image: `/app/storage/uploads` (volume) |
 | `TRUST_PROXY`, `TRUSTED_PROXIES` | Lihat di bawah | Pembacaan IP klien untuk rate limit |
+| `CRON_SECRET` | Disarankan | Mengaktifkan email terjadwal (lihat di bawah); tanpa ini endpoint cron mati |
 
 ### Akun owner (admin)
 
@@ -158,6 +159,24 @@ Di dashboard Midtrans (Settings > Payment):
 
 - *Payment Notification URL*: `https://<domain>/api/payments/midtrans`
 - *Finish Redirect URL*: `https://<domain>/payment/finish`
+
+### Email terjadwal
+
+Endpoint `POST /api/cron/trip-emails` mengirim dua jenis email otomatis, masing-masing dalam bahasa yang dipilih user di pengaturan akun:
+
+- **Pengingat sebelum perjalanan**: booking `confirmed` dengan tanggal perjalanan hari ini sampai 3 hari lagi (zona waktu `Asia/Jakarta`). Isinya titik kumpul, tanggal, daftar barang bawaan, etika setempat, kontak, tautan ke halaman booking dan e-tiket PDF.
+- **Permintaan ulasan**: booking `completed` yang perjalanannya 1 sampai 14 hari lalu dan belum diulas. Tautannya menuju halaman booking di akun, tempat ulasan ditulis.
+
+Setiap email hanya terkirim sekali: sebelum mengirim, baris booking "diklaim" dengan satu `UPDATE ... WHERE reminder_sent_at IS NULL` (atau `review_request_sent_at`), jadi dua pemanggilan yang berjalan bersamaan tidak mengirim dobel. Jika pengiriman gagal, klaim dilepas dan dicoba lagi pada pemanggilan berikutnya. Satu pemanggilan memproses paling banyak 200 email per jenis dan mengembalikan JSON berisi jumlahnya.
+
+Endpoint ini mati (404) sampai `CRON_SECRET` diisi (minimal 24 karakter, buat dengan `openssl rand -hex 32`). Panggil sekali sehari dengan header `Authorization: Bearer <CRON_SECRET>`; tanpa header atau dengan secret yang salah jawabannya 401. Memanggil lebih sering aman, tetapi tidak perlu. Contoh crontab di server (pukul 08.00 WIB; sesuaikan jika zona waktu server bukan WIB, misalnya `0 1 * * *` untuk server UTC):
+
+```cron
+CRON_TZ=Asia/Jakarta
+0 8 * * * curl -fsS -X POST -H @/etc/etnojourney/cron-header https://<domain>/api/cron/trip-emails >/dev/null
+```
+
+File `/etc/etnojourney/cron-header` berisi satu baris `Authorization: Bearer <CRON_SECRET>` dan hanya bisa dibaca pemilik crontab (`chmod 600`). Jangan menuliskan secret langsung di crontab atau di argumen `curl`: isi crontab dan argumen proses bisa terlihat user lain di server. Dengan Docker Compose, isi `CRON_SECRET` di `.env` (service `app` membacanya lewat `env_file`), lalu jalankan crontab di host yang memanggil `http://127.0.0.1:${APP_HOST_PORT:-3000}/api/cron/trip-emails` (port app hanya terbuka di localhost). Penjadwal eksternal (misalnya cron job di platform hosting) juga bisa dipakai selama mendukung header `Authorization`.
 
 ### Reverse proxy
 

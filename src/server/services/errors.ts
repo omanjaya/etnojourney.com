@@ -19,7 +19,13 @@ export type DomainErrorCode =
   | "alreadyPaid"
   | "paymentUnavailable"
   | "paymentGateway"
-  | "notRefundable";
+  | "notRefundable"
+  // Traveller self-service (cancel / reschedule).
+  | "notReschedulable"
+  | "rescheduleLimit"
+  | "rescheduleTooLate"
+  | "sameDate"
+  | "refundChanged";
 
 export class DomainError extends Error {
   constructor(

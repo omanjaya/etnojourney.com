@@ -32,6 +32,10 @@ export const auditActions = [
   "user.disabled",
   "user.enabled",
   "credit.updated",
+  "booking.cancelled_by_traveller",
+  "booking.rescheduled",
+  "review.photo_hidden",
+  "review.photo_shown",
 ] as const;
 
 export type AuditAction = (typeof auditActions)[number];

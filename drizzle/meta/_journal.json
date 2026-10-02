@@ -71,6 +71,13 @@
       "when": 1790939207026,
       "tag": "0009_admin_operations",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1790944405604,
+      "tag": "0010_traveller_self_service",
+      "breakpoints": true
     }
   ]
 }

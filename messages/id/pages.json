@@ -297,8 +297,8 @@
         "id": "paid",
         "title": "Booking yang sudah dibayar",
         "paragraphs": [
-          "Booking yang sudah dibayar tidak dapat dibatalkan sendiri dari situs. Ajukan pembatalan dengan menghubungi kami dan menyertakan kode booking.",
-          "Besaran pengembalian dana ditentukan berdasarkan jarak waktu pengajuan terhadap tanggal perjalanan: [Ketentuan persentase pengembalian dana, misalnya per rentang hari]."
+          "Booking yang sudah dibayar bisa kamu batalkan sendiri dari halaman Akun saya, selama tanggal perjalanan belum lewat. Sebelum mengonfirmasi, kamu akan melihat ketentuan yang berlaku dan besaran pengembalian dananya.",
+          "Besaran pengembalian dana ditentukan oleh jumlah hari antara hari pembatalan dan tanggal perjalanan:"
         ]
       },
       {
@@ -312,14 +312,15 @@
         "id": "refunds",
         "title": "Proses pengembalian dana",
         "paragraphs": [
-          "Pengembalian dana diproses secara manual ke metode pembayaran yang dipakai, melalui Midtrans. Lama dana diterima bergantung pada bank atau penyedia e-wallet: [Perkiraan waktu proses]."
+          "Pengembalian dana diproses secara manual ke metode pembayaran yang dipakai, melalui Midtrans. Lama dana diterima bergantung pada bank atau penyedia e-wallet, jadi kami tidak bisa menjanjikan waktu yang pasti. Kami akan mengabarimu lewat email begitu dana dikirim."
         ]
       },
       {
         "id": "changes",
         "title": "Perubahan jadwal",
         "paragraphs": [
-          "Permintaan perubahan tanggal untuk booking yang sudah dibayar diproses sesuai ketersediaan tuan rumah. Tanggal baru tetap harus minimal 3 hari dari hari pengajuan."
+          "Kamu bisa mengubah tanggal perjalanan sendiri dari halaman Akun saya, untuk booking yang sudah maupun belum dibayar, selama tanggal baru masih tersedia.",
+          "Untuk perubahan di luar ketentuan di bawah ini, hubungi kami dengan menyertakan kode booking. Permintaan diproses sesuai ketersediaan tuan rumah."
         ]
       }
     ]

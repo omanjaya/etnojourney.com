@@ -132,15 +132,39 @@ export function refundReasonForPaidNotification(input: {
  * by the system (duplicate charge, paid but cancelled). Refunding a live
  * booking's payment would leave it "confirmed" with nothing paid.
  */
-export function canRecordRefund(payment: { status: PaymentStatus; refundRequired: boolean }): boolean {
+export function canRecordRefund(payment: {
+  status: PaymentStatus;
+  refundRequired: boolean;
+}): boolean {
   return payment.status === "paid" && payment.refundRequired;
 }
 
-export function assertRefundable(payment: { status: PaymentStatus; refundRequired: boolean }): void {
+export function assertRefundable(payment: {
+  status: PaymentStatus;
+  refundRequired: boolean;
+}): void {
   if (!canRecordRefund(payment)) throw new DomainError("notRefundable");
 }
 
 /** Whole days a refund has been waiting (0 on the day it was flagged). */
 export function refundAgeDays(since: Date, now: Date = new Date()): number {
   return Math.max(0, Math.floor((now.getTime() - since.getTime()) / 86_400_000));
+}
+
+/**
+ * What must go back for a flagged payment: `refundAmount` when the policy
+ * gives a partial refund, otherwise the full amount paid.
+ */
+export function refundDue(payment: { amount: number; refundAmount: number | null }): {
+  amount: number;
+  partial: boolean;
+  /** Share of the payment, rounded to a whole percent. */
+  percent: number;
+} {
+  if (payment.refundAmount === null || payment.refundAmount >= payment.amount) {
+    return { amount: payment.amount, partial: false, percent: 100 };
+  }
+  const amount = Math.max(0, payment.refundAmount);
+  const percent = payment.amount > 0 ? Math.round((amount * 100) / payment.amount) : 0;
+  return { amount, partial: true, percent };
 }

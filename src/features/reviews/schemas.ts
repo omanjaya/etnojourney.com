@@ -3,6 +3,7 @@ import {
   REVIEW_BODY_MAX,
   REVIEW_BODY_MIN,
   REVIEW_COUNTRY_MAX,
+  REVIEW_PHOTOS_MAX,
   REVIEW_REPLY_MAX,
 } from "@/server/services/review.rules";
 
@@ -22,6 +23,42 @@ export const createReviewSchema = z.object({
 });
 
 export type CreateReviewValues = z.infer<typeof createReviewSchema>;
+
+/** One uploaded photo as the review form sends it back (see uploadReviewPhotoAction). */
+const reviewPhotoUploadSchema = z.object({
+  path: z.string().max(200),
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+  receipt: z.string().max(100),
+});
+
+/**
+ * The review form's hidden `photos` field: a JSON array of uploads. Missing or
+ * empty means no photos; the server re-checks every receipt and path.
+ */
+export const reviewPhotosFieldSchema = z
+  .string()
+  .max(4000)
+  .optional()
+  .transform((value, ctx) => {
+    if (!value) return [];
+    try {
+      return JSON.parse(value) as unknown;
+    } catch {
+      ctx.addIssue({ code: "custom", message: "invalid" });
+      return z.NEVER;
+    }
+  })
+  .pipe(z.array(reviewPhotoUploadSchema).max(REVIEW_PHOTOS_MAX, "tooMany"));
+
+export const reviewPhotoUploadTargetSchema = z.object({
+  bookingId: z.coerce.number().int().positive(),
+});
+
+export const reviewPhotoIdSchema = z.object({
+  photoId: z.number().int().positive(),
+  isHidden: z.boolean(),
+});
 
 export const setReviewPublishedSchema = z.object({
   reviewId: z.number().int().positive(),

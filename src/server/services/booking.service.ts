@@ -19,10 +19,19 @@ import {
   calculateTotal,
   generateBookingCode,
 } from "./booking.rules";
-import { DomainError } from "./errors";
+import { DomainError, type DomainErrorCode } from "./errors";
 import { paymentService } from "./payment.service";
 import { auditService } from "./audit.service";
 import { buildBookingTimeline } from "./booking-timeline.rules";
+import {
+  businessToday,
+  cancelOption,
+  newDateIssue,
+  refundQuote,
+  rescheduleBlocker,
+  type NewDateIssue,
+  type RescheduleBlocker,
+} from "./self-service.rules";
 
 export type {
   AdminBookingFilters,
@@ -39,6 +48,30 @@ export type CreateBookingInput = {
 };
 
 const CODE_ATTEMPTS = 3;
+
+/** Outcome of a traveller cancellation, for the confirmation emails. */
+export type TravellerCancellation = {
+  booking: Booking;
+  /** Whether money had been taken for the booking. */
+  paid: boolean;
+  daysBefore: number;
+  /** Refund share under the policy (0 for unpaid bookings). */
+  percent: number;
+  /** Rupiah owed back in total (0 when nothing is refunded). */
+  refundAmount: number;
+};
+
+const rescheduleErrors: Record<RescheduleBlocker, DomainErrorCode> = {
+  status: "notReschedulable",
+  limit: "rescheduleLimit",
+  tooLate: "rescheduleTooLate",
+};
+
+const newDateErrors: Record<NewDateIssue, DomainErrorCode> = {
+  sameDate: "sameDate",
+  tooSoon: "dateTooSoon",
+  tooFar: "notReschedulable",
+};
 
 /**
  * Inserts with a fresh booking code, retrying on the (rare) code collision.
@@ -102,17 +135,143 @@ export const bookingService = {
   listForUser: (userId: string) => bookingRepository.listForUser(userId),
 
   /**
-   * Travellers may only cancel their own bookings while still pending and unpaid.
-   * The booking row is locked so a payment webhook can't confirm it mid-way.
+   * Traveller cancels their own booking. Unpaid pending bookings go for free;
+   * paid ones (pending or confirmed, travel date not passed) are refunded
+   * under the policy tiers: each paid payment is flagged with its refund
+   * amount (null = full), or not flagged at all when the tier gives 0%.
+   *
+   * `expectedPercent` is the share the traveller saw in the dialog; if the
+   * tier changed since (e.g. Jakarta midnight passed) nothing is cancelled.
+   * Seats free up because capacity only counts pending and confirmed bookings.
    */
-  cancelByUser(userId: string, bookingId: number) {
+  cancelByTraveller(
+    userId: string,
+    bookingId: number,
+    expectedPercent?: number,
+    now: Date = new Date(),
+  ): Promise<TravellerCancellation> {
+    const today = businessToday(now);
     return db.transaction(async (tx) => {
       const booking = await bookingRepository.findByIdForUpdate(tx, bookingId);
       if (!booking) throw new DomainError("notFound");
       if (booking.userId !== userId) throw new DomainError("forbidden");
-      if (booking.status !== "pending") throw new DomainError("notCancellable");
-      if (await paymentRepository.hasPaid(booking.id, tx)) throw new DomainError("notCancellable");
-      return bookingRepository.updateStatusWith(tx, booking.id, "cancelled");
+
+      const paid = await paymentRepository.findPaidForBookingForUpdate(tx, booking.id);
+      // Attempts already flagged (duplicate charges) are owed back in full anyway.
+      const live = paid.filter((payment) => !payment.refundRequired);
+      const paidAmount =
+        paid.length > 0 ? live.reduce((total, payment) => total + payment.amount, 0) : null;
+
+      const option = cancelOption(booking, paidAmount, today);
+      if (!option) throw new DomainError("notCancellable");
+      if (
+        option.kind === "paid" &&
+        expectedPercent !== undefined &&
+        expectedPercent !== option.quote.percent
+      ) {
+        throw new DomainError("refundChanged");
+      }
+
+      const updated = await bookingRepository.updateStatusWith(tx, booking.id, "cancelled");
+
+      let refundAmount = 0;
+      for (const payment of live) {
+        const quote = refundQuote(payment.amount, booking.travelDate, today);
+        if (!quote.refundable) continue;
+        refundAmount += quote.amount;
+        await paymentService.flagForRefund(
+          tx,
+          payment,
+          "cancelledAfterPayment",
+          userId,
+          quote.storedAmount,
+        );
+      }
+
+      const daysBefore = option.kind === "paid" ? option.quote.daysBefore : null;
+      const percent = option.kind === "paid" ? option.quote.percent : 0;
+      await auditService.record(
+        {
+          actorId: userId,
+          action: "booking.cancelled_by_traveller",
+          entityType: "booking",
+          entityId: booking.id,
+          details: {
+            code: booking.code,
+            from: booking.status,
+            paid: option.kind === "paid",
+            daysBefore,
+            percent,
+            refundAmount,
+          },
+        },
+        tx,
+      );
+
+      return {
+        booking: updated,
+        paid: option.kind === "paid",
+        daysBefore: daysBefore ?? 0,
+        percent,
+        refundAmount,
+      };
+    });
+  },
+
+  /**
+   * Traveller moves their own booking to another date. The booking and then
+   * the tour row are locked (the tour lock serialises with `create`, so two
+   * travellers can't both take the last seats), availability is re-checked
+   * (lead time, closures, seats excluding this booking), the reschedule count
+   * goes up and the pre-trip reminder is re-armed. The price stays as booked.
+   */
+  reschedule(userId: string, bookingId: number, newDate: string, now: Date = new Date()) {
+    const today = businessToday(now);
+    return db.transaction(async (tx) => {
+      const booking = await bookingRepository.findByIdForUpdate(tx, bookingId);
+      if (!booking) throw new DomainError("notFound");
+      if (booking.userId !== userId) throw new DomainError("forbidden");
+
+      const blocker = rescheduleBlocker(booking, today);
+      if (blocker) throw new DomainError(rescheduleErrors[blocker]);
+      const issue = newDateIssue(booking.travelDate, newDate, today);
+      if (issue) throw new DomainError(newDateErrors[issue]);
+
+      const tour = await tourRepository.findById(booking.tourId);
+      if (!tour || !tour.isPublished) throw new DomainError("notReschedulable");
+      await tourRepository.lockById(tx, tour.id);
+      if (await closureRepository.isClosed(tour.id, newDate, tx)) {
+        throw new DomainError("dateClosed");
+      }
+      const alreadyBooked = await bookingRepository.countActiveSeatsExcluding(
+        tx,
+        tour.id,
+        newDate,
+        booking.id,
+      );
+      assertCapacity({
+        requested: booking.participants,
+        alreadyBooked,
+        maxParticipants: tour.maxParticipants,
+      });
+
+      const updated = await bookingRepository.reschedule(tx, booking.id, newDate);
+      await auditService.record(
+        {
+          actorId: userId,
+          action: "booking.rescheduled",
+          entityType: "booking",
+          entityId: booking.id,
+          details: {
+            code: booking.code,
+            from: booking.travelDate,
+            to: newDate,
+            rescheduleCount: updated.rescheduleCount,
+          },
+        },
+        tx,
+      );
+      return { booking: updated, from: booking.travelDate };
     });
   },
 

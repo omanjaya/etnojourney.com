@@ -21,6 +21,13 @@ import {
   adminPaymentSucceededEmail,
   type AdminBookingEmailData,
 } from "@/server/mail/templates/admin";
+import {
+  adminRescheduledEmail,
+  adminTravellerCancelledEmail,
+  travellerCancelledEmail,
+  travellerRescheduledEmail,
+  type RefundOutcome,
+} from "@/server/mail/templates/self-service";
 import { permissions } from "@/server/auth/permissions";
 import { notificationRepository } from "@/server/repositories/notification.repository";
 
@@ -121,6 +128,24 @@ async function notifyBackoffice(
   );
 }
 
+/** A traveller cancellation as reported by `bookingService.cancelByTraveller`. */
+type CancellationNotice = {
+  booking: { id: number };
+  paid: boolean;
+  daysBefore: number;
+  percent: number;
+  refundAmount: number;
+};
+
+function refundOutcome(notice: CancellationNotice, locale: Locale): RefundOutcome {
+  if (!notice.paid) return { kind: "unpaid" };
+  if (notice.refundAmount <= 0) return { kind: "none", days: notice.daysBefore };
+  const amount = formatCurrency(notice.refundAmount, locale);
+  return notice.percent >= 100
+    ? { kind: "full", amount }
+    : { kind: "partial", amount, percent: notice.percent };
+}
+
 export const notificationService = {
   async bookingCreated(bookingId: number): Promise<void> {
     await safely("bookingCreated", async () => {
@@ -173,6 +198,48 @@ export const notificationService = {
         },
       );
     });
+  },
+
+  /** Traveller cancelled their own booking: confirmation with the refund that applies. */
+  async bookingCancelledByTraveller(notice: CancellationNotice): Promise<void> {
+    const bookingId = notice.booking.id;
+    await safely("bookingCancelledByTraveller", async () => {
+      const { recipient, data, locale } = await loadBooking(bookingId);
+      await deliver(
+        recipient.email,
+        travellerCancelledEmail(await translator(locale), {
+          ...data,
+          refund: refundOutcome(notice, locale),
+        }),
+      );
+    });
+    await safely("bookingCancelledByTraveller.backoffice", () =>
+      notifyBackoffice(
+        "bookingCancelledByTraveller.backoffice",
+        bookingId,
+        async (t, data, locale) =>
+          adminTravellerCancelledEmail(t, { ...data, refund: refundOutcome(notice, locale) }),
+      ),
+    );
+  },
+
+  /** Traveller moved their booking from `previousDate` (YYYY-MM-DD) to its current date. */
+  async bookingRescheduled(bookingId: number, previousDate: string): Promise<void> {
+    await safely("bookingRescheduled", async () => {
+      const { recipient, data, locale } = await loadBooking(bookingId);
+      await deliver(
+        recipient.email,
+        travellerRescheduledEmail(await translator(locale), {
+          ...data,
+          previousDate: formatDate(previousDate, locale),
+        }),
+      );
+    });
+    await safely("bookingRescheduled.backoffice", () =>
+      notifyBackoffice("bookingRescheduled.backoffice", bookingId, async (t, data, locale) =>
+        adminRescheduledEmail(t, { ...data, previousDate: formatDate(previousDate, locale) }),
+      ),
+    );
   },
 
   /** Used by Better Auth's `sendResetPassword` hook. */

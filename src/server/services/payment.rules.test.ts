@@ -6,6 +6,7 @@ import {
   canRecordRefund,
   isRefundReason,
   refundAgeDays,
+  refundDue,
   refundReasonForPaidNotification,
   buildOrderId,
   computeSignature,
@@ -184,5 +185,33 @@ describe("refundAgeDays", () => {
   });
   it("never goes negative on clock skew", () => {
     expect(refundAgeDays(since, new Date("2026-09-30T00:00:00Z"))).toBe(0);
+  });
+});
+
+describe("refundDue", () => {
+  it("is the full payment when no partial amount is stored", () => {
+    expect(refundDue({ amount: 1_400_000, refundAmount: null })).toEqual({
+      amount: 1_400_000,
+      partial: false,
+      percent: 100,
+    });
+  });
+
+  it("is the stored amount for a partial refund, with its share", () => {
+    expect(refundDue({ amount: 1_400_000, refundAmount: 700_000 })).toEqual({
+      amount: 700_000,
+      partial: true,
+      percent: 50,
+    });
+    // Rounded-down rupiah still reads as the policy percentage.
+    expect(refundDue({ amount: 900_001, refundAmount: 450_000 }).percent).toBe(50);
+  });
+
+  it("never asks for more than was paid", () => {
+    expect(refundDue({ amount: 500_000, refundAmount: 600_000 })).toEqual({
+      amount: 500_000,
+      partial: false,
+      percent: 100,
+    });
   });
 });
