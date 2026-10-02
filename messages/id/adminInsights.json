@@ -1,0 +1,135 @@
+{
+  "fields": {
+    "replyRequired": "Tulis balasan terlebih dahulu.",
+    "replyMax": "Balasan maksimal 2000 karakter.",
+    "tooLong": "Isian ini terlalu panjang.",
+    "httpsUrl": "Masukkan tautan lengkap yang diawali https://.",
+    "uploadPath": "Gunakan path gambar yang diunggah di sini, misalnya /media/tours/2026/05/....webp.",
+    "creditExists": "Gambar ini sudah memiliki kredit. Ubah melalui daftar di bawah."
+  },
+  "reply": {
+    "add": "Balas",
+    "addFor": "Balas ulasan dari {author}",
+    "fieldLabel": "Balasan publik untuk {author}",
+    "placeholder": "Ucapkan terima kasih dan jawab pertanyaan tamu. Balasan ini tampil publik di bawah ulasan.",
+    "counter": "{count} / {max} karakter",
+    "save": "Terbitkan balasan",
+    "cancel": "Batal",
+    "existing": "Balasan tim",
+    "edit": "Ubah",
+    "editFor": "Ubah balasan untuk {author}",
+    "remove": "Hapus",
+    "removeFor": "Hapus balasan untuk {author}",
+    "confirmRemove": "Hapus balasan ini?",
+    "removeConfirm": "Ya, hapus"
+  },
+  "dashboard": {
+    "queuesLabel": "Antrean kerja",
+    "pending": {
+      "label": "Booking menunggu",
+      "action": "Konfirmasi atau tolak",
+      "count": "{count, plural, =0 {Tidak ada booking menunggu} other {# booking menunggu}}"
+    },
+    "refunds": {
+      "label": "Perlu refund",
+      "action": "Kembalikan dana lalu catat",
+      "count": "{count, plural, =0 {Tidak ada refund menunggu} other {# refund menunggu}}"
+    }
+  },
+  "reports": {
+    "eyebrow": "Wawasan",
+    "title": "Laporan",
+    "description": "Pendapatan dan booking untuk periode pilihan. Tanggal mengikuti Waktu Indonesia Barat (WIB).",
+    "showing": "Menampilkan {range}",
+    "totalsLabel": "Total periode",
+    "totals": {
+      "net": "Pendapatan bersih",
+      "netHint": "Dibayar dalam periode dikurangi refund",
+      "gross": "Pembayaran diterima",
+      "refunds": "Refund",
+      "refundCount": "{count, plural, =0 {Tidak ada refund} other {# refund}}",
+      "bookings": "Booking",
+      "participants": "{count, plural, other {# pelancong}}",
+      "groupSize": "Rata-rata ukuran grup",
+      "groupSizeHint": "Pelancong per booking"
+    },
+    "period": {
+      "label": "Periode laporan",
+      "presets": {
+        "this-month": "Bulan ini",
+        "last-month": "Bulan lalu",
+        "last-90": "90 hari terakhir",
+        "this-year": "Tahun ini"
+      },
+      "custom": "Periode khusus",
+      "from": "Dari",
+      "to": "Sampai",
+      "apply": "Terapkan"
+    },
+    "status": {
+      "title": "Booking per status",
+      "description": "Booking yang dibuat dalam periode dan statusnya saat ini.",
+      "share": "{percent}% dari booking"
+    },
+    "top": {
+      "title": "Tur teratas",
+      "caption": "Pendapatan bersih, 5 teratas"
+    },
+    "months": {
+      "title": "Per bulan",
+      "caption": "Pendapatan bersih per bulan"
+    },
+    "tours": {
+      "title": "Per tur",
+      "export": "Ekspor CSV"
+    },
+    "columns": {
+      "month": "Bulan",
+      "tour": "Tur",
+      "bookings": "Booking",
+      "participants": "Pelancong",
+      "gross": "Diterima",
+      "refunds": "Refund",
+      "net": "Bersih"
+    },
+    "empty": "Belum ada booking atau pembayaran pada periode ini."
+  },
+  "credits": {
+    "eyebrow": "Konten",
+    "title": "Kredit foto",
+    "description": "Fotografer, lisensi, dan sumber setiap foto yang dikreditkan. Kredit tampil di samping foto dan di halaman kredit publik.",
+    "searchLabel": "Cari kredit",
+    "searchPlaceholder": "Judul, pembuat, lisensi, atau path",
+    "summary": "{total, plural, other {# kredit}}",
+    "uploaded": "Unggahan",
+    "opensNewTab": "(membuka tab baru)",
+    "edit": "Ubah",
+    "editFor": "Ubah kredit untuk {title}",
+    "empty": {
+      "title": "Belum ada kredit foto",
+      "description": "Kredit foto kurasi ditambahkan oleh impor konten; tambahkan kredit untuk unggahan Anda di atas."
+    },
+    "add": {
+      "title": "Kreditkan foto unggahan",
+      "description": "Semua foto unggahan yang dipakai di tur atau destinasi sudah memiliki kredit.",
+      "pending": "{count, plural, other {# foto unggahan yang dipakai belum memiliki kredit.}}",
+      "open": "Tambah kredit",
+      "close": "Tutup"
+    },
+    "form": {
+      "path": "Path gambar",
+      "pathHint": "Pilih gambar unggahan yang sedang dipakai, atau tempel path /media/-nya.",
+      "title": "Judul foto",
+      "author": "Pembuat",
+      "license": "Lisensi",
+      "licenseUrl": "Tautan lisensi",
+      "source": "Nama sumber",
+      "sourceUrl": "Tautan sumber",
+      "optional": "{label} (opsional)",
+      "save": "Simpan kredit",
+      "create": "Tambah kredit",
+      "cancel": "Batal",
+      "created": "Kredit ditambahkan."
+    }
+  }
+}

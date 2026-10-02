@@ -63,12 +63,15 @@
     "legendAvailable": "Tersedia",
     "legendLimited": "Hampir penuh",
     "legendFull": "Penuh",
+    "legendClosed": "Tutup",
+    "closedShort": "Tutup",
     "selected": "Dipilih: {date}",
     "noneSelected": "Belum ada tanggal dipilih.",
     "day": {
       "available": "{date}, tersedia, sisa {count} kursi",
       "limited": "{date}, sisa {count} kursi",
       "full": "{date}, penuh",
+      "closed": "{date}, ditutup untuk pemesanan",
       "past": "{date}, sudah lewat",
       "tooSoon": "{date}, belum bisa dipesan"
     }

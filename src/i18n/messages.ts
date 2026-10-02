@@ -19,6 +19,12 @@ export const namespaces = [
   "media",
   "emails",
   "pages",
+  // Back-office feature areas (one file each so features don't collide).
+  "adminBooking",
+  "adminPayments",
+  "adminAvailability",
+  "adminUsers",
+  "adminInsights",
 ] as const;
 
 export async function loadMessages(locale: Locale) {

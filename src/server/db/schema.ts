@@ -30,7 +30,11 @@ const timestamps = {
 /* Auth (Better Auth)                                                */
 /* ---------------------------------------------------------------- */
 
-export const userRole = pgEnum("user_role", ["user", "admin"]);
+/**
+ * `admin` is the owner (everything, incl. users, refunds, reports, activity
+ * log); `staff` runs day-to-day operations. See src/server/auth/permissions.ts.
+ */
+export const userRole = pgEnum("user_role", ["user", "staff", "admin"]);
 
 export const user = pgTable(
   "user",
@@ -43,6 +47,8 @@ export const user = pgTable(
     role: userRole("role").notNull().default("user"),
     /** Preferred language for transactional emails. */
     locale: text("locale").notNull().default("id"),
+    /** Set by an admin to block sign-in and end all sessions. */
+    disabledAt: timestamp("disabled_at", { withTimezone: true }),
     ...timestamps,
   },
   (t) => [
@@ -208,10 +214,15 @@ export const reviews = pgTable(
     /** Locale the review was originally written in. */
     language: text("language").notNull().default("id"),
     isPublished: boolean("is_published").notNull().default(true),
+    /** Public reply from the team, shown under the review. */
+    reply: text("reply"),
+    repliedAt: timestamp("replied_at", { withTimezone: true }),
+    repliedBy: text("replied_by").references(() => user.id, { onDelete: "set null" }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
     index("reviews_tour_idx").on(t.tourId),
+    check("reviews_reply_length", sql`${t.reply} is null or char_length(${t.reply}) <= 2000`),
     index("reviews_user_idx").on(t.userId),
     check("reviews_rating_range", sql`${t.rating} between 1 and 5`),
   ],
@@ -259,7 +270,13 @@ export const bookings = pgTable(
   ],
 );
 
-export const paymentStatus = pgEnum("payment_status", ["pending", "paid", "failed", "expired"]);
+export const paymentStatus = pgEnum("payment_status", [
+  "pending",
+  "paid",
+  "failed",
+  "expired",
+  "refunded",
+]);
 
 export const payments = pgTable(
   "payments",
@@ -280,11 +297,87 @@ export const payments = pgTable(
     /** Last raw notification payload, kept for audit. */
     rawNotification: jsonb("raw_notification").$type<Record<string, unknown>>(),
     paidAt: timestamp("paid_at", { withTimezone: true }),
+    /**
+     * Money was taken but must go back (booking cancelled after payment, or a
+     * duplicate charge). Cleared when an admin records the refund.
+     */
+    refundRequired: boolean("refund_required").notNull().default(false),
+    refundedAt: timestamp("refunded_at", { withTimezone: true }),
+    refundedBy: text("refunded_by").references(() => user.id, { onDelete: "set null" }),
+    /** Bank reference or reason recorded with the refund. */
+    refundNote: text("refund_note"),
     ...timestamps,
   },
   (t) => [
     index("payments_booking_idx").on(t.bookingId),
+    index("payments_refund_required_idx").on(t.refundRequired).where(sql`${t.refundRequired}`),
     check("payments_amount_positive", sql`${t.amount} > 0`),
+  ],
+);
+
+/* ---------------------------------------------------------------- */
+/* Operations                                                        */
+/* ---------------------------------------------------------------- */
+
+/** Internal notes on a booking, visible to staff only. */
+export const bookingNotes = pgTable(
+  "booking_notes",
+  {
+    id: serial("id").primaryKey(),
+    bookingId: integer("booking_id")
+      .notNull()
+      .references(() => bookings.id, { onDelete: "cascade" }),
+    authorId: text("author_id").references(() => user.id, { onDelete: "set null" }),
+    body: text("body").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("booking_notes_booking_idx").on(t.bookingId, t.createdAt),
+    check("booking_notes_body_length", sql`char_length(${t.body}) between 1 and 2000`),
+  ],
+);
+
+/**
+ * Dates on which a tour (or, with a null tour, every tour) takes no bookings:
+ * ceremonies, weather, guide leave. Respected by the availability rules.
+ */
+export const tourClosures = pgTable(
+  "tour_closures",
+  {
+    id: serial("id").primaryKey(),
+    tourId: integer("tour_id").references(() => tours.id, { onDelete: "cascade" }),
+    date: date("date", { mode: "string" }).notNull(),
+    reason: text("reason"),
+    createdBy: text("created_by").references(() => user.id, { onDelete: "set null" }),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("tour_closures_tour_date_uq").on(t.tourId, t.date).where(sql`${t.tourId} is not null`),
+    uniqueIndex("tour_closures_all_date_uq").on(t.date).where(sql`${t.tourId} is null`),
+    index("tour_closures_date_idx").on(t.date),
+    check("tour_closures_reason_length", sql`${t.reason} is null or char_length(${t.reason}) <= 200`),
+  ],
+);
+
+/** Who changed what in the back office, and when. Append-only. */
+export const auditLogs = pgTable(
+  "audit_logs",
+  {
+    id: serial("id").primaryKey(),
+    /** Null for system actions (payment webhooks). */
+    actorId: text("actor_id").references(() => user.id, { onDelete: "set null" }),
+    /** Dotted verb, e.g. `booking.status_changed`; see AuditAction. */
+    action: text("action").notNull(),
+    entityType: text("entity_type").notNull(),
+    entityId: text("entity_id").notNull(),
+    /** Small structured details (old/new values), never secrets. */
+    details: jsonb("details").$type<Record<string, unknown>>(),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("audit_logs_created_idx").on(t.createdAt.desc(), t.id.desc()),
+    index("audit_logs_entity_idx").on(t.entityType, t.entityId, t.createdAt),
+    index("audit_logs_actor_idx").on(t.actorId, t.createdAt),
   ],
 );
 
@@ -378,3 +471,7 @@ export type BookingStatus = (typeof bookingStatus.enumValues)[number];
 export type TourCategory = (typeof tourCategory.enumValues)[number];
 export type TourDifficulty = (typeof tourDifficulty.enumValues)[number];
 export type UserRole = (typeof userRole.enumValues)[number];
+export type BookingNote = typeof bookingNotes.$inferSelect;
+export type TourClosure = typeof tourClosures.$inferSelect;
+export type AuditLog = typeof auditLogs.$inferSelect;
+export type User = typeof user.$inferSelect;

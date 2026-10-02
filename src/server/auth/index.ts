@@ -1,4 +1,5 @@
 import { betterAuth } from "better-auth";
+import { APIError } from "better-auth/api";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { db, schema } from "@/server/db";
@@ -25,6 +26,9 @@ function localeFromHeaders(headers: Headers | undefined): Locale {
   return routing.locales.find((l) => l === value) ?? routing.defaultLocale;
 }
 
+/** Error code raised when a disabled account tries to start a session. */
+export const ACCOUNT_DISABLED = "ACCOUNT_DISABLED";
+
 export const auth = betterAuth({
   appName: "EtnoJourney",
   database: drizzleAdapter(db, {
@@ -43,6 +47,9 @@ export const auth = betterAuth({
     resetPasswordTokenExpiresIn: 60 * 60,
     revokeSessionsOnPasswordReset: true,
     sendResetPassword: async ({ user, url }) => {
+      // Disabled accounts get no reset email (completion is blocked as well, in
+      // resetPasswordAction). The response stays identical either way.
+      if ((user as { disabledAt?: Date | null }).disabledAt) return;
       // Imported lazily: this config is also loaded by the seed script, outside Next.js,
       // where `server-only` modules cannot be imported.
       const { notificationService } = await import("@/server/services/notification.service");
@@ -61,6 +68,8 @@ export const auth = betterAuth({
       role: { type: "string", required: false, defaultValue: "user", input: false },
       // Set from the request locale at sign-up and from account settings, never from client input.
       locale: { type: "string", required: false, defaultValue: "id", input: false },
+      // Set by an admin (users.manage); blocks sign-in. Never client input.
+      disabledAt: { type: "date", required: false, input: false },
     },
   },
   databaseHooks: {
@@ -71,10 +80,31 @@ export const auth = betterAuth({
         }),
       },
     },
+    session: {
+      create: {
+        /**
+         * Every sign-in path ends here, after the password was verified, so a
+         * disabled account is refused without revealing anything to someone
+         * who doesn't know its password. Fails closed without an auth context.
+         */
+        before: async (session, context) => {
+          const owner = await context?.context.internalAdapter.findUserById(session.userId);
+          if (!owner || (owner as { disabledAt?: Date | null }).disabledAt) {
+            throw new APIError("FORBIDDEN", {
+              code: ACCOUNT_DISABLED,
+              message: "This account has been disabled",
+            });
+          }
+        },
+      },
+    },
   },
   session: {
     expiresIn: 60 * 60 * 24 * 7,
     updateAge: 60 * 60 * 24,
+    // Keep the cookie cache OFF: every getSession reads the user row, so role
+    // changes and disabling (which deletes sessions) apply on the next request.
+    cookieCache: { enabled: false },
   },
   // The UI only uses these through server actions (`auth.api.*`), which apply our
   // own per-account/per-IP limits. Better Auth's HTTP limiter is skipped when no

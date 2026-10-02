@@ -1,0 +1,88 @@
+{
+  "eyebrow": "Operasional",
+  "title": "Ketersediaan",
+  "description": "Tutup tanggal untuk satu tur atau semua tur, dan lihat seberapa penuh setiap tanggal.",
+  "rangeLabel": "{from} sampai {to}",
+  "scope": {
+    "label": "Tur",
+    "all": "Semua tur",
+    "unpublished": "{title} (belum terbit)"
+  },
+  "month": {
+    "nav": "Ganti bulan",
+    "prev": "Bulan sebelumnya",
+    "next": "Bulan berikutnya"
+  },
+  "calendar": {
+    "hint": "Klik tanggal untuk memilihnya, lalu klik tanggal setelahnya untuk memilih rentang. Tanggal yang sudah lewat tidak bisa ditutup.",
+    "closed": "Tutup",
+    "closedAll": "Semua tutup",
+    "toursClosed": "{count} tur tutup",
+    "seats": "{seats}/{capacity}",
+    "travellers": "{count} peserta"
+  },
+  "day": {
+    "seatsOf": "{seats} dari {capacity} kursi terisi",
+    "bookings": "{count, plural, =0 {belum ada booking} other {# booking}}",
+    "closed": "ditutup untuk tur ini",
+    "closedAll": "ditutup untuk semua tur",
+    "toursClosed": "{count} tur ditutup",
+    "past": "sudah lewat"
+  },
+  "legend": {
+    "open": "Buka",
+    "closed": "Tutup",
+    "closedAll": "Tutup untuk semua tur",
+    "selected": "Dipilih",
+    "full": "Penuh",
+    "fullSample": "8/8"
+  },
+  "panel": {
+    "title": "Tutup tanggal",
+    "scopeTour": "Berlaku untuk {tour}.",
+    "scopeAll": "Berlaku untuk semua tur.",
+    "from": "Dari",
+    "to": "Sampai",
+    "empty": "Pilih tanggal di kalender, atau isi rentang hingga 92 hari.",
+    "checking": "Memeriksa tanggal yang dipilih...",
+    "loadError": "Tanggal ini gagal diperiksa. Silakan coba lagi.",
+    "summary": "{count} tanggal dipilih: {range}.",
+    "alreadyClosed": "{count} di antaranya sudah ditutup.",
+    "affected": "Ada {bookings} booking menunggu atau terkonfirmasi ({seats} peserta) pada tanggal ini. Menutup tanggal tidak membatalkannya, jadi hubungi peserta tersebut bila perlu.",
+    "closedNotice": "{date} sedang ditutup.",
+    "closedReason": "Alasan: {reason}",
+    "reopen": "Buka kembali {date}",
+    "closedAllNotice": "Tanggal ini ditutup untuk semua tur. Pilih Semua tur untuk membukanya kembali.",
+    "reason": "Alasan (opsional)",
+    "reasonHint": "Hanya untuk tim. {count}/200",
+    "reasonPlaceholder": "Misalnya: Nyepi, jalan ditutup, pemandu cuti",
+    "submit": "Tutup {count} tanggal",
+    "allClosed": "Semua tanggal yang dipilih sudah ditutup.",
+    "clear": "Hapus pilihan",
+    "success": "{count, plural, =0 {Tidak ada tanggal baru yang ditutup.} other {# tanggal ditutup.}}",
+    "successAffected": "{count} booking pada tanggal tersebut tetap aktif.",
+    "reopened": "{count, plural, =0 {Tidak ada yang dibuka kembali.} other {# tanggal dibuka kembali.}}"
+  },
+  "list": {
+    "title": "Penutupan mendatang",
+    "description": "Tanggal berurutan yang ditutup bersamaan ditampilkan dalam satu baris.",
+    "columns": {
+      "dates": "Tanggal",
+      "tour": "Tur",
+      "reason": "Alasan",
+      "createdBy": "Ditutup oleh",
+      "actions": "Aksi"
+    },
+    "allTours": "Semua tur",
+    "noReason": "Tanpa alasan",
+    "unknownUser": "Tidak diketahui",
+    "days": "{count} hari",
+    "delete": "Buka kembali",
+    "deleteLabel": "Buka kembali {dates} untuk {tour}",
+    "confirm": "Buka kembali {dates} untuk {tour}? Peserta bisa memesan tanggal ini lagi.",
+    "empty": {
+      "title": "Belum ada penutupan",
+      "description": "Semua tanggal mendatang terbuka untuk pemesanan."
+    }
+  }
+}

@@ -79,6 +79,23 @@ export const reviewService = {
     });
   },
 
+  /**
+   * Saves the team's public reply (or removes it with `reply: null`). Editing
+   * keeps the reply author and date current.
+   */
+  async setReply(reviewId: number, actorId: string, reply: string | null) {
+    const before = await reviewRepository.findById(db, reviewId);
+    if (!before) throw new DomainError("notFound");
+    const review = await reviewRepository.setReply(
+      reviewId,
+      reply === null
+        ? { reply: null, repliedAt: null, repliedBy: null }
+        : { reply, repliedAt: new Date(), repliedBy: actorId },
+    );
+    if (!review) throw new DomainError("notFound");
+    return { review, hadReply: before.reply !== null };
+  },
+
   /** Hides or restores a review and adjusts the tour aggregate accordingly. */
   async setPublished(reviewId: number, isPublished: boolean) {
     return db.transaction(async (tx) => {

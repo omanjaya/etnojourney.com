@@ -1,0 +1,185 @@
+{
+  "roles": {
+    "user": "Wisatawan",
+    "staff": "Staf",
+    "admin": "Admin"
+  },
+  "status": {
+    "active": "Aktif",
+    "disabled": "Nonaktif"
+  },
+  "list": {
+    "eyebrow": "Tim & akun",
+    "title": "Pengguna",
+    "description": "Cari wisatawan dan staf, atur peran, dan nonaktifkan akun yang tidak boleh masuk.",
+    "searchLabel": "Cari pengguna",
+    "searchPlaceholder": "Nama atau email",
+    "clear": "Hapus pencarian",
+    "roleFilterLabel": "Saring pengguna menurut peran",
+    "allRoles": "Semua",
+    "summary": "{total, plural, =0 {Tidak ada pengguna} other {# pengguna}}",
+    "columns": {
+      "name": "Nama",
+      "email": "Email",
+      "role": "Peran",
+      "bookings": "Pemesanan",
+      "joined": "Bergabung",
+      "status": "Status"
+    },
+    "empty": {
+      "title": "Belum ada pengguna",
+      "description": "Akun akan muncul di sini begitu ada yang mendaftar."
+    },
+    "noMatch": {
+      "title": "Tidak ada pengguna yang cocok",
+      "description": "Coba nama, email, atau peran lain."
+    },
+    "pagination": {
+      "label": "Halaman pengguna",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "page": "Halaman {page}"
+    }
+  },
+  "detail": {
+    "eyebrow": "Akun pengguna",
+    "back": "Semua pengguna",
+    "profileTitle": "Profil",
+    "email": "Email",
+    "joined": "Bergabung",
+    "language": "Bahasa email",
+    "languages": {
+      "id": "Bahasa Indonesia",
+      "en": "Bahasa Inggris"
+    },
+    "emailVerified": "Email terverifikasi",
+    "yes": "Ya",
+    "no": "Tidak",
+    "disabledSince": "Nonaktif sejak",
+    "stats": {
+      "bookings": "Pemesanan",
+      "wishlist": "Wishlist"
+    },
+    "roleTitle": "Peran",
+    "roleDescription": "Staf menjalankan operasional harian. Admin juga mengelola pengguna, refund, laporan, dan log aktivitas.",
+    "roleLabel": "Peran",
+    "saveRole": "Simpan peran",
+    "roleSaved": "Peran diperbarui.",
+    "accessTitle": "Akses",
+    "accessActive": "Akun ini dapat masuk.",
+    "accessDisabled": "Akun ini nonaktif dan tidak dapat masuk.",
+    "disable": "Nonaktifkan akun",
+    "enable": "Aktifkan akun",
+    "confirmDisable": "Nonaktifkan {name}? Ia akan dikeluarkan dari semua perangkat dan tidak bisa masuk sampai diaktifkan kembali.",
+    "confirmEnable": "Aktifkan kembali {name}? Ia akan bisa masuk lagi.",
+    "statusSaved": "Akses diperbarui.",
+    "selfNote": "Ini akun Anda sendiri. Peran dan aksesnya harus diubah oleh admin lain.",
+    "bookingsTitle": "Pemesanan",
+    "bookingsEmpty": "Belum ada pemesanan.",
+    "columns": {
+      "code": "Kode",
+      "tour": "Tur",
+      "travelDate": "Tanggal",
+      "status": "Status",
+      "total": "Total"
+    },
+    "activityTitle": "Aktivitas",
+    "activityDescription": "Perubahan yang dilakukan orang ini, dan perubahan pada akunnya.",
+    "activityEmpty": "Belum ada aktivitas yang tercatat.",
+    "viewAllActivity": "Buka di log aktivitas"
+  },
+  "activity": {
+    "eyebrow": "Akuntabilitas",
+    "title": "Log aktivitas",
+    "description": "Setiap perubahan di back office: siapa melakukan apa, dan kapan.",
+    "groupFilterLabel": "Saring menurut area",
+    "allGroups": "Semua",
+    "groups": {
+      "bookings": "Pemesanan",
+      "payments": "Pembayaran",
+      "catalogue": "Katalog",
+      "reviews": "Ulasan",
+      "availability": "Ketersediaan",
+      "users": "Pengguna",
+      "credits": "Kredit foto"
+    },
+    "actorLabel": "Dilakukan oleh",
+    "allActors": "Semua orang",
+    "system": "Sistem",
+    "deletedUser": "Pengguna terhapus",
+    "reset": "Atur ulang filter",
+    "summary": "{total, plural, =0 {Tidak ada entri} other {# entri}}",
+    "columns": {
+      "time": "Waktu",
+      "actor": "Pelaku",
+      "action": "Tindakan",
+      "entity": "Item",
+      "details": "Detail"
+    },
+    "entities": {
+      "booking": "Pemesanan",
+      "payment": "Pembayaran",
+      "tour": "Tur",
+      "destination": "Destinasi",
+      "review": "Ulasan",
+      "closure": "Penutupan",
+      "user": "Pengguna",
+      "credit": "Kredit foto"
+    },
+    "empty": {
+      "title": "Belum ada yang tercatat",
+      "description": "Perubahan di back office akan tercantum di sini saat terjadi."
+    },
+    "noMatch": {
+      "title": "Tidak ada aktivitas yang cocok",
+      "description": "Coba area atau orang lain."
+    },
+    "pagination": {
+      "label": "Halaman aktivitas",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "page": "Halaman {page}"
+    },
+    "actions": {
+      "booking": {
+        "status_changed": "Mengubah status pemesanan",
+        "note_added": "Menambahkan catatan pemesanan"
+      },
+      "payment": {
+        "refund_required": "Menandai perlu refund",
+        "refunded": "Menandai pembayaran sudah direfund"
+      },
+      "tour": {
+        "created": "Membuat tur",
+        "updated": "Memperbarui tur",
+        "published": "Menerbitkan tur",
+        "unpublished": "Membatalkan penerbitan tur",
+        "featured": "Menampilkan tur sebagai unggulan",
+        "unfeatured": "Menghapus tur dari unggulan"
+      },
+      "destination": {
+        "created": "Membuat destinasi",
+        "updated": "Memperbarui destinasi",
+        "deleted": "Menghapus destinasi"
+      },
+      "review": {
+        "published": "Menerbitkan ulasan",
+        "hidden": "Menyembunyikan ulasan",
+        "replied": "Membalas ulasan"
+      },
+      "closure": {
+        "created": "Menutup tanggal",
+        "deleted": "Membuka kembali tanggal"
+      },
+      "user": {
+        "role_changed": "Mengubah peran pengguna",
+        "disabled": "Menonaktifkan akun",
+        "enabled": "Mengaktifkan akun"
+      },
+      "credit": {
+        "updated": "Memperbarui kredit foto"
+      },
+      "unknown": "Perubahan lain"
+    }
+  }
+}

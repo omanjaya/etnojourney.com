@@ -101,6 +101,19 @@ export const reviewRepository = {
       .then((rows) => rows[0]);
   },
 
+  /** Sets (or clears, with `reply: null`) the team's public reply. */
+  setReply(
+    id: number,
+    values: { reply: string | null; repliedAt: Date | null; repliedBy: string | null },
+  ) {
+    return db
+      .update(reviews)
+      .set(values)
+      .where(eq(reviews.id, id))
+      .returning()
+      .then((rows) => rows[0]);
+  },
+
   /** Reads a tour's aggregate and locks the row for the rest of the transaction. */
   lockTourAggregate(tx: DbExecutor, tourId: number) {
     return tx

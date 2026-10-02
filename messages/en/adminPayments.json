@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "title": "Payments"
+  },
+  "eyebrow": "Finance",
+  "title": "Payments & refunds",
+  "description": "Every payment attempt, and the refunds still owed to travellers.",
+  "status": {
+    "pending": "Pending",
+    "paid": "Paid",
+    "failed": "Failed",
+    "expired": "Expired",
+    "refunded": "Refunded"
+  },
+  "reasons": {
+    "duplicate": "Duplicate charge",
+    "cancelledBooking": "Paid after the booking was cancelled",
+    "cancelledAfterPayment": "Booking cancelled after payment",
+    "unknown": "Reason not recorded"
+  },
+  "queue": {
+    "title": "Needs refund",
+    "description": "Money was taken but must go back. Return it through the bank or the Midtrans dashboard, then record the refund here.",
+    "count": "{count, plural, one {# refund waiting} other {# refunds waiting}}",
+    "empty": "No refunds waiting. Payments that need a refund appear here automatically.",
+    "flaggedAge": "{days, plural, =0 {Flagged today} one {Flagged # day ago} other {Flagged # days ago}}",
+    "booking": "Booking",
+    "traveller": "Traveller",
+    "tour": "Tour",
+    "amount": "Amount",
+    "reason": "Reason",
+    "age": "Waiting",
+    "orderId": "Order ID"
+  },
+  "refund": {
+    "trigger": "Record refund",
+    "triggerFor": "Record refund for {code}",
+    "title": "Record refund",
+    "body": "Refunds are not sent from EtnoJourney. First return {amount} to the traveller through the bank or the Midtrans dashboard, then record it here. The payment will be marked as refunded.",
+    "noteLabel": "Refund reference",
+    "noteHint": "For example the bank transfer reference or the Midtrans refund ID (3 to 500 characters).",
+    "notePlaceholder": "e.g. BCA transfer ref 2610021234",
+    "cancel": "Cancel",
+    "submit": "Mark as refunded",
+    "success": "Refund for {code} recorded."
+  },
+  "list": {
+    "title": "All payments",
+    "filterLabel": "Filter by payment status",
+    "all": "All",
+    "searchLabel": "Search payments",
+    "searchPlaceholder": "Booking code or order ID",
+    "clear": "Clear search",
+    "summary": "{total, plural, =0 {No payments} one {# payment} other {# payments}}",
+    "refundRequired": "Refund needed",
+    "refundedOn": "Refunded {date}",
+    "noMatch": {
+      "title": "No payments match",
+      "description": "Try another booking code or order ID, or clear the status filter."
+    },
+    "empty": {
+      "title": "No payments yet",
+      "description": "Payments appear here as soon as a traveller starts checkout."
+    },
+    "columns": {
+      "orderId": "Order ID",
+      "booking": "Booking",
+      "traveller": "Traveller",
+      "amount": "Amount",
+      "method": "Method",
+      "status": "Status",
+      "created": "Created",
+      "paidAt": "Paid"
+    },
+    "pagination": {
+      "label": "Payment pages",
+      "previous": "Previous page",
+      "next": "Next page",
+      "page": "Page {page}"
+    }
+  }
+}

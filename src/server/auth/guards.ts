@@ -3,13 +3,23 @@ import { cache } from "react";
 import { headers } from "next/headers";
 import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
+import { DomainError } from "@/server/services/errors";
 import { auth, type AuthSession } from "./index";
+import { can, type Permission } from "./permissions";
 
 export type SessionUser = AuthSession["user"];
 
+/**
+ * A disabled account counts as signed out. Disabling also deletes its sessions,
+ * so this only matters for a session created in the instant before that.
+ */
+export function activeSession(session: AuthSession | null): AuthSession | null {
+  return session && !session.user.disabledAt ? session : null;
+}
+
 /** Reads the current session once per request. */
 export const getSession = cache(async (): Promise<AuthSession | null> => {
-  return auth.api.getSession({ headers: await headers() });
+  return activeSession(await auth.api.getSession({ headers: await headers() }));
 });
 
 export async function getCurrentUser(): Promise<SessionUser | null> {
@@ -26,12 +36,24 @@ export async function requireUser(): Promise<SessionUser> {
   return user;
 }
 
-/** For pages and layouts: redirects non-admins to the home page. */
-export async function requireAdmin(): Promise<SessionUser> {
+/**
+ * For pages and layouts: redirects anyone without `permission` (default:
+ * back-office access, i.e. staff or admin) to the home page.
+ */
+export async function requireAdmin(
+  permission: Permission = "backoffice.access",
+): Promise<SessionUser> {
   const user = await requireUser();
-  if (user.role !== "admin") {
+  if (!can(user.role, permission)) {
     const locale = await getLocale();
     return redirect({ href: "/", locale });
   }
+  return user;
+}
+
+/** For server actions and route handlers: throws `forbidden` without `permission`. */
+export async function assertPermission(permission: Permission): Promise<SessionUser> {
+  const user = await getCurrentUser();
+  if (!user || !can(user.role, permission)) throw new DomainError("forbidden");
   return user;
 }

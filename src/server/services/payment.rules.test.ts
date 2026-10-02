@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { DomainError } from "./errors";
 import {
   amountMatches,
+  assertRefundable,
+  canRecordRefund,
+  isRefundReason,
+  refundAgeDays,
+  refundReasonForPaidNotification,
   buildOrderId,
   computeSignature,
   isReusable,
@@ -103,5 +109,76 @@ describe("resolvePaymentStatus", () => {
     expect(resolvePaymentStatus({ transaction_status: "pending", status_code: "201" })).toBe(
       "pending",
     );
+  });
+});
+
+describe("refundReasonForPaidNotification", () => {
+  it("flags a second successful charge as a duplicate", () => {
+    expect(refundReasonForPaidNotification({ alreadyPaid: true, bookingStatus: "confirmed" })).toBe(
+      "duplicate",
+    );
+    // Duplicate wins even when the booking was later cancelled.
+    expect(refundReasonForPaidNotification({ alreadyPaid: true, bookingStatus: "cancelled" })).toBe(
+      "duplicate",
+    );
+  });
+
+  it("flags money that arrived for a cancelled booking", () => {
+    expect(
+      refundReasonForPaidNotification({ alreadyPaid: false, bookingStatus: "cancelled" }),
+    ).toBe("cancelledBooking");
+  });
+
+  it("does not flag a normal first payment", () => {
+    for (const status of ["pending", "confirmed", "completed"] as const) {
+      expect(refundReasonForPaidNotification({ alreadyPaid: false, bookingStatus: status })).toBe(
+        null,
+      );
+    }
+    expect(
+      refundReasonForPaidNotification({ alreadyPaid: false, bookingStatus: undefined }),
+    ).toBeNull();
+  });
+});
+
+describe("canRecordRefund / assertRefundable", () => {
+  it("only allows refunding a paid payment", () => {
+    expect(canRecordRefund({ status: "paid" })).toBe(true);
+    for (const status of ["pending", "failed", "expired", "refunded"] as const) {
+      expect(canRecordRefund({ status })).toBe(false);
+      expect(() => assertRefundable({ status })).toThrow(DomainError);
+    }
+    expect(() => assertRefundable({ status: "paid" })).not.toThrow();
+  });
+
+  it("raises the notRefundable code", () => {
+    try {
+      assertRefundable({ status: "refunded" });
+      expect.unreachable();
+    } catch (error) {
+      expect((error as DomainError).code).toBe("notRefundable");
+    }
+  });
+});
+
+describe("isRefundReason", () => {
+  it("accepts known reasons only", () => {
+    expect(isRefundReason("duplicate")).toBe(true);
+    expect(isRefundReason("cancelledBooking")).toBe(true);
+    expect(isRefundReason("cancelledAfterPayment")).toBe(true);
+    expect(isRefundReason("other")).toBe(false);
+    expect(isRefundReason(undefined)).toBe(false);
+  });
+});
+
+describe("refundAgeDays", () => {
+  const since = new Date("2026-10-01T10:00:00Z");
+  it("counts whole days waited", () => {
+    expect(refundAgeDays(since, new Date("2026-10-01T23:00:00Z"))).toBe(0);
+    expect(refundAgeDays(since, new Date("2026-10-02T10:00:00Z"))).toBe(1);
+    expect(refundAgeDays(since, new Date("2026-10-08T09:59:59Z"))).toBe(6);
+  });
+  it("never goes negative on clock skew", () => {
+    expect(refundAgeDays(since, new Date("2026-09-30T00:00:00Z"))).toBe(0);
   });
 });

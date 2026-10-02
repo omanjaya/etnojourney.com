@@ -68,5 +68,8 @@
       "title": "No reviews yet",
       "description": "Guest reviews will appear here once their trips are completed."
     }
+  },
+  "reply": {
+    "label": "Reply from the EtnoJourney team"
   }
 }

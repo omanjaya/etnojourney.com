@@ -63,12 +63,15 @@
     "legendAvailable": "Available",
     "legendLimited": "Almost full",
     "legendFull": "Full",
+    "legendClosed": "Closed",
+    "closedShort": "Closed",
     "selected": "Selected: {date}",
     "noneSelected": "No date selected yet.",
     "day": {
       "available": "{date}, available, {count, plural, one {# seat} other {# seats}} left",
       "limited": "{date}, {count, plural, one {# seat} other {# seats}} left",
       "full": "{date}, full",
+      "closed": "{date}, closed for bookings",
       "past": "{date}, in the past",
       "tooSoon": "{date}, not bookable yet"
     }

@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, formatDate } from "@/lib/format";
@@ -21,6 +22,7 @@ export function BookingsTable({
   withActions?: boolean;
 }) {
   const t = useTranslations("admin.bookings.columns");
+  const tb = useTranslations("adminBooking");
   const locale = useLocale();
   const short: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" };
 
@@ -31,7 +33,14 @@ export function BookingsTable({
         {rows.map(({ booking, tour, customer }) => (
           <li key={booking.id} className="border-line rounded-(--radius-card) border bg-white p-4">
             <div className="flex items-start justify-between gap-3">
-              <p className="font-mono text-xs font-semibold tracking-wide">{booking.code}</p>
+              <Link
+                href={`/admin/bookings/${booking.code}`}
+                aria-label={tb("openDetail", { code: booking.code })}
+                className="hover:text-terracotta inline-flex min-h-6 items-center gap-1 font-mono text-xs font-semibold tracking-wide underline-offset-4 hover:underline"
+              >
+                {booking.code}
+                <ChevronRight className="size-3.5" aria-hidden />
+              </Link>
               <BookingStatusBadge status={booking.status} />
             </div>
             <Link
@@ -115,7 +124,14 @@ export function BookingsTable({
             {rows.map(({ booking, tour, customer }) => (
               <tr key={booking.id} className="hover:bg-sand-50/60 align-top transition-colors">
                 <td className="px-5 py-4 font-mono text-xs font-semibold tracking-wide whitespace-nowrap">
-                  {booking.code}
+                  <Link
+                    href={`/admin/bookings/${booking.code}`}
+                    aria-label={tb("openDetail", { code: booking.code })}
+                    className="hover:text-terracotta inline-flex items-center gap-1 underline-offset-4 hover:underline"
+                  >
+                    {booking.code}
+                    <ChevronRight className="size-3.5" aria-hidden />
+                  </Link>
                 </td>
                 <td className="px-5 py-4">
                   <p className="font-medium">{customer.name}</p>

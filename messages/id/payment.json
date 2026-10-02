@@ -5,7 +5,8 @@
     "pending": "Menunggu pembayaran",
     "paid": "Lunas",
     "failed": "Pembayaran gagal",
-    "expired": "Kedaluwarsa"
+    "expired": "Kedaluwarsa",
+    "refunded": "Dikembalikan"
   },
   "finish": {
     "metaTitle": "Status pembayaran",

@@ -64,6 +64,13 @@
       "when": 1790915445448,
       "tag": "0008_practical_info",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1790939207026,
+      "tag": "0009_admin_operations",
+      "breakpoints": true
     }
   ]
 }

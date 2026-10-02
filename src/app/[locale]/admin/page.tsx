@@ -3,6 +3,7 @@ import {
   CalendarCheck,
   CircleCheck,
   CircleX,
+  HandCoins,
   Hourglass,
   MapIcon,
   Wallet,
@@ -10,6 +11,7 @@ import {
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin } from "@/server/auth/guards";
+import { can } from "@/server/auth/permissions";
 import { dashboardService } from "@/server/services/dashboard.service";
 import { CountUp } from "@/components/motion";
 import { Button } from "@/components/ui/button";
@@ -17,16 +19,22 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { BookingsTable } from "@/features/admin/components/bookings-table";
 import { StatCard } from "@/features/admin/components/stat-card";
+import { WorkQueueCard } from "@/features/admin-insights/components/work-queue-card";
 
 export default async function AdminOverviewPage() {
-  const [user, overview, t, tb, locale] = await Promise.all([
-    requireAdmin(),
-    dashboardService.overview(),
+  // The guard runs first: what the dashboard loads depends on the role.
+  const user = await requireAdmin();
+  const canSeeRevenue = can(user.role, "reports.view");
+  const canRefund = can(user.role, "payments.refund");
+  const [overview, t, tb, tq, locale] = await Promise.all([
+    dashboardService.overview({ withRefunds: canRefund }),
     getTranslations("admin.overview"),
     getTranslations("admin.bookings"),
+    getTranslations("adminInsights.dashboard"),
     getLocale(),
   ]);
-  const { counts, revenue, publishedTours, recent } = overview;
+  const { counts, revenue, publishedTours, recent, refundsNeeded } = overview;
+  const pending = counts.pending ?? 0;
   const intlLocale = locale === "id" ? "id-ID" : "en-US";
   const n = (value?: number) => <CountUp value={value ?? 0} locale={intlLocale} duration={900} />;
   // Currency symbol (e.g. "Rp" / "IDR") kept static while the amount counts up.
@@ -48,19 +56,44 @@ export default async function AdminOverviewPage() {
         description={t("description")}
       />
 
-      <div className="admin-stagger grid grid-cols-2 gap-3 xl:grid-cols-3">
-        <StatCard
-          icon={Wallet}
-          accent="indigo"
-          label={t("stats.revenue")}
-          value={
-            <>
-              {currencyPrefix}
-              <CountUp value={revenue} locale={intlLocale} duration={1100} />
-            </>
-          }
-          hint={t("stats.revenueHint")}
+      <section aria-label={tq("queuesLabel")} className="short:mb-4 mb-6 grid gap-3 sm:grid-cols-2">
+        <WorkQueueCard
+          icon={Hourglass}
+          href="/admin/bookings?status=pending"
+          label={tq("pending.label")}
+          action={tq("pending.action")}
+          count={pending}
+          countLabel={tq("pending.count", { count: pending })}
+          urgent={pending > 0}
         />
+        {refundsNeeded !== null && (
+          <WorkQueueCard
+            icon={HandCoins}
+            href="/admin/payments"
+            label={tq("refunds.label")}
+            action={tq("refunds.action")}
+            count={refundsNeeded}
+            countLabel={tq("refunds.count", { count: refundsNeeded })}
+            urgent={refundsNeeded > 0}
+          />
+        )}
+      </section>
+
+      <div className="admin-stagger grid grid-cols-2 gap-3 xl:grid-cols-3">
+        {canSeeRevenue && (
+          <StatCard
+            icon={Wallet}
+            accent="indigo"
+            label={t("stats.revenue")}
+            value={
+              <>
+                {currencyPrefix}
+                <CountUp value={revenue} locale={intlLocale} duration={1100} />
+              </>
+            }
+            hint={t("stats.revenueHint")}
+          />
+        )}
         <StatCard
           icon={Hourglass}
           accent="gold"

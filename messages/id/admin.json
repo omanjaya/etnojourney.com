@@ -11,7 +11,13 @@
     "openMenu": "Buka menu admin",
     "closeMenu": "Tutup menu admin",
     "signedInAs": "Masuk sebagai",
-    "destinations": "Destinasi"
+    "destinations": "Destinasi",
+    "payments": "Pembayaran",
+    "availability": "Ketersediaan",
+    "credits": "Kredit foto",
+    "reports": "Laporan",
+    "users": "Pengguna",
+    "activity": "Log aktivitas"
   },
   "overview": {
     "eyebrow": "Panel Admin",

@@ -141,6 +141,16 @@ Jika port 5432 dipakai Postgres lokal, isi `DB_HOST_PORT=5544` di `.env`; compos
 | `UPLOAD_DIR` | Tidak | Default image: `/app/storage/uploads` (volume) |
 | `TRUST_PROXY`, `TRUSTED_PROXIES` | Lihat di bawah | Pembacaan IP klien untuk rate limit |
 
+### Akun owner (admin)
+
+Seed demo jangan dijalankan di production. Untuk membuat owner: daftar dulu lewat halaman `/register`, lalu jadikan akun itu admin dari checkout repo (dengan dependensi terpasang) yang bisa menjangkau database production:
+
+```bash
+DATABASE_URL=postgres://... npx tsx scripts/make-admin.ts owner@domain.com
+```
+
+Script ini juga mengaktifkan kembali akun yang dinonaktifkan dan mencatat perubahan di log aktivitas sebagai aksi sistem. Setelah itu, peran staf dan admin lain diatur dari `/admin/users`.
+
 ### Midtrans
 
 Di dashboard Midtrans (Settings > Payment):

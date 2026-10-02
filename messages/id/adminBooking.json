@@ -1,0 +1,63 @@
+{
+  "metaTitle": "Booking {code}",
+  "back": "Semua booking",
+  "eyebrow": "Booking",
+  "createdOn": "Dipesan pada {date}",
+  "openDetail": "Buka booking {code}",
+  "summary": {
+    "title": "Ringkasan",
+    "tour": "Paket tur",
+    "viewTour": "Lihat halaman tur",
+    "travelDate": "Tanggal perjalanan",
+    "participants": "Peserta",
+    "unitPrice": "Harga per orang",
+    "total": "Total",
+    "status": "Status booking",
+    "changeStatus": "Ubah status"
+  },
+  "traveller": {
+    "title": "Wisatawan",
+    "account": "Akun",
+    "contactName": "Nama kontak",
+    "contactPhone": "Telepon kontak",
+    "notes": "Catatan wisatawan",
+    "noNotes": "Wisatawan tidak meninggalkan catatan."
+  },
+  "payments": {
+    "title": "Pembayaran",
+    "empty": "Belum ada percobaan pembayaran.",
+    "amount": "Jumlah",
+    "method": "Metode",
+    "orderId": "ID pesanan",
+    "provider": "Penyedia",
+    "createdAt": "Dimulai",
+    "paidAt": "Dibayar",
+    "refundedAt": "Dikembalikan",
+    "refundNote": "Catatan refund",
+    "refundRequired": "Perlu refund"
+  },
+  "notes": {
+    "title": "Catatan internal",
+    "description": "Hanya terlihat oleh tim back-office.",
+    "empty": "Belum ada catatan internal.",
+    "label": "Tambah catatan",
+    "placeholder": "mis. Sudah menelepon tamu untuk memastikan jam penjemputan.",
+    "remaining": "{count, plural, other {Sisa # karakter}}",
+    "submit": "Simpan catatan",
+    "unknownAuthor": "Mantan anggota tim"
+  },
+  "timeline": {
+    "title": "Riwayat",
+    "system": "Sistem",
+    "by": "oleh {name}",
+    "created": "Booking dibuat",
+    "paid": "Pembayaran {orderId} diterima ({amount})",
+    "actions": {
+      "booking_status_changed": "Status diubah menjadi {status}",
+      "booking_note_added": "Catatan internal ditambahkan",
+      "payment_refund_required": "Pembayaran ditandai perlu refund",
+      "payment_refunded": "Refund dicatat"
+    },
+    "other": "Perubahan lain ({action})"
+  }
+}

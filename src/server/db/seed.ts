@@ -14,6 +14,7 @@ import {
   itineraryDays,
   payments,
   photoCredits,
+  auditLogs,
   reviews,
   tours,
   user,
@@ -36,7 +37,8 @@ async function main() {
 
   console.log("Resetting catalog tables...");
   await db.execute(
-    sql`TRUNCATE ${payments}, ${bookings}, ${wishlists}, ${reviews}, ${itineraryDays}, ${tours}, ${destinations}, ${photoCredits} RESTART IDENTITY CASCADE`,
+    // The audit log points at catalogue ids by value; they restart here, so it goes too.
+    sql`TRUNCATE ${payments}, ${bookings}, ${wishlists}, ${reviews}, ${itineraryDays}, ${tours}, ${destinations}, ${photoCredits}, ${auditLogs} RESTART IDENTITY CASCADE`,
   );
 
   await db.insert(photoCredits).values(

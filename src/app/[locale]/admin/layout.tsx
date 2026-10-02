@@ -15,7 +15,7 @@ export default async function AdminLayout({ children }: LayoutProps<"/[locale]/a
 
   return (
     <div className="bg-sand-50 min-h-dvh lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
-      <AdminNav user={{ name: user.name, email: user.email }} />
+      <AdminNav user={{ name: user.name, email: user.email, role: user.role ?? "user" }} />
       <main
         id="main"
         tabIndex={-1}

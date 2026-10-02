@@ -5,7 +5,8 @@ import { getLocale, getTranslations } from "next-intl/server";
 import { isAPIError } from "better-auth/api";
 import { getPathname, redirect } from "@/i18n/navigation";
 import { fail, ok, type ActionResult } from "@/lib/action-result";
-import { auth } from "@/server/auth";
+import { ACCOUNT_DISABLED, auth } from "@/server/auth";
+import { resetTokenOwnerIsDisabled } from "@/server/auth/reset-token";
 import { parseInput } from "@/features/shared/run-action";
 import { createHash } from "node:crypto";
 import { proxyConfigFromEnv, resolveClientIp } from "@/server/auth/client-ip";
@@ -14,7 +15,12 @@ import { safeRedirectPath } from "./safe-redirect";
 import { forgotPasswordSchema, resetPasswordSchema, signInSchema, signUpSchema } from "./schemas";
 
 type AuthErrorKey =
-  "invalidCredentials" | "emailTaken" | "tooManyRequests" | "invalidToken" | "generic";
+  | "invalidCredentials"
+  | "emailTaken"
+  | "tooManyRequests"
+  | "invalidToken"
+  | "accountDisabled"
+  | "generic";
 
 const proxyConfig = proxyConfigFromEnv();
 
@@ -50,6 +56,8 @@ async function authFailure(error: unknown): Promise<ActionResult<never>> {
     else if (code === "INVALID_EMAIL_OR_PASSWORD") key = "invalidCredentials";
     else if (code.startsWith("USER_ALREADY_EXISTS")) key = "emailTaken";
     else if (code === "INVALID_TOKEN") key = "invalidToken";
+    // Raised by the session hook only after the password was verified.
+    else if (code === ACCOUNT_DISABLED) key = "accountDisabled";
   } else {
     console.error("[auth]", error);
   }
@@ -134,6 +142,10 @@ export async function resetPasswordAction(
   if (limited) return limited;
 
   try {
+    if (await resetTokenOwnerIsDisabled(parsed.data.token)) {
+      const t = await getTranslations("auth.errors");
+      return fail(t("accountDisabled"));
+    }
     await auth.api.resetPassword({
       body: { newPassword: parsed.data.password, token: parsed.data.token },
       headers: await headers(),

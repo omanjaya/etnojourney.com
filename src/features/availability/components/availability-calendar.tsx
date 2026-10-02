@@ -308,6 +308,9 @@ export function AvailabilityCalendar({
                           day.state === "full" && "text-muted/70 cursor-not-allowed line-through",
                           (day.state === "past" || day.state === "tooSoon") &&
                             "text-muted/45 cursor-not-allowed",
+                          // Closed by the operator: hatched, so it reads apart from "full".
+                          day.state === "closed" &&
+                            "text-muted/70 cursor-not-allowed bg-[repeating-linear-gradient(135deg,var(--color-sand-100)_0_4px,transparent_4px_8px)]",
                           selected && "bg-terracotta text-sand-50 shadow-sm",
                         )}
                       >
@@ -315,6 +318,14 @@ export function AvailabilityCalendar({
                         <span aria-hidden className="leading-none font-medium tabular-nums">
                           {Number(day.date.slice(8))}
                         </span>
+                        {day.state === "closed" && (
+                          <span
+                            aria-hidden
+                            className="mt-1 text-[9px] leading-none font-semibold whitespace-nowrap uppercase"
+                          >
+                            {t("closedShort")}
+                          </span>
+                        )}
                         {day.state === "limited" && (
                           <span
                             aria-hidden
@@ -355,6 +366,10 @@ export function AvailabilityCalendar({
           {t("legendLimited")}
         </li>
         <li className="flex items-center gap-1.5 line-through">{t("legendFull")}</li>
+        <li className="flex items-center gap-1.5">
+          <span className="border-line size-2 rounded-full border bg-[repeating-linear-gradient(135deg,var(--color-muted)_0_1px,transparent_1px_3px)]" />
+          {t("legendClosed")}
+        </li>
       </ul>
     </div>
   );

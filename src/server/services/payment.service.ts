@@ -2,7 +2,7 @@ import "server-only";
 import { logValue } from "@/lib/log";
 import { siteUrl } from "@/lib/seo";
 import { getEnv } from "@/server/env";
-import { db } from "@/server/db";
+import { db, type DbExecutor } from "@/server/db";
 import type { Payment } from "@/server/db/schema";
 import {
   createSnapTransaction,
@@ -10,18 +10,30 @@ import {
   type MidtransConfig,
 } from "@/server/integrations/midtrans";
 import { bookingRepository } from "@/server/repositories/booking.repository";
-import { paymentRepository } from "@/server/repositories/payment.repository";
+import {
+  paymentRepository,
+  type AdminPaymentFilters,
+} from "@/server/repositories/payment.repository";
+import { paginate } from "@/lib/pagination";
 import { isoDateFromToday } from "@/lib/format";
 import { canTransition } from "./booking.rules";
+import { auditService } from "./audit.service";
 import { DomainError } from "./errors";
 import { notificationService } from "./notification.service";
 import {
   amountMatches,
+  assertRefundable,
   buildOrderId,
+  isRefundReason,
   isReusable,
+  refundAgeDays,
+  refundReasonForPaidNotification,
   resolvePaymentStatus,
   type GatewayNotification,
+  type RefundReason,
 } from "./payment.rules";
+
+export type { AdminPaymentFilters } from "@/server/repositories/payment.repository";
 
 export type PaymentProvider = "midtrans" | "mock";
 
@@ -48,6 +60,36 @@ function activeProvider(): PaymentProvider {
 /** Public URL the gateway sends the traveller back to (SITE_URL first). */
 function appUrl(path: string): string {
   return new URL(path, `${siteUrl()}/`).toString();
+}
+
+/**
+ * Flags a paid payment whose money must go back to the traveller and records
+ * why. Runs inside the caller's transaction so the flag and the audit entry
+ * commit (or roll back) with the change that caused them. `actorId` is null
+ * for system actions (gateway notifications).
+ */
+async function flagRefundRequired(
+  tx: DbExecutor,
+  payment: Pick<Payment, "id" | "orderId" | "bookingId" | "amount">,
+  reason: RefundReason,
+  actorId: string | null,
+): Promise<void> {
+  await paymentRepository.update(tx, payment.id, { refundRequired: true });
+  await auditService.record(
+    {
+      actorId,
+      action: "payment.refund_required",
+      entityType: "payment",
+      entityId: payment.id,
+      details: {
+        reason,
+        orderId: payment.orderId,
+        bookingId: payment.bookingId,
+        amount: payment.amount,
+      },
+    },
+    tx,
+  );
 }
 
 export type NotificationOutcome =
@@ -148,6 +190,8 @@ export const paymentService = {
         const payment = await paymentRepository.findByOrderIdForUpdate(tx, notification.order_id);
         if (!payment) return { result: "ignored", reason: "unknown order" };
         if (payment.status === "paid") return { result: "ignored", reason: "already paid" };
+        // Refunded money is settled outside the app; a late or replayed notification must not reopen it.
+        if (payment.status === "refunded") return { result: "ignored", reason: "already refunded" };
         if (!amountMatches(notification.gross_amount, payment.amount)) {
           // Values come from the request body: neutralize them before logging.
           console.warn(
@@ -169,16 +213,24 @@ export const paymentService = {
 
         if (alreadyPaid) {
           console.warn(
-            `[payment] booking ${payment.bookingId} was already paid; payment ${payment.orderId} is a duplicate charge, refund manually`,
+            `[payment] booking ${payment.bookingId} was already paid; payment ${payment.orderId} is a duplicate charge, flagged for refund`,
           );
+          await flagRefundRequired(tx, payment, "duplicate", null);
         } else if (status === "paid") {
           const booking = await bookingRepository.findByIdForUpdate(tx, payment.bookingId);
           if (booking && canTransition(booking.status, "confirmed")) {
             await bookingRepository.updateStatusWith(tx, booking.id, "confirmed");
-          } else if (booking?.status === "cancelled") {
-            console.warn(
-              `[payment] booking ${booking.code} was cancelled but payment ${payment.orderId} succeeded; refund manually`,
-            );
+          } else {
+            const reason = refundReasonForPaidNotification({
+              alreadyPaid: false,
+              bookingStatus: booking?.status,
+            });
+            if (reason) {
+              console.warn(
+                `[payment] booking ${booking?.code} was cancelled but payment ${payment.orderId} succeeded; flagged for refund`,
+              );
+              await flagRefundRequired(tx, payment, reason, null);
+            }
           }
         }
         return {
@@ -210,4 +262,88 @@ export const paymentService = {
   },
 
   latestByBookingIds: (ids: number[]) => paymentRepository.latestByBookingIds(ids),
+
+  /* -------------------------- admin -------------------------- */
+
+  /**
+   * Flags every paid attempt of a booking for refund, e.g. when an admin
+   * cancels a booking that was already paid. Call inside the transaction that
+   * changes the booking (the booking row should already be locked).
+   */
+  async flagPaidForRefund(
+    tx: DbExecutor,
+    bookingId: number,
+    reason: RefundReason,
+    actorId: string | null,
+  ): Promise<number> {
+    const paid = await paymentRepository.findPaidForBookingForUpdate(tx, bookingId);
+    for (const payment of paid) {
+      if (!payment.refundRequired) await flagRefundRequired(tx, payment, reason, actorId);
+    }
+    return paid.length;
+  },
+
+  /**
+   * Records a refund made outside the app (bank transfer or the Midtrans
+   * dashboard). Only a paid payment can be refunded; the payment row is locked
+   * so two admins can't record the same refund twice.
+   */
+  recordRefund(actorId: string, paymentId: number, note: string): Promise<Payment> {
+    return db.transaction(async (tx) => {
+      const payment = await paymentRepository.findByIdForUpdate(tx, paymentId);
+      if (!payment) throw new DomainError("notFound");
+      assertRefundable(payment);
+      const updated = await paymentRepository.update(tx, payment.id, {
+        status: "refunded",
+        refundRequired: false,
+        refundedAt: new Date(),
+        refundedBy: actorId,
+        refundNote: note,
+      });
+      await auditService.record(
+        {
+          actorId,
+          action: "payment.refunded",
+          entityType: "payment",
+          entityId: payment.id,
+          details: {
+            orderId: payment.orderId,
+            bookingId: payment.bookingId,
+            amount: payment.amount,
+            note,
+          },
+        },
+        tx,
+      );
+      return updated;
+    });
+  },
+
+  /** Payments waiting for a refund, oldest first, with the reason from the audit log. */
+  async refundQueue() {
+    const rows = await paymentRepository.listRefundQueue();
+    const flags = await paymentRepository.refundFlags(rows.map((row) => row.payment.id));
+    const now = new Date();
+    return rows.map((row) => {
+      const flag = flags.get(row.payment.id);
+      const reason = flag?.details?.reason;
+      const flaggedAt = flag?.createdAt ?? row.payment.updatedAt;
+      return {
+        ...row,
+        reason: isRefundReason(reason) ? reason : null,
+        flaggedAt,
+        ageDays: refundAgeDays(flaggedAt, now),
+      };
+    });
+  },
+
+  /** Admin payments page: filtered and paginated. */
+  listForAdmin(filters: AdminPaymentFilters, page: number, pageSize: number) {
+    return paginate({
+      page,
+      pageSize,
+      count: () => paymentRepository.countAdmin(filters),
+      load: (limit, offset) => paymentRepository.listAdmin(filters, limit, offset),
+    });
+  },
 };
