@@ -245,9 +245,10 @@ test.describe("traveller reschedules a booking", () => {
   test("closed and full dates are refused", async ({ page }) => {
     const tour = await tourInfo();
     const from = jakartaDate(35);
-    const closedDate = laterDate([from]);
-    const fullDate = laterDate([from, closedDate]);
-    const raceDate = laterDate([from, closedDate, fullDate]);
+    // Ascending: the calendar helper only pages forward.
+    const picks: string[] = [];
+    while (picks.length < 3) picks.push(laterDate([from, ...picks]));
+    const [closedDate, fullDate, raceDate] = picks.sort();
     const booking = await createBooking({
       email: ACCOUNTS.traveler.email,
       tourSlug: TOUR,
