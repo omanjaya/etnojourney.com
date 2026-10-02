@@ -54,7 +54,8 @@
       "total": "Total",
       "status": "Status",
       "created": "Dibuat",
-      "actions": "Aksi"
+      "actions": "Aksi",
+      "tableLabel": "Tabel booking"
     },
     "noActions": "Final",
     "actions": {

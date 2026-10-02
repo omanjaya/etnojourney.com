@@ -36,6 +36,21 @@ const HATCH_ALL =
  * it; clicking a later date extends the selection to a range. The range can
  * also be typed, which allows spanning months (up to 92 days).
  */
+const ARROW_STEPS: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
+
+/** Arrow keys move between days (a week up/down), skipping past dates. */
+function moveFocusByArrow(event: React.KeyboardEvent<HTMLDivElement>) {
+  const step = ARROW_STEPS[event.key];
+  const current = (event.target as HTMLElement).closest<HTMLButtonElement>("button[data-date]");
+  if (!step || !current) return;
+  const days = [...event.currentTarget.querySelectorAll<HTMLButtonElement>("button[data-date]")];
+  const next = days[days.indexOf(current) + step];
+  if (next && !next.disabled) {
+    event.preventDefault();
+    next.focus();
+  }
+}
+
 export function ClosureManager({
   days,
   today,
@@ -183,7 +198,12 @@ export function ClosureManager({
         <p id={hintId} className="text-muted short:mb-2 mb-3 text-xs">
           {t("calendar.hint")}
         </p>
-        <div role="group" aria-describedby={hintId} className="grid grid-cols-7 gap-1 sm:gap-1.5">
+        <div
+          role="group"
+          aria-describedby={hintId}
+          onKeyDown={moveFocusByArrow}
+          className="grid grid-cols-7 gap-1 sm:gap-1.5"
+        >
           {weekdays.map((weekday) => (
             <abbr
               key={weekday.long}

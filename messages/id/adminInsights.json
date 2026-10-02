@@ -77,11 +77,13 @@
     },
     "months": {
       "title": "Per bulan",
-      "caption": "Pendapatan bersih per bulan"
+      "caption": "Pendapatan bersih per bulan",
+      "tableLabel": "Tabel per bulan"
     },
     "tours": {
       "title": "Per tur",
-      "export": "Ekspor CSV"
+      "export": "Ekspor CSV",
+      "tableLabel": "Tabel per tur"
     },
     "columns": {
       "month": "Bulan",

@@ -54,7 +54,8 @@
       "total": "Total",
       "status": "Status",
       "created": "Created",
-      "actions": "Actions"
+      "actions": "Actions",
+      "tableLabel": "Bookings table"
     },
     "noActions": "Final",
     "actions": {

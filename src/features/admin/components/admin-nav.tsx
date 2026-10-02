@@ -168,7 +168,7 @@ export function AdminNav({ user }: { user: { name: string; email: string; role: 
       </aside>
 
       {/* Mobile top bar */}
-      <div
+      <header
         style={{ viewTransitionName: "admin-nav" }}
         className="bg-indigo text-sand-50 sticky top-0 z-40 lg:hidden"
       >
@@ -206,7 +206,7 @@ export function AdminNav({ user }: { user: { name: string; email: string; role: 
             </div>
           </div>
         </nav>
-      </div>
+      </header>
     </>
   );
 }

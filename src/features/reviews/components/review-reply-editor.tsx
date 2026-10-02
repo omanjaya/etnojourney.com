@@ -2,7 +2,7 @@
 
 import { MessageSquareReply, Pencil, Trash2 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import { useId, useState, useTransition } from "react";
+import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/form-controls";
 import { REVIEW_REPLY_MAX } from "@/server/services/review.rules";
@@ -32,6 +32,30 @@ export function ReviewReplyEditor({
   const [draft, setDraft] = useState(initialReply ?? "");
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const rootRef = useRef<HTMLDivElement>(null);
+  // Set when the visitor switches mode, so focus follows them (not on first render).
+  const moved = useRef(false);
+
+  // Keep keyboard focus where the visitor is working: into the textarea when
+  // editing, onto the first action (confirm / add / edit) otherwise.
+  useEffect(() => {
+    if (!moved.current) return;
+    moved.current = false;
+    const root = rootRef.current;
+    const target =
+      mode === "edit"
+        ? root?.querySelector("textarea")
+        : mode === "confirmRemove"
+          ? // The safe choice (cancel) first, so a stray Enter doesn't delete.
+            root?.querySelector<HTMLButtonElement>('[role="group"] button:last-of-type')
+          : root?.querySelector("button");
+    target?.focus();
+  }, [mode, reply]);
+
+  const switchTo = (next: Mode) => {
+    moved.current = true;
+    setMode(next);
+  };
 
   const textareaId = `${id}-reply`;
   const errorId = `${textareaId}-error`;
@@ -46,7 +70,7 @@ export function ReviewReplyEditor({
       }
       setReply(result.data.reply);
       setRepliedAt(result.data.repliedAt);
-      setMode("view");
+      switchTo("view");
     });
   };
 
@@ -61,13 +85,13 @@ export function ReviewReplyEditor({
       setReply(null);
       setRepliedAt(null);
       setDraft("");
-      setMode("view");
+      switchTo("view");
     });
   };
 
   if (mode === "edit") {
     return (
-      <div className="mt-3 flex flex-col gap-2">
+      <div ref={rootRef} className="mt-3 flex flex-col gap-2">
         <label htmlFor={textareaId} className="text-ink-soft text-xs font-medium">
           {t("fieldLabel", { author })}
         </label>
@@ -94,7 +118,7 @@ export function ReviewReplyEditor({
               onClick={() => {
                 setDraft(reply ?? "");
                 setError(null);
-                setMode("view");
+                switchTo("view");
               }}
               disabled={pending}
             >
@@ -116,12 +140,12 @@ export function ReviewReplyEditor({
 
   if (!reply) {
     return (
-      <div className="mt-3">
+      <div ref={rootRef} className="mt-3">
         <Button
           type="button"
           variant="outline"
           size="sm"
-          onClick={() => setMode("edit")}
+          onClick={() => switchTo("edit")}
           aria-label={t("addFor", { author })}
         >
           <MessageSquareReply aria-hidden />
@@ -137,7 +161,10 @@ export function ReviewReplyEditor({
   }
 
   return (
-    <div className="border-terracotta/40 bg-sand-50 mt-3 rounded-xl border-l-2 px-3 py-2">
+    <div
+      ref={rootRef}
+      className="border-terracotta/40 bg-sand-50 mt-3 rounded-xl border-l-2 px-3 py-2"
+    >
       <p className="text-ink-soft text-xs font-medium">
         {t("existing")}
         {repliedAt && (
@@ -160,7 +187,7 @@ export function ReviewReplyEditor({
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => setMode("view")}
+            onClick={() => switchTo("view")}
             disabled={pending}
           >
             {t("cancel")}
@@ -174,7 +201,7 @@ export function ReviewReplyEditor({
             size="sm"
             onClick={() => {
               setDraft(reply);
-              setMode("edit");
+              switchTo("edit");
             }}
             aria-label={t("editFor", { author })}
           >
@@ -185,7 +212,7 @@ export function ReviewReplyEditor({
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => setMode("confirmRemove")}
+            onClick={() => switchTo("confirmRemove")}
             aria-label={t("removeFor", { author })}
           >
             <Trash2 aria-hidden />

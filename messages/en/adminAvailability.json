@@ -14,7 +14,7 @@
     "next": "Next month"
   },
   "calendar": {
-    "hint": "Click a date to select it, then click a later date to select a range. Past dates cannot be closed.",
+    "hint": "Click a date (or press Enter; move with the arrow keys) to select it, then pick a later date for a range. Past dates can't be closed.",
     "closed": "Closed",
     "closedAll": "All closed",
     "toursClosed": "{count, plural, one {# tour closed} other {# tours closed}}",

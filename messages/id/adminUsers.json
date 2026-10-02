@@ -24,7 +24,8 @@
       "role": "Peran",
       "bookings": "Pemesanan",
       "joined": "Bergabung",
-      "status": "Status"
+      "status": "Status",
+      "tableLabel": "Tabel pengguna"
     },
     "empty": {
       "title": "Belum ada pengguna",

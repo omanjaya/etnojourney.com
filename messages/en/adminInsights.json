@@ -77,11 +77,13 @@
     },
     "months": {
       "title": "By month",
-      "caption": "Net revenue per month"
+      "caption": "Net revenue per month",
+      "tableLabel": "Monthly table"
     },
     "tours": {
       "title": "By tour",
-      "export": "Export CSV"
+      "export": "Export CSV",
+      "tableLabel": "Per-tour table"
     },
     "columns": {
       "month": "Month",

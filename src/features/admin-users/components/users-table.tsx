@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { formatDate } from "@/lib/format";
 import type { UserRole } from "@/server/db/schema";
 import { UserRoleBadge, UserStatusBadge } from "./user-badges";
+import { TableScroll } from "@/components/ui/table-scroll";
 
 export type AdminUserRow = {
   id: string;
@@ -51,7 +52,7 @@ export function UsersTable({ rows }: { rows: AdminUserRow[] }) {
         ))}
       </ul>
 
-      <div className="border-line hidden overflow-x-auto rounded-(--radius-card) border bg-white md:block">
+      <TableScroll label={t("tableLabel")} className="hidden md:block">
         <table className="w-full min-w-[48rem] text-left text-sm">
           <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
             <tr>
@@ -102,7 +103,7 @@ export function UsersTable({ rows }: { rows: AdminUserRow[] }) {
             ))}
           </tbody>
         </table>
-      </div>
+      </TableScroll>
     </>
   );
 }
