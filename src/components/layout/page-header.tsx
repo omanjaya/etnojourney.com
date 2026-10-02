@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 
 const titleClass = "max-w-4xl text-5xl leading-[1.02] md:text-7xl";
+/** Smaller title on phones for list pages where content should appear sooner. */
+const compactTitleClass = "max-w-4xl text-4xl leading-[1.05] md:text-7xl md:leading-[1.02]";
 
 /** Delay (s) for content that follows a split title, so it lands after the last word. */
 function afterTitle(title: ReactNode, extra = 0): CSSProperties {
@@ -22,30 +24,42 @@ export function PageHeader({
   description,
   children,
   className,
+  compact = false,
 }: {
   eyebrow?: string;
   title: ReactNode;
   description?: string;
   children?: ReactNode;
   className?: string;
+  /** Tighter spacing and smaller title below `md`; desktop is unchanged. */
+  compact?: boolean;
 }) {
+  const heading = compact ? compactTitleClass : titleClass;
   return (
     <section
       className={cn(
-        "grain border-line bg-sand-100 border-b pt-36 pb-14 md:pt-44 md:pb-20",
+        "grain border-line bg-sand-100 border-b md:pt-44 md:pb-20",
+        compact ? "pt-24 pb-8" : "pt-36 pb-14",
         className,
       )}
     >
       <Container>
-        {eyebrow && <p className="eyebrow animate-fade-up mb-5">{eyebrow}</p>}
+        {eyebrow && (
+          <p className={cn("eyebrow animate-fade-up", compact ? "mb-3 md:mb-5" : "mb-5")}>
+            {eyebrow}
+          </p>
+        )}
         {typeof title === "string" ? (
-          <SplitWords as="h1" play="load" text={title} delay={0.08} className={titleClass} />
+          <SplitWords as="h1" play="load" text={title} delay={0.08} className={heading} />
         ) : (
-          <h1 className={cn(titleClass, "animate-fade-up")}>{title}</h1>
+          <h1 className={cn(heading, "animate-fade-up")}>{title}</h1>
         )}
         {description && (
           <p
-            className="text-ink-soft animate-fade-up mt-6 max-w-2xl text-lg leading-relaxed"
+            className={cn(
+              "text-ink-soft animate-fade-up max-w-2xl leading-relaxed",
+              compact ? "mt-3 text-base md:mt-6 md:text-lg" : "mt-6 text-lg",
+            )}
             style={afterTitle(title)}
           >
             {description}

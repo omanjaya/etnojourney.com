@@ -32,18 +32,29 @@
     "maxPrice": "Budget per person",
     "anyPrice": "Any",
     "upTo": "Up to {price}",
-    "maxDays": "Duration",
     "anyDuration": "Any",
-    "upToDays": "Up to {count, plural, one {# day} other {# days}}",
     "sort": "Sort by",
     "sortOptions": {
       "popular": "Most popular",
       "priceAsc": "Lowest price",
       "priceDesc": "Highest price",
-      "duration": "Shortest first"
+      "duration": "Shortest first",
+      "longest": "Longest first"
     },
     "toggle": "Filters",
-    "clear": "Clear"
+    "clear": "Clear",
+    "island": "Island",
+    "allIslands": "All islands",
+    "duration": "Duration",
+    "durationBuckets": {
+      "1": "1 day",
+      "2-3": "2–3 days",
+      "4+": "4 days or more"
+    },
+    "sheetTitle": "Filter tours",
+    "showResults": "{count, plural, =0 {No tours} one {Show # tour} other {Show # tours}}",
+    "close": "Close filters",
+    "activeFilters": "{count, plural, one {# active filter} other {# active filters}}"
   },
   "detail": {
     "breadcrumbHome": "Home",
@@ -71,6 +82,27 @@
     "previous": "Previous",
     "next": "Next",
     "hostedBy": "Hosted by the local community in {destination}",
-    "bookCta": "Book now"
+    "bookCta": "Book now",
+    "difficulty": "Difficulty",
+    "notIncluded": "Not included",
+    "notIncludedDefault": {
+      "transport": "Flights or transport to the meeting point",
+      "personal": "Personal expenses",
+      "tips": "Tips for guides and hosts"
+    },
+    "beforeYouGo": "Before you go",
+    "beforeYouGoIntro": "Practical notes so your trip is comfortable and your hosts feel respected.",
+    "whatToBring": "What to bring",
+    "etiquette": "Local etiquette",
+    "gettingThere": "Getting there",
+    "openInMaps": "Open in Maps"
+  },
+  "difficulty": {
+    "easy": "Easy",
+    "moderate": "Moderate",
+    "challenging": "Challenging",
+    "easyHint": "Suitable for almost everyone; plenty of stops and light walking.",
+    "moderateHint": "Basic fitness needed; a few hours of walking or some uphill terrain.",
+    "challengingHint": "Good stamina needed; long treks, steep terrain or remote conditions."
   }
 }
