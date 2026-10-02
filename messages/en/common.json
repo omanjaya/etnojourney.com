@@ -85,5 +85,15 @@
       "source": "Source"
     }
   },
-  "newTour": "New"
+  "newTour": "New",
+  "islands": {
+    "bali": "Bali",
+    "nusa-tenggara": "Nusa Tenggara",
+    "jawa": "Java",
+    "sumatra": "Sumatra",
+    "sulawesi": "Sulawesi",
+    "kalimantan": "Kalimantan (Borneo)",
+    "maluku-papua": "Maluku & Papua",
+    "other": "Other"
+  }
 }

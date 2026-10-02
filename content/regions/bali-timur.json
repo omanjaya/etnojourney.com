@@ -1,0 +1,714 @@
+{
+  "region": "bali-timur",
+  "destinations": [
+    {
+      "slug": "tenganan",
+      "name": "Tenganan Pegringsingan",
+      "province": "Bali",
+      "heroImage": "/images/content/tenganan/village-lane.webp",
+      "tagline": {
+        "id": "Desa Bali Aga yang menjaga aturan adat dan tenun gringsing ikat ganda.",
+        "en": "A Bali Aga village that keeps its customary law and gringsing double-ikat weaving."
+      },
+      "description": {
+        "id": "Tenganan Pegringsingan, di Kabupaten Karangasem, adalah salah satu desa Bali Aga, sebutan bagi masyarakat Bali yang menelusuri leluhurnya ke masa sebelum pengaruh Majapahit. Rumah-rumah berjajar di kedua sisi jalan desa yang menurun dari hulu ke hilir, dengan pintu menghadap ke ruang bersama di tengahnya. Setiap pagi kulkul, kentongan kayu desa, dipukul untuk menandai dimulainya hari.\n\nDesa ini dikenal karena kain gringsing, tenun ikat ganda yang benang lungsin dan pakannya sama-sama diikat dan dicelup pewarna alami sebelum ditenun. Teknik ini hanya dikerjakan di segelintir tempat di dunia, dan selembar kain bisa memakan waktu bertahun-tahun. Gringsing dipakai dalam upacara siklus hidup dan dipercaya memberi perlindungan.\n\nSetiap tahun, umumnya sekitar Juni hingga Juli, desa menggelar Usaba Sambah. Salah satu bagiannya adalah mekare-kare atau perang pandan, duel ritual antarpemuda dengan perisai rotan dan ikatan daun pandan berduri sebagai persembahan kepada Dewa Indra. Jadwalnya mengikuti kalender adat, sehingga kami tidak menjanjikan kunjungan bertepatan dengan upacara ini.",
+        "en": "Tenganan Pegringsingan, in Karangasem Regency, is a Bali Aga village, the name for Balinese communities who trace their ancestry to before Majapahit influence. Houses line both sides of the village street as it slopes from uphill to downhill, their doors opening onto the shared space in the middle. Every morning the kulkul, the village's wooden slit drum, is struck to mark the start of the day.\n\nThe village is known for gringsing, a double-ikat cloth in which both warp and weft threads are tied and dyed with natural pigments before weaving. The technique survives in only a handful of places in the world, and a single cloth can take years to finish. Gringsing is worn in life-cycle ceremonies and is believed to offer protection.\n\nEvery year, usually around June to July, the village holds Usaba Sambah. Part of it is mekare-kare, the pandan war: ritual duels between young men armed with rattan shields and bundles of thorny pandan leaves, offered to the god Indra. The timing follows the customary calendar, so we never promise a visit will coincide with it."
+      }
+    },
+    {
+      "slug": "sidemen",
+      "name": "Sidemen",
+      "province": "Bali",
+      "heroImage": "/images/content/sidemen/sawah-countryside.webp",
+      "tagline": {
+        "id": "Lembah sawah di kaki Gunung Agung, tempat endek dan songket ditenun di rumah-rumah.",
+        "en": "Rice valleys below Mount Agung, where endek and songket are woven at home."
+      },
+      "description": {
+        "id": "Sidemen adalah kecamatan berbukit di Kabupaten Karangasem, Bali timur, dengan sawah berundak yang turun ke lembah dan Gunung Agung yang tampak di kejauhan saat cuaca cerah. Desa Sidemen juga dikenal sebagai salah satu sentra tenun di Bali, dan di banyak rumah suara alat tenun menjadi bagian dari keseharian.\n\nDua jenis kain utama ditenun di sini. Endek, kain ikat yang dipakai sehari-hari, dibuat dengan mengikat benang mengikuti pola lalu mencelupnya sebelum ditenun. Songket, yang benangnya disulam dengan benang emas atau perak tambahan, dipakai untuk upacara siklus hidup seperti potong gigi, pernikahan, dan hari suci. Tenun Sidemen dikenal dengan motif yang padat dan warna yang beragam, dengan motif khas seperti cempaka, celedan, cepuk, dan nagasari.",
+        "en": "Sidemen is a hilly district of Karangasem Regency in east Bali, with terraced rice fields stepping down into the valley and Mount Agung visible in the distance on clear days. Sidemen village is also known as one of Bali's weaving centres, and in many homes the sound of the loom is part of daily life.\n\nTwo main kinds of cloth are woven here. Endek, an ikat cloth for everyday wear, is made by tying the threads to a pattern and dyeing them before weaving. Songket, with supplementary gold or silver threads woven into it, is worn for life-cycle ceremonies such as tooth filing, weddings and holy days. Sidemen weaving is known for dense motifs and varied colours, with local patterns such as cempaka, celedan, cepuk and nagasari."
+      }
+    },
+    {
+      "slug": "klungkung-kamasan",
+      "name": "Klungkung dan Kamasan",
+      "province": "Bali",
+      "heroImage": "/images/content/klungkung-kamasan/kerta-gosa-taman-gili.webp",
+      "tagline": {
+        "id": "Bekas pusat kerajaan Bali dan desa pelukis gaya wayang Kamasan.",
+        "en": "A former royal centre of Bali and the village of Kamasan wayang-style painters."
+      },
+      "description": {
+        "id": "Semarapura, ibu kota Kabupaten Klungkung, adalah bekas pusat kerajaan Klungkung. Di kompleks Taman Gili berdiri Kerta Gosa, balai yang dibangun pada akhir abad ke-18 sebagai tempat pengadilan, tempat perkara yang tidak terselesaikan di wilayah lain diputuskan oleh para pendeta Brahmana. Langit-langitnya dipenuhi lukisan gaya wayang Kamasan, terutama kisah Bima di surga dan neraka yang mengingatkan pada hukum karma. Lukisan ini telah beberapa kali dipulihkan dan dilukis ulang, antara lain pada 1918, 1933, dan 1963. Di dekatnya, Bale Kambang dikelilingi kolam, dengan langit-langit berkisah Sutasoma.\n\nTak jauh dari kota, Desa Kamasan menjadi pusat gaya lukis klasik Bali yang mengambil bentuk dari wayang kulit dan menjadi gaya resmi istana. Para pelukisnya masih menggambar adegan Ramayana, Mahabharata, kalender, dan cerita rakyat. Sejarah Klungkung juga mencatat Puputan Klungkung pada 18 April 1908, perlawanan terakhir keluarga raja terhadap pasukan Belanda.",
+        "en": "Semarapura, the capital of Klungkung Regency, was once the seat of the Klungkung kingdom. In the Taman Gili complex stands Kerta Gosa, a pavilion built at the end of the 18th century as a court of justice, where cases unresolved elsewhere were decided by Brahmana priests. Its ceilings are covered in Kamasan wayang-style paintings, above all the story of Bhima in heaven and hell, a reminder of karmic law. The paintings have been restored and repainted several times, including in 1918, 1933 and 1963. Nearby, Bale Kambang sits in a moat, its ceilings telling the Sutasoma story.\n\nJust outside town, Kamasan village is the home of Bali's classical painting style, which draws its figures from wayang shadow puppets and became the official style of the royal courts. Its painters still depict scenes from the Ramayana and Mahabharata, calendars and folk tales. Klungkung's history also includes the Puputan of 18 April 1908, the royal family's last stand against Dutch forces."
+      }
+    },
+    {
+      "slug": "amed",
+      "name": "Amed",
+      "province": "Bali",
+      "heroImage": "/images/content/amed/golden-hour.webp",
+      "tagline": {
+        "id": "Pesisir timur Bali tempat garam dijemur di batang kelapa dan jukung berjajar di pantai.",
+        "en": "East Bali's coast, where salt dries in coconut-trunk troughs and jukung line the beach."
+      },
+      "description": {
+        "id": "Amed adalah sebutan untuk deretan teluk dan kampung nelayan di Kecamatan Abang, Kabupaten Karangasem, di pesisir timur laut Bali dengan latar Gunung Agung. Di teluk-teluk seperti Jemeluk, perahu jukung bercadik berwarna-warni ditambatkan di pantai, dan nelayan setempat juga terlibat dalam kegiatan wisata bahari.\n\nAmed juga dikenal karena garamnya. Petani garam menjemur air laut di palungan, bilah batang kelapa yang dibelah dan dilubangi, lalu menyaringnya dengan tinjungan dari anyaman bambu. Produksinya bergantung pada musim kemarau. Garam Amed tercatat sebagai produk Indikasi Geografis sejak Desember 2015, dan sebuah koperasi masyarakat mengelola Amed Salt Center di Desa Purwakerthi. Tradisi ini kian terdesak: sebagian besar petaninya sudah berusia lanjut, dan banyak lahan digarap dengan sistem bagi hasil.",
+        "en": "Amed is the name for a string of bays and fishing hamlets in Abang District, Karangasem Regency, on Bali's north-east coast with Mount Agung behind. In bays such as Jemeluk, brightly painted jukung outriggers are pulled up on the beach, and local fishers also take part in marine tourism.\n\nAmed is also known for its salt. Salt farmers dry seawater in palungan, split and hollowed coconut trunks, and filter it through tinjungan, woven bamboo strainers. Production depends on the dry season. Amed salt has been registered as a Geographical Indication product since December 2015, and a community cooperative runs the Amed Salt Center in Purwakerthi village. The tradition is under pressure: most of its farmers are older, and much of the land is worked on a sharecropping basis."
+      }
+    }
+  ],
+  "tours": [
+    {
+      "slug": "tenganan-desa-bali-aga",
+      "destination": "tenganan",
+      "category": "village",
+      "durationDays": 1,
+      "pricePerPerson": 750000,
+      "maxParticipants": 10,
+      "title": {
+        "id": "Sehari di Desa Bali Aga Tenganan",
+        "en": "A Day in the Bali Aga Village of Tenganan"
+      },
+      "summary": {
+        "id": "Telusuri tata ruang desa Bali Aga bersama pemandu setempat, dari jalan desa berundak hingga balai-balai bersama.",
+        "en": "Walk the layout of a Bali Aga village with a local guide, from its stepped main street to its communal pavilions."
+      },
+      "description": {
+        "id": "Tur ini mengajak kamu memahami bagaimana Tenganan Pegringsingan menata kehidupan bersama. Pemandu setempat menjelaskan susunan rumah yang berjajar di kedua sisi jalan desa, fungsi balai-balai bersama, dan peran kulkul yang dipukul setiap pagi.\n\nSiang hari, kamu bisa melihat perajin menenun dan membuat kerajinan di rumah mereka, serta mencoba ayunan tradisional yang menjadi bagian dari kegiatan budaya desa. Bila kunjunganmu bertepatan dengan Usaba Sambah (umumnya Juni hingga Juli), pemandu akan menjelaskan tata krama menyaksikannya, tetapi jadwal upacara tidak kami janjikan.",
+        "en": "This tour helps you understand how Tenganan Pegringsingan organises communal life. A local guide explains the houses lined along both sides of the village street, the role of the shared pavilions, and the kulkul struck every morning.\n\nIn the afternoon you can watch artisans weaving and crafting in their homes, and try the traditional swing that is part of village cultural life. If your visit coincides with Usaba Sambah (usually June to July), your guide will explain the etiquette for watching it, but we do not promise the ceremony's dates."
+      },
+      "coverImage": "/images/content/tenganan/village-lane.webp",
+      "gallery": [
+        "/images/content/tenganan/village-lane.webp",
+        "/images/content/tenganan/bale-architecture.webp",
+        "/images/content/tenganan/bale-pavilions.webp",
+        "/images/content/tenganan/mekare-kare-crowd.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Jalan desa berundak dan tata ruang Bali Aga",
+          "en": "The stepped village street and Bali Aga layout"
+        },
+        {
+          "id": "Balai-balai bersama dan kulkul desa",
+          "en": "Communal pavilions and the village kulkul"
+        },
+        {
+          "id": "Perajin di rumah mereka",
+          "en": "Artisans at work in their homes"
+        },
+        {
+          "id": "Ayunan tradisional desa",
+          "en": "The village's traditional swing"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari desa",
+          "en": "Local guide from the village"
+        },
+        {
+          "id": "Kontribusi untuk desa",
+          "en": "Contribution to the village"
+        },
+        {
+          "id": "Makan siang khas Karangasem",
+          "en": "Karangasem-style lunch"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Area parkir Desa Tenganan Pegringsingan, Karangasem",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Jalan desa dan balai bersama",
+            "en": "Village street and pavilions"
+          },
+          "description": {
+            "id": "09.00 bertemu di area parkir desa, jalan kaki bersama pemandu, 12.00 makan siang, sore melihat perajin dan ayunan tradisional, selesai sekitar 15.00.",
+            "en": "09:00 meet at the village car park, walk with your guide, 12:00 lunch, afternoon with artisans and the traditional swing, ending around 15:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "gringsing-tenun-ikat-ganda",
+      "destination": "tenganan",
+      "category": "craft",
+      "durationDays": 1,
+      "pricePerPerson": 950000,
+      "maxParticipants": 8,
+      "title": {
+        "id": "Gringsing, Tenun Ikat Ganda Tenganan",
+        "en": "Gringsing, Tenganan's Double Ikat"
+      },
+      "summary": {
+        "id": "Pelajari kain gringsing, tenun ikat ganda berwarna alami yang hanya dibuat di segelintir tempat di dunia.",
+        "en": "Learn about gringsing, a naturally dyed double-ikat cloth made in only a handful of places in the world."
+      },
+      "description": {
+        "id": "Pada gringsing, benang lungsin dan pakan sama-sama diikat dan dicelup sebelum ditenun, sehingga motifnya baru muncul utuh ketika kedua benang bertemu. Pewarnanya berasal dari bahan alami, dan prosesnya bisa memakan waktu bertahun-tahun untuk selembar kain.\n\nBersama penenun setempat, kamu melihat tahap-tahap pembuatannya dan mendengar makna motif serta perannya dalam upacara siklus hidup, dari potong rambut, potong gigi, pernikahan, hingga kematian. Kami tidak menyediakan kelas menenun gringsing; tur ini adalah kesempatan untuk belajar dan menghargai, bukan mencoba.",
+        "en": "In gringsing, both the warp and the weft are tied and dyed before weaving, so the motif only appears whole when the two sets of threads meet. The dyes come from natural materials, and a single cloth can take years.\n\nWith local weavers, you see the stages of making it and hear about the motifs and the cloth's role in life-cycle ceremonies, from hair cutting and tooth filing to weddings and death rites. We do not offer gringsing weaving classes; this tour is a chance to learn and appreciate, not to try."
+      },
+      "coverImage": "/images/content/tenganan/geringsing-wayang.webp",
+      "gallery": [
+        "/images/content/tenganan/geringsing-wayang.webp",
+        "/images/content/tenganan/geringsing-cloth.webp",
+        "/images/content/tenganan/bale-architecture.webp",
+        "/images/content/tenganan/village-lane.webp",
+        "/images/content/tenganan/mekare-kare.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Teknik ikat ganda dari dekat",
+          "en": "Double ikat up close"
+        },
+        {
+          "id": "Pewarna alami dan lamanya proses",
+          "en": "Natural dyes and how long it takes"
+        },
+        {
+          "id": "Peran gringsing dalam upacara",
+          "en": "Gringsing's role in ceremonies"
+        },
+        {
+          "id": "Kelompok kecil, maksimal delapan orang",
+          "en": "Small group of eight at most"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Kontribusi untuk penenun dan desa",
+          "en": "Contribution to weavers and the village"
+        },
+        {
+          "id": "Makan siang",
+          "en": "Lunch"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Area parkir Desa Tenganan Pegringsingan, Karangasem",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Benang, pewarna, dan makna",
+            "en": "Threads, dyes and meaning"
+          },
+          "description": {
+            "id": "09.00 bertemu di desa, mengunjungi penenun dan melihat tahap pengikatan dan pencelupan, 12.30 makan siang, sore berbincang tentang makna motif, selesai sekitar 15.00.",
+            "en": "09:00 meet in the village, visit weavers and see the tying and dyeing stages, 12:30 lunch, afternoon conversation about the motifs, ending around 15:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tenun-endek-songket-sidemen",
+      "destination": "sidemen",
+      "category": "craft",
+      "durationDays": 1,
+      "pricePerPerson": 850000,
+      "maxParticipants": 8,
+      "title": {
+        "id": "Endek dan Songket Sidemen",
+        "en": "Endek and Songket of Sidemen"
+      },
+      "summary": {
+        "id": "Kunjungi rumah-rumah penenun Sidemen dan pelajari perbedaan endek untuk sehari-hari dan songket untuk upacara.",
+        "en": "Visit Sidemen's weaving households and learn how everyday endek differs from ceremonial songket."
+      },
+      "description": {
+        "id": "Di Sidemen, menenun dikerjakan di banyak rumah. Kamu akan melihat bagaimana benang endek diikat mengikuti pola lalu dicelup sebelum ditenun, dan bagaimana songket diberi benang tambahan yang membentuk motif berkilau.\n\nPemandu menjelaskan kapan masing-masing kain dipakai, dari keseharian hingga upacara seperti potong gigi dan pernikahan, serta motif khas Sidemen seperti cempaka dan nagasari. Sore hari kita berjalan singkat di pematang sawah untuk melihat lembah dan, bila cuaca cerah, Gunung Agung.",
+        "en": "In Sidemen, weaving happens in many homes. You will see how endek threads are tied to a pattern and dyed before weaving, and how songket gains supplementary threads that form its shimmering motifs.\n\nYour guide explains when each cloth is worn, from daily life to ceremonies such as tooth filing and weddings, and introduces Sidemen motifs such as cempaka and nagasari. In the late afternoon we take a short walk along the rice terraces to see the valley and, on clear days, Mount Agung."
+      },
+      "coverImage": "/images/content/sidemen/weaving-loom.webp",
+      "gallery": [
+        "/images/content/sidemen/weaving-loom.webp",
+        "/images/content/sidemen/endek-patra.webp",
+        "/images/content/sidemen/endek-ikat.webp",
+        "/images/content/sidemen/rice-terrace.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Penenun endek dan songket di rumah mereka",
+          "en": "Endek and songket weavers at home"
+        },
+        {
+          "id": "Mengikat dan mencelup benang ikat",
+          "en": "Tying and dyeing ikat threads"
+        },
+        {
+          "id": "Motif khas Sidemen",
+          "en": "Sidemen's own motifs"
+        },
+        {
+          "id": "Jalan sore di pematang sawah",
+          "en": "Late-afternoon walk on the terraces"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Kontribusi untuk penenun",
+          "en": "Contribution to the weavers"
+        },
+        {
+          "id": "Makan siang",
+          "en": "Lunch"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Kantor Camat Sidemen, Karangasem",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Benang ikat dan alat tenun",
+            "en": "Ikat threads and looms"
+          },
+          "description": {
+            "id": "09.00 bertemu di Sidemen, mengunjungi dua rumah penenun, 12.30 makan siang, 14.30 jalan singkat di sawah, selesai sekitar 16.30.",
+            "en": "09:00 meet in Sidemen, visit two weaving households, 12:30 lunch, 14:30 short walk in the rice fields, ending around 16:30."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "jalan-sawah-sidemen",
+      "destination": "sidemen",
+      "category": "trekking",
+      "durationDays": 1,
+      "pricePerPerson": 650000,
+      "maxParticipants": 10,
+      "title": {
+        "id": "Jalan Sawah Lembah Sidemen",
+        "en": "Walking the Sidemen Valley"
+      },
+      "summary": {
+        "id": "Berjalan di antara sawah berundak dan aliran sungai, dengan Gunung Agung di cakrawala.",
+        "en": "Walk between terraced rice fields and streams, with Mount Agung on the horizon."
+      },
+      "description": {
+        "id": "Jalur ini menyusuri pematang sawah dan jalan desa di lembah Sidemen, melewati saluran air yang mengairi sawah dan kebun di sekitarnya. Pemandu setempat menjelaskan musim tanam dan panen, serta kehidupan desa di kaki Gunung Agung.\n\nRute dan panjangnya disesuaikan dengan musim dan kondisi jalur, dengan tingkat kesulitan ringan hingga sedang. Kami menutup hari dengan makan siang sederhana di desa.",
+        "en": "The route follows rice-field dykes and village lanes through the Sidemen valley, past the channels that water the fields and gardens around them. A local guide explains the planting and harvest seasons and village life below Mount Agung.\n\nThe route and its length are adjusted to the season and trail conditions, at an easy to moderate level. We end the day with a simple lunch in the village."
+      },
+      "coverImage": "/images/content/sidemen/sawah-countryside.webp",
+      "gallery": [
+        "/images/content/sidemen/sawah-countryside.webp",
+        "/images/content/sidemen/rice-terrace.webp",
+        "/images/content/sidemen/rice-harvest.webp",
+        "/images/content/sidemen/unda-river.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Sawah berundak lembah Sidemen",
+          "en": "Sidemen's terraced fields"
+        },
+        {
+          "id": "Pemandangan Gunung Agung saat cerah",
+          "en": "Mount Agung views on clear days"
+        },
+        {
+          "id": "Musim tanam dan panen dijelaskan warga",
+          "en": "Planting and harvest explained by locals"
+        },
+        {
+          "id": "Tingkat ringan hingga sedang",
+          "en": "Easy to moderate"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Makan siang di desa",
+          "en": "Lunch in the village"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        },
+        {
+          "id": "Kontribusi untuk desa",
+          "en": "Contribution to the village"
+        }
+      ],
+      "meetingPoint": "Kantor Camat Sidemen, Karangasem",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Pematang dan lembah",
+            "en": "Dykes and valley"
+          },
+          "description": {
+            "id": "08.00 bertemu di Sidemen, berjalan sekitar tiga jam menyusuri sawah dan desa, 12.00 makan siang, selesai sekitar 13.30.",
+            "en": "08:00 meet in Sidemen, walk for about three hours through fields and villages, 12:00 lunch, ending around 13:30."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kerta-gosa-dan-lukisan-kamasan",
+      "destination": "klungkung-kamasan",
+      "category": "craft",
+      "durationDays": 1,
+      "pricePerPerson": 800000,
+      "maxParticipants": 10,
+      "title": {
+        "id": "Kerta Gosa dan Lukisan Kamasan",
+        "en": "Kerta Gosa and Kamasan Painting"
+      },
+      "summary": {
+        "id": "Baca kisah karma di langit-langit Kerta Gosa, lalu kunjungi Desa Kamasan, rumah gaya lukis wayang klasik Bali.",
+        "en": "Read the story of karma on Kerta Gosa's ceilings, then visit Kamasan, home of Bali's classical wayang painting."
+      },
+      "description": {
+        "id": "Pagi dimulai di Taman Gili, Semarapura. Di Kerta Gosa, balai pengadilan kerajaan Klungkung, pemandu membantu membaca panel-panel langit-langit bergaya wayang Kamasan, dari kisah Bima di surga dan neraka hingga Tantri. Di Bale Kambang yang dikelilingi kolam, langit-langitnya berkisah tentang Sutasoma.\n\nSiang hari kita ke Desa Kamasan untuk melihat bagaimana lukisan bergaya wayang dibuat: sketsa, pewarnaan bertahap, dan tokoh-tokoh yang mengikuti bentuk wayang kulit. Karya para pelukis bisa dibeli langsung dari mereka.",
+        "en": "The morning starts at Taman Gili, Semarapura. At Kerta Gosa, the Klungkung kingdom's hall of justice, your guide helps you read the Kamasan wayang-style ceiling panels, from Bhima in heaven and hell to the Tantri tales. At Bale Kambang, surrounded by its moat, the ceilings tell the Sutasoma story.\n\nIn the afternoon we go to Kamasan village to see how wayang-style paintings are made: the sketch, the layered colouring, and figures modelled on shadow puppets. Paintings can be bought directly from the painters."
+      },
+      "coverImage": "/images/content/klungkung-kamasan/ceiling-paintings.webp",
+      "gallery": [
+        "/images/content/klungkung-kamasan/ceiling-paintings.webp",
+        "/images/content/klungkung-kamasan/ceiling-panel.webp",
+        "/images/content/klungkung-kamasan/kerta-gosa-pavilion.webp",
+        "/images/content/klungkung-kamasan/kerta-gosa-taman-gili.webp",
+        "/images/content/klungkung-kamasan/stone-relief.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Membaca panel langit-langit Kerta Gosa",
+          "en": "Reading Kerta Gosa's ceiling panels"
+        },
+        {
+          "id": "Bale Kambang dan kisah Sutasoma",
+          "en": "Bale Kambang and the Sutasoma story"
+        },
+        {
+          "id": "Pelukis gaya wayang di Desa Kamasan",
+          "en": "Wayang-style painters in Kamasan"
+        },
+        {
+          "id": "Membeli langsung dari pelukis",
+          "en": "Buying directly from the painters"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Tiket masuk Taman Gili",
+          "en": "Taman Gili entrance ticket"
+        },
+        {
+          "id": "Makan siang",
+          "en": "Lunch"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Taman Gili Kerta Gosa, Semarapura, Klungkung",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Langit-langit karma dan desa pelukis",
+            "en": "Ceilings of karma and the painters' village"
+          },
+          "description": {
+            "id": "09.00 bertemu di Taman Gili, tur Kerta Gosa dan Bale Kambang, 12.00 makan siang di Semarapura, 13.30 Desa Kamasan, selesai sekitar 16.00.",
+            "en": "09:00 meet at Taman Gili, tour Kerta Gosa and Bale Kambang, 12:00 lunch in Semarapura, 13:30 Kamasan village, ending around 16:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "semarapura-dan-garam-kusamba",
+      "destination": "klungkung-kamasan",
+      "category": "village",
+      "durationDays": 1,
+      "pricePerPerson": 700000,
+      "maxParticipants": 8,
+      "title": {
+        "id": "Semarapura dan Garam Kusamba",
+        "en": "Semarapura and the Salt of Kusamba"
+      },
+      "summary": {
+        "id": "Dari jejak kerajaan Klungkung di Semarapura ke pantai Kusamba, tempat segelintir petani garam masih bekerja secara tradisional.",
+        "en": "From the Klungkung kingdom's traces in Semarapura to Kusamba beach, where a handful of salt farmers still work the traditional way."
+      },
+      "description": {
+        "id": "Kita mulai di Semarapura, mengenal sejarah kerajaan Klungkung dan Puputan Klungkung pada 18 April 1908, lalu melihat kompleks Taman Gili. Setelah itu kita menuju pesisir Kusamba, desa nelayan dan pusat penggaraman tradisional.\n\nPetani garam Kusamba menjemur air laut dengan cara turun-temurun memakai palung, dan garamnya dikenal berbutir besar dengan rasa yang lebih gurih. Tradisi ini kian langka: jumlah petaninya menyusut tajam dalam beberapa dekade terakhir akibat abrasi pantai dan sedikitnya generasi muda yang meneruskan. Kunjungan bergantung pada musim dan kesediaan petani, dan membeli garam langsung dari mereka adalah cara paling nyata untuk mendukung.",
+        "en": "We start in Semarapura, learning about the Klungkung kingdom and the Puputan of 18 April 1908, and seeing the Taman Gili complex. Then we head to the Kusamba coast, a fishing village and a centre of traditional salt making.\n\nKusamba's salt farmers dry seawater the inherited way, using troughs, and the salt is known for its large grains and savoury taste. The tradition is becoming rare: the number of farmers has fallen sharply in recent decades because of coastal erosion and few young people taking it up. Visits depend on the season and the farmers' willingness, and buying salt directly from them is the most tangible way to support them."
+      },
+      "coverImage": "/images/content/klungkung-kamasan/kusamba-salt.webp",
+      "gallery": [
+        "/images/content/klungkung-kamasan/kusamba-salt.webp",
+        "/images/content/klungkung-kamasan/kerta-gosa-taman-gili.webp",
+        "/images/content/klungkung-kamasan/kerta-gosa-pavilion.webp",
+        "/images/content/klungkung-kamasan/stone-relief.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Sejarah kerajaan Klungkung",
+          "en": "History of the Klungkung kingdom"
+        },
+        {
+          "id": "Taman Gili dan Kerta Gosa",
+          "en": "Taman Gili and Kerta Gosa"
+        },
+        {
+          "id": "Petani garam tradisional Kusamba",
+          "en": "Kusamba's traditional salt farmers"
+        },
+        {
+          "id": "Membeli garam langsung dari petani",
+          "en": "Buying salt directly from farmers"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Tiket masuk Taman Gili",
+          "en": "Taman Gili entrance ticket"
+        },
+        {
+          "id": "Makan siang",
+          "en": "Lunch"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Taman Gili Kerta Gosa, Semarapura, Klungkung",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Dari istana ke pesisir",
+            "en": "From palace to coast"
+          },
+          "description": {
+            "id": "09.00 bertemu di Taman Gili, sejarah Semarapura, 11.30 menuju Kusamba, 12.00 makan siang, 13.00 bersama petani garam bila musim memungkinkan, selesai sekitar 15.00.",
+            "en": "09:00 meet at Taman Gili, Semarapura's history, 11:30 drive to Kusamba, 12:00 lunch, 13:00 with the salt farmers when the season allows, ending around 15:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "garam-amed-di-batang-kelapa",
+      "destination": "amed",
+      "category": "culinary",
+      "durationDays": 1,
+      "pricePerPerson": 900000,
+      "maxParticipants": 8,
+      "title": {
+        "id": "Garam Amed di Batang Kelapa",
+        "en": "Amed Salt in Coconut Troughs"
+      },
+      "summary": {
+        "id": "Lihat bagaimana garam Amed dijemur di palungan batang kelapa dan disaring dengan anyaman bambu.",
+        "en": "See how Amed salt is dried in coconut-trunk troughs and filtered through woven bamboo."
+      },
+      "description": {
+        "id": "Garam Amed tidak dibuat di tambak, melainkan di palungan, bilah batang kelapa yang dibelah dan dilubangi untuk menampung air laut. Setelah dijemur dan disaring dengan tinjungan, butir garamnya dipanen dalam siklus beberapa hari sekali selama musim kemarau.\n\nBersama pemandu, kamu mengunjungi ladang garam di Desa Purwakerthi dan Amed Salt Center yang dikelola koperasi masyarakat, serta mendengar tantangan yang dihadapi petani: lahan yang terdesak, petani yang menua, dan sistem bagi hasil. Kunjungan ladang hanya pada musim produksi; di luar musim, tur berfokus pada pusat garam dan pesisir.",
+        "en": "Amed salt is not made in ponds but in palungan, split coconut trunks hollowed out to hold seawater. After drying and filtering through tinjungan, the salt is harvested every few days during the dry season.\n\nWith your guide, you visit the salt fields in Purwakerthi village and the Amed Salt Center run by a community cooperative, and hear about the challenges farmers face: land under pressure, an ageing workforce and sharecropping. Field visits happen only in the production season; outside it, the tour focuses on the salt center and the coast."
+      },
+      "coverImage": "/images/content/amed/salt-troughs.webp",
+      "gallery": [
+        "/images/content/amed/salt-troughs.webp",
+        "/images/content/amed/golden-hour.webp",
+        "/images/content/amed/agung-from-amed.webp",
+        "/images/content/amed/jukung-sand.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Palungan batang kelapa dan tinjungan bambu",
+          "en": "Coconut-trunk troughs and bamboo strainers"
+        },
+        {
+          "id": "Amed Salt Center milik koperasi",
+          "en": "The cooperative's Amed Salt Center"
+        },
+        {
+          "id": "Garam berindikasi geografis",
+          "en": "A Geographical Indication salt"
+        },
+        {
+          "id": "Pesisir dengan latar Gunung Agung",
+          "en": "A coast backed by Mount Agung"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Kontribusi untuk koperasi petani garam",
+          "en": "Contribution to the salt farmers' cooperative"
+        },
+        {
+          "id": "Makan siang hidangan laut",
+          "en": "Seafood lunch"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Pantai Jemeluk, Amed, Karangasem",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Dari palungan ke meja makan",
+            "en": "From trough to table"
+          },
+          "description": {
+            "id": "08.00 bertemu di Pantai Jemeluk, mengunjungi ladang garam dan Amed Salt Center, 12.00 makan siang, sore bebas di pantai, selesai sekitar 14.00.",
+            "en": "08:00 meet at Jemeluk Beach, visit the salt fields and the Amed Salt Center, 12:00 lunch, free afternoon on the beach, ending around 14:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "fajar-jukung-amed",
+      "destination": "amed",
+      "category": "village",
+      "durationDays": 2,
+      "pricePerPerson": 1650000,
+      "maxParticipants": 8,
+      "title": {
+        "id": "Fajar dan Jukung di Pesisir Amed",
+        "en": "Dawn and Jukung on the Amed Coast"
+      },
+      "summary": {
+        "id": "Menginap di Amed untuk menyaksikan jukung nelayan kembali saat pagi dan mengenal kehidupan kampung pesisir.",
+        "en": "Stay overnight in Amed to watch the fishing jukung return at dawn and get to know coastal village life."
+      },
+      "description": {
+        "id": "Jukung, perahu bercadik khas Bali, menjadi pemandangan sehari-hari di teluk-teluk Amed. Tur ini mengajak kamu menginap semalam agar bisa bangun pagi dan menyaksikan nelayan kembali ke pantai, sementara Gunung Agung perlahan terlihat di balik cahaya pagi.\n\nPemandu setempat menjelaskan kehidupan nelayan kecil di pesisir timur Bali, yang juga ikut dalam kegiatan wisata bahari, serta tantangan musim paceklik ikan. Hari kedua kita berjalan di sepanjang teluk Jemeluk dan Bunutan, lalu singgah di ladang garam tradisional bila sedang musim produksi.",
+        "en": "Jukung, Bali's outrigger canoes, are an everyday sight in Amed's bays. This tour has you stay one night so you can wake early and watch the fishers return to the beach, while Mount Agung slowly appears in the morning light.\n\nA local guide explains the lives of small-scale fishers on Bali's east coast, who also take part in marine tourism, and the challenge of lean fishing seasons. On the second day we walk along the bays of Jemeluk and Bunutan and stop at the traditional salt fields when they are in season."
+      },
+      "coverImage": "/images/content/amed/jukung-sunset.webp",
+      "gallery": [
+        "/images/content/amed/jukung-sunset.webp",
+        "/images/content/amed/fishing-beach.webp",
+        "/images/content/amed/jukung-sand.webp",
+        "/images/content/amed/golden-hour.webp",
+        "/images/content/amed/agung-from-amed.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Jukung nelayan saat fajar",
+          "en": "Fishing jukung at dawn"
+        },
+        {
+          "id": "Gunung Agung dari pesisir",
+          "en": "Mount Agung from the coast"
+        },
+        {
+          "id": "Kehidupan nelayan kecil",
+          "en": "Small-scale fishing life"
+        },
+        {
+          "id": "Teluk Jemeluk dan Bunutan",
+          "en": "Jemeluk and Bunutan bays"
+        }
+      ],
+      "included": [
+        {
+          "id": "Penginapan 1 malam",
+          "en": "1-night stay"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Pantai Jemeluk, Amed, Karangasem",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Amed",
+            "en": "Arrive in Amed"
+          },
+          "description": {
+            "id": "14.00 bertemu di Pantai Jemeluk, check-in, sore berjalan di pantai dan berbincang dengan pemandu tentang kehidupan pesisir, makan malam.",
+            "en": "14:00 meet at Jemeluk Beach, check in, late-afternoon beach walk and conversation about coastal life, dinner."
+          }
+        },
+        {
+          "title": {
+            "id": "Fajar dan teluk-teluk Amed",
+            "en": "Dawn and the bays of Amed"
+          },
+          "description": {
+            "id": "05.30 menyaksikan jukung kembali, sarapan, berjalan di teluk Jemeluk dan Bunutan, singgah di ladang garam bila musim, selesai sekitar 12.00.",
+            "en": "05:30 watch the jukung return, breakfast, walk the bays of Jemeluk and Bunutan, salt fields if in season, ending around 12:00."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Tenganan",
+    "https://www.indonesia.travel/de/de/travel-ideas/culture/makin-tahu-tentang-bali-yuk-lakukan-7-kegiatan-seru-ini-di-desa-tenganan-pegringsingan/",
+    "https://australian.museum/learn/cultures/international-collection/indonesia/ceremonial-textile/",
+    "https://threadsoflife.com/blogs/textile-highlights/geringsing-from-bali",
+    "https://inivie.com/discover-bali/tenganan-village-bali-aga",
+    "https://e-journal.unmas.ac.id/index.php/ngayah/article/view/350",
+    "https://conference.undiksha.ac.id/senadimas/2022/prosiding/file/180.pdf",
+    "https://budayabali.com/songket-sidemen-the-beauty-and-wisdom-of-balis-traditional-textile",
+    "https://en.wikipedia.org/wiki/Klungkung_Palace",
+    "https://www.bulgarihotels.com/fr_FR/bali/whats-on/article/bali/in-the-city/Kamasan-Village,-Home-to-a-Community-of-Painters",
+    "https://wovensouls.com/pages/wovensouls-guide-where-can-one-see-kamasan-paintings",
+    "https://mongabay.co.id/2017/05/11/kusamba-gairah-kehidupan-warga-pesisir-klungkung/",
+    "https://mongabay.co.id/2026/07/03/hadapi-berbagai-tantangan-garam-kusamba-terancam-punah",
+    "https://finance.detik.com/foto-bisnis/d-7657128/mengecap-gurihnya-garam-khas-pantai-kusamba-bali",
+    "https://mongabay.co.id/2019/10/17/ladang-garam-laut-makin-terdesak-koperasi-petani-buka-amed-salt-center/",
+    "https://mongabay.co.id/2015/10/18/inilah-garam-es-krim-dari-amed-bali/",
+    "https://bali.antaranews.com/berita/266577/bari-bali-indikasi-geografis-untuk-garam-mudahkan-petani-lakukan-pemasaran",
+    "https://bali.antaranews.com/berita/93110/menjemput-malam-di-teluk-jemeluk",
+    "https://mongabay.co.id/2022/02/01/amed-seraya-duo-keunikan-pesisir-di-ujung-timur-pulau-bali/",
+    "https://mongabay.co.id/2021/09/26/lomba-jukung-cara-nelayan-menghibur-diri-ketika-paceklik-ikan/"
+  ]
+}

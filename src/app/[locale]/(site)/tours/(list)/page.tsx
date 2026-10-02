@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Pagination } from "@/components/ui/pagination";
 import { PAGE_SIZE, parsePage } from "@/lib/pagination";
+import { groupByIsland } from "@/lib/regions";
 import { Reveal } from "@/components/shared/reveal";
 import { TourCard } from "@/components/shared/tour-card";
 import { WishlistButton } from "@/features/wishlist/components/wishlist-button";
@@ -62,8 +63,9 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
   const rawParams = await searchParams;
   const search = parseTourSearch(rawParams);
   const requestedPage = parsePage(rawParams.page);
-  const [t, result, destinations, user] = await Promise.all([
+  const [t, tIslands, result, destinations, user] = await Promise.all([
     getTranslations("tours.list"),
+    getTranslations("common.islands"),
     tourService.searchPage(toTourFilters(search), requestedPage, PAGE_SIZE.publicTours),
     destinationService.list(),
     getCurrentUser(),
@@ -94,7 +96,10 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
       <Container className="py-12 md:py-16">
         <TourFilters
           search={search}
-          destinations={destinations.map((d) => ({ slug: d.slug, name: d.name }))}
+          destinations={groupByIsland(destinations, (d) => d.province).flatMap(
+            ({ island, items }) =>
+              items.map((d) => ({ slug: d.slug, name: d.name, group: tIslands(island) })),
+          )}
         />
 
         <h2 className="sr-only">{t("resultsHeading")}</h2>

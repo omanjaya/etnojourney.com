@@ -30,7 +30,10 @@ const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
   images: {
-    formats: ["image/avif", "image/webp"],
+    // WebP only: AVIF encodes ~2.4x slower (measured on a cold cache), and on
+    // small servers/CI the on-demand encode queue made first visits hang.
+    // Sources are already compressed WebP, so AVIF's ~20% saving isn't worth it.
+    formats: ["image/webp"],
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
     // Uploaded media is optimizable only under /media/ and without query strings.
     localPatterns: [

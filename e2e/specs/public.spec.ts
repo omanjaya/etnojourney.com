@@ -54,6 +54,24 @@ test.describe("public browsing", () => {
     await expect(page.locator("article").first()).toBeVisible();
   });
 
+  test("destinations are grouped by island with jump links", async ({ page }) => {
+    await page.goto("/destinations");
+    const jump = page.getByRole("navigation", { name: "Lompat ke pulau" });
+    await expect(jump.getByRole("link", { name: /^Bali/ })).toBeVisible();
+
+    const bali = page.locator("section#bali");
+    await expect(bali.getByRole("heading", { level: 2, name: "Bali" })).toBeVisible();
+    await expect(bali.locator('a[href="/destinations/ubud"]')).toHaveCount(1);
+    await expect(page.locator('section#jawa a[href="/destinations/yogyakarta"]')).toHaveCount(1);
+
+    await jump.getByRole("link", { name: /^Sulawesi/ }).click();
+    await expect(page).toHaveURL(/#sulawesi$/);
+
+    // The tour filter uses the same island groups.
+    await page.goto("/tours");
+    await expect(page.locator('#filter-destination optgroup[label="Bali"] option[value="ubud"]')).toHaveCount(1);
+  });
+
   test("unknown tour and unknown paths return a branded 404", async ({ page }) => {
     for (const path of ["/tours/does-not-exist", "/some/unknown/path"]) {
       const response = await page.goto(path);
