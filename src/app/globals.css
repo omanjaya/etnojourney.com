@@ -43,8 +43,10 @@
   --animate-fade-in: fade-in 0.6s var(--ease-editorial) both;
   /* Slow zoom-out for hero photography. */
   --animate-ken-burns: ken-burns 14s var(--ease-editorial) both;
-  /* Infinite horizontal scroll; pair with a duplicated track. */
-  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  /* Infinite horizontal scroll; pair with a duplicated track. The 40s is only a
+     default: <Marquee> sets animation-duration from its measured width and
+     speed (custom properties can't override it, this value resolves on :root). */
+  --animate-marquee: marquee 40s linear infinite;
 
   @keyframes fade-in {
     from {

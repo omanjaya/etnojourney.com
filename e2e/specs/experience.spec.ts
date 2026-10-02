@@ -1,6 +1,23 @@
 import { expect, test } from "@playwright/test";
 
 test.describe("experience", () => {
+  test("home ticker moves at a readable pace", async ({ page }) => {
+    await page.goto("/");
+    const track = page.locator(".marquee-track");
+    // The track never stops moving, so it is never "stable" for Playwright's
+    // actionability checks; scroll its static container into view instead.
+    await page.locator(".marquee").evaluate((el) => el.scrollIntoView({ block: "center" }));
+    // Let the component measure its width and apply the duration.
+    await page.waitForTimeout(1000);
+    const x = () => track.evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m41);
+    const start = await x();
+    await page.waitForTimeout(3000);
+    const pxPerSecond = Math.abs((await x()) - start) / 3;
+    // Comfortable reading speed; it was ~660 px/s when the duration was ignored.
+    expect(pxPerSecond).toBeGreaterThan(15);
+    expect(pxPerSecond).toBeLessThan(70);
+  });
+
   test("language switch keeps the current page", async ({ page }) => {
     await page.goto("/tours/kasada-dan-fajar-bromo");
     await page
