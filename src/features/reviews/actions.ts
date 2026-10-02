@@ -200,19 +200,11 @@ export async function setReviewPhotoHiddenAction(
 
   return runAction(async () => {
     const actor = await assertPermission("reviews.manage");
-    const { photo, changed } = await reviewService.setPhotoHidden(
+    const { photo } = await reviewService.setPhotoHidden(
       parsed.data.photoId,
       parsed.data.isHidden,
+      actor.id,
     );
-    if (changed) {
-      await auditService.record({
-        actorId: actor.id,
-        action: photo.isHidden ? "review.photo_hidden" : "review.photo_shown",
-        entityType: "review",
-        entityId: photo.reviewId,
-        details: { photoId: photo.id, position: photo.position },
-      });
-    }
     revalidate.tourDetails();
     revalidate.admin();
     return { isHidden: photo.isHidden };

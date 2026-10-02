@@ -133,6 +133,7 @@ export function RescheduleDialog({
                 onChange={setDay}
                 refreshKey={refreshKey}
                 labelledBy={labelId}
+                marked={{ date: currentDate, label: t("currentMarker") }}
                 invalid={sameDate || tooFewSeats}
                 describedBy={hintId}
               />

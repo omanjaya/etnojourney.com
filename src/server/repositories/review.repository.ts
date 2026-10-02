@@ -158,17 +158,44 @@ export const reviewRepository = {
       .orderBy(asc(reviewPhotos.reviewId), asc(reviewPhotos.position), asc(reviewPhotos.id));
   },
 
-  findPhoto(id: number) {
-    return db
+  findPhotoForUpdate(tx: DbExecutor, id: number) {
+    return tx
       .select()
       .from(reviewPhotos)
       .where(eq(reviewPhotos.id, id))
-      .limit(1)
+      .for("update")
       .then((rows) => rows[0]);
   },
 
-  setPhotoHidden(id: number, isHidden: boolean) {
-    return db
+  /** Whether `path` is a visible photo of a published review (what /media may serve publicly). */
+  async isPhotoPublic(path: string): Promise<boolean> {
+    const rows = await db
+      .select({ id: reviewPhotos.id })
+      .from(reviewPhotos)
+      .innerJoin(reviews, eq(reviewPhotos.reviewId, reviews.id))
+      .where(
+        and(
+          eq(reviewPhotos.path, path),
+          eq(reviewPhotos.isHidden, false),
+          eq(reviews.isPublished, true),
+        ),
+      )
+      .limit(1);
+    return rows.length > 0;
+  },
+
+  /** Whether `path` belongs to any review (hidden or not): moderators may still view it. */
+  async isPhotoAttached(path: string): Promise<boolean> {
+    const rows = await db
+      .select({ id: reviewPhotos.id })
+      .from(reviewPhotos)
+      .where(eq(reviewPhotos.path, path))
+      .limit(1);
+    return rows.length > 0;
+  },
+
+  setPhotoHidden(tx: DbExecutor, id: number, isHidden: boolean) {
+    return tx
       .update(reviewPhotos)
       .set({ isHidden })
       .where(eq(reviewPhotos.id, id))

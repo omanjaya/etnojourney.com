@@ -15,6 +15,9 @@ const monthOf = (column: SQL | typeof payments.paidAt | typeof bookings.createdA
 const sumInt = (column: SQL | typeof payments.amount | typeof bookings.participants) =>
   sql<number>`coalesce(sum(${column}), 0)::bigint`;
 
+/** Money actually returned: the policy amount for partial refunds, else the full payment. */
+const refundedAmount = sql`coalesce(${payments.refundAmount}, ${payments.amount})`;
+
 /** When a refund happened: the recorded time, else the last update of the row. */
 const refundedAt = sql`coalesce(${payments.refundedAt}, ${payments.updatedAt})`;
 
@@ -58,7 +61,7 @@ export const reportRepository = {
   async refundsByMonth(range: Range) {
     const month = monthOf(refundedAt);
     const rows = await db
-      .select({ month, amount: sumInt(payments.amount) })
+      .select({ month, amount: sumInt(refundedAmount) })
       .from(payments)
       .where(refundedIn(range))
       .groupBy(month);
@@ -117,7 +120,7 @@ export const reportRepository = {
 
   async refundsByTour(range: Range) {
     const rows = await db
-      .select({ tourId: bookings.tourId, amount: sumInt(payments.amount) })
+      .select({ tourId: bookings.tourId, amount: sumInt(refundedAmount) })
       .from(payments)
       .innerJoin(bookings, eq(payments.bookingId, bookings.id))
       .where(refundedIn(range))
@@ -128,7 +131,7 @@ export const reportRepository = {
   /** Count and amount of refunds recorded in the range. */
   async refundTotals(range: Range) {
     const [row] = await db
-      .select({ count: count(), amount: sumInt(payments.amount) })
+      .select({ count: count(), amount: sumInt(refundedAmount) })
       .from(payments)
       .where(refundedIn(range));
     return { count: Number(row?.count ?? 0), amount: Number(row?.amount ?? 0) };

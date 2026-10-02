@@ -117,49 +117,82 @@ export default async function PartnerDeparturePage({
               description={t("emptyDescription")}
             />
           ) : (
-            <div className="border-line overflow-x-auto rounded-(--radius-card) border bg-white">
-              <table className="w-full min-w-[40rem] text-left text-sm">
-                <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
-                  <tr>
-                    <th scope="col" className="px-4 py-3 font-medium">
-                      {t("columns.code")}
-                    </th>
-                    <th scope="col" className="px-4 py-3 font-medium">
-                      {t("columns.contact")}
-                    </th>
-                    <th scope="col" className="px-4 py-3 text-right font-medium">
-                      {t("columns.participants")}
-                    </th>
-                    <th scope="col" className="px-4 py-3 font-medium">
-                      {t("columns.notes")}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-line divide-y">
-                  {travellers.map((row) => (
-                    <tr key={row.code} className="align-top">
-                      <td className="px-4 py-3 font-mono text-xs font-semibold tracking-wide">
+            <>
+              {/* Phones (where guides read this): one card per booking. */}
+              <ul className="flex flex-col gap-3 md:hidden">
+                {travellers.map((row) => (
+                  <li
+                    key={row.code}
+                    className="border-line rounded-(--radius-card) border bg-white p-4"
+                  >
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="font-mono text-sm font-semibold tracking-wide">
                         {row.code}
-                      </td>
-                      <td className="px-4 py-3">
-                        <p className="font-medium">{row.contactName}</p>
-                        <a
-                          href={`tel:${row.contactPhone.replace(/[^\d+]/g, "")}`}
-                          className="text-ink-soft hover:text-terracotta inline-flex min-h-8 items-center gap-1.5 underline-offset-4 hover:underline"
-                        >
-                          <Phone className="size-3.5" aria-hidden />
-                          {row.contactPhone}
-                        </a>
-                      </td>
-                      <td className="px-4 py-3 text-right tabular-nums">{row.participants}</td>
-                      <td className="text-ink-soft max-w-80 px-4 py-3 whitespace-pre-line">
-                        {row.notes || <span className="text-muted">-</span>}
-                      </td>
+                      </span>
+                      <span className="text-ink-soft text-sm tabular-nums">
+                        {t("columns.participants")}: {row.participants}
+                      </span>
+                    </div>
+                    <p className="mt-2 font-medium">{row.contactName}</p>
+                    <a
+                      href={`tel:${row.contactPhone.replace(/[^\d+]/g, "")}`}
+                      className="text-ink-soft hover:text-terracotta inline-flex min-h-11 items-center gap-1.5"
+                    >
+                      <Phone className="size-4" aria-hidden />
+                      {row.contactPhone}
+                    </a>
+                    {row.notes && (
+                      <p className="border-line text-ink-soft mt-1 border-t pt-2 text-sm whitespace-pre-line">
+                        {row.notes}
+                      </p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+              <div className="border-line hidden overflow-x-auto rounded-(--radius-card) border bg-white md:block">
+                <table className="w-full min-w-[40rem] text-left text-sm">
+                  <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
+                    <tr>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        {t("columns.code")}
+                      </th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        {t("columns.contact")}
+                      </th>
+                      <th scope="col" className="px-4 py-3 text-right font-medium">
+                        {t("columns.participants")}
+                      </th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        {t("columns.notes")}
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="divide-line divide-y">
+                    {travellers.map((row) => (
+                      <tr key={row.code} className="align-top">
+                        <td className="px-4 py-3 font-mono text-xs font-semibold tracking-wide">
+                          {row.code}
+                        </td>
+                        <td className="px-4 py-3">
+                          <p className="font-medium">{row.contactName}</p>
+                          <a
+                            href={`tel:${row.contactPhone.replace(/[^\d+]/g, "")}`}
+                            className="text-ink-soft hover:text-terracotta inline-flex min-h-8 items-center gap-1.5 underline-offset-4 hover:underline"
+                          >
+                            <Phone className="size-3.5" aria-hidden />
+                            {row.contactPhone}
+                          </a>
+                        </td>
+                        <td className="px-4 py-3 text-right tabular-nums">{row.participants}</td>
+                        <td className="text-ink-soft max-w-80 px-4 py-3 whitespace-pre-line">
+                          {row.notes || <span className="text-muted">-</span>}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
           )}
         </section>
       </Container>

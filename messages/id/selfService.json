@@ -39,7 +39,8 @@
     "notEnoughSeats": "Tanggal ini hanya tersisa {count} kursi, tidak cukup untuk {participants}.",
     "keep": "Tetap tanggal sekarang",
     "confirm": "Pindahkan booking",
-    "done": "Tanggal perjalananmu sekarang {date}. Konfirmasinya sudah kami kirim ke emailmu."
+    "done": "Tanggal perjalananmu sekarang {date}. Konfirmasinya sudah kami kirim ke emailmu.",
+    "currentMarker": "Tanggal saat ini"
   },
   "policy": {
     "tiersCaption": "Pengembalian dana menurut berapa hari sebelum tanggal perjalanan kamu membatalkan (waktu Asia/Jakarta)",

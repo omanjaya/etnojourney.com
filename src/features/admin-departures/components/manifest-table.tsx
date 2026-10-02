@@ -78,6 +78,69 @@ function Rows({ rows }: { rows: ManifestRow[] }) {
   ));
 }
 
+/** Phones: one card per booking, so every field is readable without side-scrolling. */
+function Cards({ rows }: { rows: ManifestRow[] }) {
+  const t = useTranslations("adminDepartures.manifest");
+  const tc = useTranslations("adminDepartures.manifest.columns");
+  return (
+    <ul className="flex flex-col gap-3 md:hidden print:hidden">
+      {rows.map((row) => (
+        <li key={row.id} className="border-line rounded-(--radius-card) border bg-white p-4">
+          <div className="flex items-start justify-between gap-3">
+            <Link
+              href={`/admin/bookings/${row.code}`}
+              className="hover:text-terracotta inline-flex min-h-11 items-center gap-1 font-mono text-sm font-semibold tracking-wide"
+            >
+              {row.code}
+              <ChevronRight className="size-3.5" aria-hidden />
+            </Link>
+            <BookingStatusBadge status={row.status} />
+          </div>
+          <p className="font-medium">{row.contactName}</p>
+          <a
+            href={`tel:${row.contactPhone}`}
+            className="text-ink-soft hover:text-terracotta inline-flex min-h-11 items-center text-sm tabular-nums"
+          >
+            {row.contactPhone}
+          </a>
+          <dl className="border-line mt-1 grid grid-cols-2 gap-3 border-t pt-3 text-sm">
+            <div>
+              <dt className="text-muted text-xs">{tc("participants")}</dt>
+              <dd className="font-medium tabular-nums">{row.participants}</dd>
+            </div>
+            <div>
+              <dt className="text-muted text-xs">{tc("payment")}</dt>
+              <dd>
+                {row.paymentStatus ? (
+                  <PaymentStatusBadge status={row.paymentStatus as PaymentStatus} />
+                ) : (
+                  <span className="text-muted text-xs">{t("noPayment")}</span>
+                )}
+              </dd>
+            </div>
+            {row.notes && (
+              <div className="col-span-2">
+                <dt className="text-muted text-xs">{tc("notes")}</dt>
+                <dd className="text-ink-soft text-xs leading-relaxed whitespace-pre-line">
+                  {row.notes}
+                </dd>
+              </div>
+            )}
+            {row.notesCount > 0 && (
+              <div className="col-span-2">
+                <dd className="text-ink-soft inline-flex items-center gap-1 text-xs">
+                  <MessageSquareText className="size-3.5" aria-hidden />
+                  {t("internalNotes", { count: row.notesCount })}
+                </dd>
+              </div>
+            )}
+          </dl>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function Head() {
   const t = useTranslations("adminDepartures.manifest.columns");
   const th = "px-4 py-3 font-medium print:px-2";
@@ -131,33 +194,39 @@ export function ManifestTable({ rows, totals }: { rows: ManifestRow[]; totals: M
           {t("empty")}
         </p>
       ) : (
-        <TableScroll
-          label={t("tableLabel")}
-          className="print:overflow-visible print:rounded-none print:border-0"
-        >
-          <table className={tableClass}>
-            <Head />
-            <tbody className="divide-line divide-y">
-              <Rows rows={active} />
-            </tbody>
-            <tfoot className="border-line bg-sand-50 border-t text-sm font-medium">
-              <tr>
-                <th scope="row" colSpan={3} className={`${cell} text-left`}>
-                  {t("totals", { count: totals.bookings })}
-                </th>
-                <td className={`${cell} text-right tabular-nums`} data-testid="manifest-total">
-                  {totals.participants}
-                </td>
-                <td colSpan={4} className={`${cell} text-muted text-xs font-normal`}>
-                  {t("totalsBreakdown", {
-                    confirmed: totals.confirmedParticipants,
-                    pending: totals.pendingParticipants,
-                  })}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-        </TableScroll>
+        <>
+          <Cards rows={active} />
+          <p className="text-ink-soft text-sm font-medium md:hidden print:hidden">
+            {t("totals", { count: totals.bookings })}: {totals.participants}
+          </p>
+          <TableScroll
+            label={t("tableLabel")}
+            className="hidden md:block print:block print:overflow-visible print:rounded-none print:border-0"
+          >
+            <table className={tableClass}>
+              <Head />
+              <tbody className="divide-line divide-y">
+                <Rows rows={active} />
+              </tbody>
+              <tfoot className="border-line bg-sand-50 border-t text-sm font-medium">
+                <tr>
+                  <th scope="row" colSpan={3} className={`${cell} text-left`}>
+                    {t("totals", { count: totals.bookings })}
+                  </th>
+                  <td className={`${cell} text-right tabular-nums`} data-testid="manifest-total">
+                    {totals.participants}
+                  </td>
+                  <td colSpan={4} className={`${cell} text-muted text-xs font-normal`}>
+                    {t("totalsBreakdown", {
+                      confirmed: totals.confirmedParticipants,
+                      pending: totals.pendingParticipants,
+                    })}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </TableScroll>
+        </>
       )}
 
       {cancelled.length > 0 && (

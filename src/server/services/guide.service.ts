@@ -167,10 +167,10 @@ export const guideService = {
       await auditService.record(
         {
           actorId,
-          action: "guide.updated",
+          action: "guide.unlinked",
           entityType: "guide",
           entityId: guideId,
-          details: { unlinkedUserId: guide.userId },
+          details: { userId: guide.userId },
         },
         tx,
       );

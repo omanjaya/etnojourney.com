@@ -39,7 +39,8 @@
     "notEnoughSeats": "Only {count, plural, one {# seat is} other {# seats are}} left on that date, not enough for {participants}.",
     "keep": "Keep current date",
     "confirm": "Move my booking",
-    "done": "Your travel date is now {date}. We've sent a confirmation to your email."
+    "done": "Your travel date is now {date}. We've sent a confirmation to your email.",
+    "currentMarker": "Current date"
   },
   "policy": {
     "tiersCaption": "Refund by how many days before the travel date you cancel (Asia/Jakarta time)",

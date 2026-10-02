@@ -67,6 +67,9 @@ function PhotoTile({
           alt={tp("alt", { author })}
           fill
           sizes="80px"
+          // Loaded by the browser with the moderator's session: hidden photos
+          // are not served to the (cookie-less) image optimizer.
+          unoptimized
           className={cn("object-cover transition-opacity", hidden && "opacity-35 grayscale")}
         />
         {hidden && (

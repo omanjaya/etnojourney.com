@@ -8,6 +8,7 @@ import {
 } from "@/server/repositories/booking.repository";
 import { bookingNoteRepository } from "@/server/repositories/booking-note.repository";
 import { closureRepository } from "@/server/repositories/closure.repository";
+import { departureRepository } from "@/server/repositories/departure.repository";
 import { paymentRepository } from "@/server/repositories/payment.repository";
 import { tourRepository } from "@/server/repositories/tour.repository";
 import { isoDateFromToday } from "@/lib/format";
@@ -144,10 +145,16 @@ export const bookingService = {
    * tier changed since (e.g. Jakarta midnight passed) nothing is cancelled.
    * Seats free up because capacity only counts pending and confirmed bookings.
    */
+  /**
+   * `expected` is what the traveller was shown: a free cancellation, or a paid
+   * one at a given refund percent. If the booking changed since (paid in
+   * another tab, tier rolled over at midnight) the request is refused with
+   * `refundChanged` instead of applying terms they never saw.
+   */
   cancelByTraveller(
     userId: string,
     bookingId: number,
-    expectedPercent?: number,
+    expected: { kind: "free" } | { kind: "paid"; percent: number },
     now: Date = new Date(),
   ): Promise<TravellerCancellation> {
     const today = businessToday(now);
@@ -165,9 +172,10 @@ export const bookingService = {
       const option = cancelOption(booking, paidAmount, today);
       if (!option) throw new DomainError("notCancellable");
       if (
-        option.kind === "paid" &&
-        expectedPercent !== undefined &&
-        expectedPercent !== option.quote.percent
+        option.kind !== expected.kind ||
+        (option.kind === "paid" &&
+          expected.kind === "paid" &&
+          option.quote.percent !== expected.percent)
       ) {
         throw new DomainError("refundChanged");
       }
@@ -256,6 +264,8 @@ export const bookingService = {
       });
 
       const updated = await bookingRepository.reschedule(tx, booking.id, newDate);
+      // Both departures' manifests changed: show them as "not sent" so staff resend.
+      await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate, newDate]);
       await auditService.record(
         {
           actorId: userId,
