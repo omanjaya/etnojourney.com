@@ -89,7 +89,10 @@ function NavFooter({ user }: { user: { name: string; email: string } }) {
         <p className="text-sand-50 truncate font-medium">{user.name}</p>
         <p className="text-sand-100/60 truncate text-xs">{user.email}</p>
       </div>
-      <Link href="/" className="text-sand-100/70 hover:text-sand-50 inline-flex min-h-10 items-center gap-2">
+      <Link
+        href="/"
+        className="text-sand-100/70 hover:text-sand-50 inline-flex min-h-10 items-center gap-2"
+      >
         <ArrowLeft className="size-4" aria-hidden />
         {t("backToSite")}
       </Link>
@@ -121,7 +124,7 @@ export function AdminNav({ user }: { user: { name: string; email: string } }) {
       {/* Desktop sidebar */}
       <aside
         style={{ viewTransitionName: "admin-nav" }}
-        className="bg-indigo text-sand-50 sticky top-0 hidden h-dvh flex-col gap-10 px-5 py-8 lg:flex"
+        className="bg-indigo text-sand-50 short:gap-6 short:py-6 sticky top-0 hidden h-dvh flex-col gap-10 overflow-y-auto overscroll-contain px-5 py-8 lg:flex"
       >
         <Link href="/admin" className="logo-link px-2" aria-label="EtnoJourney Admin">
           <Logo inverted />
@@ -148,7 +151,7 @@ export function AdminNav({ user }: { user: { name: string; email: string } }) {
             aria-expanded={open}
             aria-controls="admin-mobile-nav"
             aria-label={open ? t("closeMenu") : t("openMenu")}
-            className="grid size-10 place-items-center rounded-full hover:bg-white/10"
+            className="grid size-11 place-items-center rounded-full hover:bg-white/10"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
@@ -164,7 +167,8 @@ export function AdminNav({ user }: { user: { name: string; email: string } }) {
           )}
         >
           <div className="overflow-hidden">
-            <div className="flex flex-col gap-6 px-4 pb-6">
+            {/* Scrolls inside the sticky bar when the menu is taller than the screen (landscape phones). */}
+            <div className="flex max-h-[calc(100dvh-4rem)] flex-col gap-6 overflow-y-auto overscroll-contain px-4 pb-6">
               <NavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
               <NavFooter user={user} />
             </div>

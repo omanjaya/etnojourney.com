@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
   Backpack,
+  CalendarDays,
   Check,
   ChevronRight,
   CircleMinus,
@@ -20,10 +21,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { localize, type LocalizedText } from "@/lib/i18n-text";
+import { formatCurrency } from "@/lib/format";
 import { provinceLabel } from "@/lib/provinces";
 import { localizedUrl, pageMetadata, siteUrl } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Rating } from "@/components/ui/rating";
 import { categoryIcons } from "@/components/shared/category-icon";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -209,12 +212,12 @@ export default async function TourDetailPage({
   const gettingThere = tour.destination.gettingThere;
 
   return (
-    <article className="pt-28 pb-24 md:pt-32 lg:pb-0">
+    <article className="short:pt-24 pt-28 pb-24 md:pt-32 lg:pt-28 lg:pb-0">
       <JsonLd
         data={tourJsonLd(tour, locale, { home: t("breadcrumbHome"), tours: t("breadcrumbTours") })}
       />
       <Container>
-        <nav aria-label="Breadcrumb" className="text-muted mb-6 text-sm">
+        <nav aria-label="Breadcrumb" className="text-muted short:mb-2 mb-6 text-sm">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li>
               <Link href="/" className="hover:text-ink inline-flex min-h-10 items-center">
@@ -258,21 +261,44 @@ export default async function TourDetailPage({
                 />
               )}
             </div>
-            <h1 className="mt-5 text-4xl leading-[1.05] md:text-6xl">{title}</h1>
-            <p className="text-ink-soft mt-4 flex items-center gap-2">
+            <h1 className="short:mt-3 short:text-5xl mt-5 text-4xl leading-[1.05] md:text-6xl">
+              {title}
+            </h1>
+            <p className="text-ink-soft short:mt-2 mt-4 flex items-center gap-2">
               <MapPin className="text-terracotta size-4" aria-hidden />
               {tour.destination.name}, {provinceLabel(tour.destination.province, locale)}
             </p>
           </div>
-          <WishlistButton
-            tourId={tour.id}
-            initialSaved={saved}
-            isAuthenticated={Boolean(user)}
-            variant="inline"
-          />
+          <div className="flex shrink-0 flex-col items-start gap-3 md:items-end">
+            {/* Desktop: price and the way to book stay above the fold; mobile
+                has the sticky bottom bar instead. */}
+            <p className="hidden text-right lg:block">
+              <span className="text-muted block text-[11px] font-semibold tracking-[0.2em] uppercase">
+                {tc("from")}
+              </span>
+              <span className="font-display text-3xl whitespace-nowrap">
+                {formatCurrency(tour.pricePerPerson, locale)}
+              </span>{" "}
+              <span className="text-muted text-sm whitespace-nowrap">{tc("perPerson")}</span>
+            </p>
+            <div className="flex items-center gap-2">
+              <WishlistButton
+                tourId={tour.id}
+                initialSaved={saved}
+                isAuthenticated={Boolean(user)}
+                variant="inline"
+              />
+              <Button asChild className="hidden lg:inline-flex">
+                <a href="#booking">
+                  <CalendarDays aria-hidden />
+                  {t("chooseDate")}
+                </a>
+              </Button>
+            </div>
+          </div>
         </header>
 
-        <div className="mt-10">
+        <div className="short:mt-5 mt-10">
           <TourGallery
             images={images}
             alt={title}
@@ -475,7 +501,10 @@ export default async function TourDetailPage({
           </section>
         </div>
 
-        <aside id="booking" className="scroll-mt-24 lg:sticky lg:top-28 lg:self-start">
+        <aside
+          id="booking"
+          className="short:top-24 short:max-h-[calc(100dvh-7rem)] short:scroll-mt-20 scroll-mt-24 [scrollbar-width:thin] [scrollbar-color:var(--color-sand-300)_transparent] lg:sticky lg:top-28 lg:max-h-[calc(100dvh-8rem)] lg:self-start lg:overflow-y-auto lg:overscroll-contain lg:rounded-(--radius-card)"
+        >
           <div className="ej-glide-in">
             <BookingPanel
               tour={{

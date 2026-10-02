@@ -118,7 +118,7 @@ export function TourFilters({ search, total, destinations }: Props) {
 
   return (
     <div
-      className={cn("space-y-6 transition-opacity", pending && "opacity-70")}
+      className={cn("space-y-5 transition-opacity short:space-y-3", pending && "opacity-70")}
       aria-busy={pending}
     >
       {/* Category pills: always visible, also on phones. */}
@@ -156,7 +156,7 @@ export function TourFilters({ search, total, destinations }: Props) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("searchPlaceholder")}
-            className="pl-11"
+            className="pl-11 short:h-10"
             maxLength={80}
           />
         </div>
@@ -320,7 +320,7 @@ export function TourFilters({ search, total, destinations }: Props) {
               <button
                 type="button"
                 onClick={clearAll}
-                className="text-terracotta hover:bg-terracotta-light inline-flex h-12 items-center justify-center gap-1.5 rounded-xl px-3 text-sm font-medium sm:col-span-2 lg:col-auto"
+                className="text-terracotta hover:bg-terracotta-light inline-flex h-12 items-center justify-center gap-1.5 rounded-xl px-3 text-sm font-medium sm:col-span-2 lg:col-auto short:h-10"
               >
                 <X className="size-4" aria-hidden />
                 {t("clear")}
@@ -360,7 +360,7 @@ function CategoryPill({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-[background-color,border-color,color,box-shadow,scale] duration-500 ease-(--ease-editorial) active:scale-[0.97] [&_svg]:transition-transform [&_svg]:duration-500",
+        "inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium short:py-2 transition-[background-color,border-color,color,box-shadow,scale] duration-500 ease-(--ease-editorial) active:scale-[0.97] [&_svg]:transition-transform [&_svg]:duration-500",
         active
           ? "border-ink bg-ink text-sand-50 shadow-[0_10px_24px_-14px_rgb(29_26_22/0.7)]"
           : "border-line text-ink-soft hover:border-ink/30 hover:text-ink bg-white hover:[&_svg]:-rotate-6",
@@ -385,11 +385,16 @@ function FilterSelect({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-1.5 lg:min-w-36 lg:flex-1">
+    <div className="flex flex-col gap-1.5 lg:min-w-32 lg:flex-1 short:gap-1">
       <Label htmlFor={id} className="text-muted text-xs">
         {label}
       </Label>
-      <Select id={id} value={value} onChange={(e) => onChange(e.target.value)}>
+      <Select
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="short:h-10"
+      >
         {children}
       </Select>
     </div>

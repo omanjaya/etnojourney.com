@@ -3,9 +3,13 @@ import { SplitWords } from "@/components/motion";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
 
-const titleClass = "max-w-4xl text-5xl leading-[1.02] md:text-7xl";
-/** Smaller title on phones for list pages where content should appear sooner. */
-const compactTitleClass = "max-w-4xl text-4xl leading-[1.05] md:text-7xl md:leading-[1.02]";
+const titleClass = "max-w-4xl text-5xl leading-[1.02] md:text-6xl xl:text-7xl short:text-5xl";
+/**
+ * List pages (tours, destinations) where results should appear sooner: a
+ * smaller title everywhere, especially on phones and short laptop screens.
+ */
+const compactTitleClass =
+  "max-w-4xl text-4xl leading-[1.05] md:text-5xl md:leading-[1.02] xl:text-6xl short:text-4xl";
 
 /** Delay (s) for content that follows a split title, so it lands after the last word. */
 function afterTitle(title: ReactNode, extra = 0): CSSProperties {
@@ -31,21 +35,26 @@ export function PageHeader({
   description?: string;
   children?: ReactNode;
   className?: string;
-  /** Tighter spacing and smaller title below `md`; desktop is unchanged. */
+  /** Tighter spacing and a smaller title, for pages whose content is the point. */
   compact?: boolean;
 }) {
   const heading = compact ? compactTitleClass : titleClass;
   return (
     <section
       className={cn(
-        "grain border-line bg-sand-100 border-b md:pt-44 md:pb-20",
-        compact ? "pt-24 pb-8" : "pt-36 pb-14",
+        "grain border-line bg-sand-100 border-b",
+        // Clears the fixed header (72px); tighter on short laptop screens.
+        compact
+          ? "short:pt-24 short:pb-7 pt-24 pb-8 md:pt-32 md:pb-10 xl:pt-36 xl:pb-12"
+          : "short:pt-28 short:pb-10 pt-36 pb-14 md:pt-36 md:pb-14 xl:pt-44 xl:pb-20",
         className,
       )}
     >
       <Container>
         {eyebrow && (
-          <p className={cn("eyebrow animate-fade-up", compact ? "mb-3 md:mb-5" : "mb-5")}>
+          <p
+            className={cn("eyebrow animate-fade-up", compact ? "mb-3 md:mb-4" : "short:mb-3 mb-5")}
+          >
             {eyebrow}
           </p>
         )}
@@ -58,7 +67,9 @@ export function PageHeader({
           <p
             className={cn(
               "text-ink-soft animate-fade-up max-w-2xl leading-relaxed",
-              compact ? "mt-3 text-base md:mt-6 md:text-lg" : "mt-6 text-lg",
+              compact
+                ? "short:mt-3 short:text-base mt-3 text-base md:mt-4 md:text-lg"
+                : "short:mt-4 short:text-base mt-6 text-lg",
             )}
             style={afterTitle(title)}
           >

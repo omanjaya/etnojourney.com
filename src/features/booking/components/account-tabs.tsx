@@ -15,7 +15,11 @@ export function AccountTabs() {
   const t = useTranslations("account.tabs");
   const pathname = usePathname();
   return (
-    <nav aria-label={t("bookings")} className="mt-10 flex flex-wrap gap-2 print:hidden">
+    // One scrollable row on narrow phones (no orphan wrapped tab), fading at the right edge.
+    <nav
+      aria-label={t("bookings")}
+      className="-mx-4 mt-10 flex scrollbar-none gap-2 overflow-x-auto [mask-image:linear-gradient(to_right,black_85%,transparent)] px-4 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:[mask-image:none] sm:px-0 print:hidden"
+    >
       {tabs.map(({ href, key, icon: Icon }) => {
         // Booking detail pages live under /account/bookings and belong to the bookings tab.
         const active =
@@ -26,7 +30,7 @@ export function AccountTabs() {
             href={href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-medium transition-colors",
+              "inline-flex h-11 shrink-0 items-center gap-2 rounded-full px-5 text-sm font-medium whitespace-nowrap transition-colors",
               active ? "bg-ink text-sand-50" : "border-ink/15 hover:border-ink/40 border",
             )}
           >

@@ -30,6 +30,10 @@ const nextConfig: NextConfig = {
   output: "standalone",
   poweredByHeader: false,
   images: {
+    // E2E only: serve the pre-compressed WebP sources directly. Tests don't
+    // exercise image optimization, and its cold encode queue made page loads
+    // on slow CI runners flaky. Never set this in production.
+    unoptimized: process.env.NEXT_IMAGE_UNOPTIMIZED === "true",
     // WebP only: AVIF encodes ~2.4x slower (measured on a cold cache), and on
     // small servers/CI the on-demand encode queue made first visits hang.
     // Sources are already compressed WebP, so AVIF's ~20% saving isn't worth it.

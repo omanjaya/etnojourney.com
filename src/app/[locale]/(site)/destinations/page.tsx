@@ -42,9 +42,9 @@ export default async function DestinationsPage({ params }: PageProps<"/[locale]/
 
   return (
     <>
-      <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")}>
+      <PageHeader compact eyebrow={t("eyebrow")} title={t("title")} description={t("description")}>
         {groups.length > 1 && (
-          <nav aria-label={t("jumpTo")} className="mt-10 flex flex-wrap gap-2">
+          <nav aria-label={t("jumpTo")} className="short:mt-5 mt-6 flex flex-wrap gap-2 md:mt-8">
             {groups.map(({ island, items: group }) => (
               <a
                 key={island}
@@ -59,20 +59,22 @@ export default async function DestinationsPage({ params }: PageProps<"/[locale]/
         )}
       </PageHeader>
 
-      <div className="py-16 md:py-24">
+      <div className="short:py-10 py-12 md:py-16 xl:py-20">
         {groups.map(({ island, items: group }, groupIndex) => (
           <section
             key={island}
             id={island}
             aria-labelledby={`${island}-heading`}
-            className={cn("scroll-mt-24", groupIndex > 0 && "mt-20 md:mt-28")}
+            className={cn("scroll-mt-24", groupIndex > 0 && "short:mt-16 mt-16 md:mt-24")}
           >
             <Container>
-              <div className="border-line mb-8 flex items-end justify-between gap-4 border-b pb-4">
+              <div className="border-line short:mb-5 short:pb-3 mb-6 flex items-end justify-between gap-4 border-b pb-4">
                 <h2 id={`${island}-heading`} className="text-3xl md:text-4xl">
                   {tc(island)}
                 </h2>
-                <p className="text-muted text-sm">{t("destinationCount", { count: group.length })}</p>
+                <p className="text-muted text-sm">
+                  {t("destinationCount", { count: group.length })}
+                </p>
               </div>
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-12 lg:gap-6">
                 {group.map(({ destination, tourCount }, i) => (
@@ -90,7 +92,7 @@ export default async function DestinationsPage({ params }: PageProps<"/[locale]/
                       tourCount={tourCount}
                       eager={groupIndex === 0 && i === 0}
                       headingLevel="h3"
-                      className="h-[26rem] md:h-[32rem]"
+                      className="short:h-[24rem] h-[26rem] md:h-[30rem] xl:h-[32rem]"
                       sizes="(min-width: 1024px) 58vw, (min-width: 768px) 50vw, 100vw"
                     />
                   </Reveal>

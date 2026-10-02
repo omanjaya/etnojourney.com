@@ -65,7 +65,7 @@ export function TourGallery({
     <>
       <div
         className={cn(
-          "grid h-[52vh] min-h-[22rem] gap-2 overflow-hidden rounded-(--radius-card) md:h-[64vh] md:gap-3",
+          "short:h-[46vh] short:min-h-[18rem] grid h-[52vh] min-h-[22rem] gap-2 overflow-hidden rounded-(--radius-card) md:h-[64vh] md:gap-3 lg:h-[min(56vh,34rem)]",
           tiles.length > 1 ? "grid-cols-1 md:grid-cols-4 md:grid-rows-2" : "grid-cols-1",
         )}
       >
@@ -149,7 +149,10 @@ export function TourGallery({
             <div className="flex items-center justify-between px-4 py-4 sm:px-8">
               <div className="min-w-0" aria-live="polite">
                 <p className="text-sm text-white/70">{t("photo", { index: index + 1, total })}</p>
-                <PhotoCredit credit={credits[images[index]]} className="mt-1 truncate text-white/60" />
+                <PhotoCredit
+                  credit={credits[images[index]]}
+                  className="mt-1 truncate text-white/60"
+                />
               </div>
               <button
                 type="button"

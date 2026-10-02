@@ -91,7 +91,7 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
 
   return (
     <>
-      {/* Compact on phones so the first results show up without scrolling past the header. */}
+      {/* Compact so the first results show up without scrolling past the header. */}
       <PageHeader
         compact
         eyebrow={t("eyebrow")}
@@ -99,7 +99,7 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
         description={t("description")}
       />
 
-      <Container className="py-12 md:py-16">
+      <Container className="short:py-7 py-10 md:py-12">
         <TourFilters
           search={search}
           total={result.total}
@@ -111,7 +111,7 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
 
         <h2 className="sr-only">{t("resultsHeading")}</h2>
         {/* Outside the keyed block so the live region persists and announces changes. */}
-        <p className="text-muted mt-10 text-sm" aria-live="polite">
+        <p className="text-muted short:mt-5 mt-8 text-sm" aria-live="polite">
           {t("results", { count: result.total })}
           {result.pageCount > 1 && (
             <span>
