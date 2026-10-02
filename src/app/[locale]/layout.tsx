@@ -6,6 +6,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { localizedUrl, siteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/shared/json-ld";
+import { ImageFadeIn } from "@/components/motion/image-fade-in";
 import { siteContact } from "@/config/site";
 
 const fraunces = Fraunces({
@@ -89,6 +90,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       data-scroll-behavior="smooth"
     >
       <body className="min-h-dvh">
+        <ImageFadeIn />
         <a
           href="#main"
           className="bg-ink text-sand-50 sr-only z-[100] rounded-full px-4 py-2 focus:not-sr-only focus:fixed focus:top-4 focus:left-4"

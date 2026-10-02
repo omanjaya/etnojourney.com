@@ -10,4 +10,5 @@ export { CountUp } from "./count-up";
 export { Marquee } from "./marquee";
 export { Tilt } from "./tilt";
 export { Magnetic } from "./magnetic";
+export { ImageFadeIn } from "./image-fade-in";
 export { useReducedMotion } from "./use-reduced-motion";
