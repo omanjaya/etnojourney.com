@@ -13,6 +13,11 @@ import type reviews from "../messages/id/reviews.json";
 import type media from "../messages/id/media.json";
 import type emails from "../messages/id/emails.json";
 import type pages from "../messages/id/pages.json";
+import type adminBooking from "../messages/id/adminBooking.json";
+import type adminPayments from "../messages/id/adminPayments.json";
+import type adminAvailability from "../messages/id/adminAvailability.json";
+import type adminUsers from "../messages/id/adminUsers.json";
+import type adminInsights from "../messages/id/adminInsights.json";
 
 declare module "next-intl" {
   interface AppConfig {
@@ -32,6 +37,11 @@ declare module "next-intl" {
       media: typeof media;
       emails: typeof emails;
       pages: typeof pages;
+      adminBooking: typeof adminBooking;
+      adminPayments: typeof adminPayments;
+      adminAvailability: typeof adminAvailability;
+      adminUsers: typeof adminUsers;
+      adminInsights: typeof adminInsights;
     };
   }
 }

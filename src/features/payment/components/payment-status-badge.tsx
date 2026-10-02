@@ -7,6 +7,7 @@ const tones = {
   paid: "leaf",
   failed: "danger",
   expired: "neutral",
+  refunded: "neutral",
 } as const;
 
 export function PaymentStatusBadge({ status }: { status: PaymentStatus }) {

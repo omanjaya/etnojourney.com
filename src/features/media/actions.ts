@@ -3,8 +3,7 @@
 import { getTranslations } from "next-intl/server";
 import { runAction } from "@/features/shared/run-action";
 import { fail, ok, type ActionResult } from "@/lib/action-result";
-import { getCurrentUser } from "@/server/auth/guards";
-import { DomainError } from "@/server/services/errors";
+import { assertPermission } from "@/server/auth/guards";
 import { ImageRejectedError, storeTourImage } from "@/server/storage/image-processing";
 import { MAX_UPLOAD_BYTES } from "@/server/storage/image-validation";
 
@@ -15,8 +14,7 @@ type Outcome = { image: UploadedImage } | { rejected: ImageRejectedError["reason
 /** Admin-only image upload. The file is validated by content and re-encoded server-side. */
 export async function uploadImageAction(formData: FormData): Promise<ActionResult<UploadedImage>> {
   const result = await runAction<Outcome>(async () => {
-    const user = await getCurrentUser();
-    if (!user || user.role !== "admin") throw new DomainError("forbidden");
+    await assertPermission("catalogue.manage");
 
     const file = formData.get("file");
     if (!(file instanceof File) || file.size === 0) return { rejected: "empty" };

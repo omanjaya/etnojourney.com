@@ -61,6 +61,8 @@ export const auth = betterAuth({
       role: { type: "string", required: false, defaultValue: "user", input: false },
       // Set from the request locale at sign-up and from account settings, never from client input.
       locale: { type: "string", required: false, defaultValue: "id", input: false },
+      // Set by an admin (users.manage); blocks sign-in. Never client input.
+      disabledAt: { type: "date", required: false, input: false },
     },
   },
   databaseHooks: {

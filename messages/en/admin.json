@@ -11,7 +11,13 @@
     "openMenu": "Open admin menu",
     "closeMenu": "Close admin menu",
     "signedInAs": "Signed in as",
-    "destinations": "Destinations"
+    "destinations": "Destinations",
+    "payments": "Payments",
+    "availability": "Availability",
+    "credits": "Photo credits",
+    "reports": "Reports",
+    "users": "Users",
+    "activity": "Activity log"
   },
   "overview": {
     "eyebrow": "Admin Panel",

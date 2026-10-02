@@ -5,7 +5,8 @@
     "pending": "Awaiting payment",
     "paid": "Paid",
     "failed": "Payment failed",
-    "expired": "Expired"
+    "expired": "Expired",
+    "refunded": "Refunded"
   },
   "finish": {
     "metaTitle": "Payment status",

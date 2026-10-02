@@ -2,12 +2,18 @@
 
 import {
   ArrowLeft,
+  BarChart3,
   CalendarCheck,
+  CalendarX,
+  Camera,
+  History,
   LayoutDashboard,
   MapIcon,
   MapPin,
   Menu,
   MessageSquareText,
+  ReceiptText,
+  Users,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -17,25 +23,51 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/shared/logo";
 import { SignOutButton } from "@/features/auth/components/sign-out-button";
+import { can, type Permission } from "@/server/auth/permissions";
 
-const items: {
-  href: string;
-  key: "overview" | "bookings" | "tours" | "destinations" | "reviews";
-  icon: LucideIcon;
-}[] = [
-  { href: "/admin", key: "overview", icon: LayoutDashboard },
-  { href: "/admin/bookings", key: "bookings", icon: CalendarCheck },
-  { href: "/admin/tours", key: "tours", icon: MapIcon },
-  { href: "/admin/destinations", key: "destinations", icon: MapPin },
-  { href: "/admin/reviews", key: "reviews", icon: MessageSquareText },
+type NavKey =
+  | "overview"
+  | "bookings"
+  | "payments"
+  | "availability"
+  | "tours"
+  | "destinations"
+  | "reviews"
+  | "credits"
+  | "reports"
+  | "users"
+  | "activity";
+
+/** Each link shows only to roles holding its permission (the page re-checks). */
+const allItems: { href: string; key: NavKey; icon: LucideIcon; permission: Permission }[] = [
+  { href: "/admin", key: "overview", icon: LayoutDashboard, permission: "backoffice.access" },
+  { href: "/admin/bookings", key: "bookings", icon: CalendarCheck, permission: "bookings.manage" },
+  { href: "/admin/payments", key: "payments", icon: ReceiptText, permission: "payments.refund" },
+  { href: "/admin/availability", key: "availability", icon: CalendarX, permission: "availability.manage" },
+  { href: "/admin/tours", key: "tours", icon: MapIcon, permission: "catalogue.manage" },
+  { href: "/admin/destinations", key: "destinations", icon: MapPin, permission: "catalogue.manage" },
+  { href: "/admin/reviews", key: "reviews", icon: MessageSquareText, permission: "reviews.manage" },
+  { href: "/admin/credits", key: "credits", icon: Camera, permission: "credits.manage" },
+  { href: "/admin/reports", key: "reports", icon: BarChart3, permission: "reports.view" },
+  { href: "/admin/users", key: "users", icon: Users, permission: "users.manage" },
+  { href: "/admin/activity", key: "activity", icon: History, permission: "audit.view" },
 ];
 
 /** Item height (h-11) + gap (gap-1), used to slide the active indicator. */
 const ITEM_STEP_PX = 48;
 
-function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+function NavLinks({
+  pathname,
+  role,
+  onNavigate,
+}: {
+  pathname: string;
+  role: string;
+  onNavigate?: () => void;
+}) {
   const t = useTranslations("admin.nav");
   const tr = useTranslations("reviews.admin");
+  const items = allItems.filter((item) => can(role, item.permission));
   const activeIndex = items.findIndex(({ href }) =>
     href === "/admin" ? pathname === href : pathname.startsWith(href),
   );
@@ -101,7 +133,7 @@ function NavFooter({ user }: { user: { name: string; email: string } }) {
   );
 }
 
-export function AdminNav({ user }: { user: { name: string; email: string } }) {
+export function AdminNav({ user }: { user: { name: string; email: string; role: string } }) {
   const t = useTranslations("admin.nav");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -130,7 +162,7 @@ export function AdminNav({ user }: { user: { name: string; email: string } }) {
           <Logo inverted className="h-11" />
         </Link>
         <nav aria-label={t("label")} className="flex-1">
-          <NavLinks pathname={pathname} />
+          <NavLinks pathname={pathname} role={user.role} />
         </nav>
         <NavFooter user={user} />
       </aside>
@@ -169,7 +201,7 @@ export function AdminNav({ user }: { user: { name: string; email: string } }) {
           <div className="overflow-hidden">
             {/* Scrolls inside the sticky bar when the menu is taller than the screen (landscape phones). */}
             <div className="flex max-h-[calc(100dvh-4rem)] flex-col gap-6 overflow-y-auto overscroll-contain px-4 pb-6">
-              <NavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
+              <NavLinks pathname={pathname} role={user.role} onNavigate={() => setOpen(false)} />
               <NavFooter user={user} />
             </div>
           </div>

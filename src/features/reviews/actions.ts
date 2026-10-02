@@ -2,8 +2,8 @@
 
 import { getLocale, getTranslations } from "next-intl/server";
 import { fail, type ActionResult } from "@/lib/action-result";
-import { getCurrentUser } from "@/server/auth/guards";
-import { DomainError } from "@/server/services/errors";
+import { assertPermission, getCurrentUser } from "@/server/auth/guards";
+import { auditService } from "@/server/services/audit.service";
 import { reviewService } from "@/server/services/review.service";
 import { revalidate } from "@/features/shared/revalidate";
 import { parseInput, runAction } from "@/features/shared/run-action";
@@ -49,12 +49,17 @@ export async function setReviewPublishedAction(
   if (!parsed.success) return parsed.result;
 
   return runAction(async () => {
-    const user = await getCurrentUser();
-    if (!user || user.role !== "admin") throw new DomainError("forbidden");
+    const actor = await assertPermission("reviews.manage");
     const { review } = await reviewService.setPublished(
       parsed.data.reviewId,
       parsed.data.isPublished,
     );
+    await auditService.record({
+      actorId: actor.id,
+      action: review.isPublished ? "review.published" : "review.hidden",
+      entityType: "review",
+      entityId: review.id,
+    });
     revalidate.everything();
     return { isPublished: review.isPublished };
   });
