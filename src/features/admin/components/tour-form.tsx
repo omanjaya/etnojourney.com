@@ -19,6 +19,7 @@ import { ItineraryEditor } from "./tour-form/itinerary-editor";
 import { pairLines, splitPairs } from "./tour-form/lines";
 import { ListFieldsSection } from "./tour-form/list-fields";
 import { MediaSection } from "./tour-form/media-section";
+import { PracticalSection } from "./tour-form/practical-section";
 import { VisibilitySection } from "./tour-form/visibility-section";
 
 export { emptyTourDefaults, type TourFormDefaults } from "./tour-form/defaults";
@@ -47,6 +48,9 @@ export function TourForm({
   const [slugTouched, setSlugTouched] = useState(mode === "edit");
   const [highlightsText, setHighlightsText] = useState(splitPairs(defaults.highlights));
   const [includedText, setIncludedText] = useState(splitPairs(defaults.included));
+  const [notIncludedText, setNotIncludedText] = useState(splitPairs(defaults.notIncluded));
+  const [whatToBringText, setWhatToBringText] = useState(splitPairs(defaults.whatToBring));
+  const [etiquetteText, setEtiquetteText] = useState(splitPairs(defaults.etiquette));
 
   const set: SetTourField = (key, value) => setValues((prev) => ({ ...prev, [key]: value }));
   const err = (key: string) => fieldErrors[key]?.[0];
@@ -74,6 +78,9 @@ export function TourForm({
       maxParticipants: values.maxParticipants === "" ? 0 : values.maxParticipants,
       highlights: pairLines(highlightsText),
       included: pairLines(includedText),
+      notIncluded: pairLines(notIncludedText),
+      whatToBring: pairLines(whatToBringText),
+      etiquette: pairLines(etiquetteText),
     };
 
     startTransition(async () => {
@@ -148,6 +155,14 @@ export function TourForm({
         <ListFieldsSection
           highlights={{ value: highlightsText, onChange: setHighlightsText }}
           included={{ value: includedText, onChange: setIncludedText }}
+          err={err}
+        />
+        <PracticalSection
+          difficulty={values.difficulty}
+          onDifficultyChange={(v) => set("difficulty", v)}
+          notIncluded={{ value: notIncludedText, onChange: setNotIncludedText }}
+          whatToBring={{ value: whatToBringText, onChange: setWhatToBringText }}
+          etiquette={{ value: etiquetteText, onChange: setEtiquetteText }}
           err={err}
         />
         <ItineraryEditor {...sectionProps} />

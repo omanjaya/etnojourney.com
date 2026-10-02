@@ -21,6 +21,8 @@ export type DestinationFormDefaults = {
   tagline: LocalizedText;
   description: LocalizedText;
   heroImage: string;
+  /** Empty in both locales means "not set" (stored as null). */
+  gettingThere: LocalizedText;
 };
 
 export const emptyDestinationDefaults: DestinationFormDefaults = {
@@ -30,6 +32,7 @@ export const emptyDestinationDefaults: DestinationFormDefaults = {
   tagline: { id: "", en: "" },
   description: { id: "", en: "" },
   heroImage: "",
+  gettingThere: { id: "", en: "" },
 };
 
 export function DestinationForm({
@@ -139,6 +142,19 @@ export function DestinationForm({
             hint={t("fields.descriptionHint")}
             multiline
             rows={9}
+          />
+        </Section>
+
+        <Section title={t("sections.access")} hint={t("sections.accessHint")}>
+          <BilingualField
+            name="gettingThere"
+            label={t("fields.gettingThere")}
+            value={values.gettingThere}
+            onChange={(v) => set("gettingThere", v)}
+            error={err("gettingThere")}
+            hint={t("fields.gettingThereHint")}
+            multiline
+            rows={4}
           />
         </Section>
 

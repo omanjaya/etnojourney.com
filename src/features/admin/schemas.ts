@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { isAllowedImageSource } from "@/features/media/image-url";
-import { bookingStatus, tourCategory } from "@/server/db/schema";
+import { bookingStatus, tourCategory, tourDifficulty } from "@/server/db/schema";
 
 const localized = (max: number) =>
   z.object({
@@ -109,6 +109,11 @@ export const tourFormSchema = z.object({
   gallery: z.array(imageSource).max(12, "invalid"),
   highlights: z.array(localized(160)).max(12, "invalid"),
   included: z.array(localized(160)).max(20, "invalid"),
+  // Practical "before you go" info (limits match src/server/db/content.ts).
+  difficulty: z.enum(tourDifficulty.enumValues, { error: "required" }),
+  notIncluded: z.array(localized(160)).max(6, "invalid"),
+  whatToBring: z.array(localized(160)).max(8, "invalid"),
+  etiquette: z.array(localized(200)).max(6, "invalid"),
   isPublished: z.boolean(),
   isFeatured: z.boolean(),
   itinerary: z
@@ -131,6 +136,19 @@ export const destinationFormSchema = z.object({
   tagline: localized(200),
   description: localized(5000),
   heroImage: imageSource,
+  /** Optional: both locales empty means "not set"; one filled means both required. */
+  gettingThere: z.preprocess(
+    (value) =>
+      value &&
+      typeof value === "object" &&
+      "id" in value &&
+      "en" in value &&
+      !String(value.id).trim() &&
+      !String(value.en).trim()
+        ? null
+        : value,
+    localized(1000).nullable(),
+  ),
 });
 
 export type DestinationFormValues = z.input<typeof destinationFormSchema>;
