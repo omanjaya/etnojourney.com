@@ -8,7 +8,9 @@
     "eyebrow": "Destinasi",
     "title": "Tempat-tempat di mana tradisi masih hidup",
     "description": "Setiap destinasi adalah rumah bagi komunitas yang menjaga adatnya. Pilih satu, lalu temui tuan rumahnya.",
-    "gridHeading": "Semua destinasi"
+    "gridHeading": "Semua destinasi",
+    "jumpTo": "Lompat ke pulau",
+    "destinationCount": "{count, plural, one {# destinasi} other {# destinasi}}"
   },
   "detail": {
     "eyebrow": "Destinasi di {province}",

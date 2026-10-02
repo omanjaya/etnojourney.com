@@ -85,5 +85,15 @@
       "source": "Sumber"
     }
   },
-  "newTour": "Baru"
+  "newTour": "Baru",
+  "islands": {
+    "bali": "Bali",
+    "nusa-tenggara": "Nusa Tenggara",
+    "jawa": "Jawa",
+    "sumatra": "Sumatra",
+    "sulawesi": "Sulawesi",
+    "kalimantan": "Kalimantan",
+    "maluku-papua": "Maluku & Papua",
+    "other": "Lainnya"
+  }
 }

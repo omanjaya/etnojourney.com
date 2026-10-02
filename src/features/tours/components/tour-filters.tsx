@@ -12,7 +12,8 @@ import { DURATION_STEPS, PRICE_STEPS, SORT_OPTIONS, type TourSearch } from "../s
 
 type Props = {
   search: TourSearch;
-  destinations: { slug: string; name: string }[];
+  /** Destination options, already ordered; `group` (island label) renders optgroups. */
+  destinations: { slug: string; name: string; group?: string }[];
 };
 
 export function TourFilters({ search, destinations }: Props) {
@@ -125,11 +126,23 @@ export function TourFilters({ search, destinations }: Props) {
             onChange={(v) => apply({ destination: v || undefined })}
           >
             <option value="">{t("allDestinations")}</option>
-            {destinations.map((d) => (
-              <option key={d.slug} value={d.slug}>
-                {d.name}
-              </option>
-            ))}
+            {groupOptions(destinations).map(({ group, options }) =>
+              group ? (
+                <optgroup key={group} label={group}>
+                  {options.map((d) => (
+                    <option key={d.slug} value={d.slug}>
+                      {d.name}
+                    </option>
+                  ))}
+                </optgroup>
+              ) : (
+                options.map((d) => (
+                  <option key={d.slug} value={d.slug}>
+                    {d.name}
+                  </option>
+                ))
+              ),
+            )}
           </FilterSelect>
 
           <FilterSelect
@@ -243,4 +256,15 @@ function FilterSelect({
       </Select>
     </div>
   );
+}
+
+/** Consecutive options with the same `group` become one optgroup (order preserved). */
+function groupOptions<T extends { group?: string }>(options: T[]) {
+  const groups: { group?: string; options: T[] }[] = [];
+  for (const option of options) {
+    const last = groups.at(-1);
+    if (last && last.group === option.group) last.options.push(option);
+    else groups.push({ group: option.group, options: [option] });
+  }
+  return groups;
 }

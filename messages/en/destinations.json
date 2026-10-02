@@ -8,7 +8,9 @@
     "eyebrow": "Destinations",
     "title": "Places where tradition is still alive",
     "description": "Each destination is home to a community that keeps its customs. Pick one, then meet your hosts.",
-    "gridHeading": "All destinations"
+    "gridHeading": "All destinations",
+    "jumpTo": "Jump to island",
+    "destinationCount": "{count, plural, one {# destination} other {# destinations}}"
   },
   "detail": {
     "eyebrow": "Destination in {province}",
