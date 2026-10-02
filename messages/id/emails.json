@@ -152,5 +152,26 @@
         "intro": "Wisatawan memindahkan {tour} dari {from} ke {to}. Mohon kabari tuan rumah di desa."
       }
     }
+  },
+  "departure": {
+    "manifest": {
+      "subject": "Manifest {tour}, {date}",
+      "preheader": "{participants} berangkat. Titik kumpul: {place}",
+      "heading": "Manifest keberangkatan",
+      "intro": "Terima kasih sudah memandu {tour} pada {date}. Berikut daftar tamu yang berangkat.",
+      "note": "Catatan dari tim: {note}",
+      "listHeading": "Daftar tamu ({count, plural, one {# booking} other {# booking}}):",
+      "phone": "telp. {phone}",
+      "pending": "menunggu konfirmasi",
+      "notes": "Catatan tamu: {notes}",
+      "privacy": "Data tamu ini hanya untuk keperluan perjalanan. Mohon tidak dibagikan ke pihak lain.",
+      "footer": "Kamu menerima email ini karena ditugaskan sebagai pemandu oleh tim EtnoJourney."
+    },
+    "details": {
+      "destination": "Destinasi",
+      "meetingPoint": "Titik kumpul",
+      "participants": "Total peserta",
+      "bookings": "Jumlah booking"
+    }
   }
 }

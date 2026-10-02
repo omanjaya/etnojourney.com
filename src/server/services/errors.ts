@@ -25,7 +25,18 @@ export type DomainErrorCode =
   | "rescheduleLimit"
   | "rescheduleTooLate"
   | "sameDate"
-  | "refundChanged";
+  | "refundChanged"
+  // Departures (guide assignment and manifests).
+  | "guideUnavailable"
+  | "guideMissing"
+  | "guideNoEmail"
+  | "departureEmpty"
+  // Guides and partner portal accounts.
+  | "guideAccountNotFound"
+  | "guideAccountBackoffice"
+  | "guideAccountDisabled"
+  | "guideAccountLinked"
+  | "guideAlreadyLinked";
 
 export class DomainError extends Error {
   constructor(

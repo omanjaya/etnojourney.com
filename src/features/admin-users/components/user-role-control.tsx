@@ -8,7 +8,7 @@ import { Field, Select } from "@/components/ui/form-controls";
 import type { UserRole } from "@/server/db/schema";
 import { changeUserRoleAction } from "../actions";
 
-const roles: UserRole[] = ["user", "staff", "admin"];
+const roles: UserRole[] = ["user", "partner", "staff", "admin"];
 
 /** Role picker for the user detail page. The server enforces every rule. */
 export function UserRoleControl({ userId, role }: { userId: string; role: UserRole }) {

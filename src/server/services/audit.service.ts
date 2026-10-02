@@ -36,10 +36,27 @@ export const auditActions = [
   "booking.rescheduled",
   "review.photo_hidden",
   "review.photo_shown",
+  "guide.created",
+  "guide.updated",
+  "guide.linked",
+  "departure.assigned",
+  "departure.unassigned",
+  "departure.noted",
+  "departure.notified",
 ] as const;
 
 export type AuditAction = (typeof auditActions)[number];
-export type AuditEntity = "booking" | "payment" | "tour" | "destination" | "review" | "closure" | "user" | "credit";
+export type AuditEntity =
+  | "booking"
+  | "payment"
+  | "tour"
+  | "destination"
+  | "review"
+  | "closure"
+  | "user"
+  | "credit"
+  | "guide"
+  | "departure";
 
 export const auditService = {
   /**

@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import type { UserRole } from "@/server/db/schema";
 
-const roleTones = { user: "neutral", staff: "gold", admin: "indigo" } as const;
+const roleTones = { user: "neutral", partner: "leaf", staff: "gold", admin: "indigo" } as const;
 
 export function UserRoleBadge({ role }: { role: UserRole }) {
   const t = useTranslations("adminUsers.roles");

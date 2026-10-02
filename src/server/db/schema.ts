@@ -32,9 +32,11 @@ const timestamps = {
 
 /**
  * `admin` is the owner (everything, incl. users, refunds, reports, activity
- * log); `staff` runs day-to-day operations. See src/server/auth/permissions.ts.
+ * log); `staff` runs day-to-day operations; `partner` is a guide or village
+ * partner who only sees their own departures in the partner portal. See
+ * src/server/auth/permissions.ts.
  */
-export const userRole = pgEnum("user_role", ["user", "staff", "admin"]);
+export const userRole = pgEnum("user_role", ["user", "partner", "staff", "admin"]);
 
 export const user = pgTable(
   "user",
@@ -366,6 +368,79 @@ export const tourClosures = pgTable(
   ],
 );
 
+/**
+ * Guides and village partners who host departures. `userId` links the partner
+ * portal account (role `partner`); a guide can exist without an account.
+ */
+export const guides = pgTable(
+  "guides",
+  {
+    id: serial("id").primaryKey(),
+    name: text("name").notNull(),
+    /** Community, village or organisation, e.g. "Desa Adat Penglipuran". */
+    organization: text("organization"),
+    phone: text("phone"),
+    email: text("email"),
+    /** ISO 639-1 codes, e.g. {"id","en"}. */
+    languages: text("languages").array().notNull().default(sql`'{}'::text[]`),
+    notes: text("notes"),
+    isActive: boolean("is_active").notNull().default(true),
+    userId: text("user_id")
+      .unique()
+      .references(() => user.id, { onDelete: "set null" }),
+    ...timestamps,
+  },
+  (t) => [
+    check("guides_name_length", sql`char_length(${t.name}) between 2 and 120`),
+    check("guides_notes_length", sql`${t.notes} is null or char_length(${t.notes}) <= 2000`),
+  ],
+);
+
+/** Destinations a guide usually works in (used to suggest guides). */
+export const guideDestinations = pgTable(
+  "guide_destinations",
+  {
+    guideId: integer("guide_id")
+      .notNull()
+      .references(() => guides.id, { onDelete: "cascade" }),
+    destinationId: integer("destination_id")
+      .notNull()
+      .references(() => destinations.id, { onDelete: "cascade" }),
+  },
+  (t) => [
+    primaryKey({ columns: [t.guideId, t.destinationId] }),
+    index("guide_destinations_destination_idx").on(t.destinationId),
+  ],
+);
+
+/**
+ * A departure is a tour on a date (all its bookings travel together). This row
+ * exists once someone is assigned or a note is written for it.
+ */
+export const departureAssignments = pgTable(
+  "departure_assignments",
+  {
+    id: serial("id").primaryKey(),
+    tourId: integer("tour_id")
+      .notNull()
+      .references(() => tours.id, { onDelete: "cascade" }),
+    date: date("date", { mode: "string" }).notNull(),
+    guideId: integer("guide_id").references(() => guides.id, { onDelete: "set null" }),
+    /** Operational note shared with the assigned guide (meeting time, vehicle). */
+    note: text("note"),
+    assignedBy: text("assigned_by").references(() => user.id, { onDelete: "set null" }),
+    /** When the guide was last sent the manifest. */
+    notifiedAt: timestamp("notified_at", { withTimezone: true }),
+    ...timestamps,
+  },
+  (t) => [
+    uniqueIndex("departure_assignments_tour_date_uq").on(t.tourId, t.date),
+    index("departure_assignments_guide_date_idx").on(t.guideId, t.date),
+    index("departure_assignments_date_idx").on(t.date),
+    check("departure_assignments_note_length", sql`${t.note} is null or char_length(${t.note}) <= 1000`),
+  ],
+);
+
 /** Photos travellers attach to their review (re-encoded uploads, moderated). */
 export const reviewPhotos = pgTable(
   "review_photos",
@@ -504,4 +579,6 @@ export type BookingNote = typeof bookingNotes.$inferSelect;
 export type TourClosure = typeof tourClosures.$inferSelect;
 export type AuditLog = typeof auditLogs.$inferSelect;
 export type ReviewPhoto = typeof reviewPhotos.$inferSelect;
+export type Guide = typeof guides.$inferSelect;
+export type DepartureAssignment = typeof departureAssignments.$inferSelect;
 export type User = typeof user.$inferSelect;

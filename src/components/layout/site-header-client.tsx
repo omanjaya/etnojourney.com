@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, LayoutDashboard, Menu, Ticket, UserRound, X } from "lucide-react";
+import { Handshake, Heart, LayoutDashboard, Menu, Ticket, UserRound, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
@@ -11,7 +11,7 @@ import { SignOutButton } from "@/features/auth/components/sign-out-button";
 import { LocaleSwitcher } from "./locale-switcher";
 import { Container } from "./container";
 
-type HeaderUser = { name: string; isAdmin: boolean } | null;
+type HeaderUser = { name: string; isAdmin: boolean; isPartner?: boolean } | null;
 
 export function SiteHeaderClient({
   user,
@@ -21,6 +21,7 @@ export function SiteHeaderClient({
   links: { href: string; label: string }[];
 }) {
   const t = useTranslations("common.nav");
+  const tp = useTranslations("partner.nav");
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -146,6 +147,20 @@ export function SiteHeaderClient({
                   </Link>
                 </Button>
               )}
+              {user.isPartner && (
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="px-3 whitespace-nowrap text-current xl:px-4"
+                >
+                  {/* Icon-only below xl so the header never wraps at 1024-1279px. */}
+                  <Link href="/partner" aria-label={tp("portal")} title={tp("portal")}>
+                    <Handshake aria-hidden />
+                    <span className="hidden xl:inline">{tp("portal")}</span>
+                  </Link>
+                </Button>
+              )}
               <Button asChild variant={solid ? "dark" : "glass"} size="sm">
                 <Link href="/account" title={user.name}>
                   <UserRound aria-hidden />
@@ -222,6 +237,11 @@ export function SiteHeaderClient({
               <Link href="/account/wishlist" className="inline-flex min-h-11 items-center gap-3">
                 <Heart className="text-terracotta size-5" aria-hidden /> {t("wishlist")}
               </Link>
+              {user.isPartner && (
+                <Link href="/partner" className="inline-flex min-h-11 items-center gap-3">
+                  <Handshake className="text-terracotta size-5" aria-hidden /> {tp("portal")}
+                </Link>
+              )}
               {user.isAdmin && (
                 <Link href="/admin" className="inline-flex min-h-11 items-center gap-3">
                   <LayoutDashboard className="text-terracotta size-5" aria-hidden /> {t("admin")}

@@ -152,5 +152,26 @@
         "intro": "The traveller moved {tour} from {from} to {to}. Please let the village hosts know."
       }
     }
+  },
+  "departure": {
+    "manifest": {
+      "subject": "Manifest {tour}, {date}",
+      "preheader": "{participants} travelling. Meeting point: {place}",
+      "heading": "Departure manifest",
+      "intro": "Thank you for guiding {tour} on {date}. Here is the list of guests travelling.",
+      "note": "Note from the team: {note}",
+      "listHeading": "Guests ({count, plural, one {# booking} other {# bookings}}):",
+      "phone": "tel. {phone}",
+      "pending": "awaiting confirmation",
+      "notes": "Guest notes: {notes}",
+      "privacy": "This guest data is for the trip only. Please do not share it with anyone else.",
+      "footer": "You received this email because the EtnoJourney team assigned you as the guide."
+    },
+    "details": {
+      "destination": "Destination",
+      "meetingPoint": "Meeting point",
+      "participants": "Total travellers",
+      "bookings": "Bookings"
+    }
   }
 }

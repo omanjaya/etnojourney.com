@@ -21,6 +21,9 @@ import type adminInsights from "../messages/id/adminInsights.json";
 import type selfService from "../messages/id/selfService.json";
 import type trip from "../messages/id/trip.json";
 import type community from "../messages/id/community.json";
+import type adminDepartures from "../messages/id/adminDepartures.json";
+import type adminGuides from "../messages/id/adminGuides.json";
+import type partner from "../messages/id/partner.json";
 
 declare module "next-intl" {
   interface AppConfig {
@@ -48,6 +51,9 @@ declare module "next-intl" {
       selfService: typeof selfService;
       trip: typeof trip;
       community: typeof community;
+      adminDepartures: typeof adminDepartures;
+      adminGuides: typeof adminGuides;
+      partner: typeof partner;
     };
   }
 }

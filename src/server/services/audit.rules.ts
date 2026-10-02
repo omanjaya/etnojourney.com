@@ -12,6 +12,7 @@ export const auditGroups = [
   "availability",
   "users",
   "credits",
+  "operations",
 ] as const;
 
 export type AuditGroup = (typeof auditGroups)[number];
@@ -25,6 +26,8 @@ const groupByPrefix: Record<string, AuditGroup> = {
   closure: "availability",
   user: "users",
   credit: "credits",
+  guide: "operations",
+  departure: "operations",
 };
 
 export function auditGroupOf(action: string): AuditGroup | null {

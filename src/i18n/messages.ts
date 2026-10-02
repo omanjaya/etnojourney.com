@@ -29,6 +29,10 @@ export const namespaces = [
   "selfService",
   "trip",
   "community",
+  // Tour operations: departures, guides, partner portal.
+  "adminDepartures",
+  "adminGuides",
+  "partner",
 ] as const;
 
 export async function loadMessages(locale: Locale) {

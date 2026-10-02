@@ -1,0 +1,132 @@
+{
+  "eyebrow": "Operasional",
+  "title": "Keberangkatan",
+  "description": "Agenda tur yang akan berangkat, lengkap dengan peserta, kapasitas, dan pemandu yang bertugas.",
+  "filters": {
+    "label": "Saring keberangkatan",
+    "from": "Dari tanggal",
+    "to": "Sampai tanggal",
+    "tour": "Tur",
+    "allTours": "Semua tur",
+    "unpublished": "{title} (tidak terbit)",
+    "withoutGuide": "Hanya tanpa pemandu",
+    "reset": "Atur ulang filter"
+  },
+  "agenda": {
+    "summary": "{total, plural, =0 {Tidak ada keberangkatan} other {# keberangkatan}}, {withoutGuide, plural, =0 {semua sudah ada pemandu} other {# tanpa pemandu}} ({from} sampai {to})",
+    "today": "Hari ini",
+    "tomorrow": "Besok",
+    "inDays": "{count} hari lagi",
+    "daysAgo": "{count} hari lalu",
+    "participants": "{confirmed} terkonfirmasi, {pending} menunggu",
+    "seats": "{booked}/{capacity} kursi",
+    "bookings": "{count, plural, one {# booking} other {# booking}}",
+    "noGuide": "Belum ada pemandu",
+    "guideInactive": "{name} tidak aktif",
+    "hasNote": "Ada catatan operasional",
+    "notified": "Manifest sudah dikirim ke pemandu",
+    "noMatch": {
+      "title": "Tidak ada keberangkatan yang cocok",
+      "description": "Coba rentang tanggal atau tur lain, atau matikan filter tanpa pemandu."
+    },
+    "empty": {
+      "title": "Belum ada keberangkatan",
+      "description": "Keberangkatan muncul di sini begitu ada booking yang menunggu atau terkonfirmasi dalam 30 hari ke depan."
+    }
+  },
+  "capacity": {
+    "label": "{confirmed} peserta terkonfirmasi dan {pending} menunggu dari kapasitas {capacity}",
+    "title": "Kapasitas",
+    "overbooked": "{booked} dari {capacity} kursi, melebihi kapasitas",
+    "remaining": "{booked} dari {capacity} kursi terisi, sisa {remaining}",
+    "confirmedLegend": "Terkonfirmasi",
+    "pendingLegend": "Menunggu"
+  },
+  "detail": {
+    "metaTitle": "Keberangkatan {date}",
+    "back": "Semua keberangkatan",
+    "csv": "Unduh CSV",
+    "print": "Cetak manifest",
+    "printTitle": "Manifest keberangkatan",
+    "eyebrow": "Keberangkatan",
+    "summary": "Ringkasan",
+    "date": "Tanggal",
+    "meetingPoint": "Titik kumpul",
+    "participants": "Peserta",
+    "guide": "Pemandu"
+  },
+  "manifest": {
+    "title": "Manifest",
+    "tableLabel": "Daftar booking pada keberangkatan ini",
+    "empty": "Tidak ada booking aktif pada keberangkatan ini.",
+    "totals": "Total ({count, plural, one {# booking} other {# booking}})",
+    "totalsBreakdown": "{confirmed} terkonfirmasi, {pending} menunggu",
+    "showCancelled": "Tampilkan {count, plural, one {# booking dibatalkan} other {# booking dibatalkan}}",
+    "noPayment": "Belum ada",
+    "internalNotes": "{count, plural, one {# catatan internal} other {# catatan internal}}",
+    "columns": {
+      "code": "Kode",
+      "name": "Nama kontak",
+      "phone": "Telepon",
+      "participants": "Peserta",
+      "notes": "Catatan tamu",
+      "status": "Status",
+      "payment": "Pembayaran",
+      "internal": "Catatan internal"
+    }
+  },
+  "guide": {
+    "title": "Pemandu",
+    "select": "Pilih pemandu",
+    "placeholder": "Pilih pemandu...",
+    "suggested": "Disarankan (menguasai destinasi ini)",
+    "others": "Pemandu lain",
+    "all": "Semua pemandu",
+    "suggestedHint": "Pemandu yang biasa bertugas di destinasi ini tampil paling atas.",
+    "noGuides": "Belum ada pemandu aktif. Tambahkan pemandu terlebih dahulu.",
+    "inactiveOption": "{name} (tidak aktif)",
+    "save": "Tugaskan",
+    "unassign": "Lepas penugasan",
+    "assigned": "Pemandu ditugaskan.",
+    "unassigned": "Penugasan pemandu dilepas.",
+    "inactive": "Pemandu ini sudah tidak aktif. Tugaskan pemandu lain.",
+    "noEmail": "Belum ada email",
+    "assignedBy": "Diperbarui oleh {name}, {date}"
+  },
+  "send": {
+    "description": "Kirim manifest (tanpa harga dan data pembayaran) ke email pemandu dalam bahasa Indonesia.",
+    "button": "Kirim manifest ke pemandu",
+    "confirm": "Kirim manifest ke {email}?",
+    "sent": "Manifest terkirim ke {email}.",
+    "needsGuide": "Tugaskan pemandu aktif terlebih dahulu.",
+    "needsEmail": "Pemandu ini belum memiliki email. Gunakan WhatsApp atau lengkapi data pemandu.",
+    "empty": "Tidak ada booking aktif untuk dikirim.",
+    "lastSent": "Terakhir dikirim {date}"
+  },
+  "whatsapp": {
+    "button": "Kirim ringkasan via WhatsApp",
+    "noPhone": "Nomor WhatsApp pemandu belum tersedia atau tidak valid.",
+    "message": "Halo {guide}, ini ringkasan keberangkatan {tour} pada {date}. Titik kumpul: {place}. Total {participants} peserta dari {bookings} booking. Manifest lengkap dikirim lewat email. Terima kasih!",
+    "note": "Catatan dari tim: {note}"
+  },
+  "note": {
+    "title": "Catatan operasional",
+    "description": "Dibagikan ke pemandu bersama manifest, misalnya jam kumpul atau kendaraan.",
+    "label": "Catatan untuk pemandu",
+    "placeholder": "Contoh: kumpul pukul 04.30, mobil Hiace putih B 1234 XY.",
+    "remaining": "Sisa {count} karakter",
+    "save": "Simpan catatan",
+    "saved": "Catatan disimpan."
+  },
+  "history": {
+    "title": "Riwayat",
+    "empty": "Belum ada perubahan pada keberangkatan ini.",
+    "system": "Sistem"
+  },
+  "dashboard": {
+    "label": "Keberangkatan 7 hari ke depan tanpa pemandu",
+    "action": "Tugaskan pemandu",
+    "count": "{count, plural, =0 {Tidak ada keberangkatan tanpa pemandu} other {# keberangkatan tanpa pemandu}}"
+  },
+  "bookingLink": "Lihat keberangkatan"
+}

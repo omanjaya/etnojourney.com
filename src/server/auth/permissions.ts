@@ -17,6 +17,12 @@ export const permissions = {
   "reports.view": ["admin"],
   "users.manage": ["admin"],
   "audit.view": ["admin"],
+  /** Departure calendar, manifests and guide assignment. */
+  "departures.manage": ["staff", "admin"],
+  /** Guide and partner records (linking a portal account also needs users.manage). */
+  "guides.manage": ["staff", "admin"],
+  /** The partner portal (/partner): only the signed-in partner's own departures. */
+  "partner.portal": ["partner"],
 } as const satisfies Record<string, readonly UserRole[]>;
 
 export type Permission = keyof typeof permissions;

@@ -24,7 +24,17 @@
   "rescheduleTooLate": "Date changes are closed because the travel date is too close.",
   "sameDate": "Choose a date different from the current travel date.",
   "refundChanged": "The refund amount has changed since you opened this page. Please review it and confirm again.",
+  "guideUnavailable": "That guide doesn't exist or is no longer active.",
+  "guideMissing": "Assign a guide first.",
+  "guideNoEmail": "This guide has no email address. Add one to the guide's record or send it via WhatsApp.",
+  "departureEmpty": "There are no active bookings on this departure.",
+  "guideAccountNotFound": "No registered account uses this email. Ask the partner to sign up first.",
+  "guideAccountBackoffice": "Staff and admin accounts cannot become partner accounts.",
+  "guideAccountDisabled": "This account is disabled. Enable it on the users page first.",
+  "guideAccountLinked": "This account is already linked to another guide.",
+  "guideAlreadyLinked": "This guide already has a portal account. Unlink it before linking another one.",
   "fields": {
+    "guideNotesMax": "Notes can be at most 2000 characters.",
     "closurePast": "Past dates cannot be closed.",
     "closureRange": "The end date must be on or after the start date.",
     "closureTooLong": "Close at most 92 days at a time.",
@@ -43,6 +53,7 @@
     "slug": "Use lowercase letters, numbers and hyphens.",
     "url": "Enter a valid image URL.",
     "positive": "Must be greater than 0.",
-    "refundNote": "Enter 3 to 500 characters, for example the bank transfer reference."
+    "refundNote": "Enter 3 to 500 characters, for example the bank transfer reference.",
+    "departureNote": "Notes can be at most 1000 characters."
   }
 }

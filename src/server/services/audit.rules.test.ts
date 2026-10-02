@@ -10,6 +10,7 @@ const actions = [
   "closure.created",
   "user.role_changed",
   "credit.updated",
+  "departure.assigned",
 ] as const;
 
 describe("auditGroupOf", () => {
@@ -23,6 +24,7 @@ describe("auditGroupOf", () => {
       "availability",
       "users",
       "credits",
+      "operations",
     ]);
   });
 

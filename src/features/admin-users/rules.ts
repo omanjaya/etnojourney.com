@@ -30,6 +30,13 @@ export function auditEntityHref(entry: AuditEntry): string | null {
       return NUMERIC_ID.test(entry.entityId) ? `/admin/destinations/${entry.entityId}/edit` : null;
     case "user":
       return USER_ID.test(entry.entityId) ? `/admin/users/${entry.entityId}` : null;
+    case "guide":
+      return NUMERIC_ID.test(entry.entityId) ? `/admin/guides/${entry.entityId}/edit` : null;
+    case "departure": {
+      // Entity id is `${tourId}:${YYYY-MM-DD}`.
+      const match = /^(\d+):(\d{4}-\d{2}-\d{2})$/.exec(entry.entityId);
+      return match ? `/admin/departures/${match[1]}/${match[2]}` : null;
+    }
     default:
       return null;
   }

@@ -111,6 +111,16 @@ export const userRepository = {
       .then((rows) => rows[0]);
   },
 
+  /** Locks one user row by (lowercase) email, e.g. to link a partner portal account. */
+  lockByEmail(tx: DbExecutor, email: string) {
+    return tx
+      .select({ id: user.id, role: user.role, disabledAt: user.disabledAt })
+      .from(user)
+      .where(eq(user.email, email))
+      .for("update")
+      .then((rows) => rows[0]);
+  },
+
   /**
    * Locks every enabled admin and returns how many there are. Two admins
    * demoting each other at once serialize here, so one of them sees the other's

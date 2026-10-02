@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "Portal mitra"
+  },
+  "nav": {
+    "portal": "Portal mitra"
+  },
+  "languages": {
+    "id": "Bahasa Indonesia",
+    "en": "Inggris",
+    "ja": "Jepang",
+    "zh": "Mandarin",
+    "fr": "Prancis",
+    "de": "Jerman",
+    "nl": "Belanda",
+    "ko": "Korea"
+  },
+  "home": {
+    "eyebrow": "Portal mitra",
+    "title": "Halo, {name}",
+    "description": "Keberangkatan yang ditugaskan kepada Anda, lengkap dengan titik kumpul dan daftar tamu.",
+    "unlinkedTitle": "Profil pemandu belum terhubung",
+    "unlinkedDescription": "Akun Anda belum terhubung ke data pemandu. Hubungi tim EtnoJourney.",
+    "inactiveTitle": "Profil pemandu sedang nonaktif",
+    "inactiveDescription": "Keberangkatan tidak ditampilkan selama profil nonaktif. Hubungi tim EtnoJourney.",
+    "upcomingTitle": "Keberangkatan mendatang",
+    "upcomingEmptyTitle": "Belum ada keberangkatan",
+    "upcomingEmptyDescription": "Keberangkatan akan muncul di sini setelah tim menugaskan Anda.",
+    "pastTitle": "Keberangkatan {days} hari terakhir ({count})",
+    "pastEmpty": "Tidak ada keberangkatan dalam periode ini."
+  },
+  "profile": {
+    "title": "Profil Anda",
+    "phone": "Telepon",
+    "email": "Email",
+    "destinations": "Destinasi",
+    "languages": "Bahasa",
+    "changeHint": "Ada data yang perlu diubah? Hubungi tim EtnoJourney."
+  },
+  "departures": {
+    "travellers": "{participants, plural, other {# tamu}} dari {bookings, plural, other {# booking}}",
+    "open": "Lihat daftar tamu"
+  },
+  "manifest": {
+    "back": "Kembali ke portal mitra",
+    "date": "Tanggal",
+    "meetingPoint": "Titik kumpul",
+    "duration": "Durasi",
+    "days": "{count, plural, other {# hari}}",
+    "travellers": "Tamu",
+    "travellersValue": "{participants, plural, other {# orang}} dalam {bookings, plural, other {# booking}}",
+    "noteTitle": "Catatan operasional",
+    "title": "Daftar tamu",
+    "emptyTitle": "Belum ada tamu terkonfirmasi",
+    "emptyDescription": "Booking terkonfirmasi akan muncul di sini.",
+    "columns": {
+      "code": "Kode booking",
+      "contact": "Kontak",
+      "participants": "Peserta",
+      "notes": "Catatan tamu"
+    }
+  }
+}

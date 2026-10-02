@@ -2,7 +2,8 @@
   "roles": {
     "user": "Traveller",
     "staff": "Staff",
-    "admin": "Admin"
+    "admin": "Admin",
+    "partner": "Partner"
   },
   "status": {
     "active": "Active",
@@ -102,7 +103,8 @@
       "reviews": "Reviews",
       "availability": "Availability",
       "users": "Users",
-      "credits": "Photo credits"
+      "credits": "Photo credits",
+      "operations": "Tour operations"
     },
     "actorLabel": "Performed by",
     "allActors": "Everyone",
@@ -125,7 +127,9 @@
       "review": "Review",
       "closure": "Closure",
       "user": "User",
-      "credit": "Photo credit"
+      "credit": "Photo credit",
+      "guide": "Guide",
+      "departure": "Departure"
     },
     "empty": {
       "title": "Nothing recorded yet",
@@ -184,7 +188,18 @@
       "credit": {
         "updated": "Updated a photo credit"
       },
-      "unknown": "Other change"
+      "unknown": "Other change",
+      "guide": {
+        "created": "Added a guide",
+        "updated": "Updated a guide",
+        "linked": "Linked a partner portal account"
+      },
+      "departure": {
+        "assigned": "Assigned a guide",
+        "unassigned": "Removed a guide assignment",
+        "noted": "Updated a departure note",
+        "notified": "Sent the manifest to the guide"
+      }
     }
   }
 }

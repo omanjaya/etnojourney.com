@@ -24,7 +24,17 @@
   "rescheduleTooLate": "Perubahan jadwal sudah ditutup karena tanggal perjalanan terlalu dekat.",
   "sameDate": "Pilih tanggal yang berbeda dari tanggal perjalanan sekarang.",
   "refundChanged": "Besaran pengembalian dana sudah berubah sejak halaman dibuka. Periksa lagi lalu konfirmasi ulang.",
+  "guideUnavailable": "Pemandu tidak ditemukan atau sudah tidak aktif.",
+  "guideMissing": "Tugaskan pemandu terlebih dahulu.",
+  "guideNoEmail": "Pemandu ini belum memiliki alamat email. Tambahkan di data pemandu atau kirim lewat WhatsApp.",
+  "departureEmpty": "Tidak ada booking aktif pada keberangkatan ini.",
+  "guideAccountNotFound": "Tidak ada akun terdaftar dengan email ini. Minta mitra mendaftar terlebih dahulu.",
+  "guideAccountBackoffice": "Akun staf atau admin tidak bisa dijadikan akun mitra.",
+  "guideAccountDisabled": "Akun ini sedang dinonaktifkan. Aktifkan dulu di halaman pengguna.",
+  "guideAccountLinked": "Akun ini sudah terhubung ke pemandu lain.",
+  "guideAlreadyLinked": "Pemandu ini sudah memiliki akun portal. Lepaskan dulu sebelum menghubungkan akun lain.",
   "fields": {
+    "guideNotesMax": "Catatan maksimal 2000 karakter.",
     "closurePast": "Tanggal yang sudah lewat tidak bisa ditutup.",
     "closureRange": "Tanggal akhir harus sama dengan atau setelah tanggal mulai.",
     "closureTooLong": "Tutup paling banyak 92 hari sekaligus.",
@@ -43,6 +53,7 @@
     "slug": "Gunakan huruf kecil, angka, dan tanda hubung.",
     "url": "URL gambar tidak valid.",
     "positive": "Harus lebih dari 0.",
-    "refundNote": "Isi 3 sampai 500 karakter, misalnya nomor referensi transfer bank."
+    "refundNote": "Isi 3 sampai 500 karakter, misalnya nomor referensi transfer bank.",
+    "departureNote": "Catatan maksimal 1000 karakter."
   }
 }

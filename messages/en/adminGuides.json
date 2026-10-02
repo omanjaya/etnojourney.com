@@ -1,0 +1,96 @@
+{
+  "languages": {
+    "id": "Indonesian",
+    "en": "English",
+    "ja": "Japanese",
+    "zh": "Chinese",
+    "fr": "French",
+    "de": "German",
+    "nl": "Dutch",
+    "ko": "Korean"
+  },
+  "list": {
+    "eyebrow": "Operations",
+    "title": "Guides & partners",
+    "description": "Local guides and village partners who host departures. Link an account so they can open the partner portal.",
+    "new": "Add guide",
+    "searchLabel": "Search guides",
+    "searchPlaceholder": "Name, organisation, email or phone",
+    "clear": "Clear search",
+    "summary": "{total, plural, one {# guide} other {# guides}}",
+    "active": "Active",
+    "inactive": "Inactive",
+    "noAccount": "Not linked",
+    "edit": "Edit",
+    "noMatch": {
+      "title": "No matching guides",
+      "description": "Try another search term."
+    },
+    "empty": {
+      "title": "No guides yet",
+      "description": "Add your first guide or village partner."
+    },
+    "columns": {
+      "guide": "Guide",
+      "destinations": "Destinations",
+      "languages": "Languages",
+      "status": "Status",
+      "account": "Portal account",
+      "actions": "Actions"
+    },
+    "pagination": {
+      "label": "Guide list pages",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page}"
+    }
+  },
+  "form": {
+    "backToList": "Back to guides",
+    "newEyebrow": "New guide",
+    "newTitle": "Add a guide",
+    "editEyebrow": "Edit guide",
+    "statusActive": "Active",
+    "statusInactive": "Inactive",
+    "saved": "Guide saved.",
+    "save": "Save changes",
+    "create": "Save guide",
+    "sections": {
+      "profile": "Profile",
+      "profileHint": "Name and contact details the team uses to reach the guide.",
+      "work": "Areas & languages",
+      "workHint": "Used to suggest guides when assigning departures.",
+      "internal": "Internal",
+      "internalHint": "Visible to the team only, never to the guide."
+    },
+    "fields": {
+      "name": "Name",
+      "organization": "Organisation or village",
+      "organizationHint": "Optional, e.g. Desa Adat Penglipuran.",
+      "phone": "Phone / WhatsApp",
+      "phoneHint": "E.g. 0812 3456 7890 or +31 20 123 4567. Stored in international format.",
+      "email": "Email",
+      "languages": "Languages",
+      "destinations": "Destinations",
+      "destinationsHint": "Pick the destinations this guide usually works in.",
+      "noDestinations": "No destinations yet.",
+      "notes": "Internal notes",
+      "notesHint": "Up to 2000 characters.",
+      "active": "Active",
+      "activeHint": "Inactive guides cannot be assigned and see no departures in the partner portal."
+    }
+  },
+  "account": {
+    "title": "Partner portal account",
+    "description": "The linked account can sign in to the partner portal and sees only departures assigned to this guide.",
+    "linkedTo": "Linked to",
+    "adminOnly": "Only admins can link portal accounts.",
+    "emailLabel": "Registered account email",
+    "emailHint": "The partner must sign up first. Their role becomes Partner.",
+    "link": "Link account",
+    "linked": "Account linked. The partner needs to sign in again.",
+    "unlink": "Unlink account",
+    "unlinked": "Account unlinked and returned to traveller.",
+    "unlinkConfirm": "Unlink {email} from this guide? The account goes back to traveller and is signed out everywhere."
+  }
+}
