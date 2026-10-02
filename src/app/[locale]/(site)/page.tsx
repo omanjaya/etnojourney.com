@@ -104,7 +104,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       {/* Ticker band */}
       {marqueeItems.length > 0 && (
         <section className="border-line border-b py-8 md:py-10">
-          <Marquee duration={55} label={t("marquee.label")}>
+          <Marquee speed={40} label={t("marquee.label")}>
             {marqueeItems.map((item, i) => (
               <span key={`${item}-${i}`} className="flex items-center">
                 <span
