@@ -71,7 +71,9 @@
 
 /* Mobile booking bar rises from the bottom edge once the page has loaded. */
 .ej-rise-in {
-  animation: ej-rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
+  /* "backwards", not "both": a forwards fill would pin translate: 0 after the
+     entrance and override the data-hidden translate that hides the bar. */
+  animation: ej-rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s backwards;
 }
 
 @keyframes ej-rise-in {

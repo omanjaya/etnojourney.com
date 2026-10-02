@@ -36,8 +36,9 @@ test.describe("public browsing", () => {
   test("tour detail renders content, booking CTA and structured data", async ({ page }) => {
     await page.goto("/tours/kasada-dan-fajar-bromo");
     await expect(page.locator("h1")).toHaveText("Tradisi Tengger dan Fajar di Bromo");
-    // Signed-out visitors are invited to log in before booking.
-    await expect(page.getByRole("link", { name: "Masuk dan pesan" }).first()).toBeVisible();
+    // Signed-out visitors can plan (calendar visible) and sign in to continue.
+    await expect(page.locator("[data-date]").first()).toBeVisible();
+    await expect(page.getByRole("link", { name: "Masuk untuk melanjutkan" }).first()).toBeVisible();
     const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
     expect(jsonLd.join("\n")).toContain("TouristTrip");
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(

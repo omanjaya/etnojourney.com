@@ -15,12 +15,13 @@
     "subtotal": "{price} x {count}",
     "total": "Total",
     "submit": "Pesan sekarang",
-    "loginTitle": "Masuk untuk memesan",
-    "loginDescription": "Buat akun gratis untuk memesan tur dan memantau status booking.",
-    "loginCta": "Masuk dan pesan",
-    "registerCta": "Belum punya akun? Daftar",
     "paymentNote": "Bayar online setelah memesan. Booking langsung terkonfirmasi begitu pembayaran diterima.",
-    "seatsHint": "{count, plural, one {Sisa # kursi pada tanggal ini.} other {Sisa # kursi pada tanggal ini.}}"
+    "seatsHint": "{count, plural, one {Sisa # kursi pada tanggal ini.} other {Sisa # kursi pada tanggal ini.}}",
+    "signInToContinue": "Masuk untuk melanjutkan",
+    "signInHint": "Tanggal dan jumlah peserta tetap tersimpan. Belum punya akun?",
+    "registerShort": "Daftar gratis",
+    "cancellation": "Gratis batal sebelum membayar. Setelah membayar, perubahan lewat tim kami.",
+    "cancellationLink": "Kebijakan pembatalan"
   },
   "success": {
     "title": "Booking diterima",
@@ -28,7 +29,14 @@
     "codeLabel": "Kode booking",
     "viewBookings": "Lihat booking saya",
     "bookAnother": "Pesan tanggal lain",
-    "payHint": "Pembayaran aman lewat Midtrans. Kamu juga bisa membayar nanti dari halaman Booking Saya."
+    "payHint": "Pembayaran aman lewat Midtrans. Kamu juga bisa membayar nanti dari halaman Booking Saya.",
+    "nextTitle": "Langkah berikutnya",
+    "steps": {
+      "pay": "Bayar sekarang, atau nanti dari Booking Saya. Booking terkonfirmasi begitu pembayaran diterima.",
+      "email": "Kami mengirim email konfirmasi berisi kode booking dan detail perjalanan.",
+      "host": "Tuan rumah menghubungimu lewat WhatsApp sebelum hari keberangkatan. Siapkan barang di bagian Persiapan."
+    },
+    "addToCalendar": "Tambah ke kalender"
   },
   "cancel": {
     "trigger": "Batalkan",

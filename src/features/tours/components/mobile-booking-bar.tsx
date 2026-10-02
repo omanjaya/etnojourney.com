@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ArrowDown } from "lucide-react";
 import { formatCurrency } from "@/lib/format";
 import { buttonVariants } from "@/components/ui/button";
+import { BOOKED_EVENT } from "@/features/booking/components/booking-panel";
 import "../view-transitions.css";
 
 /**
@@ -13,13 +14,23 @@ import "../view-transitions.css";
  *
  * Rises from the bottom edge shortly after load (CSS only, so it also appears
  * without JS). Once hydrated, it slides away while the booking panel itself or
- * the footer is on screen, so it never duplicates the panel or covers content.
+ * the footer is on screen, so it never duplicates the panel or covers content,
+ * and it hides for good after a booking (`ej:booked`) to avoid double bookings.
  */
 export function MobileBookingBar({ pricePerPerson }: { pricePerPerson: number }) {
   const locale = useLocale();
   const t = useTranslations("tours.detail");
   const tc = useTranslations("common");
-  const [hidden, setHidden] = useState(false);
+  const [overlapping, setOverlapping] = useState(false);
+  // Once a booking is made on this page the shortcut has done its job.
+  const [booked, setBooked] = useState(false);
+  const hidden = overlapping || booked;
+
+  useEffect(() => {
+    const onBooked = () => setBooked(true);
+    window.addEventListener(BOOKED_EVENT, onBooked);
+    return () => window.removeEventListener(BOOKED_EVENT, onBooked);
+  }, []);
 
   useEffect(() => {
     const targets = [document.getElementById("booking"), document.querySelector("footer")].filter(
@@ -32,7 +43,7 @@ export function MobileBookingBar({ pricePerPerson }: { pricePerPerson: number })
         if (entry.isIntersecting) visible.add(entry.target);
         else visible.delete(entry.target);
       }
-      setHidden(visible.size > 0);
+      setOverlapping(visible.size > 0);
     });
     for (const target of targets) observer.observe(target);
     return () => observer.disconnect();

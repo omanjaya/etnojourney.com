@@ -44,5 +44,7 @@
     "cstore": "Gerai ritel (Indomaret/Alfamart)",
     "akulaku": "Akulaku",
     "simulator": "Simulator (pengembangan)"
-  }
+  },
+  "contactUs": "Hubungi kami di {email}",
+  "payLater": "Booking tetap tersimpan. Kamu bisa mencoba bayar lagi nanti dari Booking Saya."
 }

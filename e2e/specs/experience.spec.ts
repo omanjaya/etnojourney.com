@@ -82,6 +82,10 @@ test.describe("experience", () => {
       await expect(bar).toBeVisible();
       await bar.click();
       await expect(page.locator("#booking")).toBeInViewport();
+      // While the panel is visible the bar slides away so it never covers the form.
+      const container = page.locator(".ej-rise-in");
+      await expect(container).toHaveAttribute("data-hidden", "true");
+      await expect(container).not.toBeInViewport();
     });
   });
 });

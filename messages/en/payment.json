@@ -44,5 +44,7 @@
     "cstore": "Convenience store (Indomaret/Alfamart)",
     "akulaku": "Akulaku",
     "simulator": "Simulator (development)"
-  }
+  },
+  "contactUs": "Contact us at {email}",
+  "payLater": "Your booking is saved. You can try paying again later from My Bookings."
 }
