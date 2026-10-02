@@ -33,7 +33,11 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [{ protocol: "https", hostname: "images.unsplash.com" }],
     // Uploaded media is optimizable only under /media/ and without query strings.
-    localPatterns: [{ pathname: "/media/**", search: "" }],
+    localPatterns: [
+      { pathname: "/media/**", search: "" },
+      // Curated, credited content photos shipped with the app (content/README.md).
+      { pathname: "/images/content/**", search: "" },
+    ],
   },
   experimental: {
     serverActions: {

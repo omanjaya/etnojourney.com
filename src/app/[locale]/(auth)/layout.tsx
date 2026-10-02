@@ -12,7 +12,7 @@ import "@/components/layout/layout-motion.css";
 import { RouteTransition } from "@/components/layout/route-transition";
 
 const ASIDE_IMAGE =
-  "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=1600&q=80&auto=format&fit=crop";
+  "/images/content/site/tegallalang-terraces.webp";
 
 export default async function AuthLayout({ children }: { children: React.ReactNode }) {
   if (await getCurrentUser()) {

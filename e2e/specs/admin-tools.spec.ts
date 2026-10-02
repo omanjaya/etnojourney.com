@@ -179,11 +179,14 @@ test.describe("public tours pagination", () => {
     // Out-of-range pages redirect to the last real page (keeping filters).
     // Must be a real HTTP redirect (not a streamed 200 + meta refresh), so
     // crawlers never index an out-of-range page under a false canonical.
+    const [{ total }] = await sql<{ total: number }[]>`
+      select count(*)::int as total from tours where is_published`;
+    const lastPage = Math.ceil(total / 12);
     const raw = await page.request.get("/tours?page=999", { maxRedirects: 0 });
     expect([307, 308]).toContain(raw.status());
-    expect(raw.headers().location).toMatch(/\/tours\?page=2$/);
+    expect(raw.headers().location).toMatch(new RegExp(`/tours\\?page=${lastPage}$`));
     await page.goto("/tours?page=999");
-    await expect(page).toHaveURL(/\/tours\?page=2$/);
+    await expect(page).toHaveURL(new RegExp(`/tours\\?page=${lastPage}$`));
     expect(await page.locator("article").count()).toBeGreaterThan(0);
   });
 });

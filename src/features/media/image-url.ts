@@ -1,5 +1,9 @@
-/** Image sources accepted for tour content: Unsplash CDN or our own uploads. */
+/**
+ * Image sources accepted for tour content: Unsplash CDN, our own uploads, or
+ * the curated photos shipped in public/images/content (see content/README.md).
+ */
 const UPLOAD_PATH = /^\/media\/tours\/\d{4}\/\d{2}\/[a-f0-9-]{36}\.webp$/;
+const CONTENT_PATH = /^\/images\/content\/[a-z0-9-]+\/[a-z0-9-]+\.webp$/;
 
 export function isUnsplashUrl(value: string): boolean {
   try {
@@ -14,8 +18,12 @@ export function isUploadedImagePath(value: string): boolean {
   return UPLOAD_PATH.test(value);
 }
 
+export function isContentImagePath(value: string): boolean {
+  return CONTENT_PATH.test(value);
+}
+
 export function isAllowedImageSource(value: string): boolean {
-  return isUploadedImagePath(value) || isUnsplashUrl(value);
+  return isUploadedImagePath(value) || isContentImagePath(value) || isUnsplashUrl(value);
 }
 
 /** Small preview URL: resizes Unsplash images, leaves uploads to next/image. */

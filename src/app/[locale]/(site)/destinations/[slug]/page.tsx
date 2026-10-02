@@ -22,6 +22,8 @@ import { getCurrentUser } from "@/server/auth/guards";
 import { destinationService } from "@/server/services/destination.service";
 import { isDomainError } from "@/server/services/errors";
 import { wishlistService } from "@/server/services/wishlist.service";
+import { PhotoCredit } from "@/components/shared/photo-credit";
+import { photoCreditService } from "@/server/services/photo-credit.service";
 
 function absoluteImage(src: string): string {
   return src.startsWith("/") ? `${siteUrl()}${src}` : src;
@@ -61,7 +63,11 @@ export default async function DestinationPage({
   setRequestLocale(locale);
 
   const { destination, tours } = await load(slug);
-  const [t, user] = await Promise.all([getTranslations("destinations.detail"), getCurrentUser()]);
+  const [t, user, credits] = await Promise.all([
+    getTranslations("destinations.detail"),
+    getCurrentUser(),
+    photoCreditService.forImages([destination.heroImage]),
+  ]);
   const saved = user ? await wishlistService.tourIds(user.id) : new Set<number>();
   const url = localizedUrl(`/destinations/${destination.slug}`, locale);
 
@@ -142,6 +148,10 @@ export default async function DestinationPage({
           <p className="font-display animate-fade-up mt-6 max-w-2xl text-xl leading-relaxed text-white/85 italic [animation-delay:0.55s]">
             {localize(destination.tagline, locale)}
           </p>
+          <PhotoCredit
+            credit={credits.get(destination.heroImage)}
+            className="mt-8 text-white/60 [&_a]:text-white/75"
+          />
         </Container>
       </section>
 

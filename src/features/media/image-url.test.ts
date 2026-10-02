@@ -31,3 +31,11 @@ describe("isAllowedImageSource", () => {
     expect(previewSrc("/media/tours/a.webp")).toBe("/media/tours/a.webp");
   });
 });
+
+describe("curated content images", () => {
+  it("accepts shipped content photos and rejects traversal or other formats", () => {
+    expect(isAllowedImageSource("/images/content/tana-toraja/tongkonan.webp")).toBe(true);
+    expect(isAllowedImageSource("/images/content/../.env")).toBe(false);
+    expect(isAllowedImageSource("/images/content/x/photo.jpg")).toBe(false);
+  });
+});

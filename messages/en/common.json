@@ -60,7 +60,8 @@
     "faq": "FAQ",
     "cancellation": "Cancellation policy",
     "privacy": "Privacy policy",
-    "terms": "Terms & conditions"
+    "terms": "Terms & conditions",
+    "credits": "Photo credits"
   },
   "notFound": {
     "title": "This path isn't on the map",
@@ -71,5 +72,18 @@
     "title": "Something went wrong",
     "description": "We couldn't load this page. Please try again.",
     "retry": "Try again"
-  }
+  },
+  "credit": {
+    "photo": "Photo",
+    "pageTitle": "Photo credits",
+    "pageDescription": "Photos on this site are used under open licenses. Thanks to the photographers below.",
+    "seeAll": "See all photo credits",
+    "columns": {
+      "photo": "Photo",
+      "author": "Photographer",
+      "license": "License",
+      "source": "Source"
+    }
+  },
+  "newTour": "New"
 }
