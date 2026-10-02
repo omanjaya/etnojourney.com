@@ -24,7 +24,8 @@
       "role": "Role",
       "bookings": "Bookings",
       "joined": "Joined",
-      "status": "Status"
+      "status": "Status",
+      "tableLabel": "Users table"
     },
     "empty": {
       "title": "No users yet",

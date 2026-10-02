@@ -93,6 +93,28 @@ test.describe("availability closures", () => {
   test.describe("traveller", () => {
     test.use({ storageState: STORAGE_STATE.traveler });
 
+    test("a pending booking on a date closed later can no longer be paid", async ({ page }) => {
+      const booking = await createBooking({
+        email: ACCOUNTS.traveler.email,
+        tourSlug: TOUR,
+        status: "pending",
+        // Closed by the previous test; the closed-date booking count below stays at zero.
+        travelDate: bookedDate,
+        participants: 1,
+      });
+      bookingCodes.push(booking.code);
+
+      await page.goto(`/account/bookings/${booking.code}`);
+      await page.getByRole("button", { name: "Bayar sekarang" }).click();
+      await expect(page.getByRole("alert").first()).toContainText(
+        "Tanggal ini ditutup untuk pemesanan",
+      );
+      const [payments] = await sql<{ n: number }[]>`
+        select count(*)::int as n from payments p join bookings b on b.id = p.booking_id
+        where b.code = ${booking.code}`;
+      expect(payments.n).toBe(0);
+    });
+
     test("the public calendar shows the date as closed", async ({ page }) => {
       await page.goto(`/tours/${TOUR}`);
       const day = await showCalendarDate(page, closedDate);

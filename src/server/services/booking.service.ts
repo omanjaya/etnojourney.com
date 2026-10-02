@@ -159,6 +159,17 @@ export const bookingService = {
       if (status === "cancelled") {
         await paymentService.flagPaidForRefund(tx, booking.id, "cancelledAfterPayment", actorId);
       }
+      // Same transaction: the change and its audit entry land together or not at all.
+      await auditService.record(
+        {
+          actorId,
+          action: "booking.status_changed",
+          entityType: "booking",
+          entityId: booking.id,
+          details: { from: booking.status, status, code: booking.code },
+        },
+        tx,
+      );
       return updated;
     });
   },

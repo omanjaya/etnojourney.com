@@ -28,8 +28,8 @@
       "confirmed": "Confirmed",
       "completed": "Completed",
       "cancelled": "Cancelled",
-      "revenue": "Revenue",
-      "revenueHint": "From confirmed and completed bookings",
+      "revenue": "Revenue this month",
+      "revenueHint": "Payments received, net of refunds",
       "publishedTours": "Live tours"
     },
     "recent": "Latest bookings",
@@ -54,7 +54,8 @@
       "total": "Total",
       "status": "Status",
       "created": "Created",
-      "actions": "Actions"
+      "actions": "Actions",
+      "tableLabel": "Bookings table"
     },
     "noActions": "Final",
     "actions": {

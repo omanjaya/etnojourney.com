@@ -122,11 +122,12 @@ Service `dev` menjalankan `next dev` dengan folder proyek di-mount, sehingga per
 ```bash
 docker compose --profile dev up -d                  # http://localhost:3000
 docker compose --profile dev exec dev npm run db:seed
+npm run docker:migrate                              # migrasi baru saat container sudah jalan
 docker compose --profile dev logs -f dev
 docker compose --profile dev down
 ```
 
-Jika port 5432 dipakai Postgres lokal, isi `DB_HOST_PORT=5544` di `.env`; compose membacanya otomatis. Service `app` (production) dan `dev` sama-sama memakai port 3000, jadi jalankan salah satu saja. Setelah dependensi berubah (`package.json`), restart service `dev` agar `npm install` berjalan lagi.
+Jika port 5432 dipakai Postgres lokal, isi `DB_HOST_PORT=5544` di `.env`; compose membacanya otomatis. Service `app` (production) dan `dev` sama-sama memakai port 3000, jadi jalankan salah satu saja. Setelah dependensi berubah (`package.json`), restart service `dev` agar `npm install` berjalan lagi. Setelah menarik migrasi baru (`drizzle/`), jalankan `npm run docker:migrate`: `npm run db:migrate` dari host memakai `DATABASE_URL` di `.env`, yang bisa saja menunjuk ke Postgres lokal, bukan database Docker. Gejala lupa migrasi: error `column ... does not exist` dan login gagal.
 
 ### Variabel env production
 

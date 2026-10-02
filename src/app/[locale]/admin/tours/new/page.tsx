@@ -8,7 +8,7 @@ import { requireAdmin } from "@/server/auth/guards";
 
 export default async function NewTourPage() {
   // Pages must guard themselves: Next.js can render a page without its layout.
-  await requireAdmin();
+  await requireAdmin("catalogue.manage");
   const [destinations, t] = await Promise.all([
     destinationService.list(),
     getTranslations("admin.form"),

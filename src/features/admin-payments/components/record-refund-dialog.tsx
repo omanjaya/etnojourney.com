@@ -81,9 +81,9 @@ export function RecordRefundDialog({
           <span className="bg-sand-100 text-terracotta short:size-10 grid size-12 place-items-center rounded-full">
             <Landmark className="size-5" aria-hidden />
           </span>
-          <h3 id={titleId} className="short:mt-3 mt-5 text-2xl">
+          <h2 id={titleId} className="short:mt-3 mt-5 text-2xl">
             {t("title")} <span className="font-mono text-base">{code}</span>
-          </h3>
+          </h2>
           <p className="text-ink-soft mt-2 text-sm">{t("body", { amount: amountLabel })}</p>
 
           <Field

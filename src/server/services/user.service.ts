@@ -1,11 +1,24 @@
 import "server-only";
-import { db } from "@/server/db";
+import { db, type DbExecutor } from "@/server/db";
+import { can } from "@/server/auth/permissions";
 import type { UserRole } from "@/server/db/schema";
 import { paginate } from "@/lib/pagination";
 import { userRepository, type AdminUserFilters } from "@/server/repositories/user.repository";
 import { auditService } from "./audit.service";
 import { DomainError } from "./errors";
 import { disableError, isDemotion, roleChangeError } from "./user.rules";
+
+/**
+ * Re-checks the actor under the same locks as the change: an admin demoted or
+ * disabled by a concurrent request must not complete a change that was
+ * authorized before it.
+ */
+async function assertActorCanManageUsers(tx: DbExecutor, actorId: string) {
+  const actor = await userRepository.lockById(tx, actorId);
+  if (!actor || actor.disabledAt !== null || !can(actor.role, "users.manage")) {
+    throw new DomainError("forbidden");
+  }
+}
 
 export const userService = {
   listForAdmin(filters: AdminUserFilters, page: number, pageSize: number) {
@@ -44,6 +57,7 @@ export const userService = {
   async changeRole(actorId: string, targetId: string, nextRole: UserRole): Promise<boolean> {
     return db.transaction(async (tx) => {
       const activeAdmins = await userRepository.lockActiveAdmins(tx);
+      await assertActorCanManageUsers(tx, actorId);
       const target = await userRepository.lockById(tx, targetId);
       if (!target) throw new DomainError("notFound");
       const error = roleChangeError({ actorId, target, nextRole, activeAdmins });
@@ -73,6 +87,7 @@ export const userService = {
   async setDisabled(actorId: string, targetId: string, disabled: boolean): Promise<boolean> {
     return db.transaction(async (tx) => {
       const activeAdmins = await userRepository.lockActiveAdmins(tx);
+      await assertActorCanManageUsers(tx, actorId);
       const target = await userRepository.lockById(tx, targetId);
       if (!target) throw new DomainError("notFound");
       if (disabled) {

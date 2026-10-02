@@ -10,6 +10,7 @@ import {
   type MidtransConfig,
 } from "@/server/integrations/midtrans";
 import { bookingRepository } from "@/server/repositories/booking.repository";
+import { closureRepository } from "@/server/repositories/closure.repository";
 import {
   paymentRepository,
   type AdminPaymentFilters,
@@ -118,6 +119,10 @@ export const paymentService = {
         throw new DomainError("notPayable");
       }
       if (await paymentRepository.hasPaid(locked.id, tx)) throw new DomainError("alreadyPaid");
+      // A date closed after the booking was made (ceremony, weather) takes no new payments.
+      if (await closureRepository.isClosed(locked.tourId, locked.travelDate, tx)) {
+        throw new DomainError("dateClosed");
+      }
 
       const provider = activeProvider();
       const latest = await paymentRepository.findLatestForBooking(locked.id, tx);
@@ -200,6 +205,14 @@ export const paymentService = {
           return { result: "ignored", reason: "amount mismatch" };
         }
 
+        // Lock the booking before looking for other paid attempts: two attempts
+        // settling at the same moment then serialize here, and the second one
+        // sees the first as paid (and is flagged as a duplicate) instead of
+        // both reading "nothing paid yet".
+        const booking =
+          status === "paid"
+            ? await bookingRepository.findByIdForUpdate(tx, payment.bookingId)
+            : undefined;
         // Any paid attempt at this point is a *different* one: this payment isn't paid yet.
         const alreadyPaid =
           status === "paid" && (await paymentRepository.hasPaid(payment.bookingId, tx));
@@ -217,7 +230,6 @@ export const paymentService = {
           );
           await flagRefundRequired(tx, payment, "duplicate", null);
         } else if (status === "paid") {
-          const booking = await bookingRepository.findByIdForUpdate(tx, payment.bookingId);
           if (booking && canTransition(booking.status, "confirmed")) {
             await bookingRepository.updateStatusWith(tx, booking.id, "confirmed");
           } else {

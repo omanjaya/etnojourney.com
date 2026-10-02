@@ -282,7 +282,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               <Reveal key={key} delay={Math.min(i * 0.08, 0.4)}>
                 <div className="border-t border-white/15 pt-6">
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-5xl text-white/20">
+                    <span className="font-display text-5xl text-white/45" aria-hidden>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <Icon className="text-gold size-7" strokeWidth={1.25} aria-hidden />

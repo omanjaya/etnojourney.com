@@ -51,9 +51,9 @@ export async function SiteFooter() {
         </Reveal>
 
         <Reveal className="sm:col-span-2 xl:shrink-0" delay={0.08}>
-          <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+          <h2 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.explore")}
-          </h3>
+          </h2>
           <FooterLinks
             links={[
               { href: "/tours", label: t("nav.tours") },
@@ -64,9 +64,9 @@ export async function SiteFooter() {
         </Reveal>
 
         <Reveal className="sm:col-span-2 xl:shrink-0" delay={0.16}>
-          <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+          <h2 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.company")}
-          </h3>
+          </h2>
           <FooterLinks
             links={[
               { href: "/about", label: t("footer.ourStory") },
@@ -77,9 +77,9 @@ export async function SiteFooter() {
         </Reveal>
 
         <Reveal className="sm:col-span-2 xl:shrink-0" delay={0.24}>
-          <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+          <h2 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.help")}
-          </h3>
+          </h2>
           <FooterLinks
             links={[
               { href: "/faq", label: t("footer.faq") },
@@ -93,9 +93,9 @@ export async function SiteFooter() {
 
         {hasAnyContact(contact) && (
           <Reveal className="sm:col-span-6 xl:shrink-0" delay={0.32}>
-            <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
+            <h2 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
               {t("footer.contact")}
-            </h3>
+            </h2>
             <ul className="text-sand-100/80 mt-5 space-y-1 text-sm">
               {contact.address && (
                 <li className="flex gap-3 py-2">

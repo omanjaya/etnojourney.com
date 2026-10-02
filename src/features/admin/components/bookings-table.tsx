@@ -7,6 +7,7 @@ import type { Booking } from "@/server/db/schema";
 import { nextStatuses } from "@/server/services/booking.rules";
 import { BookingStatusBadge } from "@/components/shared/booking-status-badge";
 import { BookingStatusControl } from "./booking-status-control";
+import { TableScroll } from "@/components/ui/table-scroll";
 
 export type AdminBookingRow = {
   booking: Booking;
@@ -84,7 +85,7 @@ export function BookingsTable({
         ))}
       </ul>
 
-      <div className="border-line hidden overflow-x-auto rounded-(--radius-card) border bg-white md:block">
+      <TableScroll label={t("tableLabel")} className="hidden md:block">
         <table className="w-full min-w-[56rem] text-left text-sm">
           <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
             <tr>
@@ -170,7 +171,7 @@ export function BookingsTable({
             ))}
           </tbody>
         </table>
-      </div>
+      </TableScroll>
     </>
   );
 }

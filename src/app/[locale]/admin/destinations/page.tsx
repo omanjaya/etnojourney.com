@@ -17,7 +17,7 @@ export default async function AdminDestinationsPage({
   searchParams,
 }: PageProps<"/[locale]/admin/destinations">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
-  await requireAdmin();
+  await requireAdmin("catalogue.manage");
   const raw = await searchParams;
   const { q } = parseAdminListQuery(raw);
   const [result, t, tl] = await Promise.all([

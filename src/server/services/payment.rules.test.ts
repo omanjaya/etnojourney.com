@@ -142,18 +142,22 @@ describe("refundReasonForPaidNotification", () => {
 });
 
 describe("canRecordRefund / assertRefundable", () => {
-  it("only allows refunding a paid payment", () => {
-    expect(canRecordRefund({ status: "paid" })).toBe(true);
+  it("only allows refunding a paid payment that is flagged for refund", () => {
+    expect(canRecordRefund({ status: "paid", refundRequired: true })).toBe(true);
     for (const status of ["pending", "failed", "expired", "refunded"] as const) {
-      expect(canRecordRefund({ status })).toBe(false);
-      expect(() => assertRefundable({ status })).toThrow(DomainError);
+      expect(canRecordRefund({ status, refundRequired: true })).toBe(false);
+      expect(() => assertRefundable({ status, refundRequired: true })).toThrow(DomainError);
     }
-    expect(() => assertRefundable({ status: "paid" })).not.toThrow();
+    expect(() => assertRefundable({ status: "paid", refundRequired: true })).not.toThrow();
+  });
+
+  it("refuses a paid payment of a live booking (not flagged)", () => {
+    expect(canRecordRefund({ status: "paid", refundRequired: false })).toBe(false);
   });
 
   it("raises the notRefundable code", () => {
     try {
-      assertRefundable({ status: "refunded" });
+      assertRefundable({ status: "refunded", refundRequired: false });
       expect.unreachable();
     } catch (error) {
       expect((error as DomainError).code).toBe("notRefundable");

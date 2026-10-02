@@ -5,6 +5,7 @@ import { paymentMethodLabel } from "@/lib/payment-method";
 import type { Payment } from "@/server/db/schema";
 import { Badge } from "@/components/ui/badge";
 import { PaymentStatusBadge } from "./payment-status-badge";
+import { TableScroll } from "@/components/ui/table-scroll";
 
 export type AdminPaymentRow = {
   payment: Payment;
@@ -81,7 +82,7 @@ export function PaymentsTable({ rows }: { rows: AdminPaymentRow[] }) {
         ))}
       </ul>
 
-      <div className="border-line hidden overflow-x-auto rounded-(--radius-card) border bg-white md:block">
+      <TableScroll label={t("tableLabel")} className="hidden md:block">
         <table className="w-full min-w-[56rem] text-left text-sm">
           <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
             <tr>
@@ -136,7 +137,7 @@ export function PaymentsTable({ rows }: { rows: AdminPaymentRow[] }) {
             ))}
           </tbody>
         </table>
-      </div>
+      </TableScroll>
     </>
   );
 }

@@ -28,8 +28,8 @@
       "confirmed": "Terkonfirmasi",
       "completed": "Selesai",
       "cancelled": "Dibatalkan",
-      "revenue": "Pendapatan",
-      "revenueHint": "Dari booking terkonfirmasi dan selesai",
+      "revenue": "Pendapatan bulan ini",
+      "revenueHint": "Pembayaran diterima dikurangi refund",
       "publishedTours": "Tur tayang"
     },
     "recent": "Booking terbaru",
@@ -54,7 +54,8 @@
       "total": "Total",
       "status": "Status",
       "created": "Dibuat",
-      "actions": "Aksi"
+      "actions": "Aksi",
+      "tableLabel": "Tabel booking"
     },
     "noActions": "Final",
     "actions": {

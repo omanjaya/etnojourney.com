@@ -27,7 +27,7 @@ export default async function AdminOverviewPage() {
   const canSeeRevenue = can(user.role, "reports.view");
   const canRefund = can(user.role, "payments.refund");
   const [overview, t, tb, tq, locale] = await Promise.all([
-    dashboardService.overview({ withRefunds: canRefund }),
+    dashboardService.overview({ withRefunds: canRefund, withRevenue: canSeeRevenue }),
     getTranslations("admin.overview"),
     getTranslations("admin.bookings"),
     getTranslations("adminInsights.dashboard"),
@@ -80,7 +80,7 @@ export default async function AdminOverviewPage() {
       </section>
 
       <div className="admin-stagger grid grid-cols-2 gap-3 xl:grid-cols-3">
-        {canSeeRevenue && (
+        {revenue !== null && (
           <StatCard
             icon={Wallet}
             accent="indigo"

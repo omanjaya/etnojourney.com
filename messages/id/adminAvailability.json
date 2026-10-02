@@ -14,7 +14,7 @@
     "next": "Bulan berikutnya"
   },
   "calendar": {
-    "hint": "Klik tanggal untuk memilihnya, lalu klik tanggal setelahnya untuk memilih rentang. Tanggal yang sudah lewat tidak bisa ditutup.",
+    "hint": "Klik tanggal (atau Enter; pindah dengan tombol panah) untuk memilihnya, lalu pilih tanggal setelahnya untuk rentang. Tanggal yang sudah lewat tidak bisa ditutup.",
     "closed": "Tutup",
     "closedAll": "Semua tutup",
     "toursClosed": "{count} tur tutup",

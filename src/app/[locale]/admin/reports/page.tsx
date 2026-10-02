@@ -14,6 +14,7 @@ import { StatCard } from "@/features/admin/components/stat-card";
 import { BarChart } from "@/features/admin-insights/components/bar-chart";
 import { ReportPeriodPicker } from "@/features/admin-insights/components/report-period-picker";
 import { parseReportQuery, reportQueryOf } from "@/features/admin-insights/schemas";
+import { TableScroll } from "@/components/ui/table-scroll";
 
 export async function generateMetadata() {
   const t = await getTranslations("adminInsights.reports");
@@ -162,7 +163,7 @@ export default async function AdminReportsPage({
               }))}
             />
           </div>
-          <div className="border-line overflow-x-auto rounded-(--radius-card) border bg-white">
+          <TableScroll label={t("months.tableLabel")}>
             <table className="w-full min-w-[36rem] text-left text-sm">
               <caption className="sr-only">{t("months.title")}</caption>
               <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
@@ -198,7 +199,7 @@ export default async function AdminReportsPage({
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroll>
         </div>
       </section>
 
@@ -217,7 +218,7 @@ export default async function AdminReportsPage({
           </a>
         </div>
         {tours.length ? (
-          <div className="border-line overflow-x-auto rounded-(--radius-card) border bg-white">
+          <TableScroll label={t("tours.tableLabel")}>
             <table className="w-full min-w-[48rem] text-left text-sm">
               <caption className="sr-only">{t("tours.title")}</caption>
               <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
@@ -262,7 +263,7 @@ export default async function AdminReportsPage({
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableScroll>
         ) : (
           <p className="text-muted border-line rounded-(--radius-card) border bg-white p-5 text-sm">
             {t("empty")}

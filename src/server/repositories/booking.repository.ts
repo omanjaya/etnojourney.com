@@ -12,7 +12,6 @@ import {
   lte,
   or,
   sql,
-  sum,
   type SQL,
 } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
@@ -248,19 +247,13 @@ export const bookingRepository = {
   },
 
   async stats() {
-    const [byStatus, revenue] = await Promise.all([
-      db
-        .select({ status: bookings.status, total: count() })
-        .from(bookings)
-        .groupBy(bookings.status),
-      db
-        .select({ value: sql<number>`coalesce(${sum(bookings.totalPrice)}, 0)::bigint` })
-        .from(bookings)
-        .where(inArray(bookings.status, ["confirmed", "completed"])),
-    ]);
+    const byStatus = await db
+      .select({ status: bookings.status, total: count() })
+      .from(bookings)
+      .groupBy(bookings.status);
     const counts = Object.fromEntries(byStatus.map((r) => [r.status, r.total])) as Partial<
       Record<BookingStatus, number>
     >;
-    return { counts, revenue: Number(revenue[0]?.value ?? 0) };
+    return { counts };
   },
 };
