@@ -279,6 +279,24 @@ export const payments = pgTable(
   ],
 );
 
+/* ---------------------------------------------------------------- */
+/* Media                                                             */
+/* ---------------------------------------------------------------- */
+
+/**
+ * Attribution for curated content photos (public/images/content), required by
+ * CC BY / BY-SA licenses and shown next to the images. Seeded from content/photos.
+ */
+export const photoCredits = pgTable("photo_credits", {
+  path: text("path").primaryKey(),
+  title: text("title").notNull(),
+  author: text("author").notNull(),
+  license: text("license").notNull(),
+  licenseUrl: text("license_url"),
+  sourceUrl: text("source_url").notNull(),
+  source: text("source").notNull(),
+});
+
 export const wishlists = pgTable(
   "wishlists",
   {
@@ -345,6 +363,7 @@ export type ItineraryDay = typeof itineraryDays.$inferSelect;
 export type Review = typeof reviews.$inferSelect;
 export type Booking = typeof bookings.$inferSelect;
 export type Payment = typeof payments.$inferSelect;
+export type PhotoCredit = typeof photoCredits.$inferSelect;
 export type PaymentStatus = (typeof paymentStatus.enumValues)[number];
 export type BookingStatus = (typeof bookingStatus.enumValues)[number];
 export type TourCategory = (typeof tourCategory.enumValues)[number];
