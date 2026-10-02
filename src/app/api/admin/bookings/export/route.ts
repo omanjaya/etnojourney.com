@@ -26,7 +26,8 @@ const HEADER = [
 
 /**
  * GET /api/admin/bookings/export?q=&status=&from=&to=&sort=
- * Admin-only CSV of every booking matching the same filters as the admin list.
+ * Back-office CSV (`bookings.manage`: staff and admins, who see the same contact
+ * details in the booking pages) of every booking matching the same filters as the admin list.
  * Streams in batches; cells are RFC 4180 quoted and formula-neutralized.
  */
 export async function GET(request: Request) {

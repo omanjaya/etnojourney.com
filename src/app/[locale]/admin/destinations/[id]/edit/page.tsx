@@ -22,7 +22,7 @@ export default async function EditDestinationPage({
   params,
 }: PageProps<"/[locale]/admin/destinations/[id]/edit">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
-  await requireAdmin();
+  await requireAdmin("catalogue.manage");
   const { id: rawId } = await params;
   const id = Number(rawId);
   if (!Number.isInteger(id) || id < 1) notFound();

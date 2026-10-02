@@ -19,7 +19,7 @@ import { requireAdmin } from "@/server/auth/guards";
 
 export default async function AdminToursPage({ searchParams }: PageProps<"/[locale]/admin/tours">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
-  await requireAdmin();
+  await requireAdmin("catalogue.manage");
   const raw = await searchParams;
   const { q } = parseAdminListQuery(raw);
   const [result, t, tc, tl, locale] = await Promise.all([

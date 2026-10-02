@@ -127,11 +127,16 @@ export function refundReasonForPaidNotification(input: {
 }
 
 /** Only money that was actually taken (and not yet returned) can be refunded. */
-export function canRecordRefund(payment: { status: PaymentStatus }): boolean {
-  return payment.status === "paid";
+/**
+ * Only money that is owed back can be marked refunded: a paid payment flagged
+ * by the system (duplicate charge, paid but cancelled). Refunding a live
+ * booking's payment would leave it "confirmed" with nothing paid.
+ */
+export function canRecordRefund(payment: { status: PaymentStatus; refundRequired: boolean }): boolean {
+  return payment.status === "paid" && payment.refundRequired;
 }
 
-export function assertRefundable(payment: { status: PaymentStatus }): void {
+export function assertRefundable(payment: { status: PaymentStatus; refundRequired: boolean }): void {
   if (!canRecordRefund(payment)) throw new DomainError("notRefundable");
 }
 

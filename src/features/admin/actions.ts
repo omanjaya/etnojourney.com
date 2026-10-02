@@ -44,13 +44,6 @@ export async function updateBookingStatusAction(
       parsed.data.status,
       actor.id,
     );
-    await auditService.record({
-      actorId: actor.id,
-      action: "booking.status_changed",
-      entityType: "booking",
-      entityId: booking.id,
-      details: { status: booking.status, code: booking.code },
-    });
     after(() => notificationService.bookingStatusChanged(booking.id));
     revalidate.admin();
     revalidate.account();

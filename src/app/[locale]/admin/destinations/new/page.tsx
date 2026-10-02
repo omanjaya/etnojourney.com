@@ -10,7 +10,7 @@ import {
 
 export default async function NewDestinationPage() {
   // Pages must guard themselves: Next.js can render a page without its layout.
-  await requireAdmin();
+  await requireAdmin("catalogue.manage");
   const t = await getTranslations("admin.destinationForm");
 
   return (

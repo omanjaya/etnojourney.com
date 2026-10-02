@@ -17,7 +17,7 @@ export default async function AdminBookingsPage({
   searchParams,
 }: PageProps<"/[locale]/admin/bookings">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
-  await requireAdmin();
+  await requireAdmin("bookings.manage");
   const raw = await searchParams;
   const query = parseAdminBookingQuery(raw);
 
