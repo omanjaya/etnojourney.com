@@ -1,0 +1,732 @@
+{
+  "region": "bali-tengah-utara-barat",
+  "destinations": [
+    {
+      "slug": "bedulu-pejeng",
+      "name": "Bedulu & Pejeng",
+      "province": "Bali",
+      "heroImage": "/images/content/bedulu-pejeng/goa-gajah-entrance.webp",
+      "tagline": {
+        "id": "Lembah sungai purba tempat gua pertapaan, relief batu, dan Bulan Pejeng bersemayam.",
+        "en": "An ancient river valley of hermit caves, rock reliefs and the Moon of Pejeng."
+      },
+      "description": {
+        "id": "Di antara Sungai Petanu dan Pakerisan, Bedulu dan Pejeng menyimpan jejak paling tua kerajaan Bali. Goa Gajah, yang dibangun sebagai tempat pertapaan sekitar abad ke-11, berada di lereng tempat dua aliran sungai bertemu, lengkap dengan kolam petirtaan dan arca pancuran yang masih dialiri air.\n\nTak jauh dari sana, relief Yeh Pulu sepanjang sekitar 25 meter dipahat di tebing batu pada abad ke-14, menggambarkan tokoh-tokoh pewayangan berdampingan dengan adegan kehidupan desa. Di Pejeng, Pura Penataran Sasih menyimpan Bulan Pejeng, nekara perunggu setinggi sekitar 1,86 meter yang disebut sebagai nekara cetak tunggal terbesar yang pernah ditemukan.\n\nMuseum Gedong Arca, yang kini juga dikenal sebagai Museum Sarkofagus, melengkapi cerita dengan koleksi peti batu dan perkakas dari masa prasejarah hingga abad ke-15.",
+        "en": "Between the Petanu and Pakerisan rivers, Bedulu and Pejeng hold some of the oldest traces of Balinese kingdoms. Goa Gajah, built as a hermitage around the 11th century, sits on a slope where two streams meet, with bathing pools and spouting statues still fed by spring water.\n\nNearby, the roughly 25-metre Yeh Pulu reliefs were carved into a rock face in the 14th century, showing wayang figures alongside scenes of village life. In Pejeng, Pura Penataran Sasih keeps the Moon of Pejeng, a bronze kettledrum about 1.86 metres tall, described as the largest single-cast drum ever found.\n\nThe Gedong Arca Museum, now also called the Sarcophagus Museum, completes the story with stone coffins and tools from prehistory to the 15th century."
+      }
+    },
+    {
+      "slug": "celuk-mas",
+      "name": "Celuk & Mas",
+      "province": "Bali",
+      "heroImage": "/images/content/celuk-mas/woodcarver-near-ubud.webp",
+      "tagline": {
+        "id": "Dua desa perajin di selatan Ubud: perak dan emas di Celuk, ukiran kayu dan topeng di Mas.",
+        "en": "Two craft villages south of Ubud: silver and gold in Celuk, carving and masks in Mas."
+      },
+      "description": {
+        "id": "Kerajinan perak di Celuk berakar sebagai usaha keluarga yang dulu melayani puri-puri di sekitar Sukawati, Peliatan, dan Ubud. Sejak pertengahan 1970-an banyak keluarga petani beralih menjadi perajin, dan hingga kini sebagian besar perhiasan masih dikerjakan dengan tangan, termasuk teknik granulasi yang menempelkan butiran perak kecil menjadi pola.\n\nBeberapa kilometer ke utara, Desa Mas dikenal sebagai salah satu pusat ukir kayu di sekitar Ubud. Dahulu ukiran terutama dibuat untuk pura dan puri; pada 1920-an dan 1930-an kedatangan seniman asing ikut mengubah corak patung yang dikenal sekarang. Topeng-topeng Mas dikerjakan berhari-hari hingga berminggu-minggu dengan puluhan jenis pahat.\n\nDi Mas pula berdiri Setia Darma House of Masks and Puppets, museum yang menyimpan ribuan topeng dan wayang dari Nusantara dan berbagai negara.",
+        "en": "Silverwork in Celuk began as small family workshops serving the royal houses around Sukawati, Peliatan and Ubud. From the mid-1970s many farming families turned to the craft, and most jewellery is still made by hand, including granulation, in which tiny silver beads are fused into patterns.\n\nA few kilometres north, Mas is known as one of the woodcarving centres around Ubud. Carving was once made mainly for temples and palaces; the arrival of foreign artists in the 1920s and 1930s helped shape the sculpture known today. Mas masks take days to weeks to finish, using dozens of different chisels.\n\nMas is also home to the Setia Darma House of Masks and Puppets, a museum holding thousands of masks and puppets from across Indonesia and abroad."
+      }
+    },
+    {
+      "slug": "munduk-sidatapa",
+      "name": "Munduk & Sidatapa",
+      "province": "Bali",
+      "heroImage": "/images/content/munduk-sidatapa/tamblingan-temple-dawn.webp",
+      "tagline": {
+        "id": "Dataran tinggi Buleleng: danau kembar, kebun cengkeh dan kopi, serta desa-desa Bali Aga.",
+        "en": "The Buleleng highlands: twin lakes, clove and coffee gardens, and Bali Aga villages."
+      },
+      "description": {
+        "id": "Munduk adalah desa dataran tinggi di Kabupaten Buleleng yang dikelilingi kebun cengkeh, kopi, dan hutan. Pada masa kolonial, kawasan ini menjadi tempat peristirahatan dari panasnya Singaraja, dan sebagian bangunan lama masih berdiri. Dari punggung bukitnya terlihat Danau Tamblingan dan Danau Buyan di dalam kaldera tua, dengan Pura Ulun Danu Tamblingan di tepi air.\n\nTurun ke arah utara, lima desa Bali Aga, yaitu Sidatapa, Cempaga, Tigawasa, Pedawa, dan Banyuseri, menjaga adat yang berbeda dari desa-desa Bali dataran rendah. Sidatapa memiliki rumah adat Bale Gajah Tumpang Salu, sedangkan Pedawa dikenal dengan rumah Bandung Rangki yang hanya terdiri atas satu ruang, serta gula aren yang diolah dengan pengetahuan turun-temurun.",
+        "en": "Munduk is a highland village in Buleleng Regency surrounded by clove and coffee gardens and forest. In colonial times it was a retreat from the heat of Singaraja, and some old buildings still stand. From its ridges you can see Lake Tamblingan and Lake Buyan inside an ancient caldera, with Pura Ulun Danu Tamblingan at the water's edge.\n\nFurther north, five Bali Aga villages, Sidatapa, Cempaga, Tigawasa, Pedawa and Banyuseri, keep customs distinct from lowland Balinese villages. Sidatapa has the Bale Gajah Tumpang Salu house, while Pedawa is known for its single-room Bandung Rangki houses and for palm sugar made with knowledge passed down through generations."
+      }
+    },
+    {
+      "slug": "jembrana",
+      "name": "Jembrana",
+      "province": "Bali",
+      "heroImage": "/images/content/jembrana/makepung-race.webp",
+      "tagline": {
+        "id": "Bali barat yang tenang: pacuan kerbau makepung, gamelan bambu jegog, dan pelabuhan nelayan.",
+        "en": "Quiet west Bali: makepung buffalo races, giant bamboo jegog and fishing harbours."
+      },
+      "description": {
+        "id": "Jembrana adalah kabupaten paling barat di Bali, tanah sawah dan hutan bambu yang jarang didatangi rombongan wisata. Tradisinya lahir dari kehidupan agraris. Makepung adalah pacuan sepasang kerbau yang menarik cikar kecil, dikemudikan joki berpakaian adat di lintasan tanah. Lomba digelar berkala antara Juli dan November, dengan puncak berupa Piala Bupati dan Piala Gubernur.\n\nJegog, gamelan dari tabung-tabung bambu berukuran besar, berkembang di Jembrana sejak awal abad ke-20 dan namanya diambil dari instrumen terbesarnya. Di pesisir, Pelabuhan Perikanan Pengambengan menjadi pusat perikanan rakyat terbesar di Bali, tempat perahu-perahu selerek berangkat berpasangan mencari ikan di Selat Bali.",
+        "en": "Jembrana is Bali's westernmost regency, a land of rice fields and bamboo forest rarely visited by tour groups. Its traditions grew out of farming life. Makepung is a race of buffalo pairs pulling small carts, driven by jockeys in traditional dress on dirt tracks. Races are held regularly between July and November, culminating in the Regent's Cup and the Governor's Cup.\n\nJegog, a gamelan of very large bamboo tubes, developed in Jembrana in the early 20th century and takes its name from its biggest instrument. On the coast, Pengambengan fishing port is Bali's largest centre of small-scale fisheries, where selerek boats set out in pairs to fish the Bali Strait."
+      }
+    }
+  ],
+  "tours": [
+    {
+      "slug": "jalan-kaki-goa-gajah-yeh-pulu",
+      "destination": "bedulu-pejeng",
+      "category": "trekking",
+      "title": {
+        "id": "Jalan Kaki Goa Gajah ke Yeh Pulu",
+        "en": "Walking from Goa Gajah to Yeh Pulu"
+      },
+      "summary": {
+        "id": "Menyusuri lembah Petanu dari gua pertapaan abad ke-11 menuju relief batu abad ke-14, melewati sawah dan subak.",
+        "en": "Follow the Petanu valley from an 11th-century hermitage to 14th-century rock reliefs, through rice fields and subak."
+      },
+      "description": {
+        "id": "Perjalanan dimulai pagi hari di Goa Gajah, saat kolam petirtaan masih sepi. Pemandu menjelaskan jejak Hindu dan Buddha yang bertemu di situs ini, makna arca-arca pancuran, dan tata krama memasuki area pura.\n\nDari sana kita berjalan kaki melintasi pematang sawah dan aliran subak menuju Yeh Pulu, tempat relief sepanjang sekitar 25 meter menggambarkan tokoh pewayangan, perburuan, dan kehidupan sehari-hari. Siang hari ditutup dengan makan siang sederhana di warung desa.",
+        "en": "We start early at Goa Gajah, while the bathing pools are still quiet. Your guide explains how Hindu and Buddhist traces meet at this site, the meaning of the spouting statues and the etiquette for entering temple grounds.\n\nFrom there we walk along rice-field dykes and subak channels to Yeh Pulu, where some 25 metres of reliefs show wayang figures, a hunt and scenes of daily life. The morning ends with a simple lunch at a village warung."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 650000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/bedulu-pejeng/goa-gajah-entrance.webp",
+      "gallery": [
+        "/images/content/bedulu-pejeng/goa-gajah-gardens.webp",
+        "/images/content/bedulu-pejeng/goa-gajah-baths.webp",
+        "/images/content/bedulu-pejeng/yeh-pulu-relief.webp",
+        "/images/content/bedulu-pejeng/yeh-pulu-panel.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Goa Gajah sebelum ramai pengunjung",
+          "en": "Goa Gajah before the crowds"
+        },
+        {
+          "id": "Kolam petirtaan dan arca pancuran",
+          "en": "Bathing pools and spouting statues"
+        },
+        {
+          "id": "Jalan kaki melintasi sawah dan subak",
+          "en": "Walk through rice fields and subak"
+        },
+        {
+          "id": "Relief Yeh Pulu abad ke-14",
+          "en": "The 14th-century Yeh Pulu reliefs"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Tiket masuk Goa Gajah dan Yeh Pulu",
+          "en": "Entrance to Goa Gajah and Yeh Pulu"
+        },
+        {
+          "id": "Pinjaman kamen dan selendang",
+          "en": "Sarong and sash for temple visits"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        },
+        {
+          "id": "Makan siang di warung desa",
+          "en": "Lunch at a village warung"
+        }
+      ],
+      "meetingPoint": "Area parkir Goa Gajah, Bedulu, Gianyar",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Goa Gajah, sawah, dan Yeh Pulu",
+            "en": "Goa Gajah, rice fields and Yeh Pulu"
+          },
+          "description": {
+            "id": "07.30 bertemu di Goa Gajah, berkeliling situs, lalu berjalan kaki sekitar 3 km melewati sawah menuju Yeh Pulu. Makan siang di warung desa, selesai sekitar 13.00.",
+            "en": "07:30 meet at Goa Gajah and explore the site, then walk about 3 km through rice fields to Yeh Pulu. Lunch at a village warung, finishing around 13:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "bulan-pejeng-dan-museum-sarkofagus",
+      "destination": "bedulu-pejeng",
+      "category": "ritual",
+      "title": {
+        "id": "Bulan Pejeng dan Museum Sarkofagus",
+        "en": "The Moon of Pejeng and the Sarcophagus Museum"
+      },
+      "summary": {
+        "id": "Mengenal pura-pura tua Pejeng, nekara perunggu Bulan Pejeng, dan peti batu prasejarah di Museum Gedong Arca.",
+        "en": "Discover Pejeng's ancient temples, the bronze Moon of Pejeng and prehistoric stone coffins at the Gedong Arca Museum."
+      },
+      "description": {
+        "id": "Pejeng pernah menjadi pusat kerajaan Bali kuno, dan pura-puranya menyimpan peninggalan yang dirawat sebagai benda suci. Di Pura Penataran Sasih, kita melihat Bulan Pejeng dari bawah bale tempatnya disimpan dan mendengar legenda bulan yang jatuh ke bumi, sambil memahami mengapa nekara ini tetap dihormati umat.\n\nSiang hari kita mengunjungi Museum Gedong Arca untuk melihat sarkofagus dan perkakas dari zaman batu hingga perunggu, lalu menutup hari dengan berbincang tentang cara warga menjaga situs-situs ini dalam kehidupan pura sehari-hari.",
+        "en": "Pejeng was once the centre of an ancient Balinese kingdom, and its temples keep relics cared for as sacred objects. At Pura Penataran Sasih we view the Moon of Pejeng from below the pavilion that houses it and hear the legend of the moon that fell to earth, while learning why the drum is still revered.\n\nIn the afternoon we visit the Gedong Arca Museum to see sarcophagi and tools from the Stone Age to the Bronze Age, ending with a conversation about how residents look after these sites as part of everyday temple life."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 550000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/bedulu-pejeng/moon-of-pejeng.webp",
+      "gallery": [
+        "/images/content/bedulu-pejeng/penataran-sasih-gate.webp",
+        "/images/content/bedulu-pejeng/goa-gajah-entrance.webp",
+        "/images/content/bedulu-pejeng/yeh-pulu-panel.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Bulan Pejeng di Pura Penataran Sasih",
+          "en": "The Moon of Pejeng at Pura Penataran Sasih"
+        },
+        {
+          "id": "Legenda bulan yang jatuh ke bumi",
+          "en": "The legend of the fallen moon"
+        },
+        {
+          "id": "Sarkofagus prasejarah di Museum Gedong Arca",
+          "en": "Prehistoric sarcophagi at the Gedong Arca Museum"
+        },
+        {
+          "id": "Tata krama berkunjung ke pura",
+          "en": "Temple visiting etiquette"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Tiket masuk museum dan donasi pura",
+          "en": "Museum entrance and temple donations"
+        },
+        {
+          "id": "Pinjaman kamen dan selendang",
+          "en": "Sarong and sash for temple visits"
+        },
+        {
+          "id": "Air mineral dan kudapan",
+          "en": "Bottled water and snacks"
+        }
+      ],
+      "meetingPoint": "Pura Penataran Sasih, Jalan Raya Pejeng, Tampaksiring, Gianyar",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Pura-pura Pejeng dan museum",
+            "en": "Pejeng temples and the museum"
+          },
+          "description": {
+            "id": "09.00 bertemu di Pura Penataran Sasih, berkeliling pura-pura di Pejeng, lalu mengunjungi Museum Gedong Arca. Selesai sekitar 14.00.",
+            "en": "09:00 meet at Pura Penataran Sasih, visit the temples of Pejeng, then the Gedong Arca Museum. Finishing around 14:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "perak-celuk-dan-ukir-mas",
+      "destination": "celuk-mas",
+      "category": "craft",
+      "title": {
+        "id": "Perak Celuk dan Ukir Kayu Mas",
+        "en": "Celuk Silver and Mas Woodcarving"
+      },
+      "summary": {
+        "id": "Pagi di bengkel perak keluarga di Celuk, siang di antara pengukir kayu dan topeng di Desa Mas.",
+        "en": "Morning in a family silver workshop in Celuk, afternoon among the wood and mask carvers of Mas."
+      },
+      "description": {
+        "id": "Di Celuk, kita duduk di bengkel kecil tempat perhiasan masih dikerjakan dengan tangan: melebur, menarik kawat, dan menempelkan butiran-butiran perak dalam teknik granulasi. Kamu akan mencoba membuat cincin perak sederhana dengan bimbingan perajin.\n\nSetelah makan siang, kita bergeser ke Desa Mas. Di sini kamu melihat bagaimana sebatang kayu menjadi patung atau topeng melalui puluhan jenis pahat, lalu berkunjung ke Setia Darma House of Masks and Puppets untuk melihat koleksi topeng dan wayang dari berbagai daerah.",
+        "en": "In Celuk we sit in a small workshop where jewellery is still made by hand: melting, drawing wire and fusing tiny silver beads in granulation work. You will make a simple silver ring with an artisan's guidance.\n\nAfter lunch we move on to Mas. Here you see how a block of wood becomes a statue or mask through dozens of chisels, then visit the Setia Darma House of Masks and Puppets to see masks and puppets from across Indonesia."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 950000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/celuk-mas/woodcarver-near-ubud.webp",
+      "gallery": [
+        "/images/content/celuk-mas/silversmiths-workshop.webp",
+        "/images/content/celuk-mas/artisan-carving.webp",
+        "/images/content/celuk-mas/garuda-carving.webp",
+        "/images/content/celuk-mas/carved-naga-beam.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Membuat cincin perak sederhana",
+          "en": "Make a simple silver ring"
+        },
+        {
+          "id": "Melihat teknik granulasi perak",
+          "en": "See silver granulation up close"
+        },
+        {
+          "id": "Bengkel ukir kayu dan topeng di Mas",
+          "en": "Wood and mask carving workshops in Mas"
+        },
+        {
+          "id": "Setia Darma House of Masks and Puppets",
+          "en": "The Setia Darma House of Masks and Puppets"
+        }
+      ],
+      "included": [
+        {
+          "id": "Bahan perak untuk satu cincin",
+          "en": "Silver for one ring"
+        },
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Tiket museum",
+          "en": "Museum entrance"
+        },
+        {
+          "id": "Makan siang",
+          "en": "Lunch"
+        },
+        {
+          "id": "Transportasi Celuk–Mas",
+          "en": "Transport between Celuk and Mas"
+        }
+      ],
+      "meetingPoint": "Jalan Raya Celuk, Sukawati, Gianyar",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Celuk dan Mas",
+            "en": "Celuk and Mas"
+          },
+          "description": {
+            "id": "09.00 kelas perak di Celuk hingga 12.00, makan siang, 13.30 bengkel ukir di Mas dan kunjungan museum. Selesai sekitar 16.30.",
+            "en": "09:00 silver class in Celuk until 12:00, lunch, 13:30 carving workshops in Mas and the museum. Finishing around 16:30."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kelas-ukir-topeng-mas",
+      "destination": "celuk-mas",
+      "category": "craft",
+      "title": {
+        "id": "Kelas Ukir Topeng di Mas",
+        "en": "Mask Carving Class in Mas"
+      },
+      "summary": {
+        "id": "Sehari belajar dasar mengukir topeng kayu di sanggar keluarga pengukir Desa Mas.",
+        "en": "A day learning the basics of wooden mask carving in a carving family's studio in Mas."
+      },
+      "description": {
+        "id": "Topeng Bali bukan sekadar hiasan: banyak di antaranya dibuat untuk pertunjukan dan upacara. Di sanggar keluarga di Desa Mas, kamu belajar mengenali jenis kayu, alat pahat, dan tahap-tahap pembentukan wajah topeng, lalu mencoba memahat sendiri sebuah topeng kecil.\n\nTopeng yang rumit bisa memakan waktu berminggu-minggu, jadi hasil kelas ini adalah bentuk dasar yang bisa kamu bawa pulang dan selesaikan sendiri. Sore hari kita melihat contoh topeng yang sudah dicat dan berbincang tentang perannya dalam pertunjukan.",
+        "en": "Balinese masks are more than decoration: many are made for performances and ceremonies. In a family studio in Mas you learn about woods, chisels and the stages of shaping a mask's face, then carve a small mask yourself.\n\nIntricate masks can take weeks, so you leave with a rough form to take home and finish. In the afternoon we look at painted masks and talk about their role in performance."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 750000,
+      "maxParticipants": 6,
+      "coverImage": "/images/content/celuk-mas/woodcarver-at-work.webp",
+      "gallery": [
+        "/images/content/celuk-mas/artisan-carving.webp",
+        "/images/content/celuk-mas/woodcarver-near-ubud.webp",
+        "/images/content/celuk-mas/garuda-carving.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Belajar di sanggar keluarga pengukir",
+          "en": "Learn in a carving family's studio"
+        },
+        {
+          "id": "Mengenal kayu dan alat pahat",
+          "en": "Get to know woods and chisels"
+        },
+        {
+          "id": "Memahat topeng kecil sendiri",
+          "en": "Carve your own small mask"
+        },
+        {
+          "id": "Kisah topeng dalam pertunjukan Bali",
+          "en": "Masks in Balinese performance"
+        }
+      ],
+      "included": [
+        {
+          "id": "Kayu dan alat pahat",
+          "en": "Wood and carving tools"
+        },
+        {
+          "id": "Pendamping perajin",
+          "en": "Artisan instructor"
+        },
+        {
+          "id": "Makan siang",
+          "en": "Lunch"
+        },
+        {
+          "id": "Air mineral dan kudapan",
+          "en": "Bottled water and snacks"
+        }
+      ],
+      "meetingPoint": "Setia Darma House of Masks and Puppets, Mas, Ubud, Gianyar",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Sehari di sanggar topeng",
+            "en": "A day in the mask studio"
+          },
+          "description": {
+            "id": "09.00 pengenalan kayu dan alat, praktik memahat hingga 15.30 dengan jeda makan siang, lalu melihat topeng-topeng yang sudah jadi.",
+            "en": "09:00 introduction to woods and tools, carving practice until 15:30 with a lunch break, then a look at finished masks."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "trekking-danau-kembar-munduk",
+      "destination": "munduk-sidatapa",
+      "category": "trekking",
+      "title": {
+        "id": "Trekking Danau Kembar Munduk",
+        "en": "Munduk Twin Lakes Trek"
+      },
+      "summary": {
+        "id": "Dua hari menyusuri hutan dan kebun Munduk menuju Danau Tamblingan dan Buyan, menginap di desa.",
+        "en": "Two days through Munduk's forests and gardens to Lakes Tamblingan and Buyan, staying in the village."
+      },
+      "description": {
+        "id": "Hari pertama kita berjalan dari Munduk melewati kebun cengkeh dan kopi, mampir di tempat warga menjemur cengkeh, lalu menuju air terjun dan hutan di sekitar desa. Malam hari kita menginap di penginapan desa dengan makan malam masakan rumahan.\n\nHari kedua dimulai pagi-pagi di Danau Tamblingan. Dari tepi danau terlihat Pura Ulun Danu Tamblingan, yang dihormati sebagai pura bagi Dewi Danu; kita melihatnya dari luar area suci. Perjalanan dilanjutkan menyusuri punggung bukit dengan pemandangan Danau Buyan sebelum kembali ke Munduk.",
+        "en": "On day one we walk from Munduk through clove and coffee gardens, stopping where families dry cloves, then on to waterfalls and forest around the village. We spend the night in a village guesthouse with a home-cooked dinner.\n\nDay two begins early at Lake Tamblingan. From the shore you can see Pura Ulun Danu Tamblingan, revered as a temple for Dewi Danu; we view it from outside the sacred area. The walk continues along the ridge with views of Lake Buyan before returning to Munduk."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1950000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/munduk-sidatapa/lake-buyan.webp",
+      "gallery": [
+        "/images/content/munduk-sidatapa/tamblingan-temple-dawn.webp",
+        "/images/content/munduk-sidatapa/tamblingan-canoe.webp",
+        "/images/content/munduk-sidatapa/munduk-forest-valley.webp",
+        "/images/content/munduk-sidatapa/cloves-drying-munduk.webp",
+        "/images/content/munduk-sidatapa/clove-farmer.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Kebun cengkeh dan kopi Munduk",
+          "en": "Munduk's clove and coffee gardens"
+        },
+        {
+          "id": "Pagi di tepi Danau Tamblingan",
+          "en": "Morning on the shore of Lake Tamblingan"
+        },
+        {
+          "id": "Punggung bukit dengan pemandangan Danau Buyan",
+          "en": "Ridge walk above Lake Buyan"
+        },
+        {
+          "id": "Menginap di desa",
+          "en": "Overnight in the village"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu trekking lokal",
+          "en": "Local trekking guide"
+        },
+        {
+          "id": "Penginapan desa 1 malam",
+          "en": "1 night in a village guesthouse"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        },
+        {
+          "id": "Transportasi kembali ke Munduk",
+          "en": "Return transport to Munduk"
+        }
+      ],
+      "meetingPoint": "Kantor Perbekel Desa Munduk, Banjar, Buleleng",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Kebun dan hutan Munduk",
+            "en": "Munduk's gardens and forest"
+          },
+          "description": {
+            "id": "09.00 mulai berjalan dari Munduk melewati kebun dan air terjun (sekitar 4 jam, tingkat sedang), sore beristirahat di penginapan desa.",
+            "en": "09:00 walk from Munduk through gardens and waterfalls (about 4 hours, moderate), rest at the guesthouse in the afternoon."
+          }
+        },
+        {
+          "title": {
+            "id": "Danau Tamblingan dan Buyan",
+            "en": "Lakes Tamblingan and Buyan"
+          },
+          "description": {
+            "id": "06.00 menuju Danau Tamblingan, berjalan di punggung bukit dengan pemandangan Danau Buyan, kembali ke Munduk sekitar 13.00.",
+            "en": "06:00 to Lake Tamblingan, ridge walk overlooking Lake Buyan, back in Munduk around 13:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "rumah-bali-aga-sidatapa-pedawa",
+      "destination": "munduk-sidatapa",
+      "category": "village",
+      "title": {
+        "id": "Rumah Bali Aga Sidatapa dan Pedawa",
+        "en": "Bali Aga Houses of Sidatapa and Pedawa"
+      },
+      "summary": {
+        "id": "Mengenal rumah adat Bale Gajah Tumpang Salu dan Bandung Rangki, serta pembuatan gula aren di Pedawa.",
+        "en": "See the Bale Gajah Tumpang Salu and Bandung Rangki houses, and palm sugar making in Pedawa."
+      },
+      "description": {
+        "id": "Desa-desa Bali Aga di Buleleng menjaga tata ruang dan bahasa yang berbeda dari desa Bali dataran rendah. Di Sidatapa, warga mengajak kita melihat Bale Gajah Tumpang Salu, rumah adat yang membagi ruang ke dalam tiga zona sesuai konsep tri mandala.\n\nDi Pedawa, kita mengenal rumah Bandung Rangki yang hanya terdiri atas satu ruang tanpa sekat, tempat tidur, dapur, dan tempat sembahyang berada dalam satu bangunan. Siang hari kita belajar dari pengolah gula aren tentang cara menyadap nira dan memasaknya hingga mengental, pengetahuan yang menjadi kebanggaan Pedawa.",
+        "en": "Buleleng's Bali Aga villages keep spatial layouts and a dialect different from lowland Balinese villages. In Sidatapa, residents show us the Bale Gajah Tumpang Salu, a traditional house divided into three zones following the tri mandala concept.\n\nIn Pedawa we see the Bandung Rangki, a single open room where beds, kitchen and shrine share one building. In the afternoon palm sugar makers explain how they tap the sap and cook it down, knowledge Pedawa is proud of."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 900000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/munduk-sidatapa/sidatapa-bali-aga-house.webp",
+      "gallery": [
+        "/images/content/munduk-sidatapa/munduk-forest-valley.webp",
+        "/images/content/munduk-sidatapa/cloves-drying-munduk.webp",
+        "/images/content/munduk-sidatapa/clove-farmer.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Bale Gajah Tumpang Salu di Sidatapa",
+          "en": "The Bale Gajah Tumpang Salu in Sidatapa"
+        },
+        {
+          "id": "Rumah Bandung Rangki di Pedawa",
+          "en": "Bandung Rangki houses in Pedawa"
+        },
+        {
+          "id": "Belajar mengolah gula aren",
+          "en": "Learn how palm sugar is made"
+        },
+        {
+          "id": "Bahasa dan adat Bali Aga",
+          "en": "Bali Aga language and customs"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu warga desa",
+          "en": "Village guide"
+        },
+        {
+          "id": "Kontribusi untuk desa",
+          "en": "Contribution to the village"
+        },
+        {
+          "id": "Makan siang masakan rumahan",
+          "en": "Home-cooked lunch"
+        },
+        {
+          "id": "Transportasi Sidatapa–Pedawa",
+          "en": "Transport between Sidatapa and Pedawa"
+        }
+      ],
+      "meetingPoint": "Kantor Perbekel Desa Sidatapa, Banjar, Buleleng",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Sidatapa dan Pedawa",
+            "en": "Sidatapa and Pedawa"
+          },
+          "description": {
+            "id": "09.00 bertemu di Sidatapa dan melihat rumah adat, 12.00 makan siang, 13.00 ke Pedawa untuk rumah Bandung Rangki dan pengolahan gula aren. Selesai sekitar 16.00.",
+            "en": "09:00 meet in Sidatapa to see the traditional houses, 12:00 lunch, 13:00 to Pedawa for the Bandung Rangki houses and palm sugar making. Finishing around 16:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "musim-makepung-jembrana",
+      "destination": "jembrana",
+      "category": "village",
+      "title": {
+        "id": "Musim Makepung di Jembrana",
+        "en": "Makepung Season in Jembrana"
+      },
+      "summary": {
+        "id": "Menyaksikan pacuan kerbau makepung pada hari lomba resmi, lalu mengenal kehidupan petani dan sawah Jembrana.",
+        "en": "Watch makepung buffalo races on an official race day, then learn about Jembrana's farming life."
+      },
+      "description": {
+        "id": "Makepung lahir dari budaya agraris Jembrana: sepasang kerbau berhias menarik cikar kecil, dikemudikan joki berpakaian adat di lintasan tanah. Lomba digelar berkala antara Juli dan November, dengan Piala Bupati dan Piala Gubernur sebagai puncaknya.\n\nTur ini hanya dijadwalkan pada hari lomba resmi sesuai pengumuman pemerintah daerah, sehingga tanggal yang bisa dipesan terbatas pada musim tersebut. Hari kedua kita berkeliling sawah dan desa di sekitar Negara untuk memahami hubungan kerbau, sawah, dan tradisi ini dalam kehidupan petani.",
+        "en": "Makepung grew out of Jembrana's farming culture: a decorated pair of buffalo pulls a small cart, driven by a jockey in traditional dress on a dirt track. Races are held regularly between July and November, culminating in the Regent's Cup and the Governor's Cup.\n\nThis tour runs only on official race days as announced by the regional government, so bookable dates are limited to that season. On day two we explore rice fields and villages around Negara to understand how buffalo, fields and this tradition fit into farming life."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1600000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/jembrana/makepung-pair.webp",
+      "gallery": [
+        "/images/content/jembrana/makepung-race.webp",
+        "/images/content/jembrana/makepung-speed.webp",
+        "/images/content/jembrana/makepung-lampit.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Pacuan makepung pada hari lomba resmi",
+          "en": "Makepung races on an official race day"
+        },
+        {
+          "id": "Cikar dan kerbau berhias",
+          "en": "Decorated carts and buffalo"
+        },
+        {
+          "id": "Sawah dan desa di sekitar Negara",
+          "en": "Rice fields and villages around Negara"
+        },
+        {
+          "id": "Hanya pada musim lomba Juli–November",
+          "en": "Only in the July–November race season"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Penginapan 1 malam di Negara",
+          "en": "1 night's stay in Negara"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Transportasi selama tur",
+          "en": "Transport during the tour"
+        }
+      ],
+      "meetingPoint": "Taman Pecangakan, Negara, Jembrana",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Hari lomba makepung",
+            "en": "Makepung race day"
+          },
+          "description": {
+            "id": "07.00 berangkat ke lokasi lomba sesuai jadwal resmi, menyaksikan pacuan hingga siang, sore beristirahat di Negara.",
+            "en": "07:00 head to the race venue as scheduled, watch the races until midday, rest in Negara in the afternoon."
+          }
+        },
+        {
+          "title": {
+            "id": "Sawah dan desa Jembrana",
+            "en": "Jembrana's fields and villages"
+          },
+          "description": {
+            "id": "08.00 berkeliling sawah dan desa sekitar Negara bersama pemandu, makan siang, selesai sekitar 13.00.",
+            "en": "08:00 explore fields and villages around Negara with your guide, lunch, finishing around 13:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "pengambengan-dan-jegog",
+      "destination": "jembrana",
+      "category": "culinary",
+      "title": {
+        "id": "Pagi di Pengambengan dan Bambu Jegog",
+        "en": "Morning at Pengambengan and Bamboo Jegog"
+      },
+      "summary": {
+        "id": "Menyaksikan perahu selerek berlabuh di pusat perikanan rakyat terbesar Bali, mencicipi masakan ikan, lalu mendengar gamelan bambu jegog.",
+        "en": "Watch selerek boats come in at Bali's largest small-scale fishing port, taste local fish dishes, then hear bamboo jegog."
+      },
+      "description": {
+        "id": "Pelabuhan Perikanan Pengambengan adalah pusat perikanan rakyat terbesar di Bali. Nelayan di sini melaut dengan sepasang perahu selerek yang berlayar berdampingan, satu membawa jaring dan satu menampung tangkapan. Pagi hari kita melihat hasil tangkapan dibongkar dan dijual di tepi dermaga.\n\nSiang hari kita mencicipi olahan ikan dengan bumbu khas Bali barat. Sore harinya, bila jadwal sanggar setempat memungkinkan, kita mendengar latihan jegog, gamelan bambu besar khas Jembrana yang dulu dimainkan untuk mengumpulkan warga bergotong royong.",
+        "en": "Pengambengan fishing port is Bali's largest centre of small-scale fisheries. Fishers here go out in pairs of selerek boats sailing side by side, one carrying the net and the other the catch. In the morning we watch the catch unloaded and sold along the quay.\n\nAt midday we taste fish dishes with west Balinese spices. In the afternoon, when a local troupe's schedule allows, we listen to a jegog rehearsal, the giant bamboo gamelan of Jembrana once played to gather villagers for communal work."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 700000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/jembrana/pengambengan-fishermen.webp",
+      "gallery": [
+        "/images/content/jembrana/selerek-boats.webp",
+        "/images/content/jembrana/cupel-jukung-beach.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Perahu selerek berlabuh pagi hari",
+          "en": "Selerek boats coming in at dawn"
+        },
+        {
+          "id": "Pasar ikan di tepi dermaga",
+          "en": "The quayside fish market"
+        },
+        {
+          "id": "Masakan ikan khas Bali barat",
+          "en": "West Balinese fish dishes"
+        },
+        {
+          "id": "Gamelan bambu jegog (sesuai jadwal sanggar)",
+          "en": "Bamboo jegog (subject to the troupe's schedule)"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Makan siang",
+          "en": "Lunch"
+        },
+        {
+          "id": "Kontribusi untuk sanggar",
+          "en": "Contribution to the music troupe"
+        },
+        {
+          "id": "Air mineral",
+          "en": "Bottled water"
+        }
+      ],
+      "meetingPoint": "Pelabuhan Perikanan Nusantara Pengambengan, Negara, Jembrana",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Pelabuhan, dapur, dan jegog",
+            "en": "Harbour, kitchen and jegog"
+          },
+          "description": {
+            "id": "06.00 di dermaga Pengambengan, 11.30 makan siang olahan ikan, 15.00 mendengar latihan jegog bila tersedia. Selesai sekitar 17.00.",
+            "en": "06:00 at Pengambengan quay, 11:30 fish lunch, 15:00 jegog rehearsal when available. Finishing around 17:00."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Bedulu",
+    "https://en.wikipedia.org/wiki/Goa_Gajah",
+    "https://en.wikipedia.org/wiki/Moon_of_Pejeng",
+    "https://en.wikipedia.org/wiki/Bale_kulkul",
+    "https://en.wikipedia.org/wiki/Gedong_Arca_Museum,_Bedulu",
+    "https://www.indonesia.travel/fr-en/destination/bali-nusa-tenggara/bali/museum-sarkofagus",
+    "https://www.nowbali.co.id/pura-penataran-sasih-and-the-moon-of-pejeng/",
+    "https://www.nowbali.co.id/museum-gedong-arca-clues-from-prehistoric-bali/",
+    "https://bali.antaranews.com/berita/94279/belasan-perajin-perak-di-celuk-ikuti-bintek",
+    "https://www.goodnewsfromindonesia.id/2026/08/05/perhiasan-perak-celuk-bali",
+    "https://www.novica.com/blog/silver-and-gold-jewelry-artisans-of-celuk/",
+    "https://www.indonesia.travel/fr-fr/travel-ideas/culture/seru-dan-edukatif-5-aktivitas-di-desa-wisata-mas-ubud-bali-ini-wajib-dicoba",
+    "https://dictionary.basabali.org/Place_SETIA_DARMA_Houses_of_Mask_and_Puppets",
+    "https://en.wikipedia.org/wiki/Lake_Tamblingan",
+    "https://www.goodnewsfromindonesia.id/2023/01/30/keunikan-desa-sidetapa-bali",
+    "https://bali.antaranews.com/berita/132034/rumah-adat-baliaga-buleleng-tersisa-30-unit",
+    "https://jurnal.harianregional.com/sastra/id-52188",
+    "https://mongabay.co.id/2021/05/14/gula-aren-di-pedawa-dan-menggali-pengetahuan-lokal-di-masa-pandemi-bagian-2/",
+    "https://blog.isi-dps.ac.id/adihartawan/?p=19",
+    "https://bali.antaranews.com/berita/284369/pentas-jegog-buktikan-terus-eksis-di-pesta-kesenian-bali",
+    "https://mongabay.co.id/2019/07/13/ini-ragam-cara-meraup-ikan-cuma-cuma-di-pengambengan-jembrana/",
+    "https://disparda.baliprov.go.id/?p=65",
+    "https://id.wikipedia.org/wiki/Makepung",
+    "https://id.wikipedia.org/wiki/Jegog"
+  ]
+}
