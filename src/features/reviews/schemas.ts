@@ -3,6 +3,7 @@ import {
   REVIEW_BODY_MAX,
   REVIEW_BODY_MIN,
   REVIEW_COUNTRY_MAX,
+  REVIEW_REPLY_MAX,
 } from "@/server/services/review.rules";
 
 /**
@@ -12,11 +13,7 @@ import {
 export const createReviewSchema = z.object({
   bookingId: z.coerce.number().int().positive("invalid"),
   rating: z.coerce.number().int("rating").min(1, "rating").max(5, "rating"),
-  body: z
-    .string()
-    .trim()
-    .min(REVIEW_BODY_MIN, "bodyMin")
-    .max(REVIEW_BODY_MAX, "bodyMax"),
+  body: z.string().trim().min(REVIEW_BODY_MIN, "bodyMin").max(REVIEW_BODY_MAX, "bodyMax"),
   country: z
     .string()
     .trim()
@@ -30,6 +27,14 @@ export const setReviewPublishedSchema = z.object({
   reviewId: z.number().int().positive(),
   isPublished: z.boolean(),
 });
+
+/** Messages are keys under `adminInsights.fields`. */
+export const reviewReplySchema = z.object({
+  reviewId: z.number().int().positive(),
+  reply: z.string().trim().min(1, "replyRequired").max(REVIEW_REPLY_MAX, "replyMax"),
+});
+
+export const reviewIdSchema = z.object({ reviewId: z.number().int().positive() });
 
 export const reviewFilterSchema = z
   .enum(["traveller", "curated", "hidden"])

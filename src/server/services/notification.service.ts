@@ -16,6 +16,12 @@ import {
   type Email,
   type EmailTranslator,
 } from "@/server/mail/templates";
+import {
+  adminBookingCreatedEmail,
+  adminPaymentSucceededEmail,
+  type AdminBookingEmailData,
+} from "@/server/mail/templates/admin";
+import { permissions } from "@/server/auth/permissions";
 import { notificationRepository } from "@/server/repositories/notification.repository";
 
 /**
@@ -64,12 +70,68 @@ async function loadBooking(bookingId: number) {
   return { booking, recipient, data, locale };
 }
 
+type BookingContext = NonNullable<
+  Awaited<ReturnType<typeof notificationRepository.bookingContext>>
+>;
+
+/**
+ * Emails every active back-office user (roles with `bookings.manage`, not
+ * disabled) about a booking, each in their own saved locale. One failed
+ * delivery doesn't stop the others.
+ */
+async function notifyBackoffice(
+  label: string,
+  bookingId: number,
+  build: (
+    t: EmailTranslator,
+    data: AdminBookingEmailData,
+    locale: Locale,
+    context: BookingContext,
+  ) => Promise<Email>,
+): Promise<void> {
+  const [context, recipients] = await Promise.all([
+    notificationRepository.bookingContext(bookingId),
+    notificationRepository.activeUsersWithRoles(permissions["bookings.manage"]),
+  ]);
+  if (!context) throw new Error(`Booking ${bookingId} not found`);
+  const { booking, tour } = context;
+
+  await Promise.all(
+    recipients.map((recipient) =>
+      safely(`${label} -> ${recipient.email}`, async () => {
+        const locale = asLocale(recipient.locale);
+        const common = await getTranslations({ locale, namespace: "common" });
+        const data: AdminBookingEmailData = {
+          recipientName: recipient.name,
+          code: booking.code,
+          tourTitle: localize(tour.title, locale),
+          travelDate: formatDate(booking.travelDate, locale),
+          participants: common("people", { count: booking.participants }),
+          total: formatCurrency(booking.totalPrice, locale),
+          contactName: booking.contactName,
+          contactPhone: booking.contactPhone,
+          adminUrl: localizedUrl(`/admin/bookings/${booking.code}`, locale),
+        };
+        await deliver(
+          recipient.email,
+          await build(await translator(locale), data, locale, context),
+        );
+      }),
+    ),
+  );
+}
+
 export const notificationService = {
   async bookingCreated(bookingId: number): Promise<void> {
     await safely("bookingCreated", async () => {
       const { recipient, data, locale } = await loadBooking(bookingId);
       await deliver(recipient.email, bookingCreatedEmail(await translator(locale), data));
     });
+    await safely("bookingCreated.backoffice", () =>
+      notifyBackoffice("bookingCreated.backoffice", bookingId, async (t, data) =>
+        adminBookingCreatedEmail(t, data),
+      ),
+    );
   },
 
   async bookingStatusChanged(bookingId: number): Promise<void> {
@@ -94,6 +156,21 @@ export const notificationService = {
           amount: formatCurrency(payment?.amount ?? booking.totalPrice, locale),
           method: paymentMethodLabel(payment?.method, (code) => methods(code)),
         }),
+      );
+    });
+    await safely("paymentSucceeded.backoffice", async () => {
+      const payment = await notificationRepository.latestPaidPayment(bookingId);
+      await notifyBackoffice(
+        "paymentSucceeded.backoffice",
+        bookingId,
+        async (t, data, locale, { booking }) => {
+          const methods = await getTranslations({ locale, namespace: "payment.methods" });
+          return adminPaymentSucceededEmail(t, {
+            ...data,
+            amount: formatCurrency(payment?.amount ?? booking.totalPrice, locale),
+            method: paymentMethodLabel(payment?.method, (code) => methods(code)),
+          });
+        },
       );
     });
   },

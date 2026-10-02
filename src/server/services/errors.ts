@@ -5,16 +5,21 @@
 export type DomainErrorCode =
   | "notFound"
   | "forbidden"
+  | "cannotChangeSelf"
+  | "lastAdmin"
   | "dateTooSoon"
   | "invalidParticipants"
   | "capacityExceeded"
+  | "dateClosed"
+  | "closureRange"
   | "invalidTransition"
   | "notCancellable"
   | "slugTaken"
   | "notPayable"
   | "alreadyPaid"
   | "paymentUnavailable"
-  | "paymentGateway";
+  | "paymentGateway"
+  | "notRefundable";
 
 export class DomainError extends Error {
   constructor(

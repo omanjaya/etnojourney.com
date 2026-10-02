@@ -10,6 +10,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Stars } from "@/components/ui/stars";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { ReviewPublishToggle } from "@/features/reviews/components/review-publish-toggle";
+import { ReviewReplyEditor } from "@/features/reviews/components/review-reply-editor";
 import { reviewFilterSchema } from "@/features/reviews/schemas";
 import { AdminSearchBox } from "@/features/admin/components/admin-search-box";
 import { parseAdminListQuery } from "@/features/admin/schemas";
@@ -26,7 +27,7 @@ export default async function AdminReviewsPage({
   searchParams,
 }: PageProps<"/[locale]/admin/reviews">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
-  await requireAdmin();
+  await requireAdmin("reviews.manage");
   const raw = await searchParams;
   const filter = reviewFilterSchema.parse(Array.isArray(raw.filter) ? raw.filter[0] : raw.filter);
   const { q } = parseAdminListQuery(raw);
@@ -131,6 +132,12 @@ export default async function AdminReviewsPage({
                   <p className="text-ink-soft mt-2 line-clamp-4 text-sm leading-relaxed">
                     {localize(review.body, locale)}
                   </p>
+                  <ReviewReplyEditor
+                    reviewId={review.id}
+                    author={review.authorName}
+                    initialReply={review.reply}
+                    initialRepliedAt={review.repliedAt?.toISOString() ?? null}
+                  />
                   <div className="border-line mt-3 flex items-center justify-between gap-3 border-t pt-3">
                     <span className="text-muted text-xs">{t("columns.published")}</span>
                     <ReviewPublishToggle
@@ -203,6 +210,12 @@ export default async function AdminReviewsPage({
                         <p className="text-ink-soft line-clamp-3 leading-relaxed">
                           {localize(review.body, locale)}
                         </p>
+                        <ReviewReplyEditor
+                          reviewId={review.id}
+                          author={review.authorName}
+                          initialReply={review.reply}
+                          initialRepliedAt={review.repliedAt?.toISOString() ?? null}
+                        />
                       </td>
                       <td className="px-5 py-4 whitespace-nowrap">
                         {formatDate(review.createdAt, locale, short)}

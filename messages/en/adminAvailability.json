@@ -1,1 +1,88 @@
-{}
+{
+  "eyebrow": "Operations",
+  "title": "Availability",
+  "description": "Close dates for one tour or for every tour, and see how full each date is.",
+  "rangeLabel": "{from} to {to}",
+  "scope": {
+    "label": "Tour",
+    "all": "All tours",
+    "unpublished": "{title} (unpublished)"
+  },
+  "month": {
+    "nav": "Change month",
+    "prev": "Previous month",
+    "next": "Next month"
+  },
+  "calendar": {
+    "hint": "Click a date to select it, then click a later date to select a range. Past dates cannot be closed.",
+    "closed": "Closed",
+    "closedAll": "All closed",
+    "toursClosed": "{count, plural, one {# tour closed} other {# tours closed}}",
+    "seats": "{seats}/{capacity}",
+    "travellers": "{count, plural, one {# traveller} other {# travellers}}"
+  },
+  "day": {
+    "seatsOf": "{seats} of {capacity} seats booked",
+    "bookings": "{count, plural, =0 {no bookings} one {# booking} other {# bookings}}",
+    "closed": "closed for this tour",
+    "closedAll": "closed for all tours",
+    "toursClosed": "{count, plural, one {# tour closed} other {# tours closed}}",
+    "past": "in the past"
+  },
+  "legend": {
+    "open": "Open",
+    "closed": "Closed",
+    "closedAll": "Closed for all tours",
+    "selected": "Selected",
+    "full": "Fully booked",
+    "fullSample": "8/8"
+  },
+  "panel": {
+    "title": "Close dates",
+    "scopeTour": "Applies to {tour}.",
+    "scopeAll": "Applies to every tour.",
+    "from": "From",
+    "to": "To",
+    "empty": "Select a date in the calendar, or enter a range of up to 92 days.",
+    "checking": "Checking the selected dates...",
+    "loadError": "We couldn't check these dates. Please try again.",
+    "summary": "{count, plural, one {# date} other {# dates}} selected: {range}.",
+    "alreadyClosed": "{count, plural, one {# is} other {# are}} already closed.",
+    "affected": "{bookings, plural, one {# pending or confirmed booking} other {# pending or confirmed bookings}} ({seats, plural, one {# traveller} other {# travellers}}) fall on these dates. Closing does not cancel them, so contact those travellers if needed.",
+    "closedNotice": "{date} is closed.",
+    "closedReason": "Reason: {reason}",
+    "reopen": "Reopen {date}",
+    "closedAllNotice": "This date is closed for all tours. Switch to All tours to reopen it.",
+    "reason": "Reason (optional)",
+    "reasonHint": "For the team only. {count}/200",
+    "reasonPlaceholder": "For example: Nyepi, road closure, guide on leave",
+    "submit": "{count, plural, one {Close # date} other {Close # dates}}",
+    "allClosed": "Every selected date is already closed.",
+    "clear": "Clear selection",
+    "success": "{count, plural, =0 {No new dates were closed.} one {# date closed.} other {# dates closed.}}",
+    "successAffected": "{count, plural, one {# booking on these dates stays active.} other {# bookings on these dates stay active.}}",
+    "reopened": "{count, plural, =0 {Nothing to reopen.} one {# date reopened.} other {# dates reopened.}}"
+  },
+  "list": {
+    "title": "Upcoming closures",
+    "description": "Consecutive dates closed together are shown as one line.",
+    "columns": {
+      "dates": "Dates",
+      "tour": "Tour",
+      "reason": "Reason",
+      "createdBy": "Closed by",
+      "actions": "Actions"
+    },
+    "allTours": "All tours",
+    "noReason": "No reason given",
+    "unknownUser": "Unknown",
+    "days": "{count, plural, one {# day} other {# days}}",
+    "delete": "Reopen",
+    "deleteLabel": "Reopen {dates} for {tour}",
+    "confirm": "Reopen {dates} for {tour}? Travellers will be able to book these dates again.",
+    "empty": {
+      "title": "No upcoming closures",
+      "description": "Every future date is open for booking."
+    }
+  }
+}

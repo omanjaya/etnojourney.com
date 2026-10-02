@@ -1,5 +1,6 @@
 import { createHash, timingSafeEqual } from "node:crypto";
-import type { PaymentStatus } from "@/server/db/schema";
+import type { BookingStatus, PaymentStatus } from "@/server/db/schema";
+import { DomainError } from "./errors";
 
 /** A pending gateway session is reused for this long before a new one is created. */
 const PAYMENT_REUSE_WINDOW_MS = 23 * 60 * 60 * 1000;
@@ -97,4 +98,44 @@ export function isReusable(
     Boolean(payment.redirectUrl) &&
     now - payment.createdAt.getTime() < PAYMENT_REUSE_WINDOW_MS
   );
+}
+
+/* ---------------------------------------------------------------- */
+/* Refunds                                                           */
+/* ---------------------------------------------------------------- */
+
+/** Why a payment was flagged for a refund (stored in the audit log details). */
+export const refundReasons = ["duplicate", "cancelledBooking", "cancelledAfterPayment"] as const;
+export type RefundReason = (typeof refundReasons)[number];
+
+export function isRefundReason(value: unknown): value is RefundReason {
+  return typeof value === "string" && (refundReasons as readonly string[]).includes(value);
+}
+
+/**
+ * Whether a payment that just became paid must go back to the traveller:
+ * another attempt already paid the booking (duplicate charge), or the booking
+ * was cancelled before the money arrived.
+ */
+export function refundReasonForPaidNotification(input: {
+  alreadyPaid: boolean;
+  bookingStatus: BookingStatus | undefined;
+}): RefundReason | null {
+  if (input.alreadyPaid) return "duplicate";
+  if (input.bookingStatus === "cancelled") return "cancelledBooking";
+  return null;
+}
+
+/** Only money that was actually taken (and not yet returned) can be refunded. */
+export function canRecordRefund(payment: { status: PaymentStatus }): boolean {
+  return payment.status === "paid";
+}
+
+export function assertRefundable(payment: { status: PaymentStatus }): void {
+  if (!canRecordRefund(payment)) throw new DomainError("notRefundable");
+}
+
+/** Whole days a refund has been waiting (0 on the day it was flagged). */
+export function refundAgeDays(since: Date, now: Date = new Date()): number {
+  return Math.max(0, Math.floor((now.getTime() - since.getTime()) / 86_400_000));
 }

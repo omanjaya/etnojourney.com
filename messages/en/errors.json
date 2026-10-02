@@ -4,9 +4,13 @@
   "unauthorized": "Please sign in first.",
   "notFound": "We couldn't find that.",
   "forbidden": "You don't have access to do this.",
+  "cannotChangeSelf": "You can't change the role or status of your own account.",
+  "lastAdmin": "At least one active admin must remain. Promote another admin first.",
   "dateTooSoon": "Travel date must be at least 3 days from today.",
   "invalidParticipants": "Number of travellers doesn't fit this tour's capacity.",
   "capacityExceeded": "Not enough seats left on that date. Please choose another.",
+  "dateClosed": "This date is closed for bookings. Please choose another date.",
+  "closureRange": "Choose dates from today onwards, at most 92 days at a time and within the next 12 months.",
   "invalidTransition": "This status change isn't allowed.",
   "notCancellable": "This booking can no longer be cancelled.",
   "slugTaken": "That slug is already in use. Choose another one.",
@@ -14,7 +18,13 @@
   "alreadyPaid": "This booking has already been paid.",
   "paymentUnavailable": "Online payment is currently unavailable. Please contact us.",
   "paymentGateway": "Couldn't reach the payment service. Please try again shortly.",
+  "notRefundable": "Only a paid payment can be marked as refunded.",
   "fields": {
+    "closurePast": "Past dates cannot be closed.",
+    "closureRange": "The end date must be on or after the start date.",
+    "closureTooLong": "Close at most 92 days at a time.",
+    "closureTooFar": "Dates must be within the next 12 months.",
+    "closureReason": "Reason must be 200 characters or fewer.",
     "invalid": "Invalid value.",
     "required": "This field is required.",
     "email": "Enter a valid email.",
@@ -27,6 +37,7 @@
     "notesMax": "Notes must be 500 characters or fewer.",
     "slug": "Use lowercase letters, numbers and hyphens.",
     "url": "Enter a valid image URL.",
-    "positive": "Must be greater than 0."
+    "positive": "Must be greater than 0.",
+    "refundNote": "Enter 3 to 500 characters, for example the bank transfer reference."
   }
 }

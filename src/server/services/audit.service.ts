@@ -1,11 +1,13 @@
 import "server-only";
 import type { DbExecutor } from "@/server/db";
 import { auditRepository } from "@/server/repositories/audit.repository";
+import { paginate } from "@/lib/pagination";
+import { actionsInGroup, type AuditGroup } from "./audit.rules";
 
 /**
  * Every back-office change is recorded here. Add new verbs to this list (and
- * their labels under `adminActivity.actions` in messages) rather than using
- * free-form strings.
+ * their labels under `adminUsers.activity.actions` in messages) rather than
+ * using free-form strings.
  */
 export const auditActions = [
   "booking.status_changed",
@@ -55,5 +57,24 @@ export const auditService = {
 
   historyOf(entityType: AuditEntity, entityId: string | number) {
     return auditRepository.findByEntity(entityType, String(entityId));
+  },
+
+  /** Activity log: newest first, optionally narrowed to an action group and actor. */
+  list(
+    filters: { group?: AuditGroup; actor?: string; involvingUser?: string },
+    page: number,
+    pageSize: number,
+  ) {
+    const repoFilters = {
+      actions: filters.group ? actionsInGroup(auditActions, filters.group) : undefined,
+      actor: filters.actor,
+      involvingUser: filters.involvingUser,
+    };
+    return paginate({
+      page,
+      pageSize,
+      count: () => auditRepository.count(repoFilters),
+      load: (limit, offset) => auditRepository.list(repoFilters, limit, offset),
+    });
   },
 };

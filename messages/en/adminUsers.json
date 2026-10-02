@@ -1,1 +1,185 @@
-{}
+{
+  "roles": {
+    "user": "Traveller",
+    "staff": "Staff",
+    "admin": "Admin"
+  },
+  "status": {
+    "active": "Active",
+    "disabled": "Disabled"
+  },
+  "list": {
+    "eyebrow": "Team & accounts",
+    "title": "Users",
+    "description": "Find travellers and staff, adjust roles, and disable accounts that shouldn't sign in.",
+    "searchLabel": "Search users",
+    "searchPlaceholder": "Name or email",
+    "clear": "Clear search",
+    "roleFilterLabel": "Filter users by role",
+    "allRoles": "All",
+    "summary": "{total, plural, =0 {No users} one {# user} other {# users}}",
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "role": "Role",
+      "bookings": "Bookings",
+      "joined": "Joined",
+      "status": "Status"
+    },
+    "empty": {
+      "title": "No users yet",
+      "description": "Accounts appear here as soon as people sign up."
+    },
+    "noMatch": {
+      "title": "No users match",
+      "description": "Try another name, email or role."
+    },
+    "pagination": {
+      "label": "User pages",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page}"
+    }
+  },
+  "detail": {
+    "eyebrow": "User account",
+    "back": "All users",
+    "profileTitle": "Profile",
+    "email": "Email",
+    "joined": "Joined",
+    "language": "Email language",
+    "languages": {
+      "id": "Indonesian",
+      "en": "English"
+    },
+    "emailVerified": "Email verified",
+    "yes": "Yes",
+    "no": "No",
+    "disabledSince": "Disabled since",
+    "stats": {
+      "bookings": "Bookings",
+      "wishlist": "Wishlist"
+    },
+    "roleTitle": "Role",
+    "roleDescription": "Staff run daily operations. Admins also manage users, refunds, reports and the activity log.",
+    "roleLabel": "Role",
+    "saveRole": "Save role",
+    "roleSaved": "Role updated.",
+    "accessTitle": "Access",
+    "accessActive": "This account can sign in.",
+    "accessDisabled": "This account is disabled and cannot sign in.",
+    "disable": "Disable account",
+    "enable": "Enable account",
+    "confirmDisable": "Disable {name}? They will be signed out everywhere and can't sign in until re-enabled.",
+    "confirmEnable": "Enable {name} again? They will be able to sign in.",
+    "statusSaved": "Access updated.",
+    "selfNote": "This is your own account. Another admin has to change its role or access.",
+    "bookingsTitle": "Bookings",
+    "bookingsEmpty": "No bookings yet.",
+    "columns": {
+      "code": "Code",
+      "tour": "Tour",
+      "travelDate": "Date",
+      "status": "Status",
+      "total": "Total"
+    },
+    "activityTitle": "Activity",
+    "activityDescription": "Changes made by this person, and changes made to their account.",
+    "activityEmpty": "No recorded activity yet.",
+    "viewAllActivity": "Open in activity log"
+  },
+  "activity": {
+    "eyebrow": "Accountability",
+    "title": "Activity log",
+    "description": "Every back-office change: who did what, and when.",
+    "groupFilterLabel": "Filter by area",
+    "allGroups": "All",
+    "groups": {
+      "bookings": "Bookings",
+      "payments": "Payments",
+      "catalogue": "Catalogue",
+      "reviews": "Reviews",
+      "availability": "Availability",
+      "users": "Users",
+      "credits": "Photo credits"
+    },
+    "actorLabel": "Performed by",
+    "allActors": "Everyone",
+    "system": "System",
+    "deletedUser": "Deleted user",
+    "reset": "Reset filters",
+    "summary": "{total, plural, =0 {No entries} one {# entry} other {# entries}}",
+    "columns": {
+      "time": "Time",
+      "actor": "Actor",
+      "action": "Action",
+      "entity": "Item",
+      "details": "Details"
+    },
+    "entities": {
+      "booking": "Booking",
+      "payment": "Payment",
+      "tour": "Tour",
+      "destination": "Destination",
+      "review": "Review",
+      "closure": "Closure",
+      "user": "User",
+      "credit": "Photo credit"
+    },
+    "empty": {
+      "title": "Nothing recorded yet",
+      "description": "Back-office changes will be listed here as they happen."
+    },
+    "noMatch": {
+      "title": "No matching activity",
+      "description": "Try another area or person."
+    },
+    "pagination": {
+      "label": "Activity pages",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {page}"
+    },
+    "actions": {
+      "booking": {
+        "status_changed": "Changed booking status",
+        "note_added": "Added a booking note"
+      },
+      "payment": {
+        "refund_required": "Flagged a refund as required",
+        "refunded": "Marked a payment as refunded"
+      },
+      "tour": {
+        "created": "Created a tour",
+        "updated": "Updated a tour",
+        "published": "Published a tour",
+        "unpublished": "Unpublished a tour",
+        "featured": "Featured a tour",
+        "unfeatured": "Removed a tour from featured"
+      },
+      "destination": {
+        "created": "Created a destination",
+        "updated": "Updated a destination",
+        "deleted": "Deleted a destination"
+      },
+      "review": {
+        "published": "Published a review",
+        "hidden": "Hid a review",
+        "replied": "Replied to a review"
+      },
+      "closure": {
+        "created": "Closed dates",
+        "deleted": "Reopened dates"
+      },
+      "user": {
+        "role_changed": "Changed a user's role",
+        "disabled": "Disabled an account",
+        "enabled": "Enabled an account"
+      },
+      "credit": {
+        "updated": "Updated a photo credit"
+      },
+      "unknown": "Other change"
+    }
+  }
+}

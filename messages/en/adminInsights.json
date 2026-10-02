@@ -1,1 +1,135 @@
-{}
+{
+  "fields": {
+    "replyRequired": "Write a reply first.",
+    "replyMax": "Replies can be at most 2000 characters.",
+    "tooLong": "This is too long.",
+    "httpsUrl": "Enter a full link starting with https://.",
+    "uploadPath": "Use the path of an image uploaded here, e.g. /media/tours/2026/05/....webp.",
+    "creditExists": "This image already has a credit. Edit it in the list below."
+  },
+  "reply": {
+    "add": "Reply",
+    "addFor": "Reply to the review by {author}",
+    "fieldLabel": "Public reply to {author}",
+    "placeholder": "Thank the guest and answer any questions. This is shown publicly under the review.",
+    "counter": "{count} / {max} characters",
+    "save": "Publish reply",
+    "cancel": "Cancel",
+    "existing": "Team reply",
+    "edit": "Edit",
+    "editFor": "Edit the reply to {author}",
+    "remove": "Remove",
+    "removeFor": "Remove the reply to {author}",
+    "confirmRemove": "Remove this reply?",
+    "removeConfirm": "Yes, remove"
+  },
+  "dashboard": {
+    "queuesLabel": "Work queues",
+    "pending": {
+      "label": "Pending bookings",
+      "action": "Confirm or decline",
+      "count": "{count, plural, =0 {No bookings waiting} one {# booking waiting} other {# bookings waiting}}"
+    },
+    "refunds": {
+      "label": "Refunds needed",
+      "action": "Return the money and record it",
+      "count": "{count, plural, =0 {No refunds waiting} one {# refund waiting} other {# refunds waiting}}"
+    }
+  },
+  "reports": {
+    "eyebrow": "Insights",
+    "title": "Reports",
+    "description": "Revenue and bookings for a chosen period. Dates follow Western Indonesia Time (WIB).",
+    "showing": "Showing {range}",
+    "totalsLabel": "Totals for the period",
+    "totals": {
+      "net": "Net revenue",
+      "netHint": "Paid in the period minus refunds",
+      "gross": "Payments received",
+      "refunds": "Refunds",
+      "refundCount": "{count, plural, =0 {No refunds} one {# refund} other {# refunds}}",
+      "bookings": "Bookings",
+      "participants": "{count, plural, one {# traveller} other {# travellers}}",
+      "groupSize": "Average group size",
+      "groupSizeHint": "Travellers per booking"
+    },
+    "period": {
+      "label": "Report period",
+      "presets": {
+        "this-month": "This month",
+        "last-month": "Last month",
+        "last-90": "Last 90 days",
+        "this-year": "This year"
+      },
+      "custom": "Custom period",
+      "from": "From",
+      "to": "To",
+      "apply": "Apply"
+    },
+    "status": {
+      "title": "Bookings by status",
+      "description": "Bookings made in the period and where they stand now.",
+      "share": "{percent}% of bookings"
+    },
+    "top": {
+      "title": "Top tours",
+      "caption": "Net revenue, top 5"
+    },
+    "months": {
+      "title": "By month",
+      "caption": "Net revenue per month"
+    },
+    "tours": {
+      "title": "By tour",
+      "export": "Export CSV"
+    },
+    "columns": {
+      "month": "Month",
+      "tour": "Tour",
+      "bookings": "Bookings",
+      "participants": "Travellers",
+      "gross": "Received",
+      "refunds": "Refunds",
+      "net": "Net"
+    },
+    "empty": "No bookings or payments in this period."
+  },
+  "credits": {
+    "eyebrow": "Content",
+    "title": "Photo credits",
+    "description": "Photographer, license and source for every credited photo. Credits appear next to the photo and on the public credits page.",
+    "searchLabel": "Search credits",
+    "searchPlaceholder": "Title, author, license or path",
+    "summary": "{total, plural, one {# credit} other {# credits}}",
+    "uploaded": "Upload",
+    "opensNewTab": "(opens in a new tab)",
+    "edit": "Edit",
+    "editFor": "Edit the credit for {title}",
+    "empty": {
+      "title": "No photo credits yet",
+      "description": "Credits for curated photos are added by the content import; add credits for your own uploads above."
+    },
+    "add": {
+      "title": "Credit an uploaded photo",
+      "description": "Every uploaded photo used on a tour or destination already has a credit.",
+      "pending": "{count, plural, one {# uploaded photo in use has no credit yet.} other {# uploaded photos in use have no credit yet.}}",
+      "open": "Add credit",
+      "close": "Close"
+    },
+    "form": {
+      "path": "Image path",
+      "pathHint": "Pick an uploaded image in use, or paste its /media/ path.",
+      "title": "Photo title",
+      "author": "Author",
+      "license": "License",
+      "licenseUrl": "License link",
+      "source": "Source name",
+      "sourceUrl": "Source link",
+      "optional": "{label} (optional)",
+      "save": "Save credit",
+      "create": "Add credit",
+      "cancel": "Cancel",
+      "created": "Credit added."
+    }
+  }
+}

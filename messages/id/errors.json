@@ -4,9 +4,13 @@
   "unauthorized": "Silakan masuk terlebih dahulu.",
   "notFound": "Data tidak ditemukan.",
   "forbidden": "Kamu tidak memiliki akses untuk tindakan ini.",
+  "cannotChangeSelf": "Anda tidak dapat mengubah peran atau status akun Anda sendiri.",
+  "lastAdmin": "Harus ada minimal satu admin aktif. Jadikan pengguna lain admin terlebih dahulu.",
   "dateTooSoon": "Tanggal perjalanan minimal 3 hari dari hari ini.",
   "invalidParticipants": "Jumlah peserta tidak sesuai kapasitas tur.",
   "capacityExceeded": "Kuota pada tanggal tersebut tidak mencukupi. Pilih tanggal lain.",
+  "dateClosed": "Tanggal ini ditutup untuk pemesanan. Silakan pilih tanggal lain.",
+  "closureRange": "Pilih tanggal mulai hari ini, paling banyak 92 hari sekaligus dan dalam 12 bulan ke depan.",
   "invalidTransition": "Perubahan status ini tidak diizinkan.",
   "notCancellable": "Booking ini sudah tidak bisa dibatalkan.",
   "slugTaken": "Slug sudah dipakai. Gunakan slug lain.",
@@ -14,7 +18,13 @@
   "alreadyPaid": "Booking ini sudah dibayar.",
   "paymentUnavailable": "Pembayaran online sedang tidak tersedia. Silakan hubungi kami.",
   "paymentGateway": "Gagal terhubung ke layanan pembayaran. Coba beberapa saat lagi.",
+  "notRefundable": "Hanya pembayaran berstatus lunas yang bisa ditandai sudah dikembalikan.",
   "fields": {
+    "closurePast": "Tanggal yang sudah lewat tidak bisa ditutup.",
+    "closureRange": "Tanggal akhir harus sama dengan atau setelah tanggal mulai.",
+    "closureTooLong": "Tutup paling banyak 92 hari sekaligus.",
+    "closureTooFar": "Tanggal harus dalam 12 bulan ke depan.",
+    "closureReason": "Alasan maksimal 200 karakter.",
     "invalid": "Nilai tidak valid.",
     "required": "Wajib diisi.",
     "email": "Format email tidak valid.",
@@ -27,6 +37,7 @@
     "notesMax": "Catatan maksimal 500 karakter.",
     "slug": "Gunakan huruf kecil, angka, dan tanda hubung.",
     "url": "URL gambar tidak valid.",
-    "positive": "Harus lebih dari 0."
+    "positive": "Harus lebih dari 0.",
+    "refundNote": "Isi 3 sampai 500 karakter, misalnya nomor referensi transfer bank."
   }
 }

@@ -9,9 +9,17 @@ import { can, type Permission } from "./permissions";
 
 export type SessionUser = AuthSession["user"];
 
+/**
+ * A disabled account counts as signed out. Disabling also deletes its sessions,
+ * so this only matters for a session created in the instant before that.
+ */
+export function activeSession(session: AuthSession | null): AuthSession | null {
+  return session && !session.user.disabledAt ? session : null;
+}
+
 /** Reads the current session once per request. */
 export const getSession = cache(async (): Promise<AuthSession | null> => {
-  return auth.api.getSession({ headers: await headers() });
+  return activeSession(await auth.api.getSession({ headers: await headers() }));
 });
 
 export async function getCurrentUser(): Promise<SessionUser | null> {
@@ -32,7 +40,9 @@ export async function requireUser(): Promise<SessionUser> {
  * For pages and layouts: redirects anyone without `permission` (default:
  * back-office access, i.e. staff or admin) to the home page.
  */
-export async function requireAdmin(permission: Permission = "backoffice.access"): Promise<SessionUser> {
+export async function requireAdmin(
+  permission: Permission = "backoffice.access",
+): Promise<SessionUser> {
   const user = await requireUser();
   if (!can(user.role, permission)) {
     const locale = await getLocale();

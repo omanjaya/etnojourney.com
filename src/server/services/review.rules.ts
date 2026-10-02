@@ -3,6 +3,8 @@ import type { BookingStatus } from "@/server/db/schema";
 export const REVIEW_BODY_MIN = 20;
 export const REVIEW_BODY_MAX = 1000;
 export const REVIEW_COUNTRY_MAX = 56;
+/** Team reply under a review (matches the `reviews_reply_length` DB check). */
+export const REVIEW_REPLY_MAX = 2000;
 
 export type ReviewEligibility = "ok" | "notFound" | "notOwner" | "notCompleted" | "alreadyReviewed";
 

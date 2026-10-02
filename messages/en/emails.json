@@ -56,5 +56,26 @@
     "fallback": "If the button doesn't work, copy this link into your browser:",
     "expires": "This link is valid for 1 hour and can be used once.",
     "ignore": "If you didn't request a reset, you can ignore this email. Your password won't change."
+  },
+  "admin": {
+    "footer": "You're receiving this email because you're on the EtnoJourney back-office team.",
+    "openBooking": "Open booking in admin",
+    "fallback": "If the button doesn't work, copy this link into your browser:",
+    "details": {
+      "contactName": "Contact name",
+      "contactPhone": "Contact phone"
+    },
+    "bookingCreated": {
+      "subject": "New booking {code}: {tour}",
+      "preheader": "{participants} on {date}.",
+      "heading": "New booking",
+      "intro": "A traveller has just booked {tour}. It is waiting for payment and confirmation."
+    },
+    "paymentSucceeded": {
+      "subject": "Payment received for {code} ({amount})",
+      "preheader": "{amount} paid via {method}.",
+      "heading": "Payment received",
+      "intro": "The traveller has paid for {tour}. Check the booking and let the village hosts know."
+    }
   }
 }

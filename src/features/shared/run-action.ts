@@ -22,7 +22,7 @@ export async function runAction<T>(fn: () => Promise<T>): Promise<ActionResult<T
 }
 
 /** Namespaces that hold field-level validation messages. */
-type FieldsNamespace = "errors.fields" | "reviews.fields";
+type FieldsNamespace = "errors.fields" | "reviews.fields" | "adminInsights.fields";
 
 /**
  * Validates input with Zod. Schema messages are keys (e.g.

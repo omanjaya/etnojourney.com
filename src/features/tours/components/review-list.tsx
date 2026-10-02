@@ -1,5 +1,5 @@
-import { Quote } from "lucide-react";
-import { useFormatter } from "next-intl";
+import { MessageSquareReply, Quote } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
 import type { Review } from "@/server/db/schema";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/i18n-text";
@@ -8,6 +8,7 @@ import { Reveal } from "@/components/motion";
 
 export function ReviewList({ reviews, locale }: { reviews: Review[]; locale: Locale }) {
   const format = useFormatter();
+  const t = useTranslations("reviews.reply");
   return (
     <ul className="grid gap-5 md:grid-cols-2">
       {reviews.map((review, i) => (
@@ -35,6 +36,28 @@ export function ReviewList({ reviews, locale }: { reviews: Review[]; locale: Loc
                 </p>
               </div>
             </div>
+            {review.reply && (
+              <div className="border-terracotta/50 bg-sand-50 mt-5 rounded-xl border-l-2 px-4 py-3">
+                <p className="text-ink flex items-center gap-2 text-sm font-semibold">
+                  <MessageSquareReply className="text-terracotta size-4" aria-hidden />
+                  {t("label")}
+                </p>
+                {review.repliedAt && (
+                  <p className="text-muted mt-0.5 text-xs">
+                    <time dateTime={review.repliedAt.toISOString()}>
+                      {format.dateTime(review.repliedAt, {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </time>
+                  </p>
+                )}
+                <p className="text-ink-soft mt-2 text-sm leading-relaxed whitespace-pre-line">
+                  {review.reply}
+                </p>
+              </div>
+            )}
           </Reveal>
         </li>
       ))}

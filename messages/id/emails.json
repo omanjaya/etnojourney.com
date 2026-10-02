@@ -56,5 +56,26 @@
     "fallback": "Jika tombol tidak berfungsi, salin tautan ini ke browser:",
     "expires": "Tautan ini berlaku selama 1 jam dan hanya bisa dipakai sekali.",
     "ignore": "Jika kamu tidak meminta pengaturan ulang, abaikan email ini. Kata sandimu tidak akan berubah."
+  },
+  "admin": {
+    "footer": "Kamu menerima email ini karena terdaftar sebagai tim back-office EtnoJourney.",
+    "openBooking": "Buka booking di admin",
+    "fallback": "Jika tombol tidak berfungsi, salin tautan ini ke browser:",
+    "details": {
+      "contactName": "Nama kontak",
+      "contactPhone": "Telepon kontak"
+    },
+    "bookingCreated": {
+      "subject": "Booking baru {code}: {tour}",
+      "preheader": "{participants} pada {date}.",
+      "heading": "Booking baru",
+      "intro": "Seorang wisatawan baru saja memesan {tour}. Booking ini menunggu pembayaran dan konfirmasi."
+    },
+    "paymentSucceeded": {
+      "subject": "Pembayaran diterima untuk {code} ({amount})",
+      "preheader": "{amount} dibayar melalui {method}.",
+      "heading": "Pembayaran diterima",
+      "intro": "Wisatawan sudah membayar {tour}. Periksa booking ini dan kabari tuan rumah di desa."
+    }
   }
 }

@@ -222,6 +222,31 @@ export const bookingRepository = {
       .limit(limit);
   },
 
+  /** Admin booking detail: the booking with its tour and the account that made it. */
+  findAdminDetailByCode(code: string) {
+    return db
+      .select({
+        booking: bookings,
+        tour: { id: tours.id, slug: tours.slug, title: tours.title },
+        customer: { id: user.id, name: user.name, email: user.email },
+      })
+      .from(bookings)
+      .innerJoin(tours, eq(bookings.tourId, tours.id))
+      .innerJoin(user, eq(bookings.userId, user.id))
+      .where(eq(bookings.code, code))
+      .limit(1)
+      .then((rows) => rows[0]);
+  },
+
+  /** Every payment attempt for a booking, newest first. */
+  listPayments(bookingId: number) {
+    return db
+      .select()
+      .from(payments)
+      .where(eq(payments.bookingId, bookingId))
+      .orderBy(desc(payments.createdAt), desc(payments.id));
+  },
+
   async stats() {
     const [byStatus, revenue] = await Promise.all([
       db

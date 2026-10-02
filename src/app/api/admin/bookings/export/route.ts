@@ -1,6 +1,7 @@
 import { isoDateFromToday } from "@/lib/format";
 import { CSV_BOM, csvRow } from "@/lib/csv";
 import { auth } from "@/server/auth";
+import { activeSession } from "@/server/auth/guards";
 import { can } from "@/server/auth/permissions";
 import { bookingService } from "@/server/services/booking.service";
 import { parseAdminBookingQuery } from "@/features/admin/schemas";
@@ -29,7 +30,8 @@ const HEADER = [
  * Streams in batches; cells are RFC 4180 quoted and formula-neutralized.
  */
 export async function GET(request: Request) {
-  const session = await auth.api.getSession({ headers: request.headers });
+  // activeSession: a disabled account is treated as signed out.
+  const session = activeSession(await auth.api.getSession({ headers: request.headers }));
   if (!session) return new Response("Unauthorized", { status: 401, headers: noStore });
   if (!can(session.user.role, "bookings.manage")) {
     return new Response("Forbidden", { status: 403, headers: noStore });

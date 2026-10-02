@@ -5,6 +5,7 @@ import { buildIcs } from "@/lib/ics";
 import { localize } from "@/lib/i18n-text";
 import { localizedUrl } from "@/lib/seo";
 import { auth } from "@/server/auth";
+import { activeSession } from "@/server/auth/guards";
 import { accountService } from "@/server/services/account.service";
 import { isDomainError } from "@/server/services/errors";
 
@@ -21,7 +22,8 @@ export async function bookingCalendarResponse(
   code: string,
   urlLocale?: string,
 ): Promise<Response> {
-  const session = await auth.api.getSession({ headers: request.headers });
+  // activeSession: a disabled account is treated as signed out.
+  const session = activeSession(await auth.api.getSession({ headers: request.headers }));
   if (!session) return new Response("Unauthorized", { status: 401 });
 
   let booking;

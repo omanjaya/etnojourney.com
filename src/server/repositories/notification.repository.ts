@@ -1,7 +1,7 @@
 import "server-only";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, inArray, isNull } from "drizzle-orm";
 import { db } from "@/server/db";
-import { bookings, payments, tours, user } from "@/server/db/schema";
+import { bookings, payments, tours, user, type UserRole } from "@/server/db/schema";
 
 /** Read-only queries that gather everything a transactional email needs. */
 export const notificationRepository = {
@@ -18,6 +18,14 @@ export const notificationRepository = {
       .where(eq(bookings.id, bookingId))
       .limit(1)
       .then((rows) => rows[0]);
+  },
+
+  /** Active (not disabled) users holding one of `roles`. */
+  activeUsersWithRoles(roles: readonly UserRole[]) {
+    return db
+      .select({ name: user.name, email: user.email, locale: user.locale })
+      .from(user)
+      .where(and(inArray(user.role, [...roles]), isNull(user.disabledAt)));
   },
 
   latestPaidPayment(bookingId: number) {

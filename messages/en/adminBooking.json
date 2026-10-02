@@ -1,1 +1,63 @@
-{}
+{
+  "metaTitle": "Booking {code}",
+  "back": "All bookings",
+  "eyebrow": "Booking",
+  "createdOn": "Booked on {date}",
+  "openDetail": "Open booking {code}",
+  "summary": {
+    "title": "Summary",
+    "tour": "Tour",
+    "viewTour": "View tour page",
+    "travelDate": "Travel date",
+    "participants": "Travellers",
+    "unitPrice": "Price per person",
+    "total": "Total",
+    "status": "Booking status",
+    "changeStatus": "Change status"
+  },
+  "traveller": {
+    "title": "Traveller",
+    "account": "Account",
+    "contactName": "Contact name",
+    "contactPhone": "Contact phone",
+    "notes": "Traveller notes",
+    "noNotes": "The traveller left no notes."
+  },
+  "payments": {
+    "title": "Payments",
+    "empty": "No payment attempts yet.",
+    "amount": "Amount",
+    "method": "Method",
+    "orderId": "Order ID",
+    "provider": "Provider",
+    "createdAt": "Started",
+    "paidAt": "Paid",
+    "refundedAt": "Refunded",
+    "refundNote": "Refund note",
+    "refundRequired": "Refund required"
+  },
+  "notes": {
+    "title": "Internal notes",
+    "description": "Only visible to the back-office team.",
+    "empty": "No internal notes yet.",
+    "label": "Add a note",
+    "placeholder": "e.g. Called the guest to confirm the pickup time.",
+    "remaining": "{count, plural, one {# character left} other {# characters left}}",
+    "submit": "Add note",
+    "unknownAuthor": "Former team member"
+  },
+  "timeline": {
+    "title": "Timeline",
+    "system": "System",
+    "by": "by {name}",
+    "created": "Booking created",
+    "paid": "Payment {orderId} received ({amount})",
+    "actions": {
+      "booking_status_changed": "Status changed to {status}",
+      "booking_note_added": "Internal note added",
+      "payment_refund_required": "Payment flagged for refund",
+      "payment_refunded": "Refund recorded"
+    },
+    "other": "Other change ({action})"
+  }
+}

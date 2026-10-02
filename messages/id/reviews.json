@@ -68,5 +68,8 @@
       "title": "Belum ada ulasan",
       "description": "Ulasan dari tamu akan muncul di sini setelah perjalanan mereka selesai."
     }
+  },
+  "reply": {
+    "label": "Balasan dari tim EtnoJourney"
   }
 }

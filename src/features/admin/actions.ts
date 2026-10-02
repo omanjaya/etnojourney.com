@@ -39,7 +39,11 @@ export async function updateBookingStatusAction(
 
   return runAction(async () => {
     const actor = await assertPermission("bookings.manage");
-    const booking = await bookingService.changeStatus(parsed.data.bookingId, parsed.data.status);
+    const booking = await bookingService.changeStatus(
+      parsed.data.bookingId,
+      parsed.data.status,
+      actor.id,
+    );
     await auditService.record({
       actorId: actor.id,
       action: "booking.status_changed",

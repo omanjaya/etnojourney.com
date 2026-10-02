@@ -1,1 +1,82 @@
-{}
+{
+  "meta": {
+    "title": "Pembayaran"
+  },
+  "eyebrow": "Keuangan",
+  "title": "Pembayaran & refund",
+  "description": "Semua percobaan pembayaran, dan refund yang masih harus dikembalikan ke wisatawan.",
+  "status": {
+    "pending": "Menunggu",
+    "paid": "Lunas",
+    "failed": "Gagal",
+    "expired": "Kedaluwarsa",
+    "refunded": "Dikembalikan"
+  },
+  "reasons": {
+    "duplicate": "Tagihan ganda",
+    "cancelledBooking": "Dibayar setelah booking dibatalkan",
+    "cancelledAfterPayment": "Booking dibatalkan setelah dibayar",
+    "unknown": "Alasan tidak tercatat"
+  },
+  "queue": {
+    "title": "Perlu refund",
+    "description": "Dana sudah diterima tetapi harus dikembalikan. Kembalikan melalui bank atau dasbor Midtrans, lalu catat refund di sini.",
+    "count": "{count, plural, other {# refund menunggu}}",
+    "empty": "Tidak ada refund yang menunggu. Pembayaran yang perlu dikembalikan akan muncul di sini secara otomatis.",
+    "flaggedAge": "{days, plural, =0 {Ditandai hari ini} other {Ditandai # hari lalu}}",
+    "booking": "Booking",
+    "traveller": "Wisatawan",
+    "tour": "Tur",
+    "amount": "Jumlah",
+    "reason": "Alasan",
+    "age": "Menunggu",
+    "orderId": "ID order"
+  },
+  "refund": {
+    "trigger": "Catat refund",
+    "triggerFor": "Catat refund untuk {code}",
+    "title": "Catat refund",
+    "body": "Refund tidak dikirim dari EtnoJourney. Kembalikan dulu {amount} ke wisatawan melalui bank atau dasbor Midtrans, lalu catat di sini. Pembayaran akan ditandai sudah dikembalikan.",
+    "noteLabel": "Referensi refund",
+    "noteHint": "Misalnya nomor referensi transfer bank atau ID refund Midtrans (3 sampai 500 karakter).",
+    "notePlaceholder": "mis. ref transfer BCA 2610021234",
+    "cancel": "Batal",
+    "submit": "Tandai sudah dikembalikan",
+    "success": "Refund untuk {code} sudah dicatat."
+  },
+  "list": {
+    "title": "Semua pembayaran",
+    "filterLabel": "Saring menurut status pembayaran",
+    "all": "Semua",
+    "searchLabel": "Cari pembayaran",
+    "searchPlaceholder": "Kode booking atau ID order",
+    "clear": "Hapus pencarian",
+    "summary": "{total, plural, =0 {Tidak ada pembayaran} other {# pembayaran}}",
+    "refundRequired": "Perlu refund",
+    "refundedOn": "Dikembalikan {date}",
+    "noMatch": {
+      "title": "Tidak ada pembayaran yang cocok",
+      "description": "Coba kode booking atau ID order lain, atau hapus filter status."
+    },
+    "empty": {
+      "title": "Belum ada pembayaran",
+      "description": "Pembayaran muncul di sini begitu wisatawan memulai checkout."
+    },
+    "columns": {
+      "orderId": "ID order",
+      "booking": "Booking",
+      "traveller": "Wisatawan",
+      "amount": "Jumlah",
+      "method": "Metode",
+      "status": "Status",
+      "created": "Dibuat",
+      "paidAt": "Dibayar"
+    },
+    "pagination": {
+      "label": "Halaman pembayaran",
+      "previous": "Halaman sebelumnya",
+      "next": "Halaman berikutnya",
+      "page": "Halaman {page}"
+    }
+  }
+}
