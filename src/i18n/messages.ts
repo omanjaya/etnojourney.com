@@ -25,6 +25,10 @@ export const namespaces = [
   "adminAvailability",
   "adminUsers",
   "adminInsights",
+  // Traveller self-service features.
+  "selfService",
+  "trip",
+  "community",
 ] as const;
 
 export async function loadMessages(locale: Locale) {

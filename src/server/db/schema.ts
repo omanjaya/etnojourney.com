@@ -258,6 +258,11 @@ export const bookings = pgTable(
     contactName: text("contact_name").notNull(),
     contactPhone: text("contact_phone").notNull(),
     notes: text("notes"),
+    /** Times the traveller moved the date themselves (capped by the policy). */
+    rescheduleCount: integer("reschedule_count").notNull().default(0),
+    /** Idempotency for scheduled emails (pre-trip reminder, post-trip review request). */
+    reminderSentAt: timestamp("reminder_sent_at", { withTimezone: true }),
+    reviewRequestSentAt: timestamp("review_request_sent_at", { withTimezone: true }),
     ...timestamps,
   },
   (t) => [
@@ -306,6 +311,8 @@ export const payments = pgTable(
     refundedBy: text("refunded_by").references(() => user.id, { onDelete: "set null" }),
     /** Bank reference or reason recorded with the refund. */
     refundNote: text("refund_note"),
+    /** Amount owed back when it is less than the full payment (policy tiers); null = full amount. */
+    refundAmount: integer("refund_amount"),
     ...timestamps,
   },
   (t) => [
@@ -356,6 +363,28 @@ export const tourClosures = pgTable(
     uniqueIndex("tour_closures_all_date_uq").on(t.date).where(sql`${t.tourId} is null`),
     index("tour_closures_date_idx").on(t.date),
     check("tour_closures_reason_length", sql`${t.reason} is null or char_length(${t.reason}) <= 200`),
+  ],
+);
+
+/** Photos travellers attach to their review (re-encoded uploads, moderated). */
+export const reviewPhotos = pgTable(
+  "review_photos",
+  {
+    id: serial("id").primaryKey(),
+    reviewId: integer("review_id")
+      .notNull()
+      .references(() => reviews.id, { onDelete: "cascade" }),
+    /** Public path under /media/, as produced by the storage layer. */
+    path: text("path").notNull(),
+    width: integer("width").notNull(),
+    height: integer("height").notNull(),
+    position: integer("position").notNull().default(0),
+    isHidden: boolean("is_hidden").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    index("review_photos_review_idx").on(t.reviewId, t.position),
+    check("review_photos_path_media", sql`${t.path} like '/media/%'`),
   ],
 );
 
@@ -474,4 +503,5 @@ export type UserRole = (typeof userRole.enumValues)[number];
 export type BookingNote = typeof bookingNotes.$inferSelect;
 export type TourClosure = typeof tourClosures.$inferSelect;
 export type AuditLog = typeof auditLogs.$inferSelect;
+export type ReviewPhoto = typeof reviewPhotos.$inferSelect;
 export type User = typeof user.$inferSelect;

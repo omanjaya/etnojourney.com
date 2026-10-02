@@ -29,6 +29,12 @@ const schema = z.object({
   CONTACT_EMAIL: optionalString,
   CONTACT_PHONE: optionalString,
   CONTACT_ADDRESS: optionalString,
+  /** WhatsApp number in international format without "+", e.g. 6281234567890. */
+  CONTACT_WHATSAPP: optionalString.pipe(
+    z.string().regex(/^[1-9]\d{7,14}$/, "must be digits only, international format, e.g. 6281234567890").optional(),
+  ),
+  /** Shared secret for scheduled jobs (/api/cron/*), sent as `Authorization: Bearer <secret>`. */
+  CRON_SECRET: optionalString.pipe(z.string().min(24, "must be at least 24 characters").optional()),
   MAIL_FROM: optionalString,
   UPLOAD_DIR: optionalString,
   TRUST_PROXY: booleanString.default("false"),
