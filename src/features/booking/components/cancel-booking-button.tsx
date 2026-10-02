@@ -22,7 +22,13 @@ export function CancelBookingButton({ bookingId }: { bookingId: number }) {
   if (!confirming) {
     return (
       <div className="flex flex-col items-end gap-1">
-        <Button variant="outline" size="sm" onClick={() => setConfirming(true)}>
+        {/* Destructive but reversible-looking: quiet ghost style, placed last. */}
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-muted hover:text-danger"
+          onClick={() => setConfirming(true)}
+        >
           <X aria-hidden />
           {t("trigger")}
         </Button>

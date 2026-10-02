@@ -82,6 +82,38 @@
     "viewTour": "Lihat halaman tur",
     "receiptTitle": "Ringkasan booking",
     "receiptNote": "Tunjukkan kode booking ini kepada pemandu di titik temu.",
-    "paidAt": "Dibayar pada"
+    "paidAt": "Dibayar pada",
+    "addToCalendar": "Tambah ke kalender",
+    "nextStepsTitle": "Langkah berikutnya",
+    "steps": {
+      "pay": "Selesaikan pembayaran agar tempatmu terkonfirmasi.",
+      "paid": "Pembayaran diterima, booking terkonfirmasi.",
+      "email": "Kami mengirim konfirmasi dan detail perjalanan ke email kamu.",
+      "host": "Tuan rumah atau tim kami menghubungi nomor kontakmu sebelum hari perjalanan.",
+      "prepare": "Siapkan perlengkapan, lalu datang ke titik kumpul tepat waktu.",
+      "review": "Perjalanan selesai. Ceritakan pengalamanmu agar membantu pelancong lain.",
+      "cancelled": "Booking ini dibatalkan. Kamu bisa memesan tanggal lain dari halaman tur."
+    },
+    "stepDone": "Selesai",
+    "stepCurrent": "Sekarang",
+    "prepTitle": "Persiapan",
+    "prepBring": "Yang perlu dibawa",
+    "prepEtiquette": "Etika dan adat",
+    "prepNotIncluded": "Belum termasuk",
+    "prepGettingThere": "Menuju {place}"
+  },
+  "calendar": {
+    "code": "Kode booking: {code}",
+    "meetingPoint": "Titik kumpul: {place}",
+    "bring": "Yang perlu dibawa:",
+    "details": "Detail booking: {url}"
+  },
+  "nextTrip": {
+    "eyebrow": "Perjalanan berikutnya",
+    "countdown": "{days, plural, =0 {Hari ini} =1 {Besok} other {Dalam # hari}}",
+    "meetingPoint": "Titik kumpul",
+    "viewDetail": "Lihat detail",
+    "addToCalendar": "Tambah ke kalender",
+    "payHint": "Belum dibayar. Selesaikan pembayaran untuk mengonfirmasi tempatmu."
   }
 }
