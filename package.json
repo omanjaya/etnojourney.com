@@ -15,6 +15,7 @@
     "db:push": "drizzle-kit push",
     "db:seed": "tsx --env-file=.env src/server/db/seed.ts",
     "db:studio": "drizzle-kit studio",
+    "docker:migrate": "docker compose --profile dev exec dev npx drizzle-kit migrate",
     "test:e2e": "playwright test",
     "test:all": "npm run lint && npm run typecheck && npm test && npm run test:e2e"
   },

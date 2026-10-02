@@ -10,6 +10,7 @@ import {
   type MidtransConfig,
 } from "@/server/integrations/midtrans";
 import { bookingRepository } from "@/server/repositories/booking.repository";
+import { closureRepository } from "@/server/repositories/closure.repository";
 import {
   paymentRepository,
   type AdminPaymentFilters,
@@ -118,6 +119,10 @@ export const paymentService = {
         throw new DomainError("notPayable");
       }
       if (await paymentRepository.hasPaid(locked.id, tx)) throw new DomainError("alreadyPaid");
+      // A date closed after the booking was made (ceremony, weather) takes no new payments.
+      if (await closureRepository.isClosed(locked.tourId, locked.travelDate, tx)) {
+        throw new DomainError("dateClosed");
+      }
 
       const provider = activeProvider();
       const latest = await paymentRepository.findLatestForBooking(locked.id, tx);
