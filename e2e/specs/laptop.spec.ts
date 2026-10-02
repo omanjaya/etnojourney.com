@@ -70,3 +70,27 @@ test.describe("card grid symmetry", () => {
     }
   });
 });
+
+/**
+ * A 1366x768 screen leaves roughly 1366x625 for the page once browser tabs,
+ * the address bar and the taskbar are drawn; the home hero must fit that.
+ */
+for (const viewport of [
+  { width: 1280, height: 600 },
+  { width: 1366, height: 625 },
+  { width: 1536, height: 730 },
+  { width: 1920, height: 945 },
+]) {
+  test.describe(`home hero ${viewport.width}x${viewport.height}`, () => {
+    test.use({ viewport, reducedMotion: "reduce" });
+
+    test("fits one screen, stats bar included", async ({ page }) => {
+      await page.goto("/");
+      const hero = page.locator("main section").first();
+      const height = await hero.evaluate((el) => el.getBoundingClientRect().height);
+      expect(height).toBeLessThanOrEqual(viewport.height);
+      await expect(hero.locator("dl")).toBeInViewport({ ratio: 1 });
+      await expect(page.getByRole("search")).toBeInViewport({ ratio: 1 });
+    });
+  });
+}

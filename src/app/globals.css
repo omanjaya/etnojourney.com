@@ -108,8 +108,12 @@
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
+  /* Smooth in-page anchor jumps only after the visitor interacts, so the
+     browser's scroll restoration on reload/back stays instant. */
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
   }
 
   body {

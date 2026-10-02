@@ -81,7 +81,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   };
 
   return (
-    <html lang={locale} className={`${fraunces.variable} ${inter.variable}`}>
+    <html
+      lang={locale}
+      className={`${fraunces.variable} ${inter.variable}`}
+      // Next 16 keeps CSS smooth scrolling during route changes unless asked
+      // not to; without this, navigations and Back animate from the old offset.
+      data-scroll-behavior="smooth"
+    >
       <body className="min-h-dvh">
         <a
           href="#main"

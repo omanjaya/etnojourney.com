@@ -48,14 +48,16 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
 
       <div className="hero-fade relative flex flex-1 flex-col">
-        <Container className="flex flex-1 flex-col justify-center pt-32 pb-12">
+        {/* Sizes and gaps scale with viewport height (svh) too, so the whole hero,
+            stats bar included, fits one screen on short laptop/desktop windows. */}
+        <Container className="flex flex-1 flex-col justify-center pt-[clamp(5.5rem,15svh,8rem)] pb-[clamp(1.25rem,4svh,3rem)]">
           <p
             style={delay(0)}
             className="animate-fade-up text-xs font-semibold tracking-[0.3em] text-white/80 uppercase"
           >
             {t("eyebrow")}
           </p>
-          <h1 className="mt-6 max-w-5xl text-[clamp(3rem,8vw,7.5rem)] leading-[0.95] font-medium">
+          <h1 className="mt-[clamp(0.75rem,2.5svh,1.5rem)] max-w-5xl text-[clamp(2.75rem,min(8vw,11.5svh),7.5rem)] leading-[0.95] font-medium">
             <span className="sr-only">
               {t("titleStart")} {t("titleAccent")} {t("titleEnd")}
             </span>
@@ -89,7 +91,7 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
           </h1>
           <p
             style={delay(480)}
-            className="animate-fade-up mt-8 max-w-xl text-lg leading-relaxed text-white/85 md:text-xl"
+            className="animate-fade-up short:md:text-lg mt-[clamp(1rem,3.5svh,2rem)] max-w-xl text-base leading-relaxed text-white/85 sm:text-lg md:text-xl"
           >
             {t("description")}
           </p>
@@ -98,7 +100,7 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
             style={delay(580)}
             onSubmit={onSubmit}
             role="search"
-            className="animate-fade-up mt-10 flex w-full max-w-xl items-center gap-2 rounded-full border border-white/25 bg-white/10 p-2 backdrop-blur-xl transition-shadow focus-within:border-white/60 focus-within:ring-4 focus-within:ring-white/25"
+            className="animate-fade-up mt-[clamp(1.25rem,4.5svh,2.5rem)] flex w-full max-w-xl items-center gap-2 rounded-full border border-white/25 bg-white/10 p-2 backdrop-blur-xl transition-shadow focus-within:border-white/60 focus-within:ring-4 focus-within:ring-white/25"
           >
             <label htmlFor="hero-search" className="sr-only">
               {t("searchLabel")}
@@ -118,7 +120,7 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
             </Button>
           </form>
 
-          <div style={delay(680)} className="animate-fade-up mt-6">
+          <div style={delay(680)} className="animate-fade-up mt-[clamp(0.75rem,2.5svh,1.5rem)]">
             <Magnetic strength={0.3}>
               <Link
                 href="/tours"
@@ -135,12 +137,12 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
         </Container>
 
         <div className="relative border-t border-white/15 bg-black/20 backdrop-blur-md">
-          <Container className="flex items-center justify-between gap-6 py-6">
-            <dl className="grid flex-1 grid-cols-2 gap-6 md:grid-cols-4">
+          <Container className="flex items-center justify-between gap-6 py-[clamp(0.875rem,2.5svh,1.5rem)]">
+            <dl className="grid flex-1 grid-cols-4 gap-3 sm:gap-6">
               {stats.map((stat, i) => (
                 <div key={stat.label} style={delay(780 + i * 80)} className="animate-fade-up">
-                  <dt className="text-xs tracking-wide text-white/60 uppercase">{stat.label}</dt>
-                  <dd className="font-display mt-1 text-3xl">
+                  <dt className="text-[10px] leading-tight tracking-wide text-white/60 uppercase sm:text-xs">{stat.label}</dt>
+                  <dd className="font-display short:text-2xl mt-1 text-xl sm:text-3xl">
                     <CountUp value={stat.value} decimals={stat.decimals} locale={locale} />
                   </dd>
                 </div>
