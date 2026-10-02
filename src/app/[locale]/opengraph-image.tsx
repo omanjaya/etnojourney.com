@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 import { getTranslations } from "next-intl/server";
 import { hasLocale } from "next-intl";
@@ -12,6 +14,8 @@ export default async function OpengraphImage({ params }: { params: Promise<{ loc
   const { locale: requested } = await params;
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
   const t = await getTranslations({ locale, namespace: "common" });
+  const logo = await readFile(path.join(process.cwd(), "public/brand/logo-full-white.png"));
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
 
   return new ImageResponse(
     (
@@ -22,34 +26,18 @@ export default async function OpengraphImage({ params }: { params: Promise<{ loc
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: 80,
-          background: "#1e2a44",
+          padding: 72,
+          background: "#7a654f",
           color: "#fbf8f3",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 32,
-              background: "#fbf8f3",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div style={{ width: 28, height: 28, borderRadius: 14, background: "#b4532a" }} />
-          </div>
-          <div style={{ fontSize: 40, fontWeight: 600 }}>EtnoJourney</div>
-        </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ fontSize: 22, letterSpacing: 6, color: "#c4963f", textTransform: "uppercase" }}>
+        <img src={logoSrc} alt="" width={348} height={170} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          <div style={{ fontSize: 22, letterSpacing: 6, color: "#e9dcc8", textTransform: "uppercase" }}>
             {locale === "en" ? "Cultural journeys" : "Wisata budaya"}
           </div>
-          <div style={{ fontSize: 68, lineHeight: 1.08, maxWidth: 980 }}>{t("tagline")}</div>
+          <div style={{ fontSize: 62, lineHeight: 1.08, maxWidth: 1000 }}>{t("tagline")}</div>
         </div>
-        <div style={{ display: "flex", height: 8, width: 160, background: "#b4532a", borderRadius: 4 }} />
       </div>
     ),
     size,

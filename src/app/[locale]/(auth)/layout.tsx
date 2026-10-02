@@ -41,7 +41,7 @@ export default async function AuthLayout({ children }: { children: React.ReactNo
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/30" />
         <div className="relative flex h-full flex-col justify-between p-12 text-white">
           <Link href="/" aria-label="EtnoJourney" className="logo-link self-start">
-            <Logo inverted />
+            <Logo inverted className="h-14" />
           </Link>
           <figure className="max-w-lg">
             <Quote className="text-gold animate-fade-up size-8" strokeWidth={1.5} aria-hidden />

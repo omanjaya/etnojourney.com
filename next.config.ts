@@ -44,6 +44,8 @@ const nextConfig: NextConfig = {
       { pathname: "/media/**", search: "" },
       // Curated, credited content photos shipped with the app (content/README.md).
       { pathname: "/images/content/**", search: "" },
+      // Brand artwork (logo variants).
+      { pathname: "/brand/**", search: "" },
     ],
   },
   experimental: {
