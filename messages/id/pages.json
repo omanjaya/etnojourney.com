@@ -15,6 +15,128 @@
         "Kami sengaja menjaga perjalanan tetap kecil dan lambat. Tujuannya bukan mengumpulkan sebanyak mungkin tempat, melainkan memberi waktu untuk duduk, mendengar, dan belajar dari tuan rumah."
       ]
     },
+    "paths": {
+      "eyebrow": "Tiga jalan",
+      "title": "Tiga cara berjalan bersama Etno Journey",
+      "intro": "Etno Journey menempuh tiga jalan: tradisi leluhur, perjalanan batin, dan bumi yang hidup. Masing-masing adalah cara bepergian dengan pelan, bersama orang-orang yang menjaga tempat itu tetap hidup.",
+      "note": "Belum semua pengalaman di bawah ini tersedia sebagai tur yang bisa dipesan. Ini adalah jenis pengalaman yang kami kembangkan bersama komunitas mitra; jika turnya sudah ada, kami tautkan langsung.",
+      "browse": "Lihat tur",
+      "pillars": {
+        "traditions": {
+          "title": "Menemukan tradisi leluhur yang membentuk jati diri dan kearifan",
+          "intro": "Masuki warisan yang masih hidup, tempat ritual, kriya, dan kisah menerangi kearifan leluhur yang tak lekang waktu.",
+          "items": [
+            {
+              "title": "Ritual dan upacara sakral",
+              "body": "Persembahan musiman, upacara di pura, dan perayaan panen, diikuti dengan hormat."
+            },
+            {
+              "title": "Kriya dan seni warisan",
+              "body": "Menenun, mengukir kayu, membuat gerabah, dan membatik di samping para perajinnya."
+            },
+            {
+              "title": "Kisah dan tradisi lisan",
+              "body": "Mitos, silsilah, dan ingatan, dituturkan oleh para tetua yang menyimpannya."
+            },
+            {
+              "title": "Pengobatan tradisional",
+              "body": "Jamu dan terapi leluhur, sejauh yang ingin dibagikan oleh para penjaganya."
+            },
+            {
+              "title": "Musik, tari, dan pertunjukan",
+              "body": "Gamelan, kidung, dan tari sakral di tempat asalnya."
+            },
+            {
+              "title": "Perjalanan kuliner",
+              "body": "Resep leluhur yang dimasak dan dinikmati bersama keluarga setempat."
+            },
+            {
+              "title": "Ziarah ke bentang alam sakral",
+              "body": "Jalur leluhur menuju pura, tempat suci, dan bentang alam yang dimuliakan."
+            },
+            {
+              "title": "Dialog dengan penjaga tradisi",
+              "body": "Berbincang dengan pemangku, penyembuh, perajin, dan tokoh budaya."
+            }
+          ],
+          "closing": "Etno Journey mengubah warisan menjadi pengalaman, mengajak Anda menghidupi tradisi, merangkul kearifan, dan meneruskan jati diri."
+        },
+        "inner": {
+          "title": "Menempuh perjalanan batin yang menumbuhkan kesadaran dan makna",
+          "intro": "Pengalaman yang dirancang untuk menenangkan pikiran, membangkitkan kesadaran, dan menumbuhkan makna hidup yang lebih dalam.",
+          "items": [
+            {
+              "title": "Retret meditasi terpandu",
+              "body": "Hari-hari tanpa terburu-buru dengan latihan terpandu di tempat yang tenang."
+            },
+            {
+              "title": "Latihan napas dan pranayama",
+              "body": "Latihan pernapasan yang menenangkan tubuh dan pikiran."
+            },
+            {
+              "title": "Jalan hening di alam",
+              "body": "Berjalan tanpa kata, mendengarkan alam sekitar."
+            },
+            {
+              "title": "Lingkaran menulis reflektif",
+              "body": "Menulis dan berbagi renungan dari perjalanan."
+            },
+            {
+              "title": "Yoga untuk kesadaran diri",
+              "body": "Gerak lembut yang mengarahkan perhatian ke dalam."
+            },
+            {
+              "title": "Imersi bunyi sakral",
+              "body": "Beristirahat dalam suara genta, gong, dan kidung."
+            },
+            {
+              "title": "Perbincangan kontemplatif dengan tetua",
+              "body": "Obrolan pelan tentang hidup, makna, dan rasa memiliki."
+            },
+            {
+              "title": "Ritual kuliner berkesadaran",
+              "body": "Menyiapkan dan menyantap makanan dengan penuh perhatian dan rasa syukur."
+            }
+          ],
+          "closing": "Etno Journey mengajak Anda menjadikan kesadaran sebagai laku hidup, merajut hening, bunyi, gerak, dan renungan dalam perjalanan yang menumbuhkan makna dan harmoni batin."
+        },
+        "nature": {
+          "title": "Merangkul alam dalam esensi murninya",
+          "intro": "Rayakan bumi yang hidup lewat pengalaman yang menghormati keseimbangan, keindahan, dan harmoni sakral <term>Mamahayu Hayuning Bawana</term>: keselarasan hidup dan keindahan dunia.",
+          "items": [
+            {
+              "title": "Jelajah ekologi",
+              "body": "Menyusuri sawah berundak, hutan, dan sungai."
+            },
+            {
+              "title": "Ritual penyucian air",
+              "body": "Melukat di mata air dan sungai suci, dipandu oleh komunitas."
+            },
+            {
+              "title": "Menanam pohon dan konservasi",
+              "body": "Terlibat langsung dalam upaya pelestarian setempat."
+            },
+            {
+              "title": "Mengenal satwa dan keanekaragaman hayati",
+              "body": "Bertemu kehidupan suatu tempat tanpa mengusiknya."
+            },
+            {
+              "title": "Pengalaman bertani organik",
+              "body": "Turun ke ladang bersama petani yang bertanam tanpa bahan kimia."
+            },
+            {
+              "title": "Berkumpul saat senja dan api unggun",
+              "body": "Malam berisi cerita dan keheningan saat hari berakhir."
+            },
+            {
+              "title": "Dialog tentang keberlanjutan",
+              "body": "Belajar cara komunitas merawat tanah dan airnya."
+            }
+          ],
+          "closing": "Etno Journey menjadikan alam sahabat yang sakral, mengajak Anda melangkah dengan lembut, hidup dengan sadar, dan menghormati keselarasan hidup dan keindahan dunia."
+        }
+      }
+    },
     "principles": {
       "eyebrow": "Cara kami bekerja",
       "title": "Empat prinsip yang tidak kami tawar",

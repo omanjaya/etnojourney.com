@@ -78,5 +78,27 @@
   },
   "marquee": {
     "label": "EtnoJourney destinations and experiences"
+  },
+  "manifesto": {
+    "eyebrow": "Etno Journey",
+    "title": "A path into the soul of culture, tradition and nature.",
+    "lead": "Welcome to Etno Journey. Here, every step is more than travel: it is a dialogue with heritage, a reflection within, and a reverence for the living earth.",
+    "invite": "Etno Journey invites you to",
+    "closing": "This is not just a destination, but a movement: a celebration of stories, rituals and landscapes that connect humanity across time. Let Etno Journey be your guide to experiences that inspire, educate and transform.",
+    "more": "Read the path",
+    "paths": {
+      "traditions": {
+        "title": "Discover ancestral traditions",
+        "body": "Traditions that shape identity and wisdom: rituals, crafts and stories kept alive by their communities."
+      },
+      "inner": {
+        "title": "Embark on inner journeys",
+        "body": "Journeys that nurture mindfulness and meaning, through silence, sound and reflection."
+      },
+      "nature": {
+        "title": "Embrace nature in its pure essence",
+        "body": "Honouring the harmony of <term>Mamahayu Hayuning Bawana</term>: the balance of life and the beauty of the world."
+      }
+    }
   }
 }
