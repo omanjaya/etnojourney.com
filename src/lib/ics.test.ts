@@ -30,7 +30,7 @@ describe("buildIcs", () => {
 
   it("escapes text values", () => {
     expect(ics.replace(/\r\n /g, "")).toContain(
-      "DESCRIPTION:Kode: EJ-ABC123\\nBawa: sepatu\\, jas hujan\; topi",
+      "DESCRIPTION:Kode: EJ-ABC123\\nBawa: sepatu\\, jas hujan\\; topi",
     );
   });
 
@@ -47,7 +47,7 @@ describe("buildIcs", () => {
 
 describe("helpers", () => {
   it("escapes backslashes before other characters", () => {
-    expect(escapeIcsText("a\\b,c;d\ne")).toBe("a\\\\b\\,c\;d\\ne");
+    expect(escapeIcsText("a\\b,c;d\ne")).toBe("a\\\\b\\,c\\;d\\ne");
   });
 
   it("never splits a multi-byte character when folding", () => {
@@ -56,5 +56,11 @@ describe("helpers", () => {
     expect(parts.length).toBeGreaterThan(1);
     expect(parts.join("")).toBe(`SUMMARY:${"é".repeat(60)}`);
     for (const part of parts) expect(new TextEncoder().encode(part).length).toBeLessThanOrEqual(75);
+  });
+
+  it("escapes semicolons with a real backslash (RFC 5545)", () => {
+    // Regression: "\;" in a JS string literal is just ";".
+    expect(escapeIcsText("a;b")).toBe("a\\;b");
+    expect(escapeIcsText("a;b")).toHaveLength(4);
   });
 });

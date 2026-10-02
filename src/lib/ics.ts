@@ -21,7 +21,7 @@ export type IcsEvent = {
 export function escapeIcsText(value: string): string {
   return value
     .replace(/\\/g, "\\\\")
-    .replace(/;/g, "\;")
+    .replace(/;/g, "\\;")
     .replace(/,/g, "\\,")
     .replace(/\r\n|\r|\n/g, "\\n");
 }
