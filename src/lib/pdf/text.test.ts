@@ -31,11 +31,10 @@ describe("toWinAnsi", () => {
     const font = await doc.embedFont(StandardFonts.Helvetica);
     const supported = new Set(font.getCharacterSet());
     let sample = "";
-    for (let code = 0; code < 0x3100; code++) {
-      if (code >= 0xd800 && code <= 0xdfff) continue;
-      sample += String.fromCodePoint(code);
-    }
-    sample += "😀👍🏽🇮🇩";
+    // Latin, symbols and CJK punctuation (below the surrogate range), then
+    // astral characters: an emoji, a skin-tone modifier and a flag sequence.
+    for (let code = 0; code < 0x3100; code++) sample += String.fromCodePoint(code);
+    sample += "\u{1F600}\u{1F44D}\u{1F3FD}\u{1F1EE}\u{1F1E9}";
     const out = toWinAnsi(sample);
     const bad = Array.from(out).filter((c) => !supported.has(c.codePointAt(0)!));
     expect(bad).toEqual([]);
