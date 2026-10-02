@@ -24,6 +24,7 @@ import { categoryIcons, tourCategories } from "@/components/shared/category-icon
 import { DestinationCard } from "@/components/shared/destination-card";
 import { TourCard } from "@/components/shared/tour-card";
 import { HomeHero, type HeroStat } from "@/features/home/components/home-hero";
+import { Manifesto } from "@/features/home/components/manifesto";
 import { WishlistButton } from "@/features/wishlist/components/wishlist-button";
 import { getCurrentUser } from "@/server/auth/guards";
 import { destinationService } from "@/server/services/destination.service";
@@ -31,8 +32,7 @@ import { reviewService } from "@/server/services/review.service";
 import { tourService } from "@/server/services/tour.service";
 import { wishlistService } from "@/server/services/wishlist.service";
 
-const STORY_IMAGE =
-  "/images/content/site/tegallalang-terraces.webp";
+const STORY_IMAGE = "/images/content/site/tegallalang-terraces.webp";
 const CTA_IMAGE = "/images/content/site/raja-ampat-lagoon.webp";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
@@ -121,6 +121,9 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           </Marquee>
         </section>
       )}
+
+      {/* Opening narration and the three paths */}
+      <Manifesto />
 
       {/* Categories */}
       <section className="py-24 md:py-32">

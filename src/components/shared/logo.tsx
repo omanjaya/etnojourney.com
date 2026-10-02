@@ -1,27 +1,42 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Wordmark with a stylised kawung (batik) motif. */
-export function Logo({ className, inverted = false }: { className?: string; inverted?: boolean }) {
+/** Intrinsic size of the PNGs in public/brand (all variants share it). */
+const WIDTH = 1005;
+const HEIGHT = 491;
+
+/**
+ * Brand wordmark: "etno journey" with the Balinese mandala.
+ *
+ * - `inverted` switches to the white artwork for dark or photo backgrounds.
+ * - `full` adds the "pathback" tagline; it is only legible at larger sizes,
+ *   so the compact artwork is the default (header, nav).
+ *
+ * The rendered height comes from `className` (default `h-10`); width follows
+ * the aspect ratio. Source files: public/brand (see public/brand/README.md).
+ */
+export function Logo({
+  className,
+  inverted = false,
+  full = false,
+  priority = false,
+}: {
+  className?: string;
+  inverted?: boolean;
+  full?: boolean;
+  priority?: boolean;
+}) {
+  const src = `/brand/logo${full ? "-full" : ""}-${inverted ? "white" : "ink"}.png`;
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <svg viewBox="0 0 32 32" className="size-8" aria-hidden>
-        <circle cx="16" cy="16" r="15" className={inverted ? "fill-sand-50" : "fill-ink"} />
-        <g className="fill-terracotta">
-          <ellipse cx="16" cy="9.5" rx="3.2" ry="5" />
-          <ellipse cx="16" cy="22.5" rx="3.2" ry="5" />
-          <ellipse cx="9.5" cy="16" rx="5" ry="3.2" />
-          <ellipse cx="22.5" cy="16" rx="5" ry="3.2" />
-        </g>
-        <circle cx="16" cy="16" r="1.8" className={inverted ? "fill-ink" : "fill-sand-50"} />
-      </svg>
-      <span
-        className={cn(
-          "font-display text-xl font-semibold tracking-tight",
-          inverted ? "text-sand-50" : "text-ink",
-        )}
-      >
-        Etno<span className="font-normal italic">Journey</span>
-      </span>
-    </span>
+    <Image
+      src={src}
+      alt="EtnoJourney"
+      width={WIDTH}
+      height={HEIGHT}
+      priority={priority}
+      sizes="(min-width: 640px) 240px, 180px"
+      className={cn("h-10 w-auto select-none", className)}
+      draggable={false}
+    />
   );
 }

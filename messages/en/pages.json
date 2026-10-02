@@ -15,6 +15,128 @@
         "We deliberately keep journeys small and slow. The goal is not to collect as many places as possible, but to make time to sit, listen and learn from your hosts."
       ]
     },
+    "paths": {
+      "eyebrow": "Three paths",
+      "title": "Three ways to travel with Etno Journey",
+      "intro": "Etno Journey follows three paths: ancestral traditions, inner journeys and the living earth. Each is a way of travelling slowly, alongside the people who keep these places alive.",
+      "note": "Not every experience below is a bookable tour yet. These are experiences we develop with our partner communities; where a tour already exists, we link to it.",
+      "browse": "See tours",
+      "pillars": {
+        "traditions": {
+          "title": "Discover ancestral traditions that shape identity and wisdom",
+          "intro": "Step into living heritage, where rituals, crafts and stories illuminate the timeless wisdom of the ancestors.",
+          "items": [
+            {
+              "title": "Sacred rituals and ceremonies",
+              "body": "Seasonal offerings, temple rites and harvest celebrations, joined with respect."
+            },
+            {
+              "title": "Heritage crafts and artistry",
+              "body": "Weaving, woodcarving, pottery and batik, learned at the artisan's side."
+            },
+            {
+              "title": "Storytelling and oral heritage",
+              "body": "Myths, genealogies and memories, told by the elders who carry them."
+            },
+            {
+              "title": "Traditional healing practices",
+              "body": "Herbal medicine and ancestral therapies, as their keepers choose to share them."
+            },
+            {
+              "title": "Music, dance and performance",
+              "body": "Gamelan, chants and sacred dances in the setting they belong to."
+            },
+            {
+              "title": "Culinary journeys",
+              "body": "Ancestral recipes cooked and shared with local families."
+            },
+            {
+              "title": "Pilgrimage to sacred landscapes",
+              "body": "Ancestral paths to temples, shrines and natural landmarks."
+            },
+            {
+              "title": "Dialogue with custodians of tradition",
+              "body": "Conversations with priests, healers, artisans and cultural leaders."
+            }
+          ],
+          "closing": "Etno Journey turns heritage into experience, inviting you to live traditions, embrace wisdom and carry identity forward."
+        },
+        "inner": {
+          "title": "Embark on inner journeys that nurture mindfulness and meaning",
+          "intro": "Experiences designed to quiet the mind, awaken awareness and cultivate a deeper sense of purpose.",
+          "items": [
+            {
+              "title": "Guided meditation retreats",
+              "body": "Unhurried days of guided practice in quiet places."
+            },
+            {
+              "title": "Breathwork and pranayama",
+              "body": "Breathing practices that steady the body and the mind."
+            },
+            {
+              "title": "Silent nature walks",
+              "body": "Walking without words, listening to the land."
+            },
+            {
+              "title": "Mindful journaling circles",
+              "body": "Writing and sharing reflections from the road."
+            },
+            {
+              "title": "Yoga for inner awareness",
+              "body": "Gentle movement that turns attention inward."
+            },
+            {
+              "title": "Sacred sound immersion",
+              "body": "Resting in the sound of bells, gongs and chants."
+            },
+            {
+              "title": "Contemplative dialogue with elders",
+              "body": "Slow conversations about life, meaning and belonging."
+            },
+            {
+              "title": "Mindful culinary rituals",
+              "body": "Preparing and eating food with full attention and gratitude."
+            }
+          ],
+          "closing": "Etno Journey invites you to embrace mindfulness as a living practice, weaving silence, sound, movement and reflection into journeys that nurture meaning and inner harmony."
+        },
+        "nature": {
+          "title": "Embrace nature in its pure essence",
+          "intro": "Celebrate the living earth through experiences that honour balance, beauty and the sacred harmony of <term>Mamahayu Hayuning Bawana</term>: the balance of life and the beauty of the world.",
+          "items": [
+            {
+              "title": "Ecological immersion walks",
+              "body": "Through rice terraces, forests and along rivers."
+            },
+            {
+              "title": "Water blessing rituals",
+              "body": "Purification at sacred springs and rivers, guided by the community."
+            },
+            {
+              "title": "Tree planting and conservation",
+              "body": "Hands-on work with local conservation efforts."
+            },
+            {
+              "title": "Wildlife and biodiversity encounters",
+              "body": "Meeting the life of a place without disturbing it."
+            },
+            {
+              "title": "Organic farming experience",
+              "body": "Working the fields with farmers who grow without chemicals."
+            },
+            {
+              "title": "Sunset and firelight gatherings",
+              "body": "Evenings of stories and stillness as the day ends."
+            },
+            {
+              "title": "Dialogue on sustainability",
+              "body": "Learning how communities care for their land and water."
+            }
+          ],
+          "closing": "Etno Journey makes nature a sacred companion, inviting you to walk gently, live mindfully and honour the balance of life and the beauty of the world."
+        }
+      }
+    },
     "principles": {
       "eyebrow": "How we work",
       "title": "Four principles we don't compromise on",

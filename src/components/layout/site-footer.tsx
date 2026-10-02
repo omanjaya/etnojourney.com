@@ -46,7 +46,7 @@ export async function SiteFooter() {
 
       <Container className="relative grid gap-x-4 gap-y-10 py-16 sm:grid-cols-6 lg:gap-x-8 xl:flex xl:justify-between xl:gap-12">
         <Reveal className="sm:col-span-6 xl:max-w-sm xl:flex-1" delay={0}>
-          <Logo inverted />
+          <Logo inverted full className="h-24" />
           <p className="text-sand-100/70 mt-6 max-w-sm leading-relaxed">{t("footer.about")}</p>
         </Reveal>
 

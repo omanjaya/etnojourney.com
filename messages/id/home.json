@@ -78,5 +78,27 @@
   },
   "marquee": {
     "label": "Destinasi dan pengalaman EtnoJourney"
+  },
+  "manifesto": {
+    "eyebrow": "Etno Journey",
+    "title": "Jalan menuju jiwa budaya, tradisi, dan alam.",
+    "lead": "Selamat datang di Etno Journey. Di sini, setiap langkah lebih dari sekadar perjalanan: ia adalah dialog dengan warisan, perenungan ke dalam diri, dan penghormatan pada bumi yang hidup.",
+    "invite": "Etno Journey mengajak Anda untuk",
+    "closing": "Ini bukan sekadar destinasi, melainkan sebuah gerakan: perayaan kisah, ritual, dan bentang alam yang menghubungkan manusia lintas zaman. Biarkan Etno Journey menjadi pemandu Anda menuju pengalaman yang menginspirasi, mendidik, dan mengubah.",
+    "more": "Baca jalannya",
+    "paths": {
+      "traditions": {
+        "title": "Menemukan tradisi leluhur",
+        "body": "Tradisi yang membentuk jati diri dan kearifan: ritual, kriya, dan kisah yang dijaga tetap hidup oleh komunitasnya."
+      },
+      "inner": {
+        "title": "Menempuh perjalanan batin",
+        "body": "Perjalanan yang menumbuhkan kesadaran dan makna, lewat hening, bunyi, dan perenungan."
+      },
+      "nature": {
+        "title": "Merangkul alam dalam esensi murninya",
+        "body": "Menghormati harmoni <term>Mamahayu Hayuning Bawana</term>: keselarasan hidup dan keindahan dunia."
+      }
+    }
   }
 }

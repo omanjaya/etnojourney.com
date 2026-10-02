@@ -127,7 +127,7 @@ export function AdminNav({ user }: { user: { name: string; email: string } }) {
         className="bg-indigo text-sand-50 short:gap-6 short:py-6 sticky top-0 hidden h-dvh flex-col gap-10 overflow-y-auto overscroll-contain px-5 py-8 lg:flex"
       >
         <Link href="/admin" className="logo-link px-2" aria-label="EtnoJourney Admin">
-          <Logo inverted />
+          <Logo inverted className="h-11" />
         </Link>
         <nav aria-label={t("label")} className="flex-1">
           <NavLinks pathname={pathname} />
@@ -142,7 +142,7 @@ export function AdminNav({ user }: { user: { name: string; email: string } }) {
       >
         <div className="flex h-16 items-center justify-between px-4">
           <Link href="/admin" className="logo-link" aria-label="EtnoJourney Admin">
-            <Logo inverted />
+            <Logo inverted className="h-11" />
           </Link>
           <button
             ref={toggleRef}

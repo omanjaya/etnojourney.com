@@ -16,11 +16,10 @@ import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
 import { Magnetic, Reveal, SplitWords } from "@/components/motion";
 import { Button } from "@/components/ui/button";
+import { ThreePaths } from "@/features/content/components/three-paths";
 
-const MISSION_IMAGE =
-  "/images/content/site/tegallalang-terraces.webp";
-const PARTNERS_IMAGE =
-  "/images/content/site/borobudur-walk.webp";
+const MISSION_IMAGE = "/images/content/site/tegallalang-terraces.webp";
+const PARTNERS_IMAGE = "/images/content/site/borobudur-walk.webp";
 
 const PRINCIPLES = [
   { key: "fair", icon: HandCoins },
@@ -84,6 +83,9 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
           </Reveal>
         </div>
       </Container>
+
+      {/* Three paths */}
+      <ThreePaths />
 
       {/* Principles */}
       <section className="bg-indigo text-sand-50 py-20 md:py-28">
