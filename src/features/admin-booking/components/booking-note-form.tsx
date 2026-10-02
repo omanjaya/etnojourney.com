@@ -6,7 +6,7 @@ import { useState, useTransition, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Field, Textarea } from "@/components/ui/form-controls";
 import { addBookingNoteAction } from "../actions";
-import { NOTE_MAX_LENGTH } from "../schemas";
+import { NOTE_MAX_LENGTH } from "../limits";
 
 /** Adds an internal note; the page re-renders with the new note via revalidation. */
 export function BookingNoteForm({ bookingId }: { bookingId: number }) {

@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
+import { clientMessageScopes, pickMessages } from "@/i18n/messages";
 import { routing } from "@/i18n/routing";
 import { localizedUrl, siteUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -108,7 +109,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           {t("skipToContent")}
         </a>
         <JsonLd data={[organization, website]} />
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider
+          messages={pickMessages(await getMessages(), clientMessageScopes.public)}
+        >
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );

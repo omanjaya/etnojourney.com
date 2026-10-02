@@ -251,7 +251,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                   <DestinationCard
                     destination={destination}
                     tourCount={tourCount}
-                    eager={i === 0}
                     className="w-full"
                     sizes={
                       i === 0
