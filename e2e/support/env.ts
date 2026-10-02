@@ -44,6 +44,8 @@ export function serverEnv(): Record<string, string> {
     UPLOAD_DIR: "./storage/e2e-uploads",
     // Never send real email from tests.
     RESEND_API_KEY: "",
+    // Serve image files as-is; see next.config.ts.
+    NEXT_IMAGE_UNOPTIMIZED: "true",
     SEED_ADMIN_EMAIL: ACCOUNTS.admin.email,
     SEED_ADMIN_PASSWORD: ACCOUNTS.admin.password,
   };
