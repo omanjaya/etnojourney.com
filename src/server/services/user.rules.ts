@@ -1,4 +1,5 @@
 import type { UserRole } from "@/server/db/schema";
+import { can, permissions, type Permission } from "@/server/auth/permissions";
 
 /**
  * Pure rules for back-office user management. The service applies them under
@@ -39,9 +40,12 @@ export function disableError(params: {
   return null;
 }
 
-const roleRank: Record<UserRole, number> = { user: 0, staff: 1, admin: 2 };
-
-/** True when `next` grants fewer permissions than `previous`. */
+/**
+ * True when `previous` holds any permission `next` lacks (e.g. admin -> staff,
+ * partner -> staff). Such changes revoke sessions so lost access can't linger.
+ */
 export function isDemotion(previous: UserRole, next: UserRole): boolean {
-  return roleRank[next] < roleRank[previous];
+  return (Object.keys(permissions) as Permission[]).some(
+    (permission) => can(previous, permission) && !can(next, permission),
+  );
 }

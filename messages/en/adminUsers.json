@@ -2,7 +2,8 @@
   "roles": {
     "user": "Traveller",
     "staff": "Staff",
-    "admin": "Admin"
+    "admin": "Admin",
+    "partner": "Partner"
   },
   "status": {
     "active": "Active",
@@ -184,7 +185,18 @@
       "credit": {
         "updated": "Updated a photo credit"
       },
-      "unknown": "Other change"
+      "unknown": "Other change",
+      "guide": {
+        "created": "Added a guide",
+        "updated": "Updated a guide",
+        "linked": "Linked a partner portal account"
+      },
+      "departure": {
+        "assigned": "Assigned a guide",
+        "unassigned": "Removed a guide assignment",
+        "noted": "Updated a departure note",
+        "notified": "Sent the manifest to the guide"
+      }
     }
   }
 }

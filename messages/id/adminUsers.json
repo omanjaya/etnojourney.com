@@ -2,7 +2,8 @@
   "roles": {
     "user": "Wisatawan",
     "staff": "Staf",
-    "admin": "Admin"
+    "admin": "Admin",
+    "partner": "Mitra"
   },
   "status": {
     "active": "Aktif",
@@ -184,7 +185,18 @@
       "credit": {
         "updated": "Memperbarui kredit foto"
       },
-      "unknown": "Perubahan lain"
+      "unknown": "Perubahan lain",
+      "guide": {
+        "created": "Menambah pemandu",
+        "updated": "Mengubah data pemandu",
+        "linked": "Menautkan akun portal mitra"
+      },
+      "departure": {
+        "assigned": "Menugaskan pemandu",
+        "unassigned": "Melepas penugasan pemandu",
+        "noted": "Mengubah catatan keberangkatan",
+        "notified": "Mengirim manifest ke pemandu"
+      }
     }
   }
 }
