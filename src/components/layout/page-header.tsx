@@ -66,7 +66,7 @@ export function PageHeader({
         {description && (
           <p
             className={cn(
-              "text-ink-soft animate-fade-up max-w-2xl leading-relaxed",
+              "text-ink-soft animate-fade-up max-w-2xl leading-relaxed text-balance",
               compact
                 ? "short:mt-3 short:text-base mt-3 text-base md:mt-4 md:text-lg"
                 : "short:mt-4 short:text-base mt-6 text-lg",

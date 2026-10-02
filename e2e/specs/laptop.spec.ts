@@ -50,3 +50,23 @@ test.describe("tablet header", () => {
     expect(height).toBeLessThan(90);
   });
 });
+
+test.describe("card grid symmetry", () => {
+  test.use({ viewport: { width: 1366, height: 768 }, reducedMotion: "reduce" });
+
+  test("tour cards in a row share height and a price baseline", async ({ page }) => {
+    await page.goto("/tours");
+    const cards = await page.locator("main article").evaluateAll((els) =>
+      els.slice(0, 6).map((el) => {
+        const price = el.querySelector("p.border-t")!.getBoundingClientRect();
+        const box = el.getBoundingClientRect();
+        return { top: Math.round(box.top), height: Math.round(box.height), price: Math.round(price.top) };
+      }),
+    );
+    const rows = Map.groupBy(cards, (c) => c.top);
+    for (const row of rows.values()) {
+      expect(new Set(row.map((c) => c.height)).size, "card heights").toBe(1);
+      expect(new Set(row.map((c) => c.price)).size, "price rows").toBe(1);
+    }
+  });
+});

@@ -49,7 +49,7 @@ export function TourCard({
   const CategoryIcon = categoryIcons[tour.category];
 
   return (
-    <article className={cn("group relative flex flex-col", className)}>
+    <article className={cn("group relative flex h-full flex-col", className)}>
       {/* z-[1] keeps the image area (and its overlay controls) above the
           title link's full-card hit area, despite Tilt's stacking context. */}
       <Tilt max={3} className="relative z-[1] rounded-(--radius-card)">
@@ -108,12 +108,19 @@ export function TourCard({
         </div>
       </Tilt>
 
+      {/* Fixed rhythm so cards in a row line up: one-line location, a title
+          that always takes two lines, one meta line, price pinned to the bottom. */}
       <div className="flex flex-1 flex-col pt-5">
-        <p className="text-muted flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase">
-          <MapPin className="size-3.5" aria-hidden />
-          {destination.name}, {provinceLabel(destination.province, locale)}
+        <p className="text-muted flex min-w-0 items-center gap-1.5 text-xs font-medium tracking-wide uppercase">
+          <MapPin className="size-3.5 shrink-0" aria-hidden />
+          <span className="truncate">
+            {destination.name}, {provinceLabel(destination.province, locale)}
+          </span>
         </p>
-        <Heading className="mt-2 text-xl leading-snug md:text-2xl">
+        <Heading
+          title={localize(tour.title, locale)}
+          className="mt-2 line-clamp-2 min-h-[2lh] text-xl leading-snug md:text-2xl"
+        >
           <Link
             href={`/tours/${tour.slug}`}
             className="decoration-terracotta/40 group-hover:text-terracotta-dark underline-offset-4 transition-colors duration-300 after:absolute after:inset-0"
@@ -121,33 +128,34 @@ export function TourCard({
             {localize(tour.title, locale)}
           </Link>
         </Heading>
-        <div className="mt-auto flex items-end justify-between gap-4 pt-4">
-          <div className="text-ink-soft flex flex-wrap gap-x-4 gap-y-1 text-sm">
-            <span className="inline-flex items-center gap-1.5">
-              <Clock className="text-muted size-4" aria-hidden />
-              {t("days", { count: tour.durationDays })}
+        <div className="text-ink-soft mt-3 flex min-w-0 items-center gap-x-4 overflow-hidden text-sm whitespace-nowrap">
+          <span className="inline-flex items-center gap-1.5">
+            <Clock className="text-muted size-4" aria-hidden />
+            {t("days", { count: tour.durationDays })}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <Users className="text-muted size-4" aria-hidden />
+            {t("maxPeople", { count: tour.maxParticipants })}
+          </span>
+          {/* Only flag effort when it matters; easy tours keep the card clean. */}
+          {tour.difficulty !== "easy" && (
+            <span
+              className={cn(
+                "inline-flex items-center gap-1.5",
+                tour.difficulty === "challenging" && "text-terracotta-dark",
+              )}
+            >
+              <Mountain className="size-4 opacity-70" aria-hidden />
+              {td(tour.difficulty)}
             </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Users className="text-muted size-4" aria-hidden />
-              {t("maxPeople", { count: tour.maxParticipants })}
-            </span>
-            {/* Only flag effort when it matters; easy tours keep the card clean. */}
-            {tour.difficulty !== "easy" && (
-              <span
-                className={cn(
-                  "inline-flex items-center gap-1.5",
-                  tour.difficulty === "challenging" && "text-terracotta-dark",
-                )}
-              >
-                <Mountain className="size-4 opacity-70" aria-hidden />
-                {td(tour.difficulty)}
-              </span>
-            )}
-          </div>
-          <p className="text-right">
-            <span className="text-muted block text-[11px] uppercase">{t("from")}</span>
-            <span className="inline-block font-semibold transition-transform duration-500 ease-(--ease-editorial) group-hover:-translate-y-0.5">
-              {formatCurrency(tour.pricePerPerson, locale)}
+          )}
+        </div>
+        <div className="mt-auto pt-4">
+          <p className="border-line flex items-baseline justify-between gap-4 border-t pt-3">
+            <span className="text-muted text-[11px] font-medium tracking-wide uppercase">{t("from")}</span>
+            <span className="inline-block transition-transform duration-500 ease-(--ease-editorial) group-hover:-translate-y-0.5">
+              <span className="font-semibold">{formatCurrency(tour.pricePerPerson, locale)}</span>
+              <span className="text-muted text-sm"> {t("perPerson")}</span>
             </span>
           </p>
         </div>

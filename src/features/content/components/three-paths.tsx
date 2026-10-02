@@ -185,7 +185,7 @@ export async function ThreePaths() {
                     })}
                   </ul>
                   <Reveal delay={0.1}>
-                    <p className="font-display border-terracotta text-ink mt-10 border-l-2 pl-5 text-xl leading-snug italic md:text-2xl">
+                    <p className="font-display border-terracotta text-ink mt-10 border-l-2 pl-5 text-xl leading-snug text-balance italic md:text-2xl">
                       {t(`pillars.${key}.closing`)}
                     </p>
                   </Reveal>

@@ -150,7 +150,7 @@ export default async function DestinationPage({
             stagger={90}
             className="short:mt-3 short:text-6xl mt-4 text-6xl leading-none md:text-7xl xl:text-8xl"
           />
-          <p className="font-display animate-fade-up short:mt-3 short:text-lg mt-5 max-w-2xl text-xl leading-relaxed text-white/85 italic [animation-delay:0.55s]">
+          <p className="font-display animate-fade-up short:mt-3 short:text-lg mt-5 max-w-2xl text-xl leading-relaxed text-balance text-white/85 italic [animation-delay:0.55s]">
             {localize(destination.tagline, locale)}
           </p>
           <PhotoCredit

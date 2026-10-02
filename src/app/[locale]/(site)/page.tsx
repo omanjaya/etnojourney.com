@@ -356,7 +356,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 <Reveal key={review.id} delay={Math.min(i * 0.08, 0.4)} className="h-full">
                   <figure className="bg-sand-50 flex h-full flex-col rounded-(--radius-card) p-8 shadow-[0_24px_48px_-32px_rgb(29_26_22/0.35)]">
                     <Quote className="text-terracotta size-8" strokeWidth={1.25} aria-hidden />
-                    <p className="font-display mt-6 flex-1 text-xl leading-snug">
+                    <p className="font-display mt-6 flex-1 text-xl leading-snug text-balance">
                       {localize(review.body, locale)}
                     </p>
                     <Stars value={review.rating} className="mt-6" />
