@@ -104,7 +104,8 @@ export default async function DestinationPage({
           },
         ]}
       />
-      <section className="bg-indigo relative flex min-h-[78vh] items-end overflow-hidden text-white">
+      {/* Shorter on laptops so the destination's tours start near the first screen. */}
+      <section className="bg-indigo short:min-h-[50vh] relative flex min-h-[70vh] items-end overflow-hidden text-white md:min-h-[60vh] lg:min-h-[min(60vh,560px)]">
         <ViewTransition name={destinationMorphName(destination.slug)} share="morph" default="none">
           {/* Small cached copy underneath so the morph never shows an empty box
               while the full-size hero is still loading. */}
@@ -126,10 +127,10 @@ export default async function DestinationPage({
           </div>
         </ViewTransition>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/30" />
-        <Container className="relative pt-40 pb-16 md:pb-24">
+        <Container className="short:pt-24 short:pb-9 relative pt-32 pb-12 md:pb-14">
           <Link
             href="/destinations"
-            className="group/back animate-fade-in mb-8 inline-flex items-center gap-2 text-sm text-white/75 transition-colors hover:text-white"
+            className="group/back animate-fade-in short:mb-4 mb-6 inline-flex items-center gap-2 text-sm text-white/75 transition-colors hover:text-white"
           >
             <ArrowLeft
               className="size-4 transition-transform duration-500 ease-(--ease-editorial) group-hover/back:-translate-x-1"
@@ -147,19 +148,62 @@ export default async function DestinationPage({
             play="load"
             delay={0.25}
             stagger={90}
-            className="mt-4 text-6xl leading-none md:text-8xl"
+            className="short:mt-3 short:text-6xl mt-4 text-6xl leading-none md:text-7xl xl:text-8xl"
           />
-          <p className="font-display animate-fade-up mt-6 max-w-2xl text-xl leading-relaxed text-white/85 italic [animation-delay:0.55s]">
+          <p className="font-display animate-fade-up short:mt-3 short:text-lg mt-5 max-w-2xl text-xl leading-relaxed text-white/85 italic [animation-delay:0.55s]">
             {localize(destination.tagline, locale)}
           </p>
           <PhotoCredit
             credit={credits.get(destination.heroImage)}
-            className="mt-8 text-white/60 [&_a]:text-white/75"
+            className="short:mt-4 mt-6 text-white/60 [&_a]:text-white/75"
           />
         </Container>
       </section>
 
-      <Container className="grid gap-10 py-20 md:grid-cols-12 md:py-28">
+      {/* Tours first: they are what visitors come here for. */}
+      <section className="grain border-line bg-sand-100 short:py-10 border-b py-12 md:py-16">
+        <Container>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <h2 className="short:text-3xl text-3xl md:text-4xl xl:text-5xl">
+              {t("tours", { name: destination.name })}
+            </h2>
+            <p className="text-muted text-sm">{t("toursCount", { count: tours.length })}</p>
+          </div>
+
+          {tours.length === 0 ? (
+            <EmptyState
+              className="mt-8"
+              icon={Compass}
+              title={t("emptyTitle")}
+              description={t("emptyDescription")}
+              action={
+                <Button asChild variant="outline">
+                  <Link href="/tours">{t("browseTours")}</Link>
+                </Button>
+              }
+            />
+          ) : (
+            <div className="short:mt-6 mt-8 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+              {tours.map((item, i) => (
+                <Reveal key={item.tour.id} delay={Math.min((i % 3) * 0.1, 0.4)}>
+                  <TourCard
+                    data={item}
+                    action={
+                      <WishlistButton
+                        tourId={item.tour.id}
+                        initialSaved={saved.has(item.tour.id)}
+                        isAuthenticated={Boolean(user)}
+                        variant="overlay"
+                      />
+                    }
+                  />
+                </Reveal>
+              ))}
+            </div>
+          )}
+        </Container>
+      </section>
+      <Container className="grid gap-10 py-16 md:grid-cols-12 md:py-20">
         <Reveal variant="none" className="md:col-span-4">
           <SplitWords
             as="h2"
@@ -188,47 +232,6 @@ export default async function DestinationPage({
           </Reveal>
         )}
       </Container>
-
-      <section className="grain border-line bg-sand-100 border-t py-20 md:py-28">
-        <Container>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-3xl md:text-5xl">{t("tours", { name: destination.name })}</h2>
-            <p className="text-muted text-sm">{t("toursCount", { count: tours.length })}</p>
-          </div>
-
-          {tours.length === 0 ? (
-            <EmptyState
-              className="mt-10"
-              icon={Compass}
-              title={t("emptyTitle")}
-              description={t("emptyDescription")}
-              action={
-                <Button asChild variant="outline">
-                  <Link href="/tours">{t("browseTours")}</Link>
-                </Button>
-              }
-            />
-          ) : (
-            <div className="mt-12 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-              {tours.map((item, i) => (
-                <Reveal key={item.tour.id} delay={Math.min((i % 3) * 0.1, 0.4)}>
-                  <TourCard
-                    data={item}
-                    action={
-                      <WishlistButton
-                        tourId={item.tour.id}
-                        initialSaved={saved.has(item.tour.id)}
-                        isAuthenticated={Boolean(user)}
-                        variant="overlay"
-                      />
-                    }
-                  />
-                </Reveal>
-              ))}
-            </div>
-          )}
-        </Container>
-      </section>
     </>
   );
 }

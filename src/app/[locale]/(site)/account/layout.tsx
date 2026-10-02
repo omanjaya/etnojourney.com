@@ -28,13 +28,14 @@ export default async function AccountLayout({ children }: { children: React.Reac
   return (
     <>
       <PageHeader
+        compact
         eyebrow={t("eyebrow")}
         title={t("greeting", { name: user.name.split(" ")[0] })}
         description={t("description")}
       >
         <AccountTabs />
       </PageHeader>
-      <Container className="py-14 md:py-20">{children}</Container>
+      <Container className="short:py-8 py-10 md:py-14">{children}</Container>
     </>
   );
 }
