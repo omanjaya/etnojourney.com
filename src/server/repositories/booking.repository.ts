@@ -12,7 +12,6 @@ import {
   lte,
   or,
   sql,
-  sum,
   type SQL,
 } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
