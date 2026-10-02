@@ -105,7 +105,7 @@ export function SiteHeaderClient({
           <Logo inverted={!solid} />
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
           {links.map((link) => {
             const active = pathname.startsWith(link.href);
             return (
@@ -115,8 +115,8 @@ export function SiteHeaderClient({
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   // Underline grows from the left on hover and stays for the active page.
-                  "relative px-4 py-2 text-sm font-medium transition-opacity duration-300",
-                  "after:absolute after:inset-x-4 after:bottom-1 after:h-px after:origin-left after:bg-current",
+                  "relative px-3 py-2 text-sm font-medium whitespace-nowrap transition-opacity duration-300 xl:px-4",
+                  "after:absolute after:inset-x-3 after:bottom-1 after:h-px after:origin-left after:bg-current xl:after:inset-x-4",
                   "after:scale-x-0 after:transition-transform after:duration-500 after:ease-(--ease-editorial)",
                   "hover:after:scale-x-100 focus-visible:after:scale-x-100",
                   active ? "after:scale-x-100" : "opacity-80 hover:opacity-100",
@@ -128,31 +128,45 @@ export function SiteHeaderClient({
           })}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden shrink-0 items-center gap-2 lg:flex xl:gap-3">
           <LocaleSwitcher />
           {user ? (
             <div className="flex items-center gap-1">
               {user.isAdmin && (
-                <Button asChild variant="ghost" size="sm" className="text-current">
-                  <Link href="/admin">
+                <Button
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className="px-3 whitespace-nowrap text-current xl:px-4"
+                >
+                  {/* Icon-only below xl so the header never wraps at 1024-1279px. */}
+                  <Link href="/admin" aria-label={t("admin")} title={t("admin")}>
                     <LayoutDashboard aria-hidden />
-                    {t("admin")}
+                    <span className="hidden xl:inline">{t("admin")}</span>
                   </Link>
                 </Button>
               )}
               <Button asChild variant={solid ? "dark" : "glass"} size="sm">
-                <Link href="/account">
+                <Link href="/account" title={user.name}>
                   <UserRound aria-hidden />
-                  <span className="max-w-28 truncate">{user.name.split(" ")[0]}</span>
+                  <span className="max-w-24 truncate xl:max-w-32">{user.name.split(" ")[0]}</span>
                 </Link>
               </Button>
             </div>
           ) : (
             <>
-              <Link href="/login" className="px-3 text-sm font-medium opacity-80 hover:opacity-100">
+              <Link
+                href="/login"
+                className="inline-flex min-h-10 items-center px-3 text-sm font-medium whitespace-nowrap opacity-80 hover:opacity-100"
+              >
                 {t("login")}
               </Link>
-              <Button asChild variant={solid ? "primary" : "light"} size="sm">
+              <Button
+                asChild
+                variant={solid ? "primary" : "light"}
+                size="sm"
+                className="whitespace-nowrap"
+              >
                 <Link href="/register">{t("register")}</Link>
               </Button>
             </>
@@ -162,7 +176,7 @@ export function SiteHeaderClient({
         <button
           ref={toggleRef}
           type="button"
-          className="grid size-10 place-items-center rounded-full md:hidden"
+          className="grid size-11 shrink-0 place-items-center rounded-full lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-menu"
@@ -177,19 +191,31 @@ export function SiteHeaderClient({
         ref={menuRef}
         inert={!open}
         className={cn(
-          "bg-sand-50 overflow-y-auto transition-[height,opacity] duration-400 ease-(--ease-editorial) md:hidden",
+          "bg-sand-50 overflow-y-auto overscroll-contain transition-[height,opacity] duration-400 ease-(--ease-editorial) lg:hidden",
           open ? "h-[calc(100dvh-4.5rem)] opacity-100" : "h-0 opacity-0",
         )}
       >
-        <Container className="flex flex-col gap-1 py-8">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href} className="font-display py-3 text-3xl">
-              {link.label}
-            </Link>
-          ))}
+        <Container className="flex flex-col gap-1 py-6 sm:py-8">
+          {links.map((link) => {
+            const active = pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "font-display py-2 text-3xl sm:py-3",
+                  active ? "text-terracotta" : undefined,
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div className="bg-line my-6 h-px" />
           {user ? (
-            <div className="flex flex-col gap-4 text-base">
+            <div className="flex flex-col gap-2 text-base sm:gap-3">
+              <p className="text-muted truncate text-sm">{user.name}</p>
               <Link href="/account" className="inline-flex min-h-11 items-center gap-3">
                 <Ticket className="text-terracotta size-5" aria-hidden /> {t("bookings")}
               </Link>
@@ -213,7 +239,7 @@ export function SiteHeaderClient({
               </Button>
             </div>
           )}
-          <LocaleSwitcher className="mt-8" />
+          <LocaleSwitcher className="mt-6 sm:mt-8" />
         </Container>
       </div>
     </header>

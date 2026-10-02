@@ -24,7 +24,7 @@ export function LocaleSwitcher({ className }: { className?: string }) {
       role="group"
       aria-label={t("label")}
       className={cn(
-        "inline-flex items-center gap-1 text-xs font-semibold",
+        "inline-flex shrink-0 items-center gap-1 text-xs font-semibold",
         pending && "opacity-60",
         className,
       )}
@@ -38,7 +38,7 @@ export function LocaleSwitcher({ className }: { className?: string }) {
           aria-pressed={l === locale}
           lang={l}
           className={cn(
-            "inline-grid min-h-9 min-w-9 place-items-center rounded-full px-2.5 uppercase transition-colors",
+            "inline-grid min-h-10 min-w-10 place-items-center rounded-full px-2.5 uppercase transition-colors",
             l === locale ? "bg-current/10" : "opacity-80 hover:opacity-100",
           )}
         >

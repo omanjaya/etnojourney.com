@@ -44,13 +44,13 @@ export async function SiteFooter() {
         </Reveal>
       </Container>
 
-      <Container className="relative grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12">
-        <Reveal className="sm:col-span-2 lg:col-span-4" delay={0}>
+      <Container className="relative grid gap-x-4 gap-y-10 py-16 sm:grid-cols-6 lg:gap-x-8 xl:flex xl:justify-between xl:gap-12">
+        <Reveal className="sm:col-span-6 xl:max-w-sm xl:flex-1" delay={0}>
           <Logo inverted />
           <p className="text-sand-100/70 mt-6 max-w-sm leading-relaxed">{t("footer.about")}</p>
         </Reveal>
 
-        <Reveal className="lg:col-span-2" delay={0.08}>
+        <Reveal className="sm:col-span-2 xl:shrink-0" delay={0.08}>
           <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.explore")}
           </h3>
@@ -63,7 +63,7 @@ export async function SiteFooter() {
           />
         </Reveal>
 
-        <Reveal className="lg:col-span-2" delay={0.16}>
+        <Reveal className="sm:col-span-2 xl:shrink-0" delay={0.16}>
           <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.company")}
           </h3>
@@ -76,7 +76,7 @@ export async function SiteFooter() {
           />
         </Reveal>
 
-        <Reveal className="lg:col-span-2" delay={0.24}>
+        <Reveal className="sm:col-span-2 xl:shrink-0" delay={0.24}>
           <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
             {t("footer.help")}
           </h3>
@@ -92,32 +92,35 @@ export async function SiteFooter() {
         </Reveal>
 
         {hasAnyContact(contact) && (
-          <Reveal className="lg:col-span-2" delay={0.32}>
+          <Reveal className="sm:col-span-6 xl:shrink-0" delay={0.32}>
             <h3 className="text-sand-100/70 font-sans text-xs font-semibold tracking-[0.2em] uppercase">
               {t("footer.contact")}
             </h3>
-            <ul className="text-sand-100/80 mt-5 space-y-3 text-sm">
+            <ul className="text-sand-100/80 mt-5 space-y-1 text-sm">
               {contact.address && (
-                <li className="flex gap-3">
+                <li className="flex gap-3 py-2">
                   <MapPin className="text-gold size-4 shrink-0" aria-hidden />
                   {contact.address}
                 </li>
               )}
               {contact.phone && (
-                <li className="flex gap-3">
+                <li className="flex items-center gap-3">
                   <Phone className="text-gold size-4 shrink-0" aria-hidden />
                   <a
                     href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}
-                    className="hover:text-white"
+                    className="inline-flex min-h-10 items-center hover:text-white"
                   >
                     {contact.phone}
                   </a>
                 </li>
               )}
               {contact.email && (
-                <li className="flex gap-3">
+                <li className="flex items-center gap-3">
                   <Mail className="text-gold size-4 shrink-0" aria-hidden />
-                  <a href={`mailto:${contact.email}`} className="hover:text-white">
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="inline-flex min-h-10 items-center break-all hover:text-white"
+                  >
                     {contact.email}
                   </a>
                 </li>
@@ -138,11 +141,11 @@ export async function SiteFooter() {
 }
 
 const linkClass =
-  "inline-block py-1.5 transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white";
+  "inline-flex min-h-10 items-center xl:whitespace-nowrap transition-[color,translate] duration-300 ease-(--ease-editorial) hover:translate-x-1 hover:text-white";
 
 function FooterLinks({ links }: { links: { href: string; label: string }[] }) {
   return (
-    <ul className="text-sand-100/80 mt-5 space-y-1.5 text-sm">
+    <ul className="text-sand-100/80 mt-4 text-sm">
       {links.map((link) => (
         <li key={link.href}>
           <Link href={link.href} className={linkClass}>
