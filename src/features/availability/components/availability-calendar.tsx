@@ -189,21 +189,25 @@ export function AvailabilityCalendar({
       aria-invalid={invalid || undefined}
       aria-describedby={describedBy}
       className={cn(
-        "border-line rounded-xl border bg-white p-3 outline-none",
+        "border-line short:p-2 rounded-xl border bg-white p-3 outline-none",
         invalid && "border-danger",
       )}
     >
-      <div className="flex items-center justify-between gap-2 pb-2">
+      <div className="short:pb-1 flex items-center justify-between gap-2 pb-2">
         <button
           type="button"
           onClick={() => goToMonth(addMonths(month, -1))}
           disabled={month <= minMonth}
           aria-label={t("prevMonth")}
-          className="hover:bg-sand-100 grid size-10 place-items-center rounded-full transition-colors disabled:opacity-30"
+          className="hover:bg-sand-100 short:size-8 grid size-10 place-items-center rounded-full transition-colors disabled:opacity-30"
         >
           <ChevronLeft className="size-4" aria-hidden />
         </button>
-        <p id={monthLabelId} aria-live="polite" className="font-display text-lg capitalize">
+        <p
+          id={monthLabelId}
+          aria-live="polite"
+          className="font-display short:text-base text-lg capitalize"
+        >
           {monthLabel}
         </p>
         <button
@@ -211,7 +215,7 @@ export function AvailabilityCalendar({
           onClick={() => goToMonth(addMonths(month, 1))}
           disabled={month >= maxMonth}
           aria-label={t("nextMonth")}
-          className="hover:bg-sand-100 grid size-10 place-items-center rounded-full transition-colors disabled:opacity-30"
+          className="hover:bg-sand-100 short:size-8 grid size-10 place-items-center rounded-full transition-colors disabled:opacity-30"
         >
           <ChevronRight className="size-4" aria-hidden />
         </button>
@@ -245,7 +249,11 @@ export function AvailabilityCalendar({
             {t("loading")}
           </span>
           {Array.from({ length: 35 }, (_, i) => (
-            <span key={i} aria-hidden className="bg-sand-100 h-11 animate-pulse rounded-lg" />
+            <span
+              key={i}
+              aria-hidden
+              className="bg-sand-100 short:h-8 h-11 animate-pulse rounded-lg"
+            />
           ))}
         </div>
       ) : (
@@ -295,7 +303,7 @@ export function AvailabilityCalendar({
                           if (selectable) onChange(day);
                         }}
                         className={cn(
-                          "flex h-11 w-full flex-col items-center justify-center rounded-lg text-sm transition-colors duration-200",
+                          "short:h-8 short:text-[13px] flex h-11 w-full flex-col items-center justify-center rounded-lg text-sm transition-colors duration-200",
                           selectable && !selected && "text-ink hover:bg-sand-100",
                           day.state === "full" && "text-muted/70 cursor-not-allowed line-through",
                           (day.state === "past" || day.state === "tooSoon") &&
@@ -336,7 +344,7 @@ export function AvailabilityCalendar({
 
       <ul
         aria-hidden
-        className="border-line text-muted mt-2 flex flex-wrap gap-x-4 gap-y-1 border-t pt-2 text-[11px]"
+        className="border-line text-muted short:mt-1 short:pt-1.5 mt-2 flex flex-wrap gap-x-4 gap-y-1 border-t pt-2 text-[11px]"
       >
         <li className="flex items-center gap-1.5">
           <span className="border-sand-300 size-2 rounded-full border" />

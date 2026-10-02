@@ -83,18 +83,18 @@ export function BookingPanel({
   return (
     <aside
       aria-label={t("panel.submit")}
-      className="border-line rounded-(--radius-card) border bg-white p-6 shadow-[0_30px_60px_-30px_rgb(29_26_22/0.25)] md:p-8 lg:sticky lg:top-28"
+      className="border-line short:p-5 rounded-(--radius-card) border bg-white p-6 shadow-[0_30px_60px_-30px_rgb(29_26_22/0.25)] md:p-8"
     >
       <p className="text-muted text-xs font-semibold tracking-[0.2em] uppercase">
         {t("panel.priceLabel")}
       </p>
-      <p className="mt-2 flex flex-wrap items-baseline gap-x-2">
-        <span className="font-display text-4xl whitespace-nowrap">
+      <p className="short:mt-1 mt-2 flex flex-wrap items-baseline gap-x-2">
+        <span className="font-display short:text-3xl text-4xl whitespace-nowrap">
           {formatCurrency(tour.pricePerPerson, locale)}
         </span>
         <span className="text-muted text-sm whitespace-nowrap">{tc("perPerson")}</span>
       </p>
-      <div className="bg-line my-6 h-px" />
+      <div className="bg-line short:my-4 my-6 h-px" />
 
       <BookingForm
         tour={tour}
@@ -192,12 +192,7 @@ function BookingForm({
           <p className="mt-1 font-mono text-2xl font-semibold tracking-widest">{code}</p>
         </div>
         <div className="mt-6 flex flex-col gap-3">
-          <PayButton
-            bookingId={state.data.bookingId}
-            size="lg"
-            block
-            contactEmail={contactEmail}
-          />
+          <PayButton bookingId={state.data.bookingId} size="lg" block contactEmail={contactEmail} />
           <Button asChild variant="outline" size="lg" className="w-full">
             <Link href="/account">{t("success.viewBookings")}</Link>
           </Button>
@@ -271,7 +266,7 @@ function BookingForm({
       method="post"
       ref={formRef}
       onSubmit={onSubmit}
-      className="flex flex-col gap-5"
+      className="short:gap-3.5 flex flex-col gap-5"
       noValidate
     >
       {state && !state.ok && (
@@ -282,7 +277,7 @@ function BookingForm({
       <input type="hidden" name="tourId" value={tour.id} />
 
       <fieldset className="flex flex-col gap-2">
-        <legend id="travelDate-label" className="text-ink-soft mb-2 text-sm font-medium">
+        <legend id="travelDate-label" className="text-ink-soft short:mb-1 mb-2 text-sm font-medium">
           {t("panel.date")}
         </legend>
         <AvailabilityCalendar
@@ -325,7 +320,7 @@ function BookingForm({
             : t("panel.maxHint", { count: tour.maxParticipants })
         }
       >
-        <div className="border-line flex h-12 items-center justify-between rounded-xl border bg-white px-2">
+        <div className="border-line short:h-10 flex h-12 items-center justify-between rounded-xl border bg-white px-2">
           <button
             type="button"
             onClick={() => setRequested(Math.max(1, participants - 1))}
@@ -353,7 +348,7 @@ function BookingForm({
 
       {isAuthenticated && (
         <>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+          <div className="short:gap-3.5 grid gap-5 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
             <Field
               label={t("panel.contactName")}
               htmlFor="contactName"
@@ -362,6 +357,7 @@ function BookingForm({
               <Input
                 id="contactName"
                 name="contactName"
+                className="short:h-10"
                 autoComplete="name"
                 defaultValue={defaultContactName}
                 required
@@ -376,6 +372,7 @@ function BookingForm({
               <Input
                 id="contactPhone"
                 name="contactPhone"
+                className="short:h-10"
                 type="tel"
                 inputMode="tel"
                 autoComplete="tel"
@@ -393,14 +390,14 @@ function BookingForm({
               maxLength={500}
               rows={3}
               placeholder={t("panel.notesPlaceholder")}
-              className="min-h-20"
+              className="short:min-h-14 min-h-20"
               {...describedBy("notes")}
             />
           </Field>
         </>
       )}
 
-      <dl className="bg-sand-50 space-y-2 rounded-xl p-4 text-sm">
+      <dl className="bg-sand-50 short:space-y-1 short:p-3 space-y-2 rounded-xl p-4 text-sm">
         <div className="text-ink-soft flex justify-between">
           <dt>
             {t("panel.subtotal", {
@@ -412,7 +409,7 @@ function BookingForm({
         </div>
         <div className="border-line flex items-baseline justify-between border-t pt-2">
           <dt className="font-semibold">{t("panel.total")}</dt>
-          <dd className="font-display text-2xl">{formatCurrency(total, locale)}</dd>
+          <dd className="font-display short:text-xl text-2xl">{formatCurrency(total, locale)}</dd>
         </div>
       </dl>
 
