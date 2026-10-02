@@ -7,7 +7,8 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: etnojourney
     ports:
-      - "127.0.0.1:5432:5432"
+      # Override when 5432 is taken on the host (e.g. a local Postgres): DB_HOST_PORT=5544
+      - "127.0.0.1:${DB_HOST_PORT:-5432}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -16,19 +17,23 @@ services:
       timeout: 3s
       retries: 10
 
-  # Production-like app container: `docker compose up --build app`.
-  # Needs a .env with BETTER_AUTH_SECRET, BETTER_AUTH_URL and SITE_URL.
+  # Production-like app container: `docker compose --profile app up --build`.
+  # Reads secrets from .env (BETTER_AUTH_SECRET at least). The values below
+  # point the container at the compose database and default the public URLs
+  # to http://localhost:3000; override them in the shell or .env for real use.
   app:
     build: .
     restart: unless-stopped
     env_file: .env
     environment:
       DATABASE_URL: postgres://postgres:postgres@db:5432/etnojourney
+      BETTER_AUTH_URL: ${APP_URL:-http://localhost:3000}
+      SITE_URL: ${APP_URL:-http://localhost:3000}
     depends_on:
       db:
         condition: service_healthy
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:${APP_HOST_PORT:-3000}:3000"
     volumes:
       - uploads:/app/storage/uploads
     profiles: ["app"]
