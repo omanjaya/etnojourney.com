@@ -38,6 +38,36 @@ services:
       - uploads:/app/storage/uploads
     profiles: ["app"]
 
+  # Development with hot reload inside Docker: `docker compose --profile dev up`.
+  # Source is bind-mounted; node_modules and .next live in container volumes
+  # because native binaries (sharp, SWC) differ between macOS and Linux.
+  # On macOS, running `npm run dev` on the host is faster (see README).
+  dev:
+    image: node:24-alpine
+    working_dir: /app
+    command: >
+      sh -c "npm install --no-audit --no-fund &&
+             npx drizzle-kit migrate &&
+             npm run dev -- --hostname 0.0.0.0 --port 3000"
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/etnojourney
+      BETTER_AUTH_URL: ${APP_URL:-http://localhost:3000}
+      SITE_URL: ${APP_URL:-http://localhost:3000}
+      NEXT_TELEMETRY_DISABLED: "1"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${APP_HOST_PORT:-3000}:3000"
+    volumes:
+      - .:/app
+      - dev_node_modules:/app/node_modules
+      - dev_next:/app/.next
+    profiles: ["dev"]
+
 volumes:
   pgdata:
   uploads:
+  dev_node_modules:
+  dev_next:

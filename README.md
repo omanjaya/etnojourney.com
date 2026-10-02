@@ -108,6 +108,26 @@ Compose membaca rahasia dari `.env` (minimal `BETTER_AUTH_SECRET`), mengarahkan 
 - **Health check**: `GET /api/health` mengembalikan `200 {"status":"ok","db":"ok"}`, atau `503` jika database tidak terjangkau. Dipakai oleh `HEALTHCHECK` di image dan cocok untuk load balancer.
 - **Validasi env**: server menolak start jika konfigurasi salah. Daftar variabel yang bermasalah ditulis ke log tanpa menampilkan nilainya (`src/server/env.ts`).
 
+### Development dengan hot reload
+
+Dua pilihan, keduanya terukur instan di Mac (simpan file sampai browser ter-update, tanpa reload halaman):
+
+| Cara | Perintah | Hot reload |
+|---|---|---|
+| Next di host, database lokal atau Docker | `npm run dev` | ~130 ms |
+| Semua di Docker (service `dev`) | `docker compose --profile dev up` | ~220 ms |
+
+Service `dev` menjalankan `next dev` dengan folder proyek di-mount, sehingga perubahan file langsung terlihat. `node_modules` dan `.next` disimpan di volume container sendiri, karena binary native (sharp, SWC) untuk macOS berbeda dengan Linux. Saat start, container menjalankan `npm install` dan migrasi. Mode dev mengaktifkan simulator pembayaran.
+
+```bash
+docker compose --profile dev up -d                  # http://localhost:3000
+docker compose --profile dev exec dev npm run db:seed
+docker compose --profile dev logs -f dev
+docker compose --profile dev down
+```
+
+Jika port 5432 dipakai Postgres lokal, isi `DB_HOST_PORT=5544` di `.env`; compose membacanya otomatis. Service `app` (production) dan `dev` sama-sama memakai port 3000, jadi jalankan salah satu saja. Setelah dependensi berubah (`package.json`), restart service `dev` agar `npm install` berjalan lagi.
+
 ### Variabel env production
 
 | Variabel | Wajib | Keterangan |
