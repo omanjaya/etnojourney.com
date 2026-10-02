@@ -9,6 +9,7 @@ import {
   type TourFilters,
 } from "@/server/repositories/tour.repository";
 import { DomainError } from "./errors";
+import { islandOf } from "@/lib/regions";
 
 export type { TourFilters, TourSort } from "@/server/repositories/tour.repository";
 
@@ -59,8 +60,22 @@ export const tourService = {
     return tour;
   },
 
-  related: (tourId: number, destinationId: number, limit = 3) =>
-    tourRepository.findRelated(tourId, destinationId, limit),
+  /** Up to `limit` tours closest to this one (destination, island, duration, category). */
+  async related(tourId: number, destinationId: number, limit = 3) {
+    const context = await tourRepository.findRelatedContext(tourId);
+    if (!context) return [];
+    const island = islandOf(context.province);
+    return tourRepository.findRelated(
+      {
+        tourId,
+        destinationId,
+        island: island === "other" ? null : island,
+        durationDays: context.durationDays,
+        category: context.category,
+      },
+      limit,
+    );
+  },
 
   /* -------------------------- admin -------------------------- */
 

@@ -53,6 +53,7 @@ export default async function EditDestinationPage({
           tagline: destination.tagline,
           description: destination.description,
           heroImage: destination.heroImage,
+          gettingThere: destination.gettingThere ?? { id: "", en: "" },
         }}
       />
       <DeleteDestination

@@ -1,5 +1,5 @@
 import type { LocalizedText } from "@/lib/i18n-text";
-import type { TourCategory } from "@/server/db/schema";
+import type { TourCategory, TourDifficulty } from "@/server/db/schema";
 
 export const emptyText = (): LocalizedText => ({ id: "", en: "" });
 
@@ -19,6 +19,10 @@ export type TourFormDefaults = {
   gallery: string[];
   highlights: LocalizedText[];
   included: LocalizedText[];
+  difficulty: TourDifficulty;
+  notIncluded: LocalizedText[];
+  whatToBring: LocalizedText[];
+  etiquette: LocalizedText[];
   isPublished: boolean;
   isFeatured: boolean;
   itinerary: { title: LocalizedText; description: LocalizedText }[];
@@ -39,6 +43,10 @@ export const emptyTourDefaults: TourFormDefaults = {
   gallery: [],
   highlights: [],
   included: [],
+  difficulty: "easy",
+  notIncluded: [],
+  whatToBring: [],
+  etiquette: [],
   isPublished: false,
   isFeatured: false,
   itinerary: [{ title: emptyText(), description: emptyText() }],

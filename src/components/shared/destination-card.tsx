@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/i18n-text";
+import { provinceLabel } from "@/lib/provinces";
 import { cn } from "@/lib/utils";
 import type { Destination } from "@/server/db/schema";
 import "@/features/tours/view-transitions.css";
@@ -59,7 +60,7 @@ export function DestinationCard({
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent transition-opacity duration-700 group-hover:from-black/85" />
       <div className="absolute inset-x-6 bottom-6 translate-y-3 text-white transition-transform duration-700 ease-(--ease-editorial) group-hover:translate-y-0 group-focus-visible:translate-y-0">
         <p className="text-xs font-medium tracking-[0.2em] text-white/70 uppercase">
-          {destination.province}
+          {provinceLabel(destination.province, locale)}
         </p>
         <Heading className="mt-2 text-3xl">{destination.name}</Heading>
         <p className="mt-2 line-clamp-2 max-w-sm text-sm text-white/80 transition-colors duration-500 group-hover:text-white">

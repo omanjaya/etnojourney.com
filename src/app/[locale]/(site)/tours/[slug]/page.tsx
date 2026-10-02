@@ -1,19 +1,26 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
+  Backpack,
   Check,
   ChevronRight,
+  CircleMinus,
   Clock,
+  ExternalLink,
+  HeartHandshake,
   Languages,
   MapPin,
+  Mountain,
   PenLine,
+  Route,
   Sparkles,
   Users,
 } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
-import { localize } from "@/lib/i18n-text";
+import { localize, type LocalizedText } from "@/lib/i18n-text";
+import { provinceLabel } from "@/lib/provinces";
 import { localizedUrl, pageMetadata, siteUrl } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
@@ -35,6 +42,7 @@ import { tourService } from "@/server/services/tour.service";
 import { wishlistService } from "@/server/services/wishlist.service";
 import { toCreditMap } from "@/components/shared/photo-credit";
 import { photoCreditService } from "@/server/services/photo-credit.service";
+import { siteContact } from "@/config/site";
 
 type DetailTour = Awaited<ReturnType<typeof tourService.getPublishedBySlug>>;
 
@@ -103,6 +111,26 @@ function tourJsonLd(tour: DetailTour, locale: Locale, labels: { home: string; to
   ];
 }
 
+/** `?date=YYYY-MM-DD&people=N` carried through sign-in; invalid values are ignored. */
+function bookingPrefill(
+  search: Record<string, string | string[] | undefined>,
+  maxParticipants: number,
+): { initialDate?: string; initialParticipants?: number } {
+  const first = (value: string | string[] | undefined) => (Array.isArray(value) ? value[0] : value);
+  const date = first(search.date);
+  const people = Number(first(search.people));
+  const validDate =
+    date && /^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(Date.parse(`${date}T00:00:00Z`))
+      ? date
+      : undefined;
+  const validPeople =
+    Number.isInteger(people) && people >= 1 && people <= maxParticipants ? people : undefined;
+  return { initialDate: validDate, initialParticipants: validPeople };
+}
+
+const mapsUrl = (place: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+
 async function loadTour(slug: string) {
   try {
     return await tourService.getPublishedBySlug(slug);
@@ -128,14 +156,18 @@ export async function generateMetadata({
   });
 }
 
-export default async function TourDetailPage({ params }: PageProps<"/[locale]/tours/[slug]">) {
+export default async function TourDetailPage({
+  params,
+  searchParams,
+}: PageProps<"/[locale]/tours/[slug]">) {
   const { locale: rawLocale, slug } = await params;
   const locale = rawLocale as Locale;
   setRequestLocale(locale);
 
   const tour = await loadTour(slug);
-  const [t, tc, tr, user, related] = await Promise.all([
+  const [t, td, tc, tr, user, related] = await Promise.all([
     getTranslations("tours.detail"),
+    getTranslations("tours.difficulty"),
     getTranslations("common"),
     getTranslations("reviews"),
     getCurrentUser(),
@@ -157,8 +189,24 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
       value: t("groupSizeValue", { count: tour.maxParticipants }),
     },
     { icon: CategoryIcon, label: t("category"), value: tc(`categories.${tour.category}`) },
+    {
+      icon: Mountain,
+      label: t("difficulty"),
+      value: td(tour.difficulty),
+      hint: td(`${tour.difficulty}Hint`),
+    },
     { icon: Languages, label: t("language"), value: t("languageValue") },
   ];
+
+  const prefill = bookingPrefill(await searchParams, tour.maxParticipants);
+  const contactEmail = siteContact().email ?? undefined;
+  const notIncluded: LocalizedText[] = tour.notIncluded.length
+    ? tour.notIncluded
+    : (["transport", "personal", "tips"] as const).map((key) => {
+        const text = t(`notIncludedDefault.${key}`);
+        return { id: text, en: text };
+      });
+  const gettingThere = tour.destination.gettingThere;
 
   return (
     <article className="pt-28 pb-24 md:pt-32 lg:pb-0">
@@ -185,7 +233,10 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
               <ChevronRight className="size-3.5" />
             </li>
             <li>
-              <Link href={`/destinations/${tour.destination.slug}`} className="hover:text-ink inline-flex min-h-10 items-center">
+              <Link
+                href={`/destinations/${tour.destination.slug}`}
+                className="hover:text-ink inline-flex min-h-10 items-center"
+              >
                 {tour.destination.name}
               </Link>
             </li>
@@ -210,7 +261,7 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
             <h1 className="mt-5 text-4xl leading-[1.05] md:text-6xl">{title}</h1>
             <p className="text-ink-soft mt-4 flex items-center gap-2">
               <MapPin className="text-terracotta size-4" aria-hidden />
-              {tour.destination.name}, {tour.destination.province}
+              {tour.destination.name}, {provinceLabel(tour.destination.province, locale)}
             </p>
           </div>
           <WishlistButton
@@ -233,8 +284,8 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
 
       <Container className="mt-14 grid gap-14 pb-24 lg:grid-cols-[minmax(0,1fr)_24rem] lg:gap-20">
         <div className="min-w-0 space-y-20">
-          <dl className="border-line bg-line grid grid-cols-2 gap-px overflow-hidden rounded-(--radius-card) border md:grid-cols-4">
-            {facts.map(({ icon: Icon, label, value }, i) => (
+          <dl className="border-line bg-line grid grid-cols-2 gap-px overflow-hidden rounded-(--radius-card) border sm:grid-cols-3 xl:grid-cols-5">
+            {facts.map(({ icon: Icon, label, value, hint }, i) => (
               <div
                 key={label}
                 className="group/fact bg-sand-50 animate-fade-up p-5 transition-colors duration-500 hover:bg-white"
@@ -247,6 +298,7 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
                 />
                 <dt className="text-muted mt-3 text-xs tracking-wide uppercase">{label}</dt>
                 <dd className="mt-1 font-medium">{value}</dd>
+                {hint && <dd className="text-muted mt-1 text-xs leading-snug">{hint}</dd>}
               </div>
             ))}
           </dl>
@@ -304,7 +356,7 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
           )}
 
           <section aria-labelledby="included" className="grid gap-10 md:grid-cols-2">
-            <div>
+            <Reveal>
               <h2 id="included" className="text-2xl md:text-3xl">
                 {t("included")}
               </h2>
@@ -316,13 +368,85 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
                   </li>
                 ))}
               </ul>
-            </div>
-            <div>
-              <h2 className="text-2xl md:text-3xl">{t("meetingPoint")}</h2>
-              <p className="text-ink-soft mt-6 flex gap-3">
-                <MapPin className="text-terracotta mt-0.5 size-5 shrink-0" aria-hidden />
-                {tour.meetingPoint}
-              </p>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 id="not-included" className="text-2xl md:text-3xl">
+                {t("notIncluded")}
+              </h2>
+              <ul className="mt-6 space-y-3">
+                {notIncluded.map((item, i) => (
+                  <li key={i} className="text-ink-soft flex gap-3">
+                    <CircleMinus className="text-muted mt-0.5 size-5 shrink-0" aria-hidden />
+                    {localize(item, locale)}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </section>
+
+          <section aria-labelledby="before-you-go">
+            <h2 id="before-you-go" className="text-3xl md:text-4xl">
+              {t("beforeYouGo")}
+            </h2>
+            <p className="text-ink-soft mt-4 max-w-2xl leading-relaxed">{t("beforeYouGoIntro")}</p>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {tour.whatToBring.length > 0 && (
+                <Reveal className="bg-sand-100 rounded-(--radius-card) p-6">
+                  <h3 className="flex items-center gap-3 font-sans text-base font-semibold">
+                    <Backpack className="text-terracotta size-5" strokeWidth={1.5} aria-hidden />
+                    {t("whatToBring")}
+                  </h3>
+                  <ul className="text-ink-soft marker:text-sand-300 mt-4 list-disc space-y-2 pl-5">
+                    {tour.whatToBring.map((item, i) => (
+                      <li key={i}>{localize(item, locale)}</li>
+                    ))}
+                  </ul>
+                </Reveal>
+              )}
+              {tour.etiquette.length > 0 && (
+                <Reveal delay={0.08} className="bg-sand-100 rounded-(--radius-card) p-6">
+                  <h3 className="flex items-center gap-3 font-sans text-base font-semibold">
+                    <HeartHandshake
+                      className="text-terracotta size-5"
+                      strokeWidth={1.5}
+                      aria-hidden
+                    />
+                    {t("etiquette")}
+                  </h3>
+                  <ul className="text-ink-soft marker:text-sand-300 mt-4 list-disc space-y-2 pl-5">
+                    {tour.etiquette.map((item, i) => (
+                      <li key={i}>{localize(item, locale)}</li>
+                    ))}
+                  </ul>
+                </Reveal>
+              )}
+              {gettingThere && (
+                <Reveal delay={0.12} className="bg-sand-100 rounded-(--radius-card) p-6">
+                  <h3 className="flex items-center gap-3 font-sans text-base font-semibold">
+                    <Route className="text-terracotta size-5" strokeWidth={1.5} aria-hidden />
+                    {t("gettingThere")}
+                  </h3>
+                  <p className="text-ink-soft mt-4 leading-relaxed">
+                    {localize(gettingThere, locale)}
+                  </p>
+                </Reveal>
+              )}
+              <Reveal delay={0.16} className="bg-sand-100 rounded-(--radius-card) p-6">
+                <h3 className="flex items-center gap-3 font-sans text-base font-semibold">
+                  <MapPin className="text-terracotta size-5" strokeWidth={1.5} aria-hidden />
+                  {t("meetingPoint")}
+                </h3>
+                <p className="text-ink-soft mt-4 leading-relaxed">{tour.meetingPoint}</p>
+                <a
+                  href={mapsUrl(tour.meetingPoint)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-terracotta-dark hover:text-terracotta mt-3 inline-flex min-h-10 items-center gap-2 text-sm font-medium"
+                >
+                  {t("openInMaps")}
+                  <ExternalLink className="size-4" aria-hidden />
+                </a>
+              </Reveal>
             </div>
           </section>
 
@@ -363,6 +487,9 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
               }}
               isAuthenticated={Boolean(user)}
               defaultContactName={user?.name}
+              initialDate={prefill.initialDate}
+              initialParticipants={prefill.initialParticipants}
+              contactEmail={contactEmail}
             />
           </div>
         </aside>

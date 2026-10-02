@@ -125,7 +125,9 @@
       "listsHint": "One item per line. ID and EN must have the same number of lines.",
       "itinerary": "Itinerary",
       "itineraryHint": "Days follow the order of the rows below.",
-      "visibility": "Visibility"
+      "visibility": "Visibility",
+      "practical": "Before you go",
+      "practicalHint": "Practical information for guests before the trip. One item per line, with matching Indonesian and English lines."
     },
     "fields": {
       "title": "Title",
@@ -147,7 +149,11 @@
       "isPublished": "Publish on site",
       "isPublishedHint": "Draft tours are hidden from travellers.",
       "isFeatured": "Featured tour",
-      "isFeaturedHint": "Shown in the featured section on the home page."
+      "isFeaturedHint": "Shown in the featured section on the home page.",
+      "difficulty": "Difficulty",
+      "notIncluded": "Not included",
+      "whatToBring": "What to bring",
+      "etiquette": "Etiquette and customs"
     },
     "itinerary": {
       "day": "Day {day}",
@@ -156,6 +162,11 @@
       "empty": "No days yet. Add at least one day of travel.",
       "dayTitle": "Day title",
       "dayDescription": "Activities"
+    },
+    "difficulty": {
+      "easy": "Easy",
+      "moderate": "Moderate",
+      "challenging": "Challenging"
     }
   },
   "destinations": {
@@ -189,7 +200,9 @@
       "basics": "Basics",
       "basicsHint": "Name and province are shown as-is. Tagline and description appear in both languages.",
       "media": "Main photo",
-      "mediaHint": "Used on the destination card and the destination page hero. Use a landscape photo."
+      "mediaHint": "Used on the destination card and the destination page hero. Use a landscape photo.",
+      "access": "Access",
+      "accessHint": "Help guests plan how to reach this destination."
     },
     "fields": {
       "name": "Destination name",
@@ -200,7 +213,9 @@
       "taglineHint": "One short sentence for the destination card.",
       "description": "Description",
       "descriptionHint": "Separate paragraphs with a blank line.",
-      "heroImage": "Main photo"
+      "heroImage": "Main photo",
+      "gettingThere": "Getting there",
+      "gettingThereHint": "Nearest airport, harbour or road route. Leave empty if not known yet."
     },
     "delete": {
       "title": "Delete destination",

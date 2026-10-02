@@ -20,6 +20,7 @@ export const destinationContent = z.object({
   tagline: text,
   description: text,
   heroImage: imagePath,
+  gettingThere: text.optional(),
 });
 
 const reviewContent = z.object({
@@ -45,6 +46,10 @@ export const tourContent = z
     highlights: z.array(text).min(3).max(6),
     included: z.array(text).min(3).max(8),
     meetingPoint: z.string().min(3),
+    difficulty: z.enum(["easy", "moderate", "challenging"]).default("easy"),
+    notIncluded: z.array(text).max(6).default([]),
+    whatToBring: z.array(text).max(8).default([]),
+    etiquette: z.array(text).max(6).default([]),
     isFeatured: z.boolean().default(false),
     itinerary: z.array(z.object({ title: text, description: text })).min(1),
     /** Only for the original demo tours; new tours start without reviews. */

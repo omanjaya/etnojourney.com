@@ -107,6 +107,8 @@ export const verification = pgTable(
 /* Catalog                                                           */
 /* ---------------------------------------------------------------- */
 
+export const tourDifficulty = pgEnum("tour_difficulty", ["easy", "moderate", "challenging"]);
+
 export const tourCategory = pgEnum("tour_category", [
   "ritual",
   "craft",
@@ -123,6 +125,8 @@ export const destinations = pgTable("destinations", {
   tagline: jsonb("tagline").$type<LocalizedText>().notNull(),
   description: jsonb("description").$type<LocalizedText>().notNull(),
   heroImage: text("hero_image").notNull(),
+  /** How travellers usually reach the destination (airport, harbour, road). */
+  gettingThere: jsonb("getting_there").$type<LocalizedText>(),
   ...timestamps,
 });
 
@@ -151,6 +155,11 @@ export const tours = pgTable(
     highlights: jsonb("highlights").$type<LocalizedText[]>().notNull().default([]),
     included: jsonb("included").$type<LocalizedText[]>().notNull().default([]),
     meetingPoint: text("meeting_point").notNull(),
+    difficulty: tourDifficulty("difficulty").notNull().default("easy"),
+    /** Practical "before you go" info, shown next to the itinerary. */
+    notIncluded: jsonb("not_included").$type<LocalizedText[]>().notNull().default([]),
+    whatToBring: jsonb("what_to_bring").$type<LocalizedText[]>().notNull().default([]),
+    etiquette: jsonb("etiquette").$type<LocalizedText[]>().notNull().default([]),
     isPublished: boolean("is_published").notNull().default(true),
     isFeatured: boolean("is_featured").notNull().default(false),
     ...timestamps,
@@ -367,4 +376,5 @@ export type PhotoCredit = typeof photoCredits.$inferSelect;
 export type PaymentStatus = (typeof paymentStatus.enumValues)[number];
 export type BookingStatus = (typeof bookingStatus.enumValues)[number];
 export type TourCategory = (typeof tourCategory.enumValues)[number];
+export type TourDifficulty = (typeof tourDifficulty.enumValues)[number];
 export type UserRole = (typeof userRole.enumValues)[number];

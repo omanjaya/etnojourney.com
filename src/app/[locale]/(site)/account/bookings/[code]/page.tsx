@@ -4,7 +4,15 @@ import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowUpRight,
+  Backpack,
   CalendarDays,
+  CalendarPlus,
+  CircleCheck,
+  CircleDashed,
+  CircleDot,
+  CircleMinus,
+  HandHeart,
+  Navigation,
   Clock,
   MapPin,
   Phone,
@@ -15,7 +23,9 @@ import {
 } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
-import { Link } from "@/i18n/navigation";
+import type { LocalizedText } from "@/lib/i18n-text";
+import type { Locale } from "@/i18n/routing";
+import { getPathname, Link } from "@/i18n/navigation";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
 import { paymentMethodLabel } from "@/lib/payment-method";
@@ -27,6 +37,7 @@ import { BookingStatusBadge } from "@/components/shared/booking-status-badge";
 import { PrintButton } from "@/features/account/components/print-button";
 import { CancelBookingButton } from "@/features/booking/components/cancel-booking-button";
 import { PayButton } from "@/features/payment/components/pay-button";
+import { siteContact } from "@/config/site";
 import { PaymentStatusBadge } from "@/features/payment/components/payment-status-badge";
 import { WriteReviewButton } from "@/features/reviews/components/write-review-button";
 import { requireUser } from "@/server/auth/guards";
@@ -99,6 +110,13 @@ export default async function BookingDetailPage({
   const payment = payments.get(booking.id);
   const isPaid = payment?.status === "paid";
   const awaitingPayment = booking.status === "pending" && !isPaid;
+  const upcoming = booking.status === "pending" || booking.status === "confirmed";
+  const calendarHref = getPathname({
+    href: `/account/bookings/${booking.code}/calendar.ics`,
+    locale,
+  });
+  const steps = nextSteps(booking.status, isPaid);
+  const contactEmail = siteContact().email;
   const travelDate = formatDate(booking.travelDate, locale, {
     weekday: "long",
     day: "numeric",
@@ -183,8 +201,15 @@ export default async function BookingDetailPage({
             </dl>
 
             <div className="border-line flex flex-wrap items-center gap-2 border-t pt-5 print:hidden">
-              {awaitingPayment && <PayButton bookingId={booking.id} />}
-              {awaitingPayment && <CancelBookingButton bookingId={booking.id} />}
+              {awaitingPayment && <PayButton bookingId={booking.id} contactEmail={contactEmail} />}
+              {upcoming && (
+                <Button asChild variant="outline" size="sm">
+                  <a href={calendarHref} download>
+                    <CalendarPlus aria-hidden />
+                    {t("addToCalendar")}
+                  </a>
+                </Button>
+              )}
               {booking.status === "completed" && (
                 <WriteReviewButton
                   bookingId={booking.id}
@@ -198,10 +223,74 @@ export default async function BookingDetailPage({
                   <ArrowUpRight aria-hidden />
                 </Link>
               </Button>
+              {awaitingPayment && (
+                <span className="ml-auto">
+                  <CancelBookingButton bookingId={booking.id} />
+                </span>
+              )}
             </div>
           </div>
         </section>
       </Reveal>
+
+      <Reveal>
+        <Card title={t("nextStepsTitle")}>
+          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step) => {
+              const Icon =
+                step.state === "done"
+                  ? CircleCheck
+                  : step.state === "current"
+                    ? CircleDot
+                    : CircleDashed;
+              return (
+                <li
+                  key={step.key}
+                  className={cn(
+                    "flex gap-3 rounded-xl p-4 text-sm",
+                    step.state === "current" ? "bg-terracotta-light" : "bg-sand-50",
+                  )}
+                >
+                  <Icon
+                    className={cn(
+                      "mt-0.5 size-5 shrink-0",
+                      step.state === "done" && "text-leaf",
+                      step.state === "current" && "text-terracotta",
+                      step.state === "upcoming" && "text-muted",
+                    )}
+                    aria-hidden
+                  />
+                  <div>
+                    {step.state !== "upcoming" && (
+                      <p className="text-muted text-[11px] font-semibold tracking-[0.18em] uppercase">
+                        {step.state === "done" ? t("stepDone") : t("stepCurrent")}
+                      </p>
+                    )}
+                    <p className={step.state === "upcoming" ? "text-ink-soft" : "font-medium"}>
+                      {t(`steps.${step.key}`)}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </Card>
+      </Reveal>
+
+      <BeforeYouGo
+        locale={locale}
+        gettingThere={tour.destination.gettingThere}
+        whatToBring={tour.whatToBring}
+        etiquette={tour.etiquette}
+        notIncluded={tour.notIncluded}
+        labels={{
+          title: t("prepTitle"),
+          bring: t("prepBring"),
+          etiquette: t("prepEtiquette"),
+          notIncluded: t("prepNotIncluded"),
+          gettingThere: t("prepGettingThere", { place: tour.destination.name }),
+        }}
+      />
 
       <div className="grid gap-6 lg:grid-cols-3 print:block print:space-y-6">
         <Reveal delay={0.05}>
@@ -342,5 +431,100 @@ function Detail({
       </dt>
       <dd className="mt-1 font-medium">{children}</dd>
     </div>
+  );
+}
+
+type StepKey = "pay" | "paid" | "email" | "host" | "prepare" | "review" | "cancelled";
+type Step = { key: StepKey; state: "done" | "current" | "upcoming" };
+
+/** The journey after booking, adapted to where this booking is now. */
+function nextSteps(status: string, isPaid: boolean): Step[] {
+  if (status === "cancelled") return [{ key: "cancelled", state: "current" }];
+  if (status === "completed") {
+    return [
+      { key: "paid", state: "done" },
+      { key: "prepare", state: "done" },
+      { key: "review", state: "current" },
+    ];
+  }
+  if (!isPaid && status === "pending") {
+    return [
+      { key: "pay", state: "current" },
+      { key: "email", state: "upcoming" },
+      { key: "host", state: "upcoming" },
+      { key: "prepare", state: "upcoming" },
+    ];
+  }
+  return [
+    { key: "paid", state: "done" },
+    { key: "email", state: "done" },
+    { key: "host", state: "current" },
+    { key: "prepare", state: "upcoming" },
+  ];
+}
+
+/** Practical info for the trip; hidden entirely when the tour has none yet. */
+function BeforeYouGo({
+  locale,
+  gettingThere,
+  whatToBring,
+  etiquette,
+  notIncluded,
+  labels,
+}: {
+  locale: Locale;
+  gettingThere: LocalizedText | null;
+  whatToBring: LocalizedText[];
+  etiquette: LocalizedText[];
+  notIncluded: LocalizedText[];
+  labels: {
+    title: string;
+    bring: string;
+    etiquette: string;
+    notIncluded: string;
+    gettingThere: string;
+  };
+}) {
+  const groups = [
+    { key: "bring", icon: Backpack, title: labels.bring, items: whatToBring },
+    { key: "etiquette", icon: HandHeart, title: labels.etiquette, items: etiquette },
+    { key: "notIncluded", icon: CircleMinus, title: labels.notIncluded, items: notIncluded },
+  ].filter((group) => group.items.length > 0);
+  if (groups.length === 0 && !gettingThere) return null;
+
+  return (
+    <Reveal>
+      <Card title={labels.title}>
+        <div className="grid gap-6 md:grid-cols-2">
+          {gettingThere && (
+            <div className="md:col-span-2">
+              <h3 className="flex items-center gap-2 font-sans text-sm font-semibold">
+                <Navigation className="text-terracotta size-4" aria-hidden />
+                {labels.gettingThere}
+              </h3>
+              <p className="text-ink-soft mt-2 text-sm leading-relaxed">
+                {localize(gettingThere, locale)}
+              </p>
+            </div>
+          )}
+          {groups.map(({ key, icon: Icon, title, items }) => (
+            <div key={key}>
+              <h3 className="flex items-center gap-2 font-sans text-sm font-semibold">
+                <Icon className="text-terracotta size-4" aria-hidden />
+                {title}
+              </h3>
+              <ul className="text-ink-soft mt-2 space-y-1.5 text-sm">
+                {items.map((item, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="bg-sand-300 mt-2 size-1.5 shrink-0 rounded-full" aria-hidden />
+                    {localize(item, locale)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </Reveal>
   );
 }

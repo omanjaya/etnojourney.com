@@ -15,12 +15,13 @@
     "subtotal": "{price} x {count}",
     "total": "Total",
     "submit": "Book now",
-    "loginTitle": "Sign in to book",
-    "loginDescription": "Create a free account to book tours and follow your booking status.",
-    "loginCta": "Sign in to book",
-    "registerCta": "No account yet? Sign up",
     "paymentNote": "Pay online after booking. Your booking is confirmed as soon as payment is received.",
-    "seatsHint": "{count, plural, one {# seat left on this date.} other {# seats left on this date.}}"
+    "seatsHint": "{count, plural, one {# seat left on this date.} other {# seats left on this date.}}",
+    "signInToContinue": "Sign in to continue",
+    "signInHint": "Your date and travellers are kept. No account yet?",
+    "registerShort": "Sign up free",
+    "cancellation": "Free to cancel before you pay; after payment, changes go through our team.",
+    "cancellationLink": "Cancellation policy"
   },
   "success": {
     "title": "Booking received",
@@ -28,7 +29,14 @@
     "codeLabel": "Booking code",
     "viewBookings": "View my bookings",
     "bookAnother": "Book another date",
-    "payHint": "Secure payment via Midtrans. You can also pay later from My Bookings."
+    "payHint": "Secure payment via Midtrans. You can also pay later from My Bookings.",
+    "nextTitle": "What happens next",
+    "steps": {
+      "pay": "Pay now, or later from My Bookings. Your booking is confirmed once payment is received.",
+      "email": "We email you a confirmation with your booking code and trip details.",
+      "host": "Your host contacts you on WhatsApp before the trip. Pack what's listed under Before you go."
+    },
+    "addToCalendar": "Add to calendar"
   },
   "cancel": {
     "trigger": "Cancel",

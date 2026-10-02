@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { groupByIsland, islandOf } from "./regions";
+import { groupByIsland, ISLAND_SQL_PATTERNS, islandOf, regionsInQuery } from "./regions";
 
 describe("islandOf", () => {
   it("maps provinces to islands, including ones not in the catalogue yet", () => {
@@ -29,5 +29,59 @@ describe("groupByIsland", () => {
       ["jawa", 1],
       ["maluku-papua", 1],
     ]);
+  });
+});
+
+describe("ISLAND_SQL_PATTERNS", () => {
+  // Mirrors the SQL rule: first matching pattern wins (case-insensitive).
+  const sqlIslandOf = (province: string) =>
+    ISLAND_SQL_PATTERNS.find(([, source]) => new RegExp(source, "i").test(province))?.[0] ??
+    "other";
+
+  it("classifies provinces exactly like islandOf", () => {
+    const provinces = [
+      "Bali",
+      "Nusa Tenggara Timur",
+      "Nusa Tenggara Barat",
+      "DI Yogyakarta",
+      "DKI Jakarta",
+      "Jawa Barat",
+      "Banten",
+      "Sumatera Utara",
+      "Kepulauan Riau",
+      "Kepulauan Bangka Belitung",
+      "Kalimantan Barat",
+      "Sulawesi Tenggara",
+      "Gorontalo",
+      "Maluku",
+      "Papua Barat Daya",
+      "Atlantis",
+    ];
+    for (const province of provinces) expect(sqlIslandOf(province)).toBe(islandOf(province));
+  });
+});
+
+describe("regionsInQuery", () => {
+  it("recognizes island names and English aliases", () => {
+    expect(regionsInQuery("Bali").islands).toEqual(["bali"]);
+    expect(regionsInQuery("tours in Java").islands).toEqual(["jawa"]);
+    expect(regionsInQuery("Borneo longhouse").islands).toEqual(["kalimantan"]);
+    expect(regionsInQuery("Sumatera").islands).toEqual(["sumatra"]);
+  });
+
+  it("expands eastern Indonesia to its island groups", () => {
+    expect(regionsInQuery("Eastern Indonesia").islands.sort()).toEqual(
+      ["maluku-papua", "nusa-tenggara", "sulawesi"].sort(),
+    );
+    expect(regionsInQuery("indonesia timur").islands).toHaveLength(3);
+  });
+
+  it("keeps Papua and Maluku as provinces, not the whole group", () => {
+    expect(regionsInQuery("Papua")).toEqual({ islands: [], provinces: ["papua"] });
+    expect(regionsInQuery("Moluccas").provinces).toEqual(["maluku"]);
+  });
+
+  it("returns nothing for ordinary keywords", () => {
+    expect(regionsInQuery("tenun ikat")).toEqual({ islands: [], provinces: [] });
   });
 });

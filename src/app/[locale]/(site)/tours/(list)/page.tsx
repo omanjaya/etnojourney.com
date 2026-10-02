@@ -91,14 +91,21 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
 
   return (
     <>
-      <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+      {/* Compact on phones so the first results show up without scrolling past the header. */}
+      <PageHeader
+        compact
+        eyebrow={t("eyebrow")}
+        title={t("title")}
+        description={t("description")}
+      />
 
       <Container className="py-12 md:py-16">
         <TourFilters
           search={search}
+          total={result.total}
           destinations={groupByIsland(destinations, (d) => d.province).flatMap(
             ({ island, items }) =>
-              items.map((d) => ({ slug: d.slug, name: d.name, group: tIslands(island) })),
+              items.map((d) => ({ slug: d.slug, name: d.name, group: tIslands(island), island })),
           )}
         />
 
@@ -169,9 +176,10 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
           query={{
             q: search.q,
             category: search.category,
+            island: search.island,
             destination: search.destination,
             maxPrice: search.maxPrice,
-            maxDays: search.maxDays,
+            duration: search.duration,
             sort: search.sort,
           }}
           page={result.page}

@@ -32,18 +32,29 @@
     "maxPrice": "Anggaran per orang",
     "anyPrice": "Berapa pun",
     "upTo": "Hingga {price}",
-    "maxDays": "Durasi",
     "anyDuration": "Berapa pun",
-    "upToDays": "Hingga {count} hari",
     "sort": "Urutkan",
     "sortOptions": {
       "popular": "Terpopuler",
       "priceAsc": "Harga terendah",
       "priceDesc": "Harga tertinggi",
-      "duration": "Durasi tersingkat"
+      "duration": "Durasi tersingkat",
+      "longest": "Terlama"
     },
     "toggle": "Filter",
-    "clear": "Hapus"
+    "clear": "Hapus",
+    "island": "Pulau",
+    "allIslands": "Semua pulau",
+    "duration": "Durasi",
+    "durationBuckets": {
+      "1": "1 hari",
+      "2-3": "2–3 hari",
+      "4+": "4 hari atau lebih"
+    },
+    "sheetTitle": "Filter tur",
+    "showResults": "{count, plural, =0 {Tidak ada tur} other {Tampilkan # tur}}",
+    "close": "Tutup filter",
+    "activeFilters": "{count, plural, one {# filter aktif} other {# filter aktif}}"
   },
   "detail": {
     "breadcrumbHome": "Beranda",
@@ -71,6 +82,27 @@
     "previous": "Sebelumnya",
     "next": "Berikutnya",
     "hostedBy": "Dipandu oleh komunitas lokal di {destination}",
-    "bookCta": "Pesan sekarang"
+    "bookCta": "Pesan sekarang",
+    "difficulty": "Tingkat kesulitan",
+    "notIncluded": "Belum termasuk",
+    "notIncludedDefault": {
+      "transport": "Tiket pesawat atau transportasi ke titik kumpul",
+      "personal": "Pengeluaran pribadi",
+      "tips": "Tip untuk pemandu dan tuan rumah"
+    },
+    "beforeYouGo": "Persiapan",
+    "beforeYouGoIntro": "Hal-hal praktis agar perjalananmu nyaman dan tuan rumahmu merasa dihormati.",
+    "whatToBring": "Yang perlu dibawa",
+    "etiquette": "Etika di lokasi",
+    "gettingThere": "Cara ke sana",
+    "openInMaps": "Buka di Maps"
+  },
+  "difficulty": {
+    "easy": "Santai",
+    "moderate": "Sedang",
+    "challenging": "Menantang",
+    "easyHint": "Cocok untuk hampir semua orang; banyak berhenti dan jalan kaki ringan.",
+    "moderateHint": "Perlu kebugaran dasar; ada jalan kaki beberapa jam atau medan menanjak.",
+    "challengingHint": "Butuh stamina baik; trekking panjang, medan terjal, atau kondisi terpencil."
   }
 }

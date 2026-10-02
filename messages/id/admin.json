@@ -125,7 +125,9 @@
       "listsHint": "Satu item per baris. Jumlah baris ID dan EN harus sama.",
       "itinerary": "Itinerary",
       "itineraryHint": "Urutan hari mengikuti urutan baris di bawah.",
-      "visibility": "Visibilitas"
+      "visibility": "Visibilitas",
+      "practical": "Persiapan",
+      "practicalHint": "Informasi praktis untuk tamu sebelum berangkat. Tulis satu poin per baris, dengan baris bahasa Indonesia dan Inggris yang berpasangan."
     },
     "fields": {
       "title": "Judul",
@@ -147,7 +149,11 @@
       "isPublished": "Tayangkan di situs",
       "isPublishedHint": "Tur draf tidak terlihat oleh wisatawan.",
       "isFeatured": "Tur unggulan",
-      "isFeaturedHint": "Tampil di bagian unggulan beranda."
+      "isFeaturedHint": "Tampil di bagian unggulan beranda.",
+      "difficulty": "Tingkat kesulitan",
+      "notIncluded": "Belum termasuk",
+      "whatToBring": "Yang perlu dibawa",
+      "etiquette": "Etika dan adat"
     },
     "itinerary": {
       "day": "Hari {day}",
@@ -156,6 +162,11 @@
       "empty": "Belum ada hari. Tambahkan minimal satu hari perjalanan.",
       "dayTitle": "Judul hari",
       "dayDescription": "Kegiatan"
+    },
+    "difficulty": {
+      "easy": "Santai",
+      "moderate": "Sedang",
+      "challenging": "Menantang"
     }
   },
   "destinations": {
@@ -189,7 +200,9 @@
       "basics": "Informasi dasar",
       "basicsHint": "Nama dan provinsi tampil apa adanya. Tagline dan deskripsi tampil dalam dua bahasa.",
       "media": "Foto utama",
-      "mediaHint": "Dipakai di kartu destinasi dan hero halaman destinasi. Gunakan foto lanskap."
+      "mediaHint": "Dipakai di kartu destinasi dan hero halaman destinasi. Gunakan foto lanskap.",
+      "access": "Akses",
+      "accessHint": "Bantu tamu merencanakan perjalanan menuju destinasi ini."
     },
     "fields": {
       "name": "Nama destinasi",
@@ -200,7 +213,9 @@
       "taglineHint": "Satu kalimat pendek untuk kartu destinasi.",
       "description": "Deskripsi",
       "descriptionHint": "Pisahkan paragraf dengan baris kosong.",
-      "heroImage": "Foto utama"
+      "heroImage": "Foto utama",
+      "gettingThere": "Cara ke sana",
+      "gettingThereHint": "Bandara, pelabuhan, atau rute darat terdekat. Kosongkan jika belum ada."
     },
     "delete": {
       "title": "Hapus destinasi",

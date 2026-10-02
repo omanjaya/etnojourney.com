@@ -82,6 +82,38 @@
     "viewTour": "View tour page",
     "receiptTitle": "Booking summary",
     "receiptNote": "Show this booking code to your guide at the meeting point.",
-    "paidAt": "Paid on"
+    "paidAt": "Paid on",
+    "addToCalendar": "Add to calendar",
+    "nextStepsTitle": "What happens next",
+    "steps": {
+      "pay": "Complete payment to confirm your spot.",
+      "paid": "Payment received, your booking is confirmed.",
+      "email": "We email your confirmation and trip details.",
+      "host": "Your host or our team contacts your phone number before the trip.",
+      "prepare": "Pack what you need and arrive at the meeting point on time.",
+      "review": "Trip completed. Share your experience to help other travellers.",
+      "cancelled": "This booking was cancelled. You can book another date from the tour page."
+    },
+    "stepDone": "Done",
+    "stepCurrent": "Now",
+    "prepTitle": "Before you go",
+    "prepBring": "What to bring",
+    "prepEtiquette": "Etiquette and customs",
+    "prepNotIncluded": "Not included",
+    "prepGettingThere": "Getting to {place}"
+  },
+  "calendar": {
+    "code": "Booking code: {code}",
+    "meetingPoint": "Meeting point: {place}",
+    "bring": "What to bring:",
+    "details": "Booking details: {url}"
+  },
+  "nextTrip": {
+    "eyebrow": "Your next trip",
+    "countdown": "{days, plural, =0 {Today} =1 {Tomorrow} other {In # days}}",
+    "meetingPoint": "Meeting point",
+    "viewDetail": "View details",
+    "addToCalendar": "Add to calendar",
+    "payHint": "Not paid yet. Complete payment to confirm your spot."
   }
 }

@@ -57,6 +57,13 @@
       "when": 1790904622714,
       "tag": "0007_photo_credits",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790915445448,
+      "tag": "0008_practical_info",
+      "breakpoints": true
     }
   ]
 }
