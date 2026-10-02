@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { ViewTransition } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowUpRight, Clock, MapPin, Users } from "lucide-react";
+import { ArrowUpRight, Clock, MapPin, Mountain, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { formatCurrency } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
+import { provinceLabel } from "@/lib/provinces";
 import { cn } from "@/lib/utils";
 import type { Destination, Tour } from "@/server/db/schema";
 import { Badge } from "@/components/ui/badge";
@@ -44,6 +45,7 @@ export function TourCard({
 }) {
   const locale = useLocale() as Locale;
   const t = useTranslations("common");
+  const td = useTranslations("tours.difficulty");
   const CategoryIcon = categoryIcons[tour.category];
 
   return (
@@ -109,7 +111,7 @@ export function TourCard({
       <div className="flex flex-1 flex-col pt-5">
         <p className="text-muted flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase">
           <MapPin className="size-3.5" aria-hidden />
-          {destination.name}, {destination.province}
+          {destination.name}, {provinceLabel(destination.province, locale)}
         </p>
         <Heading className="mt-2 text-xl leading-snug md:text-2xl">
           <Link
@@ -120,7 +122,7 @@ export function TourCard({
           </Link>
         </Heading>
         <div className="mt-auto flex items-end justify-between gap-4 pt-4">
-          <div className="text-ink-soft flex gap-4 text-sm">
+          <div className="text-ink-soft flex flex-wrap gap-x-4 gap-y-1 text-sm">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="text-muted size-4" aria-hidden />
               {t("days", { count: tour.durationDays })}
@@ -129,6 +131,18 @@ export function TourCard({
               <Users className="text-muted size-4" aria-hidden />
               {t("maxPeople", { count: tour.maxParticipants })}
             </span>
+            {/* Only flag effort when it matters; easy tours keep the card clean. */}
+            {tour.difficulty !== "easy" && (
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1.5",
+                  tour.difficulty === "challenging" && "text-terracotta-dark",
+                )}
+              >
+                <Mountain className="size-4 opacity-70" aria-hidden />
+                {td(tour.difficulty)}
+              </span>
+            )}
           </div>
           <p className="text-right">
             <span className="text-muted block text-[11px] uppercase">{t("from")}</span>

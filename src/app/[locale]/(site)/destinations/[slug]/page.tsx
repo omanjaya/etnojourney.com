@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ViewTransition } from "react";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Compass, MapPin } from "lucide-react";
+import { ArrowLeft, Compass, MapPin, Route } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getPathname } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/i18n-text";
+import { provinceLabel } from "@/lib/provinces";
 import { localizedUrl, pageMetadata, siteUrl } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
@@ -49,7 +50,10 @@ export async function generateMetadata({
   return pageMetadata({
     locale,
     path: `/destinations/${data.destination.slug}`,
-    title: t("detailTitle", { name: data.destination.name, province: data.destination.province }),
+    title: t("detailTitle", {
+      name: data.destination.name,
+      province: provinceLabel(data.destination.province, locale),
+    }),
     description: localize(data.destination.tagline, locale),
     image: absoluteImage(data.destination.heroImage),
   });
@@ -135,7 +139,7 @@ export default async function DestinationPage({
           </Link>
           <p className="animate-fade-up flex items-center gap-2 text-xs font-semibold tracking-[0.22em] text-white/75 uppercase [animation-delay:0.15s]">
             <MapPin className="size-4" aria-hidden />
-            {t("eyebrow", { province: destination.province })}
+            {t("eyebrow", { province: provinceLabel(destination.province, locale) })}
           </p>
           <SplitWords
             as="h1"
@@ -169,6 +173,20 @@ export default async function DestinationPage({
         >
           {localize(destination.description, locale)}
         </Reveal>
+        {destination.gettingThere && (
+          <Reveal
+            delay={0.2}
+            className="bg-sand-100 rounded-(--radius-card) p-6 md:col-span-7 md:col-start-6 md:p-8"
+          >
+            <h3 className="flex items-center gap-3 font-sans text-base font-semibold">
+              <Route className="text-terracotta size-5" strokeWidth={1.5} aria-hidden />
+              {t("gettingThere")}
+            </h3>
+            <p className="text-ink-soft mt-4 leading-relaxed">
+              {localize(destination.gettingThere, locale)}
+            </p>
+          </Reveal>
+        )}
       </Container>
 
       <section className="grain border-line bg-sand-100 border-t py-20 md:py-28">
