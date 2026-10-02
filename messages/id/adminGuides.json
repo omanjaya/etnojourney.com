@@ -1,1 +1,96 @@
-{}
+{
+  "languages": {
+    "id": "Bahasa Indonesia",
+    "en": "Inggris",
+    "ja": "Jepang",
+    "zh": "Mandarin",
+    "fr": "Prancis",
+    "de": "Jerman",
+    "nl": "Belanda",
+    "ko": "Korea"
+  },
+  "list": {
+    "eyebrow": "Operasional",
+    "title": "Pemandu & mitra",
+    "description": "Pemandu lokal dan mitra desa yang memandu keberangkatan. Hubungkan akun agar mereka bisa membuka portal mitra.",
+    "new": "Tambah pemandu",
+    "searchLabel": "Cari pemandu",
+    "searchPlaceholder": "Nama, organisasi, email atau telepon",
+    "clear": "Hapus pencarian",
+    "summary": "{total, plural, other {# pemandu}}",
+    "active": "Aktif",
+    "inactive": "Nonaktif",
+    "noAccount": "Belum terhubung",
+    "edit": "Ubah",
+    "noMatch": {
+      "title": "Tidak ada pemandu yang cocok",
+      "description": "Coba kata kunci lain."
+    },
+    "empty": {
+      "title": "Belum ada pemandu",
+      "description": "Tambahkan pemandu atau mitra desa pertama Anda."
+    },
+    "columns": {
+      "guide": "Pemandu",
+      "destinations": "Destinasi",
+      "languages": "Bahasa",
+      "status": "Status",
+      "account": "Akun portal",
+      "actions": "Aksi"
+    },
+    "pagination": {
+      "label": "Halaman daftar pemandu",
+      "previous": "Sebelumnya",
+      "next": "Berikutnya",
+      "page": "Halaman {page}"
+    }
+  },
+  "form": {
+    "backToList": "Kembali ke daftar pemandu",
+    "newEyebrow": "Pemandu baru",
+    "newTitle": "Tambah pemandu",
+    "editEyebrow": "Ubah pemandu",
+    "statusActive": "Aktif",
+    "statusInactive": "Nonaktif",
+    "saved": "Data pemandu disimpan.",
+    "save": "Simpan perubahan",
+    "create": "Simpan pemandu",
+    "sections": {
+      "profile": "Profil",
+      "profileHint": "Nama dan kontak yang dipakai tim untuk menghubungi pemandu.",
+      "work": "Wilayah & bahasa",
+      "workHint": "Dipakai untuk menyarankan pemandu saat menugaskan keberangkatan.",
+      "internal": "Internal",
+      "internalHint": "Hanya terlihat oleh tim, tidak oleh pemandu."
+    },
+    "fields": {
+      "name": "Nama",
+      "organization": "Organisasi atau desa",
+      "organizationHint": "Opsional, misalnya Desa Adat Penglipuran.",
+      "phone": "Telepon / WhatsApp",
+      "phoneHint": "Contoh 0812 3456 7890 atau +31 20 123 4567. Disimpan dalam format internasional.",
+      "email": "Email",
+      "languages": "Bahasa",
+      "destinations": "Destinasi",
+      "destinationsHint": "Pilih destinasi tempat pemandu biasa bertugas.",
+      "noDestinations": "Belum ada destinasi.",
+      "notes": "Catatan internal",
+      "notesHint": "Maksimal 2000 karakter.",
+      "active": "Aktif",
+      "activeHint": "Pemandu nonaktif tidak bisa ditugaskan dan tidak melihat keberangkatan di portal mitra."
+    }
+  },
+  "account": {
+    "title": "Akun portal mitra",
+    "description": "Akun yang terhubung bisa masuk ke portal mitra dan hanya melihat keberangkatan yang ditugaskan ke pemandu ini.",
+    "linkedTo": "Terhubung ke",
+    "adminOnly": "Hanya admin yang dapat menghubungkan akun portal.",
+    "emailLabel": "Email akun terdaftar",
+    "emailHint": "Mitra harus mendaftar akun terlebih dahulu. Perannya akan menjadi Mitra.",
+    "link": "Hubungkan akun",
+    "linked": "Akun terhubung. Mitra perlu masuk kembali.",
+    "unlink": "Lepaskan akun",
+    "unlinked": "Akun dilepaskan dan kembali menjadi wisatawan.",
+    "unlinkConfirm": "Lepaskan {email} dari pemandu ini? Akun akan kembali menjadi wisatawan dan keluar dari semua sesi."
+  }
+}

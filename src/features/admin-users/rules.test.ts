@@ -28,6 +28,10 @@ describe("auditEntityHref", () => {
     expect(auditEntityHref({ entityType: "user", entityId: "aB3_x-9", details: null })).toBe(
       "/admin/users/aB3_x-9",
     );
+    expect(auditEntityHref({ entityType: "guide", entityId: "3", details: null })).toBe(
+      "/admin/guides/3/edit",
+    );
+    expect(auditEntityHref({ entityType: "guide", entityId: "3/../x", details: null })).toBeNull();
   });
 
   it("refuses ids that could escape the path", () => {
@@ -63,5 +67,14 @@ describe("compactDetails", () => {
 
   it("handles missing details", () => {
     expect(compactDetails(null)).toEqual([]);
+  });
+});
+
+describe("auditEntityHref for departures", () => {
+  it("links a departure entity to its manifest page", () => {
+    expect(
+      auditEntityHref({ entityType: "departure", entityId: "12:2026-11-03", details: null }),
+    ).toBe("/admin/departures/12/2026-11-03");
+    expect(auditEntityHref({ entityType: "departure", entityId: "x:y", details: null })).toBeNull();
   });
 });

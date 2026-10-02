@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   ArrowUpRight,
   CalendarDays,
+  CalendarRange,
   CircleAlert,
   Mail,
   Phone,
@@ -27,8 +28,10 @@ import { BookingNoteForm } from "@/features/admin-booking/components/booking-not
 import { BookingTimeline } from "@/features/admin-booking/components/booking-timeline";
 import { PaymentStatusBadge } from "@/features/payment/components/payment-status-badge";
 import { requireAdmin } from "@/server/auth/guards";
+import { can } from "@/server/auth/permissions";
 import { bookingService } from "@/server/services/booking.service";
 import { nextStatuses } from "@/server/services/booking.rules";
+import { departurePath } from "@/server/services/departure.rules";
 import { isDomainError } from "@/server/services/errors";
 
 const stamp: Intl.DateTimeFormatOptions = {
@@ -60,14 +63,15 @@ export default async function AdminBookingDetailPage({
   params,
 }: PageProps<"/[locale]/admin/bookings/[code]">) {
   // Pages guard themselves: Next.js can render a page without its layout.
-  await requireAdmin("bookings.manage");
+  const user = await requireAdmin("bookings.manage");
   const { code } = await params;
   const detail = await loadBooking(code);
-  const [locale, t, tc, methods] = await Promise.all([
+  const [locale, t, tc, methods, td] = await Promise.all([
     getLocale(),
     getTranslations("adminBooking"),
     getTranslations("common"),
     getTranslations("payment.methods"),
+    getTranslations("adminDepartures"),
   ]);
 
   const { booking, tour, customer, payments, notes, timeline } = detail;
@@ -124,6 +128,15 @@ export default async function AdminBookingDetailPage({
                     month: "long",
                     year: "numeric",
                   })}
+                  {can(user.role, "departures.manage") && (
+                    <Link
+                      href={departurePath(booking.tourId, booking.travelDate)}
+                      className="text-terracotta hover:text-terracotta-dark mt-1 flex w-fit items-center gap-1 text-xs font-medium underline-offset-4 hover:underline"
+                    >
+                      <CalendarRange className="size-3.5" aria-hidden />
+                      {td("bookingLink")}
+                    </Link>
+                  )}
                 </Detail>
                 <Detail icon={Users} label={t("summary.participants")}>
                   {tc("people", { count: booking.participants })}

@@ -1,1 +1,63 @@
-{}
+{
+  "meta": {
+    "title": "Partner portal"
+  },
+  "nav": {
+    "portal": "Partner portal"
+  },
+  "languages": {
+    "id": "Indonesian",
+    "en": "English",
+    "ja": "Japanese",
+    "zh": "Chinese",
+    "fr": "French",
+    "de": "German",
+    "nl": "Dutch",
+    "ko": "Korean"
+  },
+  "home": {
+    "eyebrow": "Partner portal",
+    "title": "Hello, {name}",
+    "description": "The departures assigned to you, with meeting points and guest lists.",
+    "unlinkedTitle": "Your guide profile is not linked yet",
+    "unlinkedDescription": "Your account is not linked to a guide record. Please contact the EtnoJourney team.",
+    "inactiveTitle": "Your guide profile is inactive",
+    "inactiveDescription": "Departures are hidden while your profile is inactive. Please contact the EtnoJourney team.",
+    "upcomingTitle": "Upcoming departures",
+    "upcomingEmptyTitle": "No departures yet",
+    "upcomingEmptyDescription": "Departures appear here once the team assigns you.",
+    "pastTitle": "Departures in the last {days} days ({count})",
+    "pastEmpty": "No departures in this period."
+  },
+  "profile": {
+    "title": "Your profile",
+    "phone": "Phone",
+    "email": "Email",
+    "destinations": "Destinations",
+    "languages": "Languages",
+    "changeHint": "Something to update? Contact the EtnoJourney team."
+  },
+  "departures": {
+    "travellers": "{participants, plural, one {# guest} other {# guests}} in {bookings, plural, one {# booking} other {# bookings}}",
+    "open": "View guest list"
+  },
+  "manifest": {
+    "back": "Back to partner portal",
+    "date": "Date",
+    "meetingPoint": "Meeting point",
+    "duration": "Duration",
+    "days": "{count, plural, one {# day} other {# days}}",
+    "travellers": "Guests",
+    "travellersValue": "{participants, plural, one {# person} other {# people}} in {bookings, plural, one {# booking} other {# bookings}}",
+    "noteTitle": "Operational note",
+    "title": "Guest list",
+    "emptyTitle": "No confirmed guests yet",
+    "emptyDescription": "Confirmed bookings appear here.",
+    "columns": {
+      "code": "Booking code",
+      "contact": "Contact",
+      "participants": "Guests",
+      "notes": "Guest notes"
+    }
+  }
+}

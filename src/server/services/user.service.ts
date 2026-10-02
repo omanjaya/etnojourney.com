@@ -13,7 +13,7 @@ import { disableError, isDemotion, roleChangeError } from "./user.rules";
  * disabled by a concurrent request must not complete a change that was
  * authorized before it.
  */
-async function assertActorCanManageUsers(tx: DbExecutor, actorId: string) {
+export async function assertActorCanManageUsers(tx: DbExecutor, actorId: string) {
   const actor = await userRepository.lockById(tx, actorId);
   if (!actor || actor.disabledAt !== null || !can(actor.role, "users.manage")) {
     throw new DomainError("forbidden");

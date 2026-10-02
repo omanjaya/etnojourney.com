@@ -103,7 +103,8 @@
       "reviews": "Ulasan",
       "availability": "Ketersediaan",
       "users": "Pengguna",
-      "credits": "Kredit foto"
+      "credits": "Kredit foto",
+      "operations": "Operasional tur"
     },
     "actorLabel": "Dilakukan oleh",
     "allActors": "Semua orang",
@@ -126,7 +127,9 @@
       "review": "Ulasan",
       "closure": "Penutupan",
       "user": "Pengguna",
-      "credit": "Kredit foto"
+      "credit": "Kredit foto",
+      "guide": "Pemandu",
+      "departure": "Keberangkatan"
     },
     "empty": {
       "title": "Belum ada yang tercatat",

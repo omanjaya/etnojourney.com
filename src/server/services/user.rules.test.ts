@@ -75,4 +75,13 @@ describe("isDemotion", () => {
     expect(isDemotion("user", "staff")).toBe(false);
     expect(isDemotion("staff", "staff")).toBe(false);
   });
+
+  it("treats losing the partner portal as a demotion, and gaining it as not", () => {
+    expect(isDemotion("partner", "user")).toBe(true);
+    expect(isDemotion("partner", "staff")).toBe(true);
+    expect(isDemotion("staff", "partner")).toBe(true);
+    expect(isDemotion("admin", "partner")).toBe(true);
+    expect(isDemotion("user", "partner")).toBe(false);
+    expect(isDemotion("partner", "partner")).toBe(false);
+  });
 });

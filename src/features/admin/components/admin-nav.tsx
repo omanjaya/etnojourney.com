@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   BarChart3,
   CalendarCheck,
+  CalendarRange,
   CalendarX,
   Camera,
   History,
@@ -13,6 +14,7 @@ import {
   Menu,
   MessageSquareText,
   ReceiptText,
+  UserRoundCheck,
   Users,
   X,
   type LucideIcon,
@@ -28,6 +30,7 @@ import { can, type Permission } from "@/server/auth/permissions";
 type NavKey =
   | "overview"
   | "bookings"
+  | "departures"
   | "payments"
   | "availability"
   | "tours"
@@ -36,19 +39,37 @@ type NavKey =
   | "credits"
   | "reports"
   | "users"
+  | "guides"
   | "activity";
 
 /** Each link shows only to roles holding its permission (the page re-checks). */
 const allItems: { href: string; key: NavKey; icon: LucideIcon; permission: Permission }[] = [
   { href: "/admin", key: "overview", icon: LayoutDashboard, permission: "backoffice.access" },
   { href: "/admin/bookings", key: "bookings", icon: CalendarCheck, permission: "bookings.manage" },
+  {
+    href: "/admin/departures",
+    key: "departures",
+    icon: CalendarRange,
+    permission: "departures.manage",
+  },
   { href: "/admin/payments", key: "payments", icon: ReceiptText, permission: "payments.refund" },
-  { href: "/admin/availability", key: "availability", icon: CalendarX, permission: "availability.manage" },
+  {
+    href: "/admin/availability",
+    key: "availability",
+    icon: CalendarX,
+    permission: "availability.manage",
+  },
   { href: "/admin/tours", key: "tours", icon: MapIcon, permission: "catalogue.manage" },
-  { href: "/admin/destinations", key: "destinations", icon: MapPin, permission: "catalogue.manage" },
+  {
+    href: "/admin/destinations",
+    key: "destinations",
+    icon: MapPin,
+    permission: "catalogue.manage",
+  },
   { href: "/admin/reviews", key: "reviews", icon: MessageSquareText, permission: "reviews.manage" },
   { href: "/admin/credits", key: "credits", icon: Camera, permission: "credits.manage" },
   { href: "/admin/reports", key: "reports", icon: BarChart3, permission: "reports.view" },
+  { href: "/admin/guides", key: "guides", icon: UserRoundCheck, permission: "guides.manage" },
   { href: "/admin/users", key: "users", icon: Users, permission: "users.manage" },
   { href: "/admin/activity", key: "activity", icon: History, permission: "audit.view" },
 ];

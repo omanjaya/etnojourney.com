@@ -1,6 +1,7 @@
 import {
   ArrowRight,
   CalendarCheck,
+  CalendarRange,
   CircleCheck,
   CircleX,
   HandCoins,
@@ -13,6 +14,9 @@ import { Link } from "@/i18n/navigation";
 import { requireAdmin } from "@/server/auth/guards";
 import { can } from "@/server/auth/permissions";
 import { dashboardService } from "@/server/services/dashboard.service";
+import { needsGuideWindow } from "@/server/services/departure.rules";
+import { departureService } from "@/server/services/departure.service";
+import { businessToday } from "@/server/services/self-service.rules";
 import { CountUp } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -26,13 +30,17 @@ export default async function AdminOverviewPage() {
   const user = await requireAdmin();
   const canSeeRevenue = can(user.role, "reports.view");
   const canRefund = can(user.role, "payments.refund");
-  const [overview, t, tb, tq, locale] = await Promise.all([
+  const canManageDepartures = can(user.role, "departures.manage");
+  const [overview, t, tb, tq, td, withoutGuide, locale] = await Promise.all([
     dashboardService.overview({ withRefunds: canRefund, withRevenue: canSeeRevenue }),
     getTranslations("admin.overview"),
     getTranslations("admin.bookings"),
     getTranslations("adminInsights.dashboard"),
+    getTranslations("adminDepartures.dashboard"),
+    canManageDepartures ? departureService.countNeedingGuideSoon() : Promise.resolve(null),
     getLocale(),
   ]);
+  const guideWindow = needsGuideWindow(businessToday());
   const { counts, revenue, publishedTours, recent, refundsNeeded } = overview;
   const pending = counts.pending ?? 0;
   const intlLocale = locale === "id" ? "id-ID" : "en-US";
@@ -56,7 +64,10 @@ export default async function AdminOverviewPage() {
         description={t("description")}
       />
 
-      <section aria-label={tq("queuesLabel")} className="short:mb-4 mb-6 grid gap-3 sm:grid-cols-2">
+      <section
+        aria-label={tq("queuesLabel")}
+        className="short:mb-4 mb-6 grid gap-3 sm:grid-cols-2 2xl:grid-cols-3"
+      >
         <WorkQueueCard
           icon={Hourglass}
           href="/admin/bookings?status=pending"
@@ -75,6 +86,17 @@ export default async function AdminOverviewPage() {
             count={refundsNeeded}
             countLabel={tq("refunds.count", { count: refundsNeeded })}
             urgent={refundsNeeded > 0}
+          />
+        )}
+        {withoutGuide !== null && (
+          <WorkQueueCard
+            icon={CalendarRange}
+            href={`/admin/departures?from=${guideWindow.from}&to=${guideWindow.to}&noGuide=1`}
+            label={td("label")}
+            action={td("action")}
+            count={withoutGuide}
+            countLabel={td("count", { count: withoutGuide })}
+            urgent={withoutGuide > 0}
           />
         )}
       </section>

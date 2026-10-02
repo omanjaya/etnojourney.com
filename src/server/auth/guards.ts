@@ -57,3 +57,12 @@ export async function assertPermission(permission: Permission): Promise<SessionU
   if (!user || !can(user.role, permission)) throw new DomainError("forbidden");
   return user;
 }
+
+/**
+ * For partner portal pages: redirects to login without a session and to the
+ * home page for anyone who isn't a partner. Reads must still be scoped to the
+ * returned user's own guide (see partner.service.ts).
+ */
+export async function requirePartner(): Promise<SessionUser> {
+  return requireAdmin("partner.portal");
+}
