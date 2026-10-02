@@ -125,6 +125,19 @@
     font-variation-settings: "opsz" 144, "SOFT" 50;
   }
 
+  /* No lone word on the last line of running text (headings balance above). */
+  p,
+  li,
+  figcaption,
+  dd {
+    text-wrap: pretty;
+  }
+
+  /* Short display text (pull quotes) reads best with even line lengths. */
+  blockquote {
+    text-wrap: balance;
+  }
+
   ::selection {
     @apply bg-terracotta text-sand-50;
   }

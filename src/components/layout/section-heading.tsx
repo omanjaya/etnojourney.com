@@ -45,7 +45,7 @@ export function SectionHeading({
         )}
         {description && (
           <Reveal delay={0.25}>
-            <p className="text-ink-soft mt-5 text-lg leading-relaxed">{description}</p>
+            <p className="text-ink-soft mt-5 text-lg leading-relaxed text-balance">{description}</p>
           </Reveal>
         )}
       </div>

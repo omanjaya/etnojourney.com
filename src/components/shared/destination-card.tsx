@@ -63,7 +63,7 @@ export function DestinationCard({
           {provinceLabel(destination.province, locale)}
         </p>
         <Heading className="mt-2 text-3xl">{destination.name}</Heading>
-        <p className="mt-2 line-clamp-2 max-w-sm text-sm text-white/80 transition-colors duration-500 group-hover:text-white">
+        <p className="mt-2 line-clamp-2 min-h-[2lh] max-w-sm text-sm text-balance text-white/80 transition-colors duration-500 group-hover:text-white">
           {localize(destination.tagline, locale)}
         </p>
         <span className="mt-4 inline-flex items-center gap-2 text-sm font-medium">
