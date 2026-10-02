@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 /*
+ * `short:` targets laptop-sized screens with limited height (e.g. 1366x768,
+ * 1280x720, 1536x864): wide enough for the desktop layout, but key info must
+ * still fit above the fold. Use it to tighten vertical spacing and type.
+ */
+@custom-variant short (@media (min-width: 1024px) and (max-height: 860px));
+
+/*
  * EtnoJourney design tokens.
  * Earthy editorial palette: sand paper backgrounds, ink text,
  * terracotta as the primary action colour, batik indigo for depth.
