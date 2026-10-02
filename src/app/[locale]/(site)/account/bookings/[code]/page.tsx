@@ -7,6 +7,7 @@ import {
   Backpack,
   CalendarDays,
   CalendarPlus,
+  FileDown,
   CircleCheck,
   CircleDashed,
   CircleDot,
@@ -40,11 +41,20 @@ import { PayButton } from "@/features/payment/components/pay-button";
 import { siteContact } from "@/config/site";
 import { PaymentStatusBadge } from "@/features/payment/components/payment-status-badge";
 import { WriteReviewButton } from "@/features/reviews/components/write-review-button";
+import { CancelPaidBookingDialog } from "@/features/self-service/components/cancel-paid-booking-dialog";
+import { RescheduleDialog } from "@/features/self-service/components/reschedule-dialog";
+import { cancellationPolicy } from "@/config/cancellation";
 import { requireUser } from "@/server/auth/guards";
 import { accountService } from "@/server/services/account.service";
 import { isDomainError } from "@/server/services/errors";
 import { paymentService } from "@/server/services/payment.service";
 import { reviewService } from "@/server/services/review.service";
+import {
+  businessToday,
+  cancelOption,
+  rescheduleBlocker,
+  tierRanges,
+} from "@/server/services/self-service.rules";
 
 /**
  * Print stylesheet for the receipt view. The site chrome (header, footer,
@@ -111,11 +121,20 @@ export default async function BookingDetailPage({
   const isPaid = payment?.status === "paid";
   const awaitingPayment = booking.status === "pending" && !isPaid;
   const upcoming = booking.status === "pending" || booking.status === "confirmed";
+  // E-ticket PDF (route handler, so a plain link rather than <Link>).
+  const hasTicket = booking.status === "confirmed" || booking.status === "completed";
+  const ticketHref = `/api/bookings/${encodeURIComponent(booking.code)}/ticket?locale=${locale}`;
+  const tTrip = await getTranslations("trip.ticket");
   const calendarHref = getPathname({
     href: `/account/bookings/${booking.code}/calendar.ics`,
     locale,
   });
   const steps = nextSteps(booking.status, isPaid);
+  // Self-service: what the traveller may do today (Asia/Jakarta); the server re-checks on submit.
+  const today = businessToday();
+  const cancel = cancelOption(booking, isPaid ? payment.amount : null, today);
+  const rescheduleBlock = upcoming ? rescheduleBlocker(booking, today) : null;
+  const tsService = await getTranslations("selfService");
   const contactEmail = siteContact().email;
   const travelDate = formatDate(booking.travelDate, locale, {
     weekday: "long",
@@ -210,6 +229,14 @@ export default async function BookingDetailPage({
                   </a>
                 </Button>
               )}
+              {hasTicket && (
+                <Button asChild variant="outline" size="sm">
+                  <a href={ticketHref} download>
+                    <FileDown aria-hidden />
+                    {tTrip("download")}
+                  </a>
+                </Button>
+              )}
               {booking.status === "completed" && (
                 <WriteReviewButton
                   bookingId={booking.id}
@@ -223,12 +250,52 @@ export default async function BookingDetailPage({
                   <ArrowUpRight aria-hidden />
                 </Link>
               </Button>
+              {upcoming && !rescheduleBlock && (
+                <RescheduleDialog
+                  bookingId={booking.id}
+                  code={booking.code}
+                  tourId={tour.id}
+                  currentDate={booking.travelDate}
+                  participants={booking.participants}
+                  participantsLabel={tc("people", { count: booking.participants })}
+                  maxReschedules={cancellationPolicy.maxReschedules}
+                  closesDaysBefore={cancellationPolicy.rescheduleMinDaysBefore}
+                />
+              )}
               {awaitingPayment && (
                 <span className="ml-auto">
                   <CancelBookingButton bookingId={booking.id} />
                 </span>
               )}
+              {!awaitingPayment && cancel?.kind === "paid" && payment && (
+                <span className="ml-auto">
+                  <CancelPaidBookingDialog
+                    bookingId={booking.id}
+                    code={booking.code}
+                    paidAmount={payment.amount}
+                    quote={cancel.quote}
+                    ranges={tierRanges()}
+                  />
+                </span>
+              )}
             </div>
+            {(rescheduleBlock === "limit" || rescheduleBlock === "tooLate") && (
+              <p data-testid="reschedule-blocked" className="text-muted -mt-3 text-xs print:hidden">
+                {rescheduleBlock === "limit"
+                  ? tsService("panel.rescheduleBlocked.limit", {
+                      max: cancellationPolicy.maxReschedules,
+                    })
+                  : tsService("panel.rescheduleBlocked.tooLate", {
+                      days: cancellationPolicy.rescheduleMinDaysBefore,
+                    })}{" "}
+                <Link
+                  href="/cancellation-policy"
+                  className="text-terracotta font-medium underline-offset-4 hover:underline"
+                >
+                  {tsService("panel.policyLink")}
+                </Link>
+              </p>
+            )}
           </div>
         </section>
       </Reveal>

@@ -11,6 +11,7 @@ import { Stars } from "@/components/ui/stars";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { ReviewPublishToggle } from "@/features/reviews/components/review-publish-toggle";
 import { ReviewReplyEditor } from "@/features/reviews/components/review-reply-editor";
+import { ReviewPhotoModeration } from "@/features/reviews/components/review-photo-moderation";
 import { reviewFilterSchema } from "@/features/reviews/schemas";
 import { AdminSearchBox } from "@/features/admin/components/admin-search-box";
 import { parseAdminListQuery } from "@/features/admin/schemas";
@@ -39,6 +40,7 @@ export default async function AdminReviewsPage({
     getLocale(),
   ]);
   const rows = result.items;
+  const photos = await reviewService.photosByReview(rows.map(({ review }) => review.id));
   const current = { filter, q };
 
   const filters = [
@@ -132,6 +134,10 @@ export default async function AdminReviewsPage({
                   <p className="text-ink-soft mt-2 line-clamp-4 text-sm leading-relaxed">
                     {localize(review.body, locale)}
                   </p>
+                  <ReviewPhotoModeration
+                    photos={photos.get(review.id) ?? []}
+                    author={review.authorName}
+                  />
                   <ReviewReplyEditor
                     reviewId={review.id}
                     author={review.authorName}
@@ -210,6 +216,10 @@ export default async function AdminReviewsPage({
                         <p className="text-ink-soft line-clamp-3 leading-relaxed">
                           {localize(review.body, locale)}
                         </p>
+                        <ReviewPhotoModeration
+                          photos={photos.get(review.id) ?? []}
+                          author={review.authorName}
+                        />
                         <ReviewReplyEditor
                           reviewId={review.id}
                           author={review.authorName}

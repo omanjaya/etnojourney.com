@@ -3,6 +3,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { LegalDocument } from "@/features/content/components/legal-document";
+import {
+  RefundTiersTable,
+  RescheduleRules,
+} from "@/features/self-service/components/cancellation-terms";
 
 export async function generateMetadata({
   params,
@@ -21,5 +25,11 @@ export default async function CancellationPolicyPage({
   params,
 }: PageProps<"/[locale]/cancellation-policy">) {
   setRequestLocale((await params).locale as Locale);
-  return <LegalDocument document="cancellation" />;
+  // Tiers and date-change rules are rendered from src/config/cancellation.ts.
+  return (
+    <LegalDocument
+      document="cancellation"
+      extras={{ paid: <RefundTiersTable />, changes: <RescheduleRules /> }}
+    />
+  );
 }

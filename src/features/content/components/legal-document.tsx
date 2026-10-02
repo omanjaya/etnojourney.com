@@ -1,5 +1,6 @@
 import { FileWarning } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
+import type { ReactNode } from "react";
 import { formatDate } from "@/lib/format";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
@@ -8,8 +9,18 @@ import { LEGAL_UPDATED, type LegalSection } from "../legal";
 
 type LegalNamespace = "cancellation" | "privacy" | "terms";
 
-/** Shared layout for the policy pages: template notice, contents and numbered sections. */
-export async function LegalDocument({ document }: { document: LegalNamespace }) {
+/**
+ * Shared layout for the policy pages: template notice, contents and numbered
+ * sections. `extras` adds content after a section's text, keyed by section id
+ * (e.g. tables generated from config).
+ */
+export async function LegalDocument({
+  document,
+  extras = {},
+}: {
+  document: LegalNamespace;
+  extras?: Partial<Record<string, ReactNode>>;
+}) {
   const [locale, t, tl] = await Promise.all([
     getLocale(),
     getTranslations(`pages.${document}`),
@@ -21,7 +32,7 @@ export async function LegalDocument({ document }: { document: LegalNamespace }) 
     <>
       <PageHeader eyebrow={t("eyebrow")} title={t("title")} description={t("description")}>
         <p className="text-muted mt-6 text-sm">
-          {tl("updated", { date: formatDate(LEGAL_UPDATED, locale) })}
+          {tl("updated", { date: formatDate(LEGAL_UPDATED[document], locale) })}
         </p>
       </PageHeader>
 
@@ -78,6 +89,7 @@ export async function LegalDocument({ document }: { document: LegalNamespace }) 
                       ))}
                     </ul>
                   )}
+                  {extras[section.id]}
                 </div>
               </section>
             </Reveal>

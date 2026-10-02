@@ -28,6 +28,7 @@ import {
   isRefundReason,
   isReusable,
   refundAgeDays,
+  refundDue,
   refundReasonForPaidNotification,
   resolvePaymentStatus,
   type GatewayNotification,
@@ -74,8 +75,10 @@ async function flagRefundRequired(
   payment: Pick<Payment, "id" | "orderId" | "bookingId" | "amount">,
   reason: RefundReason,
   actorId: string | null,
+  /** Partial refund in rupiah (policy tiers); null refunds the full amount. */
+  refundAmount: number | null = null,
 ): Promise<void> {
-  await paymentRepository.update(tx, payment.id, { refundRequired: true });
+  await paymentRepository.update(tx, payment.id, { refundRequired: true, refundAmount });
   await auditService.record(
     {
       actorId,
@@ -87,6 +90,7 @@ async function flagRefundRequired(
         orderId: payment.orderId,
         bookingId: payment.bookingId,
         amount: payment.amount,
+        ...(refundAmount === null ? {} : { refundAmount }),
       },
     },
     tx,
@@ -296,6 +300,22 @@ export const paymentService = {
   },
 
   /**
+   * Flags one paid payment for a refund of `refundAmount` rupiah (null = the
+   * full payment), e.g. when the traveller cancels under the policy tiers.
+   * Call inside the transaction that cancels the booking, with the payment
+   * row locked (`paymentRepository.findPaidForBookingForUpdate`).
+   */
+  flagForRefund(
+    tx: DbExecutor,
+    payment: Pick<Payment, "id" | "orderId" | "bookingId" | "amount">,
+    reason: RefundReason,
+    actorId: string | null,
+    refundAmount: number | null,
+  ): Promise<void> {
+    return flagRefundRequired(tx, payment, reason, actorId, refundAmount);
+  },
+
+  /**
    * Records a refund made outside the app (bank transfer or the Midtrans
    * dashboard). Only a paid payment can be refunded; the payment row is locked
    * so two admins can't record the same refund twice.
@@ -322,6 +342,7 @@ export const paymentService = {
             orderId: payment.orderId,
             bookingId: payment.bookingId,
             amount: payment.amount,
+            refundAmount: payment.refundAmount ?? payment.amount,
             note,
           },
         },
@@ -345,6 +366,7 @@ export const paymentService = {
         reason: isRefundReason(reason) ? reason : null,
         flaggedAt,
         ageDays: refundAgeDays(flaggedAt, now),
+        due: refundDue(row.payment),
       };
     });
   },

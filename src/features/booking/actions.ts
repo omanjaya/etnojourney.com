@@ -44,7 +44,10 @@ export async function cancelBookingAction(bookingId: number): Promise<ActionResu
   if (!id.success) return fail((await getTranslations("errors"))("notFound"));
 
   return runAction(async () => {
-    await bookingService.cancelByUser(user.id, id.data);
+    // Same path as the paid cancel dialog: ownership and status checked under
+    // a row lock, audited as `booking.cancelled_by_traveller`.
+    const result = await bookingService.cancelByTraveller(user.id, id.data);
+    after(() => notificationService.bookingCancelledByTraveller(result));
     revalidate.account();
     revalidate.admin();
     return undefined;

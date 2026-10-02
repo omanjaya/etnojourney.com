@@ -1,1 +1,29 @@
-{}
+{
+  "ticket": {
+    "download": "Unduh e-tiket (PDF)",
+    "heading": "E-tiket",
+    "documentTitle": "E-tiket EtnoJourney {code}",
+    "code": "Kode booking",
+    "status": "Status",
+    "statuses": {
+      "pending": "Menunggu",
+      "confirmed": "Terkonfirmasi",
+      "cancelled": "Dibatalkan",
+      "completed": "Selesai"
+    },
+    "travelDate": "Tanggal perjalanan",
+    "participants": "Peserta",
+    "people": "{count, plural, one {# orang} other {# orang}}",
+    "meetingPoint": "Titik kumpul",
+    "contactName": "Nama kontak",
+    "contactPhone": "Telepon kontak",
+    "totalPaid": "Total dibayar",
+    "total": "Total",
+    "paymentMethod": "Metode pembayaran",
+    "bring": "Yang perlu dibawa",
+    "etiquette": "Etika dan adat",
+    "verify": "Cek keaslian booking ini",
+    "policy": "Kebijakan pembatalan",
+    "footer": "Tunjukkan e-tiket ini, dicetak atau di ponsel, kepada tuan rumah di titik kumpul. Detail booking terbaru selalu ada di halaman akunmu."
+  }
+}

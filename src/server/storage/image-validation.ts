@@ -41,8 +41,11 @@ export function exceedsPixelLimit(width: number, height: number): boolean {
   return width * height > MAX_PIXELS;
 }
 
-/** `tours/<yyyy>/<mm>/<uuid>.webp`, built only from server-side values. */
-export function buildImageKey(folder: "tours", id: string, now: Date = new Date()): string {
+/** Top-level storage folders; each maps to a public `/media/<folder>/` prefix. */
+export type ImageFolder = "tours" | "reviews";
+
+/** `<folder>/<yyyy>/<mm>/<uuid>.webp`, built only from server-side values. */
+export function buildImageKey(folder: ImageFolder, id: string, now: Date = new Date()): string {
   const yyyy = String(now.getUTCFullYear());
   const mm = String(now.getUTCMonth() + 1).padStart(2, "0");
   return `${folder}/${yyyy}/${mm}/${id}.webp`;

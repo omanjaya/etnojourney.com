@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, MessageCircle } from "lucide-react";
 import { formatCurrency } from "@/lib/format";
 import { buttonVariants } from "@/components/ui/button";
 import { BOOKED_EVENT } from "@/features/booking/components/booking-panel";
@@ -17,7 +17,14 @@ import "../view-transitions.css";
  * the footer is on screen, so it never duplicates the panel or covers content,
  * and it hides for good after a booking (`ej:booked`) to avoid double bookings.
  */
-export function MobileBookingBar({ pricePerPerson }: { pricePerPerson: number }) {
+export function MobileBookingBar({
+  pricePerPerson,
+  whatsapp,
+}: {
+  pricePerPerson: number;
+  /** Optional "ask on WhatsApp" shortcut, shown as a compact icon button. */
+  whatsapp?: { href: string; label: string };
+}) {
   const locale = useLocale();
   const t = useTranslations("tours.detail");
   const tc = useTranslations("common");
@@ -64,13 +71,27 @@ export function MobileBookingBar({ pricePerPerson }: { pricePerPerson: number })
           </span>{" "}
           <span className="text-muted text-sm whitespace-nowrap">{tc("perPerson")}</span>
         </p>
-        <a href="#booking" className={buttonVariants({ size: "md", className: "group/cta" })}>
-          {t("bookCta")}
-          <ArrowDown
-            aria-hidden
-            className="transition-transform duration-500 group-hover/cta:translate-y-0.5"
-          />
-        </a>
+        <div className="flex items-center gap-2">
+          {whatsapp && (
+            <a
+              href={whatsapp.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={whatsapp.label}
+              title={whatsapp.label}
+              className={buttonVariants({ variant: "outline", size: "icon", className: "size-11" })}
+            >
+              <MessageCircle aria-hidden />
+            </a>
+          )}
+          <a href="#booking" className={buttonVariants({ size: "md", className: "group/cta" })}>
+            {t("bookCta")}
+            <ArrowDown
+              aria-hidden
+              className="transition-transform duration-500 group-hover/cta:translate-y-0.5"
+            />
+          </a>
+        </div>
       </div>
     </div>
   );

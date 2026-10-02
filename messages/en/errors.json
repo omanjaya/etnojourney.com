@@ -19,6 +19,11 @@
   "paymentUnavailable": "Online payment is currently unavailable. Please contact us.",
   "paymentGateway": "Couldn't reach the payment service. Please try again shortly.",
   "notRefundable": "Only a paid payment can be marked as refunded.",
+  "notReschedulable": "This booking can no longer be moved to another date.",
+  "rescheduleLimit": "This booking has already been moved. The reschedule limit has been reached.",
+  "rescheduleTooLate": "Date changes are closed because the travel date is too close.",
+  "sameDate": "Choose a date different from the current travel date.",
+  "refundChanged": "The refund amount has changed since you opened this page. Please review it and confirm again.",
   "fields": {
     "closurePast": "Past dates cannot be closed.",
     "closureRange": "The end date must be on or after the start date.",

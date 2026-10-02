@@ -12,6 +12,7 @@ export type RefundQueueItem = Awaited<ReturnType<typeof paymentService.refundQue
 /** Paid payments whose money must go back, oldest first, each with a "Record refund" form. */
 export function RefundQueue({ items }: { items: RefundQueueItem[] }) {
   const t = useTranslations("adminPayments");
+  const ts = useTranslations("selfService.adminRefund");
   const locale = useLocale();
 
   return (
@@ -41,8 +42,10 @@ export function RefundQueue({ items }: { items: RefundQueueItem[] }) {
         </p>
       ) : (
         <ul className="divide-line border-line mt-4 divide-y border-t">
-          {items.map(({ payment, booking, tour, customer, reason, ageDays }) => {
-            const amount = formatCurrency(payment.amount, locale);
+          {items.map(({ payment, booking, tour, customer, reason, ageDays, due }) => {
+            // What actually goes back: a policy share when the traveller cancelled late.
+            const amount = formatCurrency(due.amount, locale);
+            const paid = formatCurrency(payment.amount, locale);
             return (
               <li
                 key={payment.id}
@@ -72,11 +75,23 @@ export function RefundQueue({ items }: { items: RefundQueueItem[] }) {
                     {t("queue.flaggedAge", { days: ageDays })}
                   </p>
                 </div>
-                <p className="text-lg font-medium tabular-nums md:text-right">{amount}</p>
+                <div className="md:text-right">
+                  <p className="text-lg font-medium tabular-nums">{amount}</p>
+                  {due.partial && (
+                    <p data-testid="refund-partial" className="text-muted mt-0.5 text-xs">
+                      {ts("partial", { amount, paid, percent: due.percent })}
+                    </p>
+                  )}
+                </div>
                 <RecordRefundDialog
                   paymentId={payment.id}
                   code={booking.code}
                   amountLabel={amount}
+                  detail={
+                    due.partial
+                      ? ts("partial", { amount, paid, percent: due.percent })
+                      : ts("full", { amount })
+                  }
                 />
               </li>
             );

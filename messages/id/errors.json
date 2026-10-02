@@ -19,6 +19,11 @@
   "paymentUnavailable": "Pembayaran online sedang tidak tersedia. Silakan hubungi kami.",
   "paymentGateway": "Gagal terhubung ke layanan pembayaran. Coba beberapa saat lagi.",
   "notRefundable": "Hanya pembayaran berstatus lunas yang bisa ditandai sudah dikembalikan.",
+  "notReschedulable": "Booking ini tidak bisa diubah jadwalnya lagi.",
+  "rescheduleLimit": "Jadwal booking ini sudah pernah diubah. Batas perubahan jadwal sudah tercapai.",
+  "rescheduleTooLate": "Perubahan jadwal sudah ditutup karena tanggal perjalanan terlalu dekat.",
+  "sameDate": "Pilih tanggal yang berbeda dari tanggal perjalanan sekarang.",
+  "refundChanged": "Besaran pengembalian dana sudah berubah sejak halaman dibuka. Periksa lagi lalu konfirmasi ulang.",
   "fields": {
     "closurePast": "Tanggal yang sudah lewat tidak bisa ditutup.",
     "closureRange": "Tanggal akhir harus sama dengan atau setelah tanggal mulai.",

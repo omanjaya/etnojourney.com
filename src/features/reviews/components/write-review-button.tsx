@@ -9,7 +9,9 @@ import { REVIEW_BODY_MAX, REVIEW_BODY_MIN } from "@/server/services/review.rules
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Textarea } from "@/components/ui/form-controls";
+import type { ReviewPhotoUpload } from "@/server/services/review.service";
 import { createReviewAction } from "../actions";
+import { ReviewPhotoPicker } from "./review-photo-picker";
 
 type State = ActionResult<{ tourSlug: string }> | null;
 
@@ -117,6 +119,8 @@ function ReviewForm({
   const [state, action, pending] = useActionState<State, FormData>(createReviewAction, null);
   const [rating, setRating] = useState(0);
   const [body, setBody] = useState("");
+  const [photos, setPhotos] = useState<ReviewPhotoUpload[]>([]);
+  const [uploading, setUploading] = useState(false);
 
   const fieldErrors = state && !state.ok ? state.fieldErrors : undefined;
   const error = (field: string) => fieldErrors?.[field]?.[0];
@@ -145,6 +149,7 @@ function ReviewForm({
   return (
     <form action={action} className="flex flex-col gap-6" noValidate>
       <input type="hidden" name="bookingId" value={bookingId} />
+      <input type="hidden" name="photos" value={JSON.stringify(photos)} />
       <div>
         <h2 className="text-3xl leading-tight">{t("title")}</h2>
         <p className="text-muted mt-2 text-sm">{t("subtitle", { tour: tourTitle })}</p>
@@ -192,7 +197,14 @@ function ReviewForm({
         />
       </Field>
 
-      <Button type="submit" size="lg" loading={pending} className="w-full">
+      <ReviewPhotoPicker
+        bookingId={bookingId}
+        photos={photos}
+        onChange={setPhotos}
+        onPendingChange={setUploading}
+      />
+
+      <Button type="submit" size="lg" loading={pending} disabled={uploading} className="w-full">
         {t("submit")}
       </Button>
     </form>

@@ -297,8 +297,8 @@
         "id": "paid",
         "title": "Paid bookings",
         "paragraphs": [
-          "Paid bookings can't be cancelled from the site. Request a cancellation by contacting us with your booking code.",
-          "The refund amount depends on how far ahead of the travel date the request is made: [Refund percentage terms, e.g. by number of days]."
+          "You can cancel a paid booking yourself from My Account as long as the travel date hasn't passed. Before you confirm, you'll see which terms apply and how much will be refunded.",
+          "The refund depends on the number of days between the day you cancel and the travel date:"
         ]
       },
       {
@@ -312,14 +312,15 @@
         "id": "refunds",
         "title": "How refunds are processed",
         "paragraphs": [
-          "Refunds are processed manually to the original payment method through Midtrans. How long they take to arrive depends on your bank or e-wallet provider: [Estimated processing time]."
+          "Refunds are processed manually to the original payment method through Midtrans. How long they take to arrive depends on your bank or e-wallet provider, so we can't promise an exact time. We'll email you as soon as the refund has been sent."
         ]
       },
       {
         "id": "changes",
         "title": "Date changes",
         "paragraphs": [
-          "Requests to change the date of a paid booking are handled according to the hosts' availability. The new date must still be at least 3 days from the day of the request."
+          "You can change the travel date yourself from My Account, for paid and unpaid bookings, as long as the new date is available.",
+          "For changes outside the terms below, contact us with your booking code. Requests are handled according to the hosts' availability."
         ]
       }
     ]

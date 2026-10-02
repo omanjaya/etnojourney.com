@@ -5,8 +5,21 @@ import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/i18n-text";
 import { Stars } from "@/components/ui/stars";
 import { Reveal } from "@/components/motion";
+import {
+  ReviewPhotoStrip,
+  type ReviewStripPhoto,
+} from "@/features/reviews/components/review-photo-strip";
 
-export function ReviewList({ reviews, locale }: { reviews: Review[]; locale: Locale }) {
+export function ReviewList({
+  reviews,
+  locale,
+  photos,
+}: {
+  reviews: Review[];
+  locale: Locale;
+  /** Public photos per review id (published reviews, hidden photos excluded). */
+  photos?: ReadonlyMap<number, ReviewStripPhoto[]>;
+}) {
   const format = useFormatter();
   const t = useTranslations("reviews.reply");
   return (
@@ -24,6 +37,7 @@ export function ReviewList({ reviews, locale }: { reviews: Review[]; locale: Loc
             <p className="text-ink-soft mt-4 flex-1 leading-relaxed">
               {localize(review.body, locale)}
             </p>
+            <ReviewPhotoStrip photos={photos?.get(review.id) ?? []} author={review.authorName} />
             <div className="mt-6 flex items-center gap-3">
               <span className="bg-terracotta-light font-display text-terracotta-dark grid size-10 place-items-center rounded-full font-semibold">
                 {review.authorName.charAt(0)}

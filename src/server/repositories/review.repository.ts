@@ -1,11 +1,13 @@
 import "server-only";
 import {
   and,
+  asc,
   count,
   desc,
   eq,
   gte,
   ilike,
+  inArray,
   isNotNull,
   isNull,
   or,
@@ -14,7 +16,7 @@ import {
 } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
 import { likePattern } from "@/server/db/like";
-import { bookings, destinations, reviews, tours } from "@/server/db/schema";
+import { bookings, destinations, reviewPhotos, reviews, tours } from "@/server/db/schema";
 
 export const reviewRepository = {
   latestHighlights(limit: number) {
@@ -110,6 +112,66 @@ export const reviewRepository = {
       .update(reviews)
       .set(values)
       .where(eq(reviews.id, id))
+      .returning()
+      .then((rows) => rows[0]);
+  },
+
+  async insertPhotos(
+    tx: DbExecutor,
+    reviewId: number,
+    photos: { path: string; width: number; height: number; position: number }[],
+  ): Promise<void> {
+    if (photos.length === 0) return;
+    await tx.insert(reviewPhotos).values(photos.map((photo) => ({ ...photo, reviewId })));
+  },
+
+  /** Visible photos of published reviews only: what the public may see. */
+  publicPhotosForReviews(reviewIds: number[]) {
+    if (reviewIds.length === 0) return Promise.resolve([]);
+    return db
+      .select({
+        id: reviewPhotos.id,
+        reviewId: reviewPhotos.reviewId,
+        path: reviewPhotos.path,
+        width: reviewPhotos.width,
+        height: reviewPhotos.height,
+      })
+      .from(reviewPhotos)
+      .innerJoin(reviews, eq(reviewPhotos.reviewId, reviews.id))
+      .where(
+        and(
+          inArray(reviewPhotos.reviewId, reviewIds),
+          eq(reviews.isPublished, true),
+          eq(reviewPhotos.isHidden, false),
+        ),
+      )
+      .orderBy(asc(reviewPhotos.reviewId), asc(reviewPhotos.position), asc(reviewPhotos.id));
+  },
+
+  /** Every photo of the given reviews, hidden ones included (moderation). */
+  photosForReviews(reviewIds: number[]) {
+    if (reviewIds.length === 0) return Promise.resolve([]);
+    return db
+      .select()
+      .from(reviewPhotos)
+      .where(inArray(reviewPhotos.reviewId, reviewIds))
+      .orderBy(asc(reviewPhotos.reviewId), asc(reviewPhotos.position), asc(reviewPhotos.id));
+  },
+
+  findPhoto(id: number) {
+    return db
+      .select()
+      .from(reviewPhotos)
+      .where(eq(reviewPhotos.id, id))
+      .limit(1)
+      .then((rows) => rows[0]);
+  },
+
+  setPhotoHidden(id: number, isHidden: boolean) {
+    return db
+      .update(reviewPhotos)
+      .set({ isHidden })
+      .where(eq(reviewPhotos.id, id))
       .returning()
       .then((rows) => rows[0]);
   },

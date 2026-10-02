@@ -11,6 +11,7 @@ import {
   HeartHandshake,
   Languages,
   MapPin,
+  MessageCircle,
   Mountain,
   PenLine,
   Route,
@@ -26,7 +27,7 @@ import { provinceLabel } from "@/lib/provinces";
 import { localizedUrl, pageMetadata, siteUrl } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Rating } from "@/components/ui/rating";
 import { categoryIcons } from "@/components/shared/category-icon";
 import { JsonLd } from "@/components/shared/json-ld";
@@ -41,11 +42,13 @@ import { ReviewList } from "@/features/tours/components/review-list";
 import { TourGallery } from "@/features/tours/components/tour-gallery";
 import { getCurrentUser } from "@/server/auth/guards";
 import { isDomainError } from "@/server/services/errors";
+import { reviewService } from "@/server/services/review.service";
 import { tourService } from "@/server/services/tour.service";
 import { wishlistService } from "@/server/services/wishlist.service";
 import { toCreditMap } from "@/components/shared/photo-credit";
 import { photoCreditService } from "@/server/services/photo-credit.service";
 import { siteContact } from "@/config/site";
+import { whatsAppLink } from "@/lib/whatsapp";
 
 type DetailTour = Awaited<ReturnType<typeof tourService.getPublishedBySlug>>;
 
@@ -168,20 +171,22 @@ export default async function TourDetailPage({
   setRequestLocale(locale);
 
   const tour = await loadTour(slug);
-  const [t, td, tc, tr, user, related] = await Promise.all([
+  const [t, td, tc, tr, tw, user, related] = await Promise.all([
     getTranslations("tours.detail"),
     getTranslations("tours.difficulty"),
     getTranslations("common"),
     getTranslations("reviews"),
+    getTranslations("community.whatsapp"),
     getCurrentUser(),
     tourService.related(tour.id, tour.destinationId),
   ]);
   const title = localize(tour.title, locale);
   const CategoryIcon = categoryIcons[tour.category];
   const images = [tour.coverImage, ...tour.gallery.filter((g) => g !== tour.coverImage)];
-  const [saved, credits] = await Promise.all([
+  const [saved, credits, reviewPhotos] = await Promise.all([
     user ? wishlistService.tourIds(user.id).then((ids) => ids.has(tour.id)) : false,
     photoCreditService.forImages(images),
+    reviewService.publicPhotosByReview(tour.reviews.map((review) => review.id)),
   ]);
 
   const facts = [
@@ -202,7 +207,13 @@ export default async function TourDetailPage({
   ];
 
   const prefill = bookingPrefill(await searchParams, tour.maxParticipants);
-  const contactEmail = siteContact().email ?? undefined;
+  const contact = siteContact();
+  const contactEmail = contact.email ?? undefined;
+  // Prefilled question naming the tour and its URL; null (nothing rendered) when unset.
+  const whatsappHref = whatsAppLink(
+    contact.whatsapp,
+    tw("tourMessage", { tour: title, url: localizedUrl(`/tours/${tour.slug}`, locale) }),
+  );
   const notIncluded: LocalizedText[] = tour.notIncluded.length
     ? tour.notIncluded
     : (["transport", "personal", "tips"] as const).map((key) => {
@@ -489,7 +500,7 @@ export default async function TourDetailPage({
             </div>
             {tour.reviews.length > 0 ? (
               <div className="mt-8">
-                <ReviewList reviews={tour.reviews} locale={locale} />
+                <ReviewList reviews={tour.reviews} locale={locale} photos={reviewPhotos} />
               </div>
             ) : (
               <p className="text-muted mt-6">{t("noReviews")}</p>
@@ -520,6 +531,21 @@ export default async function TourDetailPage({
               initialParticipants={prefill.initialParticipants}
               contactEmail={contactEmail}
             />
+            {whatsappHref && (
+              <div className="short:mt-3 mt-4 flex flex-col items-center gap-2 text-center">
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={tw("askLabel")}
+                  className={buttonVariants({ variant: "outline", className: "w-full" })}
+                >
+                  <MessageCircle aria-hidden />
+                  {tw("ask")}
+                </a>
+                <p className="text-muted short:hidden text-xs">{tw("askHint")}</p>
+              </div>
+            )}
           </div>
         </aside>
       </Container>
@@ -539,7 +565,10 @@ export default async function TourDetailPage({
         </section>
       )}
 
-      <MobileBookingBar pricePerPerson={tour.pricePerPerson} />
+      <MobileBookingBar
+        pricePerPerson={tour.pricePerPerson}
+        whatsapp={whatsappHref ? { href: whatsappHref, label: tw("askLabel") } : undefined}
+      />
     </article>
   );
 }

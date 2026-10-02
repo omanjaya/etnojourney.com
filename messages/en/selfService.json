@@ -1,1 +1,59 @@
-{}
+{
+  "panel": {
+    "rescheduleBlocked": {
+      "limit": "This booking has already been moved {max, plural, one {once} other {# times}}, the most allowed. Contact us if you need another change.",
+      "tooLate": "Date changes close {days, plural, one {# day} other {# days}} before the travel date. Contact us if you need help."
+    },
+    "policyLink": "Cancellation and date change policy"
+  },
+  "tier": {
+    "atLeast": "{from, plural, one {# day} other {# days}} or more before travel",
+    "between": "{from} to {to} days before travel",
+    "under": "Fewer than {days, plural, one {# day} other {# days}} before travel",
+    "refund": "{percent, plural, =100 {Full refund} =0 {No refund} other {#% refund}}"
+  },
+  "cancel": {
+    "trigger": "Cancel booking",
+    "triggerFor": "Cancel booking {code}",
+    "title": "Cancel booking {code}?",
+    "timing": "{days, plural, =0 {Your trip is today.} one {Your trip is # day away.} other {Your trip is # days away.}} Under our cancellation policy this falls in the tier:",
+    "refundLabel": "Refund",
+    "refundAmount": "{amount} of the {paid} you paid",
+    "noRefund": "Nothing is refunded for a cancellation this close to the travel date.",
+    "processing": "Refunds are sent manually to your original payment method. How long it takes to arrive depends on your bank or e-wallet; we'll email you when it has been sent.",
+    "irreversible": "A cancelled booking can't be restored. Your seats go back on sale right away.",
+    "keep": "Keep my booking",
+    "confirm": "Yes, cancel booking",
+    "done": "Your booking has been cancelled. We've sent a confirmation to your email."
+  },
+  "reschedule": {
+    "trigger": "Change date",
+    "triggerFor": "Change the date of booking {code}",
+    "title": "Choose a new date",
+    "body": "The price stays as booked. You can change the date {max, plural, one {once} other {# times}} per booking, up to {days, plural, one {# day} other {# days}} before the current travel date.",
+    "current": "Current date: {date}",
+    "calendarLabel": "New travel date",
+    "selected": "New date: {date}",
+    "noneSelected": "Pick an available date in the calendar.",
+    "sameDate": "That is your current travel date. Pick another one.",
+    "notEnoughSeats": "Only {count, plural, one {# seat is} other {# seats are}} left on that date, not enough for {participants}.",
+    "keep": "Keep current date",
+    "confirm": "Move my booking",
+    "done": "Your travel date is now {date}. We've sent a confirmation to your email."
+  },
+  "policy": {
+    "tiersCaption": "Refund by how many days before the travel date you cancel (Asia/Jakarta time)",
+    "tierColumn": "When you cancel",
+    "refundColumn": "Refund",
+    "rounding": "Partial refunds are rounded down to the nearest rupiah.",
+    "rescheduleTitle": "Changing the date yourself",
+    "rescheduleMax": "You can change the date at most {max, plural, one {once} other {# times}} per booking.",
+    "rescheduleClose": "Date changes close {days, plural, one {# day} other {# days}} before the current travel date.",
+    "rescheduleLead": "The new date must be at least {days, plural, one {# day} other {# days}} from the day you make the change, and still open with enough seats for everyone in the booking.",
+    "reschedulePrice": "The price stays as booked, for paid and unpaid bookings alike."
+  },
+  "adminRefund": {
+    "partial": "Refund {amount} of {paid}, {percent}% per policy",
+    "full": "Full refund of {amount}"
+  }
+}

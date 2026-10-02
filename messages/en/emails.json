@@ -77,5 +77,80 @@
       "heading": "Payment received",
       "intro": "The traveller has paid for {tour}. Check the booking and let the village hosts know."
     }
+  },
+  "trip": {
+    "details": {
+      "meetingPoint": "Meeting point",
+      "contactName": "Contact name",
+      "contactPhone": "Contact phone"
+    },
+    "reminder": {
+      "subject": "Your trip to {destination} is coming up ({code})",
+      "preheader": "{date}, meeting point: {place}.",
+      "heading": "Your trip is almost here",
+      "intro": "{days, plural, =0 {{tour} starts today.} =1 {{tour} starts tomorrow.} other {{tour} starts in # days.}} Here is everything you need for the day.",
+      "meet": "Please arrive at the meeting point a little early. Your host will meet you there.",
+      "bring": "What to bring: {items}.",
+      "etiquette": "Local etiquette: {items}.",
+      "ticket": "Your e-ticket (PDF, sign in to download):",
+      "support": "Questions before you go? Contact us at {contact}."
+    },
+    "reviewRequest": {
+      "subject": "How was {tour}?",
+      "preheader": "Share your experience in a couple of minutes.",
+      "heading": "How was your trip?",
+      "intro": "We hope you enjoyed {tour} in {destination}.",
+      "ask": "A short review helps future travellers choose well and supports the village hosts who welcomed you. It only takes a couple of minutes.",
+      "button": "Write a review",
+      "fallback": "If the button doesn't work, copy this link into your browser:",
+      "once": "We only send this request once per trip."
+    }
+  },
+  "selfService": {
+    "details": {
+      "refund": "Refund",
+      "previousDate": "Previous date",
+      "newDate": "New travel date"
+    },
+    "refund": {
+      "unpaid": "Nothing had been paid for this booking, so there is nothing to refund.",
+      "full": "You'll receive a full refund of {amount}.",
+      "partial": "Under our cancellation policy, {percent}% of your payment comes back to you: {amount}.",
+      "none": "You cancelled {days, plural, =0 {on the travel date} one {# day before travel} other {# days before travel}}, so under our cancellation policy no refund applies.",
+      "processing": "Our team sends refunds manually to your original payment method. How long it takes to arrive depends on your bank or e-wallet; we'll let you know once it has been sent."
+    },
+    "refundValue": {
+      "unpaid": "Not paid",
+      "partial": "{amount} ({percent}%)",
+      "none": "No refund"
+    },
+    "cancelled": {
+      "subject": "Booking {code} cancelled",
+      "preheader": "Your booking for {tour} has been cancelled.",
+      "heading": "Your booking is cancelled",
+      "intro": "As you requested, your booking for {tour} on {date} has been cancelled."
+    },
+    "rescheduled": {
+      "subject": "Booking {code} moved to {date}",
+      "preheader": "Your new travel date is {date}.",
+      "heading": "Your new travel date",
+      "intro": "Your booking for {tour} has been moved from {from} to {to}. The price stays as booked.",
+      "next": "Our team will let your village hosts know. We'll send you a reminder again shortly before the new date."
+    },
+    "admin": {
+      "cancelled": {
+        "subject": "Traveller cancelled {code}: {tour}",
+        "heading": "Booking cancelled by the traveller",
+        "intro": "The traveller cancelled {tour} on {date} from their account. The seats are free again.",
+        "refundQueued": "A refund is owed under the cancellation policy and is waiting in the refund queue.",
+        "noRefund": "No refund is owed for this cancellation."
+      },
+      "rescheduled": {
+        "subject": "Booking {code} moved to {date}",
+        "preheader": "From {from} to {to}.",
+        "heading": "Booking rescheduled by the traveller",
+        "intro": "The traveller moved {tour} from {from} to {to}. Please let the village hosts know."
+      }
+    }
   }
 }

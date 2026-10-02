@@ -62,6 +62,16 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     ...(contact.address && {
       address: { "@type": "PostalAddress", streetAddress: contact.address, addressCountry: "ID" },
     }),
+    ...(contact.whatsapp && {
+      contactPoint: {
+        "@type": "ContactPoint",
+        // Machine-readable schema.org value, not UI copy.
+        contactType: "customer service",
+        telephone: `+${contact.whatsapp}`,
+        url: `https://wa.me/${contact.whatsapp}`,
+        availableLanguage: ["id", "en"],
+      },
+    }),
   };
   const website = {
     "@context": "https://schema.org",

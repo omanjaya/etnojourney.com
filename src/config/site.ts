@@ -1,5 +1,6 @@
 import "server-only";
 import { getEnv } from "@/server/env";
+import { normalizeWhatsAppNumber } from "@/lib/whatsapp";
 
 /**
  * Public business contact details, from env so real values are configured per
@@ -11,6 +12,8 @@ export type SiteContact = {
   phone: string | null;
   /** Single line, e.g. "Jl. ..., Gianyar, Bali". */
   address: string | null;
+  /** WhatsApp number for wa.me links: digits only, international format. */
+  whatsapp: string | null;
 };
 
 export function siteContact(): SiteContact {
@@ -19,8 +22,9 @@ export function siteContact(): SiteContact {
     email: env.CONTACT_EMAIL ?? null,
     phone: env.CONTACT_PHONE ?? null,
     address: env.CONTACT_ADDRESS ?? null,
+    whatsapp: normalizeWhatsAppNumber(env.CONTACT_WHATSAPP),
   };
 }
 
 export const hasAnyContact = (contact: SiteContact) =>
-  Boolean(contact.email || contact.phone || contact.address);
+  Boolean(contact.email || contact.phone || contact.address || contact.whatsapp);

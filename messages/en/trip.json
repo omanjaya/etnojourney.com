@@ -1,1 +1,29 @@
-{}
+{
+  "ticket": {
+    "download": "Download e-ticket (PDF)",
+    "heading": "E-ticket",
+    "documentTitle": "EtnoJourney e-ticket {code}",
+    "code": "Booking code",
+    "status": "Status",
+    "statuses": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled",
+      "completed": "Completed"
+    },
+    "travelDate": "Travel date",
+    "participants": "Travellers",
+    "people": "{count, plural, one {# person} other {# people}}",
+    "meetingPoint": "Meeting point",
+    "contactName": "Contact name",
+    "contactPhone": "Contact phone",
+    "totalPaid": "Total paid",
+    "total": "Total",
+    "paymentMethod": "Payment method",
+    "bring": "What to bring",
+    "etiquette": "Local etiquette",
+    "verify": "Verify this booking",
+    "policy": "Cancellation policy",
+    "footer": "Show this e-ticket, printed or on your phone, to your host at the meeting point. The latest booking details are always on your account page."
+  }
+}

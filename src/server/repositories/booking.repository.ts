@@ -10,6 +10,7 @@ import {
   inArray,
   lt,
   lte,
+  ne,
   or,
   sql,
   type SQL,
@@ -87,6 +88,47 @@ export const bookingRepository = {
         ),
       );
     return rows.reduce((total, row) => total + row.participants, 0);
+  },
+
+  /**
+   * Seats held on a date by every active booking except `bookingId` (the one
+   * being moved). Callers must hold the tour row lock, as for `countActiveSeats`.
+   */
+  async countActiveSeatsExcluding(
+    tx: DbExecutor,
+    tourId: number,
+    travelDate: string,
+    bookingId: number,
+  ): Promise<number> {
+    const rows = await tx
+      .select({ participants: bookings.participants })
+      .from(bookings)
+      .where(
+        and(
+          eq(bookings.tourId, tourId),
+          eq(bookings.travelDate, travelDate),
+          inArray(bookings.status, [...ACTIVE_STATUSES]),
+          ne(bookings.id, bookingId),
+        ),
+      );
+    return rows.reduce((total, row) => total + row.participants, 0);
+  },
+
+  /**
+   * Moves a booking to a new date: bumps the reschedule count and clears the
+   * pre-trip reminder marker so the reminder goes out again for the new date.
+   */
+  reschedule(tx: DbExecutor, id: number, travelDate: string): Promise<Booking> {
+    return tx
+      .update(bookings)
+      .set({
+        travelDate,
+        rescheduleCount: sql`${bookings.rescheduleCount} + 1`,
+        reminderSentAt: null,
+      })
+      .where(eq(bookings.id, id))
+      .returning()
+      .then((rows) => rows[0]);
   },
 
   insert(tx: DbExecutor, values: typeof bookings.$inferInsert): Promise<Booking> {

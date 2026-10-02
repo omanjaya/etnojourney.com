@@ -77,5 +77,80 @@
       "heading": "Pembayaran diterima",
       "intro": "Wisatawan sudah membayar {tour}. Periksa booking ini dan kabari tuan rumah di desa."
     }
+  },
+  "trip": {
+    "details": {
+      "meetingPoint": "Titik kumpul",
+      "contactName": "Nama kontak",
+      "contactPhone": "Telepon kontak"
+    },
+    "reminder": {
+      "subject": "Perjalananmu ke {destination} sudah dekat ({code})",
+      "preheader": "{date}, titik kumpul: {place}.",
+      "heading": "Perjalananmu sebentar lagi",
+      "intro": "{days, plural, =0 {{tour} dimulai hari ini.} =1 {{tour} dimulai besok.} other {{tour} dimulai # hari lagi.}} Berikut semua yang kamu perlukan di hari keberangkatan.",
+      "meet": "Datanglah ke titik kumpul sedikit lebih awal. Tuan rumahmu akan menyambut di sana.",
+      "bring": "Yang perlu dibawa: {items}.",
+      "etiquette": "Etika dan adat setempat: {items}.",
+      "ticket": "E-tiket kamu (PDF, masuk ke akun untuk mengunduh):",
+      "support": "Ada pertanyaan sebelum berangkat? Hubungi kami di {contact}."
+    },
+    "reviewRequest": {
+      "subject": "Bagaimana pengalamanmu di {tour}?",
+      "preheader": "Ceritakan pengalamanmu dalam beberapa menit.",
+      "heading": "Bagaimana perjalananmu?",
+      "intro": "Semoga kamu menikmati {tour} di {destination}.",
+      "ask": "Ulasan singkat membantu wisatawan lain memilih dengan tepat dan mendukung tuan rumah di desa yang telah menyambutmu. Hanya perlu beberapa menit.",
+      "button": "Tulis ulasan",
+      "fallback": "Jika tombol tidak berfungsi, salin tautan ini ke browser:",
+      "once": "Permintaan ini hanya kami kirim sekali untuk setiap perjalanan."
+    }
+  },
+  "selfService": {
+    "details": {
+      "refund": "Pengembalian dana",
+      "previousDate": "Tanggal sebelumnya",
+      "newDate": "Tanggal perjalanan baru"
+    },
+    "refund": {
+      "unpaid": "Booking ini belum dibayar, jadi tidak ada dana yang perlu dikembalikan.",
+      "full": "Kamu akan menerima pengembalian dana penuh sebesar {amount}.",
+      "partial": "Sesuai kebijakan pembatalan, {percent}% dari pembayaranmu dikembalikan: {amount}.",
+      "none": "Kamu membatalkan {days, plural, =0 {pada hari perjalanan} other {# hari sebelum perjalanan}}, jadi sesuai kebijakan pembatalan tidak ada pengembalian dana.",
+      "processing": "Tim kami mengirim pengembalian dana secara manual ke metode pembayaran yang kamu pakai. Lama dana diterima bergantung pada bank atau e-wallet; kami akan mengabarimu begitu dana dikirim."
+    },
+    "refundValue": {
+      "unpaid": "Belum dibayar",
+      "partial": "{amount} ({percent}%)",
+      "none": "Tidak ada pengembalian dana"
+    },
+    "cancelled": {
+      "subject": "Booking {code} dibatalkan",
+      "preheader": "Booking {tour} kamu sudah dibatalkan.",
+      "heading": "Booking kamu sudah dibatalkan",
+      "intro": "Sesuai permintaanmu, booking {tour} pada {date} sudah dibatalkan."
+    },
+    "rescheduled": {
+      "subject": "Booking {code} dipindah ke {date}",
+      "preheader": "Tanggal perjalanan barumu {date}.",
+      "heading": "Tanggal perjalanan barumu",
+      "intro": "Booking {tour} kamu sudah dipindah dari {from} ke {to}. Harga tetap seperti saat booking.",
+      "next": "Tim kami akan mengabari tuan rumah di desa. Kami akan mengirim pengingat lagi menjelang tanggal yang baru."
+    },
+    "admin": {
+      "cancelled": {
+        "subject": "Wisatawan membatalkan {code}: {tour}",
+        "heading": "Booking dibatalkan oleh wisatawan",
+        "intro": "Wisatawan membatalkan {tour} pada {date} dari akunnya. Kursinya sudah tersedia lagi.",
+        "refundQueued": "Ada pengembalian dana sesuai kebijakan pembatalan dan sudah masuk antrean refund.",
+        "noRefund": "Tidak ada pengembalian dana untuk pembatalan ini."
+      },
+      "rescheduled": {
+        "subject": "Booking {code} dipindah ke {date}",
+        "preheader": "Dari {from} ke {to}.",
+        "heading": "Jadwal booking diubah oleh wisatawan",
+        "intro": "Wisatawan memindahkan {tour} dari {from} ke {to}. Mohon kabari tuan rumah di desa."
+      }
+    }
   }
 }
