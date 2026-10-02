@@ -88,11 +88,22 @@ docker run -d --name etnojourney -p 3000:3000 \
   etnojourney
 ```
 
-Atau dengan Compose (database + app):
+Atau dengan Compose (database + app), cara termudah untuk mencoba versi production di laptop:
 
 ```bash
-docker compose --profile app up -d --build
+# Jika port 5432 sudah dipakai Postgres lokal, pilih port host lain untuk database.
+DB_HOST_PORT=5544 docker compose --profile app up -d --build
+
+# Isi data contoh ke database container (dijalankan dari host lewat port tadi).
+DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5544/etnojourney npm run db:seed
+
+open http://localhost:3000                       # login: traveler@etnojourney.id / Traveler123!
+docker compose --profile app logs -f app         # log aplikasi
+docker compose --profile app down                # berhenti (data tetap di volume)
+docker compose --profile app down -v             # berhenti dan hapus data
 ```
+
+Compose membaca rahasia dari `.env` (minimal `BETTER_AUTH_SECRET`), mengarahkan app ke database container, dan memakai `http://localhost:3000` sebagai URL publik. Ubah lewat `APP_URL`, `APP_HOST_PORT`, dan `DB_HOST_PORT`. Container berjalan dalam mode production, jadi simulator pembayaran tidak tersedia: tanpa `MIDTRANS_SERVER_KEY`, tombol bayar menampilkan pesan "pembayaran tidak tersedia".
 
 - **Health check**: `GET /api/health` mengembalikan `200 {"status":"ok","db":"ok"}`, atau `503` jika database tidak terjangkau. Dipakai oleh `HEALTHCHECK` di image dan cocok untuk load balancer.
 - **Validasi env**: server menolak start jika konfigurasi salah. Daftar variabel yang bermasalah ditulis ke log tanpa menampilkan nilainya (`src/server/env.ts`).
