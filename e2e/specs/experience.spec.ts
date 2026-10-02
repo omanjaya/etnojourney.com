@@ -49,7 +49,9 @@ test.describe("experience", () => {
   test.describe("without JavaScript", () => {
     test.use({ javaScriptEnabled: false });
     test("server HTML already contains the content", async ({ page }) => {
-      await page.goto("/");
+      // Only the HTML matters here; waiting for every image ("load") made this
+      // depend on the cold image-optimizer queue of slow CI runners.
+      await page.goto("/", { waitUntil: "domcontentloaded" });
       await expect(page.locator("h1")).toContainText("Pulang membawa");
       await expect(page.locator("article").first()).toBeVisible();
     });
