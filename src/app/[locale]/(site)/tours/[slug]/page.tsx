@@ -33,6 +33,8 @@ import { getCurrentUser } from "@/server/auth/guards";
 import { isDomainError } from "@/server/services/errors";
 import { tourService } from "@/server/services/tour.service";
 import { wishlistService } from "@/server/services/wishlist.service";
+import { toCreditMap } from "@/components/shared/photo-credit";
+import { photoCreditService } from "@/server/services/photo-credit.service";
 
 type DetailTour = Awaited<ReturnType<typeof tourService.getPublishedBySlug>>;
 
@@ -139,11 +141,13 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
     getCurrentUser(),
     tourService.related(tour.id, tour.destinationId),
   ]);
-  const saved = user ? (await wishlistService.tourIds(user.id)).has(tour.id) : false;
-
   const title = localize(tour.title, locale);
   const CategoryIcon = categoryIcons[tour.category];
   const images = [tour.coverImage, ...tour.gallery.filter((g) => g !== tour.coverImage)];
+  const [saved, credits] = await Promise.all([
+    user ? wishlistService.tourIds(user.id).then((ids) => ids.has(tour.id)) : false,
+    photoCreditService.forImages(images),
+  ]);
 
   const facts = [
     { icon: Clock, label: t("duration"), value: tc("days", { count: tour.durationDays }) },
@@ -218,7 +222,12 @@ export default async function TourDetailPage({ params }: PageProps<"/[locale]/to
         </header>
 
         <div className="mt-10">
-          <TourGallery images={images} alt={title} morphName={tourMorphName(tour.slug)} />
+          <TourGallery
+            images={images}
+            alt={title}
+            morphName={tourMorphName(tour.slug)}
+            credits={toCreditMap(credits)}
+          />
         </div>
       </Container>
 

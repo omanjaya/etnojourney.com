@@ -186,4 +186,11 @@ CI (`.github/workflows/ci.yml`) menjalankan lint, typecheck, unit, dan E2E denga
 | `npm run db:seed` | Isi data contoh |
 | `npm run db:studio` | Drizzle Studio |
 
-Foto: [Unsplash](https://unsplash.com).
+## Konten dan foto
+
+Destinasi, tur, dan kredit foto disimpan sebagai JSON di [`content/`](content/README.md) dan dimuat oleh seed. Fakta budaya disertai daftar sumber per wilayah. Semua foto berlisensi terbuka (Wikimedia Commons: CC0, CC BY, CC BY-SA; dan Unsplash), disimpan sebagai WebP di `public/images/content/`, dan kreditnya tampil di situs (galeri, hero destinasi, dan halaman `/credits`).
+
+```bash
+node scripts/content/import-photo.mjs <wilayah> <slug-destinasi> <nama> "File:Foto.jpg"
+npx tsx scripts/content/validate.ts
+```

@@ -1,5 +1,6 @@
 /**
- * Idempotent seed: resets catalog and booking tables, then (re)creates demo accounts.
+ * Idempotent seed: resets catalog and booking tables from the reviewed JSON in
+ * content/ (validated by loadContent), then (re)creates demo accounts.
  * Run with `npm run db:seed`.
  */
 import { eq, sql } from "drizzle-orm";
@@ -12,13 +13,14 @@ import {
   destinations,
   itineraryDays,
   payments,
+  photoCredits,
   reviews,
   tours,
   user,
   wishlists,
   type UserRole,
 } from "./schema";
-import { destinationSeeds, tourSeeds } from "./seed-data";
+import { loadContent } from "./content";
 
 async function ensureUser(name: string, email: string, password: string, role: UserRole) {
   const existing = await db.query.user.findFirst({ where: eq(user.email, email) });
@@ -29,17 +31,35 @@ async function ensureUser(name: string, email: string, password: string, role: U
 }
 
 async function main() {
+  // Validate everything before touching the database.
+  const content = await loadContent();
+
   console.log("Resetting catalog tables...");
   await db.execute(
-    sql`TRUNCATE ${payments}, ${bookings}, ${wishlists}, ${reviews}, ${itineraryDays}, ${tours}, ${destinations} RESTART IDENTITY CASCADE`,
+    sql`TRUNCATE ${payments}, ${bookings}, ${wishlists}, ${reviews}, ${itineraryDays}, ${tours}, ${destinations}, ${photoCredits} RESTART IDENTITY CASCADE`,
   );
 
-  const insertedDestinations = await db.insert(destinations).values(destinationSeeds).returning();
+  await db.insert(photoCredits).values(
+    Object.entries(content.credits).map(([path, c]) => ({
+      path,
+      title: c.title,
+      author: c.author,
+      license: c.license,
+      licenseUrl: c.licenseUrl,
+      sourceUrl: c.sourceUrl,
+      source: c.source,
+    })),
+  );
+
+  const insertedDestinations = await db
+    .insert(destinations)
+    .values(content.destinations)
+    .returning();
   const destinationIds = new Map(insertedDestinations.map((d) => [d.slug, d.id]));
 
   const tourIds = new Map<string, number>();
-  for (const seed of tourSeeds) {
-    const { destination, itinerary, reviews: tourReviews, ...values } = seed;
+  for (const seed of content.tours) {
+    const { destination, itinerary, reviews: tourReviews = [], ...values } = seed;
     const destinationId = destinationIds.get(destination);
     if (!destinationId) throw new Error(`Unknown destination ${destination}`);
     if (itinerary.length !== values.durationDays) {
@@ -58,13 +78,15 @@ async function main() {
       .insert(itineraryDays)
       .values(itinerary.map((day, i) => ({ ...day, tourId: tour.id, day: i + 1 })));
 
-    await db.insert(reviews).values(
-      tourReviews.map((review, i) => ({
-        ...review,
-        tourId: tour.id,
-        createdAt: new Date(Date.now() - (i + 1) * 9 * 86_400_000),
-      })),
-    );
+    if (tourReviews.length) {
+      await db.insert(reviews).values(
+        tourReviews.map((review, i) => ({
+          ...review,
+          tourId: tour.id,
+          createdAt: new Date(Date.now() - (i + 1) * 9 * 86_400_000),
+        })),
+      );
+    }
   }
 
   console.log("Ensuring demo accounts...");
@@ -99,7 +121,7 @@ async function main() {
     },
   ];
   for (const item of sample) {
-    const tour = tourSeeds.find((t) => t.slug === item.slug)!;
+    const tour = content.tours.find((t) => t.slug === item.slug)!;
     const [booking] = await db
       .insert(bookings)
       .values({
@@ -135,8 +157,9 @@ async function main() {
   });
 
   console.log(
-    `Seeded ${insertedDestinations.length} destinations, ${tourSeeds.length} tours, ` +
-      `${tourSeeds.reduce((n, t) => n + t.reviews.length, 0)} reviews, ${sample.length} bookings.`,
+    `Seeded ${insertedDestinations.length} destinations, ${content.tours.length} tours, ` +
+      `${content.tours.reduce((n, t) => n + (t.reviews?.length ?? 0), 0)} reviews, ` +
+      `${Object.keys(content.credits).length} photo credits, ${sample.length} bookings.`,
   );
 }
 

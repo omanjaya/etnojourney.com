@@ -1,0 +1,1353 @@
+{
+  "region": "indonesia-timur",
+  "destinations": [
+    {
+      "slug": "raja-ampat",
+      "name": "Raja Ampat",
+      "province": "Papua Barat Daya",
+      "heroImage": "/images/content/raja-ampat/pianemo-lagoon.webp",
+      "tagline": {
+        "id": "Kepulauan karst dan kampung bahari yang menjaga laut lewat sasi.",
+        "en": "Karst islands and seafaring villages that protect the sea through sasi."
+      },
+      "description": {
+        "id": "Raja Ampat berarti empat raja, merujuk pada empat pulau utama, yaitu Waigeo, Batanta, Salawati, dan Misool. Gugusan lebih dari 1.500 pulau kecil ini berada di ujung barat laut Kepala Burung Papua dan termasuk dalam Segitiga Terumbu Karang, kawasan laut dengan keanekaragaman hayati tertinggi di dunia.\n\nMasyarakatnya hidup dari laut dan menjaga kelestariannya lewat sasi, aturan adat yang menutup wilayah tangkap tertentu dalam jangka waktu tertentu. Di kampung-kampung seperti Arborek, warga mengelola homestay, menganyam topi dan noken dari daun pandan, serta menyambut tamu dengan tarian Yospan.",
+        "en": "Raja Ampat means Four Kings, after its four main islands: Waigeo, Batanta, Salawati and Misool. More than 1,500 small islands lie off the north-western tip of Papua's Bird's Head and form part of the Coral Triangle, the most biodiverse marine region on earth.\n\nIts communities live from the sea and protect it through sasi, a customary law that closes fishing grounds for set periods. In villages such as Arborek, residents run homestays, weave hats and noken bags from pandan leaves, and welcome guests with the Yospan dance."
+      }
+    },
+    {
+      "slug": "tana-toraja",
+      "name": "Tana Toraja",
+      "province": "Sulawesi Selatan",
+      "heroImage": "/images/content/tana-toraja/kete-kesu.webp",
+      "tagline": {
+        "id": "Dataran tinggi tongkonan, sawah berundak, dan tradisi yang memuliakan leluhur.",
+        "en": "Highlands of tongkonan houses, terraced rice and traditions that honour the ancestors."
+      },
+      "description": {
+        "id": "Nama Toraja berasal dari bahasa Bugis to riaja, \"orang dari dataran tinggi\". Di lembah-lembah sekitar Rantepao dan Makale, rumah adat tongkonan dengan atap melengkung seperti perahu berdiri berhadapan dengan lumbung padi (alang), dihiasi ukiran passura' berwarna merah, hitam, kuning, dan putih. Tongkonan bukan sekadar rumah, melainkan pusat keluarga besar dan garis keturunan.\n\nKehidupan sosial Toraja juga dikenal lewat upacara Rambu Solo', rangkaian pemakaman yang bisa berlangsung berhari-hari untuk menghormati keluarga yang meninggal, serta makam-makam batu di tebing seperti Londa. Permukiman tradisional Tana Toraja telah masuk Daftar Sementara Warisan Dunia UNESCO sejak 2009. Di dataran tingginya, petani kecil menanam kopi arabika yang dikenal hingga mancanegara.",
+        "en": "The name Toraja comes from the Buginese to riaja, \"people of the uplands\". In the valleys around Rantepao and Makale, tongkonan ancestral houses with soaring boat-shaped roofs face rows of rice barns (alang), carved with passura' motifs in red, black, yellow and white. A tongkonan is not just a house: it anchors an extended family and its lineage.\n\nToraja social life is also known for Rambu Solo', funeral ceremonies that can last several days to honour a family member who has died, and for cliff graves such as Londa. The traditional settlements of Tana Toraja have been on UNESCO's World Heritage Tentative List since 2009. On the highland slopes, smallholders grow arabica coffee known well beyond Indonesia."
+      }
+    },
+    {
+      "slug": "wakatobi",
+      "name": "Wakatobi",
+      "province": "Sulawesi Tenggara",
+      "heroImage": "/images/content/wakatobi/bajo-village-aerial.webp",
+      "tagline": {
+        "id": "Empat pulau di jantung Segitiga Terumbu Karang, rumah bagi orang Bajo.",
+        "en": "Four islands in the heart of the Coral Triangle, home to the Bajo people."
+      },
+      "description": {
+        "id": "Nama Wakatobi adalah singkatan dari empat pulau utamanya: Wangi-Wangi, Kaledupa, Tomia, dan Binongko, yang dulu dikenal sebagai Kepulauan Tukang Besi. Taman Nasionalnya ditetapkan sebagai Cagar Biosfer Dunia oleh UNESCO pada 2012 dan menjadi bagian dari Segitiga Terumbu Karang.\n\nDi perairan dangkalnya berdiri kampung-kampung suku Bajo, masyarakat bahari yang dulu hidup di atas perahu dan kini tinggal di rumah panggung di atas laut, seperti di Mola (Wangi-Wangi) serta Sampela dan Mantigola (Kaledupa). Di Liya Togo, desa budaya di Wangi-Wangi Selatan, perempuan menenun kain homoru untuk sarung dan selendang.",
+        "en": "Wakatobi is named after its four main islands: Wangi-Wangi, Kaledupa, Tomia and Binongko, once known as the Tukang Besi Islands. Its national park was designated a UNESCO Biosphere Reserve in 2012 and lies within the Coral Triangle.\n\nIn the shallows stand villages of the Bajo, a seafaring people who once lived on boats and now live in stilt houses over the sea, as in Mola (Wangi-Wangi) and Sampela and Mantigola (Kaledupa). In Liya Togo, a cultural village in South Wangi-Wangi, women weave homoru cloth for sarongs and shawls."
+      }
+    },
+    {
+      "slug": "kapuas-hulu-sintang",
+      "name": "Kapuas Hulu & Sintang",
+      "province": "Kalimantan Barat",
+      "heroImage": "/images/content/kapuas-hulu-sintang/ensaid-panjang-betang.webp",
+      "tagline": {
+        "id": "Rumah betang di hulu Sungai Kapuas, tempat tenun ikat dan hutan adat dijaga bersama.",
+        "en": "Longhouses on the upper Kapuas, where ikat weaving and customary forests are kept together."
+      },
+      "description": {
+        "id": "Di pedalaman Kalimantan Barat, sejumlah komunitas Dayak masih tinggal di rumah betang, rumah panjang di atas tiang tempat banyak keluarga hidup berdampingan dalam bilik-bilik yang terhubung satu serambi panjang. Rumah betang menjadi ruang menjaga kekerabatan, tradisi, dan kecintaan pada alam.\n\nDi Sintang, Rumah Betang Ensaid Panjang dikenal sebagai pusat tenun ikat Dayak Desa yang dikerjakan perempuan dengan alat tenun gedogan. Lebih ke hulu, di Kapuas Hulu, masyarakat Iban di Sungai Utik tinggal di rumah panjang sepanjang lebih dari dua ratus meter yang dibangun pada 1973, dan menjaga hutan adat yang menopang kehidupan mereka.",
+        "en": "In the interior of West Kalimantan, a number of Dayak communities still live in rumah betang, longhouses on stilts where many families live side by side in rooms that open onto one long gallery. The longhouse is where kinship, tradition and a love of the forest are kept alive.\n\nIn Sintang, the Ensaid Panjang longhouse is known as a centre of Dayak Desa ikat weaving, done by women on gedogan backstrap looms. Further upstream in Kapuas Hulu, the Iban of Sungai Utik live in a longhouse more than two hundred metres long, built in 1973, and look after the customary forest that sustains them."
+      }
+    },
+    {
+      "slug": "lembah-baliem",
+      "name": "Lembah Baliem",
+      "province": "Papua Pegunungan",
+      "heroImage": "/images/content/lembah-baliem/village-morning.webp",
+      "tagline": {
+        "id": "Lembah tinggi di Pegunungan Jayawijaya, rumah honai dan kebun ubi orang Hubula.",
+        "en": "A high valley in the Jayawijaya Mountains, with the honai houses and sweet-potato gardens of the Hubula people."
+      },
+      "description": {
+        "id": "Lembah Baliem membentang sekitar 80 kilometer di Pegunungan Tengah Papua, pada ketinggian sekitar 1.600 hingga 1.700 meter. Kota utamanya, Wamena, berada di tepi Sungai Baliem dan menjadi gerbang ke desa-desa di sekitarnya.\n\nLembah ini adalah rumah bagi orang Hubula, yang lebih dikenal sebagai suku Dani, serta suku Lani, Yali, dan lainnya di sekitarnya. Rumah tradisional mereka, honai, berbentuk bulat beratap jerami tanpa jendela untuk menahan dingin pegunungan. Ada honai untuk laki-laki, ebai untuk perempuan, dan wamai untuk ternak babi. Setiap Agustus, Festival Budaya Lembah Baliem yang digelar sejak 1989 menampilkan tarian, kerajinan noken, dan cerita asal-usul dari berbagai suku.",
+        "en": "The Baliem Valley stretches about 80 kilometres through Papua's Central Highlands at around 1,600 to 1,700 metres. Its main town, Wamena, lies on the Baliem River and is the gateway to the surrounding villages.\n\nThe valley is home to the Hubula, better known as the Dani, as well as the Lani, Yali and other peoples nearby. Their traditional honai are round, thatched and windowless to hold in warmth on cold highland nights: honai for men, ebai for women and wamai for pigs. Every August the Baliem Valley Cultural Festival, held since 1989, brings together dances, noken crafts and origin stories from many communities."
+      }
+    },
+    {
+      "slug": "banda-neira",
+      "name": "Banda Neira",
+      "province": "Maluku",
+      "heroImage": "/images/content/banda-neira/neira-from-gunung-api.webp",
+      "tagline": {
+        "id": "Pulau pala yang pernah mengubah peta dunia, kini sunyi di bawah Gunung Api.",
+        "en": "The nutmeg island that once redrew the world map, now quiet beneath Gunung Api."
+      },
+      "description": {
+        "id": "Hingga pertengahan abad ke-19, Kepulauan Banda adalah satu-satunya sumber pala dan fuli di dunia. Kekayaan itu mengundang perebutan: pada 1621, VOC di bawah Jan Pieterszoon Coen menaklukkan Banda dengan kekerasan yang nyaris memusnahkan penduduk aslinya, lalu membagi kebun pala menjadi persil (perk) yang dikelola para perkenier dengan tenaga kerja paksa dari wilayah lain.\n\nJejak sejarah itu masih terlihat di Banda Neira: Benteng Belgica yang berbentuk segi lima di atas bukit, Benteng Nassau di kakinya, rumah-rumah perkenier, dan rumah pengasingan Mohammad Hatta serta Sutan Sjahrir yang dibuang ke sini pada 1936. Di seberangnya menjulang Gunung Api, gunung berapi aktif setinggi sekitar 650 meter.",
+        "en": "Until the mid-19th century the Banda Islands were the world's only source of nutmeg and mace. That wealth drew conflict: in 1621 the Dutch East India Company under Jan Pieterszoon Coen conquered Banda with a violence that all but destroyed its native population, then divided the nutmeg land into parcels (perken) run by planters known as perkeniers, worked by people forcibly brought from elsewhere.\n\nThat history is still visible on Banda Neira: the pentagonal Fort Belgica on its hill, Fort Nassau below it, the planters' houses, and the houses where Mohammad Hatta and Sutan Sjahrir lived in exile from 1936. Across the water rises Gunung Api, an active volcano about 650 metres high."
+      }
+    }
+  ],
+  "tours": [
+    {
+      "slug": "kampung-arborek-raja-ampat",
+      "destination": "raja-ampat",
+      "category": "village",
+      "title": {
+        "id": "Kampung Arborek: Hidup Bersama Masyarakat Bahari",
+        "en": "Arborek Village: Life with a Seafaring Community"
+      },
+      "summary": {
+        "id": "Lima hari di homestay kampung: menganyam pandan, belajar sasi, snorkeling di karang yang dijaga adat.",
+        "en": "Five days in a village homestay: weave pandan, learn about sasi and snorkel reefs protected by custom."
+      },
+      "description": {
+        "id": "Arborek adalah kampung kecil di Selat Dampier, di tengah gugusan Raja Ampat, yang dikenal karena komitmen warganya menjaga laut. Kamu menginap di homestay yang dikelola warga, ikut mama-mama menganyam topi dan noken dari pandan, dan belajar bagaimana sasi melindungi karang dan ikan.\n\nSetiap hari ada waktu untuk snorkeling di karang depan kampung, berperahu ke laguna Pianemo, dan mendengar cerita asal-usul empat raja dari tetua adat.",
+        "en": "Arborek is a small village in the Dampier Strait, in the heart of Raja Ampat, known for its residents' commitment to protecting the sea. You stay in a community-run homestay, weave hats and noken bags from pandan with the village women, and learn how sasi protects reefs and fish.\n\nEach day includes time to snorkel the house reef, boat to the Pianemo lagoon, and hear the origin story of the four kings from a village elder."
+      },
+      "durationDays": 5,
+      "pricePerPerson": 12500000,
+      "maxParticipants": 6,
+      "rating": 5.0,
+      "reviewCount": 22,
+      "coverImage": "/images/content/raja-ampat/pianemo-lagoon.webp",
+      "gallery": [
+        "/images/content/raja-ampat/pianemo-lagoon.webp",
+        "/images/content/raja-ampat/arborek-pier.webp",
+        "/images/content/raja-ampat/house-reef-coral.webp",
+        "/images/content/raja-ampat/wayag-atolls.webp",
+        "/images/content/raja-ampat/karst-islands.webp",
+        "/images/content/raja-ampat/sawinggrai-boats.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Homestay yang dikelola kampung",
+          "en": "Community-run homestay"
+        },
+        {
+          "id": "Menganyam pandan bersama mama-mama",
+          "en": "Weave pandan with the village women"
+        },
+        {
+          "id": "Belajar tentang sasi dari tetua adat",
+          "en": "Learn about sasi from an elder"
+        },
+        {
+          "id": "Laguna Pianemo dan snorkeling karang",
+          "en": "Pianemo lagoon and reef snorkelling"
+        }
+      ],
+      "included": [
+        {
+          "id": "Homestay 4 malam",
+          "en": "4-night homestay"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Kapal antar pulau",
+          "en": "Inter-island boat"
+        },
+        {
+          "id": "Kartu masuk Raja Ampat",
+          "en": "Raja Ampat entry permit"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Pelabuhan Rakyat Sorong",
+      "isFeatured": true,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Sorong ke Arborek",
+            "en": "Sorong to Arborek"
+          },
+          "description": {
+            "id": "Kapal dari Sorong via Waisai, sambutan tarian Yospan, snorkeling sore.",
+            "en": "Boat from Sorong via Waisai, Yospan welcome dance, afternoon snorkel."
+          }
+        },
+        {
+          "title": {
+            "id": "Anyaman pandan",
+            "en": "Pandan weaving"
+          },
+          "description": {
+            "id": "Pagi menganyam bersama mama-mama, siang snorkeling di karang depan kampung.",
+            "en": "Morning weaving with the women, afternoon snorkel on the house reef."
+          }
+        },
+        {
+          "title": {
+            "id": "Laguna Pianemo",
+            "en": "Pianemo lagoon"
+          },
+          "description": {
+            "id": "Perahu ke Pianemo, mendaki ke titik pandang, makan siang di pantai.",
+            "en": "Boat to Pianemo, climb to the viewpoint, beach lunch."
+          }
+        },
+        {
+          "title": {
+            "id": "Sasi dan cerita tetua",
+            "en": "Sasi and the elder's stories"
+          },
+          "description": {
+            "id": "Belajar sasi, mengunjungi area tangkap yang ditutup, malam cerita bersama tetua adat.",
+            "en": "Learn about sasi, visit a closed fishing ground, evening stories with an elder."
+          }
+        },
+        {
+          "title": {
+            "id": "Kembali ke Sorong",
+            "en": "Return to Sorong"
+          },
+          "description": {
+            "id": "Sarapan perpisahan dan kapal kembali ke Sorong.",
+            "en": "Farewell breakfast and boat back to Sorong."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Ethan Walker",
+          "country": "United States",
+          "rating": 5,
+          "body": {
+            "id": "Karangnya luar biasa, tapi yang paling berkesan adalah keramahan warga Arborek.",
+            "en": "The reefs are stunning, but what stayed with me was Arborek's hospitality."
+          }
+        },
+        {
+          "authorName": "Lea Hoffmann",
+          "country": "Germany",
+          "rating": 5,
+          "body": {
+            "id": "Belajar tentang sasi membuat saya melihat konservasi dengan cara baru.",
+            "en": "Learning about sasi changed how I think about conservation."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tongkonan-dan-kopi-toraja",
+      "destination": "tana-toraja",
+      "category": "village",
+      "title": {
+        "id": "Tongkonan, Sawah, dan Kopi Toraja",
+        "en": "Tongkonan, Rice Terraces and Toraja Coffee"
+      },
+      "summary": {
+        "id": "Tiga hari menelusuri kampung tongkonan, sawah Batutumonga, dan kebun kopi arabika keluarga petani.",
+        "en": "Three days among tongkonan villages, the Batutumonga terraces and a farming family's arabica garden."
+      },
+      "description": {
+        "id": "Perjalanan dimulai di Kete Kesu, kampung adat di tenggara Rantepao dengan deretan tongkonan dan alang yang saling berhadapan di satu halaman. Pemandu lokal menjelaskan bagaimana tongkonan dibangun, siapa yang berhak membangunnya, dan bagaimana ukiran passura' dibuat dengan empat warna dasar.\n\nHari berikutnya kita berjalan di antara sawah berundak Batutumonga di lereng Gunung Sesean, lalu singgah di Pasar Bolu, pasar tradisional di Rantepao. Hari terakhir kamu belajar memetik, mengolah, dan menyeduh kopi arabika bersama keluarga petani di dataran tinggi.",
+        "en": "We begin at Kete Kesu, a customary village south-east of Rantepao where tongkonan and rice barns face each other across one courtyard. A local guide explains how a tongkonan is built, who has the right to build one, and how passura' carvings are made in four basic colours.\n\nNext we walk the terraces of Batutumonga on the slopes of Mount Sesean and stop at Pasar Bolu, Rantepao's traditional market. On the last day you learn to pick, process and brew arabica coffee with a farming family in the highlands."
+      },
+      "durationDays": 3,
+      "pricePerPerson": 3600000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/tana-toraja/kete-kesu.webp",
+      "gallery": [
+        "/images/content/tana-toraja/kete-kesu.webp",
+        "/images/content/tana-toraja/tongkonan-row.webp",
+        "/images/content/tana-toraja/palawa-carving.webp",
+        "/images/content/tana-toraja/batutumonga-terraces.webp",
+        "/images/content/tana-toraja/pasar-bolu-coffee.webp",
+        "/images/content/tana-toraja/tongkonan-karst.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Kampung adat Kete Kesu dan makna ukiran passura'",
+          "en": "Kete Kesu village and the meaning of passura' carvings"
+        },
+        {
+          "id": "Jalan kaki di sawah berundak Batutumonga",
+          "en": "Walk through the Batutumonga rice terraces"
+        },
+        {
+          "id": "Pasar Bolu, pasar tradisional Rantepao",
+          "en": "Pasar Bolu, Rantepao's traditional market"
+        },
+        {
+          "id": "Belajar mengolah kopi arabika dengan petani",
+          "en": "Process arabica coffee with a farming family"
+        }
+      ],
+      "included": [
+        {
+          "id": "Penginapan 2 malam di Rantepao",
+          "en": "2 nights' lodging in Rantepao"
+        },
+        {
+          "id": "Makan 6 kali",
+          "en": "6 meals"
+        },
+        {
+          "id": "Transportasi selama tur",
+          "en": "Transport during the tour"
+        },
+        {
+          "id": "Tiket masuk kampung adat",
+          "en": "Village entrance fees"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Toraja (Buntu Kunik), Mengkendek, Tana Toraja",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Kete Kesu",
+            "en": "Kete Kesu"
+          },
+          "description": {
+            "id": "Penjemputan, makan siang khas Toraja, sore di Kete Kesu bersama pemandu: arsitektur tongkonan, alang, dan ukiran.",
+            "en": "Pickup, Torajan lunch, afternoon at Kete Kesu with a guide: tongkonan architecture, rice barns and carvings."
+          }
+        },
+        {
+          "title": {
+            "id": "Batutumonga dan Pasar Bolu",
+            "en": "Batutumonga and Pasar Bolu"
+          },
+          "description": {
+            "id": "Trekking ringan di sawah Batutumonga, makan siang dengan pemandangan lembah, sore ke Pasar Bolu.",
+            "en": "Easy trek through the Batutumonga terraces, lunch over the valley, afternoon at Pasar Bolu."
+          }
+        },
+        {
+          "title": {
+            "id": "Kebun kopi",
+            "en": "Coffee garden"
+          },
+          "description": {
+            "id": "Pagi bersama keluarga petani: memetik, mengupas, dan menyangrai kopi, lalu kembali ke bandara.",
+            "en": "Morning with a farming family: picking, hulling and roasting coffee, then back to the airport."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "memahami-rambu-solo-toraja",
+      "destination": "tana-toraja",
+      "category": "ritual",
+      "title": {
+        "id": "Memahami Rambu Solo' dengan Hormat",
+        "en": "Understanding Rambu Solo' with Respect"
+      },
+      "summary": {
+        "id": "Empat hari belajar tentang Aluk To Dolo, rante, dan makam batu bersama pemandu Toraja, tanpa menjadikan duka sebagai tontonan.",
+        "en": "Four days learning about Aluk To Dolo, ceremonial grounds and rock graves with a Torajan guide, without turning grief into a show."
+      },
+      "description": {
+        "id": "Rambu Solo' adalah upacara pemakaman dalam ajaran leluhur Aluk To Dolo yang hingga kini dijalankan keluarga Toraja, termasuk yang telah memeluk agama lain. Upacara ini bisa berlangsung berhari-hari, melibatkan seluruh kerabat, dan menjadi cara keluarga menghormati serta mengantar yang meninggal.\n\nTur ini tidak menjual tiket ke upacara. Bersama pemandu Toraja, kamu belajar makna rante (lapangan upacara dengan batu menhir), liang (makam batu), dan tau-tau (patung peringatan), mengunjungi kompleks makam tebing Londa, serta berdiskusi tentang Ma'nene, tradisi merawat jenazah leluhur yang dijalankan sebagian keluarga di Toraja Utara. Bila ada keluarga yang sedang menggelar upacara dan berkenan menerima tamu, pemandu akan menanyakan izin dan memperkenalkan tata krama yang berlaku.",
+        "en": "Rambu Solo' is the funeral ceremony of the ancestral Aluk To Dolo teachings, still held by Torajan families today, including those who follow other religions. It can last several days, gathers the whole extended family, and is how the family honours and accompanies the one who has died.\n\nThis tour does not sell tickets to ceremonies. With a Torajan guide you learn the meaning of the rante (ceremonial grounds with standing stones), liang (rock graves) and tau-tau (memorial effigies), visit the Londa cliff graves, and talk about Ma'nene, the care of ancestors' remains practised by some families in North Toraja. If a family holding a ceremony is willing to receive guests, your guide will ask permission and walk you through the etiquette expected."
+      },
+      "durationDays": 4,
+      "pricePerPerson": 4900000,
+      "maxParticipants": 6,
+      "coverImage": "/images/content/tana-toraja/tongkonan-row.webp",
+      "gallery": [
+        "/images/content/tana-toraja/tongkonan-row.webp",
+        "/images/content/tana-toraja/tongkonan-garden.webp",
+        "/images/content/tana-toraja/tongkonan-forest.webp",
+        "/images/content/tana-toraja/pasar-bolu-buffalo.webp",
+        "/images/content/tana-toraja/batutumonga-terraces.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Diskusi tentang Aluk To Dolo bersama pemandu Toraja",
+          "en": "Conversations about Aluk To Dolo with a Torajan guide"
+        },
+        {
+          "id": "Rante, liang, dan tau-tau beserta maknanya",
+          "en": "Ceremonial grounds, rock graves and tau-tau explained"
+        },
+        {
+          "id": "Makam tebing Londa",
+          "en": "The Londa cliff graves"
+        },
+        {
+          "id": "Tata krama bila diundang keluarga yang berduka",
+          "en": "Etiquette if a grieving family invites you"
+        }
+      ],
+      "included": [
+        {
+          "id": "Penginapan 3 malam di Rantepao",
+          "en": "3 nights' lodging in Rantepao"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Transportasi selama tur",
+          "en": "Transport during the tour"
+        },
+        {
+          "id": "Tiket masuk situs",
+          "en": "Site entrance fees"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Sarung untuk kunjungan ke rumah duka",
+          "en": "Sarong for visits to a house of mourning"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Toraja (Buntu Kunik), Mengkendek, Tana Toraja",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Pengantar Aluk To Dolo",
+            "en": "Introduction to Aluk To Dolo"
+          },
+          "description": {
+            "id": "Tiba di Rantepao, sore berbincang dengan pemandu tentang struktur keluarga dan siklus upacara Toraja.",
+            "en": "Arrive in Rantepao; an afternoon talk with your guide on Torajan family structure and the ceremonial cycle."
+          }
+        },
+        {
+          "title": {
+            "id": "Rante dan tongkonan",
+            "en": "Ceremonial grounds and tongkonan"
+          },
+          "description": {
+            "id": "Mengunjungi rante dan kompleks tongkonan, belajar peran kerbau dalam upacara dan kehidupan sehari-hari.",
+            "en": "Visit a rante and tongkonan compound; learn the role of the buffalo in ceremonies and daily life."
+          }
+        },
+        {
+          "title": {
+            "id": "Londa dan makam batu",
+            "en": "Londa and the rock graves"
+          },
+          "description": {
+            "id": "Pagi ke Londa bersama pemandu, siang membahas Ma'nene dan perubahan tradisi di era modern.",
+            "en": "Morning at Londa with your guide; midday discussion of Ma'nene and how traditions are changing."
+          }
+        },
+        {
+          "title": {
+            "id": "Refleksi dan pulang",
+            "en": "Reflection and departure"
+          },
+          "description": {
+            "id": "Sesi tanya jawab penutup, lalu kembali ke bandara.",
+            "en": "A closing question-and-answer session, then back to the airport."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kampung-bajo-wakatobi",
+      "destination": "wakatobi",
+      "category": "village",
+      "title": {
+        "id": "Hidup di Kampung Bajo Wakatobi",
+        "en": "Life in Wakatobi's Bajo Villages"
+      },
+      "summary": {
+        "id": "Empat hari dari Mola di Wangi-Wangi hingga Sampela di Kaledupa: perahu, laut, dan rumah panggung orang Bajo.",
+        "en": "Four days from Mola on Wangi-Wangi to Sampela on Kaledupa: boats, sea and the stilt villages of the Bajo."
+      },
+      "description": {
+        "id": "Orang Bajo dikenal sebagai pelaut dan penyelam ulung yang selama berabad-abad hidup bergantung pada laut. Di Mola, kampung Bajo di Pulau Wangi-Wangi, rumah-rumah panggung terhubung jembatan kayu dan sampan menjadi kendaraan sehari-hari. Kamu belajar cara warga menangkap dan mengolah ikan, mencicipi hidangan laut segar, dan mendengar bagaimana kehidupan di atas perahu berganti menjadi kampung di atas air.\n\nHari ketiga kita menyeberang ke Kaledupa untuk mengunjungi Sampela dan Mantigola, lalu snorkeling di terumbu karang Taman Nasional Wakatobi bersama pemandu lokal.",
+        "en": "The Bajo are known as expert sailors and free divers whose lives have depended on the sea for centuries. In Mola, a Bajo village on Wangi-Wangi Island, stilt houses are linked by wooden walkways and canoes are everyday transport. You learn how residents catch and prepare fish, taste fresh seafood, and hear how life on boats turned into villages over the water.\n\nOn day three we cross to Kaledupa to visit Sampela and Mantigola, then snorkel the reefs of Wakatobi National Park with a local guide."
+      },
+      "durationDays": 4,
+      "pricePerPerson": 5400000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/wakatobi/bajo-village-aerial.webp",
+      "gallery": [
+        "/images/content/wakatobi/bajo-village-aerial.webp",
+        "/images/content/wakatobi/sampela-reflection.webp",
+        "/images/content/wakatobi/mantigola-boardwalk.webp",
+        "/images/content/wakatobi/reef-seascape.webp",
+        "/images/content/wakatobi/island-beach.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Menginap di rumah panggung kampung Bajo",
+          "en": "Stay in a Bajo stilt house"
+        },
+        {
+          "id": "Belajar menangkap dan mengolah ikan bersama warga",
+          "en": "Learn to catch and prepare fish with residents"
+        },
+        {
+          "id": "Sampela dan Mantigola di Kaledupa",
+          "en": "Sampela and Mantigola on Kaledupa"
+        },
+        {
+          "id": "Snorkeling di Taman Nasional Wakatobi",
+          "en": "Snorkelling in Wakatobi National Park"
+        }
+      ],
+      "included": [
+        {
+          "id": "Homestay 3 malam",
+          "en": "3-night homestay"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Perahu antarpulau",
+          "en": "Inter-island boat"
+        },
+        {
+          "id": "Tiket Taman Nasional Wakatobi",
+          "en": "Wakatobi National Park fee"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Matahora, Wangi-Wangi, Wakatobi",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Mola",
+            "en": "Arrive in Mola"
+          },
+          "description": {
+            "id": "Penjemputan di bandara, menuju kampung Bajo Mola, sore berkeliling dengan sampan.",
+            "en": "Airport pickup, transfer to Mola, afternoon canoe ride through the village."
+          }
+        },
+        {
+          "title": {
+            "id": "Sehari bersama nelayan",
+            "en": "A day with fishers"
+          },
+          "description": {
+            "id": "Pagi melaut bersama nelayan, siang memasak hasil tangkapan, sore cerita tentang sejarah orang Bajo.",
+            "en": "Morning at sea with fishers, cooking the catch at midday, evening stories of Bajo history."
+          }
+        },
+        {
+          "title": {
+            "id": "Kaledupa",
+            "en": "Kaledupa"
+          },
+          "description": {
+            "id": "Perahu ke Kaledupa, mengunjungi Sampela dan Mantigola, snorkeling di terumbu karang.",
+            "en": "Boat to Kaledupa, visit Sampela and Mantigola, snorkel the reef."
+          }
+        },
+        {
+          "title": {
+            "id": "Pulang",
+            "en": "Departure"
+          },
+          "description": {
+            "id": "Sarapan di atas laut dan kembali ke Bandar Udara Matahora.",
+            "en": "Breakfast over the water and return to Matahora Airport."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tenun-homoru-liya-togo",
+      "destination": "wakatobi",
+      "category": "craft",
+      "title": {
+        "id": "Tenun Homoru di Liya Togo",
+        "en": "Homoru Weaving in Liya Togo"
+      },
+      "summary": {
+        "id": "Dua hari di desa budaya Liya Togo: belajar menenun homoru, menyusuri benteng Liya dan Masjid Keraton Liya.",
+        "en": "Two days in the cultural village of Liya Togo: learn homoru weaving and walk the Liya fort and the Liya Palace Mosque."
+      },
+      "description": {
+        "id": "Liya Togo di Wangi-Wangi Selatan adalah desa budaya yang hanya sekitar lima belas menit dari pusat Kabupaten Wakatobi. Di beranda rumah, perempuan menenun kain homoru yang dipakai sebagai sarung, selendang, dan penutup kepala. Kamu akan diperkenalkan pada alat tenun, cara menyusun benang, dan motif yang diwariskan antargenerasi, lalu mencoba menenun beberapa baris sendiri.\n\nDi sela waktu menenun, kita menyusuri Benteng Liya yang mengelilingi desa dan Masjid Keraton Liya, keduanya peninggalan masa Kesultanan Buton, serta mengenal anyaman daun pandan dan tudung saji tradisional yang juga dibuat warga.",
+        "en": "Liya Togo in South Wangi-Wangi is a cultural village about fifteen minutes from the centre of Wakatobi Regency. On their verandas, women weave homoru cloth used for sarongs, shawls and headscarves. You are introduced to the loom, how the threads are set up and the motifs handed down through generations, then weave a few rows yourself.\n\nBetween weaving sessions we walk the Liya fort that encircles the village and the Liya Palace Mosque, both legacies of the Buton Sultanate, and see the pandan mats and traditional food covers residents also make."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 2600000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/wakatobi/island-beach.webp",
+      "gallery": [
+        "/images/content/wakatobi/island-beach.webp",
+        "/images/content/wakatobi/mantigola-boardwalk.webp",
+        "/images/content/wakatobi/reef-seascape.webp",
+        "/images/content/wakatobi/bajo-village-aerial.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Belajar menenun homoru bersama penenun",
+          "en": "Learn homoru weaving with local weavers"
+        },
+        {
+          "id": "Benteng Liya dan Masjid Keraton Liya",
+          "en": "The Liya fort and Liya Palace Mosque"
+        },
+        {
+          "id": "Anyaman pandan dan tudung saji tradisional",
+          "en": "Pandan weaving and traditional food covers"
+        },
+        {
+          "id": "Kelompok kecil, maksimal delapan orang",
+          "en": "Small groups of eight at most"
+        }
+      ],
+      "included": [
+        {
+          "id": "Homestay 1 malam di Liya Togo",
+          "en": "1-night homestay in Liya Togo"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Kelas tenun dan bahan",
+          "en": "Weaving class and materials"
+        },
+        {
+          "id": "Transportasi dari bandara",
+          "en": "Airport transfers"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Matahora, Wangi-Wangi, Wakatobi",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Liya Togo",
+            "en": "Liya Togo"
+          },
+          "description": {
+            "id": "Tiba di desa, perkenalan dengan penenun, sore kelas tenun homoru.",
+            "en": "Arrive in the village, meet the weavers, afternoon homoru weaving class."
+          }
+        },
+        {
+          "title": {
+            "id": "Benteng Liya",
+            "en": "Liya fort"
+          },
+          "description": {
+            "id": "Pagi menyusuri Benteng Liya dan Masjid Keraton Liya, siang melanjutkan tenunan, lalu kembali ke bandara.",
+            "en": "Morning walk around the Liya fort and Palace Mosque, finish your weaving at midday, then back to the airport."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tenun-ikat-ensaid-panjang",
+      "destination": "kapuas-hulu-sintang",
+      "category": "craft",
+      "title": {
+        "id": "Tenun Ikat di Rumah Betang Ensaid Panjang",
+        "en": "Ikat Weaving at the Ensaid Panjang Longhouse"
+      },
+      "summary": {
+        "id": "Tiga hari tinggal di rumah betang Sintang dan belajar tenun ikat Dayak Desa langsung dari para penenun.",
+        "en": "Three days in a Sintang longhouse learning Dayak Desa ikat weaving from the weavers themselves."
+      },
+      "description": {
+        "id": "Rumah Betang Ensaid Panjang berdiri tidak jauh dari Bukit Kelam dan menjadi satu-satunya rumah adat tradisional yang tersisa di desa itu. Di serambinya, para perempuan duduk menenun dengan gedogan, mengubah benang yang telah diikat dan dicelup menjadi kain bermotif. Tenun ikat Sintang sering tampil di pameran dan acara kenegaraan.\n\nKamu akan belajar tahap-tahap tenun ikat, dari mengikat motif, mencelup pewarna, hingga menenun, sambil tinggal bersama keluarga di bilik rumah betang dan ikut kegiatan harian mereka.",
+        "en": "The Ensaid Panjang longhouse stands not far from Bukit Kelam and is the last traditional longhouse in its village. On its gallery, women sit at gedogan looms turning tied and dyed threads into patterned cloth; Sintang ikat often appears at exhibitions and state events.\n\nYou learn each stage of ikat, from tying the motif and dyeing to weaving, while staying with a family in one of the longhouse rooms and joining their daily routine."
+      },
+      "durationDays": 3,
+      "pricePerPerson": 3300000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/kapuas-hulu-sintang/ikat-sintang.webp",
+      "gallery": [
+        "/images/content/kapuas-hulu-sintang/ikat-sintang.webp",
+        "/images/content/kapuas-hulu-sintang/ensaid-panjang-betang.webp",
+        "/images/content/kapuas-hulu-sintang/ensaid-panjang-side.webp",
+        "/images/content/kapuas-hulu-sintang/betang-gallery.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Menginap di bilik rumah betang",
+          "en": "Stay in a longhouse room"
+        },
+        {
+          "id": "Belajar mengikat, mencelup, dan menenun",
+          "en": "Learn to tie, dye and weave"
+        },
+        {
+          "id": "Bukit Kelam dari kejauhan",
+          "en": "Views of Bukit Kelam"
+        },
+        {
+          "id": "Tenun langsung dari tangan penenun",
+          "en": "Buy ikat directly from the weavers"
+        }
+      ],
+      "included": [
+        {
+          "id": "Menginap 2 malam di rumah betang",
+          "en": "2 nights in the longhouse"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Kelas tenun dan bahan",
+          "en": "Weaving class and materials"
+        },
+        {
+          "id": "Transportasi dari Sintang",
+          "en": "Transport from Sintang"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Tebelian, Sintang",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Ensaid Panjang",
+            "en": "Arrive at Ensaid Panjang"
+          },
+          "description": {
+            "id": "Perjalanan dari Sintang, disambut keluarga tuan rumah, sore berkeliling rumah betang.",
+            "en": "Drive from Sintang, welcome by your host family, afternoon tour of the longhouse."
+          }
+        },
+        {
+          "title": {
+            "id": "Hari tenun",
+            "en": "Weaving day"
+          },
+          "description": {
+            "id": "Belajar mengikat motif dan mencelup benang, lalu menenun di serambi bersama para penenun.",
+            "en": "Learn to tie motifs and dye threads, then weave on the gallery with the weavers."
+          }
+        },
+        {
+          "title": {
+            "id": "Pulang",
+            "en": "Departure"
+          },
+          "description": {
+            "id": "Pagi melanjutkan tenunan, perpisahan dengan keluarga, kembali ke Sintang.",
+            "en": "Finish your weaving in the morning, farewell to the family, return to Sintang."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "betang-sungai-utik-hutan-adat",
+      "destination": "kapuas-hulu-sintang",
+      "category": "trekking",
+      "title": {
+        "id": "Rumah Panjang Sungai Utik dan Hutan Adat",
+        "en": "The Sungai Utik Longhouse and Customary Forest"
+      },
+      "summary": {
+        "id": "Empat hari di rumah panjang Iban di Kapuas Hulu: menyusuri hutan adat, sungai, dan cara warga menjaganya.",
+        "en": "Four days in an Iban longhouse in Kapuas Hulu: the customary forest, the river and how residents care for them."
+      },
+      "description": {
+        "id": "Desa Sungai Utik di Kapuas Hulu berjarak sekitar enam ratus kilometer dari Pontianak. Rumah panjangnya dibangun pada 1973 sebagian dari kayu ulin dan berdiri di atas tiang setinggi dua meter. Bagi masyarakat Iban di sini, hutan adalah ibu: sumber makanan, obat, bahan bangunan, dan identitas.\n\nBersama warga, kamu menyusuri hutan adat dan Sungai Utik, belajar tentang pembagian kawasan hutan yang boleh diambil hasilnya dan yang dilindungi, serta mengenal kerajinan dan musik tradisional. Malam hari dihabiskan di serambi rumah panjang, tempat cerita dan keputusan bersama dibicarakan.",
+        "en": "Sungai Utik village in Kapuas Hulu lies about six hundred kilometres from Pontianak. Its longhouse, built in 1973 partly from Bornean ironwood, stands two metres above the ground on stilts. For the Iban here the forest is a mother: a source of food, medicine, building material and identity.\n\nWith residents you walk the customary forest and the Sungai Utik river, learn how the forest is divided into areas that may be harvested and areas that are protected, and discover local crafts and traditional music. Evenings are spent on the longhouse gallery, where stories are told and decisions are made together."
+      },
+      "durationDays": 4,
+      "pricePerPerson": 5800000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/kapuas-hulu-sintang/sungai-utik-river.webp",
+      "gallery": [
+        "/images/content/kapuas-hulu-sintang/sungai-utik-river.webp",
+        "/images/content/kapuas-hulu-sintang/sungai-utik-forest.webp",
+        "/images/content/kapuas-hulu-sintang/ensaid-panjang-betang.webp",
+        "/images/content/kapuas-hulu-sintang/betang-gallery.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Menginap di rumah panjang Iban",
+          "en": "Stay in an Iban longhouse"
+        },
+        {
+          "id": "Trekking hutan adat bersama warga",
+          "en": "Trek the customary forest with residents"
+        },
+        {
+          "id": "Menyusuri Sungai Utik",
+          "en": "Explore the Sungai Utik river"
+        },
+        {
+          "id": "Belajar cara warga mengelola hutan",
+          "en": "Learn how the community manages its forest"
+        }
+      ],
+      "included": [
+        {
+          "id": "Menginap 3 malam di rumah panjang",
+          "en": "3 nights in the longhouse"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Transportasi dari Putussibau",
+          "en": "Transport from Putussibau"
+        },
+        {
+          "id": "Perahu sungai",
+          "en": "River boat"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Pangsuma, Putussibau, Kapuas Hulu",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Putussibau ke Sungai Utik",
+            "en": "Putussibau to Sungai Utik"
+          },
+          "description": {
+            "id": "Perjalanan darat ke Sungai Utik, sambutan di rumah panjang, malam di serambi.",
+            "en": "Drive to Sungai Utik, welcome at the longhouse, evening on the gallery."
+          }
+        },
+        {
+          "title": {
+            "id": "Hutan adat",
+            "en": "Customary forest"
+          },
+          "description": {
+            "id": "Trekking setengah hari bersama warga, mengenal tanaman pangan dan obat, sore di kebun.",
+            "en": "Half-day trek with residents, learning food and medicinal plants, afternoon in the gardens."
+          }
+        },
+        {
+          "title": {
+            "id": "Sungai Utik",
+            "en": "Sungai Utik river"
+          },
+          "description": {
+            "id": "Menyusuri sungai dengan perahu, makan siang di tepi sungai, malam musik dan cerita.",
+            "en": "River trip by boat, riverside lunch, an evening of music and stories."
+          }
+        },
+        {
+          "title": {
+            "id": "Pulang",
+            "en": "Departure"
+          },
+          "description": {
+            "id": "Sarapan perpisahan dan kembali ke Putussibau.",
+            "en": "Farewell breakfast and return to Putussibau."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "trekking-lembah-baliem",
+      "destination": "lembah-baliem",
+      "category": "trekking",
+      "title": {
+        "id": "Trekking Desa-Desa Lembah Baliem",
+        "en": "Trekking the Villages of the Baliem Valley"
+      },
+      "summary": {
+        "id": "Lima hari berjalan kaki dari Wamena melewati kebun ubi, jembatan gantung, dan kampung honai.",
+        "en": "Five days on foot from Wamena through sweet-potato gardens, over suspension bridges and into honai villages."
+      },
+      "description": {
+        "id": "Dari Wamena, kita berjalan menyusuri lembah bersama pemandu dan porter dari desa setempat. Jalurnya melewati kebun ubi jalar yang menjadi makanan pokok, jembatan gantung di atas Sungai Baliem, dan punggung bukit dengan pemandangan Pegunungan Jayawijaya.\n\nMalam hari kamu menginap di desa, berbagi api di dalam honai, dan belajar bagaimana keluarga mengatur kebun, ternak, dan kehidupan bersama. Jalur dan desa yang dikunjungi disesuaikan dengan kondisi cuaca dan izin warga setempat.",
+        "en": "From Wamena we walk the valley with a guide and porters from local villages. The trail passes the sweet-potato gardens that provide the staple food, suspension bridges over the Baliem River and ridges with views of the Jayawijaya Mountains.\n\nAt night you stay in villages, share the fire inside a honai and learn how families organise their gardens, livestock and community life. Routes and villages depend on the weather and on permission from the communities."
+      },
+      "durationDays": 5,
+      "pricePerPerson": 9800000,
+      "maxParticipants": 6,
+      "coverImage": "/images/content/lembah-baliem/honai-slope.webp",
+      "gallery": [
+        "/images/content/lembah-baliem/honai-slope.webp",
+        "/images/content/lembah-baliem/valley-ridges.webp",
+        "/images/content/lembah-baliem/highland-gardens.webp",
+        "/images/content/lembah-baliem/river-trail.webp",
+        "/images/content/lembah-baliem/honai-compound.webp",
+        "/images/content/lembah-baliem/village-morning.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Trekking bersama pemandu dan porter lokal",
+          "en": "Trek with local guides and porters"
+        },
+        {
+          "id": "Menginap di desa dan berbagi api di honai",
+          "en": "Stay in villages and share the fire in a honai"
+        },
+        {
+          "id": "Kebun ubi jalar dan jembatan gantung Baliem",
+          "en": "Sweet-potato gardens and Baliem suspension bridges"
+        },
+        {
+          "id": "Pemandangan Pegunungan Jayawijaya",
+          "en": "Views of the Jayawijaya Mountains"
+        }
+      ],
+      "included": [
+        {
+          "id": "Menginap 4 malam (guesthouse dan desa)",
+          "en": "4 nights (guesthouse and village stays)"
+        },
+        {
+          "id": "Semua makan selama trekking",
+          "en": "All meals on the trek"
+        },
+        {
+          "id": "Porter lokal",
+          "en": "Local porters"
+        },
+        {
+          "id": "Surat jalan dan izin desa",
+          "en": "Travel permit and village fees"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Wamena, Jayawijaya",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Wamena",
+            "en": "Arrive in Wamena"
+          },
+          "description": {
+            "id": "Penjemputan, aklimatisasi, sore ke pasar Wamena dan briefing trekking.",
+            "en": "Pickup, acclimatisation, afternoon at the Wamena market and trek briefing."
+          }
+        },
+        {
+          "title": {
+            "id": "Ke desa pertama",
+            "en": "To the first village"
+          },
+          "description": {
+            "id": "Trekking sekitar lima jam melewati kebun dan jembatan gantung, menginap di desa.",
+            "en": "About five hours of trekking through gardens and over suspension bridges, overnight in a village."
+          }
+        },
+        {
+          "title": {
+            "id": "Punggung bukit",
+            "en": "Along the ridge"
+          },
+          "description": {
+            "id": "Trekking ke desa berikutnya dengan pemandangan lembah, sore membantu di kebun.",
+            "en": "Trek to the next village with valley views, afternoon helping in the gardens."
+          }
+        },
+        {
+          "title": {
+            "id": "Turun ke lembah",
+            "en": "Down to the valley"
+          },
+          "description": {
+            "id": "Jalur turun kembali ke tepi Sungai Baliem, malam di guesthouse Wamena.",
+            "en": "Descend back to the Baliem River, night at a Wamena guesthouse."
+          }
+        },
+        {
+          "title": {
+            "id": "Pulang",
+            "en": "Departure"
+          },
+          "description": {
+            "id": "Sarapan dan kembali ke Bandar Udara Wamena.",
+            "en": "Breakfast and return to Wamena Airport."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "festival-budaya-lembah-baliem",
+      "destination": "lembah-baliem",
+      "category": "ritual",
+      "title": {
+        "id": "Festival Budaya Lembah Baliem",
+        "en": "The Baliem Valley Cultural Festival"
+      },
+      "summary": {
+        "id": "Empat hari pada musim festival Agustus: tarian, noken, dan cerita dari suku-suku Lembah Baliem.",
+        "en": "Four days during the August festival season: dances, noken and stories from the peoples of the Baliem Valley."
+      },
+      "description": {
+        "id": "Festival Budaya Lembah Baliem digelar setiap Agustus di Kabupaten Jayawijaya sejak 1989 untuk melestarikan budaya suku-suku di lembah ini, termasuk Hubula, Lani, Yali, Nduga, dan Walak. Rangkaian acaranya menampilkan bahasa dan cerita asal-usul, tarian dari tiap suku, kerajinan seperti noken dan ukiran kayu, serta pertunjukan simulasi perang adat yang menjadi puncak acara.\n\nTur ini mengikuti jadwal resmi festival yang diumumkan pemerintah daerah setiap tahun. Di luar hari festival, kita mengunjungi pengrajin noken dan desa di sekitar Wamena. Pemandu akan menjelaskan tata krama memotret dan berinteraksi dengan para penampil.",
+        "en": "The Baliem Valley Cultural Festival has been held every August in Jayawijaya Regency since 1989 to sustain the cultures of the valley's peoples, including the Hubula, Lani, Yali, Nduga and Walak. It features languages and origin stories, dances from each community, crafts such as noken bags and woodcarving, and a staged traditional battle as its finale.\n\nThis tour follows the official festival dates announced by the regency each year. Outside festival days we visit noken makers and villages around Wamena. Your guide explains the etiquette for photographing and talking with performers."
+      },
+      "durationDays": 4,
+      "pricePerPerson": 8900000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/lembah-baliem/honai-houses.webp",
+      "gallery": [
+        "/images/content/lembah-baliem/honai-houses.webp",
+        "/images/content/lembah-baliem/honai-compound.webp",
+        "/images/content/lembah-baliem/village-morning.webp",
+        "/images/content/lembah-baliem/highland-gardens.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Dua hari di arena festival",
+          "en": "Two days at the festival grounds"
+        },
+        {
+          "id": "Tarian dan cerita dari berbagai suku",
+          "en": "Dances and stories from many communities"
+        },
+        {
+          "id": "Bertemu pengrajin noken",
+          "en": "Meet noken makers"
+        },
+        {
+          "id": "Penjelasan tata krama memotret",
+          "en": "Guidance on photography etiquette"
+        }
+      ],
+      "included": [
+        {
+          "id": "Penginapan 3 malam di Wamena",
+          "en": "3 nights' lodging in Wamena"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Tiket festival",
+          "en": "Festival entry"
+        },
+        {
+          "id": "Transportasi lokal",
+          "en": "Local transport"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        }
+      ],
+      "meetingPoint": "Bandar Udara Wamena, Jayawijaya",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Wamena",
+            "en": "Arrive in Wamena"
+          },
+          "description": {
+            "id": "Penjemputan, aklimatisasi, malam pengantar tentang suku-suku Lembah Baliem.",
+            "en": "Pickup, acclimatisation, an evening introduction to the valley's peoples."
+          }
+        },
+        {
+          "title": {
+            "id": "Festival hari pertama",
+            "en": "Festival day one"
+          },
+          "description": {
+            "id": "Seharian di arena festival bersama pemandu: pembukaan, tarian, dan pameran kerajinan.",
+            "en": "A full day at the festival with your guide: opening, dances and craft exhibits."
+          }
+        },
+        {
+          "title": {
+            "id": "Festival hari kedua",
+            "en": "Festival day two"
+          },
+          "description": {
+            "id": "Pagi di festival, siang mengunjungi pengrajin noken di desa sekitar.",
+            "en": "Morning at the festival, afternoon with noken makers in a nearby village."
+          }
+        },
+        {
+          "title": {
+            "id": "Pulang",
+            "en": "Departure"
+          },
+          "description": {
+            "id": "Sarapan dan kembali ke Bandar Udara Wamena.",
+            "en": "Breakfast and return to Wamena Airport."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "jejak-pala-banda-neira",
+      "destination": "banda-neira",
+      "category": "culinary",
+      "title": {
+        "id": "Jejak Pala di Banda Neira",
+        "en": "Tracing Nutmeg on Banda Neira"
+      },
+      "summary": {
+        "id": "Tiga hari menelusuri kebun pala Banda Besar, Benteng Belgica, dan sejarah rempah yang mengubah dunia.",
+        "en": "Three days through the nutmeg gardens of Banda Besar, Fort Belgica and the spice history that changed the world."
+      },
+      "description": {
+        "id": "Kita mulai di Benteng Belgica, yang dibangun Belanda pada 1611 dan dirombak menjadi bentuk segi lima pada 1672 hingga 1673, lalu turun ke Benteng Nassau dan kawasan kota tua. Pemandu menjelaskan sejarah perdagangan pala, penaklukan 1621, dan sistem perk yang membentuk masyarakat Banda hari ini, termasuk kisah Pulau Run yang ditukar dengan Manhattan.\n\nHari kedua kita menyeberang ke Banda Besar untuk berjalan di kebun pala, melihat cara buah dipanen, fuli dipisahkan, dan biji dikeringkan, lalu memasak hidangan berbumbu pala bersama keluarga setempat.",
+        "en": "We start at Fort Belgica, built by the Dutch in 1611 and rebuilt into its pentagonal form in 1672 to 1673, then walk down to Fort Nassau and the old town. Your guide explains the nutmeg trade, the 1621 conquest and the perk system that shaped Banda society today, including the story of Run Island, exchanged for Manhattan.\n\nOn day two we cross to Banda Besar to walk the nutmeg gardens, see how the fruit is harvested, the mace separated and the seeds dried, then cook nutmeg-spiced dishes with a local family."
+      },
+      "durationDays": 3,
+      "pricePerPerson": 4800000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/banda-neira/belgica-gunung-api.webp",
+      "gallery": [
+        "/images/content/banda-neira/belgica-gunung-api.webp",
+        "/images/content/banda-neira/nutmeg-mace.webp",
+        "/images/content/banda-neira/belgica-walls.webp",
+        "/images/content/banda-neira/nutmeg-open.webp",
+        "/images/content/banda-neira/colonial-building.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Benteng Belgica dan Benteng Nassau",
+          "en": "Fort Belgica and Fort Nassau"
+        },
+        {
+          "id": "Kebun pala di Banda Besar",
+          "en": "Nutmeg gardens on Banda Besar"
+        },
+        {
+          "id": "Sejarah rempah, perk, dan Pulau Run",
+          "en": "Spice history, the perken and Run Island"
+        },
+        {
+          "id": "Memasak hidangan berbumbu pala",
+          "en": "Cook nutmeg-spiced dishes"
+        }
+      ],
+      "included": [
+        {
+          "id": "Penginapan 2 malam di Banda Neira",
+          "en": "2 nights' lodging on Banda Neira"
+        },
+        {
+          "id": "Makan 6 kali",
+          "en": "6 meals"
+        },
+        {
+          "id": "Perahu ke Banda Besar",
+          "en": "Boat to Banda Besar"
+        },
+        {
+          "id": "Tiket masuk benteng dan museum",
+          "en": "Fort and museum entry"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        }
+      ],
+      "meetingPoint": "Pelabuhan Banda Neira, Maluku Tengah",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Kota tua dan benteng",
+            "en": "Old town and forts"
+          },
+          "description": {
+            "id": "Penjemputan di pelabuhan, siang ke Benteng Belgica dan Benteng Nassau, sore jalan kaki kota tua.",
+            "en": "Harbour pickup, midday at Fort Belgica and Fort Nassau, afternoon walk through the old town."
+          }
+        },
+        {
+          "title": {
+            "id": "Kebun pala Banda Besar",
+            "en": "Banda Besar nutmeg gardens"
+          },
+          "description": {
+            "id": "Perahu ke Banda Besar, berjalan di kebun pala, belajar panen dan pengeringan, memasak bersama keluarga.",
+            "en": "Boat to Banda Besar, walk the nutmeg gardens, learn harvesting and drying, cook with a family."
+          }
+        },
+        {
+          "title": {
+            "id": "Pulang",
+            "en": "Departure"
+          },
+          "description": {
+            "id": "Pagi bebas di tepi laut, lalu kembali ke pelabuhan.",
+            "en": "Free morning by the sea, then back to the harbour."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "pengasingan-dan-gunung-api-banda",
+      "destination": "banda-neira",
+      "category": "trekking",
+      "title": {
+        "id": "Rumah Pengasingan dan Fajar di Gunung Api",
+        "en": "Exile Houses and Dawn on Gunung Api"
+      },
+      "summary": {
+        "id": "Dua hari: rumah pengasingan Hatta dan Sjahrir, lalu mendaki Gunung Api untuk menyambut fajar di atas Banda.",
+        "en": "Two days: the exile houses of Hatta and Sjahrir, then a climb up Gunung Api to greet dawn over Banda."
+      },
+      "description": {
+        "id": "Pada 11 Februari 1936, Mohammad Hatta dan Sutan Sjahrir tiba di Banda Neira sebagai tahanan politik pemerintah kolonial. Di rumah yang kini dikenal sebagai rumah pengasingan mereka, keduanya membuka sekolah sore untuk anak-anak Banda. Kita mengunjungi rumah-rumah itu dan bangunan peninggalan kolonial di sekitarnya, sambil membicarakan arti Banda bagi perjalanan menuju kemerdekaan.\n\nDini hari berikutnya kita menyeberang ke Gunung Api dan mendaki gunung berapi aktif setinggi sekitar 650 meter ini untuk melihat matahari terbit di atas gugusan Banda. Pendakian bergantung pada status aktivitas gunung dan cuaca.",
+        "en": "On 11 February 1936, Mohammad Hatta and Sutan Sjahrir arrived on Banda Neira as political prisoners of the colonial government. In what are now known as their exile houses, they ran an afternoon school for Banda's children. We visit these houses and the colonial buildings nearby, and talk about what Banda meant on the road to independence.\n\nBefore dawn the next day we cross to Gunung Api and climb this active volcano, about 650 metres high, to watch the sunrise over the Banda islands. The climb depends on the volcano's activity status and the weather."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 2900000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/banda-neira/neira-from-gunung-api.webp",
+      "gallery": [
+        "/images/content/banda-neira/neira-from-gunung-api.webp",
+        "/images/content/banda-neira/colonial-building.webp",
+        "/images/content/banda-neira/belgica-bastion-sea.webp",
+        "/images/content/banda-neira/belgica-gunung-api.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Rumah pengasingan Hatta dan Sjahrir",
+          "en": "The exile houses of Hatta and Sjahrir"
+        },
+        {
+          "id": "Mendaki Gunung Api saat fajar",
+          "en": "A dawn climb up Gunung Api"
+        },
+        {
+          "id": "Pemandangan gugusan Kepulauan Banda",
+          "en": "Views over the Banda Islands"
+        },
+        {
+          "id": "Kelompok kecil dengan pemandu lokal",
+          "en": "Small group with a local guide"
+        }
+      ],
+      "included": [
+        {
+          "id": "Penginapan 1 malam di Banda Neira",
+          "en": "1 night's lodging on Banda Neira"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Perahu ke Gunung Api",
+          "en": "Boat to Gunung Api"
+        },
+        {
+          "id": "Tiket masuk situs sejarah",
+          "en": "Heritage site entry"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        }
+      ],
+      "meetingPoint": "Pelabuhan Banda Neira, Maluku Tengah",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Jejak pengasingan",
+            "en": "Traces of exile"
+          },
+          "description": {
+            "id": "Penjemputan di pelabuhan, mengunjungi rumah pengasingan Hatta dan Sjahrir serta bangunan kolonial di sekitarnya.",
+            "en": "Harbour pickup, visit the exile houses of Hatta and Sjahrir and the colonial buildings nearby."
+          }
+        },
+        {
+          "title": {
+            "id": "Fajar di Gunung Api",
+            "en": "Dawn on Gunung Api"
+          },
+          "description": {
+            "id": "Pukul 04.00 menyeberang dan mendaki Gunung Api, sarapan setelah turun, lalu kembali ke pelabuhan.",
+            "en": "At 04:00 cross and climb Gunung Api, breakfast after the descent, then back to the harbour."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Raja_Ampat_Islands",
+    "https://en.wikipedia.org/wiki/Toraja",
+    "https://en.wikipedia.org/wiki/Tana_Toraja_Regency",
+    "https://en.wikipedia.org/wiki/Tongkonan",
+    "https://id.wikipedia.org/wiki/Kete_Kesu",
+    "https://id.wikipedia.org/wiki/Londa",
+    "https://id.wikipedia.org/wiki/Rambu_Solo%27",
+    "https://whc.unesco.org/en/tentativelists/5462/",
+    "https://repository.unhas.ac.id/id/eprint/466",
+    "https://specialtycoffee.id/articles/sulawesi-toraja-coffee/",
+    "https://en.wikipedia.org/wiki/Wakatobi_Regency",
+    "https://mongabay.co.id/2012/05/11/unesco-wakatobi-adalah-cagar-biosfer-dunia/",
+    "https://en.wikipedia.org/wiki/Sama-Bajau",
+    "https://voinews.id/index.php/component/k2/item/27872-bajo-mola-village-in-the-wakatobi-sea-southeast-sulawesi",
+    "https://www.indonesia.travel/gb-en/travel-ideas/heritage/mau-wisata-budaya-dan-bahari-desa-wisata-liya-togo-di-wakatobi-wajib-disambangi/",
+    "https://www.kompas.id/baca/english/2018/08/18/a-full-life-in-the-longhouse",
+    "https://mongabay.co.id/2019/06/24/bagi-masyarakat-iban-sungai-utik-hutan-adalah-ibu/",
+    "https://www.suara.com/bestie/2023/10/10/163346/keunikan-rumah-bentang-ensaid-panjang-dihuni-33-kepala-keluarga",
+    "https://www.goodnewsfromindonesia.id/2020/11/01/tenun-ikat-sintang-tenun-yang-hanya-boleh-dikerjakan-kaum-perempuan",
+    "https://en.wikipedia.org/wiki/Baliem_Valley",
+    "https://en.wikipedia.org/wiki/Dani_people",
+    "https://en.wikipedia.org/wiki/Honai",
+    "https://id.wikipedia.org/wiki/Festival_Budaya_Lembah_Baliem",
+    "https://www.indonesia.travel/id/id/destination/maluku-papua/papua-pegunungan/baliem-valley",
+    "https://en.wikipedia.org/wiki/Banda_Islands",
+    "https://en.wikipedia.org/wiki/Banda_Neira",
+    "https://en.wikipedia.org/wiki/Fort_Belgica",
+    "https://ambon.antaranews.com/berita/214959/menelusuri-jejak-proklamator-bung-hatta-di-banda-neira-maluku",
+    "https://en.tempo.co/amp/538908/banda-neira-where-hatta-sjahrir-exiled",
+    "https://www.visittoraja.com/destination/toraja/batutumonga/",
+    "https://www.inews.id/regional/sulsel/profil-bandara-toraja-diusung-dengan-konsep-desain-rumah-adat-tongkonan/all",
+    "https://en.wikipedia.org/wiki/Matahora_Airport",
+    "https://rri.co.id/voice-of-indonesia/tourism/2746491/liya-togo-offers-historic-forts-and-wakatobi-beauty",
+    "https://www.indonesia.travel/gb/en/muslim-friendly-travel/attraction/masjid-keraton-liya"
+  ]
+}

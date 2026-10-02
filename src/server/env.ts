@@ -55,7 +55,10 @@ export function checkEnv(source: Record<string, string | undefined>): EnvCheck {
   }
 
   const env = parsed.data;
-  if (env.NODE_ENV === "production") {
+  // Production-only requirements apply to the running server, not to
+  // `next build` (prerendering may read env, but deploy values come later).
+  const isBuild = source.NEXT_PHASE === "phase-production-build";
+  if (env.NODE_ENV === "production" && !isBuild) {
     const errors: string[] = [];
     if (!env.SITE_URL) errors.push("SITE_URL is required in production (public site URL)");
     if (!env.BETTER_AUTH_URL.startsWith("https://")) {

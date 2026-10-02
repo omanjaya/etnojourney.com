@@ -7,7 +7,7 @@ import { tourService } from "@/server/services/tour.service";
 export const dynamic = "force-dynamic";
 
 /** Static editorial and legal pages. */
-const CONTENT_PAGES = ["/about", "/faq", "/cancellation-policy", "/privacy", "/terms"] as const;
+const CONTENT_PAGES = ["/about", "/faq", "/cancellation-policy", "/privacy", "/terms", "/credits"] as const;
 
 function entry(href: string, lastModified?: Date): MetadataRoute.Sitemap[number] {
   const url = (locale: (typeof routing.locales)[number]) => localizedUrl(href, locale);

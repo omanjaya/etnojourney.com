@@ -50,6 +50,13 @@
       "when": 1790872983346,
       "tag": "0006_bookings_created_idx_order",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1790904622714,
+      "tag": "0007_photo_credits",
+      "breakpoints": true
     }
   ]
 }

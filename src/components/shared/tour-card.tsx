@@ -87,11 +87,15 @@ export function TourCard({
             {action}
           </div>
           <div className="pointer-events-none absolute inset-x-4 bottom-4 flex items-center justify-between text-white">
-            <Rating
-              value={tour.rating}
-              count={tour.reviewCount}
-              label={t("ratingLabel", { rating: tour.rating.toFixed(1) })}
-            />
+            {tour.reviewCount > 0 ? (
+              <Rating
+                value={tour.rating}
+                count={tour.reviewCount}
+                label={t("ratingLabel", { rating: tour.rating.toFixed(1) })}
+              />
+            ) : (
+              <Badge tone="glass">{t("newTour")}</Badge>
+            )}
             <span className="text-ink grid size-10 translate-y-2 place-items-center rounded-full bg-white opacity-0 transition-all duration-500 ease-(--ease-editorial) group-hover:translate-y-0 group-hover:opacity-100">
               <ArrowUpRight
                 className="size-4 transition-transform duration-500 ease-(--ease-editorial) group-hover:rotate-45"

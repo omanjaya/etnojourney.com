@@ -1,0 +1,1184 @@
+{
+  "region": "jawa-sumatra",
+  "destinations": [
+    {
+      "slug": "tengger-bromo",
+      "name": "Tengger Bromo",
+      "province": "Jawa Timur",
+      "heroImage": "/images/content/tengger-bromo/bromo-pagi.webp",
+      "tagline": {
+        "id": "Kaldera berkabut tempat masyarakat Tengger menjaga tradisi leluhur Majapahit.",
+        "en": "A misty caldera where the Tengger people keep their Majapahit-era traditions."
+      },
+      "description": {
+        "id": "Masyarakat Tengger mendiami lereng Pegunungan Tengger dan meyakini diri sebagai keturunan Rara Anteng dan Jaka Seger. Mereka menjalankan Hindu dengan corak yang khas, dipimpin oleh dukun pandita di setiap desa.\n\nSetiap tahun, pada bulan Kasada, warga mendaki ke bibir kawah Bromo untuk melarung hasil bumi sebagai wujud syukur. Di luar upacara, kehidupan desa berpusat pada ladang kentang dan bawang di lereng curam, rumah kayu berdapur tungku, dan sarung yang selalu terselempang menahan dingin.",
+        "en": "The Tengger people live on the slopes of the Tengger massif and trace their ancestry to Rara Anteng and Jaka Seger. They practise a distinctive form of Hinduism, guided by a dukun pandita (priest) in every village.\n\nEach year, in the month of Kasada, villagers climb to Bromo's crater rim to offer the harvest in thanksgiving. Between ceremonies, life revolves around potato and shallot fields on steep slopes, timber houses warmed by wood stoves, and the sarong always draped against the cold."
+      }
+    },
+    {
+      "slug": "yogyakarta",
+      "name": "Yogyakarta",
+      "province": "DI Yogyakarta",
+      "heroImage": "/images/content/yogyakarta/borobudur-pagi.webp",
+      "tagline": {
+        "id": "Kota keraton, batik tulis, dan candi Buddha terbesar di dunia.",
+        "en": "City of the sultan's palace, hand-drawn batik and the world's largest Buddhist temple."
+      },
+      "description": {
+        "id": "Yogyakarta adalah satu-satunya provinsi di Indonesia yang dipimpin oleh seorang sultan. Keraton Ngayogyakarta Hadiningrat menjadi pusat budaya Jawa: gamelan, wayang, tari klasik, dan tata krama yang halus.\n\nDi kampung-kampung batik, teknik tulis dengan canting dan malam terus diwariskan; batik tulis Indonesia diakui UNESCO sebagai warisan budaya takbenda pada 2009. Di barat laut kota, di Magelang, Jawa Tengah, Candi Borobudur menyimpan 2.672 panel relief yang menuntun peziarah menuju puncaknya.",
+        "en": "Yogyakarta is the only Indonesian province led by a sultan. The Kraton Ngayogyakarta Hadiningrat anchors Javanese culture: gamelan, wayang puppetry, classical dance and refined etiquette.\n\nIn the batik villages, the canting-and-wax technique is still handed down; Indonesian batik was inscribed by UNESCO as intangible cultural heritage in 2009. Northwest of the city, in Magelang, Central Java, Borobudur carries 2,672 relief panels that guide pilgrims up to its summit."
+      }
+    },
+    {
+      "slug": "samosir",
+      "name": "Samosir",
+      "province": "Sumatera Utara",
+      "heroImage": "/images/content/samosir/danau-toba-dari-samosir.webp",
+      "tagline": {
+        "id": "Pulau di tengah Danau Toba, tanah rumah bolon, ulos, dan adat Batak Toba.",
+        "en": "An island in Lake Toba, home of the rumah bolon, ulos cloth and Batak Toba custom."
+      },
+      "description": {
+        "id": "Samosir adalah pulau besar di tengah Danau Toba dan jantung budaya Batak Toba. Desa-desa adatnya ditandai rumah bolon, rumah panggung kayu beratap melengkung tinggi dengan ukiran gorga di bagian depannya.\n\nDi Huta Siallagan, kawasan cagar budaya di Simanindo, berdiri Batu Persidangan, tempat para tetua dahulu menyidangkan perkara. Ulos, kain tenun Batak yang diselempangkan di bahu dan diberikan dalam upacara adat seperti pernikahan, masih ditenun dengan tangan.",
+        "en": "Samosir is the large island in the middle of Lake Toba and the heart of Batak Toba culture. Its customary villages are marked by the rumah bolon, timber houses on stilts with soaring curved roofs and carved gorga facades.\n\nIn Huta Siallagan, a protected heritage village in Simanindo, stand the Batu Persidangan, the stone seats where elders once held trials. Ulos, the Batak woven cloth draped over the shoulders and given at ceremonies such as weddings, is still woven by hand."
+      }
+    },
+    {
+      "slug": "minangkabau",
+      "name": "Minangkabau",
+      "province": "Sumatera Barat",
+      "heroImage": "/images/content/minangkabau/istano-basa-pagaruyung.webp",
+      "tagline": {
+        "id": "Dataran tinggi rumah gadang, nagari tua, songket emas, dan rendang.",
+        "en": "Highlands of rumah gadang, old nagari, golden songket and rendang."
+      },
+      "description": {
+        "id": "Dataran tinggi Sumatera Barat adalah ranah Minangkabau, masyarakat matrilineal tempat rumah gadang dimiliki perempuan dan diwariskan dari ibu ke anak perempuan. Atapnya yang melengkung seperti tanduk kerbau (gonjong) menjadi penanda yang mudah dikenali.\n\nDi lereng Gunung Marapi, Nagari Pariangan dipercaya sebagai asal-muasal nenek moyang orang Minangkabau. Tak jauh dari Batusangkar berdiri Istano Basa Pagaruyung, istana kerajaan yang beberapa kali terbakar, terakhir tersambar petir pada 2007, lalu dibangun kembali dan kini menjadi museum.",
+        "en": "The West Sumatran highlands are the land of the Minangkabau, a matrilineal society in which the rumah gadang belongs to the women and passes from mother to daughter. Its roof, curving up like buffalo horns (gonjong), is instantly recognisable.\n\nOn the slopes of Mount Marapi, Nagari Pariangan is believed to be where the Minangkabau ancestors first settled. Near Batusangkar stands the Istano Basa Pagaruyung, a royal palace that burned several times, most recently after a lightning strike in 2007, and was rebuilt as a museum."
+      }
+    },
+    {
+      "slug": "osing-kemiren",
+      "name": "Kemiren, Banyuwangi",
+      "province": "Jawa Timur",
+      "heroImage": "/images/content/osing-kemiren/dapur-tradisional-osing.webp",
+      "tagline": {
+        "id": "Desa adat suku Osing di ujung timur Jawa, rumah gandrung, barong, dan kopi.",
+        "en": "An Osing customary village at Java's eastern tip, home of gandrung, barong and coffee."
+      },
+      "description": {
+        "id": "Suku Osing adalah keturunan masyarakat Kerajaan Blambangan yang mendiami ujung timur Pulau Jawa, terutama di Kabupaten Banyuwangi, dengan bahasa Osing mereka sendiri. Desa Kemiren di Kecamatan Glagah menjadi desa wisata budaya tempat rumah adat dan tradisi Osing tetap dijalankan.\n\nKemiren menyimpan kesenian Barong Osing dan tradisi gandrung, tarian khas Banyuwangi yang dulunya digelar sebagai ungkapan syukur setelah panen. Setiap tahun desa ini menggelar Ider Bumi pada 2 Syawal, Tumpeng Sewu pada awal Dzulhijjah, dan Festival Ngopi Sepuluh Ewu setiap Oktober.",
+        "en": "The Osing are descendants of the Blambangan kingdom at the eastern tip of Java, mainly in Banyuwangi Regency, with their own Osing language. Kemiren village in Glagah district is a cultural tourism village where Osing houses and traditions are still lived.\n\nKemiren keeps the Osing barong and the gandrung, Banyuwangi's signature dance, once performed in thanksgiving after the harvest. Each year the village holds Ider Bumi on the 2nd of Syawal, Tumpeng Sewu early in Dhul Hijjah and the Ngopi Sepuluh Ewu coffee festival every October."
+      }
+    },
+    {
+      "slug": "kampung-naga",
+      "name": "Kampung Naga",
+      "province": "Jawa Barat",
+      "heroImage": "/images/content/kampung-naga/kampung-naga-lembah.webp",
+      "tagline": {
+        "id": "Kampung adat Sunda di lembah Ciwulan yang setia pada aturan leluhur.",
+        "en": "A Sundanese customary village in the Ciwulan valley, faithful to ancestral rules."
+      },
+      "description": {
+        "id": "Kampung Naga terletak di Desa Neglasari, Kecamatan Salawu, Kabupaten Tasikmalaya, di lembah subur yang dibatasi Sungai Ciwulan dan hutan keramat. Untuk mencapainya, pengunjung menuruni tangga batu (sengked) dari jalan raya Garut–Tasikmalaya.\n\nWarganya memegang adat Sunda warisan karuhun dengan teguh. Rumah harus berupa panggung dari bambu dan kayu, beratap ijuk atau alang-alang, menghadap utara atau selatan, dan tidak boleh dicat. Hutan keramat dan bangunan yang disucikan seperti Bumi Ageung dihormati warga dan tidak dimasuki dalam tur kami, dan pemandu warga akan menjelaskan di mana kamu boleh memotret.",
+        "en": "Kampung Naga lies in Neglasari village, Salawu district, Tasikmalaya, in a fertile valley bounded by the Ciwulan river and a sacred forest. Visitors reach it by walking down a stone stairway (sengked) from the Garut–Tasikmalaya road.\n\nIts residents keep Sundanese ancestral custom firmly. Houses must be on stilts, built of bamboo and wood with palm-fibre or thatch roofs, face north or south, and remain unpainted. The sacred forest and revered buildings such as the Bumi Ageung are respected by residents and not entered on our tours, and village guides will tell you where photography is allowed."
+      }
+    }
+  ],
+  "tours": [
+    {
+      "slug": "kasada-dan-fajar-bromo",
+      "destination": "tengger-bromo",
+      "category": "ritual",
+      "title": {
+        "id": "Tradisi Tengger dan Fajar di Bromo",
+        "en": "Tengger Traditions and Dawn at Bromo"
+      },
+      "summary": {
+        "id": "Menginap di rumah warga Tengger, belajar tentang Kasada dari dukun pandita, dan menyambut fajar di Penanjakan.",
+        "en": "Stay with a Tengger family, learn about Kasada from the village priest, and greet dawn at Penanjakan."
+      },
+      "description": {
+        "id": "Perjalanan dua hari ini membawa kamu ke desa Tengger di bibir kaldera. Kamu menginap di rumah keluarga, menghangatkan diri di depan tungku, dan berbincang dengan dukun pandita tentang makna Yadnya Kasada dan Karo.\n\nDini hari, kita berangkat ke Penanjakan untuk melihat matahari terbit di atas lautan pasir, lalu berjalan ke kawah Bromo melewati Pura Luhur Poten. Jika jadwal bertepatan dengan Kasada, kamu akan menyaksikan upacara dari jarak yang dihormati.",
+        "en": "This two-day journey takes you to a Tengger village on the caldera rim. You stay with a family, warm up by the wood stove, and talk with the dukun pandita about the meaning of the Kasada and Karo ceremonies.\n\nBefore dawn we head to Penanjakan to watch the sun rise over the sea of sand, then walk to Bromo's crater past Luhur Poten temple. If your dates coincide with Kasada, you will witness the ceremony from a respectful distance."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 2400000,
+      "maxParticipants": 8,
+      "rating": 4.9,
+      "reviewCount": 141,
+      "coverImage": "/images/content/tengger-bromo/bromo-pagi.webp",
+      "gallery": [
+        "/images/content/tengger-bromo/bromo-pagi.webp",
+        "/images/content/tengger-bromo/arak-arakan-kasada.webp",
+        "/images/content/tengger-bromo/doa-kasada-poten.webp",
+        "/images/content/tengger-bromo/berkuda-lautan-pasir.webp",
+        "/images/content/tengger-bromo/bromo-senja.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Menginap di rumah keluarga Tengger",
+          "en": "Homestay with a Tengger family"
+        },
+        {
+          "id": "Dialog dengan dukun pandita",
+          "en": "Conversation with the village priest"
+        },
+        {
+          "id": "Matahari terbit di Penanjakan",
+          "en": "Sunrise at Penanjakan viewpoint"
+        },
+        {
+          "id": "Berjalan ke kawah melewati Pura Luhur Poten",
+          "en": "Walk to the crater past Luhur Poten temple"
+        }
+      ],
+      "included": [
+        {
+          "id": "Homestay 1 malam",
+          "en": "1-night homestay"
+        },
+        {
+          "id": "Jip 4x4 ke Penanjakan",
+          "en": "4x4 jeep to Penanjakan"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Tiket taman nasional",
+          "en": "National park fees"
+        }
+      ],
+      "meetingPoint": "Stasiun Malang Kota Baru, Malang",
+      "isFeatured": true,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Menuju desa Tengger",
+            "en": "Into the Tengger highlands"
+          },
+          "description": {
+            "id": "13.00 berangkat dari Malang, 16.00 tiba di desa, jalan sore di ladang, makan malam dan dialog dengan dukun pandita.",
+            "en": "13:00 leave Malang, 16:00 arrive in the village, afternoon walk through the fields, dinner and conversation with the priest."
+          }
+        },
+        {
+          "title": {
+            "id": "Fajar di Penanjakan dan kawah Bromo",
+            "en": "Dawn at Penanjakan and Bromo crater"
+          },
+          "description": {
+            "id": "03.30 jip ke Penanjakan, 05.15 matahari terbit, 07.00 berjalan ke kawah, 09.30 sarapan di rumah keluarga, 13.00 tiba kembali di Malang.",
+            "en": "03:30 jeep to Penanjakan, 05:15 sunrise, 07:00 walk to the crater, 09:30 breakfast with the family, 13:00 back in Malang."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Olivia Johnson",
+          "country": "United States",
+          "rating": 5,
+          "body": {
+            "id": "Malam di depan tungku bersama keluarga Tengger adalah momen terbaik perjalanan saya.",
+            "en": "The evening by the stove with a Tengger family was the highlight of my trip."
+          }
+        },
+        {
+          "authorName": "Budi Santoso",
+          "country": "Indonesia",
+          "rating": 5,
+          "body": {
+            "id": "Penjelasan tentang Kasada sangat mendalam dan disampaikan dengan hormat.",
+            "en": "The explanation of Kasada was deep and respectfully delivered."
+          }
+        },
+        {
+          "authorName": "Noah Fischer",
+          "country": "Switzerland",
+          "rating": 5,
+          "body": {
+            "id": "Dingin, tapi fajarnya tidak terlupakan.",
+            "en": "Cold, but an unforgettable dawn."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "jejak-desa-ngadas",
+      "destination": "tengger-bromo",
+      "category": "village",
+      "title": {
+        "id": "Tiga Hari di Desa Ngadas",
+        "en": "Three Days in Ngadas Village"
+      },
+      "summary": {
+        "id": "Tinggal bersama keluarga Tengger di Ngadas: bertani di lereng, memasak di tungku, dan mengenal adat desa di ketinggian sekitar 2.100 meter.",
+        "en": "Stay with a Tengger family in Ngadas: farm the slopes, cook on the wood stove and learn village customs at about 2,100 metres."
+      },
+      "description": {
+        "id": "Ngadas adalah salah satu desa masyarakat Tengger, terletak sebagai kantong di tengah Taman Nasional Bromo Tengger Semeru pada ketinggian sekitar 2.150 meter. Sebagian besar warganya bertani sayur di lereng yang curam, dan adat desa masih dipegang kuat. Selama tiga hari, kamu ikut ke ladang, membantu memanen, dan belajar memasak di dapur tungku yang menjadi pusat kehangatan rumah.\n\nUdara di Ngadas bisa mendekati nol derajat pada malam hari. Jika kunjunganmu bertepatan dengan kegiatan adat, keluarga tuan rumah akan menjelaskan apa yang boleh dan tidak boleh dilakukan tamu.",
+        "en": "Ngadas is one of the Tengger villages, an enclave inside Bromo Tengger Semeru National Park at about 2,150 metres. Most families farm vegetables on steep slopes, and village customs are still firmly kept. Over three days you join the family in the fields, help with the harvest and learn to cook at the wood stove that keeps the house warm.\n\nNights in Ngadas can drop close to freezing. If your visit coincides with a village observance, your hosts will explain what guests may and may not do."
+      },
+      "durationDays": 3,
+      "pricePerPerson": 3100000,
+      "maxParticipants": 6,
+      "rating": 4.8,
+      "reviewCount": 37,
+      "coverImage": "/images/content/tengger-bromo/lembah-bromo.webp",
+      "gallery": [
+        "/images/content/tengger-bromo/lembah-bromo.webp",
+        "/images/content/tengger-bromo/desa-ranu-pani.webp",
+        "/images/content/tengger-bromo/upacara-karo.webp",
+        "/images/content/tengger-bromo/bromo-senja.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Desa Tengger di ketinggian sekitar 2.100 m",
+          "en": "Tengger village at about 2,100 m"
+        },
+        {
+          "id": "Bertani bersama keluarga",
+          "en": "Farm alongside your host family"
+        },
+        {
+          "id": "Memasak di dapur tungku",
+          "en": "Cook on a traditional wood stove"
+        },
+        {
+          "id": "Kelompok maksimal enam orang",
+          "en": "Groups of six at most"
+        }
+      ],
+      "included": [
+        {
+          "id": "Homestay 2 malam",
+          "en": "2-night homestay"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Transportasi pulang-pergi dari titik temu",
+          "en": "Return transport from the meeting point"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Terminal Arjosari, Malang",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Ngadas",
+            "en": "Arrive in Ngadas"
+          },
+          "description": {
+            "id": "Perjalanan dari Malang, perkenalan dengan keluarga, jalan sore keliling desa.",
+            "en": "Drive from Malang, meet your family, evening walk around the village."
+          }
+        },
+        {
+          "title": {
+            "id": "Hari di ladang",
+            "en": "A day in the fields"
+          },
+          "description": {
+            "id": "Berangkat ke ladang bersama keluarga, makan siang di gubuk ladang, sore belajar memasak.",
+            "en": "Head to the fields with the family, lunch in the field hut, cooking lesson in the afternoon."
+          }
+        },
+        {
+          "title": {
+            "id": "Pamit",
+            "en": "Farewell"
+          },
+          "description": {
+            "id": "Fajar di bukit desa, sarapan perpisahan, kembali ke Malang.",
+            "en": "Dawn on the village hill, farewell breakfast, return to Malang."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Grace Lee",
+          "country": "Canada",
+          "rating": 5,
+          "body": {
+            "id": "Benar-benar lambat dan autentik. Saya merasa seperti bagian dari keluarga.",
+            "en": "Truly slow and authentic. I felt like part of the family."
+          }
+        },
+        {
+          "authorName": "Pieter de Vries",
+          "country": "Netherlands",
+          "rating": 4,
+          "body": {
+            "id": "Dingin di malam hari, bawa jaket tebal. Pengalaman yang luar biasa.",
+            "en": "Cold at night, bring a warm jacket. A remarkable experience."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "borobudur-fajar-dan-batik-tulis",
+      "destination": "yogyakarta",
+      "category": "craft",
+      "title": {
+        "id": "Fajar Borobudur dan Batik Tulis",
+        "en": "Borobudur at Dawn and Hand-drawn Batik"
+      },
+      "summary": {
+        "id": "Membaca relief Borobudur bersama pemandu desa, lalu membatik dengan canting di kampung batik Yogyakarta.",
+        "en": "Read Borobudur's reliefs with a village guide, then draw batik with a canting in a Yogyakarta batik village."
+      },
+      "description": {
+        "id": "Hari pertama dimulai sebelum fajar di perbukitan Menoreh, lalu berjalan bersama pemandu lokal untuk membaca relief Borobudur, termasuk rangkaian Lalitavistara yang mengisahkan kehidupan Siddhartha. Sore harinya kita bersepeda melintasi desa-desa di sekitar candi.\n\nHari kedua dihabiskan di kampung batik. Seorang pembatik akan menjelaskan makna motif klasik Jawa seperti parang dan kawung, lalu memandu kamu membatik selembar kain dari pola, mencanting dengan malam, hingga pewarnaan.",
+        "en": "Day one begins before dawn in the Menoreh hills, followed by a walk with a local guide to read Borobudur's reliefs, including the Lalitavistara series on the life of Siddhartha. In the afternoon we cycle through the villages around the temple.\n\nDay two is spent in a batik village. A batik maker explains classical Javanese motifs such as parang and kawung, then guides you through your own cloth, from pattern and wax drawing with the canting to dyeing."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1900000,
+      "maxParticipants": 10,
+      "rating": 4.9,
+      "reviewCount": 167,
+      "coverImage": "/images/content/yogyakarta/borobudur-pagi.webp",
+      "gallery": [
+        "/images/content/yogyakarta/borobudur-pagi.webp",
+        "/images/content/yogyakarta/stupa-borobudur.webp",
+        "/images/content/yogyakarta/relief-lalitavistara.webp",
+        "/images/content/yogyakarta/canting-batik-tulis.webp",
+        "/images/content/yogyakarta/membatik-tulis.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Fajar di perbukitan Menoreh",
+          "en": "Dawn over the Menoreh hills"
+        },
+        {
+          "id": "Membaca relief Lalitavistara bersama pemandu lokal",
+          "en": "Read the Lalitavistara reliefs with a local guide"
+        },
+        {
+          "id": "Bersepeda di desa sekitar candi",
+          "en": "Cycle through villages around the temple"
+        },
+        {
+          "id": "Membatik selembar kain sendiri",
+          "en": "Make your own batik cloth"
+        }
+      ],
+      "included": [
+        {
+          "id": "Menginap 1 malam di guesthouse desa",
+          "en": "1 night in a village guesthouse"
+        },
+        {
+          "id": "Tiket Candi Borobudur",
+          "en": "Borobudur entrance ticket"
+        },
+        {
+          "id": "Kelas batik dan bahan",
+          "en": "Batik class and materials"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Makan 4 kali",
+          "en": "4 meals"
+        }
+      ],
+      "meetingPoint": "Stasiun Tugu Yogyakarta",
+      "isFeatured": true,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Borobudur dan Lembah Menoreh",
+            "en": "Borobudur and the Menoreh valley"
+          },
+          "description": {
+            "id": "04.00 berangkat, fajar di bukit, 07.30 tur relief, sore bersepeda desa, menginap di guesthouse.",
+            "en": "04:00 depart, dawn on the hill, 07:30 relief walk, afternoon village cycling, overnight in a guesthouse."
+          }
+        },
+        {
+          "title": {
+            "id": "Kampung batik",
+            "en": "Batik village"
+          },
+          "description": {
+            "id": "09.00 kelas batik tulis hingga 15.00, termasuk pewarnaan dan pelorodan, lalu kembali ke Yogyakarta.",
+            "en": "09:00 hand-drawn batik class until 15:00, including dyeing and wax removal, then return to Yogyakarta."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Isabella Garcia",
+          "country": "Spain",
+          "rating": 5,
+          "body": {
+            "id": "Membaca relief bersama pemandu lokal mengubah cara saya melihat Borobudur.",
+            "en": "Reading the reliefs with a local guide changed how I see Borobudur."
+          }
+        },
+        {
+          "authorName": "Ahmad Fauzi",
+          "country": "Malaysia",
+          "rating": 5,
+          "body": {
+            "id": "Kelas batiknya sabar dan detail. Kain saya tidak sempurna, tapi saya bangga.",
+            "en": "The batik class was patient and detailed. My cloth isn't perfect, but I'm proud of it."
+          }
+        },
+        {
+          "authorName": "Chloe Dubois",
+          "country": "Belgium",
+          "rating": 5,
+          "body": {
+            "id": "Kombinasi sempurna antara sejarah dan kerajinan.",
+            "en": "The perfect mix of history and craft."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "huta-siallagan-dan-rumah-bolon",
+      "destination": "samosir",
+      "category": "village",
+      "title": {
+        "id": "Huta Siallagan dan Rumah Bolon Samosir",
+        "en": "Huta Siallagan and the Rumah Bolon of Samosir"
+      },
+      "summary": {
+        "id": "Menyeberang ke Samosir, menelusuri desa adat Batak Toba, Batu Persidangan, dan arsitektur rumah bolon.",
+        "en": "Cross to Samosir to explore Batak Toba villages, the stone court seats and rumah bolon architecture."
+      },
+      "description": {
+        "id": "Perjalanan dimulai dengan kapal penyeberangan dari Ajibata ke Tomok di pesisir timur Samosir. Bersama pemandu setempat, kita mengunjungi Huta Siallagan, kawasan cagar budaya dengan deretan rumah bolon dan Batu Persidangan, kursi-kursi batu tempat persidangan adat Batak Toba dahulu digelar.\n\nHari kedua diisi dengan mengenal arsitektur rumah bolon: atap melengkung seperti perahu yang menjulang di kedua ujungnya, tiang-tiang kayu besar penopangnya, dan gorga, ukiran yang dicat tiga warna: merah, hitam, dan putih. Di Samosir kamu juga bisa menyaksikan sigale-gale, boneka kayu yang dahulu dimainkan dalam upacara kematian dan kini kerap dipertunjukkan untuk pengunjung.",
+        "en": "The journey starts with the ferry from Ajibata to Tomok on Samosir's east coast. With a local guide we visit Huta Siallagan, a protected heritage village with rows of rumah bolon and the Batu Persidangan, stone seats where Batak Toba customary trials were once held.\n\nDay two is about rumah bolon architecture: boat-shaped roofs that sweep up at both ends, the heavy timber posts beneath them, and gorga, carvings painted in three colours: red, black and white. On Samosir you can also see the sigale-gale, a wooden puppet once used in funeral dances and now often performed for visitors."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1850000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/samosir/huta-siallagan.webp",
+      "gallery": [
+        "/images/content/samosir/huta-siallagan.webp",
+        "/images/content/samosir/batu-persidangan-siallagan.webp",
+        "/images/content/samosir/rumah-bolon.webp",
+        "/images/content/samosir/rumah-bolon-samosir.webp",
+        "/images/content/samosir/pasar-tomok.webp",
+        "/images/content/samosir/danau-toba-dari-samosir.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Kapal penyeberangan Ajibata–Tomok di Danau Toba",
+          "en": "Ajibata–Tomok ferry across Lake Toba"
+        },
+        {
+          "id": "Batu Persidangan di cagar budaya Huta Siallagan",
+          "en": "The stone court seats of Huta Siallagan"
+        },
+        {
+          "id": "Arsitektur dan ukiran gorga rumah bolon",
+          "en": "Rumah bolon architecture and gorga carving"
+        },
+        {
+          "id": "Pasar dan desa tepi danau di Tomok",
+          "en": "Lakeside market and village at Tomok"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Tiket kapal penyeberangan pulang-pergi",
+          "en": "Return ferry tickets"
+        },
+        {
+          "id": "Penginapan 1 malam di Samosir",
+          "en": "1 night's lodging on Samosir"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Tiket masuk kawasan cagar budaya",
+          "en": "Heritage site entrance fees"
+        }
+      ],
+      "meetingPoint": "Pelabuhan Ajibata, Kabupaten Toba",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Menyeberang ke Samosir",
+            "en": "Crossing to Samosir"
+          },
+          "description": {
+            "id": "09.00 kapal dari Ajibata ke Tomok, jalan kaki di desa dan pasar Tomok, sore ke Huta Siallagan, menginap di Samosir.",
+            "en": "09:00 ferry from Ajibata to Tomok, walk through Tomok village and market, afternoon at Huta Siallagan, overnight on Samosir."
+          }
+        },
+        {
+          "title": {
+            "id": "Rumah bolon dan gorga",
+            "en": "Rumah bolon and gorga"
+          },
+          "description": {
+            "id": "Pagi mengenal arsitektur dan ukiran rumah bolon bersama pemandu, siang makan bersama, kapal kembali ke Ajibata sekitar pukul 15.00.",
+            "en": "Morning on rumah bolon architecture and carving with the guide, shared lunch, ferry back to Ajibata around 15:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tenun-ulos-tepi-danau-toba",
+      "destination": "samosir",
+      "category": "craft",
+      "title": {
+        "id": "Tenun Ulos di Tepi Danau Toba",
+        "en": "Ulos Weaving by Lake Toba"
+      },
+      "summary": {
+        "id": "Sehari bersama penenun ulos di Samosir: memintal, menenun dengan alat gedogan, dan memahami makna ulos dalam adat Batak.",
+        "en": "A day with ulos weavers on Samosir: spinning, weaving on a backstrap loom and the meaning of ulos in Batak custom."
+      },
+      "description": {
+        "id": "Bagi orang Batak, ulos bukan sekadar kain. Ulos diselempangkan di bahu, diberikan sebagai tanda kasih dalam upacara adat, dan dalam pernikahan digunakan untuk mengikat kedua mempelai.\n\nDi rumah seorang penenun di Samosir, kamu akan melihat proses dari benang hingga kain: memintal, menyusun benang lungsin, lalu menenun dengan alat tenun gedogan yang ditahan dengan tubuh. Kamu mencoba beberapa baris tenunan dan menutup hari di titik pandang Danau Toba.",
+        "en": "For the Batak, ulos is more than cloth. It is draped over the shoulders, given as a token of care at ceremonies, and used at weddings to bind bride and groom together.\n\nAt a weaver's home on Samosir you follow the process from thread to cloth: spinning, setting up the warp and weaving on a backstrap loom held taut by the body. You try a few rows yourself and end the day at a Lake Toba viewpoint."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 750000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/samosir/tenun-ulos.webp",
+      "gallery": [
+        "/images/content/samosir/tenun-ulos.webp",
+        "/images/content/samosir/memintal-benang-ulos.webp",
+        "/images/content/samosir/danau-toba-sipinsur.webp",
+        "/images/content/samosir/danau-toba-dari-samosir.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Belajar dari penenun ulos di rumahnya",
+          "en": "Learn from an ulos weaver at home"
+        },
+        {
+          "id": "Memintal dan menenun dengan alat gedogan",
+          "en": "Spinning and weaving on a backstrap loom"
+        },
+        {
+          "id": "Makna ulos dalam upacara adat Batak",
+          "en": "The meaning of ulos in Batak ceremonies"
+        },
+        {
+          "id": "Senja di titik pandang Danau Toba",
+          "en": "Sunset at a Lake Toba viewpoint"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Kelas tenun dan bahan",
+          "en": "Weaving class and materials"
+        },
+        {
+          "id": "Makan siang khas Batak",
+          "en": "Batak home-style lunch"
+        },
+        {
+          "id": "Transportasi lokal di Samosir",
+          "en": "Local transport on Samosir"
+        },
+        {
+          "id": "Air mineral dan kudapan tradisional",
+          "en": "Bottled water and traditional snacks"
+        }
+      ],
+      "meetingPoint": "Pelabuhan Tomok, Samosir",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Dari benang ke ulos",
+            "en": "From thread to ulos"
+          },
+          "description": {
+            "id": "09.00 bertemu di Tomok, menuju rumah penenun, kelas tenun hingga sore dengan jeda makan siang, 16.30 titik pandang danau, 18.00 kembali ke Tomok.",
+            "en": "09:00 meet at Tomok, travel to the weaver's home, weaving class until late afternoon with a lunch break, 16:30 lake viewpoint, 18:00 back at Tomok."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "nagari-tuo-pariangan-dan-pagaruyung",
+      "destination": "minangkabau",
+      "category": "village",
+      "title": {
+        "id": "Nagari Tuo Pariangan dan Istano Basa Pagaruyung",
+        "en": "Nagari Tuo Pariangan and the Pagaruyung Palace"
+      },
+      "summary": {
+        "id": "Menelusuri nagari yang dipercaya sebagai asal orang Minangkabau, rumah gadang, dan istana kerajaan Pagaruyung.",
+        "en": "Explore the village believed to be the Minangkabau homeland, rumah gadang houses and the Pagaruyung royal palace."
+      },
+      "description": {
+        "id": "Nagari Pariangan berada di lereng Gunung Marapi pada ketinggian 500 sampai 700 meter dan dipercaya sebagai tempat asal nenek moyang orang Minangkabau. Bersama pemandu setempat, kita berjalan di antara rumah gadang, sawah berundak, dan rangkiang, lumbung padi yang menyertai rumah gadang.\n\nHari kedua menuju Istano Basa Pagaruyung dekat Batusangkar. Istana ini beberapa kali terbakar, pada 1804, 1966, dan 2007, lalu dibangun kembali dan kini menjadi museum yang menjelaskan sejarah kerajaan dan adat matrilineal Minangkabau.",
+        "en": "Nagari Pariangan lies on the slopes of Mount Marapi at 500 to 700 metres and is believed to be where the Minangkabau ancestors first settled. With a local guide we walk among rumah gadang houses, terraced rice fields and rangkiang, the rice barns that accompany a rumah gadang.\n\nDay two takes us to the Istano Basa Pagaruyung near Batusangkar. The palace burned in 1804, 1966 and 2007 and was rebuilt each time; it is now a museum on the kingdom's history and Minangkabau matrilineal custom."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1650000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/minangkabau/nagari-pariangan.webp",
+      "gallery": [
+        "/images/content/minangkabau/nagari-pariangan.webp",
+        "/images/content/minangkabau/perkampungan-pariangan.webp",
+        "/images/content/minangkabau/sawah-pariangan.webp",
+        "/images/content/minangkabau/rumah-gadang-balimbiang.webp",
+        "/images/content/minangkabau/rumah-gadang-gajah-maram.webp",
+        "/images/content/minangkabau/istano-basa-pagaruyung.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Nagari Pariangan di lereng Gunung Marapi",
+          "en": "Nagari Pariangan on the slopes of Mount Marapi"
+        },
+        {
+          "id": "Rumah gadang dan rangkiang",
+          "en": "Rumah gadang houses and rangkiang rice barns"
+        },
+        {
+          "id": "Museum Istano Basa Pagaruyung",
+          "en": "The Istano Basa Pagaruyung museum"
+        },
+        {
+          "id": "Mengenal adat matrilineal Minangkabau",
+          "en": "An introduction to Minangkabau matrilineal custom"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Transportasi dari dan ke Bandara Minangkabau",
+          "en": "Transport from and to Minangkabau Airport"
+        },
+        {
+          "id": "Penginapan 1 malam di Tanah Datar",
+          "en": "1 night's lodging in Tanah Datar"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Tiket masuk Istano Basa Pagaruyung",
+          "en": "Pagaruyung Palace entrance ticket"
+        }
+      ],
+      "meetingPoint": "Bandara Internasional Minangkabau, Padang Pariaman",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Menuju Pariangan",
+            "en": "To Pariangan"
+          },
+          "description": {
+            "id": "08.00 penjemputan di bandara, perjalanan ke Tanah Datar, siang hingga sore berjalan kaki di Nagari Pariangan, menginap di Tanah Datar.",
+            "en": "08:00 airport pickup, drive to Tanah Datar, afternoon walk through Nagari Pariangan, overnight in Tanah Datar."
+          }
+        },
+        {
+          "title": {
+            "id": "Istano Basa Pagaruyung",
+            "en": "Pagaruyung Palace"
+          },
+          "description": {
+            "id": "Pagi di Istano Basa Pagaruyung, makan siang masakan Minang, kembali ke bandara sekitar pukul 16.00.",
+            "en": "Morning at the Pagaruyung Palace, Minang lunch, back at the airport around 16:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "dapur-rendang-dan-songket-pandai-sikek",
+      "destination": "minangkabau",
+      "category": "culinary",
+      "title": {
+        "id": "Dapur Rendang dan Songket Pandai Sikek",
+        "en": "Rendang Kitchen and Pandai Sikek Songket"
+      },
+      "summary": {
+        "id": "Memasak rendang dengan cara tradisional dan mengunjungi penenun songket di nagari Pandai Sikek.",
+        "en": "Cook rendang the traditional way and visit songket weavers in the village of Pandai Sikek."
+      },
+      "description": {
+        "id": "Rendang dimasak perlahan dalam santan dan bumbu hingga kuahnya mengering dan minyaknya keluar, sehingga daging terbalut bumbu pekat. Bersama sebuah keluarga Minang, kamu mengikuti prosesnya dari meracik bumbu hingga mengaduk berjam-jam di atas tungku.\n\nHari kedua menuju Pandai Sikek di lereng Gunung Singgalang, nagari yang dikenal dengan songket berbenang emas dan perak serta ukiran kayunya. Penenun akan memperlihatkan tiga motif wajib songket Pandai Sikek, yaitu pohon pinang, biji bayam, dan jalinan lidi, di atas alat tenun panta.",
+        "en": "Rendang is cooked slowly in coconut milk and spices until the liquid reduces and the oil separates, leaving the meat coated in a dark, rich paste. With a Minang family you follow the whole process, from grinding the spices to stirring for hours over the stove.\n\nDay two takes us to Pandai Sikek on the slopes of Mount Singgalang, a village known for songket woven with gold and silver thread and for its woodcarving. Weavers show the three required Pandai Sikek motifs, the areca palm, spinach seed and plaited rib, on the panta loom."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1750000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/minangkabau/songket-pandai-sikek.webp",
+      "gallery": [
+        "/images/content/minangkabau/songket-pandai-sikek.webp",
+        "/images/content/minangkabau/alat-tenun-songket.webp",
+        "/images/content/minangkabau/rendang.webp",
+        "/images/content/minangkabau/rumah-gadang-gajah-maram.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Memasak rendang bersama keluarga Minang",
+          "en": "Cook rendang with a Minang family"
+        },
+        {
+          "id": "Songket berbenang emas di Pandai Sikek",
+          "en": "Gold-thread songket in Pandai Sikek"
+        },
+        {
+          "id": "Alat tenun panta dan ukiran kayu",
+          "en": "The panta loom and woodcarving"
+        },
+        {
+          "id": "Makan bersama hasil masakan sendiri",
+          "en": "Share the meal you cooked"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Kelas memasak dan semua bahan",
+          "en": "Cooking class and all ingredients"
+        },
+        {
+          "id": "Penginapan 1 malam di Bukittinggi",
+          "en": "1 night's lodging in Bukittinggi"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Transportasi lokal",
+          "en": "Local transport"
+        }
+      ],
+      "meetingPoint": "Jam Gadang, Bukittinggi",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Dapur rendang",
+            "en": "The rendang kitchen"
+          },
+          "description": {
+            "id": "09.00 bertemu di Jam Gadang, belanja bumbu di pasar, memasak rendang hingga sore, makan malam bersama keluarga, menginap di Bukittinggi.",
+            "en": "09:00 meet at Jam Gadang, buy spices at the market, cook rendang until late afternoon, dinner with the family, overnight in Bukittinggi."
+          }
+        },
+        {
+          "title": {
+            "id": "Songket Pandai Sikek",
+            "en": "Pandai Sikek songket"
+          },
+          "description": {
+            "id": "Pagi menuju Pandai Sikek, mengunjungi penenun dan perajin ukir, makan siang, kembali ke Bukittinggi sekitar pukul 15.00.",
+            "en": "Morning drive to Pandai Sikek, visit weavers and carvers, lunch, back in Bukittinggi around 15:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "desa-adat-osing-kemiren",
+      "destination": "osing-kemiren",
+      "category": "village",
+      "title": {
+        "id": "Dua Hari di Desa Adat Osing Kemiren",
+        "en": "Two Days in the Osing Village of Kemiren"
+      },
+      "summary": {
+        "id": "Menginap di Kemiren, mengenal rumah, bahasa, dan dapur suku Osing, serta kesenian barong desa.",
+        "en": "Stay in Kemiren to discover Osing houses, language and kitchens, and the village barong."
+      },
+      "description": {
+        "id": "Kemiren di Kecamatan Glagah adalah desa wisata budaya tempat masyarakat Osing, keturunan warga Kerajaan Blambangan, menjalankan adat dan bahasanya. Kamu menginap di rumah warga, belajar sapaan dalam bahasa Osing, dan ikut menyiapkan makanan khas seperti pecel pithik di dapur tradisional.\n\nMalamnya, warga desa memperkenalkan kesenian Barong Osing yang masih dianggap sakral. Jika kunjunganmu bertepatan dengan Ider Bumi, Tumpeng Sewu, atau Festival Ngopi Sepuluh Ewu pada bulan Oktober, kamu akan diajak menyaksikannya bersama warga.",
+        "en": "Kemiren in Glagah district is a cultural tourism village where the Osing, descendants of the Blambangan kingdom, keep their customs and language. You stay in a village home, learn greetings in Osing and help prepare dishes such as pecel pithik in a traditional kitchen.\n\nIn the evening villagers introduce the Osing barong, which is still considered sacred. If your visit falls on Ider Bumi, Tumpeng Sewu or the Ngopi Sepuluh Ewu coffee festival in October, you will join the villagers to watch."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1450000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/osing-kemiren/dapur-tradisional-osing.webp",
+      "gallery": [
+        "/images/content/osing-kemiren/dapur-tradisional-osing.webp",
+        "/images/content/osing-kemiren/barong-kemiren.webp",
+        "/images/content/osing-kemiren/batik-gajah-oling.webp",
+        "/images/content/osing-kemiren/pertunjukan-gandrung.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Menginap di rumah warga Osing",
+          "en": "Stay in an Osing family home"
+        },
+        {
+          "id": "Memasak pecel pithik di dapur tradisional",
+          "en": "Cook pecel pithik in a traditional kitchen"
+        },
+        {
+          "id": "Mengenal Barong Osing Kemiren",
+          "en": "Meet the Osing barong of Kemiren"
+        },
+        {
+          "id": "Motif batik gajah oling khas Banyuwangi",
+          "en": "Banyuwangi's gajah oling batik motif"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Homestay 1 malam",
+          "en": "1-night homestay"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        },
+        {
+          "id": "Penjemputan di Stasiun Ketapang",
+          "en": "Pickup at Ketapang Station"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Stasiun Ketapang, Banyuwangi",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Kemiren",
+            "en": "Arriving in Kemiren"
+          },
+          "description": {
+            "id": "13.00 penjemputan, perkenalan dengan keluarga tuan rumah, sore memasak bersama, malam mengenal kesenian barong.",
+            "en": "13:00 pickup, meet the host family, cook together in the afternoon, evening introduction to the barong."
+          }
+        },
+        {
+          "title": {
+            "id": "Jalan kaki desa",
+            "en": "Village walk"
+          },
+          "description": {
+            "id": "Pagi berjalan keliling desa dan sawah, mengenal motif gajah oling, makan siang, kembali ke Ketapang sekitar pukul 13.00.",
+            "en": "Morning walk around the village and rice fields, the gajah oling motif, lunch, back at Ketapang around 13:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "gandrung-dan-kawah-ijen",
+      "destination": "osing-kemiren",
+      "category": "trekking",
+      "title": {
+        "id": "Gandrung Banyuwangi dan Pendakian Kawah Ijen",
+        "en": "Gandrung Dance and the Ijen Crater Hike"
+      },
+      "summary": {
+        "id": "Menyaksikan gandrung, tarian khas Banyuwangi, lalu mendaki dini hari ke tepi Kawah Ijen.",
+        "en": "Watch gandrung, Banyuwangi's signature dance, then hike before dawn to the rim of the Ijen crater."
+      },
+      "description": {
+        "id": "Gandrung adalah tarian khas Banyuwangi yang dulunya digelar sebagai ungkapan syukur masyarakat agraris setelah panen, diiringi gamelan khas Banyuwangian. Pada sore pertama, kamu mengenal sejarah dan gerak dasarnya bersama pegiat seni setempat.\n\nDini hari kedua, kita mendaki jalur Paltuding menuju tepi Kawah Ijen untuk melihat danau kawahnya yang berwarna hijau toska. Jalurnya sekitar 3 kilometer sekali jalan dengan beberapa tanjakan curam, dan masker gas disediakan karena asap belerang. Kawasan Ijen menjadi bagian dari UNESCO Global Geopark sejak 2023.",
+        "en": "Gandrung is Banyuwangi's signature dance, once performed by farming communities in thanksgiving after the harvest, accompanied by Banyuwangi-style gamelan. On the first afternoon you learn its history and basic movements with local performers.\n\nBefore dawn on day two we hike from Paltuding to the rim of the Ijen crater to see its turquoise crater lake. The trail is about 3 kilometres each way with some steep sections, and gas masks are provided because of the sulphur fumes. The Ijen area became part of a UNESCO Global Geopark in 2023."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1950000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/osing-kemiren/gandrung-banyuwangi.webp",
+      "gallery": [
+        "/images/content/osing-kemiren/gandrung-banyuwangi.webp",
+        "/images/content/osing-kemiren/pertunjukan-gandrung.webp",
+        "/images/content/osing-kemiren/kawah-ijen.webp",
+        "/images/content/osing-kemiren/barong-kemiren.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Mengenal tari gandrung bersama pegiat seni",
+          "en": "Learn about gandrung with local performers"
+        },
+        {
+          "id": "Pendakian dini hari ke tepi Kawah Ijen",
+          "en": "Pre-dawn hike to the Ijen crater rim"
+        },
+        {
+          "id": "Danau kawah berwarna hijau toska",
+          "en": "The turquoise crater lake"
+        },
+        {
+          "id": "Masker gas dan pemandu berpengalaman",
+          "en": "Gas masks and an experienced guide"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Penginapan 1 malam di Banyuwangi",
+          "en": "1 night's lodging in Banyuwangi"
+        },
+        {
+          "id": "Transportasi ke Paltuding",
+          "en": "Transport to Paltuding"
+        },
+        {
+          "id": "Masker gas dan senter kepala",
+          "en": "Gas mask and headlamp"
+        },
+        {
+          "id": "Tiket masuk Taman Wisata Alam Kawah Ijen",
+          "en": "Ijen Crater park entrance ticket"
+        }
+      ],
+      "meetingPoint": "Stasiun Ketapang, Banyuwangi",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Gandrung",
+            "en": "Gandrung"
+          },
+          "description": {
+            "id": "14.00 penjemputan, sore mengenal tari gandrung dan gamelan Banyuwangian, makan malam, istirahat lebih awal.",
+            "en": "14:00 pickup, afternoon with gandrung dance and Banyuwangi gamelan, dinner, early night."
+          }
+        },
+        {
+          "title": {
+            "id": "Kawah Ijen",
+            "en": "Ijen crater"
+          },
+          "description": {
+            "id": "01.00 berangkat ke Paltuding, mendaki sekitar 2 jam ke tepi kawah, matahari terbit di atas danau kawah, turun dan sarapan, kembali ke Ketapang sekitar pukul 11.00.",
+            "en": "01:00 drive to Paltuding, hike about 2 hours to the crater rim, sunrise over the crater lake, descend for breakfast, back at Ketapang around 11:00."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sehari-di-kampung-naga",
+      "destination": "kampung-naga",
+      "category": "village",
+      "title": {
+        "id": "Sehari di Kampung Naga",
+        "en": "A Day in Kampung Naga"
+      },
+      "summary": {
+        "id": "Menuruni tangga sengked ke kampung adat Sunda, mengenal aturan rumah, pamali, dan kehidupan sehari-hari warganya.",
+        "en": "Walk down the sengked stairs into a Sundanese customary village to learn its house rules, taboos and daily life."
+      },
+      "description": {
+        "id": "Dari tepi jalan raya Garut–Tasikmalaya, kita menuruni tangga batu sengked menuju lembah Sungai Ciwulan. Pemandu dari warga Kampung Naga akan menjelaskan aturan adat yang membentuk kampung ini: rumah panggung dari bambu dan kayu, atap ijuk atau alang-alang, menghadap utara atau selatan, dan tidak dicat.\n\nKamu akan mendengar tentang pamali, larangan tak tertulis yang dipatuhi warga, dan tentang upacara Hajat Sasih. Hutan keramat dan Bumi Ageung tidak dikunjungi, dan pemandu akan memberi tahu di mana kamu boleh memotret.",
+        "en": "From the Garut–Tasikmalaya road we walk down the stone sengked stairway into the Ciwulan river valley. A guide from Kampung Naga explains the customary rules that shape the village: stilted houses of bamboo and wood, palm-fibre or thatch roofs, facing north or south and left unpainted.\n\nYou will hear about pamali, the unwritten taboos residents observe, and the Hajat Sasih ceremony. The sacred forest and the Bumi Ageung are not visited, and the guide will tell you where photography is allowed."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 450000,
+      "maxParticipants": 12,
+      "coverImage": "/images/content/kampung-naga/rumah-adat-naga.webp",
+      "gallery": [
+        "/images/content/kampung-naga/rumah-adat-naga.webp",
+        "/images/content/kampung-naga/kampung-naga-lembah.webp",
+        "/images/content/kampung-naga/tangga-kampung-naga.webp",
+        "/images/content/kampung-naga/kolam-dan-rumah.webp",
+        "/images/content/kampung-naga/menjemur-padi.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Menuruni tangga sengked ke lembah Ciwulan",
+          "en": "Walk down the sengked stairs to the Ciwulan valley"
+        },
+        {
+          "id": "Aturan adat rumah panggung Sunda",
+          "en": "The customary rules of Sundanese stilt houses"
+        },
+        {
+          "id": "Pemandu dari warga Kampung Naga",
+          "en": "A guide from the Kampung Naga community"
+        },
+        {
+          "id": "Makan siang sederhana di rumah warga",
+          "en": "Simple lunch in a village home"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Makan siang di rumah warga",
+          "en": "Lunch in a village home"
+        },
+        {
+          "id": "Air mineral dan kudapan tradisional",
+          "en": "Bottled water and traditional snacks"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Area parkir Kampung Naga, Jalan Raya Garut–Tasikmalaya, Salawu",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Kampung Naga",
+            "en": "Kampung Naga"
+          },
+          "description": {
+            "id": "08.30 bertemu di area parkir, menuruni sengked, berkeliling kampung bersama pemandu, makan siang di rumah warga, 14.00 naik kembali ke jalan raya.",
+            "en": "08:30 meet at the car park, walk down the sengked, tour the village with the guide, lunch in a village home, 14:00 climb back to the road."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sawah-dan-sungai-ciwulan",
+      "destination": "kampung-naga",
+      "category": "trekking",
+      "title": {
+        "id": "Jalan Kaki Sawah dan Sungai Ciwulan",
+        "en": "Rice Fields and the Ciwulan River Walk"
+      },
+      "summary": {
+        "id": "Menyusuri sawah berundak, kolam ikan, dan tepian Ciwulan di sekitar Kampung Naga bersama pemandu warga.",
+        "en": "Walk the terraced fields, fishponds and banks of the Ciwulan around Kampung Naga with a village guide."
+      },
+      "description": {
+        "id": "Sawah di sekitar Kampung Naga dipanen dua kali setahun, dan kolam-kolam ikan mengisi sela permukiman. Bersama pemandu warga, kita berjalan menyusuri pematang dan tepian Sungai Ciwulan yang airnya bersumber dari Gunung Cikuray.\n\nDi sepanjang jalan kamu akan melihat padi yang dijemur di tampah, kolam-kolam ikan, dan cara warga mengelola air. Jalur ini ringan hingga sedang, sekitar 5 kilometer, dan ditutup dengan istirahat di kampung sebelum menaiki kembali tangga sengked.",
+        "en": "The fields around Kampung Naga are harvested twice a year, and fishponds fill the spaces between houses. With a village guide we walk the dykes and the banks of the Ciwulan river, which rises on Mount Cikuray.\n\nAlong the way you see rice drying on woven trays, fishponds and how residents manage water. The route is easy to moderate, about 5 kilometres, and ends with a rest in the village before climbing back up the sengked stairs."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 400000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/kampung-naga/sawah-berundak.webp",
+      "gallery": [
+        "/images/content/kampung-naga/sawah-berundak.webp",
+        "/images/content/kampung-naga/kampung-naga-sawah.webp",
+        "/images/content/kampung-naga/menjemur-padi.webp",
+        "/images/content/kampung-naga/kolam-dan-rumah.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Sawah berundak yang dipanen dua kali setahun",
+          "en": "Terraced fields harvested twice a year"
+        },
+        {
+          "id": "Tepian Sungai Ciwulan",
+          "en": "The banks of the Ciwulan river"
+        },
+        {
+          "id": "Padi dijemur di tampah dan kolam ikan",
+          "en": "Rice drying on trays and village fishponds"
+        },
+        {
+          "id": "Jalur ringan sekitar 5 km",
+          "en": "Easy trail of about 5 km"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Makan siang bekal",
+          "en": "Packed lunch"
+        },
+        {
+          "id": "Air mineral dan kudapan tradisional",
+          "en": "Bottled water and traditional snacks"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Area parkir Kampung Naga, Jalan Raya Garut–Tasikmalaya, Salawu",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Sawah dan Ciwulan",
+            "en": "Fields and the Ciwulan"
+          },
+          "description": {
+            "id": "07.30 bertemu di area parkir, menuruni sengked, jalan kaki sekitar 3 jam menyusuri sawah dan sungai, makan siang, 13.00 naik kembali ke jalan raya.",
+            "en": "07:30 meet at the car park, walk down the sengked, about 3 hours along fields and river, lunch, 13:00 climb back to the road."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Tenggerese_people",
+    "https://id.wikipedia.org/wiki/Kasada",
+    "https://id.wikipedia.org/wiki/Ngadas,_Poncokusumo,_Malang",
+    "https://en.wikipedia.org/wiki/Borobudur",
+    "https://en.wikipedia.org/wiki/Batik",
+    "https://en.wikipedia.org/wiki/Yogyakarta_Sultanate",
+    "https://en.wikipedia.org/wiki/Batak_architecture",
+    "https://id.wikipedia.org/wiki/Gorga",
+    "https://en.wikipedia.org/wiki/Ijen",
+    "https://en.wikipedia.org/wiki/Sigalegale",
+    "https://en.wikipedia.org/wiki/Ulos",
+    "https://id.wikipedia.org/wiki/Huta_Siallagan",
+    "https://id.wikipedia.org/wiki/Tomok,_Simanindo,_Samosir",
+    "https://en.wikipedia.org/wiki/Pagaruyung_Palace",
+    "https://en.wikipedia.org/wiki/Rumah_Gadang",
+    "https://id.wikipedia.org/wiki/Pariangan,_Pariangan,_Tanah_Datar",
+    "https://id.wikipedia.org/wiki/Pandai_Sikek,_X_Koto,_Tanah_Datar",
+    "https://id.wikipedia.org/wiki/Songket_Pandai_Sikek",
+    "https://en.wikipedia.org/wiki/Rendang",
+    "https://en.wikipedia.org/wiki/Osing_people",
+    "https://id.wikipedia.org/wiki/Kemiren,_Glagah,_Banyuwangi",
+    "https://id.wikipedia.org/wiki/Gandrung_Banyuwangi",
+    "https://id.wikipedia.org/wiki/Barong_Kemiren",
+    "https://id.wikipedia.org/wiki/Gajah_Oling",
+    "https://id.wikipedia.org/wiki/Tumpeng_sewu",
+    "https://id.wikipedia.org/wiki/Kampung_Naga",
+    "https://id.wikipedia.org/wiki/Upacara_Hajat_Sasih"
+  ]
+}

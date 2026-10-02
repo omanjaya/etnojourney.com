@@ -60,7 +60,8 @@
     "faq": "Pertanyaan umum",
     "cancellation": "Kebijakan pembatalan",
     "privacy": "Kebijakan privasi",
-    "terms": "Syarat & ketentuan"
+    "terms": "Syarat & ketentuan",
+    "credits": "Kredit foto"
   },
   "notFound": {
     "title": "Jalan ini belum dipetakan",
@@ -71,5 +72,18 @@
     "title": "Ada yang tidak beres",
     "description": "Terjadi kesalahan saat memuat halaman ini. Silakan coba lagi.",
     "retry": "Coba lagi"
-  }
+  },
+  "credit": {
+    "photo": "Foto",
+    "pageTitle": "Kredit foto",
+    "pageDescription": "Foto di situs ini dipakai dengan lisensi terbuka. Terima kasih kepada para fotografer berikut.",
+    "seeAll": "Lihat semua kredit foto",
+    "columns": {
+      "photo": "Foto",
+      "author": "Fotografer",
+      "license": "Lisensi",
+      "source": "Sumber"
+    }
+  },
+  "newTour": "Baru"
 }

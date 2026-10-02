@@ -32,8 +32,8 @@ import { tourService } from "@/server/services/tour.service";
 import { wishlistService } from "@/server/services/wishlist.service";
 
 const STORY_IMAGE =
-  "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=1600&q=80&auto=format&fit=crop";
-const CTA_IMAGE = "https://images.unsplash.com/photo-1570789210967-2cac24afeb00?w=2400&q=80";
+  "/images/content/site/tegallalang-terraces.webp";
+const CTA_IMAGE = "/images/content/site/raja-ampat-lagoon.webp";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const locale = (await params).locale as Locale;

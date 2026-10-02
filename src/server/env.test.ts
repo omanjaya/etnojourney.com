@@ -66,4 +66,14 @@ describe("checkEnv", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) expect(result.errors.join()).toMatch(/TRUST_PROXY/);
   });
+
+  it("does not enforce production-only rules while `next build` prerenders", () => {
+    const result = checkEnv({
+      ...base,
+      NODE_ENV: "production",
+      SITE_URL: undefined,
+      NEXT_PHASE: "phase-production-build",
+    });
+    expect(result.ok).toBe(true);
+  });
 });

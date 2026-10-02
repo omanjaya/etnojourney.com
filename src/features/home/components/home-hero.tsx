@@ -10,7 +10,7 @@ import { CountUp, Magnetic, SplitWords } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import "./home-hero.css";
 
-const HERO_IMAGE = "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=2400&q=80";
+const HERO_IMAGE = "/images/content/site/hero-ulun-danu.webp";
 
 /** Staggered CSS entrance: content is visible in server HTML, so text paints before hydration. */
 const delay = (ms: number) => ({ animationDelay: `${ms}ms` });

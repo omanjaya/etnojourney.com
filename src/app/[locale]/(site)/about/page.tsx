@@ -18,9 +18,9 @@ import { Magnetic, Reveal, SplitWords } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 
 const MISSION_IMAGE =
-  "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=1600&q=80&auto=format&fit=crop";
+  "/images/content/site/tegallalang-terraces.webp";
 const PARTNERS_IMAGE =
-  "https://images.unsplash.com/photo-1584810359583-96fc3448beaa?w=1600&q=80&auto=format&fit=crop";
+  "/images/content/site/borobudur-walk.webp";
 
 const PRINCIPLES = [
   { key: "fair", icon: HandCoins },

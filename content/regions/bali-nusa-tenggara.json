@@ -1,0 +1,1496 @@
+{
+  "region": "bali-nusa-tenggara",
+  "destinations": [
+    {
+      "slug": "ubud",
+      "name": "Ubud",
+      "province": "Bali",
+      "heroImage": "/images/content/ubud/tegallalang-terraces.webp",
+      "tagline": {
+        "id": "Jantung seni dan upacara Bali, di antara sawah berundak dan pura desa.",
+        "en": "The artistic and ceremonial heart of Bali, among terraced rice fields and village temples."
+      },
+      "description": {
+        "id": "Ubud berada di Kabupaten Gianyar dan sejak lama dikenal sebagai pusat seni Bali. Hampir setiap banjar di sekitarnya memiliki sanggar tari, sekaa gamelan, dan perajin yang mewariskan keahliannya turun-temurun. Desa-desa tetangga seperti Batuan punya gaya lukis sendiri yang berkembang sejak tahun 1930-an.\n\nDi luar keramaian jalan utama, kehidupan desa masih berputar mengikuti kalender upacara. Canang sari dipersembahkan setiap hari, dan subak, sistem pengairan sawah yang diakui UNESCO sebagai bagian dari Lanskap Budaya Provinsi Bali, membagi air dari pura di hulu hingga petak sawah terakhir.\n\nPerjalanan kami di Ubud dipandu warga setempat, sehingga kamu datang sebagai tamu, bukan penonton.",
+        "en": "Ubud, in Gianyar Regency, has long been known as Bali's centre of the arts. Almost every banjar (neighbourhood) around it has dance and gamelan groups and craftspeople who pass their skills down the generations. Neighbouring villages such as Batuan developed painting styles of their own from the 1930s.\n\nAway from the busy main street, village life still follows the ceremonial calendar. Canang sari offerings are made every day, and subak, the irrigation system recognised by UNESCO as part of the Cultural Landscape of Bali Province, shares water from upstream temples down to the last rice terrace.\n\nOur Ubud journeys are guided by local residents, so you arrive as a guest rather than a spectator."
+      }
+    },
+    {
+      "slug": "tabanan",
+      "name": "Tabanan",
+      "province": "Bali",
+      "heroImage": "/images/content/tabanan/ulun-danu-flowers.webp",
+      "tagline": {
+        "id": "Lumbung padi Bali, rumah bagi pura danau dan pura laut yang paling dihormati.",
+        "en": "Bali's rice bowl, home to its most revered lake and sea temples."
+      },
+      "description": {
+        "id": "Tabanan membentang dari dataran tinggi Bedugul yang sejuk hingga pesisir selatan yang berombak. Di hulu, Pura Ulun Danu Beratan memuliakan Dewi Danu, sumber air bagi sawah-sawah di bawahnya. Di hilir, Pura Tanah Lot berdiri di atas batu karang yang dikelilingi laut saat pasang.\n\nKawasan ini juga menjadi rumah bagi lanskap subak Jatiluwih, salah satu hamparan sawah berundak terluas di Bali, yang dikelola petani dengan ritme tanam yang sama selama berabad-abad.",
+        "en": "Tabanan stretches from the cool Bedugul highlands to the surf-washed southern coast. Upstream, Ulun Danu Beratan temple honours Dewi Danu, goddess of the lake that waters the fields below. Downstream, Tanah Lot rises from a rock that the tide turns into an island.\n\nThe regency is also home to the Jatiluwih subak landscape, one of Bali's widest sweeps of terraced rice, farmed to the same planting rhythm for centuries."
+      }
+    },
+    {
+      "slug": "nusa-penida",
+      "name": "Nusa Penida",
+      "province": "Bali",
+      "heroImage": "/images/content/nusa-penida/kelingking-aerial.webp",
+      "tagline": {
+        "id": "Pulau tebing kapur dengan tenun rangrang dan pura-pura tua.",
+        "en": "An island of limestone cliffs, rangrang weaving and ancient temples."
+      },
+      "description": {
+        "id": "Nusa Penida dikenal lewat tebing kapurnya yang dramatis, tetapi pulau ini juga menyimpan tradisi yang jarang diceritakan. Di Desa Pejukutan, banyak keluarga menenun kain rangrang, kain bebali bermotif geometris dengan celah-celah kecil di antara benangnya. Kain ini dipakai dalam upacara adat dan motif belah ketupatnya dimaknai sebagai lambang kejujuran dan keselarasan.\n\nPulau ini juga dihormati umat Hindu Bali sebagai tempat Pura Dalem Ped, dan gua Giri Putri yang di dalamnya terdapat tempat suci. Banyak umat dari Bali daratan datang bersembahyang di sini.",
+        "en": "Nusa Penida is famous for its dramatic limestone cliffs, but the island also holds less-told traditions. In Pejukutan village many families weave rangrang, a ceremonial (bebali) cloth with geometric motifs and small open gaps between the threads. It is worn in customary ceremonies, and its diamond motif is read as a symbol of honesty and harmony.\n\nThe island is revered by Balinese Hindus as the home of Pura Dalem Ped and of Giri Putri, a cave with a shrine inside, and many worshippers cross from mainland Bali to pray here."
+      }
+    },
+    {
+      "slug": "penglipuran",
+      "name": "Penglipuran",
+      "province": "Bali",
+      "heroImage": "/images/content/penglipuran/main-street.webp",
+      "tagline": {
+        "id": "Desa Bali Aga yang tertata rapi di kaki hutan bambu Bangli.",
+        "en": "A neatly ordered Bali Aga village beside the bamboo forests of Bangli."
+      },
+      "description": {
+        "id": "Penglipuran adalah desa adat di Kabupaten Bangli, sekitar lima kilometer di utara kota Bangli. Tata ruangnya mengikuti konsep Tri Mandala dengan orientasi kaja-kelod: area paling suci berada di arah Gunung Agung, rumah-rumah warga berjajar di tengah, dan wilayah yang dianggap kurang suci di ujung lainnya.\n\nSetiap pekarangan dimasuki lewat gerbang angkul-angkul yang seragam, dan bambu menjadi bahan utama atap serta dinding bangunan tradisionalnya. Hutan bambu milik desa mencakup sekitar 37,7 hektare dengan 15 jenis bambu, dan pelestariannya mendapat penghargaan Kalpataru pada 1995. Awig-awig, hukum adat desa, juga masih dijalankan, termasuk larangan berpoligami.",
+        "en": "Penglipuran is a customary village in Bangli Regency, about five kilometres north of Bangli town. Its layout follows the Tri Mandala concept with a kaja-kelod orientation: the most sacred area faces Mount Agung, family compounds line the middle, and the less sacred zone sits at the far end.\n\nEvery compound is entered through a matching angkul-angkul gate, and bamboo is the main material for the roofs and walls of its traditional buildings. The village's bamboo forest covers around 37.7 hectares with 15 bamboo species, and its conservation earned a Kalpataru award in 1995. Awig-awig, the village's customary law, is still observed, including a ban on polygamy."
+      }
+    },
+    {
+      "slug": "wae-rebo",
+      "name": "Wae Rebo",
+      "province": "Nusa Tenggara Timur",
+      "heroImage": "/images/content/wae-rebo/village-valley.webp",
+      "tagline": {
+        "id": "Kampung mbaru niang di atas 1.000 meter, pegunungan Manggarai.",
+        "en": "A village of mbaru niang houses above 1,000 metres in the Manggarai highlands."
+      },
+      "description": {
+        "id": "Wae Rebo berada di Kecamatan Satar Mese Barat, Kabupaten Manggarai, Flores, di ketinggian lebih dari 1.000 meter. Kampung ini dikenal lewat tujuh mbaru niang, rumah adat berbentuk kerucut beratap ijuk dan daun lontar dengan lima tingkat: lantai dasar untuk tempat tinggal, tingkat-tingkat di atasnya untuk menyimpan bahan makanan, benih, dan cadangan, serta tingkat teratas yang paling sakral untuk persembahan bagi leluhur.\n\nPada 2012, upaya pelestarian kampung ini mendapat pengakuan dari UNESCO Asia-Pacific Awards for Cultural Heritage Conservation. Wae Rebo hanya bisa dicapai dengan berjalan kaki sekitar 4,5 kilometer dari Desa Denge, dan setiap tamu disambut lewat ritual Waelu'u sebelum dipersilakan berkeliling. Kopi adalah tanaman utama warga, dan para perempuan menenun kain songke.",
+        "en": "Wae Rebo lies in West Satar Mese District, Manggarai Regency, Flores, at more than 1,000 metres above sea level. The village is known for its seven mbaru niang, conical houses thatched with palm fibre and lontar leaves, each with five levels: the ground floor for living, upper levels for food, seeds and reserves, and the most sacred top level for offerings to the ancestors.\n\nIn 2012 its conservation was recognised by the UNESCO Asia-Pacific Awards for Cultural Heritage Conservation. Wae Rebo can only be reached on foot, about 4.5 kilometres from Denge village, and every guest is welcomed with the Waelu'u ritual before exploring. Coffee is the main crop, and women weave songke cloth."
+      }
+    },
+    {
+      "slug": "sumba",
+      "name": "Sumba",
+      "province": "Nusa Tenggara Timur",
+      "heroImage": "/images/content/sumba/ratenggaro.webp",
+      "tagline": {
+        "id": "Pulau kampung adat beratap menara, kubur batu, dan tenun ikat.",
+        "en": "An island of towering roofs, stone tombs and ikat weaving."
+      },
+      "description": {
+        "id": "Sumba terbagi menjadi empat kabupaten: Sumba Timur, Sumba Tengah, Sumba Barat, dan Sumba Barat Daya. Kepercayaan leluhur Marapu, yang memadukan penghormatan kepada arwah nenek moyang dan alam, masih membentuk banyak hal di pulau ini, mulai dari bentuk rumah adat beratap menara hingga kubur batu megalitik yang masih terus dibangun.\n\nSumba juga terkenal dengan tenun ikatnya. Prosesnya panjang, dari mengikat benang, mencelup dengan pewarna, hingga menenun, sehingga satu lembar kain bisa memakan waktu berbulan-bulan. Di bagian barat pulau, setiap Februari dan Maret digelar Pasola, ritual adu ketangkasan berkuda dengan lembing kayu di Kodi, Lamboya, Wanukaka, dan Gaura, yang tanggalnya ditentukan para rato berdasarkan munculnya cacing laut nyale.",
+        "en": "Sumba is divided into four regencies: East, Central, West and Southwest Sumba. The ancestral Marapu belief, which honours ancestors and nature, still shapes much of the island, from traditional houses with towering roofs to megalithic stone tombs that are still being built.\n\nSumba is also famous for its ikat. The process is long, from binding the threads and dyeing them to weaving, and a single cloth can take months. In the west of the island, every February and March brings Pasola, a ritual contest of horsemen throwing wooden spears in Kodi, Lamboya, Wanukaka and Gaura, its dates set by rato (Marapu priests) according to the arrival of nyale sea worms."
+      }
+    },
+    {
+      "slug": "sade",
+      "name": "Sade",
+      "province": "Nusa Tenggara Barat",
+      "heroImage": "/images/content/sade/lumbung-houses.webp",
+      "tagline": {
+        "id": "Dusun Sasak dengan bale tani, lumbung padi, dan tenun songket.",
+        "en": "A Sasak hamlet of bale tani houses, rice barns and songket weaving."
+      },
+      "description": {
+        "id": "Sade adalah dusun adat suku Sasak di Desa Rembitan, Kecamatan Pujut, Lombok Tengah, salah satu permukiman tertua di kawasan ini yang masih mempertahankan rumah-rumah tradisionalnya. Rumah petani Sasak disebut bale tani, beratap ilalang dan berdinding anyaman bambu, dengan lumbung padi beratap melengkung yang menjadi ciri khas Lombok.\n\nLantai rumah di Sade secara berkala dilapisi kotoran kerbau yang dicampur tanah, cara tradisional untuk merekatkan dan menguatkan lantai serta menjaga rumah dari debu dan serangga. Menenun juga masih menjadi bagian dari keseharian perempuan Sade, dan kain tenun serta songketnya menjadi salah satu kebanggaan dusun ini.",
+        "en": "Sade is a customary hamlet of the Sasak people in Rembitan village, Pujut District, Central Lombok, and one of the oldest settlements in the area that still keeps its traditional houses. Sasak farmers' houses are called bale tani, with grass-thatched roofs and woven bamboo walls, alongside the curved-roof rice barns (lumbung) that have become a symbol of Lombok.\n\nThe floors of Sade's houses are periodically coated with buffalo dung mixed with earth, a traditional way to bind and strengthen the floor and keep out dust and insects. Weaving is still part of daily life for Sade's women, and its woven cloth and songket are a source of pride for the hamlet."
+      }
+    }
+  ],
+  "tours": [
+    {
+      "slug": "melukat-dan-jejak-subak-ubud",
+      "destination": "ubud",
+      "category": "ritual",
+      "title": {
+        "id": "Melukat dan Jejak Subak",
+        "en": "Melukat Blessing and the Subak Trail"
+      },
+      "summary": {
+        "id": "Ikuti upacara penyucian bersama pemangku desa, lalu telusuri saluran subak hingga pura sawah.",
+        "en": "Join a purification rite with the village priest, then follow the subak channels to a rice-field shrine."
+      },
+      "description": {
+        "id": "Pagi dimulai di sebuah pancuran suci di pinggiran Ubud. Pemangku desa akan menjelaskan makna melukat, menyiapkan canang bersama kamu, lalu memandu prosesi penyucian di bawah pancuran.\n\nSetelah berganti pakaian, kita berjalan menyusuri pematang dan saluran air bersama seorang pekaseh (ketua subak). Kamu akan melihat bagaimana air dibagi secara adil di antara petani, singgah di pura bedugul di tengah sawah, dan menutup perjalanan dengan makan siang di rumah keluarga petani.",
+        "en": "The morning begins at a sacred spring on the edge of Ubud. The village priest explains the meaning of melukat, prepares canang offerings with you, and guides the purification under the spring.\n\nAfter changing, we walk the dykes and water channels with a pekaseh, the head of the subak. You will see how water is shared fairly among farmers, stop at a bedugul shrine in the middle of the fields, and end with lunch at a farming family's home."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 850000,
+      "maxParticipants": 10,
+      "rating": 4.9,
+      "reviewCount": 128,
+      "coverImage": "/images/content/ubud/tegallalang-terraces.webp",
+      "gallery": [
+        "/images/content/ubud/tegallalang-terraces.webp",
+        "/images/content/ubud/terraces-aerial.webp",
+        "/images/content/ubud/canang-sari.webp",
+        "/images/content/ubud/canang-offerings.webp",
+        "/images/content/ubud/terraces-volcano.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Prosesi melukat dipandu pemangku desa",
+          "en": "Melukat rite guided by the village priest"
+        },
+        {
+          "id": "Belajar membuat canang sari",
+          "en": "Learn to make canang sari offerings"
+        },
+        {
+          "id": "Berjalan di jalur subak bersama pekaseh",
+          "en": "Walk the subak with the head of the water temple"
+        },
+        {
+          "id": "Makan siang di rumah keluarga petani",
+          "en": "Lunch in a farming family's home"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Pinjaman kamen dan selendang",
+          "en": "Sarong and sash for temple visits"
+        },
+        {
+          "id": "Air mineral dan kudapan tradisional",
+          "en": "Bottled water and traditional snacks"
+        },
+        {
+          "id": "Makan siang khas Bali",
+          "en": "Balinese home-cooked lunch"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Puri Saren Agung, Jl. Raya Ubud, Gianyar",
+      "isFeatured": true,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Pancuran suci dan pematang sawah",
+            "en": "Sacred spring and rice-field paths"
+          },
+          "description": {
+            "id": "07.00 bertemu di Puri Ubud, membuat canang, prosesi melukat, lalu trekking ringan 4 km mengikuti subak dan makan siang bersama keluarga petani. Selesai sekitar 14.00.",
+            "en": "07:00 meet at Puri Ubud, make offerings, melukat rite, then an easy 4 km walk along the subak and lunch with a farming family. Ends around 14:00."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Charlotte Meyer",
+          "country": "Germany",
+          "rating": 5,
+          "body": {
+            "id": "Pemangku sangat sabar menjelaskan setiap langkah. Rasanya benar-benar diterima, bukan sekadar menonton.",
+            "en": "The priest patiently explained every step. We felt genuinely welcomed rather than just watching."
+          }
+        },
+        {
+          "authorName": "Rizky Pratama",
+          "country": "Indonesia",
+          "rating": 5,
+          "body": {
+            "id": "Baru tahu cara kerja subak sedetail ini. Makan siangnya juara.",
+            "en": "I'd never understood subak in this much detail. Lunch was outstanding."
+          }
+        },
+        {
+          "authorName": "Hannah Brooks",
+          "country": "Australia",
+          "rating": 5,
+          "body": {
+            "id": "Kelompok kecil, ritme santai, dan pemandu yang tulus.",
+            "en": "Small group, unhurried pace and a sincere guide."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kelas-ukir-dan-lukis-batuan",
+      "destination": "ubud",
+      "category": "craft",
+      "title": {
+        "id": "Sanggar Ukir dan Lukis Batuan",
+        "en": "Batuan Carving and Painting Studio"
+      },
+      "summary": {
+        "id": "Sehari di sanggar keluarga seniman Batuan: belajar gaya lukis tertua di Bali dan dasar ukir kayu.",
+        "en": "A day in a Batuan artist family's studio, learning Bali's oldest painting style and woodcarving basics."
+      },
+      "description": {
+        "id": "Gaya lukis Batuan berkembang sejak tahun 1930-an di desa Batuan, Gianyar. Cirinya mudah dikenali: tinta gelap, komposisi yang sangat padat, dan bidang yang nyaris tak menyisakan ruang kosong, dengan adegan kehidupan sehari-hari berdampingan dengan kisah mitologi. Kamu akan belajar dari seniman Batuan, mulai dari membuat sketsa hingga mengisi bidang dengan detail.\n\nSiang hari, kita berpindah ke bengkel ukir kayu di desa sekitar untuk mencoba memahat motif sederhana. Karya kamu dibawa pulang.",
+        "en": "The Batuan painting style has developed since the 1930s in Batuan village, Gianyar. It is easy to recognise: dark ink, very dense compositions and almost no empty space, with everyday scenes alongside mythological stories. You will learn from a Batuan painter, from sketching to filling the surface with detail.\n\nIn the afternoon we move to a woodcarving workshop in a nearby village to try carving a simple motif. You take your work home."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 650000,
+      "maxParticipants": 8,
+      "rating": 4.8,
+      "reviewCount": 74,
+      "coverImage": "/images/content/ubud/batuan-painter.webp",
+      "gallery": [
+        "/images/content/ubud/batuan-painter.webp",
+        "/images/content/ubud/batuan-temple-painting.webp",
+        "/images/content/ubud/jungle-river.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Belajar dari pelukis gaya Batuan",
+          "en": "Learn from a Batuan-style painter"
+        },
+        {
+          "id": "Komposisi padat bertinta khas Batuan",
+          "en": "Batuan's dense, ink-based compositions"
+        },
+        {
+          "id": "Mencoba memahat motif di bengkel ukir",
+          "en": "Try carving a motif in a woodcarving workshop"
+        },
+        {
+          "id": "Bawa pulang karya sendiri",
+          "en": "Take your own artwork home"
+        }
+      ],
+      "included": [
+        {
+          "id": "Semua bahan dan alat",
+          "en": "All materials and tools"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Air mineral dan kudapan tradisional",
+          "en": "Bottled water and traditional snacks"
+        },
+        {
+          "id": "Makan siang vegetarian",
+          "en": "Vegetarian lunch"
+        }
+      ],
+      "meetingPoint": "Pura Puseh Batuan, Sukawati, Gianyar",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Lukis Batuan dan ukir kayu",
+            "en": "Batuan painting and woodcarving"
+          },
+          "description": {
+            "id": "09.00 sesi lukis di sanggar, 12.30 makan siang, 13.30 sesi ukir, 16.00 berbagi karya dan selesai.",
+            "en": "09:00 painting session at the studio, 12:30 lunch, 13:30 carving session, 16:00 share your work and finish."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Yuki Tanaka",
+          "country": "Japan",
+          "rating": 5,
+          "body": {
+            "id": "Detail lukisan Batuan luar biasa. Saya pulang dengan rasa hormat yang baru.",
+            "en": "The detail of Batuan painting is remarkable. I left with a new respect for it."
+          }
+        },
+        {
+          "authorName": "Lucas Martin",
+          "country": "France",
+          "rating": 4,
+          "body": {
+            "id": "Sangat menyenangkan, meski sesi ukirnya terasa singkat.",
+            "en": "Great fun, though the carving session felt short."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "dapur-desa-keluarga-bali",
+      "destination": "ubud",
+      "category": "culinary",
+      "title": {
+        "id": "Dapur Desa: Masak Bersama Keluarga Bali",
+        "en": "Village Kitchen: Cooking with a Balinese Family"
+      },
+      "summary": {
+        "id": "Belanja di pasar pagi, lalu memasak lawar, sate lilit, dan base genep di dapur keluarga.",
+        "en": "Shop at the morning market, then cook lawar, sate lilit and base genep in a family kitchen."
+      },
+      "description": {
+        "id": "Masakan Bali berangkat dari base genep, bumbu dasar yang diulek dari belasan rempah. Bersama Ibu Made dan keluarganya, kamu akan belanja di pasar desa, mengenal bahan-bahan lokal, lalu memasak di dapur tradisional berlantai tanah.\n\nKita menutup hari dengan makan bersama dan obrolan tentang peran makanan dalam upacara, dari banten hingga megibung.",
+        "en": "Balinese cooking starts with base genep, a paste ground from more than a dozen spices. With Ibu Made and her family, you will shop at the village market, get to know local ingredients, then cook in a traditional earth-floored kitchen.\n\nWe end the day eating together and talking about food's role in ceremonies, from offerings to megibung communal feasts."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 550000,
+      "maxParticipants": 8,
+      "rating": 4.9,
+      "reviewCount": 203,
+      "coverImage": "/images/content/ubud/balinese-feast.webp",
+      "gallery": [
+        "/images/content/ubud/balinese-feast.webp",
+        "/images/content/ubud/lawar.webp",
+        "/images/content/ubud/nasi-campur-sate-lilit.webp",
+        "/images/content/ubud/canang-offerings.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Belanja bahan di pasar desa",
+          "en": "Shop for ingredients at the village market"
+        },
+        {
+          "id": "Mengulek base genep dari nol",
+          "en": "Grind base genep from scratch"
+        },
+        {
+          "id": "Masak lima hidangan khas Bali",
+          "en": "Cook five Balinese dishes"
+        },
+        {
+          "id": "Buku resep dwibahasa",
+          "en": "Bilingual recipe booklet"
+        }
+      ],
+      "included": [
+        {
+          "id": "Semua bahan masakan",
+          "en": "All ingredients"
+        },
+        {
+          "id": "Makan bersama keluarga",
+          "en": "Shared meal with the family"
+        },
+        {
+          "id": "Transportasi pulang-pergi dari titik temu",
+          "en": "Return transport from the meeting point"
+        },
+        {
+          "id": "Buku resep",
+          "en": "Recipe booklet"
+        }
+      ],
+      "meetingPoint": "Pasar Ubud, Jl. Raya Ubud, Gianyar",
+      "isFeatured": true,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Pasar pagi dan dapur keluarga",
+            "en": "Morning market and family kitchen"
+          },
+          "description": {
+            "id": "07.30 pasar desa, 09.00 tiba di rumah keluarga, memasak hingga 12.30, lalu makan bersama.",
+            "en": "07:30 village market, 09:00 arrive at the family home, cook until 12:30, then eat together."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Emily Carter",
+          "country": "United Kingdom",
+          "rating": 5,
+          "body": {
+            "id": "Sate lilit terbaik yang pernah saya makan, dan saya ikut membuatnya.",
+            "en": "The best sate lilit I've ever had, and I helped make it."
+          }
+        },
+        {
+          "authorName": "Daniel Kim",
+          "country": "South Korea",
+          "rating": 5,
+          "body": {
+            "id": "Keluarganya hangat sekali. Anak-anak ikut membantu di dapur.",
+            "en": "Such a warm family. The kids joined in the kitchen."
+          }
+        },
+        {
+          "authorName": "Sari Wulandari",
+          "country": "Indonesia",
+          "rating": 5,
+          "body": {
+            "id": "Penjelasan tentang banten dan makanan upacara sangat membuka wawasan.",
+            "en": "The explanation of offerings and ceremonial food was eye-opening."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "pura-ulun-danu-upacara-danau",
+      "destination": "tabanan",
+      "category": "ritual",
+      "title": {
+        "id": "Pura Ulun Danu dan Persembahan untuk Danau",
+        "en": "Ulun Danu Temple and Offerings to the Lake"
+      },
+      "summary": {
+        "id": "Pahami hubungan danau, pura, dan sawah bersama pemangku di Bedugul, lalu sambut senja di Tanah Lot.",
+        "en": "Understand the bond between lake, temple and rice field with a Bedugul priest, then greet sunset at Tanah Lot."
+      },
+      "description": {
+        "id": "Perjalanan ini menelusuri air dari hulu ke hilir. Di tepi Danau Beratan, pemangku menjelaskan peran Pura Ulun Danu dalam sistem subak dan mengajak kamu menyiapkan persembahan sederhana.\n\nSore harinya, kita turun ke pesisir Tabanan untuk menyaksikan umat bersembahyang di Pura Tanah Lot saat matahari terbenam, sambil mendengar kisah Dang Hyang Nirartha.",
+        "en": "This journey follows water from source to sea. On the shore of Lake Beratan, a priest explains Ulun Danu's role in the subak system and invites you to prepare a simple offering.\n\nIn the afternoon we descend to the Tabanan coast to watch worshippers at Tanah Lot as the sun sets, hearing the story of the priest Dang Hyang Nirartha."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 750000,
+      "maxParticipants": 12,
+      "rating": 4.7,
+      "reviewCount": 96,
+      "coverImage": "/images/content/tabanan/ulun-danu-flowers.webp",
+      "gallery": [
+        "/images/content/tabanan/ulun-danu-flowers.webp",
+        "/images/content/tabanan/ulun-danu-mist.webp",
+        "/images/content/tabanan/ulun-danu-beratan.webp",
+        "/images/content/tabanan/tanah-lot-sunset.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Dialog dengan pemangku Pura Ulun Danu",
+          "en": "Conversation with an Ulun Danu temple priest"
+        },
+        {
+          "id": "Menyiapkan persembahan untuk Dewi Danu",
+          "en": "Prepare an offering for the lake goddess"
+        },
+        {
+          "id": "Pasar buah dan bunga Bedugul",
+          "en": "Bedugul fruit and flower market"
+        },
+        {
+          "id": "Senja di Pura Tanah Lot",
+          "en": "Sunset at Tanah Lot temple"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Pinjaman kamen dan selendang",
+          "en": "Sarong and sash for temple visits"
+        },
+        {
+          "id": "Transportasi pulang-pergi dari titik temu",
+          "en": "Return transport from the meeting point"
+        },
+        {
+          "id": "Tiket masuk pura",
+          "en": "Temple entrance fees"
+        },
+        {
+          "id": "Makan siang di warung lokal",
+          "en": "Lunch at a local warung"
+        }
+      ],
+      "meetingPoint": "Lobi hotel di area Ubud, Canggu, atau Seminyak",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Dari danau ke laut",
+            "en": "From lake to sea"
+          },
+          "description": {
+            "id": "08.00 penjemputan, 10.00 Pura Ulun Danu dan dialog dengan pemangku, 12.30 pasar Bedugul dan makan siang, 16.30 Tanah Lot, 19.30 kembali ke hotel.",
+            "en": "08:00 pickup, 10:00 Ulun Danu and conversation with the priest, 12:30 Bedugul market and lunch, 16:30 Tanah Lot, 19:30 back at your hotel."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Sofia Rossi",
+          "country": "Italy",
+          "rating": 5,
+          "body": {
+            "id": "Penjelasan tentang air dan pura membuat semuanya terasa terhubung.",
+            "en": "The explanation of water and temples made everything connect."
+          }
+        },
+        {
+          "authorName": "Michael Chen",
+          "country": "Singapore",
+          "rating": 4,
+          "body": {
+            "id": "Tanah Lot ramai, tapi pemandu tahu sudut yang tenang.",
+            "en": "Tanah Lot was busy, but our guide knew the quiet corners."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "trekking-subak-jatiluwih",
+      "destination": "tabanan",
+      "category": "trekking",
+      "title": {
+        "id": "Trekking Subak Jatiluwih",
+        "en": "Jatiluwih Subak Trek"
+      },
+      "summary": {
+        "id": "Jelajah 8 km di lanskap warisan dunia, dari hutan Batukaru hingga hamparan sawah berundak.",
+        "en": "An 8 km walk through a World Heritage landscape, from Batukaru forest to sweeping rice terraces."
+      },
+      "description": {
+        "id": "Jatiluwih adalah bagian dari Lanskap Budaya Provinsi Bali yang ditetapkan UNESCO. Jalur ini dimulai dari tepi hutan di kaki Gunung Batukaru, melewati kebun kakao dan kopi, lalu turun ke hamparan sawah yang masih ditanami padi merah lokal.\n\nKita singgah di rumah petani untuk mencicipi teh beras merah dan belajar tentang kalender tanam yang mengikuti upacara di pura subak.",
+        "en": "Jatiluwih is part of UNESCO's Cultural Landscape of Bali Province. The trail starts at the forest edge below Mount Batukaru, passes cacao and coffee gardens, then drops into terraces still planted with local red rice.\n\nWe stop at a farmer's home to taste red-rice tea and learn how the planting calendar follows ceremonies at the subak temple."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 700000,
+      "maxParticipants": 10,
+      "rating": 4.8,
+      "reviewCount": 58,
+      "coverImage": "/images/content/tabanan/jatiluwih-panorama.webp",
+      "gallery": [
+        "/images/content/tabanan/jatiluwih-panorama.webp",
+        "/images/content/tabanan/subak-channel.webp",
+        "/images/content/tabanan/subak-hut.webp",
+        "/images/content/tabanan/penebel-terraces.webp",
+        "/images/content/tabanan/terraces-palms.webp",
+        "/images/content/tabanan/terraces-volcano.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Lanskap subak warisan dunia UNESCO",
+          "en": "UNESCO World Heritage subak landscape"
+        },
+        {
+          "id": "Jalur hutan, kebun, dan sawah",
+          "en": "Forest, garden and rice-field trail"
+        },
+        {
+          "id": "Mencicipi teh beras merah",
+          "en": "Taste red-rice tea"
+        },
+        {
+          "id": "Makan siang dengan bahan dari kebun",
+          "en": "Garden-to-table lunch"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Transportasi pulang-pergi dari titik temu",
+          "en": "Return transport from the meeting point"
+        },
+        {
+          "id": "Air mineral dan kudapan tradisional",
+          "en": "Bottled water and traditional snacks"
+        },
+        {
+          "id": "Tongkat trekking",
+          "en": "Trekking poles"
+        },
+        {
+          "id": "Kontribusi untuk dana desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Pos informasi Jatiluwih, Penebel, Tabanan",
+      "isFeatured": false,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Hutan Batukaru ke sawah Jatiluwih",
+            "en": "Batukaru forest to Jatiluwih terraces"
+          },
+          "description": {
+            "id": "07.00 penjemputan, 09.00 mulai trekking (sekitar 3,5 jam, tingkat sedang), 13.00 makan siang di rumah petani, 15.30 kembali.",
+            "en": "07:00 pickup, 09:00 start trekking (about 3.5 hours, moderate), 13:00 lunch at a farmer's home, 15:30 return."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Tom Andersen",
+          "country": "Norway",
+          "rating": 5,
+          "body": {
+            "id": "Pemandangan luar biasa dan hampir tidak bertemu turis lain.",
+            "en": "Incredible views and we barely saw other tourists."
+          }
+        },
+        {
+          "authorName": "Ayu Lestari",
+          "country": "Indonesia",
+          "rating": 5,
+          "body": {
+            "id": "Pemandunya petani asli Jatiluwih, ceritanya sangat personal.",
+            "en": "Our guide is a Jatiluwih farmer, so the stories were very personal."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tenun-rangrang-dan-tebing-penida",
+      "destination": "nusa-penida",
+      "category": "craft",
+      "title": {
+        "id": "Tenun Rangrang dan Tebing Penida",
+        "en": "Rangrang Weaving and the Penida Cliffs"
+      },
+      "summary": {
+        "id": "Belajar menenun rangrang bersama perempuan Pejukutan, lalu menyusuri tebing selatan pulau.",
+        "en": "Learn rangrang weaving with the women of Pejukutan, then explore the island's southern cliffs."
+      },
+      "description": {
+        "id": "Rangrang adalah tenun khas Nusa Penida dengan motif geometris seperti belah ketupat, warna-warna cerah, dan celah-celah kecil di antara benangnya. Di Desa Pejukutan, tempat banyak keluarga menenun, kamu akan melihat prosesnya dan mencoba menenun beberapa baris.\n\nHari kedua, kita menjelajah sisi selatan pulau: Kelingking, Pantai Atuh, dan tebing-tebing kapur, dengan pemandu dari Nusa Penida.",
+        "en": "Rangrang is Nusa Penida's signature weaving, with geometric motifs such as diamonds, bright colours and small open gaps between the threads. In Pejukutan, where many families weave, you will see the process and try weaving a few rows yourself.\n\nOn day two we explore the island's south side, Kelingking, Atuh Beach and the limestone cliffs, with a guide from Nusa Penida."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 1600000,
+      "maxParticipants": 8,
+      "rating": 4.7,
+      "reviewCount": 49,
+      "coverImage": "/images/content/nusa-penida/kelingking.webp",
+      "gallery": [
+        "/images/content/nusa-penida/kelingking.webp",
+        "/images/content/nusa-penida/kelingking-aerial.webp",
+        "/images/content/nusa-penida/atuh-beach.webp",
+        "/images/content/nusa-penida/southern-coast.webp",
+        "/images/content/nusa-penida/goa-giri-putri.webp",
+        "/images/content/nusa-penida/limestone-cliffs.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Belajar menenun bersama kelompok perempuan",
+          "en": "Weave with a women's cooperative"
+        },
+        {
+          "id": "Mengenal pewarna alami",
+          "en": "Discover natural dyes"
+        },
+        {
+          "id": "Tebing Kelingking dan Pantai Diamond",
+          "en": "Kelingking cliff and Diamond Beach"
+        },
+        {
+          "id": "Pemandu asli Nusa Penida",
+          "en": "Guide native to Nusa Penida"
+        }
+      ],
+      "included": [
+        {
+          "id": "Fast boat pulang-pergi dari Sanur",
+          "en": "Return fast boat from Sanur"
+        },
+        {
+          "id": "Homestay 1 malam",
+          "en": "1-night homestay"
+        },
+        {
+          "id": "Kelas tenun",
+          "en": "Weaving class"
+        },
+        {
+          "id": "Pemandu lokal dari komunitas",
+          "en": "Local guide from the community"
+        },
+        {
+          "id": "Makan 3 kali",
+          "en": "3 meals"
+        }
+      ],
+      "meetingPoint": "Pelabuhan Sanur, Denpasar",
+      "isFeatured": true,
+      "itinerary": [
+        {
+          "title": {
+            "id": "Pejukutan dan tenun rangrang",
+            "en": "Pejukutan and rangrang weaving"
+          },
+          "description": {
+            "id": "08.00 fast boat dari Sanur, kelas tenun hingga sore, makan malam di homestay.",
+            "en": "08:00 fast boat from Sanur, weaving class until late afternoon, dinner at the homestay."
+          }
+        },
+        {
+          "title": {
+            "id": "Tebing selatan",
+            "en": "The southern cliffs"
+          },
+          "description": {
+            "id": "Kelingking dan Pantai Diamond di pagi hari, makan siang, fast boat kembali sekitar 16.00.",
+            "en": "Kelingking and Diamond Beach in the morning, lunch, fast boat back around 16:00."
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "authorName": "Mia Schneider",
+          "country": "Austria",
+          "rating": 5,
+          "body": {
+            "id": "Para penenun luar biasa ramah. Sekarang saya mengerti kenapa kain ini begitu berharga.",
+            "en": "The weavers were wonderfully kind. Now I understand why this cloth is so precious."
+          }
+        },
+        {
+          "authorName": "James Wilson",
+          "country": "New Zealand",
+          "rating": 4,
+          "body": {
+            "id": "Jalan menuju tebing cukup berat, tapi sepadan.",
+            "en": "The road to the cliffs is rough, but worth it."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "penglipuran-desa-bambu-bali-aga",
+      "destination": "penglipuran",
+      "category": "village",
+      "isFeatured": false,
+      "title": {
+        "id": "Penglipuran: Membaca Tata Ruang Desa Bali Aga",
+        "en": "Penglipuran: Reading a Bali Aga Village Layout"
+      },
+      "summary": {
+        "id": "Telusuri sumbu desa dari pura hingga pekarangan warga dan pahami konsep Tri Mandala bersama pemandu setempat.",
+        "en": "Walk the village axis from temple to family compounds and learn the Tri Mandala concept with a local guide."
+      },
+      "description": {
+        "id": "Penglipuran adalah salah satu contoh tata ruang desa adat Bali yang paling utuh. Kita berjalan dari ujung desa menuju arah kaja, memperhatikan bagaimana pekarangan dengan gerbang angkul-angkul berjajar rapi di kedua sisi jalan, lalu berhenti di sekitar pura untuk memahami pembagian ruang suci dan ruang hunian.\n\nPemandu juga akan bercerita tentang awig-awig, aturan adat yang masih dijalankan warga, dan tentang dapur tradisional beratap bambu yang masih dipakai di beberapa rumah.",
+        "en": "Penglipuran is one of the most intact examples of a Balinese customary village layout. We walk from one end of the village towards the kaja (mountain-ward) direction, noticing how compounds with matching angkul-angkul gates line both sides of the path, then pause near the temple to understand how sacred and living spaces are divided.\n\nYour guide will also explain awig-awig, the customary rules residents still follow, and show a traditional bamboo-roofed kitchen still used in some homes."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 650000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/penglipuran/main-street.webp",
+      "gallery": [
+        "/images/content/penglipuran/main-street.webp",
+        "/images/content/penglipuran/house-compounds.webp",
+        "/images/content/penglipuran/gateway.webp",
+        "/images/content/penglipuran/temple-guardians.webp",
+        "/images/content/penglipuran/bamboo-kitchen.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Tata ruang Tri Mandala dari dekat",
+          "en": "See the Tri Mandala layout up close"
+        },
+        {
+          "id": "Gerbang angkul-angkul yang seragam",
+          "en": "Matching angkul-angkul gateways"
+        },
+        {
+          "id": "Cerita tentang awig-awig desa",
+          "en": "Stories of the village's awig-awig"
+        },
+        {
+          "id": "Dapur tradisional beratap bambu",
+          "en": "Traditional bamboo-roofed kitchen"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Tiket masuk desa wisata",
+          "en": "Village entrance fee"
+        },
+        {
+          "id": "Transportasi pulang-pergi dari Ubud",
+          "en": "Return transport from Ubud"
+        },
+        {
+          "id": "Air mineral dan kudapan",
+          "en": "Bottled water and snacks"
+        },
+        {
+          "id": "Makan siang khas Bangli",
+          "en": "Bangli-style lunch"
+        }
+      ],
+      "meetingPoint": "Lapangan Astina Ubud, Gianyar",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Jalan kaki di sumbu desa",
+            "en": "A walk along the village axis"
+          },
+          "description": {
+            "id": "08.30 berangkat dari Ubud, 09.30 tiba di Penglipuran, berjalan menyusuri desa bersama pemandu, 12.30 makan siang, 14.00 kembali ke Ubud.",
+            "en": "08:30 depart Ubud, 09:30 arrive in Penglipuran, guided walk through the village, 12:30 lunch, 14:00 return to Ubud."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hutan-bambu-penglipuran",
+      "destination": "penglipuran",
+      "category": "trekking",
+      "isFeatured": false,
+      "title": {
+        "id": "Jalan Pagi di Hutan Bambu Penglipuran",
+        "en": "Morning Walk in Penglipuran's Bamboo Forest"
+      },
+      "summary": {
+        "id": "Menyusuri hutan bambu yang dijaga desa, lalu mengenal peran bambu dalam bangunan dan keseharian warga.",
+        "en": "Walk through the bamboo forest the village protects, then see how bamboo shapes its buildings and daily life."
+      },
+      "description": {
+        "id": "Hutan bambu Penglipuran mencakup sekitar 37,7 hektare dengan 15 jenis bambu, dan pelestariannya membuat desa ini menerima penghargaan Kalpataru pada 1995. Jalan pagi ini melewati jalur di antara rumpun bambu yang sejuk, dengan pemandu yang menjelaskan jenis-jenis bambu dan kegunaannya.\n\nSetelah itu kita kembali ke desa untuk melihat bagaimana bambu dipakai sebagai atap dan dinding bangunan tradisional, sebelum menutup pagi dengan sarapan sederhana.",
+        "en": "Penglipuran's bamboo forest covers around 37.7 hectares with 15 bamboo species, and its conservation earned the village a Kalpataru award in 1995. This morning walk follows cool paths between bamboo groves, with a guide explaining the species and their uses.\n\nWe then return to the village to see how bamboo is used for the roofs and walls of traditional buildings, before ending the morning with a simple breakfast."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 550000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/penglipuran/village-lane.webp",
+      "gallery": [
+        "/images/content/penglipuran/village-lane.webp",
+        "/images/content/penglipuran/bamboo-kitchen.webp",
+        "/images/content/penglipuran/house-compounds.webp",
+        "/images/content/penglipuran/main-street.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Hutan bambu desa seluas sekitar 37,7 ha",
+          "en": "A village bamboo forest of about 37.7 ha"
+        },
+        {
+          "id": "Mengenal 15 jenis bambu",
+          "en": "Learn about 15 bamboo species"
+        },
+        {
+          "id": "Bambu dalam arsitektur tradisional",
+          "en": "Bamboo in traditional architecture"
+        },
+        {
+          "id": "Kelompok kecil, ritme santai",
+          "en": "Small group, unhurried pace"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Tiket masuk desa wisata",
+          "en": "Village entrance fee"
+        },
+        {
+          "id": "Sarapan sederhana",
+          "en": "Simple breakfast"
+        },
+        {
+          "id": "Air mineral dan kudapan",
+          "en": "Bottled water and snacks"
+        }
+      ],
+      "meetingPoint": "Area parkir Desa Wisata Penglipuran, Bangli",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Hutan bambu dan desa",
+            "en": "Bamboo forest and village"
+          },
+          "description": {
+            "id": "07.00 bertemu di area parkir desa, 07.15 jalan kaki di hutan bambu (sekitar 2 jam, ringan), 09.30 melihat bangunan bambu di desa, 10.30 sarapan dan selesai.",
+            "en": "07:00 meet at the village car park, 07:15 bamboo forest walk (about 2 hours, easy), 09:30 bamboo buildings in the village, 10:30 breakfast and finish."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "wae-rebo-negeri-di-atas-awan",
+      "destination": "wae-rebo",
+      "category": "village",
+      "isFeatured": false,
+      "title": {
+        "id": "Wae Rebo: Bermalam di Kampung di Atas Awan",
+        "en": "Wae Rebo: A Night in the Village Above the Clouds"
+      },
+      "summary": {
+        "id": "Mendaki dari Denge, disambut ritual Waelu'u, dan bermalam di kampung mbaru niang yang dikelilingi pegunungan.",
+        "en": "Hike up from Denge, be welcomed with the Waelu'u ritual and spend the night in a village of mbaru niang houses."
+      },
+      "description": {
+        "id": "Perjalanan dimulai dari Ruteng menuju Desa Denge, titik awal pendakian ke Wae Rebo. Jalur sepanjang sekitar 4,5 kilometer melewati hutan dan memakan waktu sekitar tiga jam. Setibanya di kampung, tamu disambut lewat ritual Waelu'u di Niang Gendang, rumah utama, sebelum dipersilakan berkeliling.\n\nKamu akan bermalam di kampung, makan bersama warga, dan melihat bagaimana mbaru niang digunakan: lantai dasar untuk tempat tinggal dan tingkat-tingkat di atasnya untuk menyimpan hasil panen serta persembahan bagi leluhur. Pagi harinya, kabut sering menyelimuti lembah sebelum kita turun kembali ke Denge.",
+        "en": "The journey starts in Ruteng and heads to Denge village, the trailhead for Wae Rebo. The roughly 4.5-kilometre trail climbs through forest and takes about three hours. On arrival, guests are welcomed with the Waelu'u ritual in Niang Gendang, the main house, before exploring.\n\nYou will spend the night in the village, eat with residents and see how a mbaru niang is used: the ground floor for living and the upper levels for storing the harvest and offerings to the ancestors. In the morning, mist often fills the valley before we walk back down to Denge."
+      },
+      "durationDays": 3,
+      "pricePerPerson": 3900000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/wae-rebo/village-valley.webp",
+      "gallery": [
+        "/images/content/wae-rebo/village-valley.webp",
+        "/images/content/wae-rebo/mbaru-niang-mountains.webp",
+        "/images/content/wae-rebo/morning-mist.webp",
+        "/images/content/wae-rebo/mbaru-niang-interior.webp",
+        "/images/content/wae-rebo/forest-trail-view.webp",
+        "/images/content/wae-rebo/village-from-above.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Pendakian sekitar 4,5 km dari Desa Denge",
+          "en": "About 4.5 km hike from Denge village"
+        },
+        {
+          "id": "Disambut ritual Waelu'u",
+          "en": "Welcomed with the Waelu'u ritual"
+        },
+        {
+          "id": "Bermalam di kampung mbaru niang",
+          "en": "Overnight in a mbaru niang village"
+        },
+        {
+          "id": "Pagi berkabut di lembah Manggarai",
+          "en": "Misty mornings in the Manggarai valley"
+        }
+      ],
+      "included": [
+        {
+          "id": "Transportasi Ruteng–Denge pulang-pergi",
+          "en": "Return transport Ruteng–Denge"
+        },
+        {
+          "id": "Menginap 1 malam di Wae Rebo dan 1 malam di Denge",
+          "en": "1 night in Wae Rebo and 1 night in Denge"
+        },
+        {
+          "id": "Semua makan selama perjalanan",
+          "en": "All meals during the trip"
+        },
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Biaya kunjungan kampung",
+          "en": "Village visitor fee"
+        }
+      ],
+      "meetingPoint": "Bandara Frans Sales Lega, Ruteng",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Ruteng ke Denge",
+            "en": "Ruteng to Denge"
+          },
+          "description": {
+            "id": "Penjemputan di Ruteng, perjalanan darat ke Desa Denge, malam di penginapan warga.",
+            "en": "Pickup in Ruteng, drive to Denge village, night at a local guesthouse."
+          }
+        },
+        {
+          "title": {
+            "id": "Mendaki ke Wae Rebo",
+            "en": "Hike to Wae Rebo"
+          },
+          "description": {
+            "id": "Pagi mendaki sekitar tiga jam, ritual Waelu'u, siang berkeliling kampung, malam bersama warga.",
+            "en": "Morning hike of about three hours, Waelu'u ritual, afternoon around the village, evening with residents."
+          }
+        },
+        {
+          "title": {
+            "id": "Turun dan kembali",
+            "en": "Descend and return"
+          },
+          "description": {
+            "id": "Pagi di kampung, turun ke Denge, perjalanan kembali ke Ruteng.",
+            "en": "Morning in the village, walk down to Denge, drive back to Ruteng."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kopi-dan-songke-wae-rebo",
+      "destination": "wae-rebo",
+      "category": "culinary",
+      "isFeatured": false,
+      "title": {
+        "id": "Kopi dan Songke di Wae Rebo",
+        "en": "Coffee and Songke in Wae Rebo"
+      },
+      "summary": {
+        "id": "Mengenal kopi, tanaman utama warga Wae Rebo, dan melihat para perempuan menenun songke Manggarai.",
+        "en": "Get to know coffee, Wae Rebo's main crop, and watch women weave Manggarai songke cloth."
+      },
+      "description": {
+        "id": "Kopi adalah tanaman utama warga Wae Rebo, dan ketinggiannya yang lebih dari 1.000 meter membuat iklimnya cocok untuk budidaya kopi. Di perjalanan dua hari ini, kamu akan melihat biji kopi dijemur di halaman kampung, mendengar cerita warga tentang kebun dan cara mengolahnya, lalu mencicipi kopi yang diseduh di kampung.\n\nKita juga akan melihat para perempuan menenun songke, kain tenun khas Manggarai, dan belajar sopan santun bertamu di kampung adat.",
+        "en": "Coffee is Wae Rebo's main crop, and its altitude of more than 1,000 metres makes the climate well suited to it. On this two-day trip you will see coffee beans drying in the village yard, hear residents talk about their gardens and how they process the beans, then taste coffee brewed in the village.\n\nWe will also watch women weave songke, the traditional cloth of Manggarai, and learn the etiquette of visiting a customary village."
+      },
+      "durationDays": 2,
+      "pricePerPerson": 2600000,
+      "maxParticipants": 6,
+      "coverImage": "/images/content/wae-rebo/coffee-drying.webp",
+      "gallery": [
+        "/images/content/wae-rebo/coffee-drying.webp",
+        "/images/content/wae-rebo/mbaru-niang-mountains.webp",
+        "/images/content/wae-rebo/mbaru-niang-interior.webp",
+        "/images/content/wae-rebo/morning-mist.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Biji kopi yang dijemur di halaman kampung",
+          "en": "Coffee beans drying in the village yard"
+        },
+        {
+          "id": "Cerita warga tentang kebun kopi",
+          "en": "Residents' stories of their coffee gardens"
+        },
+        {
+          "id": "Melihat tenun songke Manggarai",
+          "en": "Watch Manggarai songke weaving"
+        },
+        {
+          "id": "Kelompok maksimal enam orang",
+          "en": "Groups of six at most"
+        }
+      ],
+      "included": [
+        {
+          "id": "Transportasi Denge pulang-pergi dari Ruteng",
+          "en": "Return transport to Denge from Ruteng"
+        },
+        {
+          "id": "Menginap 1 malam di Wae Rebo",
+          "en": "1 night in Wae Rebo"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Biaya kunjungan kampung",
+          "en": "Village visitor fee"
+        }
+      ],
+      "meetingPoint": "Bandara Frans Sales Lega, Ruteng",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Mendaki dan kopi",
+            "en": "Hike and coffee"
+          },
+          "description": {
+            "id": "Perjalanan pagi ke Denge, mendaki ke Wae Rebo, ritual Waelu'u, sore melihat pengolahan kopi.",
+            "en": "Early drive to Denge, hike to Wae Rebo, Waelu'u ritual, afternoon coffee processing."
+          }
+        },
+        {
+          "title": {
+            "id": "Songke dan pulang",
+            "en": "Songke and return"
+          },
+          "description": {
+            "id": "Pagi melihat tenun songke, turun ke Denge, kembali ke Ruteng.",
+            "en": "Morning songke weaving, walk down to Denge, return to Ruteng."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kampung-adat-sumba-barat",
+      "destination": "sumba",
+      "category": "village",
+      "isFeatured": false,
+      "title": {
+        "id": "Kampung Adat Sumba Barat: Praijing dan Ratenggaro",
+        "en": "Western Sumba's Villages: Praijing and Ratenggaro"
+      },
+      "summary": {
+        "id": "Mengunjungi kampung beratap menara dan kubur batu megalitik, serta mengenal kepercayaan Marapu.",
+        "en": "Visit villages with towering roofs and megalithic tombs, and learn about the Marapu belief."
+      },
+      "description": {
+        "id": "Perjalanan tiga hari ini menyusuri kampung-kampung adat di Sumba bagian barat. Di Praijing, dekat Waikabubak, rumah-rumah beratap ilalang menjulang tersusun di atas bukit. Di Ratenggaro, Kodi, rumah adat beratap menara berdiri di dekat pantai di antara kubur batu megalitik.\n\nPemandu akan menjelaskan kepercayaan Marapu yang membentuk rumah, kubur, dan upacara di Sumba, serta tata krama berkunjung, seperti meminta izin sebelum memotret. Pasola hanya berlangsung pada Februari dan Maret dengan tanggal yang ditentukan para rato. Jika jadwalmu bertepatan, kami akan membantu mengatur kunjungan, tetapi tur ini tidak menjanjikan Pasola.",
+        "en": "This three-day trip visits customary villages in western Sumba. In Praijing, near Waikabubak, tall thatched roofs rise on a hilltop. In Ratenggaro, Kodi, houses with towering roofs stand near the coast among megalithic stone tombs.\n\nYour guide will explain the Marapu belief that shapes Sumba's houses, tombs and ceremonies, and the etiquette of visiting, such as asking before taking photos. Pasola only takes place in February and March on dates set by the rato. If your dates coincide we will help you attend, but this tour does not promise Pasola."
+      },
+      "durationDays": 3,
+      "pricePerPerson": 4800000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/sumba/ratenggaro.webp",
+      "gallery": [
+        "/images/content/sumba/ratenggaro.webp",
+        "/images/content/sumba/praijing.webp",
+        "/images/content/sumba/ratenggaro-shore.webp",
+        "/images/content/sumba/ikat-detail.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Kampung Praijing di atas bukit",
+          "en": "Praijing on its hilltop"
+        },
+        {
+          "id": "Rumah beratap menara di Ratenggaro",
+          "en": "Towering roofs of Ratenggaro"
+        },
+        {
+          "id": "Kubur batu megalitik",
+          "en": "Megalithic stone tombs"
+        },
+        {
+          "id": "Mengenal kepercayaan Marapu",
+          "en": "An introduction to the Marapu belief"
+        }
+      ],
+      "included": [
+        {
+          "id": "Menginap 2 malam",
+          "en": "2 nights' accommodation"
+        },
+        {
+          "id": "Transportasi selama di Sumba",
+          "en": "Transport throughout Sumba"
+        },
+        {
+          "id": "Makan 6 kali",
+          "en": "6 meals"
+        },
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Kontribusi untuk kampung yang dikunjungi",
+          "en": "Contribution to the villages visited"
+        }
+      ],
+      "meetingPoint": "Bandara Lede Kalumbang, Tambolaka",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Sumba Barat Daya",
+            "en": "Arrive in Southwest Sumba"
+          },
+          "description": {
+            "id": "Penjemputan di Tambolaka, sore ke pesisir Kodi, malam di Tambolaka.",
+            "en": "Pickup in Tambolaka, afternoon on the Kodi coast, night in Tambolaka."
+          }
+        },
+        {
+          "title": {
+            "id": "Ratenggaro",
+            "en": "Ratenggaro"
+          },
+          "description": {
+            "id": "Pagi di Ratenggaro bersama pemandu, siang menuju Waikabubak.",
+            "en": "Morning in Ratenggaro with a guide, afternoon drive to Waikabubak."
+          }
+        },
+        {
+          "title": {
+            "id": "Praijing",
+            "en": "Praijing"
+          },
+          "description": {
+            "id": "Pagi di Kampung Praijing, siang kembali ke Tambolaka.",
+            "en": "Morning in Praijing village, afternoon return to Tambolaka."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "ikat-sumba-timur",
+      "destination": "sumba",
+      "category": "craft",
+      "isFeatured": false,
+      "title": {
+        "id": "Ikat Sumba Timur: Dari Benang hingga Hinggi",
+        "en": "East Sumba Ikat: From Thread to Hinggi"
+      },
+      "summary": {
+        "id": "Mengikuti proses panjang tenun ikat Sumba, dari mengikat benang dan mencelup warna hingga menenun kain hinggi.",
+        "en": "Follow the long process of Sumba ikat, from binding and dyeing the threads to weaving a hinggi cloth."
+      },
+      "description": {
+        "id": "Tenun ikat Sumba dibuat dengan proses yang panjang: benang diikat mengikuti pola, dicelup berulang kali, lalu ditenun, sehingga satu kain bisa memakan waktu berbulan-bulan. Di Sumba Timur, kain hinggi untuk laki-laki dikenal dengan motifnya yang kaya.\n\nSelama empat hari, kamu akan mengunjungi penenun di sekitar Waingapu, melihat benang-benang yang dijemur setelah dicelup, dan mencoba mengikat pola sederhana. Kita juga berkunjung ke kampung adat Rende dengan rumah-rumah tradisional dan kubur batunya.",
+        "en": "Sumba ikat is made through a long process: threads are bound to a pattern, dyed again and again, then woven, so a single cloth can take months. In East Sumba, the men's hinggi cloth is known for its rich motifs.\n\nOver four days you will visit weavers around Waingapu, see threads drying after dyeing and try binding a simple pattern. We also visit the customary village of Rende with its traditional houses and stone tombs."
+      },
+      "durationDays": 4,
+      "pricePerPerson": 6200000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/sumba/natural-dyes.webp",
+      "gallery": [
+        "/images/content/sumba/natural-dyes.webp",
+        "/images/content/sumba/hinggi-ikat.webp",
+        "/images/content/sumba/ikat-detail.webp",
+        "/images/content/sumba/rende-megaliths.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Proses ikat dari benang hingga kain",
+          "en": "The ikat process from thread to cloth"
+        },
+        {
+          "id": "Benang yang dijemur setelah dicelup",
+          "en": "Threads drying after dyeing"
+        },
+        {
+          "id": "Kain hinggi Sumba Timur",
+          "en": "East Sumba's hinggi cloth"
+        },
+        {
+          "id": "Kampung adat Rende",
+          "en": "The customary village of Rende"
+        }
+      ],
+      "included": [
+        {
+          "id": "Menginap 3 malam di Waingapu",
+          "en": "3 nights in Waingapu"
+        },
+        {
+          "id": "Transportasi selama di Sumba Timur",
+          "en": "Transport in East Sumba"
+        },
+        {
+          "id": "Semua makan",
+          "en": "All meals"
+        },
+        {
+          "id": "Pemandu lokal",
+          "en": "Local guide"
+        },
+        {
+          "id": "Kontribusi untuk penenun",
+          "en": "Contribution to the weavers"
+        }
+      ],
+      "meetingPoint": "Bandara Umbu Mehang Kunda, Waingapu",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Tiba di Waingapu",
+            "en": "Arrive in Waingapu"
+          },
+          "description": {
+            "id": "Penjemputan di bandara, sore mengenal sejarah tenun Sumba Timur.",
+            "en": "Airport pickup, afternoon introduction to East Sumba weaving."
+          }
+        },
+        {
+          "title": {
+            "id": "Mengikat dan mencelup",
+            "en": "Binding and dyeing"
+          },
+          "description": {
+            "id": "Seharian bersama penenun: mengikat pola dan melihat proses pencelupan.",
+            "en": "A day with weavers: binding patterns and watching the dyeing."
+          }
+        },
+        {
+          "title": {
+            "id": "Kampung Rende",
+            "en": "Rende village"
+          },
+          "description": {
+            "id": "Perjalanan ke Rende, melihat rumah adat dan kubur batu, kembali ke Waingapu.",
+            "en": "Drive to Rende, traditional houses and stone tombs, return to Waingapu."
+          }
+        },
+        {
+          "title": {
+            "id": "Menenun dan pulang",
+            "en": "Weaving and departure"
+          },
+          "description": {
+            "id": "Pagi melihat proses menenun, siang diantar ke bandara.",
+            "en": "Morning weaving session, afternoon airport transfer."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "tenun-songket-sade",
+      "destination": "sade",
+      "category": "craft",
+      "isFeatured": false,
+      "title": {
+        "id": "Tenun dan Songket di Dusun Sade",
+        "en": "Weaving and Songket in Sade"
+      },
+      "summary": {
+        "id": "Melihat perempuan Sasak menenun di alat tenun tradisional dan mengenal bale tani serta lumbung padi.",
+        "en": "Watch Sasak women weave on traditional looms and discover bale tani houses and rice barns."
+      },
+      "description": {
+        "id": "Di Dusun Sade, menenun masih menjadi bagian dari keseharian perempuan Sasak. Kamu akan melihat proses memintal dan menenun di alat tenun tradisional, mengenal motif-motif kain Sasak, dan mencoba menenun beberapa baris.\n\nPemandu dari dusun akan mengajak berkeliling bale tani dan lumbung padi, serta menjelaskan mengapa lantai rumah dilapisi kotoran kerbau yang dicampur tanah.",
+        "en": "In Sade, weaving is still part of daily life for Sasak women. You will watch spinning and weaving on traditional looms, learn about Sasak cloth motifs and try weaving a few rows yourself.\n\nA guide from the hamlet will show you around the bale tani houses and rice barns, and explain why the floors are coated with buffalo dung mixed with earth."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 750000,
+      "maxParticipants": 10,
+      "coverImage": "/images/content/sade/weaver-at-loom.webp",
+      "gallery": [
+        "/images/content/sade/weaver-at-loom.webp",
+        "/images/content/sade/songket-stack.webp",
+        "/images/content/sade/lumbung-houses.webp",
+        "/images/content/sade/sasak-houses.webp",
+        "/images/content/sade/sasak-bale.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Penenun Sasak di alat tenun tradisional",
+          "en": "Sasak weavers on traditional looms"
+        },
+        {
+          "id": "Mencoba menenun beberapa baris",
+          "en": "Try weaving a few rows"
+        },
+        {
+          "id": "Bale tani dan lumbung padi",
+          "en": "Bale tani houses and rice barns"
+        },
+        {
+          "id": "Lantai berlapis kotoran kerbau",
+          "en": "Floors coated with buffalo dung"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pemandu dari dusun",
+          "en": "Guide from the hamlet"
+        },
+        {
+          "id": "Sesi menenun",
+          "en": "Weaving session"
+        },
+        {
+          "id": "Transportasi dari Bandara Lombok",
+          "en": "Transport from Lombok Airport"
+        },
+        {
+          "id": "Air mineral dan kudapan",
+          "en": "Bottled water and snacks"
+        },
+        {
+          "id": "Kontribusi untuk kas desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Bandara Internasional Zainuddin Abdul Madjid, Praya",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Sehari di Sade",
+            "en": "A day in Sade"
+          },
+          "description": {
+            "id": "09.00 penjemputan di bandara, 09.30 tiba di Sade, berkeliling dusun, sesi menenun, 13.00 makan siang, 14.30 selesai.",
+            "en": "09:00 airport pickup, 09:30 arrive in Sade, walk through the hamlet, weaving session, 13:00 lunch, 14:30 finish."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "dapur-sasak-sade",
+      "destination": "sade",
+      "category": "culinary",
+      "isFeatured": false,
+      "title": {
+        "id": "Dapur Sasak dan Kehidupan Dusun",
+        "en": "Sasak Kitchen and Hamlet Life"
+      },
+      "summary": {
+        "id": "Membantu menampi padi, memasak hidangan Sasak bersama warga, lalu makan bersama di berugaq.",
+        "en": "Help winnow rice, cook Sasak dishes with residents, then eat together in a berugaq."
+      },
+      "description": {
+        "id": "Kehidupan di Sade masih dekat dengan sawah. Pagi ini kamu akan melihat bagaimana padi ditampi dan disimpan di lumbung, lalu memasak hidangan Sasak sederhana bersama warga, seperti sayur dengan bumbu khas Lombok.\n\nKita menutup hari dengan makan bersama di berugaq, balai terbuka tempat warga berkumpul, sambil mendengar cerita tentang keseharian di dusun.",
+        "en": "Life in Sade is still close to the rice fields. This morning you will see how rice is winnowed and stored in the barn, then cook simple Sasak dishes with residents, such as vegetables in Lombok-style spices.\n\nWe end the day eating together in a berugaq, the open pavilion where residents gather, while hearing about everyday life in the hamlet."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 700000,
+      "maxParticipants": 8,
+      "coverImage": "/images/content/sade/sasak-meal.webp",
+      "gallery": [
+        "/images/content/sade/sasak-meal.webp",
+        "/images/content/sade/winnowing-rice.webp",
+        "/images/content/sade/lumbung-houses.webp",
+        "/images/content/sade/sasak-houses.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Menampi padi bersama warga",
+          "en": "Winnow rice with residents"
+        },
+        {
+          "id": "Memasak hidangan Sasak",
+          "en": "Cook Sasak dishes"
+        },
+        {
+          "id": "Makan bersama di berugaq",
+          "en": "Eat together in a berugaq"
+        },
+        {
+          "id": "Kelompok kecil",
+          "en": "Small group"
+        }
+      ],
+      "included": [
+        {
+          "id": "Semua bahan masakan",
+          "en": "All ingredients"
+        },
+        {
+          "id": "Makan bersama",
+          "en": "Shared meal"
+        },
+        {
+          "id": "Pemandu dari dusun",
+          "en": "Guide from the hamlet"
+        },
+        {
+          "id": "Transportasi dari Bandara Lombok",
+          "en": "Transport from Lombok Airport"
+        },
+        {
+          "id": "Kontribusi untuk kas desa",
+          "en": "Contribution to the village fund"
+        }
+      ],
+      "meetingPoint": "Bandara Internasional Zainuddin Abdul Madjid, Praya",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Dapur dan berugaq",
+            "en": "Kitchen and berugaq"
+          },
+          "description": {
+            "id": "08.30 penjemputan, 09.00 menampi padi, 10.00 memasak bersama warga, 12.30 makan bersama di berugaq, 14.00 selesai.",
+            "en": "08:30 pickup, 09:00 winnowing rice, 10:00 cooking with residents, 12:30 shared meal in a berugaq, 14:00 finish."
+          }
+        }
+      ]
+    }
+  ],
+  "sources": [
+    "https://en.wikipedia.org/wiki/Penglipuran",
+    "https://en.wikipedia.org/wiki/Wae_Rebo",
+    "https://en.wikipedia.org/wiki/Sumba",
+    "https://en.wikipedia.org/wiki/Pasola",
+    "https://religionnews.com/2018/03/20/animist-war-game-ritual-lives-on-on-indonesian-christian-island/",
+    "https://www.goodnewsfromindonesia.id/2020/02/14/kearifan-lokal-berbalut-wisata-di-kampung-ratenggaro",
+    "https://rri.co.id/biak/wisata/1268678/desa-adat-ratenggaro-warisan-budaya-megalitikum-di-indonesia",
+    "https://ejournal.upi.edu/index.php/jaz/article/view/99518",
+    "https://www.medcom.id/english/food-travel-en/zNAx3gnK-sasak-tribe-uses-buffalo-manure-to-clean-floors",
+    "https://www.indonesia.travel/au/en/destinations/bali-nusa-tenggara/lombok/experiencing-traditional-harmony-in-sade-village-in-lombok-island",
+    "https://bali.antaranews.com/berita/64296/bi-bantu-atm-perajin-tenun-rangrang",
+    "https://journal-fis.um.ac.id/index.php/jsph/article/view/1517",
+    "https://en.wikipedia.org/wiki/Batuan,_Bali",
+    "https://www.nowbali.co.id/an-introduction-to-balis-intricate-batuan-art/",
+    "https://en.wikipedia.org/wiki/Subak_(irrigation)",
+    "https://en.wikipedia.org/wiki/Canang_sari",
+    "https://en.wikipedia.org/wiki/Pura_Ulun_Danu_Bratan",
+    "https://en.wikipedia.org/wiki/Tanah_Lot",
+    "https://www.indonesia.travel/gb-en/travel-ideas/culture/7-facts-about-wae-rebo-village-the-enchanting-land-above-the-clouds/"
+  ]
+}

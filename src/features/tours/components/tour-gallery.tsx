@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useRef, useState, ViewTransition, type CSSProperties, type KeyboardEvent } from "react";
 import { cn } from "@/lib/utils";
 import "../view-transitions.css";
+import { PhotoCredit, type ImageCredit } from "@/components/shared/photo-credit";
 
 /** Small rendition through the Next image optimizer (same URL shape cards request). */
 function underlaySrc(src: string): string {
@@ -20,11 +21,14 @@ export function TourGallery({
   images,
   alt,
   morphName,
+  credits = {},
 }: {
   images: string[];
   alt: string;
   /** View transition name of the card image this hero morphs from. */
   morphName?: string;
+  /** Attribution per image path (curated content photos). */
+  credits?: Record<string, ImageCredit>;
 }) {
   const t = useTranslations("tours.detail");
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -118,16 +122,19 @@ export function TourGallery({
         ))}
       </div>
 
-      {total > 1 && (
-        <button
-          type="button"
-          onClick={() => show(0)}
-          className="text-ink-soft hover:text-terracotta mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-medium"
-        >
-          <Images className="size-4" aria-hidden />
-          {t("viewPhotos", { count: total })}
-        </button>
-      )}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-1">
+        {total > 1 && (
+          <button
+            type="button"
+            onClick={() => show(0)}
+            className="text-ink-soft hover:text-terracotta inline-flex min-h-11 items-center gap-2 text-sm font-medium"
+          >
+            <Images className="size-4" aria-hidden />
+            {t("viewPhotos", { count: total })}
+          </button>
+        )}
+        <PhotoCredit credit={credits[images[0]]} className="text-muted" />
+      </div>
 
       <dialog
         ref={dialogRef}
@@ -140,9 +147,10 @@ export function TourGallery({
         {open && (
           <>
             <div className="flex items-center justify-between px-4 py-4 sm:px-8">
-              <p className="text-sm text-white/70" aria-live="polite">
-                {t("photo", { index: index + 1, total })}
-              </p>
+              <div className="min-w-0" aria-live="polite">
+                <p className="text-sm text-white/70">{t("photo", { index: index + 1, total })}</p>
+                <PhotoCredit credit={credits[images[index]]} className="mt-1 truncate text-white/60" />
+              </div>
               <button
                 type="button"
                 onClick={close}
