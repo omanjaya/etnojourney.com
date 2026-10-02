@@ -29,7 +29,27 @@ if (!/^[a-z0-9-]+$/.test(slug) || !/^[a-z0-9-]+$/.test(name)) {
   process.exit(2);
 }
 
-const stripHtml = (s = "") => s.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+/**
+ * Commons metadata (Artist, LicenseShortName) is HTML. Convert it to plain
+ * text: strip tags until none remain (so nested fragments like "<scr<b>ipt>"
+ * can't survive one pass), decode entities, then drop any stray angle brackets.
+ */
+export function htmlToText(html = "") {
+  let text = String(html);
+  for (let previous; previous !== text; ) {
+    previous = text;
+    text = text.replace(/<[^<>]*>/g, "");
+  }
+  text = text
+    .replace(/&nbsp;/g, " ")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;|&apos;/g, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/&lt;|&gt;/g, "")
+    .replace(/&amp;/g, "&");
+  return text.replace(/[<>]/g, "").replace(/\s+/g, " ").trim();
+}
+const stripHtml = htmlToText;
 
 async function fromCommons(title) {
   const api = new URL("https://commons.wikimedia.org/w/api.php");
