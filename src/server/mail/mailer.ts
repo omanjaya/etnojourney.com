@@ -67,4 +67,15 @@ function createMailer(): Mailer {
   return new ConsoleMailer();
 }
 
-export const mailer: Mailer = createMailer();
+/**
+ * Created on first use, not at import: reading the validated env at import time
+ * would run during `next build`, where production-only variables are absent.
+ */
+let instance: Mailer | undefined;
+
+export const mailer: Mailer = {
+  send(message) {
+    instance ??= createMailer();
+    return instance.send(message);
+  },
+};
