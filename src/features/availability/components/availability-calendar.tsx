@@ -49,6 +49,7 @@ export function AvailabilityCalendar({
   labelledBy,
   invalid = false,
   describedBy,
+  marked,
 }: {
   tourId: number;
   value: string | null;
@@ -58,6 +59,12 @@ export function AvailabilityCalendar({
   labelledBy: string;
   invalid?: boolean;
   describedBy?: string;
+  /**
+   * A reference date to outline, e.g. the booking's current date when
+   * rescheduling. The calendar opens on its month; `label` is read out and
+   * shown in the legend.
+   */
+  marked?: { date: string; label: string };
 }) {
   const t = useTranslations("booking.calendar");
   const locale = useLocale();
@@ -68,7 +75,9 @@ export function AvailabilityCalendar({
   const minMonth = monthOf(today);
   const maxMonth = addMonths(minMonth, MAX_MONTHS_AHEAD);
 
-  const [month, setMonth] = useState(() => monthOf(value ?? addDays(today, MIN_LEAD_DAYS)));
+  const [month, setMonth] = useState(() =>
+    monthOf(value ?? marked?.date ?? addDays(today, MIN_LEAD_DAYS)),
+  );
   const [focusDate, setFocusDate] = useState<string | null>(null);
   const [store, setStore] = useState<Store>({ key: refreshKey, months: {}, failed: {} });
 
@@ -312,9 +321,13 @@ export function AvailabilityCalendar({
                           day.state === "closed" &&
                             "text-muted/70 cursor-not-allowed bg-[repeating-linear-gradient(135deg,var(--color-sand-100)_0_4px,transparent_4px_8px)]",
                           selected && "bg-terracotta text-sand-50 shadow-sm",
+                          day.date === marked?.date && !selected && "ring-ink/45 ring-1 ring-inset",
                         )}
                       >
-                        <span className="sr-only">{dayLabel(day)}</span>
+                        <span className="sr-only">
+                          {dayLabel(day)}
+                          {day.date === marked?.date && `, ${marked.label}`}
+                        </span>
                         <span aria-hidden className="leading-none font-medium tabular-nums">
                           {Number(day.date.slice(8))}
                         </span>
@@ -370,6 +383,12 @@ export function AvailabilityCalendar({
           <span className="border-line size-2 rounded-full border bg-[repeating-linear-gradient(135deg,var(--color-muted)_0_1px,transparent_1px_3px)]" />
           {t("legendClosed")}
         </li>
+        {marked && (
+          <li className="flex items-center gap-1.5">
+            <span className="ring-ink/45 size-2.5 rounded-sm ring-1 ring-inset" />
+            {marked.label}
+          </li>
+        )}
       </ul>
     </div>
   );

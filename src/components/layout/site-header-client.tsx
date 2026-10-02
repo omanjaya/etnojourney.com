@@ -103,7 +103,7 @@ export function SiteHeaderClient({
         )}
       >
         <Link href="/" aria-label="EtnoJourney" className="logo-link shrink-0">
-          <Logo inverted={!solid} priority className="h-10 lg:h-12" />
+          <Logo inverted={!solid} className="h-10 lg:h-12" />
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">

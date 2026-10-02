@@ -1,6 +1,7 @@
 import "server-only";
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { db } from "@/server/db";
+import { auditService } from "./audit.service";
 import { getEnv } from "@/server/env";
 import { storeImage } from "@/server/storage/image-processing";
 import type { Locale } from "@/i18n/routing";
@@ -156,14 +157,39 @@ export const reviewService = {
     return groupByReview(await reviewRepository.photosForReviews(reviewIds));
   },
 
-  /** Hides or shows one review photo; `changed` is false when it already was. */
-  async setPhotoHidden(photoId: number, isHidden: boolean) {
-    const before = await reviewRepository.findPhoto(photoId);
-    if (!before) throw new DomainError("notFound");
-    if (before.isHidden === isHidden) return { photo: before, changed: false };
-    const photo = await reviewRepository.setPhotoHidden(photoId, isHidden);
-    if (!photo) throw new DomainError("notFound");
-    return { photo, changed: true };
+  /**
+   * Hides or shows one review photo under a row lock, auditing the change in
+   * the same transaction. `changed` is false when it already was.
+   */
+  async setPhotoHidden(photoId: number, isHidden: boolean, actorId: string) {
+    return db.transaction(async (tx) => {
+      const before = await reviewRepository.findPhotoForUpdate(tx, photoId);
+      if (!before) throw new DomainError("notFound");
+      if (before.isHidden === isHidden) return { photo: before, changed: false };
+      const photo = await reviewRepository.setPhotoHidden(tx, photoId, isHidden);
+      if (!photo) throw new DomainError("notFound");
+      await auditService.record(
+        {
+          actorId,
+          action: isHidden ? "review.photo_hidden" : "review.photo_shown",
+          entityType: "review",
+          entityId: photo.reviewId,
+          details: { photoId: photo.id, position: photo.position },
+        },
+        tx,
+      );
+      return { photo, changed: true };
+    });
+  },
+
+  /**
+   * Who may load a stored review photo: everyone when it is a visible photo
+   * of a published review, moderators while it is attached but hidden, and
+   * nobody for uploads never attached to a review.
+   */
+  async photoAccess(path: string): Promise<"public" | "moderators" | "none"> {
+    if (await reviewRepository.isPhotoPublic(path)) return "public";
+    return (await reviewRepository.isPhotoAttached(path)) ? "moderators" : "none";
   },
 
   /* -------------------------- admin -------------------------- */

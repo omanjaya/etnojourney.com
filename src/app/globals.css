@@ -95,6 +95,22 @@
     }
   }
 
+  /* For above-the-fold headings (SplitWords play="load"): starts faint but
+     painted, so the heading counts as the first contentful/LCP paint instead
+     of waiting for the stagger to reach opacity > 0. */
+  @keyframes word-settle {
+    from {
+      opacity: 0.2;
+      transform: translateY(0.45em) rotate(1.5deg);
+      filter: blur(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0);
+      filter: blur(0);
+    }
+  }
+
   @keyframes fade-up {
     from {
       opacity: 0;
@@ -182,10 +198,13 @@
     display: inline-block;
     white-space: pre;
   }
-  .split-words[data-play="load"] > [data-word],
   [data-reveal="done"] .split-words > [data-word],
   .split-words[data-reveal="done"] > [data-word] {
     animation: word-rise 0.9s var(--ease-editorial) both;
+    animation-delay: calc(var(--split-delay, 0s) + var(--i) * var(--split-stagger, 60ms));
+  }
+  .split-words[data-play="load"] > [data-word] {
+    animation: word-settle 0.9s var(--ease-editorial) both;
     animation-delay: calc(var(--split-delay, 0s) + var(--i) * var(--split-stagger, 60ms));
   }
   [data-reveal="pending"] .split-words > [data-word],

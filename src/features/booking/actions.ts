@@ -46,7 +46,8 @@ export async function cancelBookingAction(bookingId: number): Promise<ActionResu
   return runAction(async () => {
     // Same path as the paid cancel dialog: ownership and status checked under
     // a row lock, audited as `booking.cancelled_by_traveller`.
-    const result = await bookingService.cancelByTraveller(user.id, id.data);
+    // The button promised a free cancellation; a booking paid meanwhile is refused.
+    const result = await bookingService.cancelByTraveller(user.id, id.data, { kind: "free" });
     after(() => notificationService.bookingCancelledByTraveller(result));
     revalidate.account();
     revalidate.admin();

@@ -80,6 +80,8 @@ Di dashboard Midtrans, arahkan *Payment Notification URL* ke `https://<domain>/a
 
 Image production dibangun dari `Dockerfile` (multi-stage, output `standalone` Next.js, berjalan sebagai user non-root). Saat container start, migrasi di `./drizzle` diterapkan otomatis, lalu server berjalan di port 3000.
 
+> Tanpa Docker (`node .next/standalone/server.js`), jalankan dengan `HOSTNAME=0.0.0.0` seperti di `Dockerfile`. Dengan `HOSTNAME=127.0.0.1`, URL berbahasa Indonesia (tanpa prefix `/en`) masuk ke redirect 307 berulang. Batasi akses dari luar lewat firewall atau reverse proxy, bukan lewat `HOSTNAME`.
+
 ```bash
 docker build -t etnojourney .
 docker run -d --name etnojourney -p 3000:3000 \

@@ -192,7 +192,8 @@
       "guide": {
         "created": "Added a guide",
         "updated": "Updated a guide",
-        "linked": "Linked a partner portal account"
+        "linked": "Linked a partner portal account",
+        "unlinked": "Unlinked a partner portal account"
       },
       "departure": {
         "assigned": "Assigned a guide",

@@ -1,7 +1,7 @@
 import { z } from "zod";
+import { NOTE_MAX_LENGTH } from "./limits";
 
-/** Matches the `booking_notes_body_length` check constraint. */
-export const NOTE_MAX_LENGTH = 2000;
+export { NOTE_MAX_LENGTH };
 
 export const addBookingNoteSchema = z.object({
   bookingId: z.number({ error: "invalid" }).int().positive(),

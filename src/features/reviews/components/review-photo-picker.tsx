@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ImagePlus, LoaderCircle, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useId, useRef, useState, useTransition } from "react";
+import { useEffect, useId, useRef, useState, useTransition } from "react";
 import { REVIEW_PHOTO_MAX_BYTES, REVIEW_PHOTOS_MAX } from "@/server/services/review.rules";
 import type { ReviewPhotoUpload } from "@/server/services/review.service";
 import { ACCEPT_ATTRIBUTE } from "@/features/media/components/use-image-upload";
@@ -31,6 +31,14 @@ export function ReviewPhotoPicker({
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  // Local previews: the uploaded file is not served until the review is
+  // published, so show the picked file itself (object URLs, revoked on unmount).
+  const [previews, setPreviews] = useState<Record<string, string>>({});
+  const previewsRef = useRef(previews);
+  useEffect(() => {
+    previewsRef.current = previews;
+  }, [previews]);
+  useEffect(() => () => Object.values(previewsRef.current).forEach(URL.revokeObjectURL), []);
   const remaining = REVIEW_PHOTOS_MAX - photos.length;
   const hintId = `${id}-hint`;
   const errorId = `${id}-error`;
@@ -54,6 +62,8 @@ export function ReviewPhotoPicker({
         formData.set("file", file);
         const result = await uploadReviewPhotoAction(formData);
         if (result.ok) {
+          const preview = URL.createObjectURL(file);
+          setPreviews((current) => ({ ...current, [result.data.path]: preview }));
           added.push(result.data);
           onChange([...photos, ...added]);
         } else {
@@ -66,6 +76,7 @@ export function ReviewPhotoPicker({
 
   const remove = (path: string) => {
     setError(null);
+    if (previews[path]) URL.revokeObjectURL(previews[path]);
     onChange(photos.filter((photo) => photo.path !== path));
   };
 
@@ -82,13 +93,16 @@ export function ReviewPhotoPicker({
       >
         {photos.map((photo, i) => (
           <li key={photo.path} className="bg-sand-200 relative size-20 overflow-hidden rounded-xl">
-            <Image
-              src={photo.path}
-              alt={t("preview", { position: i + 1 })}
-              fill
-              sizes="80px"
-              className="object-cover"
-            />
+            {previews[photo.path] && (
+              <Image
+                src={previews[photo.path]}
+                alt={t("preview", { position: i + 1 })}
+                fill
+                sizes="80px"
+                unoptimized
+                className="object-cover"
+              />
+            )}
             <button
               type="button"
               onClick={() => remove(photo.path)}

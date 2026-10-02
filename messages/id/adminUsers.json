@@ -192,7 +192,8 @@
       "guide": {
         "created": "Menambah pemandu",
         "updated": "Mengubah data pemandu",
-        "linked": "Menautkan akun portal mitra"
+        "linked": "Menautkan akun portal mitra",
+        "unlinked": "Melepas akun portal mitra"
       },
       "departure": {
         "assigned": "Menugaskan pemandu",

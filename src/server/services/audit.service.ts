@@ -39,6 +39,7 @@ export const auditActions = [
   "guide.created",
   "guide.updated",
   "guide.linked",
+  "guide.unlinked",
   "departure.assigned",
   "departure.unassigned",
   "departure.noted",

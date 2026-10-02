@@ -34,7 +34,7 @@ export async function cancelOwnBookingAction(
     const result = await bookingService.cancelByTraveller(
       user.id,
       parsed.data.bookingId,
-      parsed.data.expectedPercent,
+      { kind: "paid", percent: parsed.data.expectedPercent },
     );
     after(() => notificationService.bookingCancelledByTraveller(result));
     revalidate.account();

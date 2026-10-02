@@ -153,7 +153,9 @@ export default async function ToursPage({ params, searchParams }: PageProps<"/[l
                   <Reveal key={item.tour.id} delay={Math.min((i % 3) * 0.09, 0.4)}>
                     <TourCard
                       data={item}
-                      priority={result.page === 1 && i < 3}
+                      // Only the first card: on phones it is the LCP, and three high-priority
+                      // images would compete for bandwidth.
+                      priority={result.page === 1 && i === 0}
                       action={
                         <WishlistButton
                           tourId={item.tour.id}

@@ -35,13 +35,19 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
   };
 
   return (
-    <section
-      className="hero bg-indigo relative flex min-h-[100svh] flex-col overflow-hidden text-white"
-    >
+    <section className="hero bg-indigo relative flex min-h-[100svh] flex-col overflow-hidden text-white">
       {/* Scroll-driven parallax (CSS) on the outer layer, Ken Burns on the inner one. */}
       <div className="hero-drift absolute inset-0 scale-110">
         <div className="animate-ken-burns absolute inset-0">
-          <Image src={HERO_IMAGE} alt="" fill preload sizes="100vw" className="object-cover" />
+          <Image
+            src={HERO_IMAGE}
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/15 to-black/75" />
@@ -141,7 +147,9 @@ export function HomeHero({ stats }: { stats: HeroStat[] }) {
             <dl className="grid flex-1 grid-cols-4 gap-3 sm:gap-6">
               {stats.map((stat, i) => (
                 <div key={stat.label} style={delay(780 + i * 80)} className="animate-fade-up">
-                  <dt className="text-[10px] leading-tight tracking-wide text-white/60 uppercase sm:text-xs">{stat.label}</dt>
+                  <dt className="text-[10px] leading-tight tracking-wide text-white/60 uppercase sm:text-xs">
+                    {stat.label}
+                  </dt>
                   <dd className="font-display short:text-2xl mt-1 text-xl sm:text-3xl">
                     <CountUp value={stat.value} decimals={stat.decimals} locale={locale} />
                   </dd>

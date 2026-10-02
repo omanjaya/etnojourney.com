@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages, getTranslations } from "next-intl/server";
+import { clientMessageScopes, pickMessages } from "@/i18n/messages";
 import { requireAdmin } from "@/server/auth/guards";
 import { AdminNav } from "@/features/admin/components/admin-nav";
 import "@/components/layout/layout-motion.css";
@@ -12,19 +14,26 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function AdminLayout({ children }: LayoutProps<"/[locale]/admin">) {
   const user = await requireAdmin();
+  // Nested providers replace (not merge) messages: send public + admin.
+  const messages = pickMessages(await getMessages(), [
+    ...clientMessageScopes.public,
+    ...clientMessageScopes.admin,
+  ]);
 
   return (
-    <div className="bg-sand-50 min-h-dvh lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
-      <AdminNav user={{ name: user.name, email: user.email, role: user.role ?? "user" }} />
-      <main
-        id="main"
-        tabIndex={-1}
-        className="min-w-0 px-4 py-8 outline-none sm:px-8 lg:px-12 lg:py-12"
-      >
-        <RouteTransition>
-          <div>{children}</div>
-        </RouteTransition>
-      </main>
-    </div>
+    <NextIntlClientProvider messages={messages}>
+      <div className="bg-sand-50 min-h-dvh lg:grid lg:grid-cols-[17rem_minmax(0,1fr)]">
+        <AdminNav user={{ name: user.name, email: user.email, role: user.role ?? "user" }} />
+        <main
+          id="main"
+          tabIndex={-1}
+          className="min-w-0 px-4 py-8 outline-none sm:px-8 lg:px-12 lg:py-12"
+        >
+          <RouteTransition>
+            <div>{children}</div>
+          </RouteTransition>
+        </main>
+      </div>
+    </NextIntlClientProvider>
   );
 }

@@ -1,5 +1,5 @@
 import "server-only";
-import { and, asc, count, eq, gte, inArray, isNull, lte, or, sql, type SQL } from "drizzle-orm";
+import { and, asc, count, eq, gte, inArray, isNotNull, isNull, lte, or, sql, type SQL } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
 import {
   bookingNotes,
@@ -67,6 +67,23 @@ const notesCount = sql<number>`(
 )`;
 
 export const departureRepository = {
+  /**
+   * Marks the manifest of these departures as not sent (the guide's copy is
+   * out of date), e.g. after a booking moved between them.
+   */
+  markManifestStale(tx: DbExecutor, tourId: number, dates: string[]) {
+    return tx
+      .update(departureAssignments)
+      .set({ notifiedAt: null })
+      .where(
+        and(
+          eq(departureAssignments.tourId, tourId),
+          inArray(departureAssignments.date, dates),
+          isNotNull(departureAssignments.notifiedAt),
+        ),
+      );
+  },
+
   /**
    * The agenda in one aggregate query: active bookings grouped per tour and
    * date, joined to the tour, destination, assignment and guide. Grouping by

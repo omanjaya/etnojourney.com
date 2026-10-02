@@ -1,7 +1,11 @@
 import { useTranslations } from "next-intl";
 import { Field, Select } from "@/components/ui/form-controls";
 import type { LocalizedText } from "@/lib/i18n-text";
-import { tourDifficulty, type TourDifficulty } from "@/server/db/schema";
+import type { TourDifficulty } from "@/server/db/schema";
+
+// Mirrors the `tour_difficulty` enum; a value import of the schema would pull
+// drizzle-orm into the client bundle. `satisfies` keeps the two in sync.
+const difficulties = ["easy", "moderate", "challenging"] as const satisfies readonly TourDifficulty[];
 import { BilingualField } from "../form-parts/bilingual-field";
 import { Section } from "../form-parts/section";
 
@@ -38,7 +42,7 @@ export function PracticalSection({
           aria-invalid={err("difficulty") ? true : undefined}
           className="md:max-w-xs"
         >
-          {tourDifficulty.enumValues.map((level) => (
+          {difficulties.map((level) => (
             <option key={level} value={level}>
               {t(`difficulty.${level}`)}
             </option>
