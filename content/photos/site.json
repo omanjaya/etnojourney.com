@@ -1,0 +1,42 @@
+{
+  "/images/content/site/hero-ulun-danu.webp": {
+    "title": "hero-ulun-danu",
+    "author": "Unsplash",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "sourceUrl": "https://unsplash.com/photos/1537996194471-e657df975ab4",
+    "source": "Unsplash",
+    "width": 1440,
+    "height": 1911
+  },
+  "/images/content/site/tegallalang-terraces.webp": {
+    "title": "tegallalang-terraces",
+    "author": "Unsplash",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "sourceUrl": "https://unsplash.com/photos/1555400038-63f5ba517a47",
+    "source": "Unsplash",
+    "width": 1440,
+    "height": 960
+  },
+  "/images/content/site/borobudur-walk.webp": {
+    "title": "borobudur-walk",
+    "author": "Unsplash",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "sourceUrl": "https://unsplash.com/photos/1584810359583-96fc3448beaa",
+    "source": "Unsplash",
+    "width": 1440,
+    "height": 1080
+  },
+  "/images/content/site/raja-ampat-lagoon.webp": {
+    "title": "raja-ampat-lagoon",
+    "author": "Unsplash",
+    "license": "Unsplash License",
+    "licenseUrl": "https://unsplash.com/license",
+    "sourceUrl": "https://unsplash.com/photos/1570789210967-2cac24afeb00",
+    "source": "Unsplash",
+    "width": 1440,
+    "height": 960
+  }
+}
