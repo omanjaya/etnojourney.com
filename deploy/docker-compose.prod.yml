@@ -1,0 +1,49 @@
+# Production stack on the VPS (/opt/etnojourney). The app image is built by
+# GitHub Actions (.github/workflows/deploy.yml) and pulled from GHCR; this file
+# and deploy.sh are copied to the server by that workflow.
+name: etnojourney
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: etnojourney
+      POSTGRES_USER: etnojourney
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # Loopback only: for maintenance through an SSH tunnel, never public.
+    ports:
+      - "127.0.0.1:5442:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etnojourney -d etnojourney"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  app:
+    image: ghcr.io/omanjaya/etnojourney:${APP_TAG:-latest}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://etnojourney:${POSTGRES_PASSWORD}@db:5432/etnojourney
+      # Caddy terminates TLS and replaces X-Forwarded-For with the client IP
+      # (a single value), which is what TRUST_PROXY without a list accepts.
+      TRUST_PROXY: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3040:3000"
+    volumes:
+      - uploads:/app/storage/uploads
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  pgdata:
+  uploads:

@@ -3,7 +3,7 @@
  * content/ (validated by loadContent), then (re)creates demo accounts.
  * Run with `npm run db:seed`.
  */
-import { eq, sql } from "drizzle-orm";
+import { count, eq, sql } from "drizzle-orm";
 import { auth } from "@/server/auth";
 import { isoDateFromToday } from "@/lib/format";
 import { generateBookingCode } from "@/server/services/booking.rules";
@@ -31,9 +31,24 @@ async function ensureUser(name: string, email: string, password: string, role: U
   return id;
 }
 
+/**
+ * `SEED_MODE=content` loads only the catalogue (destinations, tours, photo
+ * credits, curated reviews) for a fresh production database: no demo
+ * accounts, no sample bookings. It refuses to run once real bookings exist,
+ * because the catalogue reset would cascade into them.
+ */
+const contentOnly = process.env.SEED_MODE === "content";
+
 async function main() {
   // Validate everything before touching the database.
   const content = await loadContent();
+
+  if (contentOnly) {
+    const [{ total }] = await db.select({ total: count() }).from(bookings);
+    if (total > 0) {
+      throw new Error(`Refusing to reset the catalogue: ${total} bookings exist.`);
+    }
+  }
 
   console.log("Resetting catalog tables...");
   await db.execute(
@@ -89,6 +104,13 @@ async function main() {
         })),
       );
     }
+  }
+
+  if (contentOnly) {
+    console.log(
+      `Seeded ${content.destinations.length} destinations, ${content.tours.length} tours (content only).`,
+    );
+    return;
   }
 
   console.log("Ensuring demo accounts...");
