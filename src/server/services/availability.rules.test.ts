@@ -5,6 +5,8 @@ import {
   buildAdminMonth,
   buildMonthAvailability,
   closedDatesFor,
+  closureDuring,
+  closureEntityId,
   closureRangeIssue,
   dateRange,
   dayState,
@@ -15,9 +17,12 @@ import {
   isLimited,
   isMonthInRange,
   isSelectable,
+  isSpanClosed,
   lastClosableDate,
   MAX_CLOSURE_DAYS,
   mondayIndex,
+  summarizeAffected,
+  tripEndDate,
 } from "./availability.rules";
 
 describe("calendar arithmetic", () => {
@@ -104,6 +109,53 @@ describe("buildMonthAvailability", () => {
     expect(byDate["2026-10-12"]).toMatchObject({ state: "full", seatsLeft: 0 });
     expect(byDate["2026-10-20"]).toMatchObject({ state: "available", seatsLeft: 8 });
   });
+
+  it("closes the start dates of a multi-day tour whose trip would run into a closed day", () => {
+    const result = buildMonthAvailability({
+      month: "2027-03",
+      today: "2027-01-01",
+      capacity: 8,
+      taken: new Map(),
+      // Nyepi on 19 March, and 1 April (next month) closed as well.
+      closed: new Set(["2027-03-19", "2027-04-01"]),
+      durationDays: 2,
+    });
+    const state = (date: string) => result.days.find((d) => d.date === date)?.state;
+    expect(state("2027-03-17")).toBe("available");
+    expect(state("2027-03-18")).toBe("closed");
+    expect(state("2027-03-19")).toBe("closed");
+    expect(state("2027-03-20")).toBe("available");
+    expect(state("2027-03-31")).toBe("closed");
+  });
+
+  it("closes only the date itself for a day tour", () => {
+    const result = buildMonthAvailability({
+      month: "2027-03",
+      today: "2027-01-01",
+      capacity: 8,
+      taken: new Map(),
+      closed: new Set(["2027-03-19"]),
+    });
+    const state = (date: string) => result.days.find((d) => d.date === date)?.state;
+    expect(state("2027-03-18")).toBe("available");
+    expect(state("2027-03-19")).toBe("closed");
+  });
+});
+
+describe("trip spans", () => {
+  it("ends a day tour (or one in hours) on its start date", () => {
+    expect(tripEndDate("2027-03-18", 1)).toBe("2027-03-18");
+    expect(tripEndDate("2027-03-18", 0)).toBe("2027-03-18");
+    expect(tripEndDate("2027-12-31", 3)).toBe("2028-01-02");
+  });
+
+  it("is closed when any day of the trip is", () => {
+    const closed = new Set(["2027-03-19"]);
+    expect(isSpanClosed("2027-03-17", 2, closed)).toBe(false);
+    expect(isSpanClosed("2027-03-18", 2, closed)).toBe(true);
+    expect(isSpanClosed("2027-03-15", 5, closed)).toBe(true);
+    expect(isSpanClosed("2027-03-20", 3, closed)).toBe(false);
+  });
 });
 
 describe("closures", () => {
@@ -120,6 +172,40 @@ describe("closures", () => {
     expect(isClosedOn(closures, 7, "2026-10-20")).toBe(false);
     expect(isClosedOn(closures, 8, "2026-10-10")).toBe(false);
     expect([...closedDatesFor(closures, 7)].sort()).toEqual(["2026-10-10", "2026-10-17"]);
+  });
+
+  it("finds a closure on any day of a trip, for the tour or for all tours", () => {
+    expect(closureDuring(closures, 7, "2026-10-09", "2026-10-11")).toEqual(closures[0]);
+    expect(closureDuring(closures, 8, "2026-10-15", "2026-10-18")).toEqual(closures[1]);
+    expect(closureDuring(closures, 7, "2026-10-18", "2026-10-21")).toBeUndefined();
+    expect(closureDuring(closures, 8, "2026-10-20", "2026-10-20")).toEqual(closures[2]);
+  });
+
+  it("names one close or reopen action by its scope and range", () => {
+    expect(closureEntityId(12, "2027-01-01", "2027-01-31")).toBe("12:2027-01-01..2027-01-31");
+    expect(closureEntityId(null, "2027-03-19", "2027-03-19")).toBe("all:2027-03-19..2027-03-19");
+  });
+
+  it("sums the bookings that stay on a closed range and keeps the first departures", () => {
+    const departures = [
+      { tourId: 1, date: "2027-03-17", bookings: 1, seats: 2 },
+      { tourId: 2, date: "2027-03-19", bookings: 2, seats: 5 },
+      { tourId: 1, date: "2027-03-20", bookings: 1, seats: 4 },
+    ];
+    expect(summarizeAffected(departures, 2)).toEqual({
+      bookings: 4,
+      seats: 11,
+      departures: departures.slice(0, 2),
+      more: 1,
+      range: { from: "2027-03-17", to: "2027-03-20" },
+    });
+    expect(summarizeAffected([])).toEqual({
+      bookings: 0,
+      seats: 0,
+      departures: [],
+      more: 0,
+      range: null,
+    });
   });
 
   it("makes a closed date unselectable, ahead of full, but never hides the past", () => {

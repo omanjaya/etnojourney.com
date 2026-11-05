@@ -13,7 +13,7 @@
     "reset": "Reset filters"
   },
   "agenda": {
-    "summary": "{total, plural, =0 {No departures} one {# departure} other {# departures}}, {withoutGuide, plural, =0 {all have a guide} other {# without a guide}} ({from} to {to})",
+    "summary": "{total, plural, =0 {No departures} one {# departure, {withoutGuide, plural, =0 {it has a guide} other {it has no guide}}} other {# departures, {withoutGuide, plural, =0 {all have a guide} other {# without a guide}}}} ({from} to {to})",
     "today": "Today",
     "tomorrow": "Tomorrow",
     "inDays": "In {count} days",
@@ -25,6 +25,8 @@
     "guideInactive": "{name} is inactive",
     "hasNote": "Has an operational note",
     "notified": "Manifest sent to the guide",
+    "closed": "Date closed",
+    "closedReason": "Reason: {reason}",
     "noMatch": {
       "title": "No matching departures",
       "description": "Try another date range or tour, or turn off the without-guide filter."
@@ -53,7 +55,13 @@
     "date": "Date",
     "meetingPoint": "Meeting point",
     "participants": "Travellers",
-    "guide": "Guide"
+    "guide": "Guide",
+    "closed": {
+      "title": "{date} is closed for booking",
+      "body": "The bookings on this departure are still active. Make sure the tour still runs, or contact the guests to rearrange their date.",
+      "reason": "Reason: {reason}",
+      "link": "Open the availability calendar"
+    }
   },
   "manifest": {
     "title": "Manifest",
@@ -66,13 +74,11 @@
     "internalNotes": "{count, plural, one {# internal note} other {# internal notes}}",
     "columns": {
       "code": "Code",
-      "name": "Contact name",
-      "phone": "Phone",
+      "contact": "Contact",
+      "statusPayment": "Status & payment",
       "participants": "Travellers",
       "notes": "Traveller notes",
-      "status": "Status",
-      "payment": "Payment",
-      "internal": "Internal notes"
+      "payment": "Payment"
     }
   },
   "guide": {
@@ -85,13 +91,16 @@
     "suggestedHint": "Guides who usually work at this destination are listed first.",
     "noGuides": "There are no active guides yet. Add a guide first.",
     "inactiveOption": "{name} (inactive)",
+    "busyOption": "{name}, already on: {tours}",
+    "busyItem": "{tour} ({date})",
+    "busyHint": "{name} is already guiding {tours} on the same days. Make sure the schedules don't clash.",
     "save": "Assign",
     "unassign": "Unassign",
     "assigned": "Guide assigned.",
     "unassigned": "Guide unassigned.",
     "inactive": "This guide is no longer active. Assign another guide.",
     "noEmail": "No email yet",
-    "assignedBy": "Updated by {name}, {date}"
+    "assignedBy": "Assigned by {name}, {date}"
   },
   "send": {
     "description": "Email the manifest (no prices or payment details) to the guide, in Indonesian.",
@@ -121,7 +130,12 @@
   "history": {
     "title": "History",
     "empty": "No changes on this departure yet.",
-    "system": "System"
+    "system": "System",
+    "guide": "Guide: {name}",
+    "previousGuide": "Previously: {name}",
+    "noteCleared": "Note removed",
+    "sentTo": "To {email}, {participants, plural, one {# traveller} other {# travellers}}",
+    "sentToGuide": "To {name} ({email}), {participants, plural, one {# traveller} other {# travellers}}"
   },
   "dashboard": {
     "label": "Departures in the next 7 days without a guide",

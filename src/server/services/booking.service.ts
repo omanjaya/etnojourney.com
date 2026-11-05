@@ -20,6 +20,7 @@ import {
   calculateTotal,
   generateBookingCode,
 } from "./booking.rules";
+import { manifestChangedBy } from "./departure.rules";
 import { DomainError, type DomainErrorCode } from "./errors";
 import { paymentService } from "./payment.service";
 import { auditService } from "./audit.service";
@@ -119,7 +120,7 @@ export const bookingService = {
         maxParticipants: tour.maxParticipants,
       });
 
-      return insertWithUniqueCode(tx, {
+      const booking = await insertWithUniqueCode(tx, {
         userId,
         tourId: tour.id,
         travelDate: input.travelDate,
@@ -130,6 +131,9 @@ export const bookingService = {
         contactPhone: input.contactPhone,
         notes: input.notes || null,
       });
+      // A new guest on the departure: the guide's copy of the manifest is out of date.
+      await departureRepository.markManifestStale(tx, tour.id, [input.travelDate]);
+      return booking;
     });
   },
 
@@ -181,6 +185,7 @@ export const bookingService = {
       }
 
       const updated = await bookingRepository.updateStatusWith(tx, booking.id, "cancelled");
+      await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
 
       let refundAmount = 0;
       for (const payment of live) {
@@ -327,6 +332,9 @@ export const bookingService = {
       const updated = await bookingRepository.updateStatusWith(tx, booking.id, status);
       if (status === "cancelled") {
         await paymentService.flagPaidForRefund(tx, booking.id, "cancelledAfterPayment", actorId);
+      }
+      if (manifestChangedBy(booking.status, status)) {
+        await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
       }
       // Same transaction: the change and its audit entry land together or not at all.
       await auditService.record(

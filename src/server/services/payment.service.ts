@@ -11,6 +11,7 @@ import {
 } from "@/server/integrations/midtrans";
 import { bookingRepository } from "@/server/repositories/booking.repository";
 import { closureRepository } from "@/server/repositories/closure.repository";
+import { departureRepository } from "@/server/repositories/departure.repository";
 import {
   paymentRepository,
   type AdminPaymentFilters,
@@ -236,6 +237,8 @@ export const paymentService = {
         } else if (status === "paid") {
           if (booking && canTransition(booking.status, "confirmed")) {
             await bookingRepository.updateStatusWith(tx, booking.id, "confirmed");
+            // The emailed manifest flagged this guest as pending: it is out of date now.
+            await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
           } else {
             const reason = refundReasonForPaidNotification({
               alreadyPaid: false,

@@ -28,6 +28,29 @@ export function roleChangeError(params: {
   return null;
 }
 
+export type PartnerRoleError = "guideLinkedRoleChange" | "partnerNeedsGuide";
+
+/**
+ * The partner role belongs to guide portal accounts and is managed on the
+ * guide page (link / unlink, both audited). From the users page, an account
+ * linked to a guide keeps it (another role would silently lock the guide out
+ * of the portal while the guide page still shows it linked), and an unlinked
+ * account cannot get it (its portal would be empty). Re-saving partner on a
+ * partner is harmless.
+ */
+export function partnerRoleError(params: {
+  linkedToGuide: boolean;
+  currentRole: UserRole;
+  nextRole: UserRole;
+}): PartnerRoleError | null {
+  const { linkedToGuide, currentRole, nextRole } = params;
+  if (linkedToGuide && nextRole !== "partner") return "guideLinkedRoleChange";
+  if (!linkedToGuide && nextRole === "partner" && currentRole !== "partner") {
+    return "partnerNeedsGuide";
+  }
+  return null;
+}
+
 /** Disabling follows the same protections as demotion. Enabling is always allowed. */
 export function disableError(params: {
   actorId: string;

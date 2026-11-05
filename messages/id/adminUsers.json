@@ -131,6 +131,48 @@
       "guide": "Pemandu",
       "departure": "Keberangkatan"
     },
+    "dateRange": "{from} sampai {to}",
+    "details": {
+      "tour": "Tur",
+      "rating": "Bintang",
+      "guideName": "Pemandu",
+      "date": "Tanggal",
+      "from": "Dari",
+      "to": "Menjadi",
+      "status": "Status baru",
+      "days": "Jumlah hari",
+      "reason": "Alasan",
+      "email": "Email",
+      "participants": "Peserta",
+      "bookings": "Booking aktif",
+      "rangeBookings": "Booking aktif",
+      "rescheduleCount": "Kali ubah jadwal",
+      "daysBefore": "Hari sebelum berangkat",
+      "paid": "Sudah dibayar",
+      "percent": "Refund",
+      "amount": "Jumlah",
+      "refundAmount": "Jumlah refund",
+      "orderId": "No. order",
+      "note": "Catatan",
+      "change": "Perubahan",
+      "fields": "Bagian diubah",
+      "active": "Aktif"
+    },
+    "changes": {
+      "added": "Ditambahkan",
+      "edited": "Diubah",
+      "removed": "Dihapus",
+      "created": "Dibuat",
+      "updated": "Diperbarui"
+    },
+    "creditFields": {
+      "title": "Judul",
+      "author": "Pembuat",
+      "license": "Lisensi",
+      "licenseUrl": "Tautan lisensi",
+      "source": "Nama sumber",
+      "sourceUrl": "Tautan sumber"
+    },
     "empty": {
       "title": "Belum ada yang tercatat",
       "description": "Perubahan di back office akan tercantum di sini saat terjadi."

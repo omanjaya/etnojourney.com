@@ -1,11 +1,22 @@
 import { ArrowUpRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { formatDate } from "@/lib/format";
+import { formatCurrency, formatDate } from "@/lib/format";
 import type { AuditLog } from "@/server/db/schema";
-import { auditEntityHref, compactDetails } from "../rules";
+import {
+  auditDetails,
+  auditEntityHref,
+  auditEntityName,
+  type AuditDetail,
+  type AuditEntityName,
+} from "../rules";
 
-export type ActivityRow = { log: AuditLog; actorName: string | null };
+export type ActivityRow = {
+  log: AuditLog;
+  actorName: string | null;
+  /** Current name of the user or guide the entry is about, when known. */
+  entityName?: string | null;
+};
 
 const timeFormat: Intl.DateTimeFormatOptions = {
   day: "numeric",
@@ -15,9 +26,13 @@ const timeFormat: Intl.DateTimeFormatOptions = {
   minute: "2-digit",
 };
 
+const dayFormat: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" };
+
 /**
  * Audit entries as a compact list: time (Asia/Jakarta, via formatDate), actor,
- * translated action, a link to the item when it has an admin page, and details.
+ * translated action, the item by name with a link when it has an admin page,
+ * and the details that matter, labelled and translated (statuses, roles,
+ * dates, amounts) instead of raw keys and ids.
  */
 export function ActivityList({
   rows,
@@ -27,19 +42,70 @@ export function ActivityList({
   showActor?: boolean;
 }) {
   const t = useTranslations("adminUsers.activity");
+  const tUsers = useTranslations("adminUsers");
+  const tStatus = useTranslations("common.bookingStatus");
+  const tReasons = useTranslations("adminPayments.reasons");
   const locale = useLocale();
 
-  // Keys come from the database; unknown ones fall back instead of throwing.
+  // Keys and values come from the database; unknown ones fall back instead of throwing.
   type Key = Parameters<typeof t>[0];
   const label = (key: string) => (t.has(key as Key) ? t(key as Key) : null);
+  type StatusKey = Parameters<typeof tStatus>[0];
+  const status = (value: string) =>
+    tStatus.has(value as StatusKey) ? tStatus(value as StatusKey) : value;
+  type UsersKey = Parameters<typeof tUsers>[0];
+  const role = (value: string) => {
+    const key = `roles.${value}` as UsersKey;
+    return tUsers.has(key) ? tUsers(key) : value;
+  };
+  type ReasonKey = Parameters<typeof tReasons>[0];
+  const reason = (value: string) =>
+    tReasons.has(value as ReasonKey) ? tReasons(value as ReasonKey) : value;
+
+  const day = (date: string) => formatDate(date, locale, dayFormat);
+  const entityLabel = (name: AuditEntityName) =>
+    name.kind === "text"
+      ? name.value
+      : name.kind === "date"
+        ? day(name.value)
+        : name.from === name.to
+          ? day(name.from)
+          : t("dateRange", { from: day(name.from), to: day(name.to) });
+
+  const value = (detail: AuditDetail): string => {
+    switch (detail.kind) {
+      case "creditFields":
+        return detail.value.map((field) => label(`creditFields.${field}`) ?? field).join(", ");
+      case "date":
+        return day(String(detail.value));
+      case "bookingStatus":
+        return status(String(detail.value));
+      case "role":
+        return role(String(detail.value));
+      case "yesNo":
+        return detail.value ? tUsers("detail.yes") : tUsers("detail.no");
+      case "money":
+        return formatCurrency(Number(detail.value), locale);
+      case "percent":
+        return `${detail.value}%`;
+      case "change":
+        return label(`changes.${detail.value}`) ?? String(detail.value);
+      case "refundReason":
+        return reason(String(detail.value));
+      default:
+        return String(detail.value);
+    }
+  };
 
   return (
     <ol className="admin-stagger border-line divide-line divide-y rounded-(--radius-card) border bg-white">
-      {rows.map(({ log, actorName }) => {
+      {rows.map(({ log, actorName, entityName }) => {
         const href = auditEntityHref(log);
-        const code = typeof log.details?.code === "string" ? log.details.code : null;
-        const entity = `${label(`entities.${log.entityType}`) ?? log.entityType} ${code ?? `#${log.entityId}`}`;
-        const details = compactDetails(log.details);
+        const name = auditEntityName(log, entityName);
+        const entity = `${label(`entities.${log.entityType}`) ?? log.entityType} ${
+          name ? entityLabel(name) : `#${log.entityId}`
+        }`;
+        const details = auditDetails(log.action, log.details);
         return (
           <li
             key={log.id}
@@ -76,13 +142,13 @@ export function ActivityList({
               </p>
               {details.length > 0 && (
                 <dl className="mt-2 flex flex-wrap gap-1.5 text-xs">
-                  {details.map(([key, value]) => (
+                  {details.map((detail) => (
                     <div
-                      key={key}
+                      key={detail.key}
                       className="bg-sand-50 border-line inline-flex gap-1 rounded-md border px-2 py-0.5"
                     >
-                      <dt className="text-muted">{key}</dt>
-                      <dd className="font-mono break-all">{value}</dd>
+                      <dt className="text-muted">{label(`details.${detail.key}`) ?? detail.key}</dt>
+                      <dd className="break-all">{value(detail)}</dd>
                     </div>
                   ))}
                 </dl>

@@ -94,6 +94,28 @@ export const reviewRepository = {
       .then((rows) => rows[0]);
   },
 
+  /** Locks one review before publishing or hiding it, so two moderators can't both apply it. */
+  lockById(tx: DbExecutor, id: number) {
+    return tx
+      .select()
+      .from(reviews)
+      .where(eq(reviews.id, id))
+      .for("update")
+      .then((rows) => rows[0]);
+  },
+
+  /** Sum and number of a tour's published review ratings (within the caller's transaction). */
+  publishedRatingStats(tx: DbExecutor, tourId: number): Promise<{ sum: number; count: number }> {
+    return tx
+      .select({
+        sum: sql<number>`coalesce(sum(${reviews.rating}), 0)::int`,
+        count: count(),
+      })
+      .from(reviews)
+      .where(and(eq(reviews.tourId, tourId), eq(reviews.isPublished, true)))
+      .then((rows) => ({ sum: Number(rows[0]?.sum ?? 0), count: rows[0]?.count ?? 0 }));
+  },
+
   setPublished(tx: DbExecutor, id: number, isPublished: boolean) {
     return tx
       .update(reviews)

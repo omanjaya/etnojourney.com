@@ -33,6 +33,8 @@
   "guideAccountDisabled": "Akun ini sedang dinonaktifkan. Aktifkan dulu di halaman pengguna.",
   "guideAccountLinked": "Akun ini sudah terhubung ke pemandu lain.",
   "guideAlreadyLinked": "Pemandu ini sudah memiliki akun portal. Lepaskan dulu sebelum menghubungkan akun lain.",
+  "guideLinkedRoleChange": "Akun ini dipakai pemandu untuk masuk ke portal mitra. Lepaskan dulu di halaman pemandu sebelum mengubah perannya.",
+  "partnerNeedsGuide": "Peran Mitra diberikan dari halaman pemandu: buka pemandu yang bersangkutan, lalu pilih Hubungkan akun.",
   "fields": {
     "guideNotesMax": "Catatan maksimal 2000 karakter.",
     "closurePast": "Tanggal yang sudah lewat tidak bisa ditutup.",
