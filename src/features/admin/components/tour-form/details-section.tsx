@@ -1,21 +1,13 @@
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Field, Input, Select } from "@/components/ui/form-controls";
 import { tourCategories } from "@/components/shared/category-icon";
-import { formatCurrency } from "@/lib/format";
 import type { TourCategory } from "@/server/db/schema";
 import { Section } from "../form-parts/section";
 import type { TourSectionProps } from "./defaults";
-import { caretAfterDigits, countDigits, formatPriceInput, parsePrice, stripCents } from "./price";
 
 const numberValue = (raw: string) => (raw === "" ? "" : Number(raw));
 
-/** Scrolling the page over a focused number input would silently change its value. */
-const blurOnWheel = (event: React.WheelEvent<HTMLInputElement>) => event.currentTarget.blur();
-
-/**
- * Destination, category, duration, price, capacity and meeting point.
- * Field wires each control's hint and error for screen readers.
- */
+/** Destination, category, duration, price, capacity and meeting point. */
 export function DetailsSection({
   values,
   set,
@@ -24,48 +16,16 @@ export function DetailsSection({
 }: TourSectionProps & { destinations: { id: number; name: string; province: string }[] }) {
   const t = useTranslations("admin.form");
   const tc = useTranslations("common.categories");
-  const locale = useLocale();
-  const price = values.pricePerPerson;
-
-  // The price is a text field so "450.000" (the Indonesian way) means 450000,
-  // and it is shown grouped while typing. Regrouping would move the caret to
-  // the end, so it is put back after the same digit.
-  const onPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.currentTarget;
-    const digitsBeforeCaret = countDigits(
-      input.value.slice(0, input.selectionStart ?? input.value.length),
-    );
-    set("pricePerPerson", parsePrice(input.value));
-    requestAnimationFrame(() => {
-      if (document.activeElement !== input) return;
-      const caret = caretAfterDigits(input.value, digitsBeforeCaret);
-      input.setSelectionRange(caret, caret);
-    });
-  };
-
-  // A pasted "Rp 350.000,00" must not turn its cents into extra digits.
-  const onPricePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
-    const pasted = event.clipboardData.getData("text");
-    const cleaned = stripCents(pasted);
-    if (cleaned === pasted) return;
-    event.preventDefault();
-    const input = event.currentTarget;
-    const start = input.selectionStart ?? input.value.length;
-    const end = input.selectionEnd ?? input.value.length;
-    set(
-      "pricePerPerson",
-      parsePrice(input.value.slice(0, start) + cleaned + input.value.slice(end)),
-    );
-  };
 
   return (
-    <Section id="tour-details" title={t("sections.details")} hint={t("sections.detailsHint")}>
+    <Section title={t("sections.details")} hint={t("sections.detailsHint")}>
       <div className="grid gap-6 md:grid-cols-2">
         <Field label={t("fields.destination")} htmlFor="destinationId" error={err("destinationId")}>
           <Select
             id="destinationId"
             value={values.destinationId}
             onChange={(e) => set("destinationId", numberValue(e.target.value))}
+            aria-invalid={err("destinationId") ? true : undefined}
           >
             <option value="">{t("fields.selectDestination")}</option>
             {destinations.map((d) => (
@@ -80,8 +40,9 @@ export function DetailsSection({
             id="category"
             value={values.category}
             onChange={(e) => set("category", e.target.value as TourCategory | "")}
+            aria-invalid={err("category") ? true : undefined}
           >
-            <option value="">{t("fields.selectCategory")}</option>
+            <option value="">-</option>
             {tourCategories.map((c) => (
               <option key={c} value={c}>
                 {tc(c)}
@@ -100,7 +61,7 @@ export function DetailsSection({
             max={30}
             value={values.durationDays}
             onChange={(e) => set("durationDays", numberValue(e.target.value))}
-            onWheel={blurOnWheel}
+            aria-invalid={err("durationDays") ? true : undefined}
           />
         </Field>
         <Field
@@ -117,27 +78,23 @@ export function DetailsSection({
             max={12}
             value={values.durationHours}
             onChange={(e) => set("durationHours", numberValue(e.target.value))}
-            onWheel={blurOnWheel}
+            aria-invalid={err("durationHours") ? true : undefined}
           />
         </Field>
         <Field
           label={t("fields.pricePerPerson")}
           htmlFor="pricePerPerson"
           error={err("pricePerPerson")}
-          hint={
-            price === ""
-              ? undefined
-              : t("fields.pricePreview", { price: formatCurrency(price, locale) })
-          }
         >
           <Input
             id="pricePerPerson"
-            type="text"
+            type="number"
             inputMode="numeric"
-            autoComplete="off"
-            value={formatPriceInput(price, locale)}
-            onChange={onPriceChange}
-            onPaste={onPricePaste}
+            min={1}
+            step={1000}
+            value={values.pricePerPerson}
+            onChange={(e) => set("pricePerPerson", numberValue(e.target.value))}
+            aria-invalid={err("pricePerPerson") ? true : undefined}
           />
         </Field>
         <Field
@@ -153,7 +110,7 @@ export function DetailsSection({
             max={100}
             value={values.maxParticipants}
             onChange={(e) => set("maxParticipants", numberValue(e.target.value))}
-            onWheel={blurOnWheel}
+            aria-invalid={err("maxParticipants") ? true : undefined}
           />
         </Field>
       </div>
@@ -162,6 +119,7 @@ export function DetailsSection({
           id="meetingPoint"
           value={values.meetingPoint}
           onChange={(e) => set("meetingPoint", e.target.value)}
+          aria-invalid={err("meetingPoint") ? true : undefined}
         />
       </Field>
     </Section>

@@ -3,7 +3,7 @@ import type { LocalizedText } from "@/lib/i18n-text";
 import { bookingStatus, type BookingStatus } from "@/server/db/schema";
 import { reportRepository } from "@/server/repositories/report.repository";
 import {
-  bookingTotals,
+  averageGroupSize,
   buildMonthSeries,
   buildTourRows,
   periodBounds,
@@ -19,8 +19,7 @@ export type TourTitle = { slug: string; title: LocalizedText };
  * - refunds = payments with status `refunded`, bucketed by when the refund was
  *             recorded (`refunded_at`);
  * - net     = gross - refunds.
- * Bookings and statuses count bookings created in the period, whatever their
- * status now; travellers and group sizes leave cancelled bookings out.
+ * Bookings, statuses and group sizes count bookings created in the period.
  */
 export const reportService = {
   async overview(period: ReportPeriod) {
@@ -72,6 +71,8 @@ export const reportService = {
         statuses.find((s) => s.status === status)?.bookings ?? 0,
       ]),
     ) as Record<BookingStatus, number>;
+    const totalBookings = statuses.reduce((sum, s) => sum + s.bookings, 0);
+    const totalParticipants = statuses.reduce((sum, s) => sum + s.participants, 0);
     const gross = months.reduce((sum, m) => sum + m.gross, 0);
 
     return {
@@ -81,7 +82,9 @@ export const reportService = {
         refunds: refunds.amount,
         refundCount: refunds.count,
         net: gross - refunds.amount,
-        ...bookingTotals(statuses),
+        bookings: totalBookings,
+        participants: totalParticipants,
+        averageGroupSize: averageGroupSize(totalBookings, totalParticipants),
       },
       byStatus,
       months,

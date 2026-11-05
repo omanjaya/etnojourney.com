@@ -1,16 +1,8 @@
 /**
- * Pure rules for departures: a tour on a date with at least one booking that
- * is not cancelled (pending, confirmed, or completed once the trip is over).
- * No I/O, so everything here is unit-tested.
+ * Pure rules for departures: a tour on a date with at least one active
+ * (pending or confirmed) booking. No I/O, so everything here is unit-tested.
  */
 import type { BookingStatus } from "@/server/db/schema";
-
-/**
- * Booking statuses that make a departure: the travelling party plus trips
- * already completed, so past departures stay in the agenda as a record.
- * Seat holds use `ACTIVE_STATUSES` (booking.rules) instead.
- */
-export const DEPARTURE_STATUSES = ["pending", "confirmed", "completed"] as const;
 
 /** Agenda default: today plus the next 30 days (Asia/Jakarta). */
 export const DEFAULT_RANGE_DAYS = 30;
@@ -142,27 +134,6 @@ export function needsGuide(departure: {
   return departure.guideId === null || departure.guideActive === false;
 }
 
-/**
- * Agenda flag: only departures from `today` on still need a guide. A past
- * departure without one is history, not a to-do.
- */
-export function needsGuideOn(
-  departure: { date: string; guideId: number | null; guideActive?: boolean | null },
-  today: string,
-): boolean {
-  return departure.date >= today && needsGuide(departure);
-}
-
-/**
- * Whether a booking status change alters the guest list the guide was sent:
- * a booking dropping out (cancelled) or a pending one being confirmed (the
- * manifest flags pending rows). Completing a trip changes nothing.
- */
-export function manifestChangedBy(from: BookingStatus, to: BookingStatus): boolean {
-  if (from === to) return false;
-  return to === "cancelled" || (from === "pending" && to === "confirmed");
-}
-
 /* ---------------------------------------------------------------- */
 /* Agenda grouping                                                   */
 /* ---------------------------------------------------------------- */
@@ -232,66 +203,15 @@ export function manifestTotals(
   return totals;
 }
 
-/**
- * Guides covering the tour's destination first; within each group, guides
- * free on the departure's days before those already on another departure
- * (`busyWith`), then by name.
- */
-export function suggestGuides<
-  T extends { name: string; coversDestination: boolean; busyWith?: readonly unknown[] },
->(guides: readonly T[]): { suggested: T[]; others: T[] } {
-  const busy = (guide: T) => ((guide.busyWith?.length ?? 0) > 0 ? 1 : 0);
-  const sorted = [...guides].sort(
-    (a, b) => busy(a) - busy(b) || a.name.localeCompare(b.name, "id"),
-  );
+/** Guides covering the tour's destination first, then by name. */
+export function suggestGuides<T extends { name: string; coversDestination: boolean }>(
+  guides: readonly T[],
+): { suggested: T[]; others: T[] } {
+  const byName = [...guides].sort((a, b) => a.name.localeCompare(b.name, "id"));
   return {
-    suggested: sorted.filter((guide) => guide.coversDestination),
-    others: sorted.filter((guide) => !guide.coversDestination),
+    suggested: byName.filter((guide) => guide.coversDestination),
+    others: byName.filter((guide) => !guide.coversDestination),
   };
-}
-
-/* ---------------------------------------------------------------- */
-/* History                                                           */
-/* ---------------------------------------------------------------- */
-
-type HistoryEntry = {
-  log: { action: string; details: Record<string, unknown> | null; createdAt: Date };
-  actorName: string | null;
-};
-
-/**
- * Who assigned the current guide, and when: the newest `departure.assigned`
- * entry (history is oldest first). Null when there is none, or when the
- * guide was unassigned after it.
- */
-export function lastAssignment(
-  history: readonly HistoryEntry[],
-): { name: string | null; at: Date } | null {
-  for (let i = history.length - 1; i >= 0; i--) {
-    const { log, actorName } = history[i];
-    if (log.action === "departure.unassigned") return null;
-    if (log.action === "departure.assigned") return { name: actorName, at: log.createdAt };
-  }
-  return null;
-}
-
-/**
- * The guide a departure history entry is about: the new guide for an
- * assignment or a manifest send, the previous one for an unassignment.
- * Details come from the database, so the id is validated.
- */
-export function historyGuideId(
-  action: string,
-  details: Record<string, unknown> | null,
-): number | null {
-  const key =
-    action === "departure.unassigned"
-      ? "previousGuideId"
-      : action === "departure.assigned" || action === "departure.notified"
-        ? "guideId"
-        : null;
-  const value = key ? details?.[key] : null;
-  return typeof value === "number" && Number.isInteger(value) && value > 0 ? value : null;
 }
 
 /**

@@ -55,12 +55,9 @@
     "actions": {
       "booking_status_changed": "Status diubah menjadi {status}",
       "booking_note_added": "Catatan internal ditambahkan",
-      "booking_rescheduled": "Jadwal dipindah dari {from} ke {to}",
-      "booking_cancelled_by_traveller": "Dibatalkan oleh wisatawan",
-      "booking_cancelled_by_traveller_paid": "{percent, plural, =0 {Dibatalkan oleh wisatawan, tanpa refund} other {Dibatalkan oleh wisatawan, refund #% ({amount})}}",
-      "booking_expired": "Dibatalkan otomatis karena belum dibayar",
-      "payment_refund_required": "Pembayaran ditandai perlu refund {amount}",
-      "payment_refunded": "Refund {amount} dicatat"
-    }
+      "payment_refund_required": "Pembayaran ditandai perlu refund",
+      "payment_refunded": "Refund dicatat"
+    },
+    "other": "Perubahan lain ({action})"
   }
 }

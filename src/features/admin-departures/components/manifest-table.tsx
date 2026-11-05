@@ -19,14 +19,8 @@ export type ManifestRow = {
   notesCount: number;
 };
 
-const cell = "px-3 py-3 align-top print:px-2 print:py-1.5";
+const cell = "px-4 py-3 align-top print:px-2 print:py-1.5";
 
-/**
- * Laptop layout: five compact columns, with status and payment (what the team
- * checks on the day) right after the contact, so they stay in view next to
- * the guide panel at 1280-1366px without side-scrolling. The phone sits under
- * the name and the internal-notes count under the code.
- */
 function Rows({ rows }: { rows: ManifestRow[] }) {
   const t = useTranslations("adminDepartures.manifest");
   return rows.map((row) => (
@@ -39,44 +33,45 @@ function Rows({ rows }: { rows: ManifestRow[] }) {
           {row.code}
           <ChevronRight className="size-3.5 print:hidden" aria-hidden />
         </Link>
-        {row.notesCount > 0 && (
-          <span
-            className="text-ink-soft mt-1 flex items-center gap-1 font-sans font-normal tracking-normal tabular-nums"
-            title={t("internalNotes", { count: row.notesCount })}
-          >
-            <MessageSquareText className="size-3.5" aria-hidden />
-            {row.notesCount}
-            <span className="sr-only">{t("internalNotes", { count: row.notesCount })}</span>
-          </span>
-        )}
       </td>
-      <td className={`${cell} min-w-28`}>
-        <p className="font-medium">{row.contactName}</p>
-        <a
-          href={`tel:${row.contactPhone}`}
-          className="text-ink-soft hover:text-terracotta text-xs whitespace-nowrap tabular-nums"
-        >
+      <td className={`${cell} font-medium`}>{row.contactName}</td>
+      <td className={`${cell} whitespace-nowrap`}>
+        <a href={`tel:${row.contactPhone}`} className="hover:text-terracotta tabular-nums">
           {row.contactPhone}
         </a>
       </td>
-      <td className={cell}>
-        <div className="flex flex-col items-start gap-1">
-          <BookingStatusBadge status={row.status} />
-          {row.paymentStatus ? (
-            <PaymentStatusBadge status={row.paymentStatus as PaymentStatus} />
-          ) : (
-            <span className="text-muted text-xs">{t("noPayment")}</span>
-          )}
-        </div>
-      </td>
       <td className={`${cell} text-right tabular-nums`}>{row.participants}</td>
-      <td className={`${cell} max-w-72 min-w-32`}>
+      <td className={`${cell} max-w-72 min-w-48`}>
         {row.notes ? (
           <span className="text-ink-soft text-xs leading-relaxed whitespace-pre-line">
             {row.notes}
           </span>
         ) : (
           <span className="text-muted text-xs">-</span>
+        )}
+      </td>
+      <td className={cell}>
+        <BookingStatusBadge status={row.status} />
+      </td>
+      <td className={cell}>
+        {row.paymentStatus ? (
+          <PaymentStatusBadge status={row.paymentStatus as PaymentStatus} />
+        ) : (
+          <span className="text-muted text-xs">{t("noPayment")}</span>
+        )}
+      </td>
+      <td className={`${cell} text-right`}>
+        {row.notesCount > 0 ? (
+          <span
+            className="text-ink-soft inline-flex items-center gap-1 text-xs tabular-nums"
+            title={t("internalNotes", { count: row.notesCount })}
+          >
+            <MessageSquareText className="size-3.5" aria-hidden />
+            {row.notesCount}
+            <span className="sr-only">{t("internalNotes", { count: row.notesCount })}</span>
+          </span>
+        ) : (
+          <span className="text-muted text-xs">0</span>
         )}
       </td>
     </tr>
@@ -148,7 +143,7 @@ function Cards({ rows }: { rows: ManifestRow[] }) {
 
 function Head() {
   const t = useTranslations("adminDepartures.manifest.columns");
-  const th = "px-3 py-3 font-medium print:px-2";
+  const th = "px-4 py-3 font-medium print:px-2";
   return (
     <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
       <tr>
@@ -156,10 +151,10 @@ function Head() {
           {t("code")}
         </th>
         <th scope="col" className={th}>
-          {t("contact")}
+          {t("name")}
         </th>
         <th scope="col" className={th}>
-          {t("statusPayment")}
+          {t("phone")}
         </th>
         <th scope="col" className={`${th} text-right`}>
           {t("participants")}
@@ -167,12 +162,21 @@ function Head() {
         <th scope="col" className={th}>
           {t("notes")}
         </th>
+        <th scope="col" className={th}>
+          {t("status")}
+        </th>
+        <th scope="col" className={th}>
+          {t("payment")}
+        </th>
+        <th scope="col" className={`${th} text-right`}>
+          {t("internal")}
+        </th>
       </tr>
     </thead>
   );
 }
 
-const tableClass = "w-full min-w-[32rem] text-left text-sm print:min-w-0 print:text-xs";
+const tableClass = "w-full min-w-[60rem] text-left text-sm print:min-w-0 print:text-xs";
 
 /**
  * Bookings travelling on the departure (confirmed first, then pending) with
@@ -212,7 +216,7 @@ export function ManifestTable({ rows, totals }: { rows: ManifestRow[]; totals: M
                   <td className={`${cell} text-right tabular-nums`} data-testid="manifest-total">
                     {totals.participants}
                   </td>
-                  <td className={`${cell} text-muted text-xs font-normal`}>
+                  <td colSpan={4} className={`${cell} text-muted text-xs font-normal`}>
                     {t("totalsBreakdown", {
                       confirmed: totals.confirmedParticipants,
                       pending: totals.pendingParticipants,

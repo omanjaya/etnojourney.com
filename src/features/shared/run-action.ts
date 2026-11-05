@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { fail, ok, type ActionResult } from "@/lib/action-result";
 import { isDomainError } from "@/server/services/errors";
-import { groupFieldErrors, issueParams } from "./field-errors";
 
 /**
  * Wraps a server action body: maps domain errors to translated messages and
@@ -28,10 +27,7 @@ type FieldsNamespace = "errors.fields" | "reviews.fields" | "adminInsights.field
 /**
  * Validates input with Zod. Schema messages are keys (e.g.
  * `z.string().min(2, "required")`) looked up first in `fieldsNamespace`, then in
- * `errors.fields`, so field errors reach the client already localized. A size
- * check's limit is passed as `{max}` / `{min}` (e.g. "Maksimal {max} karakter.").
- * Field errors are keyed by top-level field and by dotted path
- * (`title.en`, `itinerary.0.title`), see `groupFieldErrors`.
+ * `errors.fields`, so field errors reach the client already localized.
  */
 export async function parseInput<S extends z.ZodType>(
   schema: S,
@@ -47,14 +43,17 @@ export async function parseInput<S extends z.ZodType>(
   const namespaces = [options.fieldsNamespace, "errors.fields"].filter(
     Boolean,
   ) as FieldsNamespace[];
-  const translate = (issue: z.core.$ZodIssue) => {
+  const translate = (key: string) => {
     for (const ns of namespaces) {
-      const full = `${ns}.${issue.message}` as Key;
-      if (t.has(full)) return t(full, issueParams(issue));
+      const full = `${ns}.${key}` as Key;
+      if (t.has(full)) return t(full);
     }
     return t("errors.fields.invalid");
   };
 
-  const fieldErrors = groupFieldErrors(parsed.error.issues, translate);
+  const raw = z.flattenError(parsed.error).fieldErrors as Record<string, string[] | undefined>;
+  const fieldErrors = Object.fromEntries(
+    Object.entries(raw).map(([field, keys]) => [field, keys?.map(translate)]),
+  );
   return { success: false, result: fail(t("errors.validation"), fieldErrors) };
 }

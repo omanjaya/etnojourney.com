@@ -11,7 +11,6 @@ import {
 } from "@/server/integrations/midtrans";
 import { bookingRepository } from "@/server/repositories/booking.repository";
 import { closureRepository } from "@/server/repositories/closure.repository";
-import { departureRepository } from "@/server/repositories/departure.repository";
 import {
   paymentRepository,
   type AdminPaymentFilters,
@@ -237,8 +236,6 @@ export const paymentService = {
         } else if (status === "paid") {
           if (booking && canTransition(booking.status, "confirmed")) {
             await bookingRepository.updateStatusWith(tx, booking.id, "confirmed");
-            // The emailed manifest flagged this guest as pending: it is out of date now.
-            await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
           } else {
             const reason = refundReasonForPaidNotification({
               alreadyPaid: false,
@@ -285,8 +282,26 @@ export const paymentService = {
   /* -------------------------- admin -------------------------- */
 
   /**
+   * Flags every paid attempt of a booking for refund, e.g. when an admin
+   * cancels a booking that was already paid. Call inside the transaction that
+   * changes the booking (the booking row should already be locked).
+   */
+  async flagPaidForRefund(
+    tx: DbExecutor,
+    bookingId: number,
+    reason: RefundReason,
+    actorId: string | null,
+  ): Promise<number> {
+    const paid = await paymentRepository.findPaidForBookingForUpdate(tx, bookingId);
+    for (const payment of paid) {
+      if (!payment.refundRequired) await flagRefundRequired(tx, payment, reason, actorId);
+    }
+    return paid.length;
+  },
+
+  /**
    * Flags one paid payment for a refund of `refundAmount` rupiah (null = the
-   * full payment), e.g. when a booking is cancelled under the policy tiers.
+   * full payment), e.g. when the traveller cancels under the policy tiers.
    * Call inside the transaction that cancels the booking, with the payment
    * row locked (`paymentRepository.findPaidForBookingForUpdate`).
    */

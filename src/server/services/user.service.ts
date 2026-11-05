@@ -3,11 +3,10 @@ import { db, type DbExecutor } from "@/server/db";
 import { can } from "@/server/auth/permissions";
 import type { UserRole } from "@/server/db/schema";
 import { paginate } from "@/lib/pagination";
-import { guideRepository } from "@/server/repositories/guide.repository";
 import { userRepository, type AdminUserFilters } from "@/server/repositories/user.repository";
 import { auditService } from "./audit.service";
 import { DomainError } from "./errors";
-import { disableError, isDemotion, partnerRoleError, roleChangeError } from "./user.rules";
+import { disableError, isDemotion, roleChangeError } from "./user.rules";
 
 /**
  * Re-checks the actor under the same locks as the change: an admin demoted or
@@ -53,8 +52,7 @@ export const userService = {
   /**
    * Changes a user's role under row locks (see `lockActiveAdmins`). A demotion
    * also ends the user's sessions, so lost permissions can't linger in any
-   * cached session. The partner role stays with guide portal accounts (see
-   * `partnerRoleError`). Returns whether anything changed.
+   * cached session. Returns whether anything changed.
    */
   async changeRole(actorId: string, targetId: string, nextRole: UserRole): Promise<boolean> {
     return db.transaction(async (tx) => {
@@ -64,13 +62,6 @@ export const userService = {
       if (!target) throw new DomainError("notFound");
       const error = roleChangeError({ actorId, target, nextRole, activeAdmins });
       if (error) throw new DomainError(error);
-      const linkedGuide = await guideRepository.lockByUserId(tx, targetId);
-      const partnerError = partnerRoleError({
-        linkedToGuide: Boolean(linkedGuide),
-        currentRole: target.role,
-        nextRole,
-      });
-      if (partnerError) throw new DomainError(partnerError);
       if (target.role === nextRole) return false;
 
       await userRepository.setRole(tx, targetId, nextRole);

@@ -8,11 +8,6 @@ import {
   emptyDestinationDefaults,
 } from "@/features/admin/components/destination-form";
 
-export async function generateMetadata() {
-  const t = await getTranslations("admin.destinationForm");
-  return { title: t("newTitle") };
-}
-
 export default async function NewDestinationPage() {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin("catalogue.manage");

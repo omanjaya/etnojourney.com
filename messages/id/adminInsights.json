@@ -4,7 +4,7 @@
     "replyMax": "Balasan maksimal 2000 karakter.",
     "tooLong": "Isian ini terlalu panjang.",
     "httpsUrl": "Masukkan tautan lengkap yang diawali https://.",
-    "uploadPath": "Gunakan foto yang diunggah di situs ini. Lokasi filenya diawali /media/, misalnya /media/tours/2026/05/....webp.",
+    "uploadPath": "Gunakan path gambar yang diunggah di sini, misalnya /media/tours/2026/05/....webp.",
     "creditExists": "Gambar ini sudah memiliki kredit. Ubah melalui daftar di bawah."
   },
   "reply": {
@@ -26,19 +26,14 @@
   "dashboard": {
     "queuesLabel": "Antrean kerja",
     "pending": {
-      "label": "Belum dibayar",
-      "action": "Ingatkan tamu untuk membayar, atau batalkan",
-      "count": "{count, plural, =0 {Tidak ada booking yang menunggu pembayaran} other {# booking menunggu pembayaran}}"
+      "label": "Booking menunggu",
+      "action": "Konfirmasi atau tolak",
+      "count": "{count, plural, =0 {Tidak ada booking menunggu} other {# booking menunggu}}"
     },
     "refunds": {
       "label": "Perlu refund",
       "action": "Kembalikan dana lalu catat",
       "count": "{count, plural, =0 {Tidak ada refund menunggu} other {# refund menunggu}}"
-    },
-    "placeholders": {
-      "label": "Foto sementara (AI)",
-      "action": "Ganti dengan foto asli",
-      "count": "{count, plural, other {# tur atau destinasi masih memakai foto sementara}}"
     }
   },
   "reports": {
@@ -54,9 +49,9 @@
       "refunds": "Refund",
       "refundCount": "{count, plural, =0 {Tidak ada refund} other {# refund}}",
       "bookings": "Booking",
-      "participants": "{count, plural, other {# pelancong}}{cancelled, plural, =0 {} other {, # booking dibatalkan}}",
+      "participants": "{count, plural, other {# pelancong}}",
       "groupSize": "Rata-rata ukuran grup",
-      "groupSizeHint": "Pelancong per booking, tanpa yang dibatalkan"
+      "groupSizeHint": "Pelancong per booking"
     },
     "period": {
       "label": "Periode laporan",
@@ -88,8 +83,7 @@
     "tours": {
       "title": "Per tur",
       "export": "Ekspor CSV",
-      "tableLabel": "Tabel per tur",
-      "cancelled": "{count, plural, other {# dibatalkan}}"
+      "tableLabel": "Tabel per tur"
     },
     "columns": {
       "month": "Bulan",
@@ -100,16 +94,6 @@
       "refunds": "Refund",
       "net": "Bersih"
     },
-    "exportColumns": {
-      "tourSlug": "Slug tur",
-      "tour": "Tur",
-      "bookings": "Booking",
-      "cancelled": "Booking dibatalkan",
-      "participants": "Pelancong",
-      "grossIdr": "Diterima (Rp)",
-      "refundsIdr": "Refund (Rp)",
-      "netIdr": "Bersih (Rp)"
-    },
     "empty": "Belum ada booking atau pembayaran pada periode ini."
   },
   "credits": {
@@ -117,29 +101,12 @@
     "title": "Kredit foto",
     "description": "Fotografer, lisensi, dan sumber setiap foto yang dikreditkan. Kredit tampil di samping foto dan di halaman kredit publik.",
     "searchLabel": "Cari kredit",
-    "searchPlaceholder": "Judul, pembuat, atau lisensi",
+    "searchPlaceholder": "Judul, pembuat, lisensi, atau path",
     "summary": "{total, plural, other {# kredit}}",
     "uploaded": "Unggahan",
-    "unused": "Tidak dipakai",
-    "unusedHint": "Foto ini tidak lagi tampil di situs, jadi kreditnya juga tidak ditampilkan.",
     "opensNewTab": "(membuka tab baru)",
     "edit": "Ubah",
     "editFor": "Ubah kredit untuk {title}",
-    "delete": {
-      "trigger": "Hapus",
-      "triggerFor": "Hapus kredit untuk {title}",
-      "confirm": "Hapus kredit ini?",
-      "yes": "Ya, hapus",
-      "cancel": "Batal"
-    },
-    "placeholders": {
-      "title": "Foto sementara (AI) yang masih tampil",
-      "description": "Tur dan destinasi berikut masih memakai ilustrasi AI, bukan foto tempat asli. Buka halamannya, lalu ganti foto bertanda \"Foto sementara (AI)\" dengan foto asli.",
-      "tour": "Tur",
-      "destination": "Destinasi",
-      "draft": "Draf",
-      "images": "{count, plural, other {# foto sementara}}"
-    },
     "empty": {
       "title": "Belum ada kredit foto",
       "description": "Kredit foto kurasi ditambahkan oleh impor konten; tambahkan kredit untuk unggahan Anda di atas."
@@ -147,18 +114,13 @@
     "add": {
       "title": "Kreditkan foto unggahan",
       "description": "Semua foto unggahan yang dipakai di tur atau destinasi sudah memiliki kredit.",
-      "pending": "{count, plural, other {# foto unggahan yang dipakai belum memiliki kredit.}} Kredit wajib untuk foto berlisensi seperti CC BY; foto milik sendiri boleh dilewati.",
-      "usedIn": "Dipakai di",
-      "credit": "Beri kredit",
-      "creditFor": "Beri kredit untuk foto yang dipakai di {owner}",
-      "created": "Kredit ditambahkan.",
-      "open": "Tambah kredit manual",
+      "pending": "{count, plural, other {# foto unggahan yang dipakai belum memiliki kredit.}}",
+      "open": "Tambah kredit",
       "close": "Tutup"
     },
     "form": {
-      "path": "Alamat foto",
-      "pathHint": "Tempel alamat foto unggahan, yang diawali /media/.",
-      "preview": "Pratinjau foto",
+      "path": "Path gambar",
+      "pathHint": "Pilih gambar unggahan yang sedang dipakai, atau tempel path /media/-nya.",
       "title": "Judul foto",
       "author": "Pembuat",
       "license": "Lisensi",

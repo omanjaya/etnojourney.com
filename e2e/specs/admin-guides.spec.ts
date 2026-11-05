@@ -189,7 +189,7 @@ test.describe("guides and partner portal", () => {
         staffPage.getByText("Hanya admin yang dapat menghubungkan akun portal."),
       ).toBeVisible();
       await staffPage.goto("/admin/users");
-      await expect(staffPage).toHaveURL(`${BASE_URL}/admin?denied=1`);
+      await expect(staffPage).toHaveURL(`${BASE_URL}/`);
     } finally {
       await deleteGuide(guideId);
       await sql`update "user" set role = 'user' where id = ${staffId}`;

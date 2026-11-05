@@ -1,5 +1,5 @@
 import "server-only";
-import { and, asc, eq, gte, inArray, isNull, lte, or, sql } from "drizzle-orm";
+import { and, asc, eq, gte, inArray, isNull, lte, or } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
 import { tourClosures, tours, user } from "@/server/db/schema";
 
@@ -17,20 +17,12 @@ const appliesTo = (tourId: number) =>
 
 /** Dates an admin closed for booking (`tour_closures`). */
 export const closureRepository = {
-  /**
-   * Whether a trip of `tourId` departing on `date` runs into a closed date
-   * (for that tour or for all tours). A multi-day trip is closed when any of
-   * its days is, so a two-day tour cannot leave the day before Nyepi.
-   */
+  /** Whether `tourId` is closed on `date` (for that tour or for all tours). */
   async isClosed(tourId: number, date: string, executor: DbExecutor = db): Promise<boolean> {
-    // Qualified by hand: the trip length comes from a scalar subquery on tours.
-    const lastDay = sql`${date}::date + coalesce((
-      select greatest("tours"."duration_days", 1) - 1 from "tours" where "tours"."id" = ${tourId}
-    ), 0)`;
     const rows = await executor
       .select({ id: tourClosures.id })
       .from(tourClosures)
-      .where(and(gte(tourClosures.date, date), lte(tourClosures.date, lastDay), appliesTo(tourId)))
+      .where(and(eq(tourClosures.date, date), appliesTo(tourId)))
       .limit(1);
     return rows.length > 0;
   },

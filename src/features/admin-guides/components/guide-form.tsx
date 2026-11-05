@@ -2,7 +2,7 @@
 
 import { Save } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRef, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Textarea } from "@/components/ui/form-controls";
@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 import { GUIDE_LANGUAGES } from "@/server/services/guide.rules";
 import { CheckboxCard } from "@/features/admin/components/form-parts/checkbox-card";
 import { Section } from "@/features/admin/components/form-parts/section";
-import { useFocusError } from "@/features/admin/components/form-parts/use-focus-error";
 import { createGuideAction, updateGuideAction } from "../actions";
 import type { GuideFormValues } from "../schemas";
 
@@ -120,9 +119,6 @@ export function GuideForm({
   const [message, setMessage] = useState<{ tone: "danger" | "success"; text: string } | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
   const [values, setValues] = useState(defaults);
-  const formRef = useRef<HTMLFormElement>(null);
-  // A failed save focuses the first field with an error (each failure is a new object).
-  useFocusError(formRef, message?.tone === "danger" ? message : null);
 
   const set = <K extends keyof GuideFormDefaults>(key: K, value: GuideFormDefaults[K]) =>
     setValues((prev) => ({ ...prev, [key]: value }));
@@ -148,11 +144,12 @@ export function GuideForm({
       }
       setMessage({ tone: "danger", text: result.error });
       setFieldErrors(result.fieldErrors ?? {});
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   };
 
   return (
-    <form ref={formRef} method="post" onSubmit={submit} noValidate className="flex flex-col">
+    <form method="post" onSubmit={submit} noValidate className="flex flex-col">
       {message && (
         <Alert tone={message.tone} className="mb-8">
           {message.text}

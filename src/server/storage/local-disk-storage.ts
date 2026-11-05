@@ -1,13 +1,7 @@
 import "server-only";
-import { mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import {
-  contentTypeForKey,
-  normalizeKey,
-  type Storage,
-  type StoredKey,
-  type StoredObject,
-} from "./storage";
+import { contentTypeForKey, normalizeKey, type Storage, type StoredObject } from "./storage";
 
 export class LocalDiskStorage implements Storage {
   private readonly root: string;
@@ -49,26 +43,5 @@ export class LocalDiskStorage implements Storage {
     const target = this.resolve(key);
     if (!target) return;
     await rm(target, { force: true });
-  }
-
-  async list(prefix: string): Promise<StoredKey[]> {
-    const folder = this.resolve(prefix);
-    if (!folder) return [];
-    let entries: string[];
-    try {
-      entries = await readdir(folder, { recursive: true });
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code === "ENOENT") return [];
-      throw error;
-    }
-    const files: StoredKey[] = [];
-    for (const entry of entries) {
-      const key = normalizeKey(`${prefix}/${entry.split(path.sep).join("/")}`);
-      const absolute = key && this.resolve(key);
-      if (!absolute) continue;
-      const info = await stat(absolute);
-      if (info.isFile()) files.push({ key, modifiedAt: info.mtime });
-    }
-    return files;
   }
 }

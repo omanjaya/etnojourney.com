@@ -84,12 +84,6 @@
       "author": "Photographer",
       "license": "License",
       "source": "Source"
-    },
-    "known": {
-      "aiIllustration": "AI illustration",
-      "placeholder": "Placeholder, not the real place",
-      "publicDomain": "Public domain",
-      "unsplash": "Unsplash License"
     }
   },
   "newTour": "New",

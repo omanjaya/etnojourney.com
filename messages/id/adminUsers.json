@@ -131,50 +131,6 @@
       "guide": "Pemandu",
       "departure": "Keberangkatan"
     },
-    "dateRange": "{from} sampai {to}",
-    "allTours": "semua tur",
-    "itemOfTour": "{tour}, {item}",
-    "details": {
-      "tour": "Tur",
-      "rating": "Bintang",
-      "guideName": "Pemandu",
-      "date": "Tanggal",
-      "from": "Dari",
-      "to": "Menjadi",
-      "status": "Status baru",
-      "days": "Jumlah hari",
-      "reason": "Alasan",
-      "email": "Email",
-      "participants": "Peserta",
-      "bookings": "Booking aktif",
-      "rangeBookings": "Booking aktif",
-      "rescheduleCount": "Kali ubah jadwal",
-      "daysBefore": "Hari sebelum berangkat",
-      "paid": "Sudah dibayar",
-      "percent": "Refund",
-      "amount": "Jumlah",
-      "refundAmount": "Jumlah refund",
-      "orderId": "No. order",
-      "note": "Catatan",
-      "change": "Perubahan",
-      "fields": "Bagian diubah",
-      "active": "Aktif"
-    },
-    "changes": {
-      "added": "Ditambahkan",
-      "edited": "Diubah",
-      "removed": "Dihapus",
-      "created": "Dibuat",
-      "updated": "Diperbarui"
-    },
-    "creditFields": {
-      "title": "Judul",
-      "author": "Pembuat",
-      "license": "Lisensi",
-      "licenseUrl": "Tautan lisensi",
-      "source": "Nama sumber",
-      "sourceUrl": "Tautan sumber"
-    },
     "empty": {
       "title": "Belum ada yang tercatat",
       "description": "Perubahan di back office akan tercantum di sini saat terjadi."
@@ -194,8 +150,7 @@
         "status_changed": "Mengubah status pemesanan",
         "note_added": "Menambahkan catatan pemesanan",
         "cancelled_by_traveller": "Dibatalkan oleh wisatawan",
-        "rescheduled": "Jadwal diubah",
-        "expired": "Dilepas otomatis karena belum dibayar"
+        "rescheduled": "Jadwal diubah"
       },
       "payment": {
         "refund_required": "Menandai perlu refund",
@@ -207,8 +162,7 @@
         "published": "Menerbitkan tur",
         "unpublished": "Membatalkan penerbitan tur",
         "featured": "Menampilkan tur sebagai unggulan",
-        "unfeatured": "Menghapus tur dari unggulan",
-        "deleted": "Menghapus draf tur"
+        "unfeatured": "Menghapus tur dari unggulan"
       },
       "destination": {
         "created": "Membuat destinasi",
@@ -232,8 +186,7 @@
         "enabled": "Mengaktifkan akun"
       },
       "credit": {
-        "updated": "Memperbarui kredit foto",
-        "deleted": "Menghapus kredit foto"
+        "updated": "Memperbarui kredit foto"
       },
       "unknown": "Perubahan lain",
       "guide": {

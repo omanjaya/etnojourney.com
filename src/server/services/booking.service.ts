@@ -1,11 +1,10 @@
 import "server-only";
 import { db, type DbExecutor } from "@/server/db";
 import { isUniqueViolation } from "@/server/db/errors";
-import type { Booking, BookingStatus, bookings, Payment } from "@/server/db/schema";
+import type { Booking, BookingStatus, bookings } from "@/server/db/schema";
 import {
   bookingRepository,
   type AdminBookingFilters,
-  type ExportCursor,
 } from "@/server/repositories/booking.repository";
 import { bookingNoteRepository } from "@/server/repositories/booking-note.repository";
 import { closureRepository } from "@/server/repositories/closure.repository";
@@ -15,17 +14,12 @@ import { tourRepository } from "@/server/repositories/tour.repository";
 import { isoDateFromToday } from "@/lib/format";
 import { paginate } from "@/lib/pagination";
 import {
-  assertCanComplete,
   assertCapacity,
   assertTransition,
   assertTravelDate,
   calculateTotal,
   generateBookingCode,
-  isStaleHold,
-  UNPAID_HOLD_HOURS,
-  type RefundMode,
 } from "./booking.rules";
-import { manifestChangedBy } from "./departure.rules";
 import { DomainError, type DomainErrorCode } from "./errors";
 import { paymentService } from "./payment.service";
 import { auditService } from "./audit.service";
@@ -80,39 +74,6 @@ const newDateErrors: Record<NewDateIssue, DomainErrorCode> = {
   tooFar: "notReschedulable",
 };
 
-/** Most pending bookings released per run of the daily job. */
-const HOLD_RELEASE_BATCH = 200;
-
-/**
- * Flags the paid payments of a booking being cancelled for a refund, inside
- * the cancelling transaction (payments locked by the caller). "policy" owes
- * back the cancellation-policy share for `today` and skips payments it gives
- * 0% for; "full" owes back everything. Returns the rupiah owed in total.
- */
-async function flagCancelledPayments(
-  tx: DbExecutor,
-  payments: Payment[],
-  travelDate: string,
-  today: string,
-  mode: RefundMode,
-  actorId: string | null,
-): Promise<number> {
-  let owed = 0;
-  for (const payment of payments) {
-    const quote = refundQuote(payment.amount, travelDate, today);
-    if (mode === "policy" && !quote.refundable) continue;
-    owed += mode === "policy" ? quote.amount : payment.amount;
-    await paymentService.flagForRefund(
-      tx,
-      payment,
-      "cancelledAfterPayment",
-      actorId,
-      mode === "policy" ? quote.storedAmount : null,
-    );
-  }
-  return owed;
-}
-
 /**
  * Inserts with a fresh booking code, retrying on the (rare) code collision.
  * Each attempt runs in a savepoint so a failed insert doesn't abort the transaction.
@@ -158,7 +119,7 @@ export const bookingService = {
         maxParticipants: tour.maxParticipants,
       });
 
-      const booking = await insertWithUniqueCode(tx, {
+      return insertWithUniqueCode(tx, {
         userId,
         tourId: tour.id,
         travelDate: input.travelDate,
@@ -169,9 +130,6 @@ export const bookingService = {
         contactPhone: input.contactPhone,
         notes: input.notes || null,
       });
-      // A new guest on the departure: the guide's copy of the manifest is out of date.
-      await departureRepository.markManifestStale(tx, tour.id, [input.travelDate]);
-      return booking;
     });
   },
 
@@ -223,16 +181,20 @@ export const bookingService = {
       }
 
       const updated = await bookingRepository.updateStatusWith(tx, booking.id, "cancelled");
-      await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
 
-      const refundAmount = await flagCancelledPayments(
-        tx,
-        live,
-        booking.travelDate,
-        today,
-        "policy",
-        userId,
-      );
+      let refundAmount = 0;
+      for (const payment of live) {
+        const quote = refundQuote(payment.amount, booking.travelDate, today);
+        if (!quote.refundable) continue;
+        refundAmount += quote.amount;
+        await paymentService.flagForRefund(
+          tx,
+          payment,
+          "cancelledAfterPayment",
+          userId,
+          quote.storedAmount,
+        );
+      }
 
       const daysBefore = option.kind === "paid" ? option.quote.daysBefore : null;
       const percent = option.kind === "paid" ? option.quote.percent : 0;
@@ -342,59 +304,29 @@ export const bookingService = {
    * never holds the whole table in memory.
    */
   async *exportRows(filters: AdminBookingFilters, batchSize = 500) {
-    let after: ExportCursor | undefined;
+    let beforeId: number | undefined;
     for (;;) {
-      const batch = await bookingRepository.exportBatch(filters, batchSize, after);
+      const batch = await bookingRepository.exportBatch(filters, batchSize, beforeId);
       if (batch.length === 0) return;
       yield batch;
       if (batch.length < batchSize) return;
-      const last = batch[batch.length - 1];
-      after = { id: last.id, travelDate: last.travelDate };
+      beforeId = batch[batch.length - 1].id;
     }
   },
 
   /**
    * Admin status change, validated against the current status under a row lock.
-   * "completed" is only accepted from the travel date on (Asia/Jakarta).
    * Cancelling a paid booking flags its paid payment(s) for a refund in the
-   * same transaction: the cancellation-policy share (`refund: "policy"`, when
-   * the traveller asked to cancel) or everything (`"full"`, the default, when
-   * the cancellation is ours). `actorId` is recorded on the audit entries.
+   * same transaction (`actorId` is recorded on that audit entry).
    */
-  changeStatus(
-    bookingId: number,
-    status: BookingStatus,
-    actorId: string | null = null,
-    options: { refund?: RefundMode; now?: Date } = {},
-  ) {
-    const today = businessToday(options.now);
+  changeStatus(bookingId: number, status: BookingStatus, actorId: string | null = null) {
     return db.transaction(async (tx) => {
       const booking = await bookingRepository.findByIdForUpdate(tx, bookingId);
       if (!booking) throw new DomainError("notFound");
       assertTransition(booking.status, status);
-      if (status === "completed") assertCanComplete(booking.travelDate, today);
       const updated = await bookingRepository.updateStatusWith(tx, booking.id, status);
-
-      let refund: { mode: RefundMode; refundAmount: number } | null = null;
       if (status === "cancelled") {
-        const paid = await paymentRepository.findPaidForBookingForUpdate(tx, booking.id);
-        // Attempts already flagged (duplicate charges) are owed back in full anyway.
-        const live = paid.filter((payment) => !payment.refundRequired);
-        if (live.length > 0) {
-          const mode = options.refund ?? "full";
-          const refundAmount = await flagCancelledPayments(
-            tx,
-            live,
-            booking.travelDate,
-            today,
-            mode,
-            actorId,
-          );
-          refund = { mode, refundAmount };
-        }
-      }
-      if (manifestChangedBy(booking.status, status)) {
-        await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
+        await paymentService.flagPaidForRefund(tx, booking.id, "cancelledAfterPayment", actorId);
       }
       // Same transaction: the change and its audit entry land together or not at all.
       await auditService.record(
@@ -403,57 +335,12 @@ export const bookingService = {
           action: "booking.status_changed",
           entityType: "booking",
           entityId: booking.id,
-          details: {
-            from: booking.status,
-            status,
-            code: booking.code,
-            ...(refund ? { refund: refund.mode, refundAmount: refund.refundAmount } : {}),
-          },
+          details: { from: booking.status, status, code: booking.code },
         },
         tx,
       );
       return updated;
     });
-  },
-
-  /**
-   * Gives the seats of abandoned unpaid bookings back: every pending booking
-   * that `isStaleHold` says can go (unpaid for `UNPAID_HOLD_HOURS`, or past
-   * its travel date) is cancelled by the system. Each one is re-checked under
-   * its row lock, so a payment that lands meanwhile keeps the booking. Run
-   * daily from the cron job; returns the released booking ids for emails.
-   */
-  async releaseStaleHolds(now: Date = new Date()): Promise<{ checked: number; released: number[] }> {
-    const createdBefore = new Date(now.getTime() - UNPAID_HOLD_HOURS * 3_600_000);
-    const candidates = await bookingRepository.listHoldCandidates(
-      createdBefore,
-      businessToday(now),
-      HOLD_RELEASE_BATCH,
-    );
-    const released: number[] = [];
-    for (const candidate of candidates.filter((hold) => isStaleHold(hold, now))) {
-      const done = await db.transaction(async (tx) => {
-        const booking = await bookingRepository.findByIdForUpdate(tx, candidate.id);
-        const hold = booking && (await bookingRepository.holdState(tx, booking.id));
-        if (!booking || !hold || !isStaleHold(hold, now)) return false;
-        await bookingRepository.updateStatusWith(tx, booking.id, "cancelled");
-        // The emailed manifest lists pending guests too, so it is now out of date.
-        await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
-        await auditService.record(
-          {
-            actorId: null,
-            action: "booking.expired",
-            entityType: "booking",
-            entityId: booking.id,
-            details: { code: booking.code, from: booking.status, travelDate: booking.travelDate },
-          },
-          tx,
-        );
-        return true;
-      });
-      if (done) released.push(candidate.id);
-    }
-    return { checked: candidates.length, released };
   },
 
   /**

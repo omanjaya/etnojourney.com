@@ -1,4 +1,3 @@
-import type { Locale } from "@/i18n/routing";
 import type { LocalizedText } from "@/lib/i18n-text";
 
 const toLines = (items: string[]) => items.join("\n");
@@ -24,19 +23,3 @@ export const splitPairs = (pairs: LocalizedText[]): LocalizedText => ({
   id: toLines(pairs.map((p) => p.id)),
   en: toLines(pairs.map((p) => p.en)),
 });
-
-/** Items per locale as `pairLines` will see them (blank lines ignored). */
-export const lineCounts = (text: LocalizedText): Record<Locale, number> => ({
-  id: fromLines(text.id).length,
-  en: fromLines(text.en).length,
-});
-
-/**
- * Visible rows for both list textareas: every typed line plus a spare one,
- * at least `min`. Both sides get the same height and never scroll, so line
- * N of the Indonesian column sits level with line N of the English one.
- */
-export function listRows(text: LocalizedText, min: number): number {
-  const rawLines = (value: string) => value.split("\n").length;
-  return Math.max(min, rawLines(text.id) + 1, rawLines(text.en) + 1);
-}

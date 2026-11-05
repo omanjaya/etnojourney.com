@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { auditMessageKey, buildBookingTimeline, timelineLabel } from "./booking-timeline.rules";
+import { auditMessageKey, buildBookingTimeline } from "./booking-timeline.rules";
 
 const at = (iso: string) => new Date(iso);
 
@@ -75,55 +75,5 @@ describe("buildBookingTimeline", () => {
 describe("auditMessageKey", () => {
   it("replaces dots so the action can be used as a message key", () => {
     expect(auditMessageKey("payment.refund_required")).toBe("payment_refund_required");
-  });
-});
-
-describe("timelineLabel", () => {
-  it("shows the old and new date of a reschedule", () => {
-    expect(
-      timelineLabel("booking.rescheduled", { from: "2026-12-10", to: "2026-12-17", code: "EJ-1" }),
-    ).toEqual({ key: "booking_rescheduled", from: "2026-12-10", to: "2026-12-17" });
-  });
-
-  it("shows the refund of a paid traveller cancellation, and none for an unpaid one", () => {
-    expect(
-      timelineLabel("booking.cancelled_by_traveller", {
-        from: "confirmed",
-        paid: true,
-        percent: 50,
-        refundAmount: 700_000,
-      }),
-    ).toEqual({ key: "booking_cancelled_by_traveller_paid", percent: 50, amount: 700_000 });
-    expect(
-      timelineLabel("booking.cancelled_by_traveller", { paid: false, percent: 0, refundAmount: 0 }),
-    ).toEqual({ key: "booking_cancelled_by_traveller" });
-  });
-
-  it("uses the partial refund amount when there is one", () => {
-    expect(
-      timelineLabel("payment.refund_required", { amount: 1_400_000, refundAmount: 700_000 }),
-    ).toEqual({ key: "payment_refund_required", amount: 700_000 });
-    expect(timelineLabel("payment.refund_required", { amount: 1_400_000 })).toEqual({
-      key: "payment_refund_required",
-      amount: 1_400_000,
-    });
-    expect(timelineLabel("payment.refunded", { amount: 1_400_000, refundAmount: 700_000 })).toEqual(
-      { key: "payment_refunded", amount: 700_000 },
-    );
-  });
-
-  it("labels status changes, notes and automatic releases", () => {
-    expect(timelineLabel("booking.status_changed", { from: "pending", status: "confirmed" })).toEqual(
-      { key: "booking_status_changed", status: "confirmed" },
-    );
-    expect(timelineLabel("booking.note_added", null)).toEqual({ key: "booking_note_added" });
-    expect(timelineLabel("booking.expired", { code: "EJ-1" })).toEqual({ key: "booking_expired" });
-  });
-
-  it("returns null for unknown verbs or unreadable details", () => {
-    expect(timelineLabel("tour.updated", { slug: "x" })).toBeNull();
-    expect(timelineLabel("booking.status_changed", { status: "lost" })).toBeNull();
-    expect(timelineLabel("booking.rescheduled", { from: "soon" })).toBeNull();
-    expect(timelineLabel("payment.refunded", null)).toBeNull();
   });
 });

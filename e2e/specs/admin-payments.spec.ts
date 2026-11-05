@@ -4,7 +4,6 @@ import {
   bookingStatus,
   createBooking,
   createPendingPayment,
-  jakartaDate,
   midtransSignature,
   paymentStatus,
   sql,
@@ -18,12 +17,11 @@ import {
  */
 
 /** A confirmed booking with a settled (paid) payment, as after a normal checkout. */
-async function paidBooking(travelDate?: string) {
+async function paidBooking() {
   const booking = await createBooking({
     email: ACCOUNTS.traveler.email,
     tourSlug: "tenun-rangrang-dan-tebing-penida",
     status: "confirmed",
-    travelDate,
   });
   const orderId = `${booking.code}-${Date.now()}`;
   await sql`
@@ -70,14 +68,11 @@ test.describe("admin payments and refunds", () => {
   }) => {
     const { booking, orderId } = await paidBooking();
 
-    // Cancel through the admin bookings list. The booking is paid and travels
-    // more than 14 days out, so the cancel dialog shows the full refund the policy gives.
+    // Cancel through the admin bookings list (the confirm() prompt is accepted).
     await page.goto(`/admin/bookings?q=${booking.code}`);
     const row = page.locator("tr, li").filter({ hasText: booking.code }).filter({ visible: true });
+    page.once("dialog", (dialog) => dialog.accept());
     await row.first().getByRole("button", { name: "Batalkan" }).click();
-    const cancelDialog = page.getByRole("dialog");
-    await expect(cancelDialog).toContainText("refund penuh");
-    await cancelDialog.getByRole("button", { name: "Ya, batalkan booking" }).click();
     await expect.poll(() => bookingStatus(booking.code)).toBe("cancelled");
     await expect.poll(async () => (await refundState(orderId)).refundRequired).toBe(true);
     expect(await auditReason(orderId)).toBe("cancelledAfterPayment");
@@ -115,36 +110,6 @@ test.describe("admin payments and refunds", () => {
     // The full list shows it under the "refunded" filter.
     await page.goto(`/admin/payments?status=refunded&q=${booking.code}`);
     await expect(page.getByText(orderId).filter({ visible: true }).first()).toBeVisible();
-  });
-
-  test("an admin cancelling a paid booking chooses the policy share or a full refund", async ({
-    page,
-  }) => {
-    // 10 days ahead: the cancellation policy gives back 50%.
-    const forGuest = await paidBooking(jakartaDate(10));
-    const ours = await paidBooking(jakartaDate(10));
-    const refundAmount = async (orderId: string) => {
-      const [row] = await sql<{ refundAmount: number | null }[]>`
-        select refund_amount as "refundAmount" from payments where order_id = ${orderId}`;
-      return row.refundAmount;
-    };
-    const cancel = async (code: string, choice: RegExp) => {
-      await page.goto(`/admin/bookings/${code}`);
-      await page.getByRole("button", { name: `Batalkan, booking ${code}`, exact: true }).click();
-      const dialog = page.getByRole("dialog");
-      await dialog.getByRole("radio", { name: choice }).check();
-      await dialog.getByRole("button", { name: "Ya, batalkan booking" }).click();
-      await expect.poll(() => bookingStatus(code)).toBe("cancelled");
-    };
-
-    await cancel(forGuest.booking.code, /Sesuai kebijakan pembatalan: refund 50%/);
-    await expect
-      .poll(() => refundAmount(forGuest.orderId))
-      .toBe(Math.floor(forGuest.booking.total / 2));
-
-    await cancel(ours.booking.code, /Refund penuh/);
-    await expect.poll(async () => (await refundState(ours.orderId)).refundRequired).toBe(true);
-    expect(await refundAmount(ours.orderId)).toBeNull();
   });
 
   test("a payment settling after the booking was cancelled is flagged for refund", async ({

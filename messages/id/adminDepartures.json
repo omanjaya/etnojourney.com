@@ -13,7 +13,7 @@
     "reset": "Atur ulang filter"
   },
   "agenda": {
-    "summary": "{total, plural, =0 {Tidak ada keberangkatan} other {# keberangkatan, {withoutGuide, plural, =0 {semua sudah ada pemandu} other {# tanpa pemandu}}}} ({from} sampai {to})",
+    "summary": "{total, plural, =0 {Tidak ada keberangkatan} other {# keberangkatan}}, {withoutGuide, plural, =0 {semua sudah ada pemandu} other {# tanpa pemandu}} ({from} sampai {to})",
     "today": "Hari ini",
     "tomorrow": "Besok",
     "inDays": "{count} hari lagi",
@@ -25,8 +25,6 @@
     "guideInactive": "{name} tidak aktif",
     "hasNote": "Ada catatan operasional",
     "notified": "Manifest sudah dikirim ke pemandu",
-    "closed": "Tanggal ditutup",
-    "closedReason": "Alasan: {reason}",
     "noMatch": {
       "title": "Tidak ada keberangkatan yang cocok",
       "description": "Coba rentang tanggal atau tur lain, atau matikan filter tanpa pemandu."
@@ -55,13 +53,7 @@
     "date": "Tanggal",
     "meetingPoint": "Titik kumpul",
     "participants": "Peserta",
-    "guide": "Pemandu",
-    "closed": {
-      "title": "{date} sudah ditutup untuk pemesanan",
-      "body": "Booking di keberangkatan ini tetap aktif. Pastikan tur tetap jalan, atau hubungi tamu untuk mengatur ulang jadwal.",
-      "reason": "Alasan: {reason}",
-      "link": "Buka kalender ketersediaan"
-    }
+    "guide": "Pemandu"
   },
   "manifest": {
     "title": "Manifest",
@@ -74,14 +66,13 @@
     "internalNotes": "{count, plural, one {# catatan internal} other {# catatan internal}}",
     "columns": {
       "code": "Kode",
-      "contact": "Kontak",
       "name": "Nama kontak",
       "phone": "Telepon",
-      "statusPayment": "Status & pembayaran",
-      "status": "Status",
       "participants": "Peserta",
       "notes": "Catatan tamu",
-      "payment": "Pembayaran"
+      "status": "Status",
+      "payment": "Pembayaran",
+      "internal": "Catatan internal"
     }
   },
   "guide": {
@@ -94,16 +85,13 @@
     "suggestedHint": "Pemandu yang biasa bertugas di destinasi ini tampil paling atas.",
     "noGuides": "Belum ada pemandu aktif. Tambahkan pemandu terlebih dahulu.",
     "inactiveOption": "{name} (tidak aktif)",
-    "busyOption": "{name}, sudah bertugas: {tours}",
-    "busyItem": "{tour} ({date})",
-    "busyHint": "{name} sudah bertugas di {tours} pada hari yang sama. Pastikan jadwalnya tidak bentrok.",
     "save": "Tugaskan",
     "unassign": "Lepas penugasan",
     "assigned": "Pemandu ditugaskan.",
     "unassigned": "Penugasan pemandu dilepas.",
     "inactive": "Pemandu ini sudah tidak aktif. Tugaskan pemandu lain.",
     "noEmail": "Belum ada email",
-    "assignedBy": "Ditugaskan oleh {name}, {date}"
+    "assignedBy": "Diperbarui oleh {name}, {date}"
   },
   "send": {
     "description": "Kirim manifest (tanpa harga dan data pembayaran) ke email pemandu dalam bahasa Indonesia.",
@@ -133,12 +121,7 @@
   "history": {
     "title": "Riwayat",
     "empty": "Belum ada perubahan pada keberangkatan ini.",
-    "system": "Sistem",
-    "guide": "Pemandu: {name}",
-    "previousGuide": "Sebelumnya: {name}",
-    "noteCleared": "Catatan dihapus",
-    "sentTo": "Ke {email}, {participants} peserta",
-    "sentToGuide": "Ke {name} ({email}), {participants} peserta"
+    "system": "Sistem"
   },
   "dashboard": {
     "label": "Keberangkatan 7 hari ke depan tanpa pemandu",

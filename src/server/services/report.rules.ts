@@ -154,11 +154,7 @@ export function buildMonthSeries(
 export type TourRow<T> = {
   tourId: number;
   title: T;
-  /** Bookings made, whatever their status now. */
   bookings: number;
-  /** How many of those bookings were cancelled. */
-  cancelled: number;
-  /** Travellers on the bookings that weren't cancelled. */
   participants: number;
   gross: number;
   refunds: number;
@@ -172,7 +168,7 @@ export type TourRow<T> = {
 export function buildTourRows<T>(
   titles: Map<number, T>,
   data: {
-    bookings: { tourId: number; bookings: number; cancelled?: number; participants: number }[];
+    bookings: { tourId: number; bookings: number; participants: number }[];
     gross: { tourId: number; amount: number }[];
     refunds: { tourId: number; amount: number }[];
   },
@@ -183,16 +179,7 @@ export function buildTourRows<T>(
     if (!current) {
       const title = titles.get(tourId);
       if (title === undefined) return undefined;
-      current = {
-        tourId,
-        title,
-        bookings: 0,
-        cancelled: 0,
-        participants: 0,
-        gross: 0,
-        refunds: 0,
-        net: 0,
-      };
+      current = { tourId, title, bookings: 0, participants: 0, gross: 0, refunds: 0, net: 0 };
       rows.set(tourId, current);
     }
     return current;
@@ -201,7 +188,6 @@ export function buildTourRows<T>(
     const r = row(b.tourId);
     if (r) {
       r.bookings += b.bookings;
-      r.cancelled += b.cancelled ?? 0;
       r.participants += b.participants;
     }
   }
@@ -221,27 +207,6 @@ export function buildTourRows<T>(
 /** Average travellers per booking, one decimal; 0 when there are no bookings. */
 export function averageGroupSize(bookings: number, participants: number): number {
   return bookings > 0 ? Math.round((participants / bookings) * 10) / 10 : 0;
-}
-
-/**
- * Headline booking figures from the per-status counts. `bookings` counts every
- * booking made (the status shares are a percentage of it); travellers and the
- * average group size leave cancelled bookings out, since nobody travels on them.
- */
-export function bookingTotals(
-  statuses: { status: string; bookings: number; participants: number }[],
-): { bookings: number; cancelled: number; participants: number; averageGroupSize: number } {
-  const kept = statuses.filter((s) => s.status !== "cancelled");
-  const sum = (rows: typeof statuses, key: "bookings" | "participants") =>
-    rows.reduce((total, row) => total + row[key], 0);
-  const bookings = sum(statuses, "bookings");
-  const participants = sum(kept, "participants");
-  return {
-    bookings,
-    cancelled: bookings - sum(kept, "bookings"),
-    participants,
-    averageGroupSize: averageGroupSize(sum(kept, "bookings"), participants),
-  };
 }
 
 /** Share of `part` in `total` as a whole percentage (0 when total is 0). */

@@ -35,8 +35,6 @@ const schema = z.object({
   ),
   /** Shared secret for scheduled jobs (/api/cron/*), sent as `Authorization: Bearer <secret>`. */
   CRON_SECRET: optionalString.pipe(z.string().min(24, "must be at least 24 characters").optional()),
-  /** Let the daily cron cancel unpaid pending bookings after the hold period (off by default). */
-  RELEASE_UNPAID_HOLDS: booleanString.default("false"),
   MAIL_FROM: optionalString,
   UPLOAD_DIR: optionalString,
   TRUST_PROXY: booleanString.default("false"),

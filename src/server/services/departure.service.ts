@@ -6,30 +6,25 @@ import { localize } from "@/lib/i18n-text";
 import { mailer } from "@/server/mail/mailer";
 import type { EmailTranslator } from "@/server/mail/templates";
 import { departureManifestEmail } from "@/server/mail/templates/departure";
-import { closureRepository } from "@/server/repositories/closure.repository";
 import {
   departureRepository,
   type DepartureFilters,
 } from "@/server/repositories/departure.repository";
 import { auditService } from "./audit.service";
-import { closureDuring, tripEndDate } from "./availability.rules";
 import { DomainError } from "./errors";
 import {
   capacityLoad,
   departureEntityId,
   groupByDate,
-  historyGuideId,
-  lastAssignment,
   manifestTotals,
   needsGuide,
-  needsGuideOn,
   needsGuideWindow,
   sortManifest,
   suggestGuides,
 } from "./departure.rules";
 import { businessToday } from "./self-service.rules";
 
-export type { BusyDeparture, DepartureFilters } from "@/server/repositories/departure.repository";
+export type { DepartureFilters } from "@/server/repositories/departure.repository";
 
 /** A departure is identified by its tour and travel date (YYYY-MM-DD). */
 export type DepartureKey = { tourId: number; date: string };
@@ -44,38 +39,14 @@ async function loadTour(tourId: number) {
 }
 
 export const departureService = {
-  /**
-   * Agenda rows grouped by date, each with its capacity load, guide state and
-   * whether a day of the trip is closed. Past departures stay listed as a
-   * record, but only today and later can "need a guide" (Asia/Jakarta).
-   */
-  async agenda(filters: DepartureFilters, now: Date = new Date()) {
-    const today = businessToday(now);
-    // "Without a guide" is a to-do list: past departures are history, not work.
-    const query =
-      filters.withoutGuide && filters.from < today ? { ...filters, from: today } : filters;
-    const rows = query.from > query.to ? [] : await departureRepository.agenda(query);
-    const lastDay = rows.reduce((last, row) => {
-      const end = tripEndDate(row.date, row.durationDays);
-      return end > last ? end : last;
-    }, query.to);
-    const closures = rows.length
-      ? await closureRepository.listInRange(query.tourId ?? null, query.from, lastDay)
-      : [];
-    const departures = rows.map((row) => {
-      const closure = closureDuring(
-        closures,
-        row.tourId,
-        row.date,
-        tripEndDate(row.date, row.durationDays),
-      );
-      return {
-        ...row,
-        load: capacityLoad(row.confirmed, row.pending, row.capacity),
-        needsGuide: needsGuideOn(row, today),
-        closed: closure ? { reason: closure.reason } : null,
-      };
-    });
+  /** Agenda rows grouped by date, each with its capacity load and guide state. */
+  async agenda(filters: DepartureFilters) {
+    const rows = await departureRepository.agenda(filters);
+    const departures = rows.map((row) => ({
+      ...row,
+      load: capacityLoad(row.confirmed, row.pending, row.capacity),
+      needsGuide: needsGuide(row),
+    }));
     return {
       groups: groupByDate(departures),
       total: departures.length,
@@ -94,50 +65,30 @@ export const departureService = {
   /** Everything the departure page shows. Throws `notFound` for an unknown tour. */
   async detail(key: DepartureKey) {
     const tour = await loadTour(key.tourId);
-    const end = tripEndDate(key.date, tour.durationDays);
-    const [current, rows, history, closures] = await Promise.all([
+    const [current, rows, history] = await Promise.all([
       departureRepository.findAssignment(key.tourId, key.date),
       departureRepository.listManifest(key.tourId, key.date),
       auditService.historyOf("departure", departureEntityId(key.tourId, key.date)),
-      closureRepository.listInRange(key.tourId, key.date, end),
     ]);
     const assignment = current?.assignment ?? null;
     const guide = current?.guide?.id ? current.guide : null;
-    // History names the guide each entry is about (stored ids, so renamed and
-    // unassigned guides read correctly too).
-    const historyGuideIds = new Set<number>();
-    for (const { log } of history) {
-      const id = historyGuideId(log.action, log.details);
-      if (id !== null) historyGuideIds.add(id);
-    }
-    const [guideOptions, guideNames] = await Promise.all([
-      departureRepository.listGuideOptions(tour.destinationId, guide?.id ?? null, {
-        tourId: key.tourId,
-        date: key.date,
-        end,
-      }),
-      departureRepository.guideNames([...historyGuideIds]),
-    ]);
+    const guideOptions = await departureRepository.listGuideOptions(
+      tour.destinationId,
+      guide?.id ?? null,
+    );
     const manifest = sortManifest(rows);
     const totals = manifestTotals(manifest);
-    const closure = closureDuring(closures, key.tourId, key.date, end);
     return {
       tour,
       assignment,
       guide,
-      /** Who assigned the current guide, and when (not later note or send edits). */
-      assignedBy: guide ? lastAssignment(history) : null,
+      assignedByName: current?.assignedByName ?? null,
       manifest,
       totals,
       load: capacityLoad(totals.confirmedParticipants, totals.pendingParticipants, tour.capacity),
       needsGuide: needsGuide({ guideId: guide?.id ?? null, guideActive: guide?.isActive }),
       guideOptions: suggestGuides(guideOptions),
-      /** A day of the trip that an admin closed; its bookings are kept. */
-      closure: closure ? { date: closure.date, reason: closure.reason } : null,
-      history: history.map((entry) => {
-        const guideId = historyGuideId(entry.log.action, entry.log.details);
-        return { ...entry, guideName: guideId === null ? null : (guideNames.get(guideId) ?? null) };
-      }),
+      history,
     };
   },
 
@@ -167,8 +118,7 @@ export const departureService = {
       // Nothing to unassign and no row yet: don't create an empty one.
       if (guideId === null && !existing) return { changed: false };
 
-      // A new (or no) guide has not received this manifest: show it as not sent.
-      await departureRepository.upsert(tx, key, { guideId, assignedBy: actorId, notifiedAt: null });
+      await departureRepository.upsert(tx, key, { guideId, assignedBy: actorId });
       await auditService.record(
         {
           actorId,

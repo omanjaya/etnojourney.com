@@ -24,18 +24,15 @@ import { Badge } from "@/components/ui/badge";
 import { BookingStatusBadge } from "@/components/shared/booking-status-badge";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { BookingStatusControl } from "@/features/admin/components/booking-status-control";
-import { paidBookingRefund } from "@/features/admin/booking-refund";
 import { BookingNoteForm } from "@/features/admin-booking/components/booking-note-form";
 import { BookingTimeline } from "@/features/admin-booking/components/booking-timeline";
-import { RefundAmountNote } from "@/features/admin-payments/components/refund-amount-note";
 import { PaymentStatusBadge } from "@/features/payment/components/payment-status-badge";
 import { requireAdmin } from "@/server/auth/guards";
 import { can } from "@/server/auth/permissions";
 import { bookingService } from "@/server/services/booking.service";
-import { adminStatusOptions } from "@/server/services/booking.rules";
+import { nextStatuses } from "@/server/services/booking.rules";
 import { departurePath } from "@/server/services/departure.rules";
 import { isDomainError } from "@/server/services/errors";
-import { businessToday } from "@/server/services/self-service.rules";
 
 const stamp: Intl.DateTimeFormatOptions = {
   day: "numeric",
@@ -81,11 +78,6 @@ export default async function AdminBookingDetailPage({
   const tourTitle = localize(tour.title, locale);
   // Same rule as the account page: a paid attempt wins over newer failed ones.
   const headlinePayment = payments.find((p) => p.status === "paid") ?? payments[0];
-  const today = businessToday();
-  // Money taken and not yet owed back: what a cancellation would refund.
-  const livePaid = payments
-    .filter((p) => p.status === "paid" && !p.refundRequired)
-    .reduce((total, p) => total + p.amount, 0);
 
   return (
     <>
@@ -168,8 +160,7 @@ export default async function AdminBookingDetailPage({
                   <BookingStatusControl
                     bookingId={booking.id}
                     code={booking.code}
-                    options={adminStatusOptions(booking, today)}
-                    paid={paidBookingRefund(livePaid, booking.travelDate, today)}
+                    options={nextStatuses(booking.status)}
                   />
                 </div>
               </div>
@@ -197,7 +188,6 @@ export default async function AdminBookingDetailPage({
                         {formatCurrency(payment.amount, locale)}
                       </p>
                     </div>
-                    <RefundAmountNote payment={payment} className="mt-2 text-right" />
                     <dl className="mt-3 grid gap-x-6 gap-y-2 text-xs sm:grid-cols-2">
                       <Row label={t("payments.orderId")}>
                         <span className="font-mono break-all">{payment.orderId}</span>
@@ -220,7 +210,7 @@ export default async function AdminBookingDetailPage({
                       )}
                       {payment.refundNote && (
                         <Row label={t("payments.refundNote")} className="sm:col-span-2">
-                          <span className="wrap-anywhere">{payment.refundNote}</span>
+                          {payment.refundNote}
                         </Row>
                       )}
                     </dl>
@@ -239,9 +229,7 @@ export default async function AdminBookingDetailPage({
                 <ul className="flex flex-col gap-3" aria-label={t("notes.title")}>
                   {notes.map(({ note, authorName }) => (
                     <li key={note.id} className="bg-sand-50 rounded-xl px-4 py-3">
-                      <p className="text-sm leading-relaxed wrap-anywhere whitespace-pre-line">
-                        {note.body}
-                      </p>
+                      <p className="text-sm leading-relaxed whitespace-pre-line">{note.body}</p>
                       <p className="text-muted mt-2 text-xs">
                         {authorName ?? t("notes.unknownAuthor")} &middot;{" "}
                         <time dateTime={note.createdAt.toISOString()}>
@@ -279,9 +267,7 @@ export default async function AdminBookingDetailPage({
               </Detail>
               <Detail icon={StickyNote} label={t("traveller.notes")}>
                 {booking.notes ? (
-                  <span className="font-normal wrap-anywhere whitespace-pre-line">
-                    {booking.notes}
-                  </span>
+                  <span className="font-normal whitespace-pre-line">{booking.notes}</span>
                 ) : (
                   <span className="text-muted font-normal">{t("traveller.noNotes")}</span>
                 )}

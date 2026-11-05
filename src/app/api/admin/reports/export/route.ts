@@ -1,7 +1,4 @@
-import { getTranslations } from "next-intl/server";
-import { pickLocale } from "@/i18n/pick-locale";
 import { CSV_BOM, csvRow } from "@/lib/csv";
-import { localize } from "@/lib/i18n-text";
 import { auth } from "@/server/auth";
 import { activeSession } from "@/server/auth/guards";
 import { can } from "@/server/auth/permissions";
@@ -11,23 +8,21 @@ import { parseReportQuery } from "@/features/admin-insights/schemas";
 // Reads the session and the database on every request.
 export const dynamic = "force-dynamic";
 
-const COLUMNS = [
-  "tourSlug",
-  "tour",
+const HEADER = [
+  "tour_slug",
+  "tour_title_id",
+  "tour_title_en",
   "bookings",
-  "cancelled",
   "participants",
-  "grossIdr",
-  "refundsIdr",
-  "netIdr",
-] as const;
+  "gross_idr",
+  "refunds_idr",
+  "net_idr",
+];
 
 /**
- * GET /api/admin/reports/export?period=&from=&to=&locale=
+ * GET /api/admin/reports/export?period=&from=&to=
  * Admin-only CSV of the per-tour report table for the same period as the page
- * (revenue by paid date net of refunds; bookings by creation date, Asia/Jakarta;
- * travellers leave cancelled bookings out). Headers and tour titles are in
- * `locale`, else the user's language.
+ * (revenue by paid date net of refunds; bookings by creation date, Asia/Jakarta).
  */
 export async function GET(request: Request) {
   // activeSession: a disabled account is treated as signed out.
@@ -39,22 +34,18 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const period = parseReportQuery(Object.fromEntries(url.searchParams));
-  const locale = pickLocale(url.searchParams.get("locale"), session.user.locale);
-  const [rows, columns] = await Promise.all([
-    reportService.tourRows(period),
-    getTranslations({ locale, namespace: "adminInsights.reports.exportColumns" }),
-  ]);
+  const rows = await reportService.tourRows(period);
 
   const body =
     CSV_BOM +
-    csvRow(COLUMNS.map((key) => columns(key))) +
+    csvRow(HEADER) +
     rows
       .map((row) =>
         csvRow([
           row.title.slug,
-          localize(row.title.title, locale),
+          row.title.title.id,
+          row.title.title.en,
           row.bookings,
-          row.cancelled,
           row.participants,
           row.gross,
           row.refunds,

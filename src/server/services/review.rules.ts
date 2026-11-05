@@ -24,17 +24,10 @@ export function reviewEligibility(params: {
 
 export type RatingAggregate = { rating: number; count: number };
 
-const roundRating = (value: number) => Math.min(5, Math.max(0, Math.round(value * 10) / 10));
-
 /**
  * Adds (`direction = 1`) or removes (`direction = -1`) one rating from a tour's
  * aggregate. `count` is the historical review count, so the previous average is
- * treated as `count` ratings of `rating` each. Star ratings are whole numbers,
- * so the total is snapped to the nearest whole number before the change: the
- * stored average keeps one decimal, and rebuilding from it unsnapped made
- * every hide and show drift (1, 1, 3 with both 1s hidden read 3.2). The snap
- * is exact for up to 10 reviews; `nextTourAggregate` avoids it entirely when
- * every counted review is a row.
+ * treated as `count` ratings of `rating` each.
  */
 export function applyReviewDelta(
   aggregate: RatingAggregate,
@@ -43,32 +36,9 @@ export function applyReviewDelta(
 ): RatingAggregate {
   const count = Math.max(0, aggregate.count + direction);
   if (count === 0) return { rating: 0, count: 0 };
-  const total = Math.round(aggregate.rating * aggregate.count) + direction * rating;
-  return { rating: roundRating(total / count), count };
-}
-
-/**
- * The tour aggregate after one review was added (`direction = 1`) or removed
- * (`-1`), given the published review rows *after* the change. When the
- * aggregate counts exactly the published rows (a tour whose ratings all come
- * from reviews on the site), it is recomputed from them, which is exact and
- * repairs any earlier drift. A curated count above the rows (an imported
- * history) falls back to `applyReviewDelta`.
- */
-export function nextTourAggregate(params: {
-  current: RatingAggregate;
-  rating: number;
-  direction: 1 | -1;
-  /** Sum and number of the tour's published review ratings after the change. */
-  published: { sum: number; count: number };
-}): RatingAggregate {
-  const { current, rating, direction, published } = params;
-  const publishedBefore = published.count - direction;
-  if (current.count === publishedBefore) {
-    if (published.count <= 0) return { rating: 0, count: 0 };
-    return { rating: roundRating(published.sum / published.count), count: published.count };
-  }
-  return applyReviewDelta(current, rating, direction);
+  const total = aggregate.rating * aggregate.count + direction * rating;
+  const average = Math.round((total / count) * 10) / 10;
+  return { rating: Math.min(5, Math.max(0, average)), count };
 }
 
 /* ----------------------------- review photos ----------------------------- */

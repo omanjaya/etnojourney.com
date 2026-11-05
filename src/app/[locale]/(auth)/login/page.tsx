@@ -4,7 +4,7 @@ import { pageMetadata } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 import { Alert } from "@/components/ui/alert";
 import { LoginForm } from "@/features/auth/components/login-form";
-import { isSafeRedirectPath } from "@/features/auth/safe-redirect";
+import { safeRedirectPath } from "@/features/auth/safe-redirect";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [locale, t, tc] = await Promise.all([
@@ -23,9 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function LoginPage({ searchParams }: PageProps<"/[locale]/login">) {
   const { next, reset } = await searchParams;
-  // An unsafe `next` is dropped (not replaced by /account), so the sign-in can
-  // still pick the landing page by role.
-  const nextPath = typeof next === "string" && isSafeRedirectPath(next) ? next : undefined;
+  const nextPath = typeof next === "string" ? safeRedirectPath(next) : undefined;
   const t = await getTranslations("auth.login");
 
   return (

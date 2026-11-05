@@ -1,32 +1,23 @@
 "use client";
 
-import { ArrowUpRight, Link2, TriangleAlert, Unlink } from "lucide-react";
+import { Link2, Unlink } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/form-controls";
-import { Link } from "@/i18n/navigation";
 import { linkGuideAccountAction, unlinkGuideAccountAction } from "../actions";
 
 /**
  * Links or unlinks the guide's partner portal account (admins only). The
- * server re-checks the permission and every link rule. A linked account that
- * can no longer open the portal (not a partner any more, or disabled) is
- * flagged with the way to restore it.
+ * server re-checks the permission and every link rule.
  */
 export function GuideAccountControl({
   guideId,
   account,
 }: {
   guideId: number;
-  account: {
-    id: string;
-    name: string;
-    email: string;
-    isPartner: boolean;
-    disabled: boolean;
-  } | null;
+  account: { name: string; email: string } | null;
 }) {
   const t = useTranslations("adminGuides.account");
   const [email, setEmail] = useState("");
@@ -72,23 +63,6 @@ export function GuideAccountControl({
             <dd className="font-medium">{account.name}</dd>
             <dd className="text-ink-soft break-all">{account.email}</dd>
           </dl>
-          {(!account.isPartner || account.disabled) && (
-            <div className="bg-gold-light flex items-start gap-3 rounded-xl px-4 py-3 text-sm text-[#6f4f17]">
-              <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
-              <div>
-                <p>{account.disabled ? t("disabled") : t("notPartner")}</p>
-                {account.disabled && (
-                  <Link
-                    href={`/admin/users/${account.id}`}
-                    className="mt-1 inline-flex items-center gap-1 font-medium underline underline-offset-4"
-                  >
-                    {t("openUser")}
-                    <ArrowUpRight className="size-3.5" aria-hidden />
-                  </Link>
-                )}
-              </div>
-            </div>
-          )}
           <Button
             type="button"
             variant="outline"

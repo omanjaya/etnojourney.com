@@ -1,17 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { formatBusinessDateTime, formatDate, isoDateFromToday } from "./format";
-
-describe("formatBusinessDateTime", () => {
-  it("renders an instant in Jakarta time as YYYY-MM-DD HH:mm", () => {
-    // 11:01 UTC is 18:01 in Jakarta (UTC+7).
-    expect(formatBusinessDateTime(new Date("2026-11-05T11:01:12.813Z"))).toBe("2026-11-05 18:01");
-  });
-
-  it("rolls over to the next Jakarta day and uses a 24-hour clock", () => {
-    expect(formatBusinessDateTime(new Date("2026-12-31T17:05:00Z"))).toBe("2027-01-01 00:05");
-    expect(formatBusinessDateTime(new Date("2026-06-01T16:59:00Z"))).toBe("2026-06-01 23:59");
-  });
-});
+import { formatDate, isoDateFromToday } from "./format";
 
 describe("isoDateFromToday", () => {
   it("uses the Jakarta calendar day, not the host's", () => {

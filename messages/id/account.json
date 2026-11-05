@@ -86,9 +86,8 @@
     "addToCalendar": "Tambah ke kalender",
     "nextStepsTitle": "Langkah berikutnya",
     "steps": {
-      "pay": "Selesaikan pembayaran dalam {hours} jam setelah memesan agar tempatmu tetap tersimpan.",
+      "pay": "Selesaikan pembayaran agar tempatmu terkonfirmasi.",
       "paid": "Pembayaran diterima, booking terkonfirmasi.",
-      "confirmedUnpaid": "Booking dikonfirmasi langsung oleh tim kami. Pembayaran diatur bersama tim, bukan lewat situs.",
       "email": "Kami mengirim konfirmasi dan detail perjalanan ke email kamu.",
       "host": "Tuan rumah atau tim kami menghubungi nomor kontakmu sebelum hari perjalanan.",
       "prepare": "Siapkan perlengkapan, lalu datang ke titik kumpul tepat waktu.",

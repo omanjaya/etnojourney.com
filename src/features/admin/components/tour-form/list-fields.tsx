@@ -1,6 +1,9 @@
 import { useTranslations } from "next-intl";
+import type { LocalizedText } from "@/lib/i18n-text";
+import { BilingualField } from "../form-parts/bilingual-field";
 import { Section } from "../form-parts/section";
-import { ListField, type ListValue } from "./list-field";
+
+type ListValue = { value: LocalizedText; onChange: (value: LocalizedText) => void };
 
 /**
  * Highlights and "included" lists, edited as one line per item per locale.
@@ -18,22 +21,24 @@ export function ListFieldsSection({
   const t = useTranslations("admin.form");
 
   return (
-    <Section id="tour-lists" title={t("sections.lists")} hint={t("sections.listsHint")}>
-      <ListField
+    <Section title={t("sections.lists")} hint={t("sections.listsHint")}>
+      <BilingualField
         name="highlights"
         label={t("fields.highlights")}
-        list={highlights}
+        value={highlights.value}
+        onChange={highlights.onChange}
         error={err("highlights")}
-        maxLines={12}
-        minRows={5}
+        multiline
+        rows={5}
       />
-      <ListField
+      <BilingualField
         name="included"
         label={t("fields.included")}
-        list={included}
+        value={included.value}
+        onChange={included.onChange}
         error={err("included")}
-        maxLines={20}
-        minRows={5}
+        multiline
+        rows={5}
       />
     </Section>
   );

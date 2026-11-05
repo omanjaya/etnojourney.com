@@ -1,13 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { Save } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useId, useState, useTransition, type FormEvent } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/form-controls";
-import { isUploadedImagePath } from "@/features/media/image-url";
 import { createCreditAction, updateCreditAction } from "../actions";
 
 export type CreditFormValues = {
@@ -37,28 +35,23 @@ const TEXT_FIELDS: { key: TextKey; type: "text" | "url"; required: boolean }[] =
   { key: "license", type: "text", required: true },
   { key: "licenseUrl", type: "url", required: false },
   { key: "source", type: "text", required: true },
-  // Own photos and local photographers often have no web page to link to.
-  { key: "sourceUrl", type: "url", required: false },
+  { key: "sourceUrl", type: "url", required: true },
 ];
 
 /**
- * Edit an existing credit (path fixed) or add one for an uploaded image:
- * either a photo picked from the list (`pathLocked`) or a typed /media/ path.
+ * Edit an existing credit (path fixed) or add one for an uploaded image
+ * (path chosen from `suggestions` or typed).
  */
 export function CreditForm({
   mode,
   defaults,
-  pathLocked = false,
+  suggestions = [],
   onDone,
-  onCancel = mode === "edit" ? onDone : undefined,
 }: {
   mode: "create" | "edit";
   defaults: CreditFormValues;
-  /** Create mode: the photo was picked from the list, so its path is not editable. */
-  pathLocked?: boolean;
+  suggestions?: string[];
   onDone?: () => void;
-  /** Shows a cancel button (edit mode: defaults to `onDone`). */
-  onCancel?: () => void;
 }) {
   const t = useTranslations("adminInsights.credits.form");
   const id = useId();
@@ -94,42 +87,26 @@ export function CreditForm({
 
   return (
     <form onSubmit={submit} noValidate className="flex flex-col gap-4">
-      {mode === "create" && !pathLocked && (
-        <div className="flex items-start gap-4">
-          <Field
-            label={t("path")}
-            htmlFor={fieldId("path")}
-            error={err("path")}
-            hint={t("pathHint")}
-            className="min-w-0 flex-1"
-          >
-            <Input
-              id={fieldId("path")}
-              value={values.path}
-              onChange={(e) => setValues((v) => ({ ...v, path: e.target.value }))}
-              placeholder="/media/tours/2026/05/....webp"
-              required
-              autoComplete="off"
-              {...invalid("path")}
-            />
-          </Field>
-          {isUploadedImagePath(values.path.trim()) && (
-            <div className="bg-sand-200 relative mt-7 size-16 shrink-0 overflow-hidden rounded-xl">
-              <Image
-                src={values.path.trim()}
-                alt={t("preview")}
-                fill
-                sizes="64px"
-                className="object-cover"
-              />
-            </div>
+      {mode === "create" && (
+        <Field label={t("path")} htmlFor={fieldId("path")} error={err("path")} hint={t("pathHint")}>
+          <Input
+            id={fieldId("path")}
+            value={values.path}
+            onChange={(e) => setValues((v) => ({ ...v, path: e.target.value }))}
+            list={suggestions.length ? `${fieldId("path")}-list` : undefined}
+            placeholder="/media/tours/2026/05/....webp"
+            required
+            autoComplete="off"
+            {...invalid("path")}
+          />
+          {suggestions.length > 0 && (
+            <datalist id={`${fieldId("path")}-list`}>
+              {suggestions.map((path) => (
+                <option key={path} value={path} />
+              ))}
+            </datalist>
           )}
-        </div>
-      )}
-      {pathLocked && err("path") && (
-        <p role="alert" className="text-danger text-xs">
-          {err("path")}
-        </p>
+        </Field>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2">
@@ -158,8 +135,8 @@ export function CreditForm({
       {saved && mode === "create" && <Alert tone="success">{t("created")}</Alert>}
 
       <div className="flex flex-wrap justify-end gap-2">
-        {onCancel && (
-          <Button type="button" variant="ghost" size="sm" onClick={onCancel} disabled={pending}>
+        {onDone && mode === "edit" && (
+          <Button type="button" variant="ghost" size="sm" onClick={onDone} disabled={pending}>
             {t("cancel")}
           </Button>
         )}

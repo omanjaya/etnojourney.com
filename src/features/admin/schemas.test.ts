@@ -76,7 +76,7 @@ const validTour = {
   coverImage: "/images/content/ubud/cover.webp",
   gallery: [],
   highlights: [],
-  included: [text("Makan siang", "Lunch")],
+  included: [],
   difficulty: "moderate",
   notIncluded: [text("Tiket pesawat", "Flights")],
   whatToBring: [],
@@ -126,137 +126,6 @@ describe("tourFormSchema duration in hours", () => {
     ).toBe(false);
     expect(tourFormSchema.safeParse({ ...validTour, durationHours: 13 }).success).toBe(false);
     expect(tourFormSchema.safeParse({ ...validTour, durationHours: 0 }).success).toBe(false);
-  });
-});
-
-/** Issue messages per dotted path, e.g. `{ "title.en": ["englishRequired"] }`. */
-function tourIssues(input: Record<string, unknown>) {
-  const parsed = tourFormSchema.safeParse(input);
-  if (parsed.success) return {};
-  const byPath: Record<string, string[]> = {};
-  for (const issue of parsed.error.issues) {
-    (byPath[issue.path.join(".")] ??= []).push(issue.message);
-  }
-  return byPath;
-}
-
-describe("tourFormSchema messages", () => {
-  it("rejects a price typed in thousands and an absurdly high one", () => {
-    expect(tourIssues({ ...validTour, pricePerPerson: 450 })).toEqual({
-      pricePerPerson: ["priceMin"],
-    });
-    expect(tourIssues({ ...validTour, pricePerPerson: 0 })).toEqual({
-      pricePerPerson: ["priceMin"],
-    });
-    expect(tourIssues({ ...validTour, pricePerPerson: 1_000_000_001 })).toEqual({
-      pricePerPerson: ["priceMax"],
-    });
-    expect(tourFormSchema.safeParse({ ...validTour, pricePerPerson: 10_000 }).success).toBe(true);
-  });
-
-  it("asks to choose an unselected destination, category or difficulty", () => {
-    expect(
-      tourIssues({ ...validTour, destinationId: 0, category: undefined, difficulty: "" }),
-    ).toEqual({ destinationId: ["choose"], category: ["choose"], difficulty: ["choose"] });
-  });
-
-  it("names the range in number errors", () => {
-    expect(tourIssues({ ...validTour, maxParticipants: 150 })).toEqual({
-      maxParticipants: ["maxParticipants"],
-    });
-    expect(tourIssues({ ...validTour, durationHours: 2.5 })).toEqual({
-      durationHours: ["durationHours"],
-    });
-  });
-
-  it("says when only the English side is missing, and states text limits", () => {
-    expect(tourIssues({ ...validTour, title: text("Judul", " ") })).toEqual({
-      "title.en": ["englishRequired"],
-    });
-    expect(tourIssues({ ...validTour, title: text("", "Title") })).toEqual({
-      "title.id": ["required"],
-    });
-    expect(tourIssues({ ...validTour, summary: text("a".repeat(301), "b") })).toEqual({
-      "summary.id": ["tooLong"],
-    });
-  });
-
-  it("reports differing ID and EN line counts and too many lines", () => {
-    expect(tourIssues({ ...validTour, highlights: [text("Satu"), { id: "Dua", en: "" }] })).toEqual(
-      { "highlights.1.en": ["linesMismatch"] },
-    );
-    const sevenLines = Array.from({ length: 7 }, (_, i) => text(`a${i}`));
-    expect(tourIssues({ ...validTour, notIncluded: sevenLines })).toEqual({
-      notIncluded: ["tooManyLines"],
-    });
-    expect(tourIssues({ ...validTour, etiquette: [text("a".repeat(201), "b")] })).toEqual({
-      "etiquette.0.id": ["lineTooLong"],
-    });
-  });
-
-  it("requires at least one included item", () => {
-    expect(tourIssues({ ...validTour, included: [] })).toEqual({
-      included: ["includedRequired"],
-    });
-  });
-});
-
-describe("tourFormSchema itinerary days", () => {
-  const day = { title: text("Hari"), description: text("Kegiatan") };
-
-  it("needs one itinerary entry per day of the duration", () => {
-    expect(tourIssues({ ...validTour, durationDays: 3 })).toEqual({
-      itinerary: ["itineraryDays"],
-    });
-    expect(tourIssues({ ...validTour, itinerary: [day, day] })).toEqual({
-      itinerary: ["itineraryDays"],
-    });
-    expect(
-      tourFormSchema.safeParse({ ...validTour, durationDays: 2, itinerary: [day, day] }).success,
-    ).toBe(true);
-  });
-
-  it("reports an empty itinerary as a day-count problem", () => {
-    // Both the minimum and the per-day check fire; parseInput shows the message once.
-    const issues = tourIssues({ ...validTour, itinerary: [] });
-    expect(Object.keys(issues)).toEqual(["itinerary"]);
-    expect(new Set(issues.itinerary)).toEqual(new Set(["itineraryDays"]));
-  });
-
-  it("points at the exact day field that is missing English", () => {
-    const missing = { title: text("Hari 1"), description: { id: "Kegiatan", en: "" } };
-    expect(tourIssues({ ...validTour, itinerary: [missing] })).toEqual({
-      "itinerary.0.description.en": ["englishRequired"],
-    });
-  });
-});
-
-describe("tourFormSchema cross-field checks", () => {
-  it("runs while unrelated fields still fail", () => {
-    const issues = tourIssues({
-      ...validTour,
-      category: undefined,
-      durationDays: 2,
-      durationHours: 3,
-    });
-    expect(issues).toEqual({
-      category: ["choose"],
-      durationHours: ["durationHoursSameDay"],
-      itinerary: ["itineraryDays"],
-    });
-  });
-
-  it("waits for the fields they read", () => {
-    expect(tourIssues({ ...validTour, durationDays: "", durationHours: 3 })).toEqual({
-      durationDays: ["durationDays"],
-    });
-  });
-
-  it("rejects a payload that is not an object instead of throwing", () => {
-    // Server actions can be called with anything; parseInput must get a failure back.
-    for (const input of [null, undefined, "tour", 5, []]) {
-      expect(tourFormSchema.safeParse(input).success).toBe(false);
-    }
   });
 });
 

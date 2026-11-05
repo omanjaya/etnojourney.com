@@ -92,13 +92,6 @@
       "when": 1793875942220,
       "tag": "0012_tour_duration_hours",
       "breakpoints": true
-    },
-    {
-      "idx": 13,
-      "version": "7",
-      "when": 1793884399846,
-      "tag": "0013_photo_credit_source_optional",
-      "breakpoints": true
     }
   ]
 }

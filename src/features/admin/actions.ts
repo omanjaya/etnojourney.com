@@ -7,11 +7,9 @@ import { fail, type ActionResult } from "@/lib/action-result";
 import { assertPermission } from "@/server/auth/guards";
 import { auditService } from "@/server/services/audit.service";
 import type { BookingStatus } from "@/server/db/schema";
-import type { RefundMode } from "@/server/services/booking.rules";
 import { bookingService } from "@/server/services/booking.service";
 import { destinationService } from "@/server/services/destination.service";
-import type { TourRemovalBlocker } from "@/server/services/catalogue.rules";
-import { DomainError, isDomainError } from "@/server/services/errors";
+import { DomainError } from "@/server/services/errors";
 import { notificationService } from "@/server/services/notification.service";
 import { tourService } from "@/server/services/tour.service";
 import { revalidate } from "@/features/shared/revalidate";
@@ -19,10 +17,8 @@ import { parseInput, runAction } from "@/features/shared/run-action";
 import {
   destinationFormSchema,
   destinationIdSchema,
-  editVersionSchema,
   toggleTourSchema,
   tourFormSchema,
-  tourIdSchema,
   updateBookingStatusSchema,
   type DestinationFormValues,
   type TourFormValues,
@@ -34,35 +30,11 @@ function revalidateCatalogue() {
   revalidate.everything();
 }
 
-/** What an edit form gets back after a save: whether anything changed, and its new version. */
-export type SavedEdit = { changed: boolean; version: string };
-
-/**
- * `runAction`, except that a taken or locked slug is also reported on the slug
- * field, so the form marks and focuses it instead of only showing the banner.
- */
-async function runSlugAction<T>(fn: () => Promise<T>): Promise<ActionResult<T>> {
-  let slugError = false;
-  const result = await runAction(async () => {
-    try {
-      return await fn();
-    } catch (error) {
-      if (isDomainError(error) && (error.code === "slugTaken" || error.code === "slugLocked")) {
-        slugError = true;
-      }
-      throw error;
-    }
-  });
-  if (!result.ok && slugError) return fail(result.error, { slug: [result.error] });
-  return result;
-}
-
 export async function updateBookingStatusAction(
   bookingId: number,
   status: BookingStatus,
-  refund?: RefundMode,
 ): Promise<ActionResult<{ status: BookingStatus }>> {
-  const parsed = await parseInput(updateBookingStatusSchema, { bookingId, status, refund });
+  const parsed = await parseInput(updateBookingStatusSchema, { bookingId, status });
   if (!parsed.success) return parsed.result;
 
   return runAction(async () => {
@@ -71,7 +43,6 @@ export async function updateBookingStatusAction(
       parsed.data.bookingId,
       parsed.data.status,
       actor.id,
-      { refund: parsed.data.refund },
     );
     after(() => notificationService.bookingStatusChanged(booking.id));
     revalidate.admin();
@@ -124,12 +95,11 @@ export async function setTourFeaturedAction(
   });
 }
 
-/** Creates the tour, then opens it in the editor (with a "created" notice). */
 export async function createTourAction(values: TourFormValues): Promise<ActionResult<never>> {
   const parsed = await parseInput(tourFormSchema, values);
   if (!parsed.success) return parsed.result;
 
-  return runSlugAction(async () => {
+  return runAction(async () => {
     const actor = await assertPermission("catalogue.manage");
     const tour = await tourService.create(parsed.data);
     await auditService.record({
@@ -140,61 +110,31 @@ export async function createTourAction(values: TourFormValues): Promise<ActionRe
       details: { slug: tour.slug },
     });
     revalidateCatalogue();
-    return redirect({
-      href: { pathname: `/admin/tours/${tour.id}/edit`, query: { created: "1" } },
-      locale: await getLocale(),
-    });
+    return redirect({ href: "/admin/tours", locale: await getLocale() });
   });
 }
 
-/**
- * Saves the tour edit form and stays on the page (the form shows "saved").
- * `version` is the edit version the form was opened with; a newer save by
- * someone else is refused with `staleEdit` instead of being overwritten.
- */
 export async function updateTourAction(
   tourId: number,
   values: TourFormValues,
-  version: string,
-): Promise<ActionResult<SavedEdit>> {
+): Promise<ActionResult<never>> {
   const parsed = await parseInput(tourFormSchema, values);
   if (!parsed.success) return parsed.result;
 
-  return runSlugAction(async () => {
+  return runAction(async () => {
     const actor = await assertPermission("catalogue.manage");
     if (!Number.isInteger(tourId) || tourId < 1) throw new DomainError("notFound");
-    const expected = editVersionSchema.safeParse(version);
-    if (!expected.success) throw new DomainError("staleEdit");
-    // The service records the audit entry in the same transaction as the change.
-    const saved = await tourService.update(actor.id, tourId, parsed.data, expected.data);
-    if (saved.changed) revalidateCatalogue();
-    return saved;
-  });
-}
-
-/** Deletes an unused draft tour; anything else is refused with the reason. */
-export async function deleteTourAction(tourId: number): Promise<ActionResult<never>> {
-  const parsed = await parseInput(tourIdSchema, tourId);
-  if (!parsed.success) return parsed.result;
-
-  let blocker: TourRemovalBlocker | null = null;
-  const result = await runAction(async () => {
-    const actor = await assertPermission("catalogue.manage");
-    const removed = await tourService.remove(actor.id, parsed.data);
-    if (removed.status === "blocked") {
-      blocker = removed.blocker;
-      return;
-    }
+    await tourService.update(tourId, parsed.data);
+    await auditService.record({
+      actorId: actor.id,
+      action: "tour.updated",
+      entityType: "tour",
+      entityId: tourId,
+      details: { slug: parsed.data.slug },
+    });
     revalidateCatalogue();
     return redirect({ href: "/admin/tours", locale: await getLocale() });
   });
-
-  if (blocker) {
-    const t = await getTranslations("admin.form.delete.blocked");
-    return fail(t(blocker));
-  }
-  // Success redirects on the server, so only failures reach this point.
-  return result as ActionResult<never>;
 }
 
 /* ------------------------------------------------------------------ */
@@ -202,16 +142,13 @@ export async function deleteTourAction(tourId: number): Promise<ActionResult<nev
 /* ------------------------------------------------------------------ */
 
 /**
- * Creates a destination (id = null, then opens it in the editor with a
- * "created" notice) or saves an edit (stays on the page; `version` guards
- * against overwriting someone else's newer save). A taken slug is reported on
- * the slug field rather than as a generic error.
+ * Creates (id = null) or updates a destination, then redirects to the list.
+ * A taken slug is reported on the slug field rather than as a generic error.
  */
-async function saveDestination<T>(
+async function saveDestination(
   id: number | null,
   values: DestinationFormValues,
-  version: string | null,
-): Promise<ActionResult<T>> {
+): Promise<ActionResult<never>> {
   const parsed = await parseInput(destinationFormSchema, values);
   if (!parsed.success) return parsed.result;
 
@@ -223,49 +160,40 @@ async function saveDestination<T>(
       slugTaken = true;
       return;
     }
-    if (id !== null) {
-      const expected = editVersionSchema.safeParse(version);
-      if (!expected.success) throw new DomainError("staleEdit");
-      // The service records the audit entry in the same transaction as the change.
-      const saved = await destinationService.update(actor.id, id, parsed.data, expected.data);
-      if (saved.changed) revalidateCatalogue();
-      return saved;
-    }
-    const created = await destinationService.create(parsed.data);
+    const saved =
+      id === null
+        ? await destinationService.create(parsed.data)
+        : await destinationService.update(id, parsed.data);
     await auditService.record({
       actorId: actor.id,
-      action: "destination.created",
+      action: id === null ? "destination.created" : "destination.updated",
       entityType: "destination",
-      entityId: created.id,
-      details: { slug: created.slug },
+      entityId: saved.id,
+      details: { slug: saved.slug },
     });
     revalidateCatalogue();
-    return redirect({
-      href: { pathname: `/admin/destinations/${created.id}/edit`, query: { created: "1" } },
-      locale: await getLocale(),
-    });
+    return redirect({ href: "/admin/destinations", locale: await getLocale() });
   });
 
   if (slugTaken) {
     const t = await getTranslations("admin.destinationForm");
     return fail(t("slugTaken"), { slug: [t("slugTaken")] });
   }
-  // Creating redirects on the server, so only failures and edits reach this point.
-  return result as ActionResult<T>;
+  // Success redirects on the server, so only failures reach this point.
+  return result as ActionResult<never>;
 }
 
 export async function createDestinationAction(
   values: DestinationFormValues,
 ): Promise<ActionResult<never>> {
-  return saveDestination<never>(null, values, null);
+  return saveDestination(null, values);
 }
 
 export async function updateDestinationAction(
   destinationId: number,
   values: DestinationFormValues,
-  version: string,
-): Promise<ActionResult<SavedEdit>> {
-  return saveDestination<SavedEdit>(destinationId, values, version);
+): Promise<ActionResult<never>> {
+  return saveDestination(destinationId, values);
 }
 
 /** Deletes a destination with no tours; the server re-checks even if the UI disabled it. */
@@ -276,11 +204,16 @@ export async function deleteDestinationAction(destinationId: number): Promise<Ac
   let inUse = false;
   const result = await runAction(async () => {
     const actor = await assertPermission("catalogue.manage");
-    // The service records `destination.deleted` (with slug and name) in its transaction.
-    if ((await destinationService.remove(actor.id, parsed.data)) === "inUse") {
+    if ((await destinationService.remove(parsed.data)) === "inUse") {
       inUse = true;
       return;
     }
+    await auditService.record({
+      actorId: actor.id,
+      action: "destination.deleted",
+      entityType: "destination",
+      entityId: parsed.data,
+    });
     revalidateCatalogue();
     return redirect({ href: "/admin/destinations", locale: await getLocale() });
   });
