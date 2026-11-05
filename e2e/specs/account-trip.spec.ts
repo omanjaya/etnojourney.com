@@ -53,7 +53,7 @@ test.describe("account: upcoming trip", () => {
     await page.goto(`/account/bookings/${booking.code}`);
     await expect(page.getByRole("heading", { name: "Langkah berikutnya" })).toBeVisible();
     await expect(
-      page.getByText("Selesaikan pembayaran agar tempatmu terkonfirmasi."),
+      page.getByText("Selesaikan pembayaran dalam 48 jam setelah memesan agar tempatmu tetap tersimpan."),
     ).toBeVisible();
   });
 });

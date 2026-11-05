@@ -54,6 +54,7 @@
     "summary": "{total, plural, =0 {Tidak ada pembayaran} other {# pembayaran}}",
     "refundRequired": "Perlu refund",
     "refundedOn": "Dikembalikan {date}",
+    "refundedPartial": "Dikembalikan {amount} dari {paid} ({percent}%)",
     "noMatch": {
       "title": "Tidak ada pembayaran yang cocok",
       "description": "Coba kode booking atau ID order lain, atau hapus filter status."

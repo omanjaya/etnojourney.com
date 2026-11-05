@@ -7,6 +7,7 @@ import { fail, type ActionResult } from "@/lib/action-result";
 import { assertPermission } from "@/server/auth/guards";
 import { auditService } from "@/server/services/audit.service";
 import type { BookingStatus } from "@/server/db/schema";
+import type { RefundMode } from "@/server/services/booking.rules";
 import { bookingService } from "@/server/services/booking.service";
 import { destinationService } from "@/server/services/destination.service";
 import type { TourRemovalBlocker } from "@/server/services/catalogue.rules";
@@ -59,8 +60,9 @@ async function runSlugAction<T>(fn: () => Promise<T>): Promise<ActionResult<T>> 
 export async function updateBookingStatusAction(
   bookingId: number,
   status: BookingStatus,
+  refund?: RefundMode,
 ): Promise<ActionResult<{ status: BookingStatus }>> {
-  const parsed = await parseInput(updateBookingStatusSchema, { bookingId, status });
+  const parsed = await parseInput(updateBookingStatusSchema, { bookingId, status, refund });
   if (!parsed.success) return parsed.result;
 
   return runAction(async () => {
@@ -69,6 +71,7 @@ export async function updateBookingStatusAction(
       parsed.data.bookingId,
       parsed.data.status,
       actor.id,
+      { refund: parsed.data.refund },
     );
     after(() => notificationService.bookingStatusChanged(booking.id));
     revalidate.admin();

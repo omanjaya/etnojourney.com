@@ -47,6 +47,7 @@ import { RescheduleDialog } from "@/features/self-service/components/reschedule-
 import { cancellationPolicy } from "@/config/cancellation";
 import { requireUser } from "@/server/auth/guards";
 import { accountService } from "@/server/services/account.service";
+import { UNPAID_HOLD_HOURS } from "@/server/services/booking.rules";
 import { isDomainError } from "@/server/services/errors";
 import { paymentService } from "@/server/services/payment.service";
 import { reviewService } from "@/server/services/review.service";
@@ -343,7 +344,9 @@ export default async function BookingDetailPage({
                       </p>
                     )}
                     <p className={step.state === "upcoming" ? "text-ink-soft" : "font-medium"}>
-                      {t(`steps.${step.key}`)}
+                      {step.key === "pay"
+                        ? t("steps.pay", { hours: UNPAID_HOLD_HOURS })
+                        : t(`steps.${step.key}`)}
                     </p>
                   </div>
                 </li>
@@ -510,15 +513,28 @@ function Detail({
   );
 }
 
-type StepKey = "pay" | "paid" | "email" | "host" | "prepare" | "review" | "cancelled";
+type StepKey =
+  | "pay"
+  | "paid"
+  | "confirmedUnpaid"
+  | "email"
+  | "host"
+  | "prepare"
+  | "review"
+  | "cancelled";
 type Step = { key: StepKey; state: "done" | "current" | "upcoming" };
 
-/** The journey after booking, adapted to where this booking is now. */
+/**
+ * The journey after booking, adapted to where this booking is now. A booking
+ * the team confirmed without an online payment (cash or transfer) never
+ * claims "payment received".
+ */
 function nextSteps(status: string, isPaid: boolean): Step[] {
   if (status === "cancelled") return [{ key: "cancelled", state: "current" }];
+  const confirmed: StepKey = isPaid ? "paid" : "confirmedUnpaid";
   if (status === "completed") {
     return [
-      { key: "paid", state: "done" },
+      { key: confirmed, state: "done" },
       { key: "prepare", state: "done" },
       { key: "review", state: "current" },
     ];
@@ -532,7 +548,7 @@ function nextSteps(status: string, isPaid: boolean): Step[] {
     ];
   }
   return [
-    { key: "paid", state: "done" },
+    { key: confirmed, state: "done" },
     { key: "email", state: "done" },
     { key: "host", state: "current" },
     { key: "prepare", state: "upcoming" },

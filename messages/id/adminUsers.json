@@ -150,7 +150,8 @@
         "status_changed": "Mengubah status pemesanan",
         "note_added": "Menambahkan catatan pemesanan",
         "cancelled_by_traveller": "Dibatalkan oleh wisatawan",
-        "rescheduled": "Jadwal diubah"
+        "rescheduled": "Jadwal diubah",
+        "expired": "Dilepas otomatis karena belum dibayar"
       },
       "payment": {
         "refund_required": "Menandai perlu refund",

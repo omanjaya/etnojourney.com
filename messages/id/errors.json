@@ -12,6 +12,7 @@
   "dateClosed": "Tanggal ini ditutup untuk pemesanan. Silakan pilih tanggal lain.",
   "closureRange": "Pilih tanggal mulai hari ini, paling banyak 92 hari sekaligus dan dalam 12 bulan ke depan.",
   "invalidTransition": "Perubahan status ini tidak diizinkan.",
+  "tripNotStarted": "Booking baru bisa ditandai selesai mulai tanggal perjalanannya.",
   "notCancellable": "Booking ini sudah tidak bisa dibatalkan.",
   "slugTaken": "Alamat halaman ini sudah dipakai. Gunakan alamat lain.",
   "staleEdit": "Data ini baru saja diubah orang lain (atau di tab lain). Supaya perubahan itu tidak tertimpa, muat ulang halaman lalu ulangi perubahan Anda.",

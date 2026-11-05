@@ -26,9 +26,9 @@
   "dashboard": {
     "queuesLabel": "Antrean kerja",
     "pending": {
-      "label": "Booking menunggu",
-      "action": "Konfirmasi atau tolak",
-      "count": "{count, plural, =0 {Tidak ada booking menunggu} other {# booking menunggu}}"
+      "label": "Belum dibayar",
+      "action": "Ingatkan tamu untuk membayar, atau batalkan",
+      "count": "{count, plural, =0 {Tidak ada booking yang menunggu pembayaran} other {# booking menunggu pembayaran}}"
     },
     "refunds": {
       "label": "Perlu refund",
@@ -54,9 +54,9 @@
       "refunds": "Refund",
       "refundCount": "{count, plural, =0 {Tidak ada refund} other {# refund}}",
       "bookings": "Booking",
-      "participants": "{count, plural, other {# pelancong}}",
+      "participants": "{count, plural, other {# pelancong}}{cancelled, plural, =0 {} other {, # booking dibatalkan}}",
       "groupSize": "Rata-rata ukuran grup",
-      "groupSizeHint": "Pelancong per booking"
+      "groupSizeHint": "Pelancong per booking, tanpa yang dibatalkan"
     },
     "period": {
       "label": "Periode laporan",
@@ -88,7 +88,8 @@
     "tours": {
       "title": "Per tur",
       "export": "Ekspor CSV",
-      "tableLabel": "Tabel per tur"
+      "tableLabel": "Tabel per tur",
+      "cancelled": "{count, plural, other {# dibatalkan}}"
     },
     "columns": {
       "month": "Bulan",
@@ -98,6 +99,16 @@
       "gross": "Diterima",
       "refunds": "Refund",
       "net": "Bersih"
+    },
+    "exportColumns": {
+      "tourSlug": "Slug tur",
+      "tour": "Tur",
+      "bookings": "Booking",
+      "cancelled": "Booking dibatalkan",
+      "participants": "Pelancong",
+      "grossIdr": "Diterima (Rp)",
+      "refundsIdr": "Refund (Rp)",
+      "netIdr": "Bersih (Rp)"
     },
     "empty": "Belum ada booking atau pembayaran pada periode ini."
   },

@@ -55,9 +55,12 @@
     "actions": {
       "booking_status_changed": "Status changed to {status}",
       "booking_note_added": "Internal note added",
-      "payment_refund_required": "Payment flagged for refund",
-      "payment_refunded": "Refund recorded"
-    },
-    "other": "Other change ({action})"
+      "booking_rescheduled": "Rescheduled from {from} to {to}",
+      "booking_cancelled_by_traveller": "Cancelled by the traveller",
+      "booking_cancelled_by_traveller_paid": "{percent, plural, =0 {Cancelled by the traveller, no refund} other {Cancelled by the traveller, #% refund ({amount})}}",
+      "booking_expired": "Cancelled automatically because it wasn't paid",
+      "payment_refund_required": "Payment flagged for a refund of {amount}",
+      "payment_refunded": "Refund of {amount} recorded"
+    }
   }
 }

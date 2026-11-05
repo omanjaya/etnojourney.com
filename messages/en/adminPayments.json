@@ -54,6 +54,7 @@
     "summary": "{total, plural, =0 {No payments} one {# payment} other {# payments}}",
     "refundRequired": "Refund needed",
     "refundedOn": "Refunded {date}",
+    "refundedPartial": "Returned {amount} of {paid} ({percent}%)",
     "noMatch": {
       "title": "No payments match",
       "description": "Try another booking code or order ID, or clear the status filter."

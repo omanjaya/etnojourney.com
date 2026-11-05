@@ -48,7 +48,7 @@ Detail konvensi ada di [`AGENTS.md`](AGENTS.md), dan desain lengkap di [`docs/su
 2. Server menghitung harga dari database dan mengecek sisa kuota di dalam transaksi dengan row lock, sehingga tidak terjadi overbooking.
 3. Booking tercatat `pending` dengan kode `EJ-XXXXXX`, dan email konfirmasi dikirim.
 4. Traveller menekan **Bayar sekarang** dan diarahkan ke halaman pembayaran Midtrans. Webhook `POST /api/payments/midtrans` memverifikasi signature dan jumlah, lalu menandai pembayaran `paid` dan booking `confirmed` secara otomatis.
-5. Selama belum dibayar, traveller bisa membatalkan. Admin tetap bisa mengubah status secara manual: `pending → confirmed | cancelled`, `confirmed → completed | cancelled`.
+5. Selama belum dibayar, traveller bisa membatalkan. Admin tetap bisa mengubah status secara manual: `pending → confirmed | cancelled`, `confirmed → completed | cancelled`. Mengonfirmasi booking yang belum dibayar meminta konfirmasi dulu (tamu tidak bisa lagi membayar online), `completed` baru bisa dipilih mulai tanggal perjalanan, dan membatalkan booking yang sudah dibayar menanyakan refund sesuai kebijakan atau penuh.
 6. Setelah perjalanan `completed`, traveller bisa menulis satu ulasan per booking. Rating tur dihitung ulang otomatis, dan admin bisa menyembunyikan ulasan di `/admin/reviews`.
 
 ### Integrasi eksternal
@@ -168,6 +168,8 @@ Endpoint `POST /api/cron/trip-emails` mengirim dua jenis email otomatis, masing-
 
 - **Pengingat sebelum perjalanan**: booking `confirmed` dengan tanggal perjalanan hari ini sampai 3 hari lagi (zona waktu `Asia/Jakarta`). Isinya titik kumpul, tanggal, daftar barang bawaan, etika setempat, kontak, tautan ke halaman booking dan e-tiket PDF.
 - **Permintaan ulasan**: booking `completed` yang perjalanannya 1 sampai 14 hari lalu dan belum diulas. Tautannya menuju halaman booking di akun, tempat ulasan ditulis.
+
+Pemanggilan yang sama juga **melepas kursi booking yang tidak dibayar**: booking `pending` tanpa pembayaran lunas dibatalkan oleh sistem jika sudah lebih dari 48 jam sejak dipesan (kecuali pembayaran via Midtrans masih berjalan, maksimal 24 jam) atau tanggal perjalanannya sudah lewat. Tiap pembatalan tercatat di log aktivitas sebagai `booking.expired`, dan traveller menerima email "booking dibatalkan" seperti biasa. Batas waktunya ada di `src/server/services/booking.rules.ts` (`UNPAID_HOLD_HOURS`).
 
 Setiap email hanya terkirim sekali: sebelum mengirim, baris booking "diklaim" dengan satu `UPDATE ... WHERE reminder_sent_at IS NULL` (atau `review_request_sent_at`), jadi dua pemanggilan yang berjalan bersamaan tidak mengirim dobel. Jika pengiriman gagal, klaim dilepas dan dicoba lagi pada pemanggilan berikutnya. Satu pemanggilan memproses paling banyak 200 email per jenis dan mengembalikan JSON berisi jumlahnya.
 

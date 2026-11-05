@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { isAllowedImageSource } from "@/features/media/image-url";
 import { bookingStatus, tourCategory, tourDifficulty } from "@/server/db/schema";
+import { REFUND_MODES } from "@/server/services/booking.rules";
 
 /** Required in both languages; a missing English side says so in its message. */
 const localized = (max: number) =>
@@ -56,6 +57,8 @@ export const bookingStatusSchema = z.enum(bookingStatus.enumValues, { error: "in
 export const updateBookingStatusSchema = z.object({
   bookingId: z.number().int().positive(),
   status: bookingStatusSchema,
+  /** For cancelling a paid booking: the policy share or a full refund. */
+  refund: z.enum(REFUND_MODES, { error: "invalid" }).optional(),
 });
 
 export const toggleTourSchema = z.object({

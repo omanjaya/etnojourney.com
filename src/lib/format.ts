@@ -38,6 +38,27 @@ export function formatDate(
   }).format(value);
 }
 
+/**
+ * An instant as `YYYY-MM-DD HH:mm` in the business time zone (24-hour), for
+ * CSV exports: spreadsheets read it as a date-time and it sorts as text.
+ */
+export function formatBusinessDateTime(value: Date): string {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: BUSINESS_TIME_ZONE,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    })
+      .formatToParts(value)
+      .map((part) => [part.type, part.value]),
+  );
+  return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute}`;
+}
+
 /** Today's calendar date in the business time zone, as `YYYY-MM-DD`. */
 function businessToday(now: Date): string {
   // en-CA formats as YYYY-MM-DD.

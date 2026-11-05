@@ -13,6 +13,7 @@ export type DomainErrorCode =
   | "dateClosed"
   | "closureRange"
   | "invalidTransition"
+  | "tripNotStarted"
   | "notCancellable"
   | "slugTaken"
   // Catalogue editing: someone saved in between; a live tour keeps its address.

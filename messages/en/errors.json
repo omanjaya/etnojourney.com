@@ -12,6 +12,7 @@
   "dateClosed": "This date is closed for bookings. Please choose another date.",
   "closureRange": "Choose dates from today onwards, at most 92 days at a time and within the next 12 months.",
   "invalidTransition": "This status change isn't allowed.",
+  "tripNotStarted": "A booking can only be marked completed from its travel date onwards.",
   "notCancellable": "This booking can no longer be cancelled.",
   "slugTaken": "That page address is already in use. Choose another one.",
   "staleEdit": "Someone else (or another tab) changed this just now. To avoid overwriting their change, reload the page and make your edit again.",
