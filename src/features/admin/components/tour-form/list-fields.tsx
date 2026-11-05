@@ -18,7 +18,7 @@ export function ListFieldsSection({
   const t = useTranslations("admin.form");
 
   return (
-    <Section title={t("sections.lists")} hint={t("sections.listsHint")}>
+    <Section id="tour-lists" title={t("sections.lists")} hint={t("sections.listsHint")}>
       <ListField
         name="highlights"
         label={t("fields.highlights")}

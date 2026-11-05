@@ -59,7 +59,7 @@ export function DetailsSection({
   };
 
   return (
-    <Section title={t("sections.details")} hint={t("sections.detailsHint")}>
+    <Section id="tour-details" title={t("sections.details")} hint={t("sections.detailsHint")}>
       <div className="grid gap-6 md:grid-cols-2">
         <Field label={t("fields.destination")} htmlFor="destinationId" error={err("destinationId")}>
           <Select

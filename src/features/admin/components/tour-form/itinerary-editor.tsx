@@ -32,7 +32,7 @@ export function ItineraryEditor({ values, set, err }: TourSectionProps) {
     );
 
   return (
-    <Section title={t("sections.itinerary")} hint={t("sections.itineraryHint")}>
+    <Section id="tour-itinerary" title={t("sections.itinerary")} hint={t("sections.itineraryHint")}>
       {sectionError && (
         <p role="alert" className="text-danger text-xs">
           {sectionError}

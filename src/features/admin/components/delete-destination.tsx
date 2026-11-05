@@ -1,23 +1,27 @@
 "use client";
 
-import { Trash2, TriangleAlert } from "lucide-react";
+import { ArrowUpRight, Trash2, TriangleAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRef, useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { deleteDestinationAction } from "../actions";
 
 /**
- * Danger zone for the destination edit page. Disabled (with an explanation)
- * while tours still reference the destination; the server re-checks anyway.
+ * Danger zone for the destination edit page. Disabled (with an explanation
+ * and a link to the tours in question) while tours still reference the
+ * destination; the server re-checks anyway.
  */
 export function DeleteDestination({
   destinationId,
   name,
+  slug,
   tourCount,
 }: {
   destinationId: number;
   name: string;
+  slug: string;
   tourCount: number;
 }) {
   const t = useTranslations("admin.destinationForm.delete");
@@ -53,6 +57,15 @@ export function DeleteDestination({
           <p className="text-muted mt-2 text-sm">
             {blocked ? t("blocked", { count: tourCount }) : t("hint")}
           </p>
+          {blocked && (
+            <Link
+              href={{ pathname: "/admin/tours", query: { destination: slug } }}
+              className="text-terracotta-dark hover:text-terracotta mt-2 inline-flex min-h-10 items-center gap-1.5 text-sm font-medium underline-offset-4 hover:underline"
+            >
+              {t("viewTours", { count: tourCount })}
+              <ArrowUpRight className="size-4" aria-hidden />
+            </Link>
+          )}
         </div>
         <Button
           ref={triggerRef}

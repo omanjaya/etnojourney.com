@@ -63,6 +63,11 @@ export const toggleTourSchema = z.object({
   value: z.boolean(),
 });
 
+export const tourIdSchema = z.number().int().positive();
+
+/** The edit version a form was opened with (see catalogue.rules `recordVersion`). */
+export const editVersionSchema = z.string().regex(/^[0-9a-z]{1,32}$/);
+
 /* ---------------------------------------------------------------- */
 /* List filters (URL search params)                                  */
 /* ---------------------------------------------------------------- */
@@ -115,6 +120,26 @@ const adminListQuerySchema = z.object({ q: optionalParam(searchText) });
 /** `?q=` on the simpler admin lists (tours, reviews, destinations). */
 export function parseAdminListQuery(raw: RawParams): { q?: string } {
   return adminListQuerySchema.parse(flatten(raw));
+}
+
+export const ADMIN_TOUR_STATUSES = ["published", "draft"] as const;
+
+const adminTourQuerySchema = z.object({
+  q: optionalParam(searchText),
+  status: optionalParam(z.enum(ADMIN_TOUR_STATUSES)),
+  destination: optionalParam(
+    z
+      .string()
+      .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+      .max(80),
+  ),
+});
+
+export type AdminTourQuery = z.infer<typeof adminTourQuerySchema>;
+
+/** Admin tour list: `?q=`, `?status=published|draft` and `?destination=<slug>`. */
+export function parseAdminTourQuery(raw: RawParams): AdminTourQuery {
+  return adminTourQuerySchema.parse(flatten(raw));
 }
 
 export const tourFormSchema = z

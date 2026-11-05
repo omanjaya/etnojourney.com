@@ -96,7 +96,8 @@ test.describe("admin destinations", () => {
     const slug = await page.locator("#slug").inputValue();
     expect(slug).toContain(suffix);
     await page.getByRole("button", { name: "Buat destinasi" }).click();
-    await expect(page).toHaveURL(/\/admin\/destinations$/);
+    // Creating opens the new destination in the editor with a confirmation.
+    await expect(page).toHaveURL(/\/admin\/destinations\/\d+\/edit\?created=1$/);
 
     // Visible on the public site.
     const publicPage = await page.context().newPage();

@@ -14,6 +14,8 @@
   "invalidTransition": "This status change isn't allowed.",
   "notCancellable": "This booking can no longer be cancelled.",
   "slugTaken": "That page address is already in use. Choose another one.",
+  "staleEdit": "Someone else (or another tab) changed this just now. To avoid overwriting their change, reload the page and make your edit again.",
+  "slugLocked": "A live tour's page address can't be changed, so links people have shared keep working. Switch off Publish on site first if you really need a new address.",
   "notPayable": "This booking can't be paid. Make sure it is still pending and the travel date hasn't passed.",
   "alreadyPaid": "This booking has already been paid.",
   "paymentUnavailable": "Online payment is currently unavailable. Please contact us.",

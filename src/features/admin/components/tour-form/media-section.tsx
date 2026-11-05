@@ -11,7 +11,7 @@ export function MediaSection({ values, set, err }: TourSectionProps) {
   const galleryHint = tm("galleryHint");
 
   return (
-    <Section title={t("sections.media")} hint={tm("sectionHint")}>
+    <Section id="tour-media" title={t("sections.media")} hint={tm("sectionHint")}>
       <Field label={t("fields.coverImage")} htmlFor="coverImage" error={err("coverImage")}>
         <ImageUploader
           id="coverImage"

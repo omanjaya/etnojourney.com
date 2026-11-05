@@ -9,17 +9,23 @@ const actions = {
   featured: setTourFeaturedAction,
 };
 
-/** Optimistic switch for a boolean tour flag; reverts if the server rejects. */
+/**
+ * Optimistic switch for a boolean tour flag; reverts if the server rejects.
+ * With `confirmOff` (e.g. upcoming bookings would lose their tour page), the
+ * operator confirms before the switch turns off.
+ */
 export function TourToggle({
   tourId,
   field,
   initial,
   label,
+  confirmOff,
 }: {
   tourId: number;
   field: keyof typeof actions;
   initial: boolean;
   label: string;
+  confirmOff?: string;
 }) {
   const [checked, setChecked] = useState(initial);
   const [error, setError] = useState<string | null>(null);
@@ -27,6 +33,7 @@ export function TourToggle({
 
   const toggle = () => {
     const next = !checked;
+    if (!next && confirmOff && !window.confirm(confirmOff)) return;
     setChecked(next);
     setError(null);
     startTransition(async () => {

@@ -100,6 +100,8 @@
     "new": "New tour",
     "edit": "Edit",
     "view": "View on site",
+    "preview": "Preview",
+    "copy": "Copy to a new tour",
     "empty": {
       "title": "No tours yet",
       "description": "Create your first tour package to start taking bookings."
@@ -113,7 +115,16 @@
       "actions": "Actions"
     },
     "togglePublished": "Publish {title}",
-    "toggleFeatured": "Feature {title}"
+    "toggleFeatured": "Feature {title}",
+    "confirmUnpublish": "{count, plural, one {# upcoming booking still uses} other {# upcoming bookings still use}} \"{title}\". If you hide it, guests can't open the tour page or change their date themselves. Hide it anyway?",
+    "filters": {
+      "label": "Filter tours by status",
+      "all": "All",
+      "published": "Live",
+      "draft": "Draft",
+      "destination": "Destination: {name}",
+      "clearDestination": "Remove the destination filter {name}"
+    }
   },
   "form": {
     "newEyebrow": "Catalogue",
@@ -123,6 +134,15 @@
     "backToList": "Back to tours",
     "create": "Create tour",
     "save": "Save changes",
+    "saved": "Changes saved.",
+    "unchanged": "Nothing changed, so there was nothing to save.",
+    "unsaved": "You have unsaved changes.",
+    "unsavedConfirm": "You have unsaved changes. Leave this page and discard them?",
+    "createdDraft": "The tour was created as a draft, so guests can't see it yet. Check it with Preview, then switch on Publish on site under Visibility when it's ready.",
+    "createdLive": "The tour was created and is live on the site.",
+    "copyTitle": "Copy of {title}",
+    "copyNotice": "This form holds a copy of \"{title}\", including photos, lists and itinerary. Change the title and whatever is different, then click Create tour. The copy is saved as a draft and is not live yet.",
+    "jumpTo": "Jump to a form section",
     "lang": {
       "id": "ID",
       "en": "EN"
@@ -138,6 +158,7 @@
       "itinerary": "Itinerary",
       "itineraryHint": "One entry for each day of Duration (days). For a same-day or few-hour tour, describe every activity under Day 1.",
       "visibility": "Visibility",
+      "visibilityLiveHint": "These switches take effect straight away, without Save. Save the form above first so the latest version is what goes live.",
       "practical": "Before you go",
       "practicalHint": "Practical information for guests before the trip. One item per line; Indonesian and English lines pair up in order."
     },
@@ -147,6 +168,8 @@
       "description": "Description",
       "slug": "Page address",
       "slugHint": "Filled in automatically from the Indonesian title. Avoid changing it once the tour has been shared: old links will stop working.",
+      "slugHintEdit": "This is the tour page's address. If you change it, links people have already shared stop working.",
+      "slugLockedHint": "A live tour's page address is locked so links people have shared keep working. Switch off Publish on site first if you really need to change it.",
       "destination": "Destination",
       "selectDestination": "Choose a destination",
       "category": "Category",
@@ -192,6 +215,20 @@
       "easy": "Easy",
       "moderate": "Moderate",
       "challenging": "Challenging"
+    },
+    "delete": {
+      "title": "Delete draft tour",
+      "trigger": "Delete tour",
+      "hint": "Nobody has booked or reviewed this draft, so it can be deleted permanently.",
+      "blocked": {
+        "published": "A live tour can't be deleted. Only drafts can: switch off Publish on site first if this tour really isn't used.",
+        "hasBookings": "This tour has bookings, so it can't be deleted. Switch off Publish on site instead so it is no longer sold.",
+        "hasReviews": "This tour has guest reviews, so it can't be deleted. Switch off Publish on site instead so it is no longer sold."
+      },
+      "confirmTitle": "Delete {title}?",
+      "confirmBody": "This draft tour and its itinerary will be deleted permanently. This can't be undone.",
+      "confirm": "Yes, delete",
+      "cancel": "Cancel"
     }
   },
   "destinations": {
@@ -222,6 +259,7 @@
     "create": "Create destination",
     "save": "Save changes",
     "slugTaken": "That page address is already used by another destination.",
+    "createdNotice": "The destination was created. You can now choose it when you create a tour package.",
     "sections": {
       "basics": "Basics",
       "basicsHint": "Name and province are shown as-is. Tagline and description appear in both languages.",
@@ -234,6 +272,7 @@
       "name": "Destination name",
       "slug": "Page address",
       "slugHint": "Filled automatically from the name. Avoid changing it once the destination has been shared: old links will stop working.",
+      "slugHintEdit": "This is the destination page's address. If you change it, links people have already shared stop working.",
       "province": "Province",
       "tagline": "Tagline",
       "taglineHint": "One short sentence for the destination card.",
@@ -247,7 +286,8 @@
       "title": "Delete destination",
       "trigger": "Delete destination",
       "hint": "A destination can only be deleted when it has no tours.",
-      "blocked": "{count, plural, one {This destination still has # tour. Move or delete it first.} other {This destination still has # tours. Move or delete them first.}}",
+      "blocked": "{count, plural, one {This destination still has # tour. Move it to another destination first (change Destination on the tour's edit page), or delete it if it is an unused draft.} other {This destination still has # tours. Move them to another destination first (change Destination on each tour's edit page), or delete the ones that are unused drafts.}}",
+      "viewTours": "See the {count, plural, one {# tour} other {# tours}} in this destination",
       "confirmTitle": "Delete {name}?",
       "confirmBody": "This destination will be permanently removed from the site. This can't be undone.",
       "confirm": "Yes, delete",

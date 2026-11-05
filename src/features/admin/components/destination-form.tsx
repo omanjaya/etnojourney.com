@@ -1,8 +1,8 @@
 "use client";
 
-import { Save } from "lucide-react";
+import { CircleCheck, Save } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, fieldDescribedBy, Input } from "@/components/ui/form-controls";
@@ -13,6 +13,8 @@ import type { DestinationFormValues } from "../schemas";
 import { BilingualField } from "./form-parts/bilingual-field";
 import { Section } from "./form-parts/section";
 import { slugify } from "./form-parts/slug";
+import { useFocusError } from "./form-parts/use-focus-error";
+import { useLeaveGuard } from "./form-parts/use-leave-guard";
 
 export type DestinationFormDefaults = {
   slug: string;
@@ -35,21 +37,41 @@ export const emptyDestinationDefaults: DestinationFormDefaults = {
   gettingThere: { id: "", en: "" },
 };
 
+/**
+ * Create/edit form for a destination. Edit mode saves in place and sends back
+ * the `version` it was opened with (a newer save by someone else is refused,
+ * not overwritten). Leaving with unsaved changes asks first; a failed save
+ * focuses the first field with an error.
+ */
 export function DestinationForm({
   mode,
   destinationId,
   defaults,
+  version,
 }: {
   mode: "create" | "edit";
   destinationId?: number;
   defaults: DestinationFormDefaults;
+  /** Edit mode: the edit version of the destination as loaded. */
+  version?: string;
 }) {
   const t = useTranslations("admin.destinationForm");
+  const tf = useTranslations("admin.form");
+  const formRef = useRef<HTMLFormElement>(null);
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
+  const [failures, setFailures] = useState(0);
+  const [savedVersion, setSavedVersion] = useState(version ?? "");
+  const [saved, setSaved] = useState<"saved" | "unchanged" | null>(null);
   const [values, setValues] = useState(defaults);
   const [slugTouched, setSlugTouched] = useState(mode === "edit");
+
+  const snapshot = JSON.stringify(values);
+  const [savedSnapshot, setSavedSnapshot] = useState(snapshot);
+  const dirty = snapshot !== savedSnapshot;
+  useLeaveGuard(dirty && !pending, tf("unsavedConfirm"));
+  useFocusError(formRef, failures);
 
   const set = <K extends keyof DestinationFormDefaults>(
     key: K,
@@ -62,28 +84,40 @@ export function DestinationForm({
   const setName = (name: string) =>
     setValues((prev) => ({ ...prev, name, slug: slugTouched ? prev.slug : slugify(name) }));
 
+  const showFailure = (result: {
+    error: string;
+    fieldErrors?: Record<string, string[] | undefined>;
+  }) => {
+    setError(result.error);
+    setFieldErrors(result.fieldErrors ?? {});
+    setFailures((n) => n + 1);
+  };
+
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
     setError(null);
     setFieldErrors({});
+    setSaved(null);
     const payload: DestinationFormValues = values;
+    const submitted = snapshot;
 
     startTransition(async () => {
-      const result =
-        mode === "edit" && destinationId
-          ? await updateDestinationAction(destinationId, payload)
-          : await createDestinationAction(payload);
-      // Success redirects on the server, so only failures return here.
-      if (!result.ok) {
-        setError(result.error);
-        setFieldErrors(result.fieldErrors ?? {});
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      if (mode === "edit" && destinationId) {
+        const result = await updateDestinationAction(destinationId, payload, savedVersion);
+        if (!result.ok) return showFailure(result);
+        setSavedVersion(result.data.version);
+        setSavedSnapshot(submitted);
+        setSaved(result.data.changed ? "saved" : "unchanged");
+        return;
       }
+      // Creating redirects to the new destination's edit page, so only failures return here.
+      const result = await createDestinationAction(payload);
+      if (!result.ok) showFailure(result);
     });
   };
 
   return (
-    <form method="post" onSubmit={submit} noValidate className="flex flex-col">
+    <form ref={formRef} method="post" onSubmit={submit} noValidate className="flex flex-col">
       {error && <Alert className="mb-8">{error}</Alert>}
 
       <div className="border-line rounded-(--radius-card) border bg-white p-6 md:p-10">
@@ -112,7 +146,7 @@ export function DestinationForm({
             label={t("fields.slug")}
             htmlFor="slug"
             error={err("slug")}
-            hint={t("fields.slugHint")}
+            hint={mode === "edit" ? t("fields.slugHintEdit") : t("fields.slugHint")}
           >
             <Input
               id="slug"
@@ -171,7 +205,18 @@ export function DestinationForm({
         </Section>
       </div>
 
-      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex justify-end border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex items-center justify-end gap-4 border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+        <div className="min-w-0 flex-1 text-xs sm:text-sm">
+          {dirty && <p className="text-muted">{tf("unsaved")}</p>}
+          <p role="status" className="text-leaf inline-flex items-center gap-2 font-medium">
+            {!dirty && saved && (
+              <>
+                <CircleCheck className="size-4 shrink-0" aria-hidden />
+                {saved === "saved" ? tf("saved") : tf("unchanged")}
+              </>
+            )}
+          </p>
+        </div>
         <Button type="submit" size="lg" loading={pending}>
           {!pending && <Save aria-hidden />}
           {mode === "edit" ? t("save") : t("create")}

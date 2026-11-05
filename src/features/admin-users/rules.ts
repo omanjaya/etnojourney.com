@@ -4,6 +4,8 @@
  */
 
 export type AuditEntry = {
+  /** e.g. `destination.deleted`; a deleted entity has no page to link to. */
+  action?: string;
   entityType: string;
   entityId: string;
   details: Record<string, unknown> | null;
@@ -19,6 +21,7 @@ const USER_ID = /^[A-Za-z0-9_-]{1,64}$/;
  * become part of a URL.
  */
 export function auditEntityHref(entry: AuditEntry): string | null {
+  if (entry.action?.endsWith(".deleted")) return null;
   const code = entry.details?.code;
   switch (entry.entityType) {
     case "booking":

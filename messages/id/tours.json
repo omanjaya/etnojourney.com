@@ -58,6 +58,12 @@
   },
   "detail": {
     "breadcrumbHome": "Beranda",
+    "preview": {
+      "title": "Pratinjau draf.",
+      "body": "Tur ini belum tayang, jadi hanya tim EtnoJourney yang bisa membuka halaman ini.",
+      "backToEditor": "Kembali ke editor",
+      "bookingClosed": "Pemesanan dibuka setelah tur ini ditayangkan."
+    },
     "breadcrumbTours": "Paket Tur",
     "duration": "Durasi",
     "groupSize": "Rombongan",

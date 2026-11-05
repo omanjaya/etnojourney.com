@@ -15,6 +15,9 @@ export type DomainErrorCode =
   | "invalidTransition"
   | "notCancellable"
   | "slugTaken"
+  // Catalogue editing: someone saved in between; a live tour keeps its address.
+  | "staleEdit"
+  | "slugLocked"
   | "notPayable"
   | "alreadyPaid"
   | "paymentUnavailable"

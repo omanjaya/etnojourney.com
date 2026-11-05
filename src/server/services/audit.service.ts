@@ -20,6 +20,7 @@ export const auditActions = [
   "tour.unpublished",
   "tour.featured",
   "tour.unfeatured",
+  "tour.deleted",
   "destination.created",
   "destination.updated",
   "destination.deleted",

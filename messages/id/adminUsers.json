@@ -162,7 +162,8 @@
         "published": "Menerbitkan tur",
         "unpublished": "Membatalkan penerbitan tur",
         "featured": "Menampilkan tur sebagai unggulan",
-        "unfeatured": "Menghapus tur dari unggulan"
+        "unfeatured": "Menghapus tur dari unggulan",
+        "deleted": "Menghapus draf tur"
       },
       "destination": {
         "created": "Membuat destinasi",

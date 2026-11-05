@@ -2,7 +2,9 @@
  * Adds catalogue entries from content/ that the database does not have yet:
  * destinations and tours (matched by slug, with their itinerary) and photo
  * credits (matched by path). It never updates or deletes anything, so edits
- * made in the back office and live bookings are left alone. Use it to publish
+ * made in the back office and live bookings are left alone; a tour slug the
+ * back office renamed or deleted (per the activity log) is not added again,
+ * and a renamed destination still matches its old slug. Use it to publish
  * new content on a database that already has bookings, where the seed refuses
  * to run.
  *
@@ -12,7 +14,7 @@
  * New tours and destinations are recorded in the activity log as system actions.
  * Run migrations first: a new deploy applies them when the container starts.
  */
-import { inArray } from "drizzle-orm";
+import { asc, inArray } from "drizzle-orm";
 import { db } from "@/server/db";
 import { auditLogs, destinations, itineraryDays, photoCredits, tours } from "@/server/db/schema";
 import { loadContent } from "@/server/db/content";
@@ -33,6 +35,35 @@ async function main() {
     const existingTours = new Set(
       (await tx.select({ slug: tours.slug }).from(tours)).map((r) => r.slug),
     );
+
+    // Addresses the back office moved away from (renamed) or deleted on purpose
+    // count as existing, so the sync never brings a duplicate or removed tour back.
+    const catalogueHistory = await tx
+      .select({
+        action: auditLogs.action,
+        entityId: auditLogs.entityId,
+        details: auditLogs.details,
+      })
+      .from(auditLogs)
+      .where(inArray(auditLogs.action, ["tour.updated", "tour.deleted", "destination.updated"]))
+      .orderBy(asc(auditLogs.id));
+    const destinationIds = new Set(existingDestinations.values());
+    for (const { action, entityId, details } of catalogueHistory) {
+      const previous = details?.previousSlug;
+      if (action === "tour.deleted" && typeof details?.slug === "string") {
+        existingTours.add(details.slug);
+      } else if (action === "tour.updated" && typeof previous === "string") {
+        existingTours.add(previous);
+      } else if (
+        action === "destination.updated" &&
+        typeof previous === "string" &&
+        !existingDestinations.has(previous) &&
+        destinationIds.has(Number(entityId))
+      ) {
+        // Content still names the old slug: attach its tours to the renamed destination.
+        existingDestinations.set(previous, Number(entityId));
+      }
+    }
 
     const newCredits = Object.entries(content.credits).filter(
       ([path]) => !existingCredits.has(path),

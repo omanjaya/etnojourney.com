@@ -14,6 +14,8 @@
   "invalidTransition": "Perubahan status ini tidak diizinkan.",
   "notCancellable": "Booking ini sudah tidak bisa dibatalkan.",
   "slugTaken": "Alamat halaman ini sudah dipakai. Gunakan alamat lain.",
+  "staleEdit": "Data ini baru saja diubah orang lain (atau di tab lain). Supaya perubahan itu tidak tertimpa, muat ulang halaman lalu ulangi perubahan Anda.",
+  "slugLocked": "Alamat halaman tur yang sedang tayang tidak bisa diubah, supaya tautan yang sudah dibagikan tetap berfungsi. Matikan Tayangkan di situs dulu jika memang perlu mengganti alamat.",
   "notPayable": "Booking ini tidak bisa dibayar. Pastikan statusnya masih menunggu dan tanggal perjalanan belum lewat.",
   "alreadyPaid": "Booking ini sudah dibayar.",
   "paymentUnavailable": "Pembayaran online sedang tidak tersedia. Silakan hubungi kami.",

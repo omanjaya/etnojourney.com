@@ -41,6 +41,33 @@ describe("auditEntityHref", () => {
     expect(auditEntityHref({ entityType: "user", entityId: "a/b", details: null })).toBeNull();
   });
 
+  it("does not link deleted tours and destinations (their page is gone)", () => {
+    expect(
+      auditEntityHref({
+        action: "destination.deleted",
+        entityType: "destination",
+        entityId: "30",
+        details: { slug: "uji", name: "Uji" },
+      }),
+    ).toBeNull();
+    expect(
+      auditEntityHref({
+        action: "tour.deleted",
+        entityType: "tour",
+        entityId: "63",
+        details: null,
+      }),
+    ).toBeNull();
+    expect(
+      auditEntityHref({
+        action: "tour.updated",
+        entityType: "tour",
+        entityId: "63",
+        details: null,
+      }),
+    ).toBe("/admin/tours/63/edit");
+  });
+
   it("returns null for entities without a page", () => {
     expect(auditEntityHref({ entityType: "review", entityId: "1", details: null })).toBeNull();
     expect(auditEntityHref({ entityType: "closure", entityId: "1", details: null })).toBeNull();

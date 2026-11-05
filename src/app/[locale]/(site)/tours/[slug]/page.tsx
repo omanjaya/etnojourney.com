@@ -8,6 +8,7 @@ import {
   CircleMinus,
   Clock,
   ExternalLink,
+  Eye,
   HeartHandshake,
   Languages,
   MapPin,
@@ -138,9 +139,10 @@ function bookingPrefill(
 const mapsUrl = (place: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
 
+/** Published tours for everyone; drafts only for the catalogue team (preview), else 404. */
 async function loadTour(slug: string) {
   try {
-    return await tourService.getPublishedBySlug(slug);
+    return await tourService.getBySlugForViewer(slug, await getCurrentUser());
   } catch (error) {
     if (isDomainError(error) && error.code === "notFound") notFound();
     throw error;
@@ -152,15 +154,17 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/tours/[slug]">): Promise<Metadata> {
   const { locale: rawLocale, slug } = await params;
   const locale = rawLocale as Locale;
-  const tour = await tourService.getPublishedBySlug(slug).catch(() => null);
+  const tour = await tourService.getBySlugForViewer(slug, await getCurrentUser()).catch(() => null);
   if (!tour) return {};
-  return pageMetadata({
+  const metadata = pageMetadata({
     locale,
     path: `/tours/${tour.slug}`,
     title: localize(tour.title, locale),
     description: localize(tour.summary, locale),
     image: socialImage(tour.coverImage),
   });
+  // A draft preview must never be indexed.
+  return tour.isPublished ? metadata : { ...metadata, robots: { index: false, follow: false } };
 }
 
 export default async function TourDetailPage({
@@ -223,13 +227,40 @@ export default async function TourDetailPage({
         return { id: text, en: text };
       });
   const gettingThere = tour.destination.gettingThere;
+  // Only the catalogue team gets this far for a draft: show it, but not as bookable.
+  const preview = !tour.isPublished;
 
   return (
     <article className="short:pt-24 pt-28 pb-24 md:pt-32 lg:pt-28 lg:pb-0">
-      <JsonLd
-        data={tourJsonLd(tour, locale, { home: t("breadcrumbHome"), tours: t("breadcrumbTours") })}
-      />
+      {!preview && (
+        <JsonLd
+          data={tourJsonLd(tour, locale, {
+            home: t("breadcrumbHome"),
+            tours: t("breadcrumbTours"),
+          })}
+        />
+      )}
       <Container>
+        {preview && (
+          <div
+            role="note"
+            className="border-gold/40 bg-gold-light text-ink short:mb-3 mb-6 flex flex-col gap-3 rounded-(--radius-card) border px-5 py-3 text-sm sm:flex-row sm:items-center sm:justify-between"
+          >
+            <p className="flex items-start gap-3">
+              <Eye className="text-terracotta mt-0.5 size-4 shrink-0" aria-hidden />
+              <span>
+                <strong className="font-semibold">{t("preview.title")}</strong> {t("preview.body")}
+              </span>
+            </p>
+            <Link
+              href={`/admin/tours/${tour.id}/edit`}
+              className="text-terracotta-dark hover:text-terracotta inline-flex min-h-10 shrink-0 items-center gap-2 font-medium"
+            >
+              <PenLine className="size-4" aria-hidden />
+              {t("preview.backToEditor")}
+            </Link>
+          </div>
+        )}
         <nav aria-label="Breadcrumb" className="text-muted short:mb-2 mb-6 text-sm">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li>
@@ -294,20 +325,22 @@ export default async function TourDetailPage({
               </span>{" "}
               <span className="text-muted text-sm whitespace-nowrap">{tc("perPerson")}</span>
             </p>
-            <div className="flex items-center gap-2">
-              <WishlistButton
-                tourId={tour.id}
-                initialSaved={saved}
-                isAuthenticated={Boolean(user)}
-                variant="inline"
-              />
-              <Button asChild className="hidden lg:inline-flex">
-                <a href="#booking">
-                  <CalendarDays aria-hidden />
-                  {t("chooseDate")}
-                </a>
-              </Button>
-            </div>
+            {!preview && (
+              <div className="flex items-center gap-2">
+                <WishlistButton
+                  tourId={tour.id}
+                  initialSaved={saved}
+                  isAuthenticated={Boolean(user)}
+                  variant="inline"
+                />
+                <Button asChild className="hidden lg:inline-flex">
+                  <a href="#booking">
+                    <CalendarDays aria-hidden />
+                    {t("chooseDate")}
+                  </a>
+                </Button>
+              </div>
+            )}
           </div>
         </header>
 
@@ -524,37 +557,43 @@ export default async function TourDetailPage({
           id="booking"
           className="short:top-24 short:max-h-[calc(100dvh-7rem)] short:scroll-mt-20 scroll-mt-24 [scrollbar-width:thin] [scrollbar-color:var(--color-sand-300)_transparent] lg:sticky lg:top-28 lg:max-h-[calc(100dvh-8rem)] lg:self-start lg:overflow-y-auto lg:overscroll-contain lg:rounded-(--radius-card)"
         >
-          <div className="ej-glide-in">
-            <BookingPanel
-              tour={{
-                id: tour.id,
-                slug: tour.slug,
-                pricePerPerson: tour.pricePerPerson,
-                maxParticipants: tour.maxParticipants,
-                durationDays: tour.durationDays,
-              }}
-              isAuthenticated={Boolean(user)}
-              defaultContactName={user?.name}
-              initialDate={prefill.initialDate}
-              initialParticipants={prefill.initialParticipants}
-              contactEmail={contactEmail}
-            />
-            {whatsappHref && (
-              <div className="short:mt-3 mt-4 flex flex-col items-center gap-2 text-center">
-                <a
-                  href={whatsappHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={tw("askLabel")}
-                  className={buttonVariants({ variant: "outline", className: "w-full" })}
-                >
-                  <MessageCircle aria-hidden />
-                  {tw("ask")}
-                </a>
-                <p className="text-muted short:hidden text-xs">{tw("askHint")}</p>
-              </div>
-            )}
-          </div>
+          {preview ? (
+            <p className="bg-sand-100 text-ink-soft rounded-(--radius-card) p-6 text-sm leading-relaxed">
+              {t("preview.bookingClosed")}
+            </p>
+          ) : (
+            <div className="ej-glide-in">
+              <BookingPanel
+                tour={{
+                  id: tour.id,
+                  slug: tour.slug,
+                  pricePerPerson: tour.pricePerPerson,
+                  maxParticipants: tour.maxParticipants,
+                  durationDays: tour.durationDays,
+                }}
+                isAuthenticated={Boolean(user)}
+                defaultContactName={user?.name}
+                initialDate={prefill.initialDate}
+                initialParticipants={prefill.initialParticipants}
+                contactEmail={contactEmail}
+              />
+              {whatsappHref && (
+                <div className="short:mt-3 mt-4 flex flex-col items-center gap-2 text-center">
+                  <a
+                    href={whatsappHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={tw("askLabel")}
+                    className={buttonVariants({ variant: "outline", className: "w-full" })}
+                  >
+                    <MessageCircle aria-hidden />
+                    {tw("ask")}
+                  </a>
+                  <p className="text-muted short:hidden text-xs">{tw("askHint")}</p>
+                </div>
+              )}
+            </div>
+          )}
         </aside>
       </Container>
 
@@ -573,10 +612,12 @@ export default async function TourDetailPage({
         </section>
       )}
 
-      <MobileBookingBar
-        pricePerPerson={tour.pricePerPerson}
-        whatsapp={whatsappHref ? { href: whatsappHref, label: tw("askLabel") } : undefined}
-      />
+      {!preview && (
+        <MobileBookingBar
+          pricePerPerson={tour.pricePerPerson}
+          whatsapp={whatsappHref ? { href: whatsappHref, label: tw("askLabel") } : undefined}
+        />
+      )}
     </article>
   );
 }

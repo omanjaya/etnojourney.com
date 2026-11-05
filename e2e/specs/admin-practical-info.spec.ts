@@ -46,7 +46,9 @@ test.describe("admin practical info", () => {
     await page.locator("#etiquette-id").fill(`Berpakaian sopan ${marker}`);
     await page.locator("#etiquette-en").fill(`Dress modestly ${marker}`);
     await page.getByRole("button", { name: "Simpan perubahan" }).click();
-    await expect(page).toHaveURL(/\/admin\/tours$/);
+    // Saving keeps the editor open and confirms in the save bar.
+    await expect(page.getByText("Perubahan tersimpan.")).toBeVisible();
+    await expect(page).toHaveURL(/\/edit$/);
 
     // Persisted and prefilled when editing again.
     await page.goto(`/admin/tours/${original.id}/edit`);

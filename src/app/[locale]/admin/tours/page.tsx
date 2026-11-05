@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { ExternalLink, MapIcon, Pencil, Plus, SearchX } from "lucide-react";
+import { Copy, ExternalLink, Eye, MapIcon, Pencil, Plus, SearchX, X } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
+import { cn } from "@/lib/utils";
 import { tourService } from "@/server/services/tour.service";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,7 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Pagination } from "@/components/ui/pagination";
 import { PAGE_SIZE, parsePage } from "@/lib/pagination";
 import { AdminSearchBox } from "@/features/admin/components/admin-search-box";
-import { parseAdminListQuery } from "@/features/admin/schemas";
+import { parseAdminTourQuery, type AdminTourQuery } from "@/features/admin/schemas";
 import { categoryIcons } from "@/components/shared/category-icon";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { TourToggle } from "@/features/admin/components/tour-toggle";
@@ -26,15 +27,42 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin("catalogue.manage");
   const raw = await searchParams;
-  const { q } = parseAdminListQuery(raw);
+  const query = parseAdminTourQuery(raw);
+  const { q, status, destination } = query;
   const [result, t, tc, tl, locale] = await Promise.all([
-    tourService.listForAdmin(q, parsePage(raw.page), PAGE_SIZE.admin),
+    tourService.listForAdmin(
+      { query: q, status, destinationSlug: destination },
+      parsePage(raw.page),
+      PAGE_SIZE.admin,
+    ),
     getTranslations("admin.tours"),
     getTranslations("common.categories"),
     getTranslations("admin.lists"),
     getLocale(),
   ]);
   const rows = result.items;
+  // Unpublishing a tour that guests already booked asks first (their tour page goes away).
+  const upcoming = await tourService.upcomingBookingCounts(rows.map(({ tour }) => tour.id));
+  const confirmUnpublish = (tourId: number, title: string) => {
+    const count = upcoming.get(tourId) ?? 0;
+    return count > 0 ? t("confirmUnpublish", { count, title }) : undefined;
+  };
+  const filtered = Boolean(q || status || destination);
+  const withQuery = (patch: Partial<AdminTourQuery>) => ({
+    pathname: "/admin/tours",
+    query: Object.fromEntries(
+      Object.entries({ ...query, ...patch }).filter((entry): entry is [string, string] =>
+        Boolean(entry[1]),
+      ),
+    ),
+  });
+  const statusFilters = [
+    { value: undefined, label: t("filters.all") },
+    { value: "published" as const, label: t("filters.published") },
+    { value: "draft" as const, label: t("filters.draft") },
+  ];
+  // Every row in a destination-filtered list belongs to it, so the name comes for free.
+  const destinationName = destination ? (rows[0]?.destination.name ?? destination) : null;
 
   const newButton = (
     <Button asChild>
@@ -54,20 +82,56 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
         action={newButton}
       />
 
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      {/* One row on laptops (search, status, summary) so the first tours stay in view. */}
+      <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center">
         <AdminSearchBox
           pathname="/admin/tours"
-          query={{ q }}
+          query={{ q, status, destination }}
           label={tl("searchLabel")}
           placeholder={tl("placeholders.tours")}
           clearLabel={tl("clear")}
         />
-        <p className="text-muted text-sm" aria-live="polite">
+        <div className="flex flex-wrap items-center gap-2">
+          <nav
+            aria-label={t("filters.label")}
+            className="flex scrollbar-none gap-2 overflow-x-auto"
+          >
+            {statusFilters.map((filter) => {
+              const active = filter.value === status;
+              return (
+                <Link
+                  key={filter.value ?? "all"}
+                  href={withQuery({ status: filter.value })}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "inline-flex min-h-10 shrink-0 items-center rounded-full border px-4 text-sm font-medium transition-colors",
+                    active
+                      ? "border-ink bg-ink text-sand-50"
+                      : "border-line text-ink-soft hover:border-sand-300 bg-white",
+                  )}
+                >
+                  {filter.label}
+                </Link>
+              );
+            })}
+          </nav>
+          {destinationName && (
+            <Link
+              href={withQuery({ destination: undefined })}
+              aria-label={t("filters.clearDestination", { name: destinationName })}
+              className="border-ink bg-ink text-sand-50 inline-flex min-h-10 items-center gap-2 rounded-full border px-4 text-sm font-medium"
+            >
+              {t("filters.destination", { name: destinationName })}
+              <X className="size-4" aria-hidden />
+            </Link>
+          )}
+        </div>
+        <p className="text-muted text-sm lg:ml-auto" aria-live="polite">
           {tl("summary", { total: result.total })}
         </p>
       </div>
 
-      {rows.length === 0 && q ? (
+      {rows.length === 0 && filtered ? (
         <EmptyState
           icon={SearchX}
           title={tl("noMatchTitle")}
@@ -126,6 +190,7 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
                         field="published"
                         initial={tour.isPublished}
                         label={t("togglePublished", { title })}
+                        confirmOff={confirmUnpublish(tour.id, title)}
                       />
                     </div>
                     <div className="flex items-center justify-between gap-2">
@@ -145,13 +210,24 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
                         {t("edit")}
                       </Link>
                     </Button>
-                    {tour.isPublished && (
-                      <Button asChild variant="ghost" size="icon" aria-label={t("view")}>
-                        <Link href={`/tours/${tour.slug}`} target="_blank">
-                          <ExternalLink aria-hidden />
-                        </Link>
-                      </Button>
-                    )}
+                    <Button asChild variant="ghost" size="icon" aria-label={t("copy")}>
+                      <Link
+                        href={{ pathname: "/admin/tours/new", query: { from: String(tour.id) } }}
+                      >
+                        <Copy aria-hidden />
+                      </Link>
+                    </Button>
+                    {/* Drafts open as a preview that only the team can see. */}
+                    <Button
+                      asChild
+                      variant="ghost"
+                      size="icon"
+                      aria-label={tour.isPublished ? t("view") : t("preview")}
+                    >
+                      <Link href={`/tours/${tour.slug}`} target="_blank">
+                        {tour.isPublished ? <ExternalLink aria-hidden /> : <Eye aria-hidden />}
+                      </Link>
+                    </Button>
                   </div>
                 </li>
               );
@@ -199,7 +275,7 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
                             />
                           </div>
                           <div className="min-w-0">
-                            <p className="line-clamp-1 font-medium">{title}</p>
+                            <p className="line-clamp-2 leading-snug font-medium">{title}</p>
                             <p className="text-muted text-xs">
                               {destination.name}, {destination.province}
                             </p>
@@ -221,6 +297,7 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
                           field="published"
                           initial={tour.isPublished}
                           label={t("togglePublished", { title })}
+                          confirmOff={confirmUnpublish(tour.id, title)}
                         />
                       </td>
                       <td className="px-5 py-4 text-center">
@@ -233,13 +310,38 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
                       </td>
                       <td className="px-5 py-4">
                         <div className="flex justify-end gap-1">
-                          {tour.isPublished && (
-                            <Button asChild variant="ghost" size="icon" aria-label={t("view")}>
-                              <Link href={`/tours/${tour.slug}`} target="_blank">
+                          {/* Drafts open as a preview that only the team can see. */}
+                          <Button
+                            asChild
+                            variant="ghost"
+                            size="icon"
+                            aria-label={tour.isPublished ? t("view") : t("preview")}
+                            title={tour.isPublished ? t("view") : t("preview")}
+                          >
+                            <Link href={`/tours/${tour.slug}`} target="_blank">
+                              {tour.isPublished ? (
                                 <ExternalLink aria-hidden />
-                              </Link>
-                            </Button>
-                          )}
+                              ) : (
+                                <Eye aria-hidden />
+                              )}
+                            </Link>
+                          </Button>
+                          <Button
+                            asChild
+                            variant="ghost"
+                            size="icon"
+                            aria-label={t("copy")}
+                            title={t("copy")}
+                          >
+                            <Link
+                              href={{
+                                pathname: "/admin/tours/new",
+                                query: { from: String(tour.id) },
+                              }}
+                            >
+                              <Copy aria-hidden />
+                            </Link>
+                          </Button>
                           <Button asChild variant="outline" size="sm">
                             <Link href={`/admin/tours/${tour.id}/edit`}>
                               <Pencil aria-hidden />
@@ -257,7 +359,7 @@ export default async function AdminToursPage({ searchParams }: PageProps<"/[loca
           <Pagination
             className="mt-8"
             pathname="/admin/tours"
-            query={{ q }}
+            query={{ q, status, destination }}
             page={result.page}
             pageCount={result.pageCount}
             labels={{
