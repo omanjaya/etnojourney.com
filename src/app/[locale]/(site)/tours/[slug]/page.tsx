@@ -394,20 +394,26 @@ export default async function TourDetailPage({
             </section>
           )}
 
-          <section aria-labelledby="included" className="grid gap-10 md:grid-cols-2">
-            <Reveal>
-              <h2 id="included" className="text-2xl md:text-3xl">
-                {t("included")}
-              </h2>
-              <ul className="mt-6 space-y-3">
-                {tour.included.map((item, i) => (
-                  <li key={i} className="text-ink-soft flex gap-3">
-                    <Check className="text-leaf mt-0.5 size-5 shrink-0" aria-hidden />
-                    {localize(item, locale)}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+          {/* The admin form requires an "included" item, but older rows may have none. */}
+          <section
+            aria-labelledby={tour.included.length > 0 ? "included" : "not-included"}
+            className="grid gap-10 md:grid-cols-2"
+          >
+            {tour.included.length > 0 && (
+              <Reveal>
+                <h2 id="included" className="text-2xl md:text-3xl">
+                  {t("included")}
+                </h2>
+                <ul className="mt-6 space-y-3">
+                  {tour.included.map((item, i) => (
+                    <li key={i} className="text-ink-soft flex gap-3">
+                      <Check className="text-leaf mt-0.5 size-5 shrink-0" aria-hidden />
+                      {localize(item, locale)}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            )}
             <Reveal delay={0.08}>
               <h2 id="not-included" className="text-2xl md:text-3xl">
                 {t("notIncluded")}

@@ -60,13 +60,14 @@
       "actions": "Actions",
       "tableLabel": "Bookings table"
     },
-    "noActions": "Final",
+    "noActions": "No further action",
     "actions": {
       "confirmed": "Confirm",
       "completed": "Mark completed",
       "cancelled": "Cancel",
       "pending": "Hold"
     },
+    "actionFor": "{action}, booking {code}",
     "confirmCancel": "Cancel booking {code}? This can't be undone.",
     "filters": {
       "searchLabel": "Search bookings",
@@ -133,26 +134,28 @@
       "detailsHint": "Price is per person, in Indonesian Rupiah.",
       "media": "Photos",
       "lists": "Highlights and inclusions",
-      "listsHint": "One item per line. ID and EN must have the same number of lines.",
+      "listsHint": "One item per line. Indonesian and English lines pair up in order, so both need the same number of lines.",
       "itinerary": "Itinerary",
-      "itineraryHint": "Days follow the order of the rows below.",
+      "itineraryHint": "One entry for each day of Duration (days). For a same-day or few-hour tour, describe every activity under Day 1.",
       "visibility": "Visibility",
       "practical": "Before you go",
-      "practicalHint": "Practical information for guests before the trip. One item per line, with matching Indonesian and English lines."
+      "practicalHint": "Practical information for guests before the trip. One item per line; Indonesian and English lines pair up in order."
     },
     "fields": {
       "title": "Title",
       "summary": "Summary",
       "description": "Description",
-      "slug": "URL slug",
-      "slugHint": "Filled in automatically from the Indonesian title.",
+      "slug": "Page address",
+      "slugHint": "Filled in automatically from the Indonesian title. Avoid changing it once the tour has been shared: old links will stop working.",
       "destination": "Destination",
       "selectDestination": "Choose a destination",
       "category": "Category",
+      "selectCategory": "Choose a category",
       "durationDays": "Duration (days)",
       "durationHours": "Duration (hours)",
-      "durationHoursHint": "Optional, only for 1-day tours shorter than a full day.",
-      "pricePerPerson": "Price per person (IDR)",
+      "durationHoursHint": "Optional, 1 to 12 hours. Only for 1-day tours shorter than a full day.",
+      "pricePerPerson": "Price per person (Rp)",
+      "pricePreview": "Shown on the site as {price} per person.",
       "maxParticipants": "Max. guests",
       "meetingPoint": "Meeting point",
       "coverImage": "Cover photo",
@@ -165,16 +168,25 @@
       "isFeaturedHint": "Shown in the featured section on the home page.",
       "difficulty": "Difficulty",
       "notIncluded": "Not included",
+      "notIncludedHint": "If left empty, the tour page shows: {items}.",
       "whatToBring": "What to bring",
       "etiquette": "Etiquette and customs"
     },
     "itinerary": {
       "day": "Day {day}",
+      "dayOf": "Day {day} of {total}",
+      "mismatch": "The tour lasts {total, plural, one {# day} other {# days}}, but the itinerary has {days, plural, one {# day} other {# days}}. Make them match before saving.",
       "add": "Add day",
+      "addLimit": "Every day is already there. To add a day, increase Duration (days) first.",
       "remove": "Remove day {day}",
       "empty": "No days yet. Add at least one day of travel.",
       "dayTitle": "Day title",
       "dayDescription": "Activities"
+    },
+    "listLines": {
+      "count": "Indonesian {id, plural, one {# line} other {# lines}}, English {en, plural, one {# line} other {# lines}} (max. {max}).",
+      "mismatch": "The line counts differ.",
+      "tooMany": "More than {max} lines."
     },
     "difficulty": {
       "easy": "Easy",
@@ -209,7 +221,7 @@
     "backToList": "Back to destinations",
     "create": "Create destination",
     "save": "Save changes",
-    "slugTaken": "That slug is already used by another destination.",
+    "slugTaken": "That page address is already used by another destination.",
     "sections": {
       "basics": "Basics",
       "basicsHint": "Name and province are shown as-is. Tagline and description appear in both languages.",
@@ -220,8 +232,8 @@
     },
     "fields": {
       "name": "Destination name",
-      "slug": "URL slug",
-      "slugHint": "Filled automatically from the name.",
+      "slug": "Page address",
+      "slugHint": "Filled automatically from the name. Avoid changing it once the destination has been shared: old links will stop working.",
       "province": "Province",
       "tagline": "Tagline",
       "taglineHint": "One short sentence for the destination card.",
@@ -253,8 +265,8 @@
     "noMatchDescription": "Try a different keyword.",
     "summary": "{total, plural, =0 {Nothing found} one {# item} other {# items}}",
     "placeholders": {
-      "tours": "Search title, slug or destination",
-      "destinations": "Search name, province or slug",
+      "tours": "Search title or destination",
+      "destinations": "Search name or province",
       "reviews": "Search author, tour or review text"
     }
   }

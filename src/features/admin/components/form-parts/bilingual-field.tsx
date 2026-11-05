@@ -1,4 +1,5 @@
-import { Input, Textarea } from "@/components/ui/form-controls";
+import type { ReactNode } from "react";
+import { Input, joinIds, Textarea } from "@/components/ui/form-controls";
 import type { Locale } from "@/i18n/routing";
 import type { LocalizedText } from "@/lib/i18n-text";
 
@@ -12,7 +13,15 @@ function LangTag({ locale }: { locale: Locale }) {
   );
 }
 
-/** Two side-by-side controls (ID, EN) for one localized value. Ids are `${name}-${locale}`. */
+/**
+ * Two side-by-side controls (ID, EN) for one localized value. Ids are
+ * `${name}-${locale}`; the hint, status and error are `${name}-hint`,
+ * `${name}-status` and `${name}-error`, all linked with aria-describedby.
+ *
+ * On an error, a side left empty is the one the error is about (for example a
+ * missing English text), so only that side is marked invalid. When both sides
+ * are filled, both are marked.
+ */
 export function BilingualField({
   name,
   label,
@@ -21,7 +30,9 @@ export function BilingualField({
   error,
   multiline = false,
   rows,
+  wrap,
   hint,
+  status,
 }: {
   name: string;
   label: string;
@@ -30,8 +41,21 @@ export function BilingualField({
   error?: string;
   multiline?: boolean;
   rows?: number;
+  /** Textarea wrapping; "off" keeps one item per visual line in list fields. */
+  wrap?: "soft" | "off";
   hint?: string;
+  /** Live feedback under the controls, e.g. line counts. */
+  status?: ReactNode;
 }) {
+  const describedBy = joinIds(
+    hint && `${name}-hint`,
+    status != null && `${name}-status`,
+    error && `${name}-error`,
+  );
+  const empty = LOCALES.filter((locale) => !value[locale].trim());
+  const invalid = (locale: Locale) =>
+    Boolean(error) && (empty.length === 0 || empty.includes(locale));
+
   return (
     <fieldset className="flex flex-col gap-2">
       <legend className="text-ink-soft mb-2 text-sm font-medium">{label}</legend>
@@ -41,8 +65,8 @@ export function BilingualField({
           const common = {
             id,
             value: value[locale],
-            "aria-invalid": error ? true : undefined,
-            "aria-describedby": error ? `${name}-error` : undefined,
+            "aria-invalid": invalid(locale) || undefined,
+            "aria-describedby": describedBy,
             onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
               onChange({ ...value, [locale]: e.target.value }),
           };
@@ -52,18 +76,26 @@ export function BilingualField({
                 <LangTag locale={locale} />
                 <span className="sr-only">{label}</span>
               </label>
-              {multiline ? <Textarea rows={rows} {...common} /> : <Input {...common} />}
+              {multiline ? <Textarea rows={rows} wrap={wrap} {...common} /> : <Input {...common} />}
             </div>
           );
         })}
       </div>
-      {error ? (
+      {hint && (
+        <p id={`${name}-hint`} className="text-muted text-xs">
+          {hint}
+        </p>
+      )}
+      {status != null && (
+        <div id={`${name}-status`} className="text-muted text-xs">
+          {status}
+        </div>
+      )}
+      {error && (
         <p id={`${name}-error`} role="alert" className="text-danger text-xs">
           {error}
         </p>
-      ) : hint ? (
-        <p className="text-muted text-xs">{hint}</p>
-      ) : null}
+      )}
     </fieldset>
   );
 }

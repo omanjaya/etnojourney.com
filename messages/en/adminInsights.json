@@ -4,7 +4,7 @@
     "replyMax": "Replies can be at most 2000 characters.",
     "tooLong": "This is too long.",
     "httpsUrl": "Enter a full link starting with https://.",
-    "uploadPath": "Use the path of an image uploaded here, e.g. /media/tours/2026/05/....webp.",
+    "uploadPath": "Use a photo uploaded to this site. Its file location starts with /media/, e.g. /media/tours/2026/05/....webp.",
     "creditExists": "This image already has a credit. Edit it in the list below."
   },
   "reply": {
@@ -101,7 +101,7 @@
     "title": "Photo credits",
     "description": "Photographer, license and source for every credited photo. Credits appear next to the photo and on the public credits page.",
     "searchLabel": "Search credits",
-    "searchPlaceholder": "Title, author, license or path",
+    "searchPlaceholder": "Title, author or license",
     "summary": "{total, plural, one {# credit} other {# credits}}",
     "uploaded": "Upload",
     "opensNewTab": "(opens in a new tab)",
@@ -119,8 +119,8 @@
       "close": "Close"
     },
     "form": {
-      "path": "Image path",
-      "pathHint": "Pick an uploaded image in use, or paste its /media/ path.",
+      "path": "Photo file location",
+      "pathHint": "Pick an uploaded photo in use, or paste its file location starting with /media/.",
       "title": "Photo title",
       "author": "Author",
       "license": "License",

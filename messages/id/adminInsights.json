@@ -4,7 +4,7 @@
     "replyMax": "Balasan maksimal 2000 karakter.",
     "tooLong": "Isian ini terlalu panjang.",
     "httpsUrl": "Masukkan tautan lengkap yang diawali https://.",
-    "uploadPath": "Gunakan path gambar yang diunggah di sini, misalnya /media/tours/2026/05/....webp.",
+    "uploadPath": "Gunakan foto yang diunggah di situs ini. Lokasi filenya diawali /media/, misalnya /media/tours/2026/05/....webp.",
     "creditExists": "Gambar ini sudah memiliki kredit. Ubah melalui daftar di bawah."
   },
   "reply": {
@@ -101,7 +101,7 @@
     "title": "Kredit foto",
     "description": "Fotografer, lisensi, dan sumber setiap foto yang dikreditkan. Kredit tampil di samping foto dan di halaman kredit publik.",
     "searchLabel": "Cari kredit",
-    "searchPlaceholder": "Judul, pembuat, lisensi, atau path",
+    "searchPlaceholder": "Judul, pembuat, atau lisensi",
     "summary": "{total, plural, other {# kredit}}",
     "uploaded": "Unggahan",
     "opensNewTab": "(membuka tab baru)",
@@ -119,8 +119,8 @@
       "close": "Tutup"
     },
     "form": {
-      "path": "Path gambar",
-      "pathHint": "Pilih gambar unggahan yang sedang dipakai, atau tempel path /media/-nya.",
+      "path": "Lokasi file foto",
+      "pathHint": "Pilih foto unggahan yang sedang dipakai, atau tempel lokasi filenya yang diawali /media/.",
       "title": "Judul foto",
       "author": "Pembuat",
       "license": "Lisensi",

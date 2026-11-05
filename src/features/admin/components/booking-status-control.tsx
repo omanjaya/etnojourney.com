@@ -54,6 +54,8 @@ export function BookingStatusControl({
             loading={pending && target === status}
             disabled={pending}
             onClick={() => change(status)}
+            // Every row has the same buttons; the code tells them apart for screen readers.
+            aria-label={t("actionFor", { action: t(`actions.${status}`), code })}
           >
             {t(`actions.${status}`)}
           </Button>

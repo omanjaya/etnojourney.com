@@ -6,6 +6,12 @@ import { useRef, useState, type DragEvent } from "react";
 import { cn } from "@/lib/utils";
 import { ACCEPT_ATTRIBUTE } from "./use-image-upload";
 
+/**
+ * File picker with a visible button. The hidden file input keeps `id`, so a
+ * surrounding <Field> label still opens the picker; the button is named by
+ * that label (`${id}-label`) plus its own text, e.g. "Foto sampul Ganti foto".
+ * The input itself is hidden from assistive tech so it isn't announced twice.
+ */
 export function Dropzone({
   id,
   multiple = false,
@@ -32,6 +38,9 @@ export function Dropzone({
   const [dragging, setDragging] = useState(false);
   const inactive = pending || disabled;
   const compact = variant === "tile";
+  const buttonId = `${id}-button`;
+  // A missing label id is skipped, leaving the button's own text as its name.
+  const labelledBy = `${id}-label ${buttonId}`;
 
   const input = (
     <input
@@ -42,6 +51,7 @@ export function Dropzone({
       multiple={multiple}
       className="sr-only"
       tabIndex={-1}
+      aria-hidden
       disabled={inactive}
       onChange={(event) => {
         onFiles(Array.from(event.target.files ?? []));
@@ -55,9 +65,11 @@ export function Dropzone({
       <>
         {input}
         <button
+          id={buttonId}
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={inactive}
+          aria-labelledby={labelledBy}
           aria-describedby={describedBy}
           className="inline-flex h-9 items-center gap-2 rounded-full bg-sand-50 px-4 text-sm font-medium text-ink shadow-sm transition hover:bg-white disabled:opacity-60 [&_svg]:size-4"
         >
@@ -111,9 +123,11 @@ export function Dropzone({
         <>
           {!compact && <p className="text-sm font-medium text-ink">{label ?? t("title")}</p>}
           <button
+            id={buttonId}
             type="button"
             onClick={() => inputRef.current?.click()}
             disabled={inactive}
+            aria-labelledby={labelledBy}
             aria-describedby={describedBy}
             className="rounded-full text-sm font-medium text-terracotta underline-offset-4 hover:underline disabled:pointer-events-none"
           >
