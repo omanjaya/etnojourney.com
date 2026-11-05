@@ -132,9 +132,18 @@ test.describe("admin operations", () => {
       await expect(toggle).toHaveAttribute("aria-checked", "false");
       await expect.poll(() => tourIsPublished(slug)).toBe(false);
 
-      const visitor = await (await browser.newContext()).newPage();
-      const response = await visitor.goto(`${BASE_URL}/tours/${slug}`);
+      // Explicit empty state: a new context otherwise inherits the admin's storageState.
+      const visitorContext = await browser.newContext({
+        storageState: { cookies: [], origins: [] },
+      });
+      const response = await (await visitorContext.newPage()).goto(`${BASE_URL}/tours/${slug}`);
       expect(response?.status()).toBe(404);
+      await visitorContext.close();
+
+      // The catalogue team can still open the draft as a preview.
+      const preview = await page.goto(`/tours/${slug}`);
+      expect(preview?.status()).toBe(200);
+      await expect(page.getByRole("note").getByText("Pratinjau draf.")).toBeVisible();
     } finally {
       await setTourPublished(slug, true);
     }

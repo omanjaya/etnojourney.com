@@ -130,7 +130,7 @@ test.describe("admin payments and refunds", () => {
     };
     const cancel = async (code: string, choice: RegExp) => {
       await page.goto(`/admin/bookings/${code}`);
-      await page.getByRole("button", { name: "Batalkan", exact: true }).click();
+      await page.getByRole("button", { name: `Batalkan, booking ${code}`, exact: true }).click();
       const dialog = page.getByRole("dialog");
       await dialog.getByRole("radio", { name: choice }).check();
       await dialog.getByRole("button", { name: "Ya, batalkan booking" }).click();

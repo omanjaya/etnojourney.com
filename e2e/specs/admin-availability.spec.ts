@@ -57,7 +57,8 @@ test.describe("availability closures", () => {
     expect(rows[0].reason).toBe("Upacara adat desa");
     const [audit] = await sql<{ n: number }[]>`
       select count(*)::int as n from audit_logs where action = 'closure.created'
-        and details->>'date' = ${closedDate} and (details->>'tourId')::int = ${tourId}`;
+        and details->>'from' = ${closedDate} and details->>'to' = ${closedDate}
+        and (details->>'tourId')::int = ${tourId}`;
     expect(audit.n).toBeGreaterThan(0);
     await context.close();
   });
