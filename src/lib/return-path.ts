@@ -15,5 +15,8 @@ export const RETURN_PATH_HEADER = "x-etno-return-path";
 export function returnPath(pathname: string, search = ""): string {
   const [, first, ...rest] = pathname.split("/");
   const isLocale = (routing.locales as readonly string[]).includes(first);
-  return `${isLocale ? `/${rest.join("/")}` : pathname}${search}`;
+  const path = isLocale ? `/${rest.join("/")}` : pathname;
+  // "//host" or "/\\host" would leave the site when used as a redirect target.
+  if (!path.startsWith("/") || path.startsWith("//") || path.startsWith("/\\")) return "/";
+  return `${path}${search}`;
 }

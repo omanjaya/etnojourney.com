@@ -16,6 +16,12 @@ describe("returnPath", () => {
     expect(returnPath("/")).toBe("/");
   });
 
+  it("never returns a path that leaves the site", () => {
+    expect(returnPath("/en//evil.com")).toBe("/");
+    expect(returnPath("//evil.com")).toBe("/");
+    expect(returnPath("/en/\\evil.com")).toBe("/");
+  });
+
   it("only strips a whole first segment that is a locale", () => {
     expect(returnPath("/english/tours")).toBe("/english/tours");
     expect(returnPath("/tours/en")).toBe("/tours/en");

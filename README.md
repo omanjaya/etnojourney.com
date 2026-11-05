@@ -144,6 +144,7 @@ Jika port 5432 dipakai Postgres lokal, isi `DB_HOST_PORT=5544` di `.env`; compos
 | `UPLOAD_DIR` | Tidak | Default image: `/app/storage/uploads` (volume) |
 | `TRUST_PROXY`, `TRUSTED_PROXIES` | Lihat di bawah | Pembacaan IP klien untuk rate limit |
 | `CRON_SECRET` | Disarankan | Mengaktifkan email terjadwal (lihat di bawah); tanpa ini endpoint cron mati |
+| `RELEASE_UNPAID_HOLDS` | Opsional | `true`: cron harian membatalkan booking `pending` yang tidak dibayar setelah 48 jam (bawaan `false`) |
 
 ### Akun owner (admin)
 
@@ -169,7 +170,7 @@ Endpoint `POST /api/cron/trip-emails` mengirim dua jenis email otomatis, masing-
 - **Pengingat sebelum perjalanan**: booking `confirmed` dengan tanggal perjalanan hari ini sampai 3 hari lagi (zona waktu `Asia/Jakarta`). Isinya titik kumpul, tanggal, daftar barang bawaan, etika setempat, kontak, tautan ke halaman booking dan e-tiket PDF.
 - **Permintaan ulasan**: booking `completed` yang perjalanannya 1 sampai 14 hari lalu dan belum diulas. Tautannya menuju halaman booking di akun, tempat ulasan ditulis.
 
-Pemanggilan yang sama juga **melepas kursi booking yang tidak dibayar**: booking `pending` tanpa pembayaran lunas dibatalkan oleh sistem jika sudah lebih dari 48 jam sejak dipesan (kecuali pembayaran via Midtrans masih berjalan, maksimal 24 jam) atau tanggal perjalanannya sudah lewat. Tiap pembatalan tercatat di log aktivitas sebagai `booking.expired`, dan traveller menerima email "booking dibatalkan" seperti biasa. Batas waktunya ada di `src/server/services/booking.rules.ts` (`UNPAID_HOLD_HOURS`).
+Jika `RELEASE_UNPAID_HOLDS=true` (bawaan `false`), pemanggilan yang sama juga **melepas kursi booking yang tidak dibayar**: booking `pending` tanpa pembayaran lunas dibatalkan oleh sistem jika sudah lebih dari 48 jam sejak dipesan (kecuali pembayaran via Midtrans masih berjalan, maksimal 24 jam) atau tanggal perjalanannya sudah lewat. Tiap pembatalan tercatat di log aktivitas sebagai `booking.expired`, dan traveller menerima email "booking dibatalkan" seperti biasa. Batas waktunya ada di `src/server/services/booking.rules.ts` (`UNPAID_HOLD_HOURS`).
 
 Setiap email hanya terkirim sekali: sebelum mengirim, baris booking "diklaim" dengan satu `UPDATE ... WHERE reminder_sent_at IS NULL` (atau `review_request_sent_at`), jadi dua pemanggilan yang berjalan bersamaan tidak mengirim dobel. Jika pengiriman gagal, klaim dilepas dan dicoba lagi pada pemanggilan berikutnya. Satu pemanggilan memproses paling banyak 200 email per jenis dan mengembalikan JSON berisi jumlahnya.
 

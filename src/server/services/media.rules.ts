@@ -12,6 +12,17 @@ export const ORPHAN_UPLOAD_GRACE_MS = 2 * 24 * 60 * 60 * 1000;
 
 export type StoredUpload = { key: string; modifiedAt: Date };
 
+/**
+ * True when deleting `orphans` of `total` stored uploads looks like a normal
+ * cleanup. Wiping more than half of a non-trivial library in one run is far
+ * more likely a broken "in use" query than real clutter, so the job stops.
+ */
+export function isSafeOrphanCleanup(total: number, orphans: number): boolean {
+  if (orphans === 0) return true;
+  if (total < 10) return orphans < total;
+  return orphans <= total / 2;
+}
+
 /** Public URL of a storage key, as saved on tours and destinations. */
 export const uploadUrl = (key: string) => `/media/${key}`;
 
@@ -25,8 +36,7 @@ export function orphanUploadKeys(
   return files
     .filter(
       (file) =>
-        !usedPaths.has(uploadUrl(file.key)) &&
-        now.getTime() - file.modifiedAt.getTime() >= graceMs,
+        !usedPaths.has(uploadUrl(file.key)) && now.getTime() - file.modifiedAt.getTime() >= graceMs,
     )
     .map((file) => file.key);
 }
