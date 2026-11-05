@@ -25,6 +25,7 @@
     "eyebrow": "Admin Panel",
     "title": "Welcome back, {name}",
     "description": "Track incoming bookings and manage tour packages in one place.",
+    "denied": "Only an admin can open that page, so we brought you to this overview instead.",
     "stats": {
       "pending": "Awaiting confirmation",
       "confirmed": "Confirmed",
@@ -117,6 +118,7 @@
     "newEyebrow": "Catalogue",
     "newTitle": "Create a new tour",
     "editTitle": "Edit tour",
+    "editMetaTitle": "Edit {title}",
     "backToList": "Back to tours",
     "create": "Create tour",
     "save": "Save changes",
@@ -203,6 +205,7 @@
     "newEyebrow": "Catalogue",
     "newTitle": "Create a destination",
     "editTitle": "Edit destination",
+    "editMetaTitle": "Edit {name}",
     "backToList": "Back to destinations",
     "create": "Create destination",
     "save": "Save changes",

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { safeRedirectPath } from "./safe-redirect";
+import { isSafeRedirectPath, landingPathForRole, safeRedirectPath } from "./safe-redirect";
 
 describe("safeRedirectPath", () => {
   it("keeps relative in-app paths", () => {
@@ -26,6 +26,29 @@ describe("safeRedirectPath", () => {
       undefined,
     ]) {
       expect(safeRedirectPath(bad)).toBe("/account");
+      expect(isSafeRedirectPath(bad)).toBe(false);
+    }
+  });
+
+  it("uses the given fallback", () => {
+    expect(safeRedirectPath(undefined, "/admin")).toBe("/admin");
+    expect(safeRedirectPath("/admin/tours", "/account")).toBe("/admin/tours");
+  });
+});
+
+describe("landingPathForRole", () => {
+  it("sends staff and the owner to the back office", () => {
+    expect(landingPathForRole("admin")).toBe("/admin");
+    expect(landingPathForRole("staff")).toBe("/admin");
+  });
+
+  it("sends partners to their portal", () => {
+    expect(landingPathForRole("partner")).toBe("/partner");
+  });
+
+  it("sends travellers and unknown roles to their account", () => {
+    for (const role of ["user", "", null, undefined, "owner"]) {
+      expect(landingPathForRole(role)).toBe("/account");
     }
   });
 });

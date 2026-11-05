@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { login, registerNewUser } from "../support/auth";
+import { ACCOUNTS } from "../support/env";
 
 test.describe("authentication", () => {
   test("wrong credentials show a generic error", async ({ page }) => {
@@ -29,6 +30,11 @@ test.describe("authentication", () => {
     await login(evil, email, password, "//evil.example.com");
     expect(new URL(evil.url()).host).toBe(new URL(safe.url()).host);
     await expect(evil).toHaveURL(/\/account$/);
+  });
+
+  test("an admin signing in without `next` lands on the back office", async ({ page }) => {
+    await login(page, ACCOUNTS.admin.email, ACCOUNTS.admin.password);
+    await expect(page).toHaveURL(/\/admin$/);
   });
 
   test("forgot password answers the same for known and unknown emails", async ({ browser }) => {

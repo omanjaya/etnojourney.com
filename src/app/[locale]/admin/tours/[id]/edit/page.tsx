@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
+import { cache } from "react";
 import { Link } from "@/i18n/navigation";
 import { localize } from "@/lib/i18n-text";
 import { destinationService } from "@/server/services/destination.service";
@@ -10,13 +11,27 @@ import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { TourForm, type TourFormDefaults } from "@/features/admin/components/tour-form";
 import { requireAdmin } from "@/server/auth/guards";
 
-async function loadTour(id: number) {
+// Cached so the page and its metadata read the tour once per request.
+const loadTour = cache(async (id: number) => {
   try {
     return await tourService.getForEdit(id);
   } catch (error) {
     if (isDomainError(error) && error.code === "notFound") notFound();
     throw error;
   }
+});
+
+export async function generateMetadata({ params }: PageProps<"/[locale]/admin/tours/[id]/edit">) {
+  await requireAdmin("catalogue.manage");
+  const id = Number((await params).id);
+  if (!Number.isInteger(id) || id < 1) notFound();
+  const [tour, t, locale] = await Promise.all([
+    loadTour(id),
+    getTranslations("admin.form"),
+    getLocale(),
+  ]);
+  // Names the tour, so several edit tabs can be told apart.
+  return { title: t("editMetaTitle", { title: localize(tour.title, locale) }) };
 }
 
 export default async function EditTourPage({

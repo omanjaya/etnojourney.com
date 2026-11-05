@@ -6,6 +6,11 @@ import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { emptyTourDefaults, TourForm } from "@/features/admin/components/tour-form";
 import { requireAdmin } from "@/server/auth/guards";
 
+export async function generateMetadata() {
+  const t = await getTranslations("admin.form");
+  return { title: t("newTitle") };
+}
+
 export default async function NewTourPage() {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin("catalogue.manage");

@@ -9,7 +9,13 @@ import { RouteTransition } from "@/components/layout/route-transition";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("admin.meta");
-  return { title: t("title"), robots: { index: false, follow: false } };
+  return {
+    // A layout's template applies only to its pages: the overview keeps the
+    // default ("Panel Admin | EtnoJourney" via the root template), and page
+    // titles read e.g. "Paket tur · Panel Admin | EtnoJourney".
+    title: { default: t("title"), template: `%s · ${t("title")} | EtnoJourney` },
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function AdminLayout({ children }: LayoutProps<"/[locale]/admin">) {
