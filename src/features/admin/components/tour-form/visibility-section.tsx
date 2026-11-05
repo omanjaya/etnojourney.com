@@ -8,7 +8,7 @@ export function VisibilitySection({ values, set }: Omit<TourSectionProps, "err">
   const t = useTranslations("admin.form");
 
   return (
-    <Section title={t("sections.visibility")}>
+    <Section id="tour-visibility" title={t("sections.visibility")}>
       <div className="grid gap-3 md:grid-cols-2">
         <CheckboxCard
           id="isPublished"

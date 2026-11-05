@@ -33,7 +33,7 @@ export function PracticalSection({
   const t = useTranslations("admin.form");
 
   return (
-    <Section title={t("sections.practical")} hint={t("sections.practicalHint")}>
+    <Section id="tour-practical" title={t("sections.practical")} hint={t("sections.practicalHint")}>
       <Field label={t("fields.difficulty")} htmlFor="difficulty" error={err("difficulty")}>
         <Select
           id="difficulty"

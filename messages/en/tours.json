@@ -58,6 +58,12 @@
   },
   "detail": {
     "breadcrumbHome": "Home",
+    "preview": {
+      "title": "Draft preview.",
+      "body": "This tour is not live yet, so only the EtnoJourney team can open this page.",
+      "backToEditor": "Back to the editor",
+      "bookingClosed": "Booking opens once this tour is live."
+    },
     "breadcrumbTours": "Tours",
     "duration": "Duration",
     "groupSize": "Group size",

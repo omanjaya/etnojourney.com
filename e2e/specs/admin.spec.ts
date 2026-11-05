@@ -111,7 +111,10 @@ test.describe("admin operations", () => {
     const slug = "jejak-desa-ngadas";
     await setTourPublished(slug, true);
     try {
-      await page.goto("/admin/tours");
+      // The list is newest first, so search for the tour; accept the
+      // "upcoming bookings" confirmation in case other specs booked it.
+      page.on("dialog", (dialog) => dialog.accept());
+      await page.goto("/admin/tours?q=Ngadas");
       const toggle = page
         .getByRole("switch", { name: /Tayangkan Tiga Hari di Desa Ngadas/ })
         .filter({ visible: true })

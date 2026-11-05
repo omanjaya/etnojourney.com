@@ -162,7 +162,8 @@
         "published": "Published a tour",
         "unpublished": "Unpublished a tour",
         "featured": "Featured a tour",
-        "unfeatured": "Removed a tour from featured"
+        "unfeatured": "Removed a tour from featured",
+        "deleted": "Deleted a draft tour"
       },
       "destination": {
         "created": "Created a destination",

@@ -245,13 +245,16 @@ export default async function BookingDetailPage({
                   alreadyReviewed={reviewed.has(booking.id)}
                 />
               )}
-              <Button asChild variant="ghost" size="sm">
-                <Link href={`/tours/${tour.slug}`}>
-                  {t("viewTour")}
-                  <ArrowUpRight aria-hidden />
-                </Link>
-              </Button>
-              {upcoming && !rescheduleBlock && (
+              {/* A tour taken off the site has no public page, and moving the date needs it. */}
+              {tour.isPublished && (
+                <Button asChild variant="ghost" size="sm">
+                  <Link href={`/tours/${tour.slug}`}>
+                    {t("viewTour")}
+                    <ArrowUpRight aria-hidden />
+                  </Link>
+                </Button>
+              )}
+              {upcoming && !rescheduleBlock && tour.isPublished && (
                 <RescheduleDialog
                   bookingId={booking.id}
                   code={booking.code}
@@ -280,7 +283,12 @@ export default async function BookingDetailPage({
                 </span>
               )}
             </div>
-            {(rescheduleBlock === "limit" || rescheduleBlock === "tooLate") && (
+            {upcoming && !tour.isPublished && (
+              <p className="text-muted -mt-3 text-xs print:hidden">
+                {tsService("panel.rescheduleBlocked.unpublished")}
+              </p>
+            )}
+            {tour.isPublished && (rescheduleBlock === "limit" || rescheduleBlock === "tooLate") && (
               <p data-testid="reschedule-blocked" className="text-muted -mt-3 text-xs print:hidden">
                 {rescheduleBlock === "limit"
                   ? tsService("panel.rescheduleBlocked.limit", {

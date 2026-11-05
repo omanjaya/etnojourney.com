@@ -19,8 +19,9 @@ export function ItineraryEditor({ values, set, err }: TourSectionProps) {
     );
 
   return (
-    <Section title={t("sections.itinerary")} hint={t("sections.itineraryHint")}>
-      {err("itinerary") && (
+    <Section id="tour-itinerary" title={t("sections.itinerary")} hint={t("sections.itineraryHint")}>
+      {/* Errors inside a day are shown on that day's fields instead. */}
+      {err("itinerary") && !days.some((_, i) => err(`itinerary.${i}`)) && (
         <p role="alert" className="text-danger text-xs">
           {err("itinerary")}
         </p>
@@ -57,12 +58,14 @@ export function ItineraryEditor({ values, set, err }: TourSectionProps) {
                 label={t("itinerary.dayTitle")}
                 value={day.title}
                 onChange={(title) => updateDay(index, { title })}
+                error={err(`itinerary.${index}.title`)}
               />
               <BilingualField
                 name={`itinerary-${index}-description`}
                 label={t("itinerary.dayDescription")}
                 value={day.description}
                 onChange={(description) => updateDay(index, { description })}
+                error={err(`itinerary.${index}.description`)}
                 multiline
                 rows={3}
               />

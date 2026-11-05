@@ -52,8 +52,16 @@ export async function parseInput<S extends z.ZodType>(
   };
 
   const raw = z.flattenError(parsed.error).fieldErrors as Record<string, string[] | undefined>;
-  const fieldErrors = Object.fromEntries(
+  const fieldErrors: Record<string, string[] | undefined> = Object.fromEntries(
     Object.entries(raw).map(([field, keys]) => [field, keys?.map(translate)]),
   );
+  // Nested issues also get dotted keys for every deeper prefix (an empty EN
+  // title of day 1 gives "itinerary.0", "itinerary.0.title" and
+  // "itinerary.0.title.en"), so a form can mark the exact day, line or language.
+  for (const issue of parsed.error.issues) {
+    for (let depth = 2; depth <= issue.path.length; depth++) {
+      fieldErrors[issue.path.slice(0, depth).map(String).join(".")] ??= [translate(issue.message)];
+    }
+  }
   return { success: false, result: fail(t("errors.validation"), fieldErrors) };
 }

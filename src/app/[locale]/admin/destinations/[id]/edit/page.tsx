@@ -1,7 +1,9 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { Alert } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { requireAdmin } from "@/server/auth/guards";
 import { destinationService } from "@/server/services/destination.service";
 import { isDomainError } from "@/server/services/errors";
@@ -20,17 +22,20 @@ async function loadDestination(id: number) {
 
 export default async function EditDestinationPage({
   params,
+  searchParams,
 }: PageProps<"/[locale]/admin/destinations/[id]/edit">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin("catalogue.manage");
   const { id: rawId } = await params;
   const id = Number(rawId);
   if (!Number.isInteger(id) || id < 1) notFound();
+  const created = (await searchParams).created === "1";
 
-  const [destination, tourCount, t] = await Promise.all([
+  const [destination, tourCount, t, td] = await Promise.all([
     loadDestination(id),
     destinationService.tourCount(id),
     getTranslations("admin.destinationForm"),
+    getTranslations("admin.destinations"),
   ]);
 
   return (
@@ -42,10 +47,27 @@ export default async function EditDestinationPage({
         <ArrowLeft className="size-4" aria-hidden />
         {t("backToList")}
       </Link>
-      <AdminPageHeader eyebrow={t("editTitle")} title={destination.name} />
+      <AdminPageHeader
+        eyebrow={t("editTitle")}
+        title={destination.name}
+        action={
+          <Button asChild variant="outline">
+            <Link href={`/destinations/${destination.slug}`} target="_blank">
+              <ExternalLink aria-hidden />
+              {td("view")}
+            </Link>
+          </Button>
+        }
+      />
+      {created && (
+        <Alert tone="success" className="mb-8">
+          {t("createdNotice")}
+        </Alert>
+      )}
       <DestinationForm
         mode="edit"
         destinationId={destination.id}
+        version={destination.version}
         defaults={{
           slug: destination.slug,
           name: destination.name,
@@ -59,6 +81,7 @@ export default async function EditDestinationPage({
       <DeleteDestination
         destinationId={destination.id}
         name={destination.name}
+        slug={destination.slug}
         tourCount={tourCount}
       />
     </>

@@ -98,6 +98,8 @@
     "new": "Tur baru",
     "edit": "Ubah",
     "view": "Lihat di situs",
+    "preview": "Pratinjau",
+    "copy": "Salin jadi tur baru",
     "empty": {
       "title": "Belum ada tur",
       "description": "Buat paket tur pertama untuk mulai menerima booking."
@@ -111,7 +113,16 @@
       "actions": "Aksi"
     },
     "togglePublished": "Tayangkan {title}",
-    "toggleFeatured": "Jadikan {title} unggulan"
+    "toggleFeatured": "Jadikan {title} unggulan",
+    "confirmUnpublish": "Masih ada {count} booking mendatang untuk tur \"{title}\". Jika disembunyikan, tamu tidak bisa membuka halaman tur atau mengubah jadwal sendiri. Tetap sembunyikan?",
+    "filters": {
+      "label": "Filter status tur",
+      "all": "Semua",
+      "published": "Tayang",
+      "draft": "Draf",
+      "destination": "Destinasi: {name}",
+      "clearDestination": "Hapus filter destinasi {name}"
+    }
   },
   "form": {
     "newEyebrow": "Katalog",
@@ -120,6 +131,15 @@
     "backToList": "Kembali ke daftar tur",
     "create": "Buat tur",
     "save": "Simpan perubahan",
+    "saved": "Perubahan tersimpan.",
+    "unchanged": "Tidak ada perubahan untuk disimpan.",
+    "unsaved": "Ada perubahan yang belum disimpan.",
+    "unsavedConfirm": "Ada perubahan yang belum disimpan. Tinggalkan halaman ini dan buang perubahan tersebut?",
+    "createdDraft": "Tur sudah dibuat sebagai draf, jadi belum terlihat oleh tamu. Cek tampilannya lewat tombol Pratinjau, lalu nyalakan Tayangkan di situs di bagian Visibilitas saat sudah siap.",
+    "createdLive": "Tur sudah dibuat dan langsung tayang di situs.",
+    "copyTitle": "Salinan dari {title}",
+    "copyNotice": "Formulir ini berisi salinan \"{title}\", termasuk foto, daftar, dan itinerary. Ubah judul dan bagian yang berbeda, lalu klik Buat tur. Salinan disimpan sebagai draf dan belum tayang.",
+    "jumpTo": "Lompat ke bagian formulir",
     "lang": {
       "id": "ID",
       "en": "EN"
@@ -135,6 +155,7 @@
       "itinerary": "Itinerary",
       "itineraryHint": "Urutan hari mengikuti urutan baris di bawah.",
       "visibility": "Visibilitas",
+      "visibilityLiveHint": "Tombol di sini langsung berlaku tanpa perlu Simpan. Simpan dulu isian di atas supaya versi terbarunya yang tayang.",
       "practical": "Persiapan",
       "practicalHint": "Informasi praktis untuk tamu sebelum berangkat. Tulis satu poin per baris, dengan baris bahasa Indonesia dan Inggris yang berpasangan."
     },
@@ -144,6 +165,8 @@
       "description": "Deskripsi",
       "slug": "Slug URL",
       "slugHint": "Diisi otomatis dari judul bahasa Indonesia.",
+      "slugHintEdit": "Ini alamat halaman tur. Jika diubah, tautan lama yang sudah dibagikan tidak berfungsi lagi.",
+      "slugLockedHint": "Alamat halaman tur yang sedang tayang dikunci supaya tautan yang sudah dibagikan tetap berfungsi. Matikan Tayangkan di situs dulu jika memang perlu menggantinya.",
       "destination": "Destinasi",
       "selectDestination": "Pilih destinasi",
       "category": "Kategori",
@@ -178,6 +201,20 @@
       "easy": "Santai",
       "moderate": "Sedang",
       "challenging": "Menantang"
+    },
+    "delete": {
+      "title": "Hapus draf tur",
+      "trigger": "Hapus tur",
+      "hint": "Draf ini belum pernah dipesan atau diulas, jadi bisa dihapus permanen.",
+      "blocked": {
+        "published": "Tur yang sedang tayang tidak bisa dihapus. Hanya draf yang bisa dihapus: matikan Tayangkan di situs dulu jika tur ini memang tidak dipakai.",
+        "hasBookings": "Tur ini sudah pernah dipesan, jadi tidak bisa dihapus. Matikan Tayangkan di situs saja agar tidak dijual lagi.",
+        "hasReviews": "Tur ini sudah punya ulasan tamu, jadi tidak bisa dihapus. Matikan Tayangkan di situs saja agar tidak dijual lagi."
+      },
+      "confirmTitle": "Hapus {title}?",
+      "confirmBody": "Draf tur ini beserta itinerary-nya akan dihapus permanen. Tindakan ini tidak bisa dibatalkan.",
+      "confirm": "Ya, hapus",
+      "cancel": "Batal"
     }
   },
   "destinations": {
@@ -207,6 +244,7 @@
     "create": "Buat destinasi",
     "save": "Simpan perubahan",
     "slugTaken": "Slug sudah dipakai destinasi lain.",
+    "createdNotice": "Destinasi sudah dibuat. Sekarang destinasi ini bisa dipilih saat membuat paket tur.",
     "sections": {
       "basics": "Informasi dasar",
       "basicsHint": "Nama dan provinsi tampil apa adanya. Tagline dan deskripsi tampil dalam dua bahasa.",
@@ -219,6 +257,7 @@
       "name": "Nama destinasi",
       "slug": "Slug URL",
       "slugHint": "Diisi otomatis dari nama.",
+      "slugHintEdit": "Ini alamat halaman destinasi. Jika diubah, tautan lama yang sudah dibagikan tidak berfungsi lagi.",
       "province": "Provinsi",
       "tagline": "Tagline",
       "taglineHint": "Satu kalimat pendek untuk kartu destinasi.",
@@ -232,7 +271,8 @@
       "title": "Hapus destinasi",
       "trigger": "Hapus destinasi",
       "hint": "Destinasi hanya bisa dihapus jika tidak ada paket tur di dalamnya.",
-      "blocked": "{count, plural, one {Masih ada # paket tur di destinasi ini. Pindahkan atau hapus tur tersebut terlebih dahulu.} other {Masih ada # paket tur di destinasi ini. Pindahkan atau hapus tur tersebut terlebih dahulu.}}",
+      "blocked": "{count, plural, one {Masih ada # paket tur di destinasi ini. Pindahkan tur tersebut ke destinasi lain (ubah kolom Destinasi di halaman edit tur), atau hapus jika masih draf yang tidak terpakai.} other {Masih ada # paket tur di destinasi ini. Pindahkan tur tersebut ke destinasi lain (ubah kolom Destinasi di halaman edit tur), atau hapus yang masih draf dan tidak terpakai.}}",
+      "viewTours": "Lihat {count} tur di destinasi ini",
       "confirmTitle": "Hapus {name}?",
       "confirmBody": "Destinasi ini akan dihapus permanen dari situs. Tindakan ini tidak bisa dibatalkan.",
       "confirm": "Ya, hapus",
