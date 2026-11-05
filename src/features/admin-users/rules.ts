@@ -104,6 +104,23 @@ export function auditEntityName(
   }
 }
 
+/**
+ * The tour a departure or closure entry is about, since its name alone is
+ * only a date: one tour (`tourTitle`, the current title the database has for
+ * `details.tourId`) or every tour (a closure stored with `tourId: null`).
+ * Null for other entries, and when the tour no longer exists.
+ */
+export function auditTourScope<T>(
+  entry: AuditEntry,
+  tourTitle?: T | null,
+): { kind: "tour"; title: T } | { kind: "all" } | null {
+  if (entry.entityType !== "departure" && entry.entityType !== "closure") return null;
+  const details = entry.details ?? {};
+  if (!("tourId" in details)) return null;
+  if (details.tourId === null) return entry.entityType === "closure" ? { kind: "all" } : null;
+  return tourTitle ? { kind: "tour", title: tourTitle } : null;
+}
+
 /** How a detail value is shown: translated, formatted, or as plain text. */
 export type AuditDetailKind =
   | "text"

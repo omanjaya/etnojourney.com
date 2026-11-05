@@ -132,6 +132,8 @@
       "departure": "Keberangkatan"
     },
     "dateRange": "{from} sampai {to}",
+    "allTours": "semua tur",
+    "itemOfTour": "{tour}, {item}",
     "details": {
       "tour": "Tur",
       "rating": "Bintang",

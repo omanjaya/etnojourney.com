@@ -2,11 +2,13 @@ import { ArrowUpRight } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, formatDate } from "@/lib/format";
+import { localize, type LocalizedText } from "@/lib/i18n-text";
 import type { AuditLog } from "@/server/db/schema";
 import {
   auditDetails,
   auditEntityHref,
   auditEntityName,
+  auditTourScope,
   type AuditDetail,
   type AuditEntityName,
 } from "../rules";
@@ -16,6 +18,8 @@ export type ActivityRow = {
   actorName: string | null;
   /** Current name of the user or guide the entry is about, when known. */
   entityName?: string | null;
+  /** Current title of the tour a departure or closure entry is about, when known. */
+  entityTour?: LocalizedText | null;
 };
 
 const timeFormat: Intl.DateTimeFormatOptions = {
@@ -99,11 +103,19 @@ export function ActivityList({
 
   return (
     <ol className="admin-stagger border-line divide-line divide-y rounded-(--radius-card) border bg-white">
-      {rows.map(({ log, actorName, entityName }) => {
+      {rows.map(({ log, actorName, entityName, entityTour }) => {
         const href = auditEntityHref(log);
         const name = auditEntityName(log, entityName);
+        const item = name ? entityLabel(name) : `#${log.entityId}`;
+        // A departure or closure is named by its dates: say which tour (or all tours) too.
+        const scope = auditTourScope(log, entityTour);
+        const tour = scope
+          ? scope.kind === "all"
+            ? t("allTours")
+            : localize(scope.title, locale)
+          : null;
         const entity = `${label(`entities.${log.entityType}`) ?? log.entityType} ${
-          name ? entityLabel(name) : `#${log.entityId}`
+          tour ? t("itemOfTour", { tour, item }) : item
         }`;
         const details = auditDetails(log.action, log.details);
         return (

@@ -132,6 +132,8 @@
       "departure": "Departure"
     },
     "dateRange": "{from} to {to}",
+    "allTours": "all tours",
+    "itemOfTour": "{tour}, {item}",
     "details": {
       "tour": "Tour",
       "rating": "Stars",

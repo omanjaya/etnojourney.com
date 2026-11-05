@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { auditDetails, auditEntityHref, auditEntityName } from "./rules";
+import { auditDetails, auditEntityHref, auditEntityName, auditTourScope } from "./rules";
 
 describe("auditEntityHref", () => {
   it("links bookings and payments by their code", () => {
@@ -130,6 +130,65 @@ describe("auditEntityName", () => {
   it("returns null when only the id is known", () => {
     expect(auditEntityName({ entityType: "user", entityId: "CIaYo7V6", details: null })).toBeNull();
     expect(auditEntityName({ entityType: "review", entityId: "26", details: null })).toBeNull();
+  });
+});
+
+describe("auditTourScope", () => {
+  const title = { id: "Menyusuri Desa", en: "Village Walk" };
+
+  it("names the tour of a departure or closure from its stored tour id", () => {
+    expect(
+      auditTourScope(
+        { entityType: "departure", entityId: "66:2026-12-10", details: { tourId: 66 } },
+        title,
+      ),
+    ).toEqual({ kind: "tour", title });
+    expect(
+      auditTourScope(
+        { entityType: "closure", entityId: "66:2027-01-01..2027-01-31", details: { tourId: 66 } },
+        title,
+      ),
+    ).toEqual({ kind: "tour", title });
+  });
+
+  it("tells an all-tours closure apart from a closure of one tour", () => {
+    expect(
+      auditTourScope(
+        {
+          entityType: "closure",
+          entityId: "all:2027-01-01..2027-01-31",
+          details: { tourId: null },
+        },
+        null,
+      ),
+    ).toEqual({ kind: "all" });
+    // Older per-day entries stored the same shape under a numeric id.
+    expect(
+      auditTourScope({ entityType: "closure", entityId: "41", details: { tourId: null } }),
+    ).toEqual({ kind: "all" });
+  });
+
+  it("returns null for other entries, unknown tours and missing tour ids", () => {
+    expect(
+      auditTourScope({ entityType: "tour", entityId: "66", details: { tourId: 66 } }, title),
+    ).toBeNull();
+    expect(
+      auditTourScope({
+        entityType: "departure",
+        entityId: "66:2026-12-10",
+        details: { tourId: 66 },
+      }),
+    ).toBeNull();
+    expect(
+      auditTourScope({ entityType: "departure", entityId: "66:2026-12-10", details: null }, title),
+    ).toBeNull();
+    expect(
+      auditTourScope({
+        entityType: "departure",
+        entityId: "66:2026-12-10",
+        details: { tourId: null },
+      }),
+    ).toBeNull();
   });
 });
 
