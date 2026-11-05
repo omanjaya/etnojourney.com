@@ -35,6 +35,7 @@
     "completed": "Selesai"
   },
   "days": "{count, plural, one {# hari} other {# hari}}",
+  "hours": "{count, plural, other {# jam}}",
   "maxPeople": "Maks. {count}",
   "people": "{count, plural, one {# orang} other {# orang}}",
   "from": "Mulai",

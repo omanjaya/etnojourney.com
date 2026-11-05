@@ -33,7 +33,7 @@ const orderings: Record<TourSort, SQL[]> = {
   popular: [desc(tours.isFeatured), desc(tours.rating), desc(tours.reviewCount)],
   priceAsc: [asc(tours.pricePerPerson)],
   priceDesc: [desc(tours.pricePerPerson)],
-  duration: [asc(tours.durationDays)],
+  duration: [asc(tours.durationDays), asc(sql`coalesce(${tours.durationHours}, 24)`)],
   longest: [desc(tours.durationDays), desc(tours.rating)],
 };
 

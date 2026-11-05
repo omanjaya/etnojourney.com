@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
+import { durationMessage } from "@/lib/duration";
 import { formatDate } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
 import { requirePartner } from "@/server/auth/guards";
@@ -85,7 +86,7 @@ export default async function PartnerDeparturePage({
             {departure.meetingPoint}
           </Fact>
           <Fact icon={Clock} label={t("duration")}>
-            {t("days", { count: departure.durationDays })}
+            {t(durationMessage(departure).key, { count: durationMessage(departure).count })}
           </Fact>
           <Fact icon={Users} label={t("travellers")}>
             {t("travellersValue", {

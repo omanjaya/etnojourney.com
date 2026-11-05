@@ -12,6 +12,7 @@ export type TourFormDefaults = {
   description: LocalizedText;
   category: TourCategory | "";
   durationDays: number | "";
+  durationHours: number | "";
   pricePerPerson: number | "";
   maxParticipants: number | "";
   meetingPoint: string;
@@ -36,6 +37,7 @@ export const emptyTourDefaults: TourFormDefaults = {
   description: emptyText(),
   category: "",
   durationDays: 1,
+  durationHours: "",
   pricePerPerson: "",
   maxParticipants: 10,
   meetingPoint: "",

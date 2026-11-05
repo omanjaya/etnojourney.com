@@ -72,6 +72,24 @@
         "id": "Sekitar 2,5–3,5 jam berkendara dari Denpasar ke arah Gilimanuk di jalur pantai selatan-barat; Negara adalah ibu kota Kabupaten Jembrana.",
         "en": "About 2.5–3.5 hours by road from Denpasar towards Gilimanuk along the southwest coast; Negara is the capital of Jembrana Regency."
       }
+    },
+    {
+      "slug": "kenderan-manuaba",
+      "name": "Kenderan & Manuaba",
+      "province": "Bali",
+      "heroImage": "/images/content/kenderan-manuaba/hero-terraces.webp",
+      "tagline": {
+        "id": "Desa tua di utara Ubud: petirtaan suci, air terjun tujuh tirta, dan sawah yang digarap keluarga petani.",
+        "en": "An old village north of Ubud: a sacred spring sanctuary, a waterfall of seven holy springs and family-farmed rice fields."
+      },
+      "description": {
+        "id": "Kenderan adalah desa di Kecamatan Tegallalang, Gianyar, sekitar 20 menit berkendara ke utara dari pusat Ubud. Menurut sejarah desanya, kisah Kenderan berawal dari dua tempat: Manuaba, permukiman tua yang dulu menjadi pusat desa, dan Petirtaan Telaga Waja di tepi barat desa.\n\nDi Manuaba ditemukan serpihan cetakan nekara perunggu. Ukuran dan hiasan geometrisnya mendekati Bulan Pejeng di Pura Penataran Sasih, sehingga sejumlah arkeolog menduga nekara Pejeng dicetak di Bali dan cetakan Manuaba berasal dari masa yang sama. Telaga Waja menyimpan ceruk-ceruk pertapaan, pancuran mandi, dan pancuran air suci yang diperkirakan sudah dipakai sejak abad ke-11; hingga kini orang datang ke sana untuk melukat.\n\nTak jauh dari Pura Griya Sakti Manuaba, Air Terjun Manuaba tersembunyi di dasar lembah. Menurut kepercayaan setempat, airnya berasal dari tujuh mata air suci (tirta). Program di Kenderan dipandu keluarga warga desa, dari rumah mereka hingga ke sawah dan mata air.",
+        "en": "Kenderan is a village in Tegallalang district, Gianyar, about 20 minutes' drive north of central Ubud. Its own village history begins in two places: Manuaba, the old settlement that was once the centre of the village, and the Telaga Waja spring sanctuary on its western edge.\n\nFragments of a bronze-drum casting mould were found in Manuaba. Their size and geometric decoration come close to the Moon of Pejeng in Pura Penataran Sasih, and several archaeologists believe the Pejeng drum was cast in Bali, with the Manuaba mould from the same era. Telaga Waja has meditation niches, bathing spouts and holy-water spouts thought to have been in use since the 11th century, and people still come here for melukat purification.\n\nNot far from Pura Griya Sakti Manuaba, Manuaba Waterfall hides at the bottom of a ravine; local belief holds that its water comes from seven sacred springs (tirta). Our Kenderan programmes are hosted by a village family, from their home to the rice fields and springs."
+      },
+      "gettingThere": {
+        "id": "Sekitar 20–30 menit berkendara ke utara dari pusat Ubud, atau 1,5–2 jam dari Bandara I Gusti Ngurah Rai tergantung lalu lintas.",
+        "en": "About 20–30 minutes' drive north of central Ubud, or 1.5–2 hours from I Gusti Ngurah Rai Airport depending on traffic."
+      }
     }
   ],
   "tours": [
@@ -1133,6 +1151,688 @@
           "en": "Travel insurance"
         }
       ]
+    },
+    {
+      "slug": "menyusuri-desa-manuaba",
+      "destination": "kenderan-manuaba",
+      "category": "village",
+      "title": {
+        "id": "Menyusuri Desa Manuaba",
+        "en": "Strolling Through Manuaba Village"
+      },
+      "summary": {
+        "id": "Disambut keluarga Bali, belajar membuat canang sari, lalu berjalan ke puri dan Pura Puseh Manuaba yang menyimpan cetakan nekara kuno.",
+        "en": "Be welcomed by a Balinese family, learn to make canang sari, then walk to the puri and Pura Puseh Manuaba, keeper of an ancient drum mould."
+      },
+      "description": {
+        "id": "Merangkul kehangatan, menapak jejak leluhur. Langkah pertamamu di Manuaba dimulai di beranda rumah sebuah keluarga, disambut senyum hangat dan segelas minuman sehat yang dibuat segar dari kebun mereka.\n\nDari sana kamu diajak menjelajahi rumah Bali itu sendiri. Setiap bale, gerbang, dan halaman bukan sekadar bangunan, melainkan puisi tentang keselarasan hidup: kearifan leluhur tentang keseimbangan antara manusia, alam, dan spiritualitas. Lalu kamu belajar seni membuat canang sari, persembahan harian dari janur yang dihiasi bunga warna-warni, tanda syukur dan keseimbangan yang sederhana namun abadi.\n\nPerjalanan berlanjut ke puri, jantung budaya desa, tempat aura kebangsawanan berpadu dengan kesederhanaan dan waktu seolah melambat. Langkahmu berakhir di Pura Puseh Manuaba yang menyimpan cetakan nekara kuno. Para arkeolog mengaitkan cetakan ini dengan Bulan Pejeng, sehingga sejenak kamu berdiri di jembatan antara desa hari ini dan peradaban masa lalu.",
+        "en": "Embracing warmth, tracing ancestral footsteps. Your first steps into Manuaba begin on the veranda of a family home, with warm smiles and a glass of healthy welcome drink made fresh from their garden.\n\nFrom there you wander through the Balinese house itself. Every bale (pavilion), gate and courtyard is more than a structure: it is poetry about the harmony of life, carrying the ancestors' wisdom on balance between people, nature and the spiritual. Then you learn the art of canang sari, the daily offering woven from palm leaves and adorned with colourful flowers, a simple and timeless gesture of gratitude and balance.\n\nThe walk continues to the puri, the cultural heart of the village, where nobility blends with simplicity and time seems to slow down. It ends at Pura Puseh Manuaba, which keeps an ancient bronze-drum (nekara) mould. Archaeologists link it to the Moon of Pejeng, so for a moment you stand on a bridge between today's village and civilisations of the past."
+      },
+      "durationDays": 1,
+      "durationHours": 2,
+      "pricePerPerson": 350000,
+      "maxParticipants": 10,
+      "difficulty": "easy",
+      "isFeatured": false,
+      "coverImage": "/images/content/kenderan-manuaba/house-compound.webp",
+      "gallery": [
+        "/images/content/kenderan-manuaba/house-compound.webp",
+        "/images/content/kenderan-manuaba/welcome-drink.webp",
+        "/images/content/kenderan-manuaba/canang-sari.webp",
+        "/images/content/kenderan-manuaba/puri-courtyard.webp",
+        "/images/content/kenderan-manuaba/village-temple.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Minuman sambutan sehat dari kebun keluarga",
+          "en": "Healthy welcome drink from the family garden"
+        },
+        {
+          "id": "Mengenal filosofi arsitektur rumah Bali",
+          "en": "The philosophy behind a Balinese family compound"
+        },
+        {
+          "id": "Belajar membuat canang sari",
+          "en": "Learn to make canang sari offerings"
+        },
+        {
+          "id": "Cetakan nekara kuno di Pura Puseh Manuaba",
+          "en": "The ancient drum mould at Pura Puseh Manuaba"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pendampingan keluarga tuan rumah",
+          "en": "Guided by your host family"
+        },
+        {
+          "id": "Minuman sambutan sehat",
+          "en": "Healthy welcome drink"
+        },
+        {
+          "id": "Bahan dan pendampingan membuat canang sari",
+          "en": "Materials and guidance for making canang sari"
+        }
+      ],
+      "notIncluded": [
+        {
+          "id": "Transportasi dari hotel ke titik kumpul",
+          "en": "Transport from your hotel to the meeting point"
+        },
+        {
+          "id": "Pengeluaran pribadi, minuman tambahan, dan oleh-oleh",
+          "en": "Personal expenses, extra drinks and souvenirs"
+        },
+        {
+          "id": "Tip untuk pemandu dan tuan rumah (sukarela)",
+          "en": "Tips for guides and hosts (optional)"
+        },
+        {
+          "id": "Asuransi perjalanan",
+          "en": "Travel insurance"
+        }
+      ],
+      "whatToBring": [
+        {
+          "id": "Pakaian sopan yang menutup bahu dan lutut",
+          "en": "Modest clothing that covers shoulders and knees"
+        },
+        {
+          "id": "Sandal atau sepatu yang mudah dilepas",
+          "en": "Sandals or shoes that are easy to slip off"
+        },
+        {
+          "id": "Uang tunai pecahan kecil untuk membeli kerajinan atau donasi",
+          "en": "Small-denomination cash for crafts or donations"
+        }
+      ],
+      "etiquette": [
+        {
+          "id": "Kenakan kain dan selendang saat memasuki area pura, dan bersikaplah tenang di dalamnya.",
+          "en": "Wear a sarong and sash inside temple grounds and keep your voice low."
+        },
+        {
+          "id": "Menurut adat Hindu Bali, perempuan yang sedang haid tidak memasuki area pura; beri tahu pemandu agar rute disesuaikan.",
+          "en": "By Balinese Hindu custom, women who are menstruating do not enter temple grounds; tell your guide and the route will be adjusted."
+        },
+        {
+          "id": "Cetakan nekara adalah benda suci yang disimpan di pura: amati dari tempat yang ditunjukkan dan tanyakan dulu sebelum memotret.",
+          "en": "The drum mould is a sacred object kept in the temple: view it from where you are shown and ask before taking photos."
+        },
+        {
+          "id": "Jangan melangkahi atau menginjak canang (sesajen) di jalan dan di depan rumah.",
+          "en": "Do not step over or on canang offerings on paths and in front of homes."
+        }
+      ],
+      "meetingPoint": "Manuaba, Desa Kenderan, Tegallalang, Gianyar",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Rumah keluarga, canang sari, puri, dan pura",
+            "en": "Family home, canang sari, puri and temple"
+          },
+          "description": {
+            "id": "Minuman sambutan di rumah keluarga, berkeliling rumah adat Bali, membuat canang sari, lalu berjalan kaki ke puri dan Pura Puseh Manuaba. Sekitar 2 jam.",
+            "en": "Welcome drink at the family home, a walk through the Balinese compound, canang sari making, then on foot to the puri and Pura Puseh Manuaba. About 2 hours."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "melukat-beji-telaga-waja",
+      "destination": "kenderan-manuaba",
+      "category": "ritual",
+      "title": {
+        "id": "Melukat di Beji Telaga Waja",
+        "en": "Melukat at Beji Telaga Waja"
+      },
+      "summary": {
+        "id": "Perjalanan penyucian diri: membuat canang untuk sembahyang, melukat di mata air suci Telaga Waja, lalu makan siang bersama keluarga Bali.",
+        "en": "A spiritual purification journey: make canang for prayer, take part in melukat at the Telaga Waja holy spring, then share lunch with a Balinese family."
+      },
+      "description": {
+        "id": "Jalan menuju keseimbangan, rasa syukur, dan pembaruan. Perjalananmu dimulai di halaman rumah sebuah keluarga Bali, disambut senyum dan minuman segar dari bahan-bahan alami kebun mereka, tanda keramahan dan keselarasan.\n\nKamu kemudian dibimbing menjalani laku suci membuat canang sari dari janur dan bunga. Persembahan yang kamu buat dengan sepenuh hati ini nanti dipakai untuk sembahyang di Pura Puseh Manuaba, sebagai tanda syukur dan ikatan antara manusia, alam, dan Sang Pencipta.\n\nDari sana jalan membawamu ke Beji Telaga Waja, mata air suci yang dihormati karena daya penyuciannya. Di sinilah ritual melukat berlangsung untuk membersihkan tiga lapis tubuh: sthula sarira, tubuh fisik; suksma sarira, tubuh halus pikiran dan perasaan; serta antahkarana sarira, tubuh penyebab di inti terdalam jiwa. Saat air suci mengalir, yang membebani dibasuh pergi, keseimbangan dan kejernihan kembali, dan kamu tersambung lagi dengan irama abadi kehidupan.\n\nPerjalanan ditutup kembali di rumah keluarga dengan makan siang ala Bali. Dalam suasana hangat dan apa adanya, santapan ini menjadi perayaan kebersamaan, budaya, dan pembaruan.",
+        "en": "A path to balance, gratitude and renewal. Your journey begins in the courtyard of a Balinese family, with smiles and a refreshing welcome drink made from natural ingredients from their garden, a gesture of hospitality and harmony.\n\nYou are then guided into the sacred practice of making canang sari from palm leaves and flowers. The offering you prepare with devotion is later used in prayer at Pura Puseh Manuaba, as a sign of gratitude and of the bond between people, nature and the divine.\n\nFrom there the path leads to Beji Telaga Waja, a holy spring revered for its cleansing power. Here the melukat ritual unfolds, cleansing the three bodies: sthula sarira, the physical body; suksma sarira, the subtle body of mind and emotion; and antahkarana sarira, the causal body at the deepest core of the soul. As the sacred water flows over you it washes away what weighs you down, restores balance and clarity, and reconnects you with the eternal rhythm of life.\n\nThe journey ends back at the family home with a Balinese-style lunch. Surrounded by warmth and authenticity, the meal becomes a celebration of community, culture and renewal."
+      },
+      "durationDays": 1,
+      "durationHours": 4,
+      "pricePerPerson": 650000,
+      "maxParticipants": 10,
+      "difficulty": "easy",
+      "isFeatured": false,
+      "coverImage": "/images/content/kenderan-manuaba/holy-spring.webp",
+      "gallery": [
+        "/images/content/kenderan-manuaba/holy-spring.webp",
+        "/images/content/kenderan-manuaba/canang-sari.webp",
+        "/images/content/kenderan-manuaba/village-temple.webp",
+        "/images/content/kenderan-manuaba/welcome-drink.webp",
+        "/images/content/kenderan-manuaba/balinese-lunch.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Membuat sendiri canang sari untuk sembahyang",
+          "en": "Make the canang sari you will offer in prayer"
+        },
+        {
+          "id": "Sembahyang di Pura Puseh Manuaba",
+          "en": "Prayer at Pura Puseh Manuaba"
+        },
+        {
+          "id": "Melukat di petirtaan kuno Telaga Waja",
+          "en": "Melukat at the ancient Telaga Waja spring sanctuary"
+        },
+        {
+          "id": "Makan siang ala Bali bersama keluarga",
+          "en": "Balinese-style lunch with the family"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pendampingan keluarga tuan rumah selama ritual",
+          "en": "Your host family's guidance throughout the ritual"
+        },
+        {
+          "id": "Minuman sambutan sehat",
+          "en": "Healthy welcome drink"
+        },
+        {
+          "id": "Bahan canang sari dan sarana sembahyang",
+          "en": "Canang sari materials and prayer offerings"
+        },
+        {
+          "id": "Makan siang ala Bali",
+          "en": "Balinese-style lunch"
+        }
+      ],
+      "notIncluded": [
+        {
+          "id": "Transportasi dari hotel ke titik kumpul",
+          "en": "Transport from your hotel to the meeting point"
+        },
+        {
+          "id": "Pengeluaran pribadi, minuman tambahan, dan oleh-oleh",
+          "en": "Personal expenses, extra drinks and souvenirs"
+        },
+        {
+          "id": "Tip untuk pemandu dan tuan rumah (sukarela)",
+          "en": "Tips for guides and hosts (optional)"
+        },
+        {
+          "id": "Asuransi perjalanan",
+          "en": "Travel insurance"
+        }
+      ],
+      "whatToBring": [
+        {
+          "id": "Baju ganti, pakaian dalam ganti, dan handuk",
+          "en": "A change of clothes, spare underwear and a towel"
+        },
+        {
+          "id": "Kantong kedap air untuk barang yang basah",
+          "en": "A waterproof bag for wet things"
+        },
+        {
+          "id": "Sandal yang tidak licin",
+          "en": "Non-slip sandals"
+        },
+        {
+          "id": "Uang tunai pecahan kecil untuk membeli kerajinan atau donasi",
+          "en": "Small-denomination cash for crafts or donations"
+        }
+      ],
+      "etiquette": [
+        {
+          "id": "Menurut tuan rumah, adat di Beji Telaga Waja mengharuskan orang yang melukat masuk ke air tanpa busana. Pemandu menjelaskan tata caranya sebelum ritual; tanyakan apa saja yang membuatmu ragu.",
+          "en": "Your hosts explain that custom at Beji Telaga Waja asks those taking part in melukat to enter the water unclothed. Your guide explains the procedure beforehand; ask about anything you are unsure of."
+        },
+        {
+          "id": "Jangan memotret atau merekam di area pemandian, dan jaga jarak dari warga yang sedang melukat.",
+          "en": "Do not take photos or video in the bathing area, and keep a respectful distance from villagers who are bathing."
+        },
+        {
+          "id": "Kenakan kain dan selendang saat memasuki area pura, dan bersikaplah tenang di dalamnya.",
+          "en": "Wear a sarong and sash inside temple grounds and keep your voice low."
+        },
+        {
+          "id": "Menurut adat Hindu Bali, perempuan yang sedang haid tidak memasuki area pura; beri tahu pemandu agar rute disesuaikan.",
+          "en": "By Balinese Hindu custom, women who are menstruating do not enter temple grounds; tell your guide and the route will be adjusted."
+        },
+        {
+          "id": "Ikuti arahan pemandu dan pemangku selama ritual.",
+          "en": "Follow your guide and the temple priest throughout the ritual."
+        }
+      ],
+      "meetingPoint": "Manuaba, Desa Kenderan, Tegallalang, Gianyar",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Canang, sembahyang, dan melukat",
+            "en": "Canang, prayer and melukat"
+          },
+          "description": {
+            "id": "Disambut di rumah keluarga, membuat canang sari, sembahyang di Pura Puseh Manuaba, melukat di Beji Telaga Waja, lalu kembali untuk makan siang ala Bali. Sekitar setengah hari.",
+            "en": "Welcome at the family home, canang sari making, prayer at Pura Puseh Manuaba, melukat at Beji Telaga Waja, then back for a Balinese-style lunch. About half a day."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "melukat-air-terjun-manuaba",
+      "destination": "kenderan-manuaba",
+      "category": "ritual",
+      "title": {
+        "id": "Melukat di Air Terjun Manuaba",
+        "en": "Melukat at Manuaba Waterfall"
+      },
+      "summary": {
+        "id": "Perjalanan penyucian diri sehari penuh: membuat canang, sembahyang di Pura Puseh Manuaba, lalu melukat di air terjun yang dialiri tujuh mata air suci.",
+        "en": "A full-day purification journey: make canang, pray at Pura Puseh Manuaba, then take part in melukat at a waterfall fed by seven sacred springs."
+      },
+      "description": {
+        "id": "Jalan menuju keseimbangan, rasa syukur, dan pembaruan. Hari dimulai di halaman rumah sebuah keluarga Bali, disambut senyum dan minuman segar dari bahan-bahan alami kebun mereka, tanda keramahan dan keselarasan.\n\nKamu dibimbing membuat canang sari, persembahan harian dari janur dan bunga. Canang buatanmu nanti dipakai untuk sembahyang di Pura Puseh Manuaba, sebagai tanda syukur dan ikatan antara manusia, alam, dan Sang Pencipta.\n\nDari sana jalan menurun ke Air Terjun Manuaba. Menurut kepercayaan setempat, air terjun ini terbentuk dari pertemuan tujuh mata air suci (tirta), masing-masing dengan makna spiritualnya sendiri: Tirta Sangku, Tirta Sudamala, Tirta Sambung Dawa, Tirta Bulan, Tirta Dadapan, Tirta Gringsing, dan Tirta Lindung Wesi. Pertemuan ketujuhnya diyakini memberi air terjun ini energi spiritual yang istimewa, menjadikannya bukan hanya tempat yang indah, tetapi juga tempat penyucian, perenungan, dan penghormatan bagi warga setempat.\n\nDi sinilah ritual melukat berlangsung untuk membersihkan tiga lapis tubuh: sthula sarira, tubuh fisik; suksma sarira, tubuh halus pikiran dan perasaan; serta antahkarana sarira, tubuh penyebab di inti terdalam jiwa. Saat air suci mengalir, yang membebani dibasuh pergi, keseimbangan dan kejernihan kembali, dan kamu tersambung lagi dengan irama abadi kehidupan.\n\nPerjalanan ditutup kembali di rumah keluarga dengan makan siang ala Bali, perayaan sederhana tentang kebersamaan, budaya, dan pembaruan.",
+        "en": "A path to balance, gratitude and renewal. The day begins in the courtyard of a Balinese family, with smiles and a refreshing welcome drink made from natural ingredients from their garden, a gesture of hospitality and harmony.\n\nYou are guided through making canang sari, the daily offering woven from palm leaves and flowers. The canang you make is later used in prayer at Pura Puseh Manuaba, as a sign of gratitude and of the bond between people, nature and the divine.\n\nFrom there the path leads down to Manuaba Waterfall. Local belief holds that it is formed where seven sacred springs (tirta) meet, each with its own spiritual meaning: Tirta Sangku, Tirta Sudamala, Tirta Sambung Dawa, Tirta Bulan, Tirta Dadapan, Tirta Gringsing and Tirta Lindung Wesi. Their meeting is believed to give the waterfall a special spiritual energy, making it a place of purification, reflection and reverence for the local community as much as a place of natural beauty.\n\nHere the melukat ritual unfolds, cleansing the three bodies: sthula sarira, the physical body; suksma sarira, the subtle body of mind and emotion; and antahkarana sarira, the causal body at the deepest core of the soul. As the sacred water flows over you it washes away what weighs you down, restores balance and clarity, and reconnects you with the eternal rhythm of life.\n\nThe day ends back at the family home with a Balinese-style lunch, a quiet celebration of community, culture and renewal."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 750000,
+      "maxParticipants": 10,
+      "difficulty": "moderate",
+      "isFeatured": false,
+      "coverImage": "/images/content/kenderan-manuaba/waterfall-prayer.webp",
+      "gallery": [
+        "/images/content/kenderan-manuaba/waterfall-prayer.webp",
+        "/images/content/kenderan-manuaba/manuaba-waterfall.webp",
+        "/images/content/kenderan-manuaba/canang-sari.webp",
+        "/images/content/kenderan-manuaba/village-temple.webp",
+        "/images/content/kenderan-manuaba/balinese-lunch.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Membuat sendiri canang sari untuk sembahyang",
+          "en": "Make the canang sari you will offer in prayer"
+        },
+        {
+          "id": "Sembahyang di Pura Puseh Manuaba",
+          "en": "Prayer at Pura Puseh Manuaba"
+        },
+        {
+          "id": "Melukat di air terjun tujuh tirta",
+          "en": "Melukat at the waterfall of seven sacred springs"
+        },
+        {
+          "id": "Makan siang ala Bali bersama keluarga",
+          "en": "Balinese-style lunch with the family"
+        }
+      ],
+      "included": [
+        {
+          "id": "Pendampingan keluarga tuan rumah selama ritual",
+          "en": "Your host family's guidance throughout the ritual"
+        },
+        {
+          "id": "Minuman sambutan sehat",
+          "en": "Healthy welcome drink"
+        },
+        {
+          "id": "Bahan canang sari dan sarana sembahyang",
+          "en": "Canang sari materials and prayer offerings"
+        },
+        {
+          "id": "Makan siang ala Bali",
+          "en": "Balinese-style lunch"
+        }
+      ],
+      "notIncluded": [
+        {
+          "id": "Transportasi dari hotel ke titik kumpul",
+          "en": "Transport from your hotel to the meeting point"
+        },
+        {
+          "id": "Pengeluaran pribadi, minuman tambahan, dan oleh-oleh",
+          "en": "Personal expenses, extra drinks and souvenirs"
+        },
+        {
+          "id": "Tip untuk pemandu dan tuan rumah (sukarela)",
+          "en": "Tips for guides and hosts (optional)"
+        },
+        {
+          "id": "Asuransi perjalanan",
+          "en": "Travel insurance"
+        }
+      ],
+      "whatToBring": [
+        {
+          "id": "Baju ganti, pakaian dalam ganti, dan handuk",
+          "en": "A change of clothes, spare underwear and a towel"
+        },
+        {
+          "id": "Kantong kedap air untuk barang yang basah",
+          "en": "A waterproof bag for wet things"
+        },
+        {
+          "id": "Sandal gunung atau sepatu yang tidak licin untuk jalan setapak ke air terjun",
+          "en": "Sport sandals or shoes with good grip for the path down to the waterfall"
+        },
+        {
+          "id": "Uang tunai pecahan kecil untuk membeli kerajinan atau donasi",
+          "en": "Small-denomination cash for crafts or donations"
+        }
+      ],
+      "etiquette": [
+        {
+          "id": "Kenakan kain dan selendang saat memasuki area pura, dan bersikaplah tenang di dalamnya.",
+          "en": "Wear a sarong and sash inside temple grounds and keep your voice low."
+        },
+        {
+          "id": "Menurut adat Hindu Bali, perempuan yang sedang haid tidak memasuki area pura; beri tahu pemandu agar rute disesuaikan.",
+          "en": "By Balinese Hindu custom, women who are menstruating do not enter temple grounds; tell your guide and the route will be adjusted."
+        },
+        {
+          "id": "Jangan memotret atau merekam di area pemandian, dan jaga jarak dari warga yang sedang melukat.",
+          "en": "Do not take photos or video in the bathing area, and keep a respectful distance from villagers who are bathing."
+        },
+        {
+          "id": "Ikuti arahan pemandu dan pemangku selama ritual.",
+          "en": "Follow your guide and the temple priest throughout the ritual."
+        }
+      ],
+      "meetingPoint": "Manuaba, Desa Kenderan, Tegallalang, Gianyar",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Canang, Pura Puseh, dan air terjun suci",
+            "en": "Canang, Pura Puseh and the sacred waterfall"
+          },
+          "description": {
+            "id": "Disambut di rumah keluarga, membuat canang sari, sembahyang di Pura Puseh Manuaba, turun ke Air Terjun Manuaba untuk melukat, lalu kembali untuk makan siang ala Bali. Sehari penuh.",
+            "en": "Welcome at the family home, canang sari making, prayer at Pura Puseh Manuaba, down to Manuaba Waterfall for melukat, then back for a Balinese-style lunch. A full day."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "kelas-masak-rustik-manuaba",
+      "destination": "kenderan-manuaba",
+      "category": "culinary",
+      "title": {
+        "id": "Kelas Masak Rustik di Tengah Sawah",
+        "en": "Rustic Cooking Class in the Rice Fields"
+      },
+      "summary": {
+        "id": "Dari Air Terjun Manuaba menyusuri sawah sambil memetik bumbu, lalu memasak ala Bali di pondok di tengah sawah.",
+        "en": "From Manuaba Waterfall across the rice fields, picking spices on the way, then cook Balinese food in a hut among the paddies."
+      },
+      "description": {
+        "id": "Dari jalan setapak alam ke cita rasa Bali. Perjalananmu dimulai di Air Terjun Manuaba yang tersembunyi, tempat suara air berpadu dengan keheningan hutan. Di sini kamu berhenti sejenak menyegarkan diri dengan kelapa muda dingin, hadiah alam yang membangunkan indra.\n\nDari air terjun, petualangan berlanjut dengan jalan kaki santai melintasi sawah berundak dan kebun. Di sepanjang jalan kamu memetik bahan segar langsung dari tanahnya: cabai, kunyit, jahe, tomat, dan lainnya. Setiap langkah menyambungkanmu dengan irama hidup petani Bali.\n\nTiba di pondok sederhana di tengah sawah, kamu disambut minuman sehat dan diperkenalkan pada filosofi dapur Bali serta basa genep, racikan bumbu lengkap yang melambangkan keseimbangan, kesehatan, dan tradisi dalam masakan Bali. Dibimbing tuan rumah setempat, kamu mulai memasak: bunyi ulekan, harum rempah, dan desis sayuran segar menjadi simfoni rasa warisan kuliner Bali.\n\nPengalaman ini ditutup dengan makan siang ala Bali dari masakan buatanmu sendiri, dikelilingi sawah dan kehangatan warga.",
+        "en": "From nature's path to Balinese flavours. Your journey begins at the hidden Manuaba Waterfall, where the sound of falling water blends with the calm of the jungle. Here you pause to refresh yourself with a chilled young coconut, a natural gift that wakes up the senses.\n\nFrom the waterfall the adventure continues with a gentle walk across rice terraces and plantations. Along the way you gather fresh ingredients straight from the land: chillies, turmeric, ginger, tomatoes and more. Each step connects you to the rhythm of Balinese farming life.\n\nAt a rustic pondok (hut) in the middle of the rice fields you are welcomed with a healthy drink and introduced to the philosophy of the Balinese kitchen and to basa genep, the complete spice blend that embodies balance, wellness and tradition in Balinese cooking. Guided by local hosts you roll up your sleeves: the pounding of spices, the scent of herbs and the sizzle of fresh vegetables tell the story of Bali's culinary heritage.\n\nThe experience ends with a Balinese-style lunch of the dishes you cooked yourself, surrounded by rice fields and the warmth of the community."
+      },
+      "durationDays": 1,
+      "durationHours": 5,
+      "pricePerPerson": 600000,
+      "maxParticipants": 8,
+      "difficulty": "easy",
+      "isFeatured": false,
+      "coverImage": "/images/content/kenderan-manuaba/pondok-rice-field.webp",
+      "gallery": [
+        "/images/content/kenderan-manuaba/pondok-rice-field.webp",
+        "/images/content/kenderan-manuaba/young-coconut.webp",
+        "/images/content/kenderan-manuaba/harvesting-spices.webp",
+        "/images/content/kenderan-manuaba/base-genep.webp",
+        "/images/content/kenderan-manuaba/cooking-class.webp",
+        "/images/content/kenderan-manuaba/manuaba-waterfall.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Kelapa muda dingin di Air Terjun Manuaba",
+          "en": "A chilled young coconut at Manuaba Waterfall"
+        },
+        {
+          "id": "Memetik bumbu langsung dari kebun dan sawah",
+          "en": "Pick spices straight from the gardens and fields"
+        },
+        {
+          "id": "Mengenal filosofi basa genep",
+          "en": "The philosophy of basa genep, Bali's complete spice blend"
+        },
+        {
+          "id": "Memasak dan makan siang di pondok tengah sawah",
+          "en": "Cook and eat lunch in a hut among the rice fields"
+        }
+      ],
+      "included": [
+        {
+          "id": "Kelapa muda di air terjun",
+          "en": "Young coconut at the waterfall"
+        },
+        {
+          "id": "Minuman sambutan sehat",
+          "en": "Healthy welcome drink"
+        },
+        {
+          "id": "Pemandu lokal selama jalan kaki",
+          "en": "Local guide on the walk"
+        },
+        {
+          "id": "Semua bahan masakan dan pendampingan memasak",
+          "en": "All ingredients and cooking guidance"
+        },
+        {
+          "id": "Makan siang dari masakan yang kamu buat",
+          "en": "Lunch of the dishes you cook"
+        }
+      ],
+      "notIncluded": [
+        {
+          "id": "Transportasi dari hotel ke titik kumpul",
+          "en": "Transport from your hotel to the meeting point"
+        },
+        {
+          "id": "Pengeluaran pribadi, minuman tambahan, dan oleh-oleh",
+          "en": "Personal expenses, extra drinks and souvenirs"
+        },
+        {
+          "id": "Tip untuk pemandu dan tuan rumah (sukarela)",
+          "en": "Tips for guides and hosts (optional)"
+        },
+        {
+          "id": "Asuransi perjalanan",
+          "en": "Travel insurance"
+        }
+      ],
+      "whatToBring": [
+        {
+          "id": "Sepatu atau sandal gunung yang nyaman untuk pematang sawah",
+          "en": "Comfortable shoes or sport sandals for paddy paths"
+        },
+        {
+          "id": "Topi, kacamata hitam, dan tabir surya",
+          "en": "Hat, sunglasses and sunscreen"
+        },
+        {
+          "id": "Pakaian nyaman yang boleh kotor",
+          "en": "Comfortable clothes you don't mind getting messy"
+        },
+        {
+          "id": "Beri tahu alergi atau pantangan makanan saat memesan",
+          "en": "Let us know about allergies or dietary restrictions when you book"
+        }
+      ],
+      "etiquette": [
+        {
+          "id": "Berjalan di pematang di belakang pemandu dan jangan menginjak tanaman padi.",
+          "en": "Walk the paddy dikes behind your guide and do not step on the rice plants."
+        },
+        {
+          "id": "Petik hanya yang ditunjukkan tuan rumah; kebun dan sawah adalah milik keluarga petani.",
+          "en": "Pick only what your hosts show you; the gardens and fields belong to farming families."
+        },
+        {
+          "id": "Jangan melangkahi atau menginjak canang (sesajen) di jalan dan di depan rumah.",
+          "en": "Do not step over or on canang offerings on paths and in front of homes."
+        },
+        {
+          "id": "Gunakan tangan kanan saat memberi dan menerima sesuatu.",
+          "en": "Use your right hand to give and receive things."
+        }
+      ],
+      "meetingPoint": "Air Terjun Manuaba, Desa Kenderan, Tegallalang, Gianyar",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Air terjun, sawah, dan pondok dapur",
+            "en": "Waterfall, rice fields and a kitchen hut"
+          },
+          "description": {
+            "id": "Mulai di Air Terjun Manuaba dengan kelapa muda, jalan kaki santai melintasi sawah sambil memetik bumbu, lalu memasak dan makan siang di pondok di tengah sawah. Sekitar setengah hari.",
+            "en": "Start at Manuaba Waterfall with a young coconut, a gentle walk across the rice fields picking spices, then cooking and lunch in a hut among the paddies. About half a day."
+          }
+        }
+      ]
+    },
+    {
+      "slug": "jalan-sawah-dan-masak-kenderan",
+      "destination": "kenderan-manuaba",
+      "category": "culinary",
+      "title": {
+        "id": "Jalan Kaki di Sawah dan Masak Autentik Bali",
+        "en": "Rice Paddy Walks and Authentic Balinese Cooking"
+      },
+      "summary": {
+        "id": "Sehari di Kenderan: mengunjungi mata air suci Telaga Waja, berjalan 1,5 jam di antara sawah sambil memetik bumbu, lalu memasak bersama keluarga Bali.",
+        "en": "A day in Kenderan: visit the Telaga Waja holy spring, walk 1.5 hours through the rice paddies picking spices, then cook with a Balinese family."
+      },
+      "description": {
+        "id": "Perjalanan melintasi alam, budaya, dan rasa. Harimu dimulai di rumah sebuah keluarga Bali dengan minuman sambutan yang menyegarkan dan jeda singkat setelah perjalanan dari hotel.\n\nKamu lalu diajak ke salah satu mata air suci paling unik di Bali, Beji Telaga Waja, yang dikenal dengan ritual penyucian melukat. Menurut tuan rumah, adat di sini mengharuskan orang yang melukat masuk ke air tanpa busana, sebagai lambang penyerahan diri sepenuhnya kepada Sang Pencipta. Meski hanya mengamati, suasananya terasa sangat spiritual.\n\nDari pura, jalan membawamu ke jantung pedesaan. Jalan kaki santai di antara sawah hijau menyuguhkan pemandangan sawah berundak, pohon kelapa yang melambai, pondok petani, dan kandang sapi. Di sepanjang jalan kamu memetik sayur dan bumbu segar, cabai, kunyit, jahe, dan lainnya, yang nanti menjadi bahan masakanmu.\n\nSetelah sekitar 1,5 jam berjalan, kamu tiba di rumah tradisional Bali. Keluarga kembali menyambutmu dengan minuman sehat, lalu memperkenalkan filosofi rumah Bali, dapur Bali, dan basa genep, racikan bumbu yang menjadi dasar masakan Bali. Dengan bimbingan tuan rumah, kelas masak dimulai, dan begitu hidangan siap kamu menikmati hasil kerjamu sendiri. Bagi yang masih ingin melanjutkan, hari bisa ditutup di Air Terjun Manuaba yang tersembunyi.",
+        "en": "A journey through nature, culture and flavour. Your day begins at a Balinese family home with a refreshing healthy welcome drink and a short pause to freshen up after the drive from your hotel.\n\nYou are then guided to one of Bali's most unusual holy springs, Beji Telaga Waja, known for the melukat purification ritual. Your hosts explain that custom here asks bathers to enter the water unclothed, a sign of complete surrender to the divine. Even simply as an observer, the atmosphere is deeply spiritual.\n\nFrom the temple the path leads into the heart of the countryside. A leisurely walk through emerald rice paddies reveals terraced fields, swaying coconut palms, rustic farmers' huts and cattle pens, and along the way you pick fresh vegetables and spices, chillies, turmeric, ginger and more, for the cooking to come.\n\nAfter about an hour and a half of walking you reach a traditional Balinese house. The family welcomes you again with a healthy drink and introduces the philosophy of the Balinese home, the Balinese kitchen and basa genep, the spice blend at the heart of Balinese cuisine. Then the cooking class begins, and when the dishes are ready you sit down to enjoy what you made. For those who wish to continue, the day can end at the hidden Manuaba Waterfall."
+      },
+      "durationDays": 1,
+      "pricePerPerson": 850000,
+      "maxParticipants": 8,
+      "difficulty": "moderate",
+      "isFeatured": false,
+      "coverImage": "/images/content/kenderan-manuaba/rice-paddy-walk.webp",
+      "gallery": [
+        "/images/content/kenderan-manuaba/rice-paddy-walk.webp",
+        "/images/content/kenderan-manuaba/holy-spring.webp",
+        "/images/content/kenderan-manuaba/harvesting-spices.webp",
+        "/images/content/kenderan-manuaba/cooking-class.webp",
+        "/images/content/kenderan-manuaba/base-genep.webp",
+        "/images/content/kenderan-manuaba/manuaba-waterfall.webp"
+      ],
+      "highlights": [
+        {
+          "id": "Mengunjungi mata air suci Beji Telaga Waja",
+          "en": "Visit the Beji Telaga Waja holy spring"
+        },
+        {
+          "id": "Jalan kaki 1,5 jam di antara sawah dan kebun kelapa",
+          "en": "A 1.5-hour walk through rice paddies and coconut groves"
+        },
+        {
+          "id": "Memetik sayur dan bumbu untuk dimasak",
+          "en": "Pick the vegetables and spices you will cook"
+        },
+        {
+          "id": "Kelas masak di rumah tradisional Bali",
+          "en": "A cooking class in a traditional Balinese house"
+        },
+        {
+          "id": "Pilihan penutup di Air Terjun Manuaba",
+          "en": "An optional finale at Manuaba Waterfall"
+        }
+      ],
+      "included": [
+        {
+          "id": "Minuman sambutan sehat di rumah keluarga",
+          "en": "Healthy welcome drinks at the family homes"
+        },
+        {
+          "id": "Pemandu lokal selama jalan kaki",
+          "en": "Local guide on the walk"
+        },
+        {
+          "id": "Semua bahan masakan dan pendampingan memasak",
+          "en": "All ingredients and cooking guidance"
+        },
+        {
+          "id": "Makan siang dari masakan yang kamu buat",
+          "en": "Lunch of the dishes you cook"
+        }
+      ],
+      "notIncluded": [
+        {
+          "id": "Transportasi dari hotel ke titik kumpul",
+          "en": "Transport from your hotel to the meeting point"
+        },
+        {
+          "id": "Pengeluaran pribadi, minuman tambahan, dan oleh-oleh",
+          "en": "Personal expenses, extra drinks and souvenirs"
+        },
+        {
+          "id": "Tip untuk pemandu dan tuan rumah (sukarela)",
+          "en": "Tips for guides and hosts (optional)"
+        },
+        {
+          "id": "Asuransi perjalanan",
+          "en": "Travel insurance"
+        }
+      ],
+      "whatToBring": [
+        {
+          "id": "Sepatu atau sandal gunung yang nyaman untuk pematang sawah",
+          "en": "Comfortable shoes or sport sandals for paddy paths"
+        },
+        {
+          "id": "Topi, kacamata hitam, dan tabir surya",
+          "en": "Hat, sunglasses and sunscreen"
+        },
+        {
+          "id": "Baju ganti dan handuk bila ingin ikut melukat atau ke air terjun",
+          "en": "A change of clothes and a towel if you would like to join melukat or visit the waterfall"
+        },
+        {
+          "id": "Beri tahu alergi atau pantangan makanan saat memesan",
+          "en": "Let us know about allergies or dietary restrictions when you book"
+        }
+      ],
+      "etiquette": [
+        {
+          "id": "Menurut tuan rumah, adat di Beji Telaga Waja mengharuskan orang yang melukat masuk ke air tanpa busana. Pemandu menjelaskan tata caranya sebelum ritual; tanyakan apa saja yang membuatmu ragu.",
+          "en": "Your hosts explain that custom at Beji Telaga Waja asks those taking part in melukat to enter the water unclothed. Your guide explains the procedure beforehand; ask about anything you are unsure of."
+        },
+        {
+          "id": "Jangan memotret atau merekam di area pemandian, dan jaga jarak dari warga yang sedang melukat.",
+          "en": "Do not take photos or video in the bathing area, and keep a respectful distance from villagers who are bathing."
+        },
+        {
+          "id": "Kenakan kain dan selendang saat memasuki area pura, dan bersikaplah tenang di dalamnya.",
+          "en": "Wear a sarong and sash inside temple grounds and keep your voice low."
+        },
+        {
+          "id": "Menurut adat Hindu Bali, perempuan yang sedang haid tidak memasuki area pura; beri tahu pemandu agar rute disesuaikan.",
+          "en": "By Balinese Hindu custom, women who are menstruating do not enter temple grounds; tell your guide and the route will be adjusted."
+        },
+        {
+          "id": "Berjalan di pematang di belakang pemandu dan jangan menginjak tanaman padi.",
+          "en": "Walk the paddy dikes behind your guide and do not step on the rice plants."
+        },
+        {
+          "id": "Gunakan tangan kanan saat memberi dan menerima sesuatu.",
+          "en": "Use your right hand to give and receive things."
+        }
+      ],
+      "meetingPoint": "Manuaba, Desa Kenderan, Tegallalang, Gianyar",
+      "itinerary": [
+        {
+          "title": {
+            "id": "Telaga Waja, sawah, dan dapur keluarga",
+            "en": "Telaga Waja, rice paddies and a family kitchen"
+          },
+          "description": {
+            "id": "Minuman sambutan di rumah keluarga, berkunjung ke Beji Telaga Waja, jalan kaki sekitar 1,5 jam melintasi sawah sambil memetik bumbu, kelas masak dan makan siang di rumah tradisional Bali, lalu bila ingin, mampir ke Air Terjun Manuaba. Sehari penuh.",
+            "en": "Welcome drink at the family home, a visit to Beji Telaga Waja, a walk of about 1.5 hours across the rice fields picking spices, a cooking class and lunch in a traditional Balinese house, then, if you like, Manuaba Waterfall. A full day."
+          }
+        }
+      ]
     }
   ],
   "sources": [
@@ -1161,6 +1861,11 @@
     "https://id.wikipedia.org/wiki/Makepung",
     "https://id.wikipedia.org/wiki/Jegog",
     "https://www.nowbali.co.id/rules-balinese-temples/",
-    "https://www.baliholidaysecrets.com/bali-airport-to-munduk/"
+    "https://www.baliholidaysecrets.com/bali-airport-to-munduk/",
+    "https://lppm.stikom-bali.ac.id/wp-content/uploads/2021/10/Profil-Desa-Kenderan-2021-1.pdf",
+    "https://journal.undiknas.ac.id/index.php/manajemen/article/view/4289",
+    "https://www.balitourismjournal.org/ojs/index.php/btj/article/download/60/74/167",
+    "https://www.nowbali.co.id/?p=37406",
+    "https://www.indonesia.travel/id/id/destinasi/bali-nusa-tenggara/manuaba-waterfall-the-hidden-beauty-of-tegalallang-bali"
   ]
 }

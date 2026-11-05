@@ -35,6 +35,7 @@
     "completed": "Completed"
   },
   "days": "{count, plural, one {# day} other {# days}}",
+  "hours": "{count, plural, one {# hour} other {# hours}}",
   "maxPeople": "Max. {count}",
   "people": "{count, plural, one {# person} other {# people}}",
   "from": "From",

@@ -37,6 +37,7 @@ const departureColumns = {
   tourTitle: tours.title,
   meetingPoint: tours.meetingPoint,
   durationDays: tours.durationDays,
+  durationHours: tours.durationHours,
   note: departureAssignments.note,
   bookingCount,
   participantCount,

@@ -148,6 +148,8 @@
       "selectDestination": "Choose a destination",
       "category": "Category",
       "durationDays": "Duration (days)",
+      "durationHours": "Duration (hours)",
+      "durationHoursHint": "Optional, only for 1-day tours shorter than a full day.",
       "pricePerPerson": "Price per person (IDR)",
       "maxParticipants": "Max. guests",
       "meetingPoint": "Meeting point",

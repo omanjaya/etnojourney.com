@@ -27,6 +27,7 @@ import type { ReactNode } from "react";
 import type { LocalizedText } from "@/lib/i18n-text";
 import type { Locale } from "@/i18n/routing";
 import { getPathname, Link } from "@/i18n/navigation";
+import { durationMessage } from "@/lib/duration";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
 import { paymentMethodLabel } from "@/lib/payment-method";
@@ -209,7 +210,7 @@ export default async function BookingDetailPage({
                 {travelDate}
               </Detail>
               <Detail icon={Clock} label={t("duration")}>
-                {tc("days", { count: tour.durationDays })}
+                {tc(durationMessage(tour).key, { count: durationMessage(tour).count })}
               </Detail>
               <Detail icon={Users} label={t("participants")}>
                 {tc("people", { count: booking.participants })}

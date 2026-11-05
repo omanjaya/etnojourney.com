@@ -51,7 +51,7 @@ export function DetailsSection({
           </Select>
         </Field>
       </div>
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <Field label={t("fields.durationDays")} htmlFor="durationDays" error={err("durationDays")}>
           <Input
             id="durationDays"
@@ -62,6 +62,23 @@ export function DetailsSection({
             value={values.durationDays}
             onChange={(e) => set("durationDays", numberValue(e.target.value))}
             aria-invalid={err("durationDays") ? true : undefined}
+          />
+        </Field>
+        <Field
+          label={t("fields.durationHours")}
+          htmlFor="durationHours"
+          error={err("durationHours")}
+          hint={t("fields.durationHoursHint")}
+        >
+          <Input
+            id="durationHours"
+            type="number"
+            inputMode="numeric"
+            min={1}
+            max={12}
+            value={values.durationHours}
+            onChange={(e) => set("durationHours", numberValue(e.target.value))}
+            aria-invalid={err("durationHours") ? true : undefined}
           />
         </Field>
         <Field

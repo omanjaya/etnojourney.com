@@ -1,0 +1,2 @@
+ALTER TABLE "tours" ADD COLUMN "duration_hours" integer;--> statement-breakpoint
+ALTER TABLE "tours" ADD CONSTRAINT "tours_duration_hours_same_day" CHECK ("tours"."duration_hours" is null or ("tours"."duration_days" = 1 and "tours"."duration_hours" between 1 and 12));
