@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { requireAdmin } from "@/server/auth/guards";
 import { destinationService } from "@/server/services/destination.service";
 import { isDomainError } from "@/server/services/errors";
+import { photoCreditService } from "@/server/services/photo-credit.service";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { DeleteDestination } from "@/features/admin/components/delete-destination";
 import { DestinationForm } from "@/features/admin/components/destination-form";
@@ -32,6 +33,7 @@ export default async function EditDestinationPage({
     destinationService.tourCount(id),
     getTranslations("admin.destinationForm"),
   ]);
+  const placeholderImages = await photoCreditService.placeholdersAmong([destination.heroImage]);
 
   return (
     <>
@@ -55,6 +57,7 @@ export default async function EditDestinationPage({
           heroImage: destination.heroImage,
           gettingThere: destination.gettingThere ?? { id: "", en: "" },
         }}
+        placeholderImages={placeholderImages}
       />
       <DeleteDestination
         destinationId={destination.id}

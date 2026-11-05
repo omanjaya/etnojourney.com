@@ -7,6 +7,7 @@ import {
   HandCoins,
   Hourglass,
   MapIcon,
+  Sparkles,
   Wallet,
 } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
@@ -16,6 +17,7 @@ import { can } from "@/server/auth/permissions";
 import { dashboardService } from "@/server/services/dashboard.service";
 import { needsGuideWindow } from "@/server/services/departure.rules";
 import { departureService } from "@/server/services/departure.service";
+import { photoCreditService } from "@/server/services/photo-credit.service";
 import { businessToday } from "@/server/services/self-service.rules";
 import { CountUp } from "@/components/motion";
 import { Button } from "@/components/ui/button";
@@ -31,7 +33,8 @@ export default async function AdminOverviewPage() {
   const canSeeRevenue = can(user.role, "reports.view");
   const canRefund = can(user.role, "payments.refund");
   const canManageDepartures = can(user.role, "departures.manage");
-  const [overview, t, tb, tq, td, withoutGuide, locale] = await Promise.all([
+  const canManageCredits = can(user.role, "credits.manage");
+  const [overview, t, tb, tq, td, withoutGuide, locale, placeholderUsage] = await Promise.all([
     dashboardService.overview({ withRefunds: canRefund, withRevenue: canSeeRevenue }),
     getTranslations("admin.overview"),
     getTranslations("admin.bookings"),
@@ -39,6 +42,7 @@ export default async function AdminOverviewPage() {
     getTranslations("adminDepartures.dashboard"),
     canManageDepartures ? departureService.countNeedingGuideSoon() : Promise.resolve(null),
     getLocale(),
+    canManageCredits ? photoCreditService.placeholderUsage() : Promise.resolve(null),
   ]);
   const guideWindow = needsGuideWindow(businessToday());
   const { counts, revenue, publishedTours, recent, refundsNeeded } = overview;
@@ -97,6 +101,18 @@ export default async function AdminOverviewPage() {
             count={withoutGuide}
             countLabel={td("count", { count: withoutGuide })}
             urgent={withoutGuide > 0}
+          />
+        )}
+        {/* AI placeholder photos still live: shown only while any are left. */}
+        {placeholderUsage && placeholderUsage.length > 0 && (
+          <WorkQueueCard
+            icon={Sparkles}
+            href="/admin/credits#placeholders"
+            label={tq("placeholders.label")}
+            action={tq("placeholders.action")}
+            count={placeholderUsage.length}
+            countLabel={tq("placeholders.count", { count: placeholderUsage.length })}
+            urgent={false}
           />
         )}
       </section>

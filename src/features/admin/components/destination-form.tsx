@@ -6,7 +6,9 @@ import { useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/form-controls";
+import { CreditsHint } from "@/features/media/components/credits-hint";
 import { ImageUploader } from "@/features/media/components/image-uploader";
+import { useUploadTracker } from "@/features/media/components/use-upload-tracker";
 import type { LocalizedText } from "@/lib/i18n-text";
 import { createDestinationAction, updateDestinationAction } from "../actions";
 import type { DestinationFormValues } from "../schemas";
@@ -39,13 +41,19 @@ export function DestinationForm({
   mode,
   destinationId,
   defaults,
+  placeholderImages,
 }: {
   mode: "create" | "edit";
   destinationId?: number;
   defaults: DestinationFormDefaults;
+  /** The hero, when it is credited as a temporary AI placeholder. */
+  placeholderImages?: string[];
 }) {
   const t = useTranslations("admin.destinationForm");
+  const tm = useTranslations("media.form");
   const [pending, startTransition] = useTransition();
+  // A save sent while the photo is still uploading would keep the old photo.
+  const uploads = useUploadTracker();
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
   const [values, setValues] = useState(defaults);
@@ -64,6 +72,7 @@ export function DestinationForm({
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (uploads.uploading) return;
     setError(null);
     setFieldErrors({});
     const payload: DestinationFormValues = values;
@@ -165,13 +174,19 @@ export function DestinationForm({
               value={values.heroImage}
               onChange={(url) => set("heroImage", url)}
               invalid={Boolean(err("heroImage"))}
+              placeholderImages={placeholderImages}
+              onPendingChange={uploads.track("heroImage")}
             />
           </Field>
+          <CreditsHint />
         </Section>
       </div>
 
-      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex justify-end border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
-        <Button type="submit" size="lg" loading={pending}>
+      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex items-center justify-end gap-4 border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+        <p role="status" className="text-muted text-sm">
+          {uploads.uploading ? tm("waitForUploads") : null}
+        </p>
+        <Button type="submit" size="lg" loading={pending} disabled={uploads.uploading}>
           {!pending && <Save aria-hidden />}
           {mode === "edit" ? t("save") : t("create")}
         </Button>

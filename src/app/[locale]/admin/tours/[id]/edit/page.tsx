@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { localize } from "@/lib/i18n-text";
 import { destinationService } from "@/server/services/destination.service";
 import { isDomainError } from "@/server/services/errors";
+import { photoCreditService } from "@/server/services/photo-credit.service";
 import { tourService } from "@/server/services/tour.service";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { TourForm, type TourFormDefaults } from "@/features/admin/components/tour-form";
@@ -33,6 +34,10 @@ export default async function EditTourPage({
     destinationService.list(),
     getTranslations("admin.form"),
     getLocale(),
+  ]);
+  const placeholderImages = await photoCreditService.placeholdersAmong([
+    tour.coverImage,
+    ...tour.gallery,
   ]);
 
   const defaults: TourFormDefaults = {
@@ -75,6 +80,7 @@ export default async function EditTourPage({
         tourId={tour.id}
         defaults={defaults}
         destinations={destinations.map(({ id, name, province }) => ({ id, name, province }))}
+        placeholderImages={placeholderImages}
       />
     </>
   );

@@ -34,6 +34,11 @@
       "label": "Refunds needed",
       "action": "Return the money and record it",
       "count": "{count, plural, =0 {No refunds waiting} one {# refund waiting} other {# refunds waiting}}"
+    },
+    "placeholders": {
+      "label": "Temporary (AI) photos",
+      "action": "Replace with real photos",
+      "count": "{count, plural, one {# tour or destination still uses temporary photos} other {# tours or destinations still use temporary photos}}"
     }
   },
   "reports": {
@@ -104,9 +109,26 @@
     "searchPlaceholder": "Title, author, license or path",
     "summary": "{total, plural, one {# credit} other {# credits}}",
     "uploaded": "Upload",
+    "unused": "Not used",
+    "unusedHint": "This photo is no longer shown on the site, so its credit is not shown either.",
     "opensNewTab": "(opens in a new tab)",
     "edit": "Edit",
     "editFor": "Edit the credit for {title}",
+    "delete": {
+      "trigger": "Delete",
+      "triggerFor": "Delete the credit for {title}",
+      "confirm": "Delete this credit?",
+      "yes": "Yes, delete",
+      "cancel": "Cancel"
+    },
+    "placeholders": {
+      "title": "Temporary (AI) photos still on the site",
+      "description": "These tours and destinations still use AI illustrations, not photos of the real place. Open each one and replace the photos marked \"Temporary (AI)\" with real photos.",
+      "tour": "Tour",
+      "destination": "Destination",
+      "draft": "Draft",
+      "images": "{count, plural, one {# temporary photo} other {# temporary photos}}"
+    },
     "empty": {
       "title": "No photo credits yet",
       "description": "Credits for curated photos are added by the content import; add credits for your own uploads above."
@@ -114,13 +136,18 @@
     "add": {
       "title": "Credit an uploaded photo",
       "description": "Every uploaded photo used on a tour or destination already has a credit.",
-      "pending": "{count, plural, one {# uploaded photo in use has no credit yet.} other {# uploaded photos in use have no credit yet.}}",
-      "open": "Add credit",
+      "pending": "{count, plural, one {# uploaded photo in use has no credit yet.} other {# uploaded photos in use have no credit yet.}} Licensed photos such as CC BY need one; your own photos can be skipped.",
+      "usedIn": "Used on",
+      "credit": "Add credit",
+      "creditFor": "Add a credit for the photo used on {owner}",
+      "created": "Credit added.",
+      "open": "Add a credit manually",
       "close": "Close"
     },
     "form": {
-      "path": "Image path",
-      "pathHint": "Pick an uploaded image in use, or paste its /media/ path.",
+      "path": "Photo address",
+      "pathHint": "Paste the address of an uploaded photo, starting with /media/.",
+      "preview": "Photo preview",
       "title": "Photo title",
       "author": "Author",
       "license": "License",

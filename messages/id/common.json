@@ -84,6 +84,12 @@
       "author": "Fotografer",
       "license": "Lisensi",
       "source": "Sumber"
+    },
+    "known": {
+      "aiIllustration": "Ilustrasi AI",
+      "placeholder": "Ilustrasi, bukan foto tempat asli",
+      "publicDomain": "Domain publik",
+      "unsplash": "Lisensi Unsplash"
     }
   },
   "newTour": "Baru",

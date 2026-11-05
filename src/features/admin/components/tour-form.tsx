@@ -6,6 +6,7 @@ import { useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input } from "@/components/ui/form-controls";
+import { useUploadTracker } from "@/features/media/components/use-upload-tracker";
 import type { LocalizedText } from "@/lib/i18n-text";
 import type { TourCategory } from "@/server/db/schema";
 import { createTourAction, updateTourAction } from "../actions";
@@ -33,14 +34,20 @@ export function TourForm({
   tourId,
   defaults,
   destinations,
+  placeholderImages,
 }: {
   mode: "create" | "edit";
   tourId?: number;
   defaults: TourFormDefaults;
   destinations: { id: number; name: string; province: string }[];
+  /** Cover/gallery images credited as temporary AI placeholders. */
+  placeholderImages?: string[];
 }) {
   const t = useTranslations("admin.form");
+  const tm = useTranslations("media.form");
   const [pending, startTransition] = useTransition();
+  // A save sent while a photo is still uploading would keep the old photo.
+  const uploads = useUploadTracker();
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
 
@@ -66,6 +73,7 @@ export function TourForm({
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (uploads.uploading) return;
     setError(null);
     setFieldErrors({});
 
@@ -151,7 +159,11 @@ export function TourForm({
         </Section>
 
         <DetailsSection {...sectionProps} destinations={destinations} />
-        <MediaSection {...sectionProps} />
+        <MediaSection
+          {...sectionProps}
+          placeholderImages={placeholderImages}
+          onUploadingChange={uploads.report}
+        />
         <ListFieldsSection
           highlights={{ value: highlightsText, onChange: setHighlightsText }}
           included={{ value: includedText, onChange: setIncludedText }}
@@ -169,8 +181,11 @@ export function TourForm({
         <VisibilitySection values={values} set={set} />
       </div>
 
-      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex justify-end border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
-        <Button type="submit" size="lg" loading={pending}>
+      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex items-center justify-end gap-4 border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+        <p role="status" className="text-muted text-sm">
+          {uploads.uploading ? tm("waitForUploads") : null}
+        </p>
+        <Button type="submit" size="lg" loading={pending} disabled={uploads.uploading}>
           {!pending && <Save aria-hidden />}
           {mode === "edit" ? t("save") : t("create")}
         </Button>

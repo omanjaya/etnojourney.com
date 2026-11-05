@@ -43,7 +43,8 @@ etnojourney.com, www.etnojourney.com {
 ```
 
 Cron (`/etc/cron.d/etnojourney`): trip emails daily (`/api/cron/trip-emails`
-with `CRON_SECRET`) and the nightly database backup.
+with `CRON_SECRET`), the daily cleanup of unused photo uploads
+(`/api/cron/media-cleanup`, same secret) and the nightly database backup.
 
 Useful commands:
 

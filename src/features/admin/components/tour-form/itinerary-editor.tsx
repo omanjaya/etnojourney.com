@@ -1,5 +1,7 @@
 import { Plus, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRef } from "react";
+import { flushSync } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { BilingualField } from "../form-parts/bilingual-field";
 import { Section } from "../form-parts/section";
@@ -11,6 +13,21 @@ type Day = TourFormDefaults["itinerary"][number];
 export function ItineraryEditor({ values, set, err }: TourSectionProps) {
   const t = useTranslations("admin.form");
   const days = values.itinerary;
+  const listRef = useRef<HTMLOListElement>(null);
+  const addRef = useRef<HTMLButtonElement>(null);
+
+  // The removed day's button is gone: focus the day that took its place,
+  // the previous one, or "Add day" when none is left.
+  const removeDay = (index: number) => {
+    flushSync(() =>
+      set(
+        "itinerary",
+        days.filter((_, i) => i !== index),
+      ),
+    );
+    const buttons = listRef.current?.querySelectorAll<HTMLElement>("[data-remove-day]") ?? [];
+    (buttons[Math.min(index, buttons.length - 1)] ?? addRef.current)?.focus();
+  };
 
   const updateDay = (index: number, patch: Partial<Day>) =>
     set(
@@ -30,7 +47,7 @@ export function ItineraryEditor({ values, set, err }: TourSectionProps) {
           {t("itinerary.empty")}
         </p>
       )}
-      <ol className="flex flex-col gap-5">
+      <ol ref={listRef} className="flex flex-col gap-5">
         {days.map((day, index) => (
           <li key={index} className="border-line bg-sand-50 rounded-xl border p-5">
             <div className="mb-4 flex items-center justify-between gap-4">
@@ -41,12 +58,8 @@ export function ItineraryEditor({ values, set, err }: TourSectionProps) {
                 size="icon"
                 className="text-muted hover:text-danger size-9"
                 aria-label={t("itinerary.remove", { day: index + 1 })}
-                onClick={() =>
-                  set(
-                    "itinerary",
-                    days.filter((_, i) => i !== index),
-                  )
-                }
+                data-remove-day=""
+                onClick={() => removeDay(index)}
               >
                 <Trash2 aria-hidden />
               </Button>
@@ -72,6 +85,7 @@ export function ItineraryEditor({ values, set, err }: TourSectionProps) {
       </ol>
       <div>
         <Button
+          ref={addRef}
           type="button"
           variant="outline"
           size="sm"
