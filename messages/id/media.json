@@ -12,14 +12,14 @@
   "gallery": {
     "add": "Tambah foto",
     "count": "{count, plural, =0 {Belum ada foto} other {# dari {max} foto}}",
-    "moveLeft": "Geser ke kiri",
-    "moveRight": "Geser ke kanan",
+    "moveLeft": "Geser foto {position} ke kiri",
+    "moveRight": "Geser foto {position} ke kanan",
     "remove": "Hapus foto {position}",
     "position": "Foto {position}",
     "full": "Galeri sudah penuh."
   },
   "url": {
-    "toggle": "Atau tempel URL Unsplash",
+    "toggle": "Atau tempel tautan foto Unsplash",
     "label": "URL gambar",
     "placeholder": "https://images.unsplash.com/photo-...",
     "add": "Pakai URL",
@@ -33,7 +33,7 @@
     "corrupt": "File gambar rusak atau tidak bisa dibaca."
   },
   "form": {
-    "sectionHint": "Unggah foto sendiri atau pakai URL dari images.unsplash.com. Foto diubah otomatis ke WebP dan metadata lokasinya dihapus.",
+    "sectionHint": "Unggah foto dari komputer atau HP. Foto mendatar (lanskap) paling bagus. Lokasi GPS yang tersimpan di foto dihapus otomatis.",
     "galleryHint": "Maksimal 12 foto. Urutan pertama tampil paling besar di halaman tur."
   }
 }

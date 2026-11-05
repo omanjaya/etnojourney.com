@@ -86,7 +86,7 @@ test.describe("admin destinations", () => {
     await page.locator("#tagline-en").fill("A customary village above the clouds.");
     await page.locator("#description-id").fill("Deskripsi uji untuk destinasi baru.");
     await page.locator("#description-en").fill("Test description for a new destination.");
-    await page.getByRole("button", { name: "Atau tempel URL Unsplash" }).click();
+    await page.getByRole("button", { name: "Atau tempel tautan foto Unsplash" }).click();
     await page
       .getByPlaceholder("https://images.unsplash.com/photo-...")
       .fill(

@@ -59,13 +59,14 @@
       "actions": "Aksi",
       "tableLabel": "Tabel booking"
     },
-    "noActions": "Final",
+    "noActions": "Tidak ada tindakan lagi",
     "actions": {
       "confirmed": "Konfirmasi",
       "completed": "Tandai selesai",
       "cancelled": "Batalkan",
       "pending": "Tunda"
     },
+    "actionFor": "{action}, booking {code}",
     "confirmCancel": "Batalkan booking {code}? Tindakan ini tidak bisa diurungkan.",
     "filters": {
       "searchLabel": "Cari booking",
@@ -131,26 +132,28 @@
       "detailsHint": "Harga dihitung per orang dalam Rupiah.",
       "media": "Foto",
       "lists": "Sorotan dan fasilitas",
-      "listsHint": "Satu item per baris. Jumlah baris ID dan EN harus sama.",
-      "itinerary": "Itinerary",
-      "itineraryHint": "Urutan hari mengikuti urutan baris di bawah.",
+      "listsHint": "Tulis satu item per baris. Baris bahasa Indonesia dan Inggris berpasangan sesuai urutannya, jadi jumlahnya harus sama.",
+      "itinerary": "Rencana perjalanan",
+      "itineraryHint": "Satu bagian untuk setiap hari, sesuai Durasi (hari). Untuk tur sehari atau beberapa jam, tulis semua kegiatan di Hari 1.",
       "visibility": "Visibilitas",
       "practical": "Persiapan",
-      "practicalHint": "Informasi praktis untuk tamu sebelum berangkat. Tulis satu poin per baris, dengan baris bahasa Indonesia dan Inggris yang berpasangan."
+      "practicalHint": "Informasi praktis untuk tamu sebelum berangkat. Tulis satu poin per baris; baris bahasa Indonesia dan Inggris berpasangan sesuai urutannya."
     },
     "fields": {
       "title": "Judul",
       "summary": "Ringkasan",
       "description": "Deskripsi",
-      "slug": "Slug URL",
-      "slugHint": "Diisi otomatis dari judul bahasa Indonesia.",
+      "slug": "Alamat halaman",
+      "slugHint": "Diisi otomatis dari judul bahasa Indonesia. Jangan diubah setelah tur dibagikan, karena tautan lama akan berhenti berfungsi.",
       "destination": "Destinasi",
       "selectDestination": "Pilih destinasi",
       "category": "Kategori",
+      "selectCategory": "Pilih kategori",
       "durationDays": "Durasi (hari)",
       "durationHours": "Durasi (jam)",
-      "durationHoursHint": "Opsional, hanya untuk tur 1 hari yang lebih pendek dari sehari penuh.",
-      "pricePerPerson": "Harga per orang (IDR)",
+      "durationHoursHint": "Opsional, 1 sampai 12 jam. Hanya untuk tur 1 hari yang lebih pendek dari sehari penuh.",
+      "pricePerPerson": "Harga per orang (Rp)",
+      "pricePreview": "Tampil di situs sebagai {price} per orang.",
       "maxParticipants": "Maks. peserta",
       "meetingPoint": "Titik kumpul",
       "coverImage": "Foto sampul",
@@ -163,16 +166,25 @@
       "isFeaturedHint": "Tampil di bagian unggulan beranda.",
       "difficulty": "Tingkat kesulitan",
       "notIncluded": "Belum termasuk",
+      "notIncludedHint": "Jika dikosongkan, halaman tur menampilkan: {items}.",
       "whatToBring": "Yang perlu dibawa",
       "etiquette": "Etika dan adat"
     },
     "itinerary": {
       "day": "Hari {day}",
+      "dayOf": "Hari {day} dari {total}",
+      "mismatch": "Durasi tur {total} hari, tetapi rencana perjalanan berisi {days} hari. Samakan jumlahnya sebelum menyimpan.",
       "add": "Tambah hari",
+      "addLimit": "Semua hari sudah ada. Untuk menambah hari, naikkan Durasi (hari) dulu.",
       "remove": "Hapus hari {day}",
       "empty": "Belum ada hari. Tambahkan minimal satu hari perjalanan.",
       "dayTitle": "Judul hari",
       "dayDescription": "Kegiatan"
+    },
+    "listLines": {
+      "count": "Indonesia {id} baris, Inggris {en} baris (maks. {max}).",
+      "mismatch": "Jumlah baris belum sama.",
+      "tooMany": "Lebih dari {max} baris."
     },
     "difficulty": {
       "easy": "Santai",
@@ -206,10 +218,10 @@
     "backToList": "Kembali ke daftar destinasi",
     "create": "Buat destinasi",
     "save": "Simpan perubahan",
-    "slugTaken": "Slug sudah dipakai destinasi lain.",
+    "slugTaken": "Alamat halaman ini sudah dipakai destinasi lain.",
     "sections": {
       "basics": "Informasi dasar",
-      "basicsHint": "Nama dan provinsi tampil apa adanya. Tagline dan deskripsi tampil dalam dua bahasa.",
+      "basicsHint": "Nama dan provinsi tampil apa adanya. Kalimat singkat dan deskripsi tampil dalam dua bahasa.",
       "media": "Foto utama",
       "mediaHint": "Dipakai di kartu destinasi dan hero halaman destinasi. Gunakan foto lanskap.",
       "access": "Akses",
@@ -217,10 +229,10 @@
     },
     "fields": {
       "name": "Nama destinasi",
-      "slug": "Slug URL",
-      "slugHint": "Diisi otomatis dari nama.",
+      "slug": "Alamat halaman",
+      "slugHint": "Diisi otomatis dari nama. Jangan diubah setelah destinasi dibagikan, karena tautan lama akan berhenti berfungsi.",
       "province": "Provinsi",
-      "tagline": "Tagline",
+      "tagline": "Kalimat singkat",
       "taglineHint": "Satu kalimat pendek untuk kartu destinasi.",
       "description": "Deskripsi",
       "descriptionHint": "Pisahkan paragraf dengan baris kosong.",
@@ -250,8 +262,8 @@
     "noMatchDescription": "Coba kata kunci lain.",
     "summary": "{total, plural, =0 {Tidak ada data} other {# data}}",
     "placeholders": {
-      "tours": "Cari judul, slug, atau destinasi",
-      "destinations": "Cari nama, provinsi, atau slug",
+      "tours": "Cari judul atau destinasi",
+      "destinations": "Cari nama atau provinsi",
       "reviews": "Cari penulis, tur, atau isi ulasan"
     }
   }

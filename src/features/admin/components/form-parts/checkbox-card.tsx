@@ -33,7 +33,10 @@ export function CheckboxCard({
       />
       <span>
         <span className="block text-sm font-medium">{label}</span>
-        <span className="text-muted block text-xs">{hint}</span>
+        {/* text-muted is too faint on the tinted checked background (4.33:1). */}
+        <span className={cn("block text-xs", checked ? "text-ink-soft" : "text-muted")}>
+          {hint}
+        </span>
       </span>
     </label>
   );

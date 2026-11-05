@@ -12,14 +12,14 @@
   "gallery": {
     "add": "Add photo",
     "count": "{count, plural, =0 {No photos yet} other {# of {max} photos}}",
-    "moveLeft": "Move left",
-    "moveRight": "Move right",
+    "moveLeft": "Move photo {position} left",
+    "moveRight": "Move photo {position} right",
     "remove": "Remove photo {position}",
     "position": "Photo {position}",
     "full": "The gallery is full."
   },
   "url": {
-    "toggle": "Or paste an Unsplash URL",
+    "toggle": "Or paste an Unsplash photo link",
     "label": "Image URL",
     "placeholder": "https://images.unsplash.com/photo-...",
     "add": "Use URL",
@@ -33,7 +33,7 @@
     "corrupt": "The image file is damaged or unreadable."
   },
   "form": {
-    "sectionHint": "Upload your own photos or use URLs from images.unsplash.com. Photos are converted to WebP and location metadata is removed.",
+    "sectionHint": "Upload photos from your computer or phone. Landscape photos work best. GPS location saved in a photo is removed automatically.",
     "galleryHint": "Up to 12 photos. The first one is shown largest on the tour page."
   }
 }

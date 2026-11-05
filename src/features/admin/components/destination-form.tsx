@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Field, Input } from "@/components/ui/form-controls";
+import { Field, fieldDescribedBy, Input } from "@/components/ui/form-controls";
 import { ImageUploader } from "@/features/media/components/image-uploader";
 import type { LocalizedText } from "@/lib/i18n-text";
 import { createDestinationAction, updateDestinationAction } from "../actions";
@@ -165,6 +165,7 @@ export function DestinationForm({
               value={values.heroImage}
               onChange={(url) => set("heroImage", url)}
               invalid={Boolean(err("heroImage"))}
+              describedBy={fieldDescribedBy("heroImage", { error: err("heroImage") })}
             />
           </Field>
         </Section>

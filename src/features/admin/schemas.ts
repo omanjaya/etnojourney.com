@@ -2,11 +2,27 @@ import { z } from "zod";
 import { isAllowedImageSource } from "@/features/media/image-url";
 import { bookingStatus, tourCategory, tourDifficulty } from "@/server/db/schema";
 
+/** Required in both languages; a missing English side says so in its message. */
 const localized = (max: number) =>
   z.object({
-    id: z.string().trim().min(1, "required").max(max, "invalid"),
-    en: z.string().trim().min(1, "required").max(max, "invalid"),
+    id: z.string().trim().min(1, "required").max(max, "tooLong"),
+    en: z.string().trim().min(1, "englishRequired").max(max, "tooLong"),
   });
+
+/**
+ * A bilingual list edited as one line per item per language. The form pairs
+ * ID and EN lines by position and drops blank lines, so an empty side only
+ * happens when the two columns have a different number of lines.
+ */
+const bilingualList = (lineMax: number, maxLines: number) =>
+  z
+    .array(
+      z.object({
+        id: z.string().trim().min(1, "linesMismatch").max(lineMax, "lineTooLong"),
+        en: z.string().trim().min(1, "linesMismatch").max(lineMax, "lineTooLong"),
+      }),
+    )
+    .max(maxLines, "tooManyLines");
 
 /** Unsplash CDN URLs or images uploaded through the media pipeline. */
 const imageSource = z
@@ -16,12 +32,19 @@ const imageSource = z
   .max(500, "url")
   .refine(isAllowedImageSource, "url");
 
-const intIn = (min: number, max: number) =>
-  z.coerce
-    .number({ error: "positive" })
-    .int({ error: "invalid" })
-    .min(min, "positive")
-    .max(max, "invalid");
+/** Whole number in [min, max]. Every failure shows `message`, which states the range. */
+const intIn = (min: number, max: number, message: string) =>
+  z.coerce.number({ error: message }).int({ error: message }).min(min, message).max(max, message);
+
+/**
+ * Lets a cross-field check run while unrelated fields still fail, so the
+ * operator sees every problem after one save. It still waits for the fields
+ * it reads to parse.
+ */
+const afterFields =
+  (...fields: string[]) =>
+  (payload: z.core.ParsePayload) =>
+    !payload.issues.some((issue) => fields.includes(String(issue.path?.[0])));
 
 export const bookingStatusSchema = z.enum(bookingStatus.enumValues, { error: "invalid" });
 
@@ -97,39 +120,53 @@ export const tourFormSchema = z
       .min(1, "required")
       .max(80, "slug")
       .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug"),
-    destinationId: intIn(1, Number.MAX_SAFE_INTEGER),
+    // The form sends 0 when nothing is chosen.
+    destinationId: intIn(1, Number.MAX_SAFE_INTEGER, "choose"),
     title: localized(120),
     summary: localized(300),
     description: localized(5000),
-    category: z.enum(tourCategory.enumValues, { error: "required" }),
-    durationDays: intIn(1, 30),
+    category: z.enum(tourCategory.enumValues, { error: "choose" }),
+    durationDays: intIn(1, 30, "durationDays"),
     /** Same-day tours only; empty means the tour fills the day(s). */
     durationHours: z.preprocess(
       (v) => (v === "" || v === undefined ? null : v),
-      intIn(1, 12).nullable(),
+      intIn(1, 12, "durationHours").nullable(),
     ),
-    pricePerPerson: intIn(1, 1_000_000_000),
-    maxParticipants: intIn(1, 100),
-    meetingPoint: z.string().trim().min(2, "required").max(200, "invalid"),
+    // The floor catches a price typed in thousands ("450" for Rp 450.000).
+    pricePerPerson: z.coerce
+      .number({ error: "priceMin" })
+      .int({ error: "priceMin" })
+      .min(10_000, "priceMin")
+      .max(1_000_000_000, "priceMax"),
+    maxParticipants: intIn(1, 100, "maxParticipants"),
+    meetingPoint: z.string().trim().min(2, "required").max(200, "tooLong"),
     coverImage: imageSource,
-    gallery: z.array(imageSource).max(12, "invalid"),
-    highlights: z.array(localized(160)).max(12, "invalid"),
-    included: z.array(localized(160)).max(20, "invalid"),
+    gallery: z.array(imageSource).max(12, "tooManyPhotos"),
+    highlights: bilingualList(160, 12),
+    // An empty list would leave a bare "Included" heading on the tour page.
+    included: bilingualList(160, 20).min(1, "includedRequired"),
     // Practical "before you go" info (limits match src/server/db/content.ts).
-    difficulty: z.enum(tourDifficulty.enumValues, { error: "required" }),
-    notIncluded: z.array(localized(160)).max(6, "invalid"),
-    whatToBring: z.array(localized(160)).max(8, "invalid"),
-    etiquette: z.array(localized(200)).max(6, "invalid"),
+    difficulty: z.enum(tourDifficulty.enumValues, { error: "choose" }),
+    notIncluded: bilingualList(160, 6),
+    whatToBring: bilingualList(160, 8),
+    etiquette: bilingualList(200, 6),
     isPublished: z.boolean(),
     isFeatured: z.boolean(),
     itinerary: z
       .array(z.object({ title: localized(120), description: localized(1500) }))
-      .min(1, "required")
-      .max(30, "invalid"),
+      .min(1, "itineraryDays")
+      .max(30, "itineraryDays"),
   })
   .refine((t) => t.durationHours === null || t.durationDays === 1, {
-    message: "invalid",
+    message: "durationHoursSameDay",
     path: ["durationHours"],
+    when: afterFields("durationDays", "durationHours"),
+  })
+  // One itinerary entry per day, as content JSON requires (src/server/db/content.ts).
+  .refine((t) => !Array.isArray(t.itinerary) || t.itinerary.length === t.durationDays, {
+    message: "itineraryDays",
+    path: ["itinerary"],
+    when: afterFields("durationDays"),
   });
 
 export type TourFormValues = z.input<typeof tourFormSchema>;
@@ -141,8 +178,8 @@ export const destinationFormSchema = z.object({
     .min(1, "required")
     .max(80, "slug")
     .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug"),
-  name: z.string().trim().min(2, "required").max(80, "invalid"),
-  province: z.string().trim().min(2, "required").max(80, "invalid"),
+  name: z.string().trim().min(2, "required").max(80, "tooLong"),
+  province: z.string().trim().min(2, "required").max(80, "tooLong"),
   tagline: localized(200),
   description: localized(5000),
   heroImage: imageSource,

@@ -5,7 +5,7 @@ import { ArrowLeft, ArrowRight, Link2, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useId, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/form-controls";
+import { Input, joinIds } from "@/components/ui/form-controls";
 import { cn } from "@/lib/utils";
 import { isUnsplashUrl, previewSrc } from "../image-url";
 import { Dropzone } from "./dropzone";
@@ -100,15 +100,19 @@ export function ImageUploader({
   value,
   onChange,
   invalid = false,
+  describedBy,
 }: {
   id: string;
   value: string;
   onChange: (url: string) => void;
   invalid?: boolean;
+  /** Ids of the surrounding field's hint/error, read with the upload button. */
+  describedBy?: string;
 }) {
   const t = useTranslations("media.dropzone");
   const { upload, pending, error } = useImageUpload((image) => onChange(image.url));
   const errorId = `${id}-upload-error`;
+  const buttonDescribedBy = joinIds(describedBy, error && errorId);
 
   return (
     <div className="flex flex-col gap-3">
@@ -132,7 +136,7 @@ export function ImageUploader({
               variant="button"
               pending={pending}
               label={t("replace")}
-              describedBy={error ? errorId : undefined}
+              describedBy={buttonDescribedBy}
               onFiles={upload}
             />
             <Button
@@ -149,12 +153,7 @@ export function ImageUploader({
           </div>
         </figure>
       ) : (
-        <Dropzone
-          id={id}
-          pending={pending}
-          describedBy={error ? errorId : undefined}
-          onFiles={upload}
-        />
+        <Dropzone id={id} pending={pending} describedBy={buttonDescribedBy} onFiles={upload} />
       )}
       <UploadError id={errorId} message={error} />
       <UrlEntry onSubmit={onChange} />
@@ -168,11 +167,14 @@ export function MultiImageUploader({
   value,
   onChange,
   max = 12,
+  describedBy,
 }: {
   id: string;
   value: string[];
   onChange: (urls: string[]) => void;
   max?: number;
+  /** Ids of the surrounding field's hint/error, read with the add button. */
+  describedBy?: string;
 }) {
   const t = useTranslations("media.gallery");
   const [items, setItems] = useState(value);
@@ -237,14 +239,14 @@ export function MultiImageUploader({
             <div className="absolute inset-x-2 bottom-2 flex justify-between gap-1">
               <div className="flex gap-1">
                 <IconButton
-                  label={t("moveLeft")}
+                  label={t("moveLeft", { position: index + 1 })}
                   onClick={() => move(index, -1)}
                   disabled={index === 0}
                 >
                   <ArrowLeft aria-hidden />
                 </IconButton>
                 <IconButton
-                  label={t("moveRight")}
+                  label={t("moveRight", { position: index + 1 })}
                   onClick={() => move(index, 1)}
                   disabled={index === items.length - 1}
                 >
@@ -268,7 +270,7 @@ export function MultiImageUploader({
               multiple
               pending={pending}
               label={t("add")}
-              describedBy={error ? errorId : undefined}
+              describedBy={joinIds(describedBy, error && errorId)}
               onFiles={add}
             />
           </li>
