@@ -39,12 +39,17 @@ const intIn = (min: number, max: number, message: string) =>
 /**
  * Lets a cross-field check run while unrelated fields still fail, so the
  * operator sees every problem after one save. It still waits for the fields
- * it reads to parse.
+ * it reads to parse. A `when` replaces Zod's own "skip after a fatal issue"
+ * guard, so an issue without a field (the input is not an object at all)
+ * also stops the check; otherwise it would read properties of `null`.
  */
 const afterFields =
   (...fields: string[]) =>
   (payload: z.core.ParsePayload) =>
-    !payload.issues.some((issue) => fields.includes(String(issue.path?.[0])));
+    !payload.issues.some((issue) => {
+      const field = issue.path?.[0];
+      return field === undefined || fields.includes(String(field));
+    });
 
 export const bookingStatusSchema = z.enum(bookingStatus.enumValues, { error: "invalid" });
 

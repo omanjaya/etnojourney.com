@@ -54,7 +54,8 @@ export function ItineraryEditor({ values, set, err }: TourSectionProps) {
           <li key={index} className="border-line bg-sand-50 rounded-xl border p-5">
             <div className="mb-4 flex items-center justify-between gap-4">
               <span className="font-display text-lg">
-                {total !== null
+                {/* A day past the duration has no "of N"; the mismatch warning explains it. */}
+                {total !== null && index < total
                   ? t("itinerary.dayOf", { day: index + 1, total })
                   : t("itinerary.day", { day: index + 1 })}
               </span>

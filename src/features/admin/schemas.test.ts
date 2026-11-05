@@ -251,6 +251,13 @@ describe("tourFormSchema cross-field checks", () => {
       durationDays: ["durationDays"],
     });
   });
+
+  it("rejects a payload that is not an object instead of throwing", () => {
+    // Server actions can be called with anything; parseInput must get a failure back.
+    for (const input of [null, undefined, "tour", 5, []]) {
+      expect(tourFormSchema.safeParse(input).success).toBe(false);
+    }
+  });
 });
 
 const validDestination = {
