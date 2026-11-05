@@ -156,7 +156,7 @@ export async function generateMetadata({
   const locale = rawLocale as Locale;
   const tour = await tourService.getBySlugForViewer(slug, await getCurrentUser()).catch(() => null);
   if (!tour) return {};
-  const metadata = pageMetadata({
+  const metadata = await pageMetadata({
     locale,
     path: `/tours/${tour.slug}`,
     title: localize(tour.title, locale),
