@@ -5,6 +5,7 @@ import {
   count,
   desc,
   eq,
+  gt,
   gte,
   ilike,
   inArray,
@@ -25,13 +26,17 @@ import {
   user,
   type Booking,
   type BookingStatus,
+  type PaymentStatus,
 } from "@/server/db/schema";
-import { ACTIVE_STATUSES } from "@/server/services/booking.rules";
+import { ACTIVE_STATUSES, phoneSearchDigits } from "@/server/services/booking.rules";
 
 export type AdminBookingSort = "created" | "travel";
 
 export type AdminBookingFilters = {
-  /** Matches booking code, customer name or customer email. */
+  /**
+   * Matches booking code, customer name or email, contact name, tour title, or
+   * (when it looks like a phone number) the contact phone in any format.
+   */
   q?: string;
   status?: BookingStatus;
   /** Travel date range, inclusive, YYYY-MM-DD. */
@@ -40,8 +45,13 @@ export type AdminBookingFilters = {
   sort?: AdminBookingSort;
 };
 
+/** Digits of the contact phone without a leading "0" or "62" (see `phoneSearchDigits`). */
+const phoneDigits = sql`regexp_replace(regexp_replace(${bookings.contactPhone}, '[^0-9]', '', 'g'), '^(62|0)', '')`;
+
+/** Callers must join `tours` and `user`: the search covers both. */
 function adminConditions(filters: AdminBookingFilters): SQL | undefined {
   const pattern = filters.q ? likePattern(filters.q) : undefined;
+  const phone = filters.q ? phoneSearchDigits(filters.q) : null;
   return and(
     filters.status ? eq(bookings.status, filters.status) : undefined,
     filters.from ? gte(bookings.travelDate, filters.from) : undefined,
@@ -52,6 +62,9 @@ function adminConditions(filters: AdminBookingFilters): SQL | undefined {
           ilike(user.name, pattern),
           ilike(user.email, pattern),
           ilike(bookings.contactName, pattern),
+          sql`${tours.title}->>'id' ilike ${pattern}`,
+          sql`${tours.title}->>'en' ilike ${pattern}`,
+          phone ? sql`${phoneDigits} like ${`%${phone}%`}` : undefined,
         )
       : undefined,
   );
@@ -63,13 +76,64 @@ function adminOrder(sort: AdminBookingSort | undefined): SQL[] {
     : [desc(bookings.createdAt), desc(bookings.id)];
 }
 
+/**
+ * The outer booking's id for correlated subqueries, always table-qualified:
+ * in a single-table select Drizzle renders `bookings.id` as a bare "id",
+ * which inside a subquery on payments would bind to `payments.id`.
+ */
+const outerBookingId = sql`${bookings}.${sql.identifier("id")}`;
+
 /** Paid attempt first, otherwise the most recent one. */
-const latestPaymentStatus = sql<string | null>`(
+const latestPaymentStatus = sql<PaymentStatus | null>`(
   select ${payments.status} from ${payments}
-  where ${payments.bookingId} = ${bookings.id}
+  where ${payments.bookingId} = ${outerBookingId}
   order by (${payments.status} = 'paid') desc, ${payments.createdAt} desc
   limit 1
 )`;
+
+/** Money taken and not yet flagged for a refund (0 when unpaid). */
+const livePaidAmount = sql<number>`(
+  select coalesce(sum(${payments.amount}), 0)::int from ${payments}
+  where ${payments.bookingId} = ${outerBookingId}
+    and ${payments.status} = 'paid' and not ${payments.refundRequired}
+)`.mapWith(Number);
+
+/** What the admin booking lists show for each booking. */
+const adminListRow = {
+  booking: bookings,
+  tour: { id: tours.id, slug: tours.slug, title: tours.title },
+  customer: { id: user.id, name: user.name, email: user.email },
+  paymentStatus: latestPaymentStatus,
+  paidAmount: livePaidAmount,
+};
+
+/** Payment state that decides whether a pending booking still holds its seats. */
+const holdColumns = {
+  id: bookings.id,
+  status: bookings.status,
+  travelDate: bookings.travelDate,
+  createdAt: bookings.createdAt,
+  hasPaid: sql<boolean>`exists(
+    select 1 from ${payments}
+    where ${payments.bookingId} = ${outerBookingId} and ${payments.status} = 'paid'
+  )`,
+  pendingPaymentAt: sql<Date | null>`(
+    select max(${payments.createdAt}) from ${payments}
+    where ${payments.bookingId} = ${outerBookingId} and ${payments.status} = 'pending'
+  )`.mapWith(payments.createdAt),
+};
+
+/** Where the next export batch starts: after the last row of the previous one. */
+export type ExportCursor = { id: number; travelDate: string };
+
+/** Keyset continuation matching the export order for `sort`. */
+function exportAfter(sort: AdminBookingSort | undefined, after: ExportCursor): SQL | undefined {
+  if (sort !== "travel") return lt(bookings.id, after.id);
+  return or(
+    gt(bookings.travelDate, after.travelDate),
+    and(eq(bookings.travelDate, after.travelDate), lt(bookings.id, after.id)),
+  );
+}
 
 export const bookingRepository = {
   /**
@@ -189,11 +253,7 @@ export const bookingRepository = {
 
   listAll(status?: BookingStatus) {
     return db
-      .select({
-        booking: bookings,
-        tour: { id: tours.id, slug: tours.slug, title: tours.title },
-        customer: { id: user.id, name: user.name, email: user.email },
-      })
+      .select(adminListRow)
       .from(bookings)
       .innerJoin(tours, eq(bookings.tourId, tours.id))
       .innerJoin(user, eq(bookings.userId, user.id))
@@ -204,11 +264,7 @@ export const bookingRepository = {
   /** Admin list page: one page of bookings matching the filters. */
   listAdmin(filters: AdminBookingFilters, limit: number, offset: number) {
     return db
-      .select({
-        booking: bookings,
-        tour: { id: tours.id, slug: tours.slug, title: tours.title },
-        customer: { id: user.id, name: user.name, email: user.email },
-      })
+      .select(adminListRow)
       .from(bookings)
       .innerJoin(tours, eq(bookings.tourId, tours.id))
       .innerJoin(user, eq(bookings.userId, user.id))
@@ -222,18 +278,19 @@ export const bookingRepository = {
     return db
       .select({ total: count() })
       .from(bookings)
+      .innerJoin(tours, eq(bookings.tourId, tours.id))
       .innerJoin(user, eq(bookings.userId, user.id))
       .where(adminConditions(filters))
       .then((rows) => rows[0]?.total ?? 0);
   },
 
-  /** Flat rows for CSV export, read in batches by the caller. */
   /**
-   * Keyset-paginated export batch (newest id first). Unlike OFFSET, each batch
-   * seeks straight past the previous one, so exports stay linear and rows
-   * can't shift between batches when new bookings arrive mid-export.
+   * Flat rows for CSV export, one keyset-paginated batch at a time: newest
+   * first, or by travel date for `sort: "travel"` (as on the admin list).
+   * Unlike OFFSET, each batch seeks straight past the previous one, so exports
+   * stay linear and rows can't shift between batches when bookings arrive.
    */
-  exportBatch(filters: AdminBookingFilters, limit: number, beforeId?: number) {
+  exportBatch(filters: AdminBookingFilters, limit: number, after?: ExportCursor) {
     return db
       .select({
         code: bookings.code,
@@ -253,13 +310,12 @@ export const bookingRepository = {
       .from(bookings)
       .innerJoin(tours, eq(bookings.tourId, tours.id))
       .innerJoin(user, eq(bookings.userId, user.id))
-      .where(
-        and(
-          adminConditions(filters),
-          beforeId === undefined ? undefined : lt(bookings.id, beforeId),
-        ),
+      .where(and(adminConditions(filters), after ? exportAfter(filters.sort, after) : undefined))
+      .orderBy(
+        ...(filters.sort === "travel"
+          ? [asc(bookings.travelDate), desc(bookings.id)]
+          : [desc(bookings.id)]),
       )
-      .orderBy(desc(bookings.id))
       .limit(limit);
   },
 
@@ -286,6 +342,34 @@ export const bookingRepository = {
       .from(payments)
       .where(eq(payments.bookingId, bookingId))
       .orderBy(desc(payments.createdAt), desc(payments.id));
+  },
+
+  /**
+   * Pending bookings that may have to give their seats back (created before
+   * `createdBefore`, or travelling before `today`), oldest first, with the
+   * payment state `isStaleHold` needs.
+   */
+  listHoldCandidates(createdBefore: Date, today: string, limit: number) {
+    return db
+      .select(holdColumns)
+      .from(bookings)
+      .where(
+        and(
+          eq(bookings.status, "pending"),
+          or(lte(bookings.createdAt, createdBefore), lt(bookings.travelDate, today)),
+        ),
+      )
+      .orderBy(asc(bookings.id))
+      .limit(limit);
+  },
+
+  /** The same hold state for one booking, read inside the caller's transaction. */
+  holdState(tx: DbExecutor, id: number) {
+    return tx
+      .select(holdColumns)
+      .from(bookings)
+      .where(eq(bookings.id, id))
+      .then((rows) => rows[0]);
   },
 
   async stats() {

@@ -26,7 +26,7 @@
     "title": "Welcome back, {name}",
     "description": "Track incoming bookings and manage tour packages in one place.",
     "stats": {
-      "pending": "Awaiting confirmation",
+      "pending": "Awaiting payment",
       "confirmed": "Confirmed",
       "completed": "Completed",
       "cancelled": "Cancelled",
@@ -55,9 +55,30 @@
       "participants": "Guests",
       "total": "Total",
       "status": "Status",
-      "created": "Created",
-      "actions": "Actions",
       "tableLabel": "Bookings table"
+    },
+    "exportColumns": {
+      "code": "Code",
+      "status": "Status",
+      "paymentStatus": "Payment",
+      "customerName": "Account name",
+      "customerEmail": "Account email",
+      "contactName": "Contact name",
+      "contactPhone": "Contact phone",
+      "tour": "Tour",
+      "travelDate": "Travel date",
+      "participants": "Guests",
+      "totalIdr": "Total (IDR)",
+      "createdAt": "Booked (WIB)"
+    },
+    "createdAgo": "Booked {time}",
+    "payment": {
+      "none": "Not paid",
+      "pending": "Payment in progress",
+      "paid": "Paid",
+      "failed": "Payment failed",
+      "expired": "Not paid",
+      "refunded": "Refunded"
     },
     "noActions": "Final",
     "actions": {
@@ -67,9 +88,25 @@
       "pending": "Hold"
     },
     "confirmCancel": "Cancel booking {code}? This can't be undone.",
+    "confirmUnpaid": "Booking {code} hasn't been paid. Once it's confirmed, the guest can no longer pay on the website. Only confirm if you've received the payment directly (cash or bank transfer). Continue?",
+    "confirmComplete": "Mark booking {code} as completed? Its seats are released and the guest is asked for a review. This can't be undone.",
+    "cancelPaid": {
+      "title": "Cancel booking {code}?",
+      "paid": "The guest has paid {amount}. How much goes back?",
+      "policy": "Per the cancellation policy",
+      "policyRefund": "{percent, plural, =0 {no refund} other {#% refund ({amount})}}",
+      "policyHint": "Choose this when the guest asked to cancel.",
+      "full": "Full refund",
+      "policyFull": "Under the cancellation policy, the guest gets a full refund of {amount}.",
+      "fullHint": "Choose this when we cancel, for example because of weather or a ceremony.",
+      "processing": "The money isn't returned automatically. The refund joins the Refunds needed queue, to be transferred and then recorded on the Payments page.",
+      "irreversible": "A cancelled booking can't be restored, and its seats become available again right away.",
+      "keep": "Keep booking",
+      "confirm": "Yes, cancel booking"
+    },
     "filters": {
       "searchLabel": "Search bookings",
-      "searchPlaceholder": "Code, name or email",
+      "searchPlaceholder": "Code, name or phone",
       "clear": "Clear search",
       "from": "Travel from",
       "to": "Until",

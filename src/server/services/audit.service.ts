@@ -34,6 +34,7 @@ export const auditActions = [
   "credit.updated",
   "booking.cancelled_by_traveller",
   "booking.rescheduled",
+  "booking.expired",
   "review.photo_hidden",
   "review.photo_shown",
   "guide.created",

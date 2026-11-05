@@ -1,16 +1,21 @@
 import {
   ArrowRightLeft,
+  CalendarClock,
+  CalendarX2,
   CircleDollarSign,
   CirclePlus,
   History,
   StickyNote,
+  TimerOff,
   Undo2,
   type LucideIcon,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { formatCurrency, formatDate } from "@/lib/format";
-import { bookingStatus, type BookingStatus } from "@/server/db/schema";
-import { auditMessageKey, type TimelineEvent } from "@/server/services/booking-timeline.rules";
+import {
+  timelineLabel,
+  type TimelineEvent,
+} from "@/server/services/booking-timeline.rules";
 
 const stamp: Intl.DateTimeFormatOptions = {
   day: "numeric",
@@ -20,21 +25,53 @@ const stamp: Intl.DateTimeFormatOptions = {
   minute: "2-digit",
 };
 
+const day: Intl.DateTimeFormatOptions = { day: "numeric", month: "short", year: "numeric" };
+
 const auditIcons: Record<string, LucideIcon> = {
   "booking.status_changed": ArrowRightLeft,
   "booking.note_added": StickyNote,
+  "booking.rescheduled": CalendarClock,
+  "booking.cancelled_by_traveller": CalendarX2,
+  "booking.expired": TimerOff,
   "payment.refund_required": Undo2,
   "payment.refunded": Undo2,
 };
-
-const isBookingStatus = (value: unknown): value is BookingStatus =>
-  (bookingStatus.enumValues as readonly unknown[]).includes(value);
 
 /** Vertical history of a booking, newest first. */
 export function BookingTimeline({ events }: { events: TimelineEvent[] }) {
   const t = useTranslations("adminBooking.timeline");
   const ts = useTranslations("common.bookingStatus");
+  // Every audit verb has a label here (a test enforces it): the fallback, never a raw verb.
+  const ta = useTranslations("adminUsers.activity.actions");
   const locale = useLocale();
+  const money = (value: number) => formatCurrency(value, locale);
+
+  const auditLabel = (action: string, details: Record<string, unknown> | null): string => {
+    const label = timelineLabel(action, details);
+    switch (label?.key) {
+      case "booking_status_changed":
+        return t("actions.booking_status_changed", { status: ts(label.status) });
+      case "booking_rescheduled":
+        return t("actions.booking_rescheduled", {
+          from: formatDate(label.from, locale, day),
+          to: formatDate(label.to, locale, day),
+        });
+      case "booking_cancelled_by_traveller_paid":
+        return t("actions.booking_cancelled_by_traveller_paid", {
+          percent: label.percent,
+          amount: money(label.amount),
+        });
+      case "payment_refund_required":
+      case "payment_refunded":
+        return t(`actions.${label.key}`, { amount: money(label.amount) });
+      case "booking_note_added":
+      case "booking_cancelled_by_traveller":
+      case "booking_expired":
+        return t(`actions.${label.key}`);
+    }
+    type Key = Parameters<typeof ta>[0];
+    return ta.has(action as Key) ? ta(action as Key) : ta("unknown");
+  };
 
   const describe = (event: TimelineEvent): { icon: LucideIcon; label: string; actor: string } => {
     if (event.kind === "created") {
@@ -49,19 +86,14 @@ export function BookingTimeline({ events }: { events: TimelineEvent[] }) {
         icon: CircleDollarSign,
         label: t("paid", {
           orderId: event.orderId,
-          amount: formatCurrency(event.amount, locale),
+          amount: money(event.amount),
         }),
         actor: t("system"),
       };
     }
-    const key = `actions.${auditMessageKey(event.action)}` as Parameters<typeof t>[0];
-    const status = event.details?.status;
-    const label = t.has(key)
-      ? t(key, { status: isBookingStatus(status) ? ts(status) : String(status ?? "") } as never)
-      : t("other", { action: event.action });
     return {
       icon: auditIcons[event.action] ?? History,
-      label,
+      label: auditLabel(event.action, event.details),
       actor: event.actorName ? t("by", { name: event.actorName }) : t("system"),
     };
   };

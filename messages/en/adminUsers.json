@@ -150,7 +150,8 @@
         "status_changed": "Changed booking status",
         "note_added": "Added a booking note",
         "cancelled_by_traveller": "Cancelled by the traveller",
-        "rescheduled": "Rescheduled"
+        "rescheduled": "Rescheduled",
+        "expired": "Released automatically (not paid)"
       },
       "payment": {
         "refund_required": "Flagged a refund as required",

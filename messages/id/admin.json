@@ -26,7 +26,7 @@
     "title": "Selamat datang, {name}",
     "description": "Pantau booking yang masuk dan kelola paket tur dari satu tempat.",
     "stats": {
-      "pending": "Menunggu konfirmasi",
+      "pending": "Menunggu pembayaran",
       "confirmed": "Terkonfirmasi",
       "completed": "Selesai",
       "cancelled": "Dibatalkan",
@@ -55,9 +55,30 @@
       "participants": "Peserta",
       "total": "Total",
       "status": "Status",
-      "created": "Dibuat",
-      "actions": "Aksi",
       "tableLabel": "Tabel booking"
+    },
+    "exportColumns": {
+      "code": "Kode",
+      "status": "Status",
+      "paymentStatus": "Pembayaran",
+      "customerName": "Nama akun",
+      "customerEmail": "Email akun",
+      "contactName": "Nama kontak",
+      "contactPhone": "Telepon kontak",
+      "tour": "Tur",
+      "travelDate": "Tanggal berangkat",
+      "participants": "Peserta",
+      "totalIdr": "Total (Rp)",
+      "createdAt": "Dipesan (WIB)"
+    },
+    "createdAgo": "Dipesan {time}",
+    "payment": {
+      "none": "Belum bayar",
+      "pending": "Sedang dibayar",
+      "paid": "Lunas",
+      "failed": "Gagal bayar",
+      "expired": "Belum bayar",
+      "refunded": "Dikembalikan"
     },
     "noActions": "Final",
     "actions": {
@@ -67,9 +88,25 @@
       "pending": "Tunda"
     },
     "confirmCancel": "Batalkan booking {code}? Tindakan ini tidak bisa diurungkan.",
+    "confirmUnpaid": "Booking {code} belum dibayar. Setelah dikonfirmasi, tamu tidak bisa lagi membayar lewat situs. Konfirmasi hanya jika Anda sudah menerima pembayarannya langsung (tunai atau transfer). Lanjutkan?",
+    "confirmComplete": "Tandai booking {code} sudah selesai? Kursinya dilepas dan tamu diminta menulis ulasan. Tindakan ini tidak bisa diurungkan.",
+    "cancelPaid": {
+      "title": "Batalkan booking {code}?",
+      "paid": "Tamu sudah membayar {amount}. Berapa yang dikembalikan?",
+      "policy": "Sesuai kebijakan pembatalan",
+      "policyRefund": "{percent, plural, =0 {tanpa refund} other {refund #% ({amount})}}",
+      "policyHint": "Pilih ini jika tamu sendiri yang minta batal.",
+      "full": "Refund penuh",
+      "policyFull": "Sesuai kebijakan pembatalan, tamu mendapat refund penuh {amount}.",
+      "fullHint": "Pilih ini jika kami yang membatalkan, misalnya karena cuaca atau upacara adat.",
+      "processing": "Uang tidak dikembalikan otomatis. Refund masuk antrean Perlu refund, lalu ditransfer dan dicatat di halaman Pembayaran.",
+      "irreversible": "Booking yang dibatalkan tidak bisa dipulihkan, dan kursinya langsung tersedia lagi.",
+      "keep": "Jangan batalkan",
+      "confirm": "Ya, batalkan booking"
+    },
     "filters": {
       "searchLabel": "Cari booking",
-      "searchPlaceholder": "Kode, nama, atau email",
+      "searchPlaceholder": "Kode, nama, atau no. WA",
       "clear": "Hapus pencarian",
       "from": "Berangkat dari",
       "to": "Sampai",

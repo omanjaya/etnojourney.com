@@ -13,6 +13,7 @@ export type DomainErrorCode =
   | "dateClosed"
   | "closureRange"
   | "invalidTransition"
+  | "tripNotStarted"
   | "notCancellable"
   | "slugTaken"
   | "notPayable"

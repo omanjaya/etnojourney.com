@@ -12,6 +12,7 @@
   "dateClosed": "This date is closed for bookings. Please choose another date.",
   "closureRange": "Choose dates from today onwards, at most 92 days at a time and within the next 12 months.",
   "invalidTransition": "This status change isn't allowed.",
+  "tripNotStarted": "A booking can only be marked completed from its travel date onwards.",
   "notCancellable": "This booking can no longer be cancelled.",
   "slugTaken": "That slug is already in use. Choose another one.",
   "notPayable": "This booking can't be paid. Make sure it is still pending and the travel date hasn't passed.",

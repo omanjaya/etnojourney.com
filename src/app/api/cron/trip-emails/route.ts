@@ -1,12 +1,16 @@
 import { isCronAuthorized } from "@/server/cron-auth";
 import { getEnv } from "@/server/env";
+import { bookingService } from "@/server/services/booking.service";
+import { notificationService } from "@/server/services/notification.service";
 import { tripEmailService } from "@/server/services/trip-email.service";
 
 const json = (body: unknown, status = 200) =>
   Response.json(body, { status, headers: { "Cache-Control": "no-store" } });
 
 /**
- * Daily job: pre-trip reminders and post-trip review requests. Call with
+ * Daily job: pre-trip reminders and post-trip review requests, and releasing
+ * the seats of unpaid bookings (`bookingService.releaseStaleHolds`; each
+ * traveller gets the usual "booking cancelled" email). Call with
  * `Authorization: Bearer $CRON_SECRET` (see README, "Email terjadwal").
  * 404 while CRON_SECRET is unset (the endpoint is off), 401 on a wrong secret.
  */
@@ -18,8 +22,17 @@ export async function POST(request: Request) {
   }
 
   try {
+    const holds = await bookingService.releaseStaleHolds();
+    // One at a time: a slow mail server must not open many SMTP connections.
+    for (const bookingId of holds.released) {
+      await notificationService.bookingStatusChanged(bookingId);
+    }
     const result = await tripEmailService.runScheduled();
-    return json({ ok: true, ...result });
+    return json({
+      ok: true,
+      ...result,
+      unpaidHolds: { checked: holds.checked, released: holds.released.length },
+    });
   } catch (error) {
     console.error("[cron] trip-emails failed", error);
     return json({ error: "internal" }, 500);

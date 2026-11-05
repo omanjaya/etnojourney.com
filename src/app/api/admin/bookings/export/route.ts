@@ -1,5 +1,8 @@
-import { isoDateFromToday } from "@/lib/format";
+import { getTranslations } from "next-intl/server";
+import { pickLocale } from "@/i18n/pick-locale";
+import { formatBusinessDateTime, isoDateFromToday } from "@/lib/format";
 import { CSV_BOM, csvRow } from "@/lib/csv";
+import { localize } from "@/lib/i18n-text";
 import { auth } from "@/server/auth";
 import { activeSession } from "@/server/auth/guards";
 import { can } from "@/server/auth/permissions";
@@ -9,26 +12,28 @@ import { parseAdminBookingQuery } from "@/features/admin/schemas";
 // Reads the session and the database on every request.
 export const dynamic = "force-dynamic";
 
-const HEADER = [
+const COLUMNS = [
   "code",
   "status",
-  "payment_status",
-  "customer_name",
-  "customer_email",
-  "contact_name",
-  "contact_phone",
+  "paymentStatus",
+  "customerName",
+  "customerEmail",
+  "contactName",
+  "contactPhone",
   "tour",
-  "travel_date",
+  "travelDate",
   "participants",
-  "total_idr",
-  "created_at",
-];
+  "totalIdr",
+  "createdAt",
+] as const;
 
 /**
- * GET /api/admin/bookings/export?q=&status=&from=&to=&sort=
+ * GET /api/admin/bookings/export?q=&status=&from=&to=&sort=&locale=
  * Back-office CSV (`bookings.manage`: staff and admins, who see the same contact
- * details in the booking pages) of every booking matching the same filters as the admin list.
- * Streams in batches; cells are RFC 4180 quoted and formula-neutralized.
+ * details in the booking pages) of every booking matching the same filters and
+ * sort as the admin list. Headers, statuses and tour titles are in `locale`
+ * (else the user's language); booking times are Asia/Jakarta. Streams in
+ * batches; cells are RFC 4180 quoted and formula-neutralized.
  */
 export async function GET(request: Request) {
   // activeSession: a disabled account is treated as signed out.
@@ -40,12 +45,18 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const filters = parseAdminBookingQuery(Object.fromEntries(url.searchParams));
+  const locale = pickLocale(url.searchParams.get("locale"), session.user.locale);
+  const [columns, bookingStatus, paymentStatus] = await Promise.all([
+    getTranslations({ locale, namespace: "admin.bookings.exportColumns" }),
+    getTranslations({ locale, namespace: "common.bookingStatus" }),
+    getTranslations({ locale, namespace: "adminPayments.status" }),
+  ]);
   const batches = bookingService.exportRows(filters);
   const encoder = new TextEncoder();
 
   const stream = new ReadableStream<Uint8Array>({
     start(controller) {
-      controller.enqueue(encoder.encode(CSV_BOM + csvRow(HEADER)));
+      controller.enqueue(encoder.encode(CSV_BOM + csvRow(COLUMNS.map((key) => columns(key)))));
     },
     async pull(controller) {
       try {
@@ -55,17 +66,17 @@ export async function GET(request: Request) {
           .map((row) =>
             csvRow([
               row.code,
-              row.status,
-              row.paymentStatus ?? "",
+              bookingStatus(row.status),
+              row.paymentStatus ? paymentStatus(row.paymentStatus) : "",
               row.customerName,
               row.customerEmail,
               row.contactName,
               row.contactPhone,
-              row.tourTitle.id,
+              localize(row.tourTitle, locale),
               row.travelDate,
               row.participants,
               row.totalPrice,
-              row.createdAt.toISOString(),
+              formatBusinessDateTime(row.createdAt),
             ]),
           )
           .join("");

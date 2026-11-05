@@ -103,8 +103,15 @@ test.describe("admin operations", () => {
     });
     await page.goto("/admin/bookings?status=pending");
     const row = rowFor(page, booking.code);
+    // The booking is unpaid, so the admin is warned first; accept the warning.
+    let warning = "";
+    page.once("dialog", (dialog) => {
+      warning = dialog.message();
+      return dialog.accept();
+    });
     await row.getByRole("button", { name: "Konfirmasi" }).click();
     await expect.poll(() => bookingStatus(booking.code)).toBe("confirmed");
+    expect(warning).toContain("belum dibayar");
   });
 
   test("unpublishing a tour hides it from the public site", async ({ page, browser }) => {

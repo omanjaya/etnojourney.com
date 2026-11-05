@@ -26,9 +26,9 @@
   "dashboard": {
     "queuesLabel": "Work queues",
     "pending": {
-      "label": "Pending bookings",
-      "action": "Confirm or decline",
-      "count": "{count, plural, =0 {No bookings waiting} one {# booking waiting} other {# bookings waiting}}"
+      "label": "Not paid yet",
+      "action": "Remind the guest to pay, or cancel",
+      "count": "{count, plural, =0 {No bookings awaiting payment} one {# booking awaiting payment} other {# bookings awaiting payment}}"
     },
     "refunds": {
       "label": "Refunds needed",
@@ -49,9 +49,9 @@
       "refunds": "Refunds",
       "refundCount": "{count, plural, =0 {No refunds} one {# refund} other {# refunds}}",
       "bookings": "Bookings",
-      "participants": "{count, plural, one {# traveller} other {# travellers}}",
+      "participants": "{count, plural, one {# traveller} other {# travellers}}{cancelled, plural, =0 {} one {, # booking cancelled} other {, # bookings cancelled}}",
       "groupSize": "Average group size",
-      "groupSizeHint": "Travellers per booking"
+      "groupSizeHint": "Travellers per booking, not counting cancellations"
     },
     "period": {
       "label": "Report period",
@@ -83,7 +83,8 @@
     "tours": {
       "title": "By tour",
       "export": "Export CSV",
-      "tableLabel": "Per-tour table"
+      "tableLabel": "Per-tour table",
+      "cancelled": "{count, plural, other {# cancelled}}"
     },
     "columns": {
       "month": "Month",
@@ -93,6 +94,16 @@
       "gross": "Received",
       "refunds": "Refunds",
       "net": "Net"
+    },
+    "exportColumns": {
+      "tourSlug": "Tour slug",
+      "tour": "Tour",
+      "bookings": "Bookings",
+      "cancelled": "Cancelled bookings",
+      "participants": "Travellers",
+      "grossIdr": "Received (IDR)",
+      "refundsIdr": "Refunds (IDR)",
+      "netIdr": "Net (IDR)"
     },
     "empty": "No bookings or payments in this period."
   },

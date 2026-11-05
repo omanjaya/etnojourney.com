@@ -159,7 +159,7 @@ export default async function AdminOverviewPage() {
           </Button>
         </div>
         {recent.length ? (
-          <BookingsTable rows={recent} />
+          <BookingsTable rows={recent} now={new Date()} />
         ) : (
           <EmptyState
             icon={CalendarCheck}
