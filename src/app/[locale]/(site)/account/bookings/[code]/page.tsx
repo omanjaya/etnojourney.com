@@ -47,7 +47,6 @@ import { RescheduleDialog } from "@/features/self-service/components/reschedule-
 import { cancellationPolicy } from "@/config/cancellation";
 import { requireUser } from "@/server/auth/guards";
 import { accountService } from "@/server/services/account.service";
-import { UNPAID_HOLD_HOURS } from "@/server/services/booking.rules";
 import { isDomainError } from "@/server/services/errors";
 import { paymentService } from "@/server/services/payment.service";
 import { reviewService } from "@/server/services/review.service";
@@ -246,16 +245,13 @@ export default async function BookingDetailPage({
                   alreadyReviewed={reviewed.has(booking.id)}
                 />
               )}
-              {/* A tour taken off the site has no public page, and moving the date needs it. */}
-              {tour.isPublished && (
-                <Button asChild variant="ghost" size="sm">
-                  <Link href={`/tours/${tour.slug}`}>
-                    {t("viewTour")}
-                    <ArrowUpRight aria-hidden />
-                  </Link>
-                </Button>
-              )}
-              {upcoming && !rescheduleBlock && tour.isPublished && (
+              <Button asChild variant="ghost" size="sm">
+                <Link href={`/tours/${tour.slug}`}>
+                  {t("viewTour")}
+                  <ArrowUpRight aria-hidden />
+                </Link>
+              </Button>
+              {upcoming && !rescheduleBlock && (
                 <RescheduleDialog
                   bookingId={booking.id}
                   code={booking.code}
@@ -284,12 +280,7 @@ export default async function BookingDetailPage({
                 </span>
               )}
             </div>
-            {upcoming && !tour.isPublished && (
-              <p className="text-muted -mt-3 text-xs print:hidden">
-                {tsService("panel.rescheduleBlocked.unpublished")}
-              </p>
-            )}
-            {tour.isPublished && (rescheduleBlock === "limit" || rescheduleBlock === "tooLate") && (
+            {(rescheduleBlock === "limit" || rescheduleBlock === "tooLate") && (
               <p data-testid="reschedule-blocked" className="text-muted -mt-3 text-xs print:hidden">
                 {rescheduleBlock === "limit"
                   ? tsService("panel.rescheduleBlocked.limit", {
@@ -344,9 +335,7 @@ export default async function BookingDetailPage({
                       </p>
                     )}
                     <p className={step.state === "upcoming" ? "text-ink-soft" : "font-medium"}>
-                      {step.key === "pay"
-                        ? t("steps.pay", { hours: UNPAID_HOLD_HOURS })
-                        : t(`steps.${step.key}`)}
+                      {t(`steps.${step.key}`)}
                     </p>
                   </div>
                 </li>
@@ -513,28 +502,15 @@ function Detail({
   );
 }
 
-type StepKey =
-  | "pay"
-  | "paid"
-  | "confirmedUnpaid"
-  | "email"
-  | "host"
-  | "prepare"
-  | "review"
-  | "cancelled";
+type StepKey = "pay" | "paid" | "email" | "host" | "prepare" | "review" | "cancelled";
 type Step = { key: StepKey; state: "done" | "current" | "upcoming" };
 
-/**
- * The journey after booking, adapted to where this booking is now. A booking
- * the team confirmed without an online payment (cash or transfer) never
- * claims "payment received".
- */
+/** The journey after booking, adapted to where this booking is now. */
 function nextSteps(status: string, isPaid: boolean): Step[] {
   if (status === "cancelled") return [{ key: "cancelled", state: "current" }];
-  const confirmed: StepKey = isPaid ? "paid" : "confirmedUnpaid";
   if (status === "completed") {
     return [
-      { key: confirmed, state: "done" },
+      { key: "paid", state: "done" },
       { key: "prepare", state: "done" },
       { key: "review", state: "current" },
     ];
@@ -548,7 +524,7 @@ function nextSteps(status: string, isPaid: boolean): Step[] {
     ];
   }
   return [
-    { key: confirmed, state: "done" },
+    { key: "paid", state: "done" },
     { key: "email", state: "done" },
     { key: "host", state: "current" },
     { key: "prepare", state: "upcoming" },

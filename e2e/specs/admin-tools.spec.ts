@@ -87,7 +87,7 @@ test.describe("admin bookings tools", () => {
     const body = await response.text();
     const lines = body.replace(/^﻿/, "").trim().split("\r\n");
     expect(lines[0]).toBe(
-      "Kode,Status,Pembayaran,Nama akun,Email akun,Nama kontak,Telepon kontak,Tur,Tanggal berangkat,Peserta,Total (Rp),Dipesan (WIB)",
+      "code,status,payment_status,customer_name,customer_email,contact_name,contact_phone,tour,travel_date,participants,total_idr,created_at",
     );
     expect(lines).toHaveLength(2);
     expect(lines[1].startsWith(booking.code)).toBe(true);

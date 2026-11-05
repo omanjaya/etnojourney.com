@@ -2,7 +2,6 @@
  * Builds the admin booking timeline from the booking itself, its payments and
  * the audit log. Pure so the ordering and merging rules stay unit-tested.
  */
-import { bookingStatus, type BookingStatus } from "@/server/db/schema";
 
 export type TimelineAuditEntry = {
   id: number;
@@ -77,61 +76,3 @@ export function buildBookingTimeline(input: {
 
 /** `booking.status_changed` -> `booking_status_changed` (next-intl keys can't contain dots). */
 export const auditMessageKey = (action: string) => action.replace(/\./g, "_");
-
-/** The timeline message for an audit entry, with the details it shows. */
-export type TimelineLabel =
-  | { key: "booking_status_changed"; status: BookingStatus }
-  | { key: "booking_note_added" }
-  | { key: "booking_rescheduled"; from: string; to: string }
-  | { key: "booking_cancelled_by_traveller" }
-  | { key: "booking_cancelled_by_traveller_paid"; percent: number; amount: number }
-  | { key: "booking_expired" }
-  | { key: "payment_refund_required"; amount: number }
-  | { key: "payment_refunded"; amount: number };
-
-const isoDate = (value: unknown): value is string =>
-  typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
-const amount = (value: unknown): value is number =>
-  typeof value === "number" && Number.isFinite(value) && value >= 0;
-const isStatus = (value: unknown): value is BookingStatus =>
-  (bookingStatus.enumValues as readonly unknown[]).includes(value);
-
-/**
- * Which message describes an audit entry on the booking timeline, with the
- * values it needs (dates as `YYYY-MM-DD`, amounts in rupiah). Null when the
- * verb has no timeline message or its details can't be read: the caller then
- * falls back to the activity-log label, never to the raw verb.
- */
-export function timelineLabel(
-  action: string,
-  details: Record<string, unknown> | null,
-): TimelineLabel | null {
-  const d = details ?? {};
-  switch (action) {
-    case "booking.status_changed":
-      return isStatus(d.status) ? { key: "booking_status_changed", status: d.status } : null;
-    case "booking.note_added":
-      return { key: "booking_note_added" };
-    case "booking.rescheduled":
-      return isoDate(d.from) && isoDate(d.to)
-        ? { key: "booking_rescheduled", from: d.from, to: d.to }
-        : null;
-    case "booking.cancelled_by_traveller":
-      return d.paid === true && amount(d.percent) && amount(d.refundAmount)
-        ? { key: "booking_cancelled_by_traveller_paid", percent: d.percent, amount: d.refundAmount }
-        : { key: "booking_cancelled_by_traveller" };
-    case "booking.expired":
-      return { key: "booking_expired" };
-    case "payment.refund_required":
-    case "payment.refunded": {
-      // A partial refund records `refundAmount`; otherwise the whole payment goes back.
-      const owed = amount(d.refundAmount) ? d.refundAmount : d.amount;
-      if (!amount(owed)) return null;
-      return action === "payment.refunded"
-        ? { key: "payment_refunded", amount: owed }
-        : { key: "payment_refund_required", amount: owed };
-    }
-    default:
-      return null;
-  }
-}

@@ -3,7 +3,7 @@
     "title": "Seret foto ke sini",
     "or": "atau",
     "browse": "pilih dari perangkat",
-    "hint": "JPEG, PNG, WebP, atau AVIF. Foto besar diperkecil otomatis.",
+    "hint": "JPEG, PNG, WebP, atau AVIF. Maks. 8 MB.",
     "uploading": "Mengunggah dan mengoptimalkan...",
     "replace": "Ganti foto",
     "remove": "Hapus foto",
@@ -12,46 +12,28 @@
   "gallery": {
     "add": "Tambah foto",
     "count": "{count, plural, =0 {Belum ada foto} other {# dari {max} foto}}",
-    "moveLeft": "Geser foto {position} ke kiri",
-    "moveRight": "Geser foto {position} ke kanan",
+    "moveLeft": "Geser ke kiri",
+    "moveRight": "Geser ke kanan",
     "remove": "Hapus foto {position}",
-    "replace": "Ganti foto {position}",
-    "replaceInput": "Pilih foto pengganti",
-    "replacing": "Mengganti foto...",
-    "makeCover": "Jadikan foto {position} sebagai sampul",
-    "coverBadge": "Sampul",
     "position": "Foto {position}",
     "full": "Galeri sudah penuh."
   },
-  "placeholder": {
-    "badge": "Foto sementara (AI)",
-    "hint": "Ilustrasi AI, bukan foto tempat asli. Ganti dengan foto asli."
-  },
   "url": {
-    "toggle": "Atau tempel tautan foto Unsplash",
+    "toggle": "Atau tempel URL Unsplash",
     "label": "URL gambar",
     "placeholder": "https://images.unsplash.com/photo-...",
     "add": "Pakai URL",
-    "cancel": "Batal",
     "invalid": "Hanya URL dari images.unsplash.com yang diterima."
   },
   "errors": {
     "empty": "Pilih sebuah file gambar.",
-    "tooLarge": "Foto terlalu besar (maks. 8 MB). Perkecil dulu, misalnya kirim foto ke diri sendiri lewat WhatsApp lalu simpan, kemudian unggah lagi.",
+    "tooLarge": "Ukuran file melebihi 8 MB.",
     "unsupported": "Format tidak didukung. Gunakan JPEG, PNG, WebP, atau AVIF.",
-    "tooManyPixels": "Resolusi foto terlalu besar (maks. 40 megapiksel). Perkecil dulu, misalnya kirim foto ke diri sendiri lewat WhatsApp lalu simpan, kemudian unggah lagi.",
-    "corrupt": "File gambar rusak atau tidak bisa dibaca.",
-    "rateLimited": "Terlalu banyak foto diunggah dalam waktu singkat. Tunggu beberapa menit, lalu coba lagi."
-  },
-  "warnings": {
-    "notLandscape": "Foto ini tidak mendatar, jadi bagian atas dan bawahnya akan terpotong di halaman. Sebaiknya pakai foto mendatar (lanskap).",
-    "small": "Foto ini kecil (lebar {width} piksel), jadi bisa tampak buram di halaman. Sebaiknya pakai foto asli dari kamera dengan lebar minimal 1600 piksel."
+    "tooManyPixels": "Resolusi gambar terlalu besar (maks. 40 megapiksel).",
+    "corrupt": "File gambar rusak atau tidak bisa dibaca."
   },
   "form": {
-    "sectionHint": "Unggah foto dari komputer atau HP. Foto mendatar (lanskap) paling bagus. Lokasi GPS yang tersimpan di foto dihapus otomatis.",
-    "galleryHint": "Maksimal 12 foto. Foto sampul selalu tampil paling besar di halaman tur, lalu foto galeri sesuai urutan ini. Klik bintang pada foto untuk menjadikannya sampul.",
-    "waitForUploads": "Tunggu foto selesai diunggah sebelum menyimpan.",
-    "creditsHint": "Setelah disimpan, foto unggahan Anda bisa diberi kredit (nama fotografer) di halaman <link>Kredit foto</link>. Foto milik sendiri tidak wajib diberi kredit.",
-    "opensNewTab": "(membuka tab baru)"
+    "sectionHint": "Unggah foto sendiri atau pakai URL dari images.unsplash.com. Foto diubah otomatis ke WebP dan metadata lokasinya dihapus.",
+    "galleryHint": "Maksimal 12 foto. Urutan pertama tampil paling besar di halaman tur."
   }
 }

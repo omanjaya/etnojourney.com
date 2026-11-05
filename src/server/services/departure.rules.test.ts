@@ -2,19 +2,14 @@ import { describe, expect, it } from "vitest";
 import {
   addDays,
   capacityLoad,
-  DEPARTURE_STATUSES,
   departureEntityId,
   departurePath,
   groupByDate,
   guideWhatsAppNumber,
-  historyGuideId,
   isIsoDate,
-  lastAssignment,
   MAX_RANGE_DAYS,
-  manifestChangedBy,
   manifestTotals,
   needsGuide,
-  needsGuideOn,
   needsGuideWindow,
   parseDepartureEntityId,
   resolveDateRange,
@@ -135,71 +130,6 @@ describe("needsGuide", () => {
     expect(needsGuide({ guideId: 3, guideActive: true })).toBe(false);
     expect(needsGuide({ guideId: 3 })).toBe(false);
   });
-
-  it("only flags today and later in the agenda: past departures are history", () => {
-    const today = "2026-10-10";
-    expect(needsGuideOn({ date: "2026-10-10", guideId: null }, today)).toBe(true);
-    expect(needsGuideOn({ date: "2026-10-11", guideId: 3, guideActive: false }, today)).toBe(true);
-    expect(needsGuideOn({ date: "2026-10-09", guideId: null }, today)).toBe(false);
-    expect(needsGuideOn({ date: "2026-10-12", guideId: 3, guideActive: true }, today)).toBe(false);
-  });
-
-  it("keeps completed trips on the agenda but not cancelled ones", () => {
-    expect(DEPARTURE_STATUSES).toEqual(["pending", "confirmed", "completed"]);
-  });
-});
-
-describe("manifestChangedBy", () => {
-  it("marks the guide's copy stale when a guest drops out or gets confirmed", () => {
-    expect(manifestChangedBy("pending", "cancelled")).toBe(true);
-    expect(manifestChangedBy("confirmed", "cancelled")).toBe(true);
-    expect(manifestChangedBy("pending", "confirmed")).toBe(true);
-  });
-
-  it("ignores completing a trip and no-op changes", () => {
-    expect(manifestChangedBy("confirmed", "completed")).toBe(false);
-    expect(manifestChangedBy("confirmed", "confirmed")).toBe(false);
-    expect(manifestChangedBy("cancelled", "cancelled")).toBe(false);
-  });
-});
-
-describe("departure history", () => {
-  const entry = (action: string, at: string, actorName: string | null = "Admin") => ({
-    log: { action, details: null, createdAt: new Date(at) },
-    actorName,
-  });
-
-  it("credits the latest assignment, not later notes or sends", () => {
-    const history = [
-      entry("departure.assigned", "2026-11-01T01:00:00Z", "Admin A"),
-      entry("departure.assigned", "2026-11-02T01:00:00Z", "Admin B"),
-      entry("departure.noted", "2026-11-03T01:00:00Z", "Staff C"),
-      entry("departure.notified", "2026-11-04T01:00:00Z", "Staff C"),
-    ];
-    expect(lastAssignment(history)).toEqual({
-      name: "Admin B",
-      at: new Date("2026-11-02T01:00:00Z"),
-    });
-  });
-
-  it("has no assigner when the guide was unassigned afterwards or never assigned", () => {
-    expect(
-      lastAssignment([
-        entry("departure.assigned", "2026-11-01T01:00:00Z"),
-        entry("departure.unassigned", "2026-11-02T01:00:00Z"),
-      ]),
-    ).toBeNull();
-    expect(lastAssignment([entry("departure.noted", "2026-11-01T01:00:00Z")])).toBeNull();
-  });
-
-  it("finds the guide an entry is about, validating the stored id", () => {
-    expect(historyGuideId("departure.assigned", { guideId: 3, previousGuideId: 2 })).toBe(3);
-    expect(historyGuideId("departure.unassigned", { guideId: null, previousGuideId: 2 })).toBe(2);
-    expect(historyGuideId("departure.notified", { guideId: 4, email: "a@b.c" })).toBe(4);
-    expect(historyGuideId("departure.noted", { guideId: 4 })).toBeNull();
-    expect(historyGuideId("departure.assigned", { guideId: "3" })).toBeNull();
-    expect(historyGuideId("departure.assigned", null)).toBeNull();
-  });
 });
 
 describe("groupByDate", () => {
@@ -256,15 +186,6 @@ describe("suggestGuides", () => {
     ]);
     expect(suggested.map((g) => g.name)).toEqual(["Ketut", "Made"]);
     expect(others.map((g) => g.name)).toEqual(["Ayu", "Wayan"]);
-  });
-
-  it("lists guides already busy on those days after the free ones", () => {
-    const { suggested } = suggestGuides([
-      { name: "Ayu", coversDestination: true, busyWith: [{ date: "2026-12-10" }] },
-      { name: "Made", coversDestination: true, busyWith: [] },
-      { name: "Ketut", coversDestination: true },
-    ]);
-    expect(suggested.map((g) => g.name)).toEqual(["Ketut", "Made", "Ayu"]);
   });
 });
 

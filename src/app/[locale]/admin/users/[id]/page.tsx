@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowUpRight, ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { cache, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 import { formatCurrency, formatDate } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
@@ -16,23 +16,13 @@ import { UserRoleBadge, UserStatusBadge } from "@/features/admin-users/component
 import { UserAccessControl } from "@/features/admin-users/components/user-access-control";
 import { UserRoleControl } from "@/features/admin-users/components/user-role-control";
 
-// Cached so the page and its metadata read the user once per request.
-const loadUser = cache(async (id: string) => {
+async function loadUser(id: string) {
   try {
     return await userService.detailForAdmin(id);
   } catch (error) {
     if (isDomainError(error) && error.code === "notFound") notFound();
     throw error;
   }
-});
-
-export async function generateMetadata({ params }: PageProps<"/[locale]/admin/users/[id]">) {
-  // Guarded too: the title carries the user's name.
-  await requireAdmin("users.manage");
-  const { id } = await params;
-  if (!/^[A-Za-z0-9_-]{1,64}$/.test(id)) notFound();
-  const { profile } = await loadUser(id);
-  return { title: profile.name };
 }
 
 const ACTIVITY_LIMIT = 15;

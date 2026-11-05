@@ -86,9 +86,8 @@
     "addToCalendar": "Add to calendar",
     "nextStepsTitle": "What happens next",
     "steps": {
-      "pay": "Complete payment within {hours} hours of booking to keep your spot.",
+      "pay": "Complete payment to confirm your spot.",
       "paid": "Payment received, your booking is confirmed.",
-      "confirmedUnpaid": "Our team confirmed your booking directly. Payment is arranged with the team, not on the website.",
       "email": "We email your confirmation and trip details.",
       "host": "Your host or our team contacts your phone number before the trip.",
       "prepare": "Pack what you need and arrive at the meeting point on time.",

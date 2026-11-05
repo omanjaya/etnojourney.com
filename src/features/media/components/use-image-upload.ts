@@ -1,19 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useEffect, useEffectEvent, useState, useTransition } from "react";
-import { MAX_UPLOAD_BYTES } from "@/server/storage/image-validation";
+import { useState, useTransition } from "react";
 import { uploadImageAction, type UploadedImage } from "../actions";
-import { prepareImageForUpload } from "./prepare-upload";
 
 const ACCEPTED = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+const MAX_BYTES = 8 * 1024 * 1024;
 
 export const ACCEPT_ATTRIBUTE = ACCEPTED.join(",");
 
 /**
- * Uploads files one by one through the server action. Large photos are shrunk
- * in the browser first; the remaining client checks are only for fast
- * feedback, the server re-validates every file by its content.
+ * Uploads files one by one through the server action. Client checks are only
+ * for fast feedback; the server re-validates every file by its content.
  */
 export function useImageUpload(onUploaded: (image: UploadedImage) => void) {
   const t = useTranslations("media.errors");
@@ -24,14 +22,13 @@ export function useImageUpload(onUploaded: (image: UploadedImage) => void) {
     if (files.length === 0) return;
     setError(null);
     startTransition(async () => {
-      for (const original of files) {
-        if (original.type && !ACCEPTED.includes(original.type)) {
-          setError(t("unsupported"));
+      for (const file of files) {
+        if (file.size > MAX_BYTES) {
+          setError(t("tooLarge"));
           continue;
         }
-        const file = await prepareImageForUpload(original);
-        if (file.size > MAX_UPLOAD_BYTES) {
-          setError(t("tooLarge"));
+        if (file.type && !ACCEPTED.includes(file.type)) {
+          setError(t("unsupported"));
           continue;
         }
         const formData = new FormData();
@@ -44,17 +41,4 @@ export function useImageUpload(onUploaded: (image: UploadedImage) => void) {
   };
 
   return { upload, pending, error, setError };
-}
-
-/**
- * Tells the parent form whether this uploader is busy, so it can hold the
- * save until every photo is in (a save sent mid-upload would keep the old photo).
- */
-export function useReportPending(pending: boolean, onPendingChange?: (pending: boolean) => void) {
-  const report = useEffectEvent((value: boolean) => onPendingChange?.(value));
-  useEffect(() => {
-    report(pending);
-  }, [pending]);
-  // An uploader removed mid-upload must not keep the form locked.
-  useEffect(() => () => report(false), []);
 }

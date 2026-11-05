@@ -2,8 +2,7 @@
   "panel": {
     "rescheduleBlocked": {
       "limit": "Jadwal booking ini sudah diubah {max} kali, batas maksimal. Hubungi kami bila perlu perubahan lagi.",
-      "tooLate": "Perubahan jadwal ditutup {days} hari sebelum tanggal perjalanan. Hubungi kami bila butuh bantuan.",
-      "unpublished": "Tur ini sedang tidak ditampilkan di situs, jadi tanggalnya tidak bisa diubah sendiri. Hubungi kami bila perlu mengubah tanggal."
+      "tooLate": "Perubahan jadwal ditutup {days} hari sebelum tanggal perjalanan. Hubungi kami bila butuh bantuan."
     },
     "policyLink": "Kebijakan pembatalan dan perubahan jadwal"
   },

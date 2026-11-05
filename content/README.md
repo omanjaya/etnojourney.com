@@ -27,10 +27,6 @@ source, so visitors can tell it is not a photo of the place. Replace it with a r
 file name, updated credit) as soon as one arrives. Never depict sacred objects or named sites
 as if photographed. The Kenderan & Manuaba tours use placeholders (`kenderan-manuaba/`).
 
-The back office treats any credit whose license starts with `Placeholder` as a placeholder: the
-dashboard and `/admin/credits` list the tours and destinations that still show one, and the edit
-forms mark those photos "Foto sementara (AI)". Replacing the photo there (upload) clears it.
-
 ## Rules
 
 - Cultural facts must come from verifiable sources listed in `sources`.

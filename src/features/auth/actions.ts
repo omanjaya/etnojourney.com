@@ -10,16 +10,8 @@ import { resetTokenOwnerIsDisabled } from "@/server/auth/reset-token";
 import { parseInput } from "@/features/shared/run-action";
 import { createHash } from "node:crypto";
 import { proxyConfigFromEnv, resolveClientIp } from "@/server/auth/client-ip";
-import {
-  authRateLimiter,
-  consumeRateLimit,
-  normalizeEmail,
-  rateLimitChecks,
-  refundRateLimit,
-  type AuthAction,
-  type RateLimitCheck,
-} from "./rate-limit";
-import { landingPathForRole, safeRedirectPath } from "./safe-redirect";
+import { authRateLimiter, normalizeEmail, rateLimitChecks, type AuthAction } from "./rate-limit";
+import { safeRedirectPath } from "./safe-redirect";
 import { forgotPasswordSchema, resetPasswordSchema, signInSchema, signUpSchema } from "./schemas";
 
 type AuthErrorKey =
@@ -33,26 +25,22 @@ type AuthErrorKey =
 const proxyConfig = proxyConfigFromEnv();
 
 /**
- * Buckets this request counts against: the client IP (only if it comes from a
- * trusted proxy) and, when given, the target account, so rotating spoofed IPs
- * can't bypass it.
+ * Returns a translated failure when the caller exceeded a limit for this action.
+ * Counts against the client IP (only if it comes from a trusted proxy) and, when
+ * given, the target account, so rotating spoofed IPs can't bypass it.
  */
-async function limitChecks(action: AuthAction, account?: string): Promise<RateLimitCheck[]> {
-  return rateLimitChecks(action, resolveClientIp(await headers(), proxyConfig), account);
-}
-
-/** Counts the attempt; returns a translated failure when a limit is exceeded. */
-async function overLimit(checks: RateLimitCheck[]): Promise<ActionResult<never> | null> {
-  if (consumeRateLimit(authRateLimiter, checks)) return null;
-  const t = await getTranslations("auth.errors");
-  return fail(t("tooManyRequests"));
-}
-
 async function rateLimited(
   action: AuthAction,
   account?: string,
 ): Promise<ActionResult<never> | null> {
-  return overLimit(await limitChecks(action, account));
+  const ip = resolveClientIp(await headers(), proxyConfig);
+  // Every bucket is hit (no short-circuit) so each one keeps an accurate count.
+  const results = rateLimitChecks(action, ip, account).map(({ key, rule }) =>
+    authRateLimiter.hit(key, rule),
+  );
+  if (results.every(Boolean)) return null;
+  const t = await getTranslations("auth.errors");
+  return fail(t("tooManyRequests"));
 }
 
 /** Reset tokens are bucketed by hash so raw tokens never sit in memory as keys. */
@@ -82,25 +70,17 @@ export async function signInAction(
 ): Promise<ActionResult> {
   const parsed = await parseInput(signInSchema, Object.fromEntries(formData));
   if (!parsed.success) return parsed.result;
-  const checks = await limitChecks("signIn", normalizeEmail(parsed.data.email));
-  const limited = await overLimit(checks);
+  const limited = await rateLimited("signIn", normalizeEmail(parsed.data.email));
   if (limited) return limited;
   const { email, password, next } = parsed.data;
 
-  let role: string | null | undefined;
   try {
-    const result = await auth.api.signInEmail({
-      body: { email, password },
-      headers: await headers(),
-    });
-    role = result.user.role;
+    await auth.api.signInEmail({ body: { email, password }, headers: await headers() });
   } catch (error) {
     return authFailure(error);
   }
-  // Only failed attempts count: signing in correctly never uses up the limit.
-  refundRateLimit(authRateLimiter, checks);
 
-  redirect({ href: safeRedirectPath(next, landingPathForRole(role)), locale: await getLocale() });
+  redirect({ href: safeRedirectPath(next), locale: await getLocale() });
   return { ok: true, data: undefined };
 }
 

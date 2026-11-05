@@ -40,11 +40,6 @@ const refundedIn = (range: Range) =>
 const bookedIn = (range: Range) =>
   and(gte(bookings.createdAt, range.start), lt(bookings.createdAt, range.end));
 
-/** People actually travelling: participants of bookings that weren't cancelled. */
-const travellers = sql<number>`coalesce(sum(${bookings.participants}) filter (where ${bookings.status} <> 'cancelled'), 0)::bigint`;
-
-const cancelledBookings = sql<number>`count(*) filter (where ${bookings.status} = 'cancelled')`;
-
 const toNumber = <T extends Record<string, unknown>>(rows: T[], keys: (keyof T)[]) =>
   rows.map((row) => {
     const copy = { ...row };
@@ -73,11 +68,10 @@ export const reportRepository = {
     return toNumber(rows, ["amount"]);
   },
 
-  /** Bookings made per month (every status) and the travellers among them (not cancelled). */
   async bookingsByMonth(range: Range) {
     const month = monthOf(bookings.createdAt);
     const rows = await db
-      .select({ month, bookings: count(), participants: travellers })
+      .select({ month, bookings: count(), participants: sumInt(bookings.participants) })
       .from(bookings)
       .where(bookedIn(range))
       .groupBy(month);
@@ -101,23 +95,17 @@ export const reportRepository = {
     }[];
   },
 
-  /**
-   * Per tour: bookings made (every status, so a tour whose only booking was
-   * cancelled still shows), how many of them were cancelled, and travellers
-   * (participants of the bookings that weren't).
-   */
   async bookingsByTour(range: Range) {
     const rows = await db
       .select({
         tourId: bookings.tourId,
         bookings: count(),
-        cancelled: cancelledBookings,
-        participants: travellers,
+        participants: sumInt(bookings.participants),
       })
       .from(bookings)
       .where(bookedIn(range))
       .groupBy(bookings.tourId);
-    return toNumber(rows, ["bookings", "cancelled", "participants"]);
+    return toNumber(rows, ["bookings", "participants"]);
   },
 
   async grossByTour(range: Range) {

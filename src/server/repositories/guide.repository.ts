@@ -47,8 +47,6 @@ export const guideRepository = {
         isActive: guides.isActive,
         destinations: destinationNames,
         accountEmail: user.email,
-        accountRole: user.role,
-        accountDisabled: sql<boolean>`${user.disabledAt} is not null`,
       })
       .from(guides)
       .leftJoin(user, eq(user.id, guides.userId))
@@ -85,13 +83,7 @@ export const guideRepository = {
   /** The account linked to a guide, for the admin edit page. */
   findAccount(userId: string) {
     return db
-      .select({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        disabledAt: user.disabledAt,
-      })
+      .select({ id: user.id, name: user.name, email: user.email, role: user.role })
       .from(user)
       .where(eq(user.id, userId))
       .then((rows) => rows[0]);

@@ -38,7 +38,7 @@
     "changeHint": "Ada data yang perlu diubah? Hubungi tim EtnoJourney."
   },
   "departures": {
-    "travellers": "{participants, plural, other {# tamu}} dari {bookings, plural, other {# booking}}{pending, plural, =0 {} other {, # menunggu konfirmasi}}",
+    "travellers": "{participants, plural, other {# tamu}} dari {bookings, plural, other {# booking}}",
     "open": "Lihat daftar tamu"
   },
   "manifest": {
@@ -49,12 +49,11 @@
     "days": "{count, plural, other {# hari}}",
     "hours": "{count, plural, other {# jam}}",
     "travellers": "Tamu",
-    "travellersValue": "{participants, plural, other {# orang}} dalam {bookings, plural, other {# booking}}{pending, plural, =0 {} other {, # menunggu konfirmasi}}",
+    "travellersValue": "{participants, plural, other {# orang}} dalam {bookings, plural, other {# booking}}",
     "noteTitle": "Catatan operasional",
     "title": "Daftar tamu",
-    "pending": "Menunggu konfirmasi",
-    "emptyTitle": "Belum ada tamu",
-    "emptyDescription": "Tamu yang memesan keberangkatan ini akan muncul di sini.",
+    "emptyTitle": "Belum ada tamu terkonfirmasi",
+    "emptyDescription": "Booking terkonfirmasi akan muncul di sini.",
     "columns": {
       "code": "Kode booking",
       "contact": "Kontak",

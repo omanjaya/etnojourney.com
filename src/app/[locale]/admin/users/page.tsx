@@ -12,11 +12,6 @@ import { FilterPills } from "@/features/admin-users/components/filter-pills";
 import { UsersTable } from "@/features/admin-users/components/users-table";
 import { parseAdminUserQuery } from "@/features/admin-users/schemas";
 
-export async function generateMetadata() {
-  const t = await getTranslations("adminUsers.list");
-  return { title: t("title") };
-}
-
 export default async function AdminUsersPage({ searchParams }: PageProps<"/[locale]/admin/users">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin("users.manage");

@@ -82,8 +82,8 @@ export const destinationRepository = {
       .then((rows) => rows[0]);
   },
 
-  update(id: number, values: Partial<NewDestination>, executor: DbExecutor = db) {
-    return executor
+  update(id: number, values: Partial<NewDestination>) {
+    return db
       .update(destinations)
       .set(values)
       .where(eq(destinations.id, id))
@@ -91,32 +91,10 @@ export const destinationRepository = {
       .then((rows) => rows[0]);
   },
 
-  /**
-   * The destination row as the edit form uses it. The edit page and the save
-   * both read through here, so the edit version computed from either matches.
-   */
-  findEditable(id: number) {
-    return db
-      .select()
-      .from(destinations)
-      .where(eq(destinations.id, id))
-      .then((rows) => rows[0]);
-  },
-
-  /** `findEditable`, locked until the transaction ends (saves). */
-  findForUpdate(tx: DbExecutor, id: number) {
-    return tx
-      .select()
-      .from(destinations)
-      .where(eq(destinations.id, id))
-      .for("update")
-      .then((rows) => rows[0]);
-  },
-
   /** Locks the destination row so a concurrent tour insert can't race a delete. */
   lockById(tx: DbExecutor, id: number) {
     return tx
-      .select({ id: destinations.id, slug: destinations.slug, name: destinations.name })
+      .select({ id: destinations.id })
       .from(destinations)
       .where(eq(destinations.id, id))
       .for("update")

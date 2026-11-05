@@ -14,11 +14,6 @@ import { ActivityList } from "@/features/admin-users/components/activity-list";
 import { FilterPills } from "@/features/admin-users/components/filter-pills";
 import { parseActivityQuery } from "@/features/admin-users/schemas";
 
-export async function generateMetadata() {
-  const t = await getTranslations("adminUsers.activity");
-  return { title: t("title") };
-}
-
 export default async function AdminActivityPage({
   searchParams,
 }: PageProps<"/[locale]/admin/activity">) {

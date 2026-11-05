@@ -10,12 +10,8 @@ import { bookings, departureAssignments, guides, tours } from "@/server/db/schem
  * prices, payments, emails or internal notes).
  */
 
-/**
- * Bookings on the guest list: every one that is not cancelled, like the
- * emailed manifest and the WhatsApp summary. Pending ones are still unpaid
- * and are flagged (`status`), never shown with payment details.
- */
-const ON_MANIFEST = ["pending", "confirmed", "completed"] as const;
+/** Bookings that actually travel: unpaid and cancelled ones are not on a manifest. */
+const TRAVELLING = ["confirmed", "completed"] as const;
 
 // Qualified by hand: drizzle renders columns unqualified inside a correlated subquery.
 const destinationNames = sql<string[]>`coalesce((
@@ -25,27 +21,15 @@ const destinationNames = sql<string[]>`coalesce((
   where "guide_destinations"."guide_id" = "guides"."id"
 ), '{}')`;
 
-const departureBookings = sql`
+const travellingFilter = sql`
   from "bookings"
   where "bookings"."tour_id" = "departure_assignments"."tour_id"
-    and "bookings"."travel_date" = "departure_assignments"."date"`;
-const onManifestFilter = sql`${departureBookings}
-    and "bookings"."status" in ('pending', 'confirmed', 'completed')`;
-const bookingCount = sql<number>`(select count(*)::int ${onManifestFilter})`.mapWith(Number);
+    and "bookings"."travel_date" = "departure_assignments"."date"
+    and "bookings"."status" in ('confirmed', 'completed')`;
+const bookingCount = sql<number>`(select count(*)::int ${travellingFilter})`.mapWith(Number);
 const participantCount = sql<number>`(
-  select coalesce(sum("bookings"."participants"), 0)::int ${onManifestFilter}
+  select coalesce(sum("bookings"."participants"), 0)::int ${travellingFilter}
 )`.mapWith(Number);
-const pendingParticipants = sql<number>`(
-  select coalesce(sum("bookings"."participants"), 0)::int ${departureBookings}
-    and "bookings"."status" = 'pending'
-)`.mapWith(Number);
-
-/**
- * Only departures that still have a guest: when every booking is cancelled
- * (or moved), the leftover assignment disappears from the portal just as the
- * departure disappears from the admin agenda.
- */
-const hasGuests = sql`exists (select 1 ${onManifestFilter})`;
 
 const departureColumns = {
   tourId: departureAssignments.tourId,
@@ -57,7 +41,6 @@ const departureColumns = {
   note: departureAssignments.note,
   bookingCount,
   participantCount,
-  pendingParticipants,
 };
 
 export const partnerRepository = {
@@ -79,23 +62,17 @@ export const partnerRepository = {
       .then((rows) => rows[0]);
   },
 
-  /** Departures (with guests) assigned to this guide on or after `from`, soonest first. */
+  /** Departures assigned to this guide on or after `from`, soonest first. */
   listUpcoming(guideId: number, from: string) {
     return db
       .select(departureColumns)
       .from(departureAssignments)
       .innerJoin(tours, eq(tours.id, departureAssignments.tourId))
-      .where(
-        and(
-          eq(departureAssignments.guideId, guideId),
-          gte(departureAssignments.date, from),
-          hasGuests,
-        ),
-      )
+      .where(and(eq(departureAssignments.guideId, guideId), gte(departureAssignments.date, from)))
       .orderBy(asc(departureAssignments.date), asc(departureAssignments.tourId));
   },
 
-  /** Departures (with guests) assigned to this guide in [from, before), most recent first. */
+  /** Departures assigned to this guide in [from, before), most recent first. */
   listPast(guideId: number, from: string, before: string) {
     return db
       .select(departureColumns)
@@ -106,13 +83,12 @@ export const partnerRepository = {
           eq(departureAssignments.guideId, guideId),
           gte(departureAssignments.date, from),
           lt(departureAssignments.date, before),
-          hasGuests,
         ),
       )
       .orderBy(desc(departureAssignments.date), asc(departureAssignments.tourId));
   },
 
-  /** One departure, only when it is assigned to this guide and still has guests. */
+  /** One departure, only when it is assigned to this guide. */
   findDeparture(guideId: number, tourId: number, date: string) {
     return db
       .select(departureColumns)
@@ -123,7 +99,6 @@ export const partnerRepository = {
           eq(departureAssignments.guideId, guideId),
           eq(departureAssignments.tourId, tourId),
           eq(departureAssignments.date, date),
-          hasGuests,
         ),
       )
       .then((rows) => rows[0]);
@@ -132,13 +107,12 @@ export const partnerRepository = {
   /**
    * The partner-safe manifest. The join on the assignment repeats the guide
    * scope, so this returns nothing for a departure that isn't theirs even if
-   * called on its own. `status` only marks pending (unconfirmed) guests.
+   * called on its own.
    */
   listManifest(guideId: number, tourId: number, date: string) {
     return db
       .select({
         code: bookings.code,
-        status: bookings.status,
         contactName: bookings.contactName,
         contactPhone: bookings.contactPhone,
         participants: bookings.participants,
@@ -157,7 +131,7 @@ export const partnerRepository = {
         and(
           eq(bookings.tourId, tourId),
           eq(bookings.travelDate, date),
-          inArray(bookings.status, [...ON_MANIFEST]),
+          inArray(bookings.status, [...TRAVELLING]),
         ),
       )
       .orderBy(asc(bookings.contactName), asc(bookings.id));

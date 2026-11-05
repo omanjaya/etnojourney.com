@@ -86,7 +86,7 @@ test.describe("admin insights", () => {
     expect(csv.status()).toBe(200);
     expect(csv.headers()["content-type"]).toContain("text/csv");
     const body = await csv.text();
-    expect(body).toContain("Slug tur,Tur,Booking,Booking dibatalkan,Pelancong,Diterima (Rp)");
+    expect(body).toContain("tour_slug,tour_title_id,tour_title_en");
     expect(body).toContain("borobudur-fajar-dan-batik-tulis");
   });
 

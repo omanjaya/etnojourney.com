@@ -1,14 +1,12 @@
 "use client";
 
-import { ArrowUpRight, Lock, TriangleAlert, Unlock, X } from "lucide-react";
+import { Lock, TriangleAlert, Unlock, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, Input, Textarea } from "@/components/ui/form-controls";
-import { Link } from "@/i18n/navigation";
 import { formatDate } from "@/lib/format";
-import { localize } from "@/lib/i18n-text";
 import { cn } from "@/lib/utils";
 import { mondayIndex, type AdminDay } from "@/server/services/availability.rules";
 import {
@@ -19,65 +17,6 @@ import {
 } from "../actions";
 
 type Selection = { from: string; to: string } | null;
-
-type Affected = ClosurePreview["affected"];
-
-/**
- * Bookings that stay on a closed range, as links to each departure's guest
- * list (names, phones, WhatsApp) so the team can contact them, plus the
- * agenda for the rest.
- */
-function AffectedDepartures({
-  affected,
-  tourId,
-}: {
-  affected: Affected;
-  /** Selected tour, or null for all tours (then each link names its tour). */
-  tourId: number | null;
-}) {
-  const t = useTranslations("adminAvailability.panel");
-  const locale = useLocale();
-  if (affected.departures.length === 0) return null;
-  const short = (date: string) => formatDate(date, locale, { day: "numeric", month: "short" });
-  const link = "hover:text-terracotta inline-flex items-start gap-1 underline underline-offset-4";
-  return (
-    <div className="mt-2">
-      <p>{t("affectedListTitle")}</p>
-      <ul className="mt-1 flex flex-col gap-1">
-        {affected.departures.map((departure) => (
-          <li key={`${departure.tourId}-${departure.date}`}>
-            <Link href={`/admin/departures/${departure.tourId}/${departure.date}`} className={link}>
-              {tourId === null
-                ? t("affectedLinkTour", {
-                    tour: localize(departure.tourTitle, locale),
-                    date: short(departure.date),
-                    count: departure.bookings,
-                  })
-                : t("affectedLink", { date: short(departure.date), count: departure.bookings })}
-              <ArrowUpRight className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            </Link>
-          </li>
-        ))}
-      </ul>
-      {affected.more > 0 && affected.range && (
-        <Link
-          href={{
-            pathname: "/admin/departures",
-            query: {
-              from: affected.range.from,
-              to: affected.range.to,
-              ...(tourId === null ? {} : { tour: String(tourId) }),
-            },
-          }}
-          className={cn(link, "mt-1")}
-        >
-          {t("affectedMore", { count: affected.more })}
-          <ArrowUpRight className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-        </Link>
-      )}
-    </div>
-  );
-}
 
 type PreviewState = {
   key: string;
@@ -131,12 +70,7 @@ export function ClosureManager({
   const [selection, setSelection] = useState<Selection>(null);
   const [reason, setReason] = useState("");
   const [preview, setPreview] = useState<PreviewState | null>(null);
-  const [notice, setNotice] = useState<{
-    tone: "success" | "danger";
-    text: string;
-    /** After closing: bookings that stay on the closed dates. */
-    affected?: Affected;
-  } | null>(null);
+  const [notice, setNotice] = useState<{ tone: "success" | "danger"; text: string } | null>(null);
   const [pending, startTransition] = useTransition();
 
   const key = selection ? `${tourId ?? "all"}:${selection.from}:${selection.to}` : "";
@@ -203,12 +137,11 @@ export function ClosureManager({
         setNotice({ tone: "danger", text: result.error });
         return;
       }
-      const { affected } = result.data;
       const parts = [t("panel.success", { count: result.data.created })];
-      if (affected.bookings > 0) {
-        parts.push(t("panel.successAffected", { count: affected.bookings }));
+      if (result.data.affectedBookings > 0) {
+        parts.push(t("panel.successAffected", { count: result.data.affectedBookings }));
       }
-      setNotice({ tone: "success", text: parts.join(" "), affected });
+      setNotice({ tone: "success", text: parts.join(" ") });
       clear();
     });
   };
@@ -400,7 +333,6 @@ export function ClosureManager({
         {notice && (
           <Alert tone={notice.tone} className="short:mt-3 mt-4">
             {notice.text}
-            {notice.affected && <AffectedDepartures affected={notice.affected} tourId={tourId} />}
           </Alert>
         )}
 
@@ -455,15 +387,12 @@ export function ClosureManager({
                   className="bg-gold-light flex items-start gap-3 rounded-xl px-4 py-3 text-[#6f4f17]"
                 >
                   <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
-                  <div className="min-w-0">
-                    <p>
-                      {t("panel.affected", {
-                        bookings: data.affected.bookings,
-                        seats: data.affected.seats,
-                      })}
-                    </p>
-                    <AffectedDepartures affected={data.affected} tourId={tourId} />
-                  </div>
+                  <p>
+                    {t("panel.affected", {
+                      bookings: data.affected.bookings,
+                      seats: data.affected.seats,
+                    })}
+                  </p>
                 </div>
               )}
             </>

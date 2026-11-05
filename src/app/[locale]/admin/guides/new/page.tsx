@@ -6,11 +6,6 @@ import { guideService } from "@/server/services/guide.service";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { emptyGuideDefaults, GuideForm } from "@/features/admin-guides/components/guide-form";
 
-export async function generateMetadata() {
-  const t = await getTranslations("adminGuides.form");
-  return { title: t("newTitle") };
-}
-
 export default async function NewGuidePage() {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin("guides.manage");
