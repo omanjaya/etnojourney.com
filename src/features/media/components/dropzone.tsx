@@ -6,6 +6,9 @@ import { useRef, useState, type DragEvent } from "react";
 import { cn } from "@/lib/utils";
 import { ACCEPT_ATTRIBUTE } from "./use-image-upload";
 
+/** Marks the button that opens the file picker, so uploaders can move focus to it. */
+export const DROPZONE_TRIGGER = "data-dropzone-trigger";
+
 /**
  * File picker with a visible button. The hidden file input keeps `id`, so a
  * surrounding <Field> label still opens the picker; the button is named by
@@ -38,9 +41,23 @@ export function Dropzone({
   const [dragging, setDragging] = useState(false);
   const inactive = pending || disabled;
   const compact = variant === "tile";
+
+  // The trigger stays mounted (and focusable) while an upload runs, so
+  // keyboard focus is not thrown back to the top of the page.
+  const open = () => {
+    if (!inactive) inputRef.current?.click();
+  };
   const buttonId = `${id}-button`;
-  // A missing label id is skipped, leaving the button's own text as its name.
-  const labelledBy = `${id}-label ${buttonId}`;
+  const trigger = {
+    id: buttonId,
+    type: "button" as const,
+    onClick: open,
+    "aria-disabled": inactive || undefined,
+    // A missing label id is skipped, leaving the button's own text as its name.
+    "aria-labelledby": `${id}-label ${buttonId}`,
+    "aria-describedby": describedBy,
+    [DROPZONE_TRIGGER]: "",
+  };
 
   const input = (
     <input
@@ -65,13 +82,8 @@ export function Dropzone({
       <>
         {input}
         <button
-          id={buttonId}
-          type="button"
-          onClick={() => inputRef.current?.click()}
-          disabled={inactive}
-          aria-labelledby={labelledBy}
-          aria-describedby={describedBy}
-          className="inline-flex h-9 items-center gap-2 rounded-full bg-sand-50 px-4 text-sm font-medium text-ink shadow-sm transition hover:bg-white disabled:opacity-60 [&_svg]:size-4"
+          {...trigger}
+          className="inline-flex h-9 items-center gap-2 rounded-full bg-sand-50 px-4 text-sm font-medium text-ink shadow-sm transition hover:bg-white aria-disabled:cursor-default aria-disabled:opacity-60 [&_svg]:size-4"
         >
           {pending ? (
             <LoaderCircle className="animate-spin" aria-hidden />
@@ -80,6 +92,9 @@ export function Dropzone({
           )}
           {pending ? t("uploading") : (label ?? t("replace"))}
         </button>
+        <span role="status" className="sr-only">
+          {pending ? t("uploading") : ""}
+        </span>
       </>
     );
   }
@@ -115,27 +130,25 @@ export function Dropzone({
           <ImageUp className="size-5" aria-hidden />
         )}
       </span>
-      {pending ? (
-        <p className="text-sm text-ink-soft" role="status">
-          {t("uploading")}
+      {!compact && (
+        <p className="text-sm font-medium text-ink">
+          {pending ? t("uploading") : (label ?? t("title"))}
         </p>
-      ) : (
-        <>
-          {!compact && <p className="text-sm font-medium text-ink">{label ?? t("title")}</p>}
-          <button
-            id={buttonId}
-            type="button"
-            onClick={() => inputRef.current?.click()}
-            disabled={inactive}
-            aria-labelledby={labelledBy}
-            aria-describedby={describedBy}
-            className="rounded-full text-sm font-medium text-terracotta underline-offset-4 hover:underline disabled:pointer-events-none"
-          >
-            {compact ? (label ?? t("browse")) : `${t("or")} ${t("browse")}`}
-          </button>
-          {!compact && <p className="text-xs text-muted">{t("hint")}</p>}
-        </>
       )}
+      <button
+        {...trigger}
+        className="rounded-full text-sm font-medium text-terracotta underline-offset-4 hover:underline aria-disabled:cursor-default aria-disabled:no-underline aria-disabled:opacity-60"
+      >
+        {compact
+          ? pending
+            ? t("uploading")
+            : (label ?? t("browse"))
+          : `${t("or")} ${t("browse")}`}
+      </button>
+      {!compact && <p className="text-xs text-muted">{t("hint")}</p>}
+      <span role="status" className="sr-only">
+        {pending ? t("uploading") : ""}
+      </span>
     </div>
   );
 }

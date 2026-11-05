@@ -176,7 +176,10 @@ Endpoint ini mati (404) sampai `CRON_SECRET` diisi (minimal 24 karakter, buat de
 ```cron
 CRON_TZ=Asia/Jakarta
 0 8 * * * curl -fsS -X POST -H @/etc/etnojourney/cron-header https://<domain>/api/cron/trip-emails >/dev/null
+30 3 * * * curl -fsS -X POST -H @/etc/etnojourney/cron-header https://<domain>/api/cron/media-cleanup >/dev/null
 ```
+
+Endpoint kedua, `POST /api/cron/media-cleanup`, memakai secret yang sama. Foto tur dan destinasi tersimpan begitu dipilih di formulir, sebelum formulir disimpan, jadi foto yang diganti, dihapus, atau tidak jadi dipakai tertinggal di folder upload. Endpoint ini menghapus foto unggahan (`/media/tours/...`) yang tidak dipakai tur atau destinasi mana pun dan berumur lebih dari dua hari, beserta kreditnya. Foto ulasan tidak disentuh.
 
 File `/etc/etnojourney/cron-header` berisi satu baris `Authorization: Bearer <CRON_SECRET>` dan hanya bisa dibaca pemilik crontab (`chmod 600`). Jangan menuliskan secret langsung di crontab atau di argumen `curl`: isi crontab dan argumen proses bisa terlihat user lain di server. Dengan Docker Compose, isi `CRON_SECRET` di `.env` (service `app` membacanya lewat `env_file`), lalu jalankan crontab di host yang memanggil `http://127.0.0.1:${APP_HOST_PORT:-3000}/api/cron/trip-emails` (port app hanya terbuka di localhost). Penjadwal eksternal (misalnya cron job di platform hosting) juga bisa dipakai selama mendukung header `Authorization`.
 

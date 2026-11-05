@@ -187,7 +187,8 @@
         "enabled": "Enabled an account"
       },
       "credit": {
-        "updated": "Updated a photo credit"
+        "updated": "Updated a photo credit",
+        "deleted": "Deleted a photo credit"
       },
       "unknown": "Other change",
       "guide": {

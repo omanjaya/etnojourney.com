@@ -187,7 +187,8 @@
         "enabled": "Mengaktifkan akun"
       },
       "credit": {
-        "updated": "Memperbarui kredit foto"
+        "updated": "Memperbarui kredit foto",
+        "deleted": "Menghapus kredit foto"
       },
       "unknown": "Perubahan lain",
       "guide": {

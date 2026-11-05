@@ -505,7 +505,8 @@ export const photoCredits = pgTable("photo_credits", {
   author: text("author").notNull(),
   license: text("license").notNull(),
   licenseUrl: text("license_url"),
-  sourceUrl: text("source_url").notNull(),
+  /** Optional: the operator's own photos or a local photographer often have no web page. */
+  sourceUrl: text("source_url"),
   source: text("source").notNull(),
 });
 

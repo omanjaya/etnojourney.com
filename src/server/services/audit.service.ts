@@ -33,6 +33,7 @@ export const auditActions = [
   "user.disabled",
   "user.enabled",
   "credit.updated",
+  "credit.deleted",
   "booking.cancelled_by_traveller",
   "booking.rescheduled",
   "review.photo_hidden",

@@ -21,6 +21,7 @@
   "paymentUnavailable": "Pembayaran online sedang tidak tersedia. Silakan hubungi kami.",
   "paymentGateway": "Gagal terhubung ke layanan pembayaran. Coba beberapa saat lagi.",
   "notRefundable": "Hanya pembayaran berstatus lunas yang bisa ditandai sudah dikembalikan.",
+  "creditInUse": "Kredit ini tidak bisa dihapus karena fotonya masih tampil di situs.",
   "notReschedulable": "Booking ini tidak bisa diubah jadwalnya lagi.",
   "rescheduleLimit": "Jadwal booking ini sudah pernah diubah. Batas perubahan jadwal sudah tercapai.",
   "rescheduleTooLate": "Perubahan jadwal sudah ditutup karena tanggal perjalanan terlalu dekat.",

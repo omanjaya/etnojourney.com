@@ -5,6 +5,7 @@ import type { Locale } from "@/i18n/routing";
 import { pageMetadata } from "@/lib/seo";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
+import { creditText } from "@/components/shared/photo-credit";
 import { photoCreditService } from "@/server/services/photo-credit.service";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/credits">): Promise<Metadata> {
@@ -18,14 +19,16 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/credits"
   });
 }
 
-/** Every curated photo with its photographer, license and source. */
+/** Every photo the site shows that has a credit, with its photographer, license and source. */
 export default async function CreditsPage({ params }: PageProps<"/[locale]/credits">) {
   const locale = (await params).locale as Locale;
   setRequestLocale(locale);
-  const [t, credits] = await Promise.all([
+  const [t, tk, credits] = await Promise.all([
     getTranslations("common.credit"),
+    getTranslations("common.credit.known"),
     photoCreditService.all(),
   ]);
+  const text = (value: string) => creditText(value, tk);
 
   return (
     <>
@@ -41,7 +44,7 @@ export default async function CreditsPage({ params }: PageProps<"/[locale]/credi
                 <dt className="sr-only">{t("columns.photo")}</dt>
                 <dd className="font-medium break-words">{credit.title}</dd>
                 <dt className="sr-only">{t("columns.author")}</dt>
-                <dd className="text-ink-soft truncate">{credit.author}</dd>
+                <dd className="text-ink-soft truncate">{text(credit.author)}</dd>
                 <dt className="sr-only">{t("columns.license")}</dt>
                 <dd className="text-muted">
                   {credit.licenseUrl ? (
@@ -51,20 +54,24 @@ export default async function CreditsPage({ params }: PageProps<"/[locale]/credi
                       rel="noopener noreferrer license"
                       className="hover:text-terracotta underline underline-offset-2"
                     >
-                      {credit.license}
+                      {text(credit.license)}
                     </a>
                   ) : (
-                    credit.license
+                    text(credit.license)
                   )}
                   {" · "}
-                  <a
-                    href={credit.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-terracotta underline underline-offset-2"
-                  >
-                    {credit.source}
-                  </a>
+                  {credit.sourceUrl ? (
+                    <a
+                      href={credit.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-terracotta underline underline-offset-2"
+                    >
+                      {credit.source}
+                    </a>
+                  ) : (
+                    credit.source
+                  )}
                 </dd>
               </dl>
             </li>

@@ -23,6 +23,8 @@ export type DomainErrorCode =
   | "paymentUnavailable"
   | "paymentGateway"
   | "notRefundable"
+  // Photo credits.
+  | "creditInUse"
   // Traveller self-service (cancel / reschedule).
   | "notReschedulable"
   | "rescheduleLimit"

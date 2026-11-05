@@ -6,8 +6,11 @@ import { useRef, useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Field, fieldDescribedBy, Input } from "@/components/ui/form-controls";
+import { CreditsHint } from "@/features/media/components/credits-hint";
 import { ImageUploader } from "@/features/media/components/image-uploader";
+import { useUploadTracker } from "@/features/media/components/use-upload-tracker";
 import type { LocalizedText } from "@/lib/i18n-text";
+import { cn } from "@/lib/utils";
 import { createDestinationAction, updateDestinationAction } from "../actions";
 import type { DestinationFormValues } from "../schemas";
 import { BilingualField } from "./form-parts/bilingual-field";
@@ -48,17 +51,23 @@ export function DestinationForm({
   destinationId,
   defaults,
   version,
+  placeholderImages,
 }: {
   mode: "create" | "edit";
   destinationId?: number;
   defaults: DestinationFormDefaults;
   /** Edit mode: the edit version of the destination as loaded. */
   version?: string;
+  /** The hero, when it is credited as a temporary AI placeholder. */
+  placeholderImages?: string[];
 }) {
   const t = useTranslations("admin.destinationForm");
   const tf = useTranslations("admin.form");
+  const tm = useTranslations("media.form");
   const formRef = useRef<HTMLFormElement>(null);
   const [pending, startTransition] = useTransition();
+  // A save sent while the photo is still uploading would keep the old photo.
+  const uploads = useUploadTracker();
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
   const [failures, setFailures] = useState(0);
@@ -95,6 +104,7 @@ export function DestinationForm({
 
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (uploads.uploading) return;
     setError(null);
     setFieldErrors({});
     setSaved(null);
@@ -200,24 +210,38 @@ export function DestinationForm({
               onChange={(url) => set("heroImage", url)}
               invalid={Boolean(err("heroImage"))}
               describedBy={fieldDescribedBy("heroImage", { error: err("heroImage") })}
+              placeholderImages={placeholderImages}
+              onPendingChange={uploads.track("heroImage")}
             />
           </Field>
+          <CreditsHint />
         </Section>
       </div>
 
       <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex items-center justify-end gap-4 border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
         <div className="min-w-0 flex-1 text-xs sm:text-sm">
-          {dirty && <p className="text-muted">{tf("unsaved")}</p>}
-          <p role="status" className="text-leaf inline-flex items-center gap-2 font-medium">
-            {!dirty && saved && (
-              <>
-                <CircleCheck className="size-4 shrink-0" aria-hidden />
-                {saved === "saved" ? tf("saved") : tf("unchanged")}
-              </>
+          {dirty && !uploads.uploading && <p className="text-muted">{tf("unsaved")}</p>}
+          {/* One live region: upload progress wins over the saved state. */}
+          <p
+            role="status"
+            className={cn(
+              uploads.uploading
+                ? "text-muted"
+                : "text-leaf inline-flex items-center gap-2 font-medium",
             )}
+          >
+            {uploads.uploading
+              ? tm("waitForUploads")
+              : !dirty &&
+                saved && (
+                  <>
+                    <CircleCheck className="size-4 shrink-0" aria-hidden />
+                    {saved === "saved" ? tf("saved") : tf("unchanged")}
+                  </>
+                )}
           </p>
         </div>
-        <Button type="submit" size="lg" loading={pending}>
+        <Button type="submit" size="lg" loading={pending} disabled={uploads.uploading}>
           {!pending && <Save aria-hidden />}
           {mode === "edit" ? t("save") : t("create")}
         </Button>

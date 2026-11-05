@@ -8,6 +8,7 @@ import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { destinationService } from "@/server/services/destination.service";
 import { isDomainError } from "@/server/services/errors";
+import { photoCreditService } from "@/server/services/photo-credit.service";
 import { tourService } from "@/server/services/tour.service";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { DeleteTour } from "@/features/admin/components/delete-tour";
@@ -57,7 +58,10 @@ export default async function EditTourPage({
     getTranslations("admin.tours"),
     getLocale(),
   ]);
-  const removalBlocker = await tourService.removalBlocker(tour);
+  const [removalBlocker, placeholderImages] = await Promise.all([
+    tourService.removalBlocker(tour),
+    photoCreditService.placeholdersAmong([tour.coverImage, ...tour.gallery]),
+  ]);
   const title = localize(tour.title, locale);
   const upcomingBookings = upcoming.get(tour.id) ?? 0;
 
@@ -109,6 +113,7 @@ export default async function EditTourPage({
               : undefined,
         }}
         destinations={destinations.map(({ id, name, province }) => ({ id, name, province }))}
+        placeholderImages={placeholderImages}
       />
       <DeleteTour tourId={tour.id} title={title} blocker={removalBlocker} />
     </>

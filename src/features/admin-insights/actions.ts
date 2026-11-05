@@ -7,7 +7,7 @@ import { auditService } from "@/server/services/audit.service";
 import { photoCreditService } from "@/server/services/photo-credit.service";
 import { revalidate } from "@/features/shared/revalidate";
 import { parseInput, runAction } from "@/features/shared/run-action";
-import { createCreditSchema, updateCreditSchema } from "./schemas";
+import { createCreditSchema, deleteCreditSchema, updateCreditSchema } from "./schemas";
 
 const FIELDS = ["title", "author", "license", "licenseUrl", "sourceUrl", "source"] as const;
 
@@ -71,4 +71,29 @@ export async function createCreditAction(
     return fail(t("creditExists"), { path: [t("creditExists")] });
   }
   return ok({ path });
+}
+
+/** Deletes the credit of an upload the site no longer shows (admin list "Hapus"). */
+export async function deleteCreditAction(
+  input: Record<string, unknown>,
+): Promise<ActionResult<{ path: string }>> {
+  const parsed = await parseInput(deleteCreditSchema, input, {
+    fieldsNamespace: "adminInsights.fields",
+  });
+  if (!parsed.success) return parsed.result;
+
+  return runAction(async () => {
+    const actor = await assertPermission("credits.manage");
+    const { path } = parsed.data;
+    const deleted = await photoCreditService.remove(path);
+    await auditService.record({
+      actorId: actor.id,
+      action: "credit.deleted",
+      entityType: "credit",
+      entityId: path,
+      details: { title: deleted.title, author: deleted.author },
+    });
+    revalidate.everything();
+    return { path };
+  });
 }
