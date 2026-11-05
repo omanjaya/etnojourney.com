@@ -11,10 +11,11 @@ const ADMIN_PATHS = [
 ];
 
 test.describe("admin access control", () => {
-  test("signed-out visitors are sent to login", async ({ page }) => {
+  test("signed-out visitors are sent to login, which returns to the page", async ({ page }) => {
     for (const path of ADMIN_PATHS) {
       await page.goto(path);
-      await expect(page, path).toHaveURL(/\/login/);
+      // `next` carries the page so signing in comes back to it.
+      await expect(page, path).toHaveURL(new RegExp(`/login\\?next=${encodeURIComponent(path)}$`));
     }
   });
 

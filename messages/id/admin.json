@@ -25,6 +25,7 @@
     "eyebrow": "Panel Admin",
     "title": "Selamat datang, {name}",
     "description": "Pantau booking yang masuk dan kelola paket tur dari satu tempat.",
+    "denied": "Halaman tadi hanya bisa dibuka oleh admin, jadi Anda kami bawa ke ringkasan ini.",
     "stats": {
       "pending": "Menunggu konfirmasi",
       "confirmed": "Terkonfirmasi",
@@ -117,6 +118,7 @@
     "newEyebrow": "Katalog",
     "newTitle": "Buat tur baru",
     "editTitle": "Ubah tur",
+    "editMetaTitle": "Ubah {title}",
     "backToList": "Kembali ke daftar tur",
     "create": "Buat tur",
     "save": "Simpan perubahan",
@@ -203,6 +205,7 @@
     "newEyebrow": "Katalog",
     "newTitle": "Buat destinasi baru",
     "editTitle": "Ubah destinasi",
+    "editMetaTitle": "Ubah {name}",
     "backToList": "Kembali ke daftar destinasi",
     "create": "Buat destinasi",
     "save": "Simpan perubahan",

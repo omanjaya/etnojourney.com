@@ -50,6 +50,7 @@
     "newEyebrow": "Pemandu baru",
     "newTitle": "Tambah pemandu",
     "editEyebrow": "Ubah pemandu",
+    "editMetaTitle": "Ubah {name}",
     "statusActive": "Aktif",
     "statusInactive": "Nonaktif",
     "saved": "Data pemandu disimpan.",

@@ -50,6 +50,7 @@
     "newEyebrow": "New guide",
     "newTitle": "Add a guide",
     "editEyebrow": "Edit guide",
+    "editMetaTitle": "Edit {name}",
     "statusActive": "Active",
     "statusInactive": "Inactive",
     "saved": "Guide saved.",

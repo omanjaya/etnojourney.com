@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { cache } from "react";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin } from "@/server/auth/guards";
 import { destinationService } from "@/server/services/destination.service";
@@ -9,13 +10,27 @@ import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { DeleteDestination } from "@/features/admin/components/delete-destination";
 import { DestinationForm } from "@/features/admin/components/destination-form";
 
-async function loadDestination(id: number) {
+// Cached so the page and its metadata read the destination once per request.
+const loadDestination = cache(async (id: number) => {
   try {
     return await destinationService.getForEdit(id);
   } catch (error) {
     if (isDomainError(error) && error.code === "notFound") notFound();
     throw error;
   }
+});
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]/admin/destinations/[id]/edit">) {
+  await requireAdmin("catalogue.manage");
+  const id = Number((await params).id);
+  if (!Number.isInteger(id) || id < 1) notFound();
+  const [destination, t] = await Promise.all([
+    loadDestination(id),
+    getTranslations("admin.destinationForm"),
+  ]);
+  return { title: t("editMetaTitle", { name: destination.name }) };
 }
 
 export default async function EditDestinationPage({

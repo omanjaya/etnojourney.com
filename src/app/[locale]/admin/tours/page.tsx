@@ -17,6 +17,11 @@ import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { TourToggle } from "@/features/admin/components/tour-toggle";
 import { requireAdmin } from "@/server/auth/guards";
 
+export async function generateMetadata() {
+  const t = await getTranslations("admin.tours");
+  return { title: t("title") };
+}
+
 export default async function AdminToursPage({ searchParams }: PageProps<"/[locale]/admin/tours">) {
   // Pages must guard themselves: Next.js can render a page without its layout.
   await requireAdmin("catalogue.manage");

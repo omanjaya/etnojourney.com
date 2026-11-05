@@ -71,9 +71,13 @@ async function loadDeparture(params: { tourId: string; date: string }) {
 export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/admin/departures/[tourId]/[date]">): Promise<Metadata> {
-  const { date } = await params;
-  const t = await getTranslations("adminDepartures.detail");
-  return { title: t("metaTitle", { date }), robots: { index: false, follow: false } };
+  const key = parseDepartureParams(await params);
+  if (!key) notFound();
+  const [t, locale] = await Promise.all([getTranslations("adminDepartures.detail"), getLocale()]);
+  return {
+    title: t("metaTitle", { date: formatDate(key.date, locale) }),
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function AdminDepartureDetailPage({

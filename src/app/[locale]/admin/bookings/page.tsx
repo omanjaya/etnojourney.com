@@ -13,6 +13,11 @@ import { BookingsTable } from "@/features/admin/components/bookings-table";
 import { parseAdminBookingQuery } from "@/features/admin/schemas";
 import { requireAdmin } from "@/server/auth/guards";
 
+export async function generateMetadata() {
+  const t = await getTranslations("admin.bookings");
+  return { title: t("title") };
+}
+
 export default async function AdminBookingsPage({
   searchParams,
 }: PageProps<"/[locale]/admin/bookings">) {

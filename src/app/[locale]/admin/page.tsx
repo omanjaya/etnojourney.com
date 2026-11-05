@@ -18,6 +18,7 @@ import { needsGuideWindow } from "@/server/services/departure.rules";
 import { departureService } from "@/server/services/departure.service";
 import { businessToday } from "@/server/services/self-service.rules";
 import { CountUp } from "@/components/motion";
+import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
@@ -25,9 +26,11 @@ import { BookingsTable } from "@/features/admin/components/bookings-table";
 import { StatCard } from "@/features/admin/components/stat-card";
 import { WorkQueueCard } from "@/features/admin-insights/components/work-queue-card";
 
-export default async function AdminOverviewPage() {
+export default async function AdminOverviewPage({ searchParams }: PageProps<"/[locale]/admin">) {
   // The guard runs first: what the dashboard loads depends on the role.
   const user = await requireAdmin();
+  // Set by requireAdmin when staff open an admin-only page.
+  const { denied } = await searchParams;
   const canSeeRevenue = can(user.role, "reports.view");
   const canRefund = can(user.role, "payments.refund");
   const canManageDepartures = can(user.role, "departures.manage");
@@ -63,6 +66,8 @@ export default async function AdminOverviewPage() {
         title={t("title", { name: user.name.split(" ")[0] })}
         description={t("description")}
       />
+
+      {denied === "1" && <Alert className="short:mb-4 mb-6">{t("denied")}</Alert>}
 
       <section
         aria-label={tq("queuesLabel")}

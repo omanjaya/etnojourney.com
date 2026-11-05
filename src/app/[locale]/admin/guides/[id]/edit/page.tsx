@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { cache } from "react";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin } from "@/server/auth/guards";
 import { can } from "@/server/auth/permissions";
@@ -11,13 +12,26 @@ import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 import { GuideAccountControl } from "@/features/admin-guides/components/guide-account-control";
 import { GuideForm } from "@/features/admin-guides/components/guide-form";
 
-async function loadGuide(id: number) {
+// Cached so the page and its metadata read the guide once per request.
+const loadGuide = cache(async (id: number) => {
   try {
     return await guideService.detailForAdmin(id);
   } catch (error) {
     if (isDomainError(error) && error.code === "notFound") notFound();
     throw error;
   }
+});
+
+export async function generateMetadata({ params }: PageProps<"/[locale]/admin/guides/[id]/edit">) {
+  // Guarded too: the title carries the guide's name.
+  await requireAdmin("guides.manage");
+  const { id: rawId } = await params;
+  if (!/^\d{1,9}$/.test(rawId) || Number(rawId) < 1) notFound();
+  const [{ guide }, t] = await Promise.all([
+    loadGuide(Number(rawId)),
+    getTranslations("adminGuides.form"),
+  ]);
+  return { title: t("editMetaTitle", { name: guide.name }) };
 }
 
 export default async function EditGuidePage({

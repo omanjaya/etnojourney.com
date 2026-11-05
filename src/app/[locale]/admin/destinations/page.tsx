@@ -13,6 +13,11 @@ import { AdminSearchBox } from "@/features/admin/components/admin-search-box";
 import { parseAdminListQuery } from "@/features/admin/schemas";
 import { AdminPageHeader } from "@/features/admin/components/admin-page-header";
 
+export async function generateMetadata() {
+  const t = await getTranslations("admin.destinations");
+  return { title: t("title") };
+}
+
 export default async function AdminDestinationsPage({
   searchParams,
 }: PageProps<"/[locale]/admin/destinations">) {
