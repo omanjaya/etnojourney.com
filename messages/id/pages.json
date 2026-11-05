@@ -5,11 +5,11 @@
       "description": "EtnoJourney merancang perjalanan budaya kecil yang dipandu langsung oleh warga desa, dengan pembagian hasil yang adil dan hormat pada tradisi."
     },
     "eyebrow": "Tentang kami",
-    "title": "Perjalanan yang dipimpin oleh tuan rumahnya",
+    "title": "Perjalanan yang dipandu tuan rumah khusus untukmu, dengan wawasan autentik dan perjumpaan bermakna di sepanjang jalan.",
     "description": "Kami percaya cara terbaik mengenal sebuah budaya adalah lewat orang-orang yang menghidupinya setiap hari, bukan lewat panggung yang disiapkan untuk wisatawan.",
     "mission": {
       "eyebrow": "Misi",
-      "title": "Membuka pintu, bukan memajang tradisi",
+      "title": "Membuka pintu untuk menjelajah, lebih dari sekadar pertunjukan.",
       "body": [
         "EtnoJourney menghubungkan pelancong dengan komunitas adat dan desa di seluruh Nusantara. Setiap perjalanan dirancang bersama warga setempat: mereka yang menentukan apa yang boleh dibagikan, kapan, dan dengan cara apa.",
         "Kami sengaja menjaga perjalanan tetap kecil dan lambat. Tujuannya bukan mengumpulkan sebanyak mungkin tempat, melainkan memberi waktu untuk duduk, mendengar, dan belajar dari tuan rumah."
@@ -178,7 +178,7 @@
       ]
     },
     "cta": {
-      "title": "Siap menjadi tamu yang baik?",
+      "title": "Siap menjadi pelancong yang bertanggung jawab?",
       "body": "Lihat perjalanan yang sedang dibuka dan pilih yang paling sesuai dengan ritmemu.",
       "button": "Jelajahi paket tur"
     }

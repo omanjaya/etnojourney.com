@@ -11,6 +11,8 @@ import {
   daysInMonth,
   groupClosures,
   isMonthInRange,
+  summarizeAffected,
+  tripEndDate,
   type MonthAvailability,
 } from "./availability.rules";
 import { DomainError } from "./errors";
@@ -34,16 +36,13 @@ function assertRange(input: ClosureRangeInput, now: Date) {
   }
 }
 
-/** Bookings that keep their seats on the range (closing never cancels them). */
+/**
+ * Bookings that keep their seats on the range (closing never cancels them),
+ * including multi-day trips that started earlier and run into it, with the
+ * first few departures so the panel can link to their guest lists.
+ */
 async function affectedBookings({ tourId, from, to }: ClosureRangeInput) {
-  const load = await availabilityRepository.loadByDate(tourId, from, to);
-  let bookings = 0;
-  let seats = 0;
-  for (const day of load.values()) {
-    bookings += day.bookings;
-    seats += day.seats;
-  }
-  return { bookings, seats, dates: load.size };
+  return summarizeAffected(await availabilityRepository.affectedDepartures(tourId, from, to));
 }
 
 export const availabilityService = {
@@ -64,9 +63,11 @@ export const availabilityService = {
     if (!tour || !tour.isPublished) throw new DomainError("notFound");
 
     const days = daysInMonth(month);
+    // A trip leaving on the last day of the month still runs on the next month's first days.
+    const lastTripDay = tripEndDate(days.at(-1)!, tour.durationDays);
     const [taken, closed] = await Promise.all([
       availabilityRepository.seatsTakenByDate(tourId, days[0], days.at(-1)!),
-      closureRepository.closedDatesForTour(tourId, days[0], days.at(-1)!),
+      closureRepository.closedDatesForTour(tourId, days[0], lastTripDay),
     ]);
     return buildMonthAvailability({
       month,
@@ -74,6 +75,7 @@ export const availabilityService = {
       capacity: tour.maxParticipants,
       taken,
       closed,
+      durationDays: tour.durationDays,
     });
   },
 
@@ -108,7 +110,7 @@ export const availabilityService = {
 
   /**
    * What closing a range would do: how many dates are new and how many
-   * pending or confirmed bookings fall on them (they are kept, not cancelled).
+   * pending or confirmed bookings run on them (they are kept, not cancelled).
    */
   async previewClosure(input: ClosureRangeInput, now: Date = new Date()) {
     assertRange(input, now);

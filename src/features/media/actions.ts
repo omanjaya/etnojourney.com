@@ -1,6 +1,7 @@
 "use server";
 
 import { getTranslations } from "next-intl/server";
+import { createRateLimiter } from "@/features/auth/rate-limit";
 import { runAction } from "@/features/shared/run-action";
 import { fail, ok, type ActionResult } from "@/lib/action-result";
 import { assertPermission } from "@/server/auth/guards";
@@ -9,16 +10,27 @@ import { MAX_UPLOAD_BYTES } from "@/server/storage/image-validation";
 
 export type UploadedImage = { url: string; width: number; height: number };
 
-type Outcome = { image: UploadedImage } | { rejected: ImageRejectedError["reason"] };
+type Outcome =
+  | { image: UploadedImage }
+  | { rejected: ImageRejectedError["reason"] | "rateLimited" };
+
+/**
+ * Per back-office user. Generous enough to replace every photo of several
+ * tours in one sitting, but it stops a runaway script or a hijacked session
+ * from filling the server's disk (sharp re-encoding is also the costly part).
+ */
+const uploadLimiter = createRateLimiter();
+const UPLOAD_LIMIT = { max: 120, windowMs: 10 * 60_000 };
 
 /** Admin-only image upload. The file is validated by content and re-encoded server-side. */
 export async function uploadImageAction(formData: FormData): Promise<ActionResult<UploadedImage>> {
   const result = await runAction<Outcome>(async () => {
-    await assertPermission("catalogue.manage");
+    const actor = await assertPermission("catalogue.manage");
 
     const file = formData.get("file");
     if (!(file instanceof File) || file.size === 0) return { rejected: "empty" };
     if (file.size > MAX_UPLOAD_BYTES) return { rejected: "tooLarge" };
+    if (!uploadLimiter.hit(`upload:${actor.id}`, UPLOAD_LIMIT)) return { rejected: "rateLimited" };
 
     try {
       const { url, width, height } = await storeTourImage(new Uint8Array(await file.arrayBuffer()));

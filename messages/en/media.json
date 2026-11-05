@@ -3,7 +3,7 @@
     "title": "Drag a photo here",
     "or": "or",
     "browse": "choose from your device",
-    "hint": "JPEG, PNG, WebP or AVIF. Max. 8 MB.",
+    "hint": "JPEG, PNG, WebP or AVIF. Large photos are shrunk automatically.",
     "uploading": "Uploading and optimizing...",
     "replace": "Replace photo",
     "remove": "Remove photo",
@@ -12,28 +12,46 @@
   "gallery": {
     "add": "Add photo",
     "count": "{count, plural, =0 {No photos yet} other {# of {max} photos}}",
-    "moveLeft": "Move left",
-    "moveRight": "Move right",
+    "moveLeft": "Move photo {position} left",
+    "moveRight": "Move photo {position} right",
     "remove": "Remove photo {position}",
+    "replace": "Replace photo {position}",
+    "replaceInput": "Choose a replacement photo",
+    "replacing": "Replacing the photo...",
+    "makeCover": "Make photo {position} the cover",
+    "coverBadge": "Cover",
     "position": "Photo {position}",
     "full": "The gallery is full."
   },
+  "placeholder": {
+    "badge": "Temporary (AI)",
+    "hint": "An AI illustration, not the real place. Replace it with a real photo."
+  },
   "url": {
-    "toggle": "Or paste an Unsplash URL",
+    "toggle": "Or paste an Unsplash photo link",
     "label": "Image URL",
     "placeholder": "https://images.unsplash.com/photo-...",
     "add": "Use URL",
+    "cancel": "Cancel",
     "invalid": "Only URLs from images.unsplash.com are accepted."
   },
   "errors": {
     "empty": "Choose an image file.",
-    "tooLarge": "The file is larger than 8 MB.",
+    "tooLarge": "The photo is too large (max. 8 MB). Make it smaller first, for example by sending it to yourself on WhatsApp and saving it, then upload it again.",
     "unsupported": "Unsupported format. Use JPEG, PNG, WebP or AVIF.",
-    "tooManyPixels": "The image resolution is too large (max. 40 megapixels).",
-    "corrupt": "The image file is damaged or unreadable."
+    "tooManyPixels": "The photo resolution is too large (max. 40 megapixels). Make it smaller first, for example by sending it to yourself on WhatsApp and saving it, then upload it again.",
+    "corrupt": "The image file is damaged or unreadable.",
+    "rateLimited": "Too many photos uploaded in a short time. Wait a few minutes, then try again."
+  },
+  "warnings": {
+    "notLandscape": "This photo is not landscape, so its top and bottom will be cropped on the page. A landscape photo works best.",
+    "small": "This photo is small ({width} pixels wide), so it may look blurry on the page. Use the original from the camera, at least 1600 pixels wide."
   },
   "form": {
-    "sectionHint": "Upload your own photos or use URLs from images.unsplash.com. Photos are converted to WebP and location metadata is removed.",
-    "galleryHint": "Up to 12 photos. The first one is shown largest on the tour page."
+    "sectionHint": "Upload photos from your computer or phone. Landscape photos work best. GPS location saved in a photo is removed automatically.",
+    "galleryHint": "Up to 12 photos. The cover photo is always shown largest on the tour page, followed by the gallery photos in this order. Click the star on a photo to make it the cover.",
+    "waitForUploads": "Wait for the photos to finish uploading before saving.",
+    "creditsHint": "Once saved, photos you upload can be credited (photographer's name) on the <link>Photo credits</link> page. Your own photos need no credit.",
+    "opensNewTab": "(opens in a new tab)"
   }
 }

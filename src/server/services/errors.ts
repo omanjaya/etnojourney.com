@@ -13,13 +13,19 @@ export type DomainErrorCode =
   | "dateClosed"
   | "closureRange"
   | "invalidTransition"
+  | "tripNotStarted"
   | "notCancellable"
   | "slugTaken"
+  // Catalogue editing: someone saved in between; a live tour keeps its address.
+  | "staleEdit"
+  | "slugLocked"
   | "notPayable"
   | "alreadyPaid"
   | "paymentUnavailable"
   | "paymentGateway"
   | "notRefundable"
+  // Photo credits.
+  | "creditInUse"
   // Traveller self-service (cancel / reschedule).
   | "notReschedulable"
   | "rescheduleLimit"
@@ -36,7 +42,9 @@ export type DomainErrorCode =
   | "guideAccountBackoffice"
   | "guideAccountDisabled"
   | "guideAccountLinked"
-  | "guideAlreadyLinked";
+  | "guideAlreadyLinked"
+  | "guideLinkedRoleChange"
+  | "partnerNeedsGuide";
 
 export class DomainError extends Error {
   constructor(

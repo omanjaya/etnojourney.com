@@ -37,19 +37,21 @@ export function isHttpsUrl(value: string): boolean {
 }
 
 const text = (max: number) => z.string().trim().min(1, "required").max(max, "tooLong");
-const httpsUrl = z.string().trim().max(500, "tooLong").refine(isHttpsUrl, "httpsUrl");
+/** Optional https link: empty is stored as null. */
+const optionalHttpsUrl = z
+  .string()
+  .trim()
+  .max(500, "tooLong")
+  .refine((value) => value === "" || isHttpsUrl(value), "httpsUrl")
+  .transform((value) => value || null);
 
 export const creditFieldsSchema = z.object({
   title: text(200),
   author: text(200),
   license: text(100),
-  licenseUrl: z
-    .string()
-    .trim()
-    .max(500, "tooLong")
-    .refine((value) => value === "" || isHttpsUrl(value), "httpsUrl")
-    .transform((value) => value || null),
-  sourceUrl: httpsUrl,
+  licenseUrl: optionalHttpsUrl,
+  // Own photos and local photographers often have no web page to link to.
+  sourceUrl: optionalHttpsUrl,
   source: text(100),
 });
 
@@ -62,6 +64,11 @@ export const updateCreditSchema = creditFieldsSchema.extend({
 
 /** New credits are only for images uploaded through the media pipeline. */
 export const createCreditSchema = creditFieldsSchema.extend({
+  path: z.string().trim().min(1, "required").refine(isUploadedImagePath, "uploadPath"),
+});
+
+/** Credits of uploads the site no longer shows can be deleted (the service re-checks). */
+export const deleteCreditSchema = z.object({
   path: z.string().trim().min(1, "required").refine(isUploadedImagePath, "uploadPath"),
 });
 

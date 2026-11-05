@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   averageGroupSize,
   barWidth,
+  bookingTotals,
   buildMonthSeries,
   buildTourRows,
   isIsoDate,
@@ -142,7 +143,55 @@ describe("buildTourRows", () => {
     });
     expect(rows.map((r) => r.title)).toEqual(["Ubud", "Bromo"]);
     expect(rows[0]).toMatchObject({ gross: 900, refunds: 100, net: 800, bookings: 1 });
-    expect(rows[1]).toMatchObject({ net: 300, bookings: 3, participants: 6 });
+    expect(rows[1]).toMatchObject({ net: 300, bookings: 3, participants: 6, cancelled: 0 });
+  });
+
+  it("keeps a tour whose only booking was cancelled, with its cancelled count", () => {
+    const rows = buildTourRows(new Map([[7, "Dapur Desa"]]), {
+      bookings: [{ tourId: 7, bookings: 1, cancelled: 1, participants: 0 }],
+      gross: [],
+      refunds: [],
+    });
+    expect(rows).toEqual([
+      {
+        tourId: 7,
+        title: "Dapur Desa",
+        bookings: 1,
+        cancelled: 1,
+        participants: 0,
+        gross: 0,
+        refunds: 0,
+        net: 0,
+      },
+    ]);
+  });
+});
+
+describe("bookingTotals", () => {
+  it("counts every booking made but only travellers who weren't cancelled", () => {
+    // Seed shape: 4 bookings this month, one (2 pax) cancelled.
+    const totals = bookingTotals([
+      { status: "pending", bookings: 1, participants: 2 },
+      { status: "confirmed", bookings: 1, participants: 3 },
+      { status: "cancelled", bookings: 1, participants: 2 },
+      { status: "completed", bookings: 1, participants: 2 },
+    ]);
+    expect(totals).toEqual({ bookings: 4, cancelled: 1, participants: 7, averageGroupSize: 2.3 });
+  });
+
+  it("handles a period with only cancellations or nothing at all", () => {
+    expect(bookingTotals([{ status: "cancelled", bookings: 2, participants: 5 }])).toEqual({
+      bookings: 2,
+      cancelled: 2,
+      participants: 0,
+      averageGroupSize: 0,
+    });
+    expect(bookingTotals([])).toEqual({
+      bookings: 0,
+      cancelled: 0,
+      participants: 0,
+      averageGroupSize: 0,
+    });
   });
 });
 

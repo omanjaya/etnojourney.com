@@ -1,0 +1,1 @@
+ALTER TABLE "photo_credits" ALTER COLUMN "source_url" DROP NOT NULL;

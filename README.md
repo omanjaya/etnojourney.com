@@ -48,7 +48,7 @@ Detail konvensi ada di [`AGENTS.md`](AGENTS.md), dan desain lengkap di [`docs/su
 2. Server menghitung harga dari database dan mengecek sisa kuota di dalam transaksi dengan row lock, sehingga tidak terjadi overbooking.
 3. Booking tercatat `pending` dengan kode `EJ-XXXXXX`, dan email konfirmasi dikirim.
 4. Traveller menekan **Bayar sekarang** dan diarahkan ke halaman pembayaran Midtrans. Webhook `POST /api/payments/midtrans` memverifikasi signature dan jumlah, lalu menandai pembayaran `paid` dan booking `confirmed` secara otomatis.
-5. Selama belum dibayar, traveller bisa membatalkan. Admin tetap bisa mengubah status secara manual: `pending → confirmed | cancelled`, `confirmed → completed | cancelled`.
+5. Selama belum dibayar, traveller bisa membatalkan. Admin tetap bisa mengubah status secara manual: `pending → confirmed | cancelled`, `confirmed → completed | cancelled`. Mengonfirmasi booking yang belum dibayar meminta konfirmasi dulu (tamu tidak bisa lagi membayar online), `completed` baru bisa dipilih mulai tanggal perjalanan, dan membatalkan booking yang sudah dibayar menanyakan refund sesuai kebijakan atau penuh.
 6. Setelah perjalanan `completed`, traveller bisa menulis satu ulasan per booking. Rating tur dihitung ulang otomatis, dan admin bisa menyembunyikan ulasan di `/admin/reviews`.
 
 ### Integrasi eksternal
@@ -144,6 +144,7 @@ Jika port 5432 dipakai Postgres lokal, isi `DB_HOST_PORT=5544` di `.env`; compos
 | `UPLOAD_DIR` | Tidak | Default image: `/app/storage/uploads` (volume) |
 | `TRUST_PROXY`, `TRUSTED_PROXIES` | Lihat di bawah | Pembacaan IP klien untuk rate limit |
 | `CRON_SECRET` | Disarankan | Mengaktifkan email terjadwal (lihat di bawah); tanpa ini endpoint cron mati |
+| `RELEASE_UNPAID_HOLDS` | Opsional | `true`: cron harian membatalkan booking `pending` yang tidak dibayar setelah 48 jam (bawaan `false`) |
 
 ### Akun owner (admin)
 
@@ -169,6 +170,8 @@ Endpoint `POST /api/cron/trip-emails` mengirim dua jenis email otomatis, masing-
 - **Pengingat sebelum perjalanan**: booking `confirmed` dengan tanggal perjalanan hari ini sampai 3 hari lagi (zona waktu `Asia/Jakarta`). Isinya titik kumpul, tanggal, daftar barang bawaan, etika setempat, kontak, tautan ke halaman booking dan e-tiket PDF.
 - **Permintaan ulasan**: booking `completed` yang perjalanannya 1 sampai 14 hari lalu dan belum diulas. Tautannya menuju halaman booking di akun, tempat ulasan ditulis.
 
+Jika `RELEASE_UNPAID_HOLDS=true` (bawaan `false`), pemanggilan yang sama juga **melepas kursi booking yang tidak dibayar**: booking `pending` tanpa pembayaran lunas dibatalkan oleh sistem jika sudah lebih dari 48 jam sejak dipesan (kecuali pembayaran via Midtrans masih berjalan, maksimal 24 jam) atau tanggal perjalanannya sudah lewat. Tiap pembatalan tercatat di log aktivitas sebagai `booking.expired`, dan traveller menerima email "booking dibatalkan" seperti biasa. Batas waktunya ada di `src/server/services/booking.rules.ts` (`UNPAID_HOLD_HOURS`).
+
 Setiap email hanya terkirim sekali: sebelum mengirim, baris booking "diklaim" dengan satu `UPDATE ... WHERE reminder_sent_at IS NULL` (atau `review_request_sent_at`), jadi dua pemanggilan yang berjalan bersamaan tidak mengirim dobel. Jika pengiriman gagal, klaim dilepas dan dicoba lagi pada pemanggilan berikutnya. Satu pemanggilan memproses paling banyak 200 email per jenis dan mengembalikan JSON berisi jumlahnya.
 
 Endpoint ini mati (404) sampai `CRON_SECRET` diisi (minimal 24 karakter, buat dengan `openssl rand -hex 32`). Panggil sekali sehari dengan header `Authorization: Bearer <CRON_SECRET>`; tanpa header atau dengan secret yang salah jawabannya 401. Memanggil lebih sering aman, tetapi tidak perlu. Contoh crontab di server (pukul 08.00 WIB; sesuaikan jika zona waktu server bukan WIB, misalnya `0 1 * * *` untuk server UTC):
@@ -176,7 +179,10 @@ Endpoint ini mati (404) sampai `CRON_SECRET` diisi (minimal 24 karakter, buat de
 ```cron
 CRON_TZ=Asia/Jakarta
 0 8 * * * curl -fsS -X POST -H @/etc/etnojourney/cron-header https://<domain>/api/cron/trip-emails >/dev/null
+30 3 * * * curl -fsS -X POST -H @/etc/etnojourney/cron-header https://<domain>/api/cron/media-cleanup >/dev/null
 ```
+
+Endpoint kedua, `POST /api/cron/media-cleanup`, memakai secret yang sama. Foto tur dan destinasi tersimpan begitu dipilih di formulir, sebelum formulir disimpan, jadi foto yang diganti, dihapus, atau tidak jadi dipakai tertinggal di folder upload. Endpoint ini menghapus foto unggahan (`/media/tours/...`) yang tidak dipakai tur atau destinasi mana pun dan berumur lebih dari dua hari, beserta kreditnya. Foto ulasan tidak disentuh.
 
 File `/etc/etnojourney/cron-header` berisi satu baris `Authorization: Bearer <CRON_SECRET>` dan hanya bisa dibaca pemilik crontab (`chmod 600`). Jangan menuliskan secret langsung di crontab atau di argumen `curl`: isi crontab dan argumen proses bisa terlihat user lain di server. Dengan Docker Compose, isi `CRON_SECRET` di `.env` (service `app` membacanya lewat `env_file`), lalu jalankan crontab di host yang memanggil `http://127.0.0.1:${APP_HOST_PORT:-3000}/api/cron/trip-emails` (port app hanya terbuka di localhost). Penjadwal eksternal (misalnya cron job di platform hosting) juga bisa dipakai selama mendukung header `Authorization`.
 

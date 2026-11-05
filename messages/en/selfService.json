@@ -2,7 +2,8 @@
   "panel": {
     "rescheduleBlocked": {
       "limit": "This booking has already been moved {max, plural, one {once} other {# times}}, the most allowed. Contact us if you need another change.",
-      "tooLate": "Date changes close {days, plural, one {# day} other {# days}} before the travel date. Contact us if you need help."
+      "tooLate": "Date changes close {days, plural, one {# day} other {# days}} before the travel date. Contact us if you need help.",
+      "unpublished": "This tour is not shown on the site right now, so you can't change the date yourself. Contact us if you need a different date."
     },
     "policyLink": "Cancellation and date change policy"
   },

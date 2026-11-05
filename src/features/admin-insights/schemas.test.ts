@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   createCreditSchema,
+  deleteCreditSchema,
   isHttpsUrl,
   parseReportQuery,
   reportQueryOf,
@@ -43,6 +44,23 @@ describe("credit schemas", () => {
     const issues = result.error!.issues.map((i) => [i.path[0], i.message]);
     expect(issues).toContainEqual(["sourceUrl", "httpsUrl"]);
     expect(issues).toContainEqual(["licenseUrl", "httpsUrl"]);
+  });
+
+  it("allows a credit without a source link (own photos), stored as null", () => {
+    const parsed = updateCreditSchema.parse({
+      ...base,
+      path: "/images/content/bali/pura.webp",
+      sourceUrl: "  ",
+    });
+    expect(parsed.sourceUrl).toBeNull();
+  });
+
+  it("only deletes credits of uploaded images", () => {
+    const upload = "/media/tours/2026/05/0f8fad5b-d9cb-469f-a165-70867728950e.webp";
+    expect(deleteCreditSchema.safeParse({ path: upload }).success).toBe(true);
+    expect(deleteCreditSchema.safeParse({ path: "/images/content/bali/pura.webp" }).success).toBe(
+      false,
+    );
   });
 
   it("only creates credits for uploaded images", () => {

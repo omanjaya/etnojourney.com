@@ -11,10 +11,11 @@ const ADMIN_PATHS = [
 ];
 
 test.describe("admin access control", () => {
-  test("signed-out visitors are sent to login", async ({ page }) => {
+  test("signed-out visitors are sent to login, which returns to the page", async ({ page }) => {
     for (const path of ADMIN_PATHS) {
       await page.goto(path);
-      await expect(page, path).toHaveURL(/\/login/);
+      // `next` carries the page so signing in comes back to it.
+      await expect(page, path).toHaveURL(new RegExp(`/login\\?next=${encodeURIComponent(path)}$`));
     }
   });
 
@@ -103,15 +104,25 @@ test.describe("admin operations", () => {
     });
     await page.goto("/admin/bookings?status=pending");
     const row = rowFor(page, booking.code);
+    // The booking is unpaid, so the admin is warned first; accept the warning.
+    let warning = "";
+    page.once("dialog", (dialog) => {
+      warning = dialog.message();
+      return dialog.accept();
+    });
     await row.getByRole("button", { name: "Konfirmasi" }).click();
     await expect.poll(() => bookingStatus(booking.code)).toBe("confirmed");
+    expect(warning).toContain("belum dibayar");
   });
 
   test("unpublishing a tour hides it from the public site", async ({ page, browser }) => {
     const slug = "jejak-desa-ngadas";
     await setTourPublished(slug, true);
     try {
-      await page.goto("/admin/tours");
+      // The list is newest first, so search for the tour; accept the
+      // "upcoming bookings" confirmation in case other specs booked it.
+      page.on("dialog", (dialog) => dialog.accept());
+      await page.goto("/admin/tours?q=Ngadas");
       const toggle = page
         .getByRole("switch", { name: /Tayangkan Tiga Hari di Desa Ngadas/ })
         .filter({ visible: true })
@@ -121,9 +132,18 @@ test.describe("admin operations", () => {
       await expect(toggle).toHaveAttribute("aria-checked", "false");
       await expect.poll(() => tourIsPublished(slug)).toBe(false);
 
-      const visitor = await (await browser.newContext()).newPage();
-      const response = await visitor.goto(`${BASE_URL}/tours/${slug}`);
+      // Explicit empty state: a new context otherwise inherits the admin's storageState.
+      const visitorContext = await browser.newContext({
+        storageState: { cookies: [], origins: [] },
+      });
+      const response = await (await visitorContext.newPage()).goto(`${BASE_URL}/tours/${slug}`);
       expect(response?.status()).toBe(404);
+      await visitorContext.close();
+
+      // The catalogue team can still open the draft as a preview.
+      const preview = await page.goto(`/tours/${slug}`);
+      expect(preview?.status()).toBe(200);
+      await expect(page.getByRole("note").getByText("Pratinjau draf.")).toBeVisible();
     } finally {
       await setTourPublished(slug, true);
     }

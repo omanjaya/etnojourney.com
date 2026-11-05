@@ -1,7 +1,11 @@
+import { getTranslations } from "next-intl/server";
+import { pickLocale } from "@/i18n/pick-locale";
 import { CSV_BOM, csvRow } from "@/lib/csv";
+import { localize } from "@/lib/i18n-text";
 import { auth } from "@/server/auth";
 import { activeSession } from "@/server/auth/guards";
 import { can } from "@/server/auth/permissions";
+import { paymentStatus, type PaymentStatus } from "@/server/db/schema";
 import { departureService } from "@/server/services/departure.service";
 import { isDomainError } from "@/server/services/errors";
 import { parseDepartureParams } from "@/features/admin-departures/schemas";
@@ -9,26 +13,18 @@ import { parseDepartureParams } from "@/features/admin-departures/schemas";
 // Reads the session and the database on every request.
 export const dynamic = "force-dynamic";
 
-const HEADER = [
-  "code",
-  "status",
-  "payment_status",
-  "contact_name",
-  "contact_phone",
-  "participants",
-  "traveller_notes",
-  "internal_notes",
-  "tour",
-  "travel_date",
-];
-
 const noStore = { "Cache-Control": "no-store" };
 
+const isPaymentStatus = (value: unknown): value is PaymentStatus =>
+  (paymentStatus.enumValues as readonly unknown[]).includes(value);
+
 /**
- * GET /api/admin/departures/:tourId/:date/export
- * The departure's manifest as CSV (`departures.manage`: staff and admins).
- * Travelling bookings only (confirmed first, then pending); no prices. Cells
- * are RFC 4180 quoted and formula-neutralized.
+ * GET /api/admin/departures/:tourId/:date/export?locale=
+ * The departure's manifest as CSV (`departures.manage`: staff and admins), with
+ * the same columns and wording as the manifest on the page, in `locale` (else
+ * the user's language). Travelling bookings only (confirmed first, then
+ * pending); no prices and no internal notes. Cells are RFC 4180 quoted and
+ * formula-neutralized.
  */
 export async function GET(
   request: Request,
@@ -54,22 +50,42 @@ export async function GET(
     throw error;
   }
 
+  const locale = pickLocale(new URL(request.url).searchParams.get("locale"), session.user.locale);
+  const [t, bookingStatus, payment] = await Promise.all([
+    getTranslations({ locale, namespace: "adminDepartures" }),
+    getTranslations({ locale, namespace: "common.bookingStatus" }),
+    getTranslations({ locale, namespace: "payment.status" }),
+  ]);
+  const header = [
+    t("manifest.columns.code"),
+    t("manifest.columns.status"),
+    t("manifest.columns.payment"),
+    t("manifest.columns.name"),
+    t("manifest.columns.phone"),
+    t("manifest.columns.participants"),
+    t("manifest.columns.notes"),
+    t("filters.tour"),
+    t("detail.date"),
+  ];
+
   const { tour, rows } = manifest;
+  const tourTitle = localize(tour.title, locale);
   const body =
     CSV_BOM +
-    csvRow(HEADER) +
+    csvRow(header) +
     rows
       .map((row) =>
         csvRow([
           row.code,
-          row.status,
-          row.paymentStatus ?? "",
+          bookingStatus(row.status),
+          isPaymentStatus(row.paymentStatus)
+            ? payment(row.paymentStatus)
+            : t("manifest.noPayment"),
           row.contactName,
           row.contactPhone,
           row.participants,
           row.notes ?? "",
-          row.notesCount,
-          tour.title.id,
+          tourTitle,
           key.date,
         ]),
       )

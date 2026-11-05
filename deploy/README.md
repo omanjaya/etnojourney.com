@@ -43,7 +43,11 @@ etnojourney.com, www.etnojourney.com {
 ```
 
 Cron (`/etc/cron.d/etnojourney`): trip emails daily (`/api/cron/trip-emails`
-with `CRON_SECRET`) and the nightly database backup.
+with `CRON_SECRET`) and the nightly database backup. The daily cleanup of
+unused photo uploads (`/api/cron/media-cleanup`, same secret) is not scheduled
+yet: add it to that file when wanted (it refuses to delete more than half of
+the uploads in one run). Unpaid pending bookings are only released when the
+app runs with `RELEASE_UNPAID_HOLDS=true`.
 
 Useful commands:
 

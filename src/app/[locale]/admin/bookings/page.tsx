@@ -1,5 +1,5 @@
 import { CalendarCheck, SearchX } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { PAGE_SIZE, parsePage } from "@/lib/pagination";
 import { cn } from "@/lib/utils";
@@ -13,6 +13,11 @@ import { BookingsTable } from "@/features/admin/components/bookings-table";
 import { parseAdminBookingQuery } from "@/features/admin/schemas";
 import { requireAdmin } from "@/server/auth/guards";
 
+export async function generateMetadata() {
+  const t = await getTranslations("admin.bookings");
+  return { title: t("title") };
+}
+
 export default async function AdminBookingsPage({
   searchParams,
 }: PageProps<"/[locale]/admin/bookings">) {
@@ -21,19 +26,23 @@ export default async function AdminBookingsPage({
   const raw = await searchParams;
   const query = parseAdminBookingQuery(raw);
 
-  const [result, t, ts] = await Promise.all([
+  const [result, t, ts, locale] = await Promise.all([
     bookingService.listForAdmin(query, parsePage(raw.page), PAGE_SIZE.admin),
     getTranslations("admin.bookings"),
     getTranslations("common.bookingStatus"),
+    getLocale(),
   ]);
+  const now = new Date();
 
   // Plain strings for links and client components (status pills keep the other filters).
   const current: Record<string, string | undefined> = { ...query };
   const filtered = Boolean(query.q || query.from || query.to);
-  const exportParams = new URLSearchParams(
-    Object.entries(current).filter((entry): entry is [string, string] => Boolean(entry[1])),
-  );
-  const exportHref = `/api/admin/bookings/export${exportParams.size ? `?${exportParams}` : ""}`;
+  // Same filters and sort as the list; `locale` picks the language of the CSV headers.
+  const exportParams = new URLSearchParams([
+    ...Object.entries(current).filter((entry): entry is [string, string] => Boolean(entry[1])),
+    ["locale", locale],
+  ]);
+  const exportHref = `/api/admin/bookings/export?${exportParams}`;
 
   const statusFilters = [
     { value: undefined, label: t("all") },
@@ -84,7 +93,7 @@ export default async function AdminBookingsPage({
 
       {result.items.length ? (
         <>
-          <BookingsTable rows={result.items} withActions />
+          <BookingsTable rows={result.items} now={now} withActions />
           <Pagination
             className="mt-8"
             pathname="/admin/bookings"

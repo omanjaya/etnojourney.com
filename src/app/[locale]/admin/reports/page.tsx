@@ -43,7 +43,8 @@ export default async function AdminReportsPage({
   const money = (value: number) => formatCurrency(value, locale);
   const number = (value: number) =>
     new Intl.NumberFormat(locale === "id" ? "id-ID" : "en-US").format(value);
-  const exportHref = `/api/admin/reports/export?${new URLSearchParams(reportQueryOf(period))}`;
+  // `locale` picks the language of the CSV headers.
+  const exportHref = `/api/admin/reports/export?${new URLSearchParams({ ...reportQueryOf(period), locale })}`;
   const range = `${formatDate(period.from, locale)} - ${formatDate(period.to, locale)}`;
 
   const th = "px-4 py-3 font-medium";
@@ -88,7 +89,10 @@ export default async function AdminReportsPage({
           accent="gold"
           label={t("totals.bookings")}
           value={<span data-testid="report-bookings">{number(totals.bookings)}</span>}
-          hint={t("totals.participants", { count: totals.participants })}
+          hint={t("totals.participants", {
+            count: totals.participants,
+            cancelled: totals.cancelled,
+          })}
         />
         <StatCard
           icon={Users}
@@ -254,7 +258,14 @@ export default async function AdminReportsPage({
                         {localize(row.title.title, locale)}
                       </Link>
                     </th>
-                    <td className={`${td} text-right`}>{number(row.bookings)}</td>
+                    <td className={`${td} text-right`}>
+                      {number(row.bookings)}
+                      {row.cancelled > 0 && (
+                        <span className="text-muted block text-xs">
+                          {t("tours.cancelled", { count: row.cancelled })}
+                        </span>
+                      )}
+                    </td>
                     <td className={`${td} text-right`}>{number(row.participants)}</td>
                     <td className={`${td} text-right`}>{money(row.gross)}</td>
                     <td className={`${td} text-right`}>{money(row.refunds)}</td>

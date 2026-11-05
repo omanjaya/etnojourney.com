@@ -1,6 +1,6 @@
 "use client";
 
-import { UserCheck, UserMinus } from "lucide-react";
+import { TriangleAlert, UserCheck, UserMinus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState, useTransition, type FormEvent } from "react";
 import { Alert } from "@/components/ui/alert";
@@ -8,9 +8,20 @@ import { Button } from "@/components/ui/button";
 import { Field, Select } from "@/components/ui/form-controls";
 import { assignGuideAction } from "../actions";
 
-type GuideOption = { id: number; name: string; organization: string | null; isActive: boolean };
+type GuideOption = {
+  id: number;
+  name: string;
+  organization: string | null;
+  isActive: boolean;
+  /** Other departures this guide already works on overlapping days (a label), or null. */
+  busy: string | null;
+};
 
-/** Picks the departure's guide; suggested guides (covering the destination) come first. */
+/**
+ * Picks the departure's guide; suggested guides (covering the destination)
+ * come first, guides already working on overlapping days last and marked.
+ * A clash is a hint, not a block: two short tours can share a day.
+ */
 export function GuideAssignmentForm({
   tourId,
   date,
@@ -49,9 +60,11 @@ export function GuideAssignmentForm({
 
   const label = (guide: GuideOption) => {
     const name = guide.organization ? `${guide.name} (${guide.organization})` : guide.name;
-    return guide.isActive ? name : t("inactiveOption", { name });
+    if (!guide.isActive) return t("inactiveOption", { name });
+    return guide.busy ? t("busyOption", { name, tours: guide.busy }) : name;
   };
   const noGuides = suggested.length === 0 && others.length === 0;
+  const selected = [...suggested, ...others].find((guide) => String(guide.id) === value);
 
   return (
     <form onSubmit={submit} className="flex flex-col gap-3">
@@ -89,6 +102,12 @@ export function GuideAssignmentForm({
           )}
         </Select>
       </Field>
+      {selected?.busy && (
+        <p className="flex items-start gap-2 text-xs text-[#8a6420]" aria-live="polite">
+          <TriangleAlert className="mt-0.5 size-3.5 shrink-0" aria-hidden />
+          {t("busyHint", { name: selected.name, tours: selected.busy })}
+        </p>
+      )}
       <div className="flex flex-wrap items-center gap-2">
         <Button
           type="submit"

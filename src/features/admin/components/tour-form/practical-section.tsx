@@ -1,15 +1,15 @@
 import { useTranslations } from "next-intl";
 import { Field, Select } from "@/components/ui/form-controls";
-import type { LocalizedText } from "@/lib/i18n-text";
 import type { TourDifficulty } from "@/server/db/schema";
 
 // Mirrors the `tour_difficulty` enum; a value import of the schema would pull
 // drizzle-orm into the client bundle. `satisfies` keeps the two in sync.
 const difficulties = ["easy", "moderate", "challenging"] as const satisfies readonly TourDifficulty[];
-import { BilingualField } from "../form-parts/bilingual-field";
 import { Section } from "../form-parts/section";
+import { ListField, type ListValue } from "./list-field";
 
-type ListValue = { value: LocalizedText; onChange: (value: LocalizedText) => void };
+/** What the public tour page lists when "not included" is left empty. */
+const notIncludedDefaults = ["transport", "personal", "tips"] as const;
 
 /**
  * "Before you go" info: difficulty plus three bilingual lists edited one item
@@ -31,15 +31,15 @@ export function PracticalSection({
   err: (key: string) => string | undefined;
 }) {
   const t = useTranslations("admin.form");
+  const tTour = useTranslations("tours.detail.notIncludedDefault");
 
   return (
-    <Section title={t("sections.practical")} hint={t("sections.practicalHint")}>
+    <Section id="tour-practical" title={t("sections.practical")} hint={t("sections.practicalHint")}>
       <Field label={t("fields.difficulty")} htmlFor="difficulty" error={err("difficulty")}>
         <Select
           id="difficulty"
           value={difficulty}
           onChange={(e) => onDifficultyChange(e.target.value as TourDifficulty)}
-          aria-invalid={err("difficulty") ? true : undefined}
           className="md:max-w-xs"
         >
           {difficulties.map((level) => (
@@ -49,32 +49,32 @@ export function PracticalSection({
           ))}
         </Select>
       </Field>
-      <BilingualField
+      <ListField
         name="notIncluded"
         label={t("fields.notIncluded")}
-        value={notIncluded.value}
-        onChange={notIncluded.onChange}
+        list={notIncluded}
         error={err("notIncluded")}
-        multiline
-        rows={4}
+        hint={t("fields.notIncludedHint", {
+          items: notIncludedDefaults.map((key) => tTour(key)).join("; "),
+        })}
+        maxLines={6}
+        minRows={4}
       />
-      <BilingualField
+      <ListField
         name="whatToBring"
         label={t("fields.whatToBring")}
-        value={whatToBring.value}
-        onChange={whatToBring.onChange}
+        list={whatToBring}
         error={err("whatToBring")}
-        multiline
-        rows={4}
+        maxLines={8}
+        minRows={4}
       />
-      <BilingualField
+      <ListField
         name="etiquette"
         label={t("fields.etiquette")}
-        value={etiquette.value}
-        onChange={etiquette.onChange}
+        list={etiquette}
         error={err("etiquette")}
-        multiline
-        rows={4}
+        maxLines={6}
+        minRows={4}
       />
     </Section>
   );

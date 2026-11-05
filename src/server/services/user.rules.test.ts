@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { disableError, isDemotion, roleChangeError, type ManagedUser } from "./user.rules";
+import {
+  disableError,
+  isDemotion,
+  partnerRoleError,
+  roleChangeError,
+  type ManagedUser,
+} from "./user.rules";
 
 const admin = (id: string, disabledAt: Date | null = null): ManagedUser => ({
   id,
@@ -47,6 +53,41 @@ describe("roleChangeError", () => {
   it("treats re-saving admin on an admin as harmless", () => {
     expect(
       roleChangeError({ actorId: "a2", target: admin("a1"), nextRole: "admin", activeAdmins: 1 }),
+    ).toBeNull();
+  });
+});
+
+describe("partnerRoleError", () => {
+  it("keeps a guide's portal account a partner", () => {
+    for (const nextRole of ["user", "staff", "admin"] as const) {
+      expect(
+        partnerRoleError({ linkedToGuide: true, currentRole: "partner", nextRole }),
+        nextRole,
+      ).toBe("guideLinkedRoleChange");
+    }
+  });
+
+  it("lets a linked account be set back to partner (restores portal access)", () => {
+    expect(
+      partnerRoleError({ linkedToGuide: true, currentRole: "user", nextRole: "partner" }),
+    ).toBeNull();
+    expect(
+      partnerRoleError({ linkedToGuide: true, currentRole: "partner", nextRole: "partner" }),
+    ).toBeNull();
+  });
+
+  it("refuses the partner role for an account no guide uses", () => {
+    expect(
+      partnerRoleError({ linkedToGuide: false, currentRole: "user", nextRole: "partner" }),
+    ).toBe("partnerNeedsGuide");
+  });
+
+  it("leaves other role changes alone", () => {
+    expect(
+      partnerRoleError({ linkedToGuide: false, currentRole: "user", nextRole: "staff" }),
+    ).toBeNull();
+    expect(
+      partnerRoleError({ linkedToGuide: false, currentRole: "partner", nextRole: "user" }),
     ).toBeNull();
   });
 });

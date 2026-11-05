@@ -5,6 +5,7 @@ import { paymentMethodLabel } from "@/lib/payment-method";
 import type { Payment } from "@/server/db/schema";
 import { Badge } from "@/components/ui/badge";
 import { PaymentStatusBadge } from "./payment-status-badge";
+import { RefundAmountNote } from "./refund-amount-note";
 import { TableScroll } from "@/components/ui/table-scroll";
 
 export type AdminPaymentRow = {
@@ -21,7 +22,10 @@ const dateTime: Intl.DateTimeFormatOptions = {
   minute: "2-digit",
 };
 
-/** Admin list of payment attempts: stacked cards on mobile, a table from `md`. */
+/**
+ * Admin list of payment attempts: stacked cards on mobile, a table from `md`.
+ * The "created" column only shows on wide screens so the table fits a laptop.
+ */
 export function PaymentsTable({ rows }: { rows: AdminPaymentRow[] }) {
   const t = useTranslations("adminPayments.list");
   const tm = useTranslations("payment.methods");
@@ -31,6 +35,7 @@ export function PaymentsTable({ rows }: { rows: AdminPaymentRow[] }) {
     <div className="flex flex-col items-start gap-1">
       <PaymentStatusBadge status={payment.status} />
       {payment.refundRequired && <Badge tone="terracotta">{t("refundRequired")}</Badge>}
+      <RefundAmountNote payment={payment} />
       {payment.refundedAt && (
         <span className="text-muted text-xs">
           {t("refundedOn", { date: formatDate(payment.refundedAt, locale, dateTime) })}
@@ -42,7 +47,7 @@ export function PaymentsTable({ rows }: { rows: AdminPaymentRow[] }) {
   const bookingLink = (code: string) => (
     <Link
       href={`/admin/bookings/${code}`}
-      className="hover:text-terracotta font-mono text-xs font-semibold tracking-wide underline-offset-4 hover:underline"
+      className="hover:text-terracotta font-mono text-xs font-semibold tracking-wide whitespace-nowrap underline-offset-4 hover:underline"
     >
       {code}
     </Link>
@@ -83,28 +88,28 @@ export function PaymentsTable({ rows }: { rows: AdminPaymentRow[] }) {
       </ul>
 
       <TableScroll label={t("tableLabel")} className="hidden md:block">
-        <table className="w-full min-w-[56rem] text-left text-sm">
+        <table className="w-full text-left text-sm">
           <thead className="border-line bg-sand-50 text-muted border-b text-xs tracking-wide uppercase">
             <tr>
-              <th scope="col" className="short:py-3 px-5 py-4 font-medium">
+              <th scope="col" className="short:py-3 px-3 py-4 2xl:px-5 font-medium">
                 {t("columns.booking")}
               </th>
-              <th scope="col" className="short:py-3 px-5 py-4 font-medium">
+              <th scope="col" className="short:py-3 px-3 py-4 2xl:px-5 font-medium">
                 {t("columns.traveller")}
               </th>
-              <th scope="col" className="short:py-3 px-5 py-4 font-medium">
+              <th scope="col" className="short:py-3 px-3 py-4 2xl:px-5 font-medium">
                 {t("columns.method")}
               </th>
-              <th scope="col" className="short:py-3 px-5 py-4 text-right font-medium">
+              <th scope="col" className="short:py-3 px-3 py-4 2xl:px-5 text-right font-medium">
                 {t("columns.amount")}
               </th>
-              <th scope="col" className="short:py-3 px-5 py-4 font-medium">
+              <th scope="col" className="short:py-3 px-3 py-4 2xl:px-5 font-medium">
                 {t("columns.status")}
               </th>
-              <th scope="col" className="short:py-3 px-5 py-4 font-medium">
+              <th scope="col" className="short:py-3 hidden px-3 py-4 font-medium 2xl:table-cell 2xl:px-5">
                 {t("columns.created")}
               </th>
-              <th scope="col" className="short:py-3 px-5 py-4 font-medium">
+              <th scope="col" className="short:py-3 px-3 py-4 2xl:px-5 font-medium">
                 {t("columns.paidAt")}
               </th>
             </tr>
@@ -112,25 +117,25 @@ export function PaymentsTable({ rows }: { rows: AdminPaymentRow[] }) {
           <tbody className="admin-stagger divide-line divide-y">
             {rows.map(({ payment, booking, customer }) => (
               <tr key={payment.id} className="hover:bg-sand-50/60 align-top transition-colors">
-                <td className="short:py-3 px-5 py-4">
+                <td className="short:py-3 px-3 py-4 2xl:px-5">
                   {bookingLink(booking.code)}
-                  <p className="text-muted mt-1 font-mono text-xs">{payment.orderId}</p>
+                  <p className="text-muted mt-1 font-mono text-xs break-all">{payment.orderId}</p>
                 </td>
-                <td className="short:py-3 px-5 py-4">
+                <td className="short:py-3 px-3 py-4 2xl:px-5">
                   <p className="font-medium">{customer.name}</p>
                   <p className="text-muted text-xs">{customer.email}</p>
                 </td>
-                <td className="short:py-3 px-5 py-4 whitespace-nowrap">
+                <td className="short:py-3 px-3 py-4 2xl:px-5 whitespace-nowrap">
                   {paymentMethodLabel(payment.method, tm)}
                 </td>
-                <td className="short:py-3 px-5 py-4 text-right font-medium whitespace-nowrap tabular-nums">
+                <td className="short:py-3 px-3 py-4 2xl:px-5 text-right font-medium whitespace-nowrap tabular-nums">
                   {formatCurrency(payment.amount, locale)}
                 </td>
-                <td className="short:py-3 px-5 py-4">{statusCell(payment)}</td>
-                <td className="text-muted short:py-3 px-5 py-4 whitespace-nowrap">
+                <td className="short:py-3 px-3 py-4 2xl:px-5">{statusCell(payment)}</td>
+                <td className="text-muted short:py-3 hidden px-3 py-4 whitespace-nowrap 2xl:table-cell 2xl:px-5">
                   {formatDate(payment.createdAt, locale, dateTime)}
                 </td>
-                <td className="text-muted short:py-3 px-5 py-4 whitespace-nowrap">
+                <td className="text-muted short:py-3 px-3 py-4 2xl:px-5 whitespace-nowrap">
                   {payment.paidAt ? formatDate(payment.paidAt, locale, dateTime) : "-"}
                 </td>
               </tr>

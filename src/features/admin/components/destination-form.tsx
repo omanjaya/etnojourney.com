@@ -1,18 +1,23 @@
 "use client";
 
-import { Save } from "lucide-react";
+import { CircleCheck, Save } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { Alert } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { Field, Input } from "@/components/ui/form-controls";
+import { Field, fieldDescribedBy, Input } from "@/components/ui/form-controls";
+import { CreditsHint } from "@/features/media/components/credits-hint";
 import { ImageUploader } from "@/features/media/components/image-uploader";
+import { useUploadTracker } from "@/features/media/components/use-upload-tracker";
 import type { LocalizedText } from "@/lib/i18n-text";
+import { cn } from "@/lib/utils";
 import { createDestinationAction, updateDestinationAction } from "../actions";
 import type { DestinationFormValues } from "../schemas";
 import { BilingualField } from "./form-parts/bilingual-field";
 import { Section } from "./form-parts/section";
 import { slugify } from "./form-parts/slug";
+import { useFocusError } from "./form-parts/use-focus-error";
+import { useLeaveGuard } from "./form-parts/use-leave-guard";
 
 export type DestinationFormDefaults = {
   slug: string;
@@ -35,21 +40,47 @@ export const emptyDestinationDefaults: DestinationFormDefaults = {
   gettingThere: { id: "", en: "" },
 };
 
+/**
+ * Create/edit form for a destination. Edit mode saves in place and sends back
+ * the `version` it was opened with (a newer save by someone else is refused,
+ * not overwritten). Leaving with unsaved changes asks first; a failed save
+ * focuses the first field with an error.
+ */
 export function DestinationForm({
   mode,
   destinationId,
   defaults,
+  version,
+  placeholderImages,
 }: {
   mode: "create" | "edit";
   destinationId?: number;
   defaults: DestinationFormDefaults;
+  /** Edit mode: the edit version of the destination as loaded. */
+  version?: string;
+  /** The hero, when it is credited as a temporary AI placeholder. */
+  placeholderImages?: string[];
 }) {
   const t = useTranslations("admin.destinationForm");
+  const tf = useTranslations("admin.form");
+  const tm = useTranslations("media.form");
+  const formRef = useRef<HTMLFormElement>(null);
   const [pending, startTransition] = useTransition();
+  // A save sent while the photo is still uploading would keep the old photo.
+  const uploads = useUploadTracker();
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[] | undefined>>({});
+  const [failures, setFailures] = useState(0);
+  const [savedVersion, setSavedVersion] = useState(version ?? "");
+  const [saved, setSaved] = useState<"saved" | "unchanged" | null>(null);
   const [values, setValues] = useState(defaults);
   const [slugTouched, setSlugTouched] = useState(mode === "edit");
+
+  const snapshot = JSON.stringify(values);
+  const [savedSnapshot, setSavedSnapshot] = useState(snapshot);
+  const dirty = snapshot !== savedSnapshot;
+  useLeaveGuard(dirty && !pending, tf("unsavedConfirm"));
+  useFocusError(formRef, failures);
 
   const set = <K extends keyof DestinationFormDefaults>(
     key: K,
@@ -62,28 +93,41 @@ export function DestinationForm({
   const setName = (name: string) =>
     setValues((prev) => ({ ...prev, name, slug: slugTouched ? prev.slug : slugify(name) }));
 
+  const showFailure = (result: {
+    error: string;
+    fieldErrors?: Record<string, string[] | undefined>;
+  }) => {
+    setError(result.error);
+    setFieldErrors(result.fieldErrors ?? {});
+    setFailures((n) => n + 1);
+  };
+
   const submit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (uploads.uploading) return;
     setError(null);
     setFieldErrors({});
+    setSaved(null);
     const payload: DestinationFormValues = values;
+    const submitted = snapshot;
 
     startTransition(async () => {
-      const result =
-        mode === "edit" && destinationId
-          ? await updateDestinationAction(destinationId, payload)
-          : await createDestinationAction(payload);
-      // Success redirects on the server, so only failures return here.
-      if (!result.ok) {
-        setError(result.error);
-        setFieldErrors(result.fieldErrors ?? {});
-        window.scrollTo({ top: 0, behavior: "smooth" });
+      if (mode === "edit" && destinationId) {
+        const result = await updateDestinationAction(destinationId, payload, savedVersion);
+        if (!result.ok) return showFailure(result);
+        setSavedVersion(result.data.version);
+        setSavedSnapshot(submitted);
+        setSaved(result.data.changed ? "saved" : "unchanged");
+        return;
       }
+      // Creating redirects to the new destination's edit page, so only failures return here.
+      const result = await createDestinationAction(payload);
+      if (!result.ok) showFailure(result);
     });
   };
 
   return (
-    <form method="post" onSubmit={submit} noValidate className="flex flex-col">
+    <form ref={formRef} method="post" onSubmit={submit} noValidate className="flex flex-col">
       {error && <Alert className="mb-8">{error}</Alert>}
 
       <div className="border-line rounded-(--radius-card) border bg-white p-6 md:p-10">
@@ -112,7 +156,7 @@ export function DestinationForm({
             label={t("fields.slug")}
             htmlFor="slug"
             error={err("slug")}
-            hint={t("fields.slugHint")}
+            hint={mode === "edit" ? t("fields.slugHintEdit") : t("fields.slugHint")}
           >
             <Input
               id="slug"
@@ -165,13 +209,39 @@ export function DestinationForm({
               value={values.heroImage}
               onChange={(url) => set("heroImage", url)}
               invalid={Boolean(err("heroImage"))}
+              describedBy={fieldDescribedBy("heroImage", { error: err("heroImage") })}
+              placeholderImages={placeholderImages}
+              onPendingChange={uploads.track("heroImage")}
             />
           </Field>
+          <CreditsHint />
         </Section>
       </div>
 
-      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex justify-end border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
-        <Button type="submit" size="lg" loading={pending}>
+      <div className="border-line bg-sand-50/90 sticky bottom-0 z-10 -mx-4 mt-8 flex items-center justify-end gap-4 border-t px-4 py-4 backdrop-blur sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+        <div className="min-w-0 flex-1 text-xs sm:text-sm">
+          {dirty && !uploads.uploading && <p className="text-muted">{tf("unsaved")}</p>}
+          {/* One live region: upload progress wins over the saved state. */}
+          <p
+            role="status"
+            className={cn(
+              uploads.uploading
+                ? "text-muted"
+                : "text-leaf inline-flex items-center gap-2 font-medium",
+            )}
+          >
+            {uploads.uploading
+              ? tm("waitForUploads")
+              : !dirty &&
+                saved && (
+                  <>
+                    <CircleCheck className="size-4 shrink-0" aria-hidden />
+                    {saved === "saved" ? tf("saved") : tf("unchanged")}
+                  </>
+                )}
+          </p>
+        </div>
+        <Button type="submit" size="lg" loading={pending} disabled={uploads.uploading}>
           {!pending && <Save aria-hidden />}
           {mode === "edit" ? t("save") : t("create")}
         </Button>

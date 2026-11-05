@@ -12,6 +12,8 @@ export type PartnerDeparture = {
   note: string | null;
   bookingCount: number;
   participantCount: number;
+  /** Of `participantCount`, guests whose booking is not confirmed yet. */
+  pendingParticipants: number;
 };
 
 /** One assigned departure, linking to its manifest. */
@@ -44,6 +46,7 @@ export async function DepartureCard({ departure }: { departure: PartnerDeparture
               {t("travellers", {
                 participants: departure.participantCount,
                 bookings: departure.bookingCount,
+                pending: departure.pendingParticipants,
               })}
             </span>
           </li>

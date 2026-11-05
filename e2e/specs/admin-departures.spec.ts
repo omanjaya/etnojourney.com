@@ -135,8 +135,8 @@ test.describe("admin departures", () => {
     expect(response.status()).toBe(200);
     expect(response.headers()["content-type"]).toContain("text/csv");
     const body = await response.text();
-    expect(body).toContain("code,status,payment_status,contact_name,contact_phone,participants");
-    expect(body).toContain(`${booking.code},confirmed,`);
+    expect(body).toContain("Kode,Status,Pembayaran,Nama kontak,Telepon,Peserta,Catatan tamu");
+    expect(body).toContain(`${booking.code},Terkonfirmasi,`);
     expect(body).not.toContain("total");
   });
 

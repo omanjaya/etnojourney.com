@@ -5,11 +5,11 @@
       "description": "EtnoJourney designs small cultural journeys led by village hosts, with a fair share for communities and respect for tradition."
     },
     "eyebrow": "About us",
-    "title": "Journeys led by the people who host them",
+    "title": "Journeys guided by your dedicated host, offering authentic insights and meaningful encounters along the path.",
     "description": "We believe the best way to understand a culture is through the people who live it every day, not through a stage set up for tourists.",
     "mission": {
       "eyebrow": "Mission",
-      "title": "Opening doors, not putting traditions on display",
+      "title": "Opening Doors to Exploration Beyond the Showcase.",
       "body": [
         "EtnoJourney connects travellers with customary and village communities across Indonesia. Every journey is designed together with local hosts: they decide what can be shared, when, and how.",
         "We deliberately keep journeys small and slow. The goal is not to collect as many places as possible, but to make time to sit, listen and learn from your hosts."
@@ -178,7 +178,7 @@
       ]
     },
     "cta": {
-      "title": "Ready to be a good guest?",
+      "title": "Ready to be a responsible traveler?",
       "body": "See the journeys that are open now and choose the one that suits your pace.",
       "button": "Explore tours"
     }

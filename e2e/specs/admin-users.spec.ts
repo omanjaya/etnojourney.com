@@ -40,9 +40,13 @@ test.describe("admin users", () => {
     await expect(travellerPage).toHaveURL(/\/admin\/bookings$/);
     await expect(travellerPage.locator("h1")).toBeVisible();
 
+    // Admin-only pages send staff back to the overview, which says why.
     for (const path of ["/admin/users", "/admin/activity"]) {
       await travellerPage.goto(path);
-      await expect(travellerPage, path).toHaveURL(`${BASE_URL}/`);
+      await expect(travellerPage, path).toHaveURL(`${BASE_URL}/admin?denied=1`);
+      await expect(
+        travellerPage.getByRole("alert").filter({ hasText: "hanya bisa dibuka oleh admin" }),
+      ).toBeVisible();
     }
   });
 

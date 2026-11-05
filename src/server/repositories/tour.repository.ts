@@ -1,10 +1,25 @@
 import "server-only";
-import { and, asc, count, desc, eq, gte, ilike, lte, or, sql, type SQL } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  gte,
+  ilike,
+  inArray,
+  lte,
+  or,
+  sql,
+  type SQL,
+} from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
 import { likePattern } from "@/server/db/like";
 import {
+  bookings,
   destinations,
   itineraryDays,
+  reviews,
   tours,
   type NewTour,
   type Tour,
@@ -15,7 +30,8 @@ import { ISLAND_SQL_PATTERNS, regionsInQuery, type FilterableIsland } from "@/li
 
 export type ItineraryInput = { title: LocalizedText; description: LocalizedText }[];
 
-export type TourSort = "popular" | "priceAsc" | "priceDesc" | "duration" | "longest";
+/** `newest` is for the admin list (stable while publish/featured toggles change). */
+export type TourSort = "popular" | "priceAsc" | "priceDesc" | "duration" | "longest" | "newest";
 
 export type TourFilters = {
   query?: string;
@@ -27,6 +43,8 @@ export type TourFilters = {
   maxDays?: number;
   sort?: TourSort;
   includeUnpublished?: boolean;
+  /** Admin list: only unpublished tours. */
+  draftsOnly?: boolean;
 };
 
 const orderings: Record<TourSort, SQL[]> = {
@@ -35,6 +53,7 @@ const orderings: Record<TourSort, SQL[]> = {
   priceDesc: [desc(tours.pricePerPerson)],
   duration: [asc(tours.durationDays), asc(sql`coalesce(${tours.durationHours}, 24)`)],
   longest: [desc(tours.durationDays), desc(tours.rating)],
+  newest: [desc(tours.createdAt), desc(tours.id)],
 };
 
 /**
@@ -53,6 +72,7 @@ export function islandCondition(island: FilterableIsland): SQL {
 function searchConditions(filters: TourFilters): SQL | undefined {
   const conditions: (SQL | undefined)[] = [
     filters.includeUnpublished ? undefined : eq(tours.isPublished, true),
+    filters.draftsOnly ? eq(tours.isPublished, false) : undefined,
     filters.category ? eq(tours.category, filters.category) : undefined,
     filters.island ? islandCondition(filters.island) : undefined,
     filters.destinationSlug ? eq(destinations.slug, filters.destinationSlug) : undefined,
@@ -210,6 +230,57 @@ export const tourRepository = {
       .then((rows) => rows.length > 0);
   },
 
+  /**
+   * The full tour row and its itinerary as the edit form uses them. The edit
+   * page and the save both read through here, so the edit version computed
+   * from either is the same for the same data.
+   */
+  findEditable(id: number) {
+    return findEditable(db, id, false);
+  },
+
+  /** `findEditable`, with the tour row locked until the transaction ends (saves, deletes). */
+  findForUpdate(tx: DbExecutor, id: number) {
+    return findEditable(tx, id, true);
+  },
+
+  /** Bookings (any status) and reviews (shown or hidden) that reference the tour. */
+  async countUsage(tx: DbExecutor, id: number): Promise<{ bookings: number; reviews: number }> {
+    const [usage] = await tx
+      .select({
+        bookings: sql<number>`(select count(*) from ${bookings} where ${bookings.tourId} = ${id})::int`,
+        reviews: sql<number>`(select count(*) from ${reviews} where ${reviews.tourId} = ${id})::int`,
+      })
+      .from(tours)
+      .where(eq(tours.id, id));
+    return { bookings: usage?.bookings ?? 0, reviews: usage?.reviews ?? 0 };
+  },
+
+  /**
+   * Pending or confirmed bookings travelling on or after `today` (YYYY-MM-DD,
+   * Asia/Jakarta), per tour. Tours without any are left out of the map.
+   */
+  async countUpcomingBookings(tourIds: number[], today: string): Promise<Map<number, number>> {
+    if (tourIds.length === 0) return new Map();
+    const rows = await db
+      .select({ tourId: bookings.tourId, total: count() })
+      .from(bookings)
+      .where(
+        and(
+          inArray(bookings.tourId, tourIds),
+          inArray(bookings.status, ["pending", "confirmed"]),
+          gte(bookings.travelDate, today),
+        ),
+      )
+      .groupBy(bookings.tourId);
+    return new Map(rows.map((row) => [row.tourId, row.total]));
+  },
+
+  /** Deletes the tour; itinerary, closures, departures and wishlist rows cascade. */
+  delete(tx: DbExecutor, id: number) {
+    return tx.delete(tours).where(eq(tours.id, id));
+  },
+
   /** Locks the tour row so concurrent bookings for it are serialised. */
   lockById(tx: DbExecutor, id: number): Promise<{ id: number } | undefined> {
     return tx
@@ -257,6 +328,18 @@ export const tourRepository = {
     return db.$count(tours, eq(tours.isPublished, true));
   },
 };
+
+async function findEditable(executor: DbExecutor, id: number, lock: boolean) {
+  const query = executor.select().from(tours).where(eq(tours.id, id));
+  const [tour] = await (lock ? query.for("update") : query);
+  if (!tour) return undefined;
+  const itinerary = await executor
+    .select({ title: itineraryDays.title, description: itineraryDays.description })
+    .from(itineraryDays)
+    .where(eq(itineraryDays.tourId, id))
+    .orderBy(asc(itineraryDays.day));
+  return { ...tour, itinerary };
+}
 
 async function insertItinerary(tx: DbExecutor, tourId: number, itinerary: ItineraryInput) {
   if (itinerary.length === 0) return;
