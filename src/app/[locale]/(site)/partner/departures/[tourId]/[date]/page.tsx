@@ -11,6 +11,7 @@ import { isIsoDate } from "@/server/services/guide.rules";
 import { partnerService } from "@/server/services/partner.service";
 import { Container } from "@/components/layout/container";
 import { PageHeader } from "@/components/layout/page-header";
+import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
 
 function Fact({
@@ -36,7 +37,8 @@ function Fact({
 /**
  * Partner-safe manifest: only departures assigned to the signed-in partner's
  * guide resolve (anything else is a 404), and only booking code, contact name
- * and phone, party size and traveller notes are shown.
+ * and phone, party size and traveller notes are shown. Guests whose booking
+ * is not confirmed yet are listed too (as on the emailed manifest), marked.
  */
 export default async function PartnerDeparturePage({
   params,
@@ -92,6 +94,7 @@ export default async function PartnerDeparturePage({
             {t("travellersValue", {
               participants: departure.participantCount,
               bookings: departure.bookingCount,
+              pending: departure.pendingParticipants,
             })}
           </Fact>
         </dl>
@@ -134,6 +137,11 @@ export default async function PartnerDeparturePage({
                         {t("columns.participants")}: {row.participants}
                       </span>
                     </div>
+                    {row.status === "pending" && (
+                      <Badge tone="gold" className="mt-2">
+                        {t("pending")}
+                      </Badge>
+                    )}
                     <p className="mt-2 font-medium">{row.contactName}</p>
                     <a
                       href={`tel:${row.contactPhone.replace(/[^\d+]/g, "")}`}
@@ -176,6 +184,11 @@ export default async function PartnerDeparturePage({
                         </td>
                         <td className="px-4 py-3">
                           <p className="font-medium">{row.contactName}</p>
+                          {row.status === "pending" && (
+                            <Badge tone="gold" className="my-1">
+                              {t("pending")}
+                            </Badge>
+                          )}
                           <a
                             href={`tel:${row.contactPhone.replace(/[^\d+]/g, "")}`}
                             className="text-ink-soft hover:text-terracotta inline-flex min-h-8 items-center gap-1.5 underline-offset-4 hover:underline"

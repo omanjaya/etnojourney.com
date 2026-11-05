@@ -4,6 +4,7 @@ import {
   ArrowLeft,
   CalendarDays,
   Download,
+  Lock,
   Mail,
   MapPin,
   MessageCircle,
@@ -30,8 +31,13 @@ import { PrintManifestButton } from "@/features/admin-departures/components/prin
 import { SendManifestButton } from "@/features/admin-departures/components/send-manifest-button";
 import { parseDepartureParams } from "@/features/admin-departures/schemas";
 import { requireAdmin } from "@/server/auth/guards";
+import { can } from "@/server/auth/permissions";
 import { guideWhatsAppNumber } from "@/server/services/departure.rules";
-import { departureService, type DepartureKey } from "@/server/services/departure.service";
+import {
+  departureService,
+  type BusyDeparture,
+  type DepartureKey,
+} from "@/server/services/departure.service";
 import { isDomainError } from "@/server/services/errors";
 
 /**
@@ -84,7 +90,7 @@ export default async function AdminDepartureDetailPage({
   params,
 }: PageProps<"/[locale]/admin/departures/[tourId]/[date]">) {
   // Pages guard themselves: Next.js can render a page without its layout.
-  await requireAdmin("departures.manage");
+  const viewer = await requireAdmin("departures.manage");
   const { key, detail } = await loadDeparture(await params);
   const [locale, t, tId, tc, tActions] = await Promise.all([
     getLocale(),
@@ -104,6 +110,24 @@ export default async function AdminDepartureDetailPage({
     year: "numeric",
   });
   const activeGuide = guide?.isActive ? guide : null;
+  const { closure } = detail;
+
+  // Other departures a guide already works on overlapping days, as "Tour (12 Dec)".
+  const busyLabel = (busy: BusyDeparture[]) =>
+    busy.length
+      ? busy
+          .map((other) =>
+            t("guide.busyItem", {
+              tour: localize(other.tourTitle, locale),
+              date: formatDate(other.date, locale, { day: "numeric", month: "short" }),
+            }),
+          )
+          .join(", ")
+      : null;
+  const toOption = ({ busyWith, ...option }: (typeof detail.guideOptions.suggested)[number]) => ({
+    ...option,
+    busy: busyLabel(busyWith),
+  });
 
   const sendBlocker = !activeGuide
     ? t("send.needsGuide")
@@ -184,6 +208,41 @@ export default async function AdminDepartureDetailPage({
           )
         }
       />
+
+      {closure && (
+        <div
+          role="status"
+          className="bg-gold-light short:mb-4 mb-6 flex items-start gap-3 rounded-xl px-4 py-3 text-sm text-[#6f4f17] print:hidden"
+        >
+          <Lock className="mt-0.5 size-4 shrink-0" aria-hidden />
+          <div className="min-w-0">
+            <p className="font-medium">
+              {t("detail.closed.title", {
+                date: formatDate(closure.date, locale, {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                }),
+              })}
+            </p>
+            <p className="mt-0.5">{t("detail.closed.body")}</p>
+            {closure.reason && (
+              <p className="mt-0.5">{t("detail.closed.reason", { reason: closure.reason })}</p>
+            )}
+            {can(viewer.role, "availability.manage") && (
+              <Link
+                href={{
+                  pathname: "/admin/availability",
+                  query: { tour: String(key.tourId), month: closure.date.slice(0, 7) },
+                }}
+                className="mt-1 inline-flex font-medium underline underline-offset-4"
+              >
+                {t("detail.closed.link")}
+              </Link>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="short:gap-4 grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="short:gap-4 flex min-w-0 flex-col gap-6">
@@ -303,11 +362,11 @@ export default async function AdminDepartureDetailPage({
                       <span className="text-muted">{t("guide.noEmail")}</span>
                     )}
                   </div>
-                  {assignment?.updatedAt && detail.assignedByName && (
+                  {detail.assignedBy?.name && (
                     <p className="text-muted mt-2 text-xs">
                       {t("guide.assignedBy", {
-                        name: detail.assignedByName,
-                        date: formatDate(assignment.updatedAt, locale, stamp),
+                        name: detail.assignedBy.name,
+                        date: formatDate(detail.assignedBy.at, locale, stamp),
                       })}
                     </p>
                   )}
@@ -318,8 +377,8 @@ export default async function AdminDepartureDetailPage({
                 tourId={key.tourId}
                 date={key.date}
                 currentGuideId={guide?.id ?? null}
-                suggested={detail.guideOptions.suggested}
-                others={detail.guideOptions.others}
+                suggested={detail.guideOptions.suggested.map(toOption)}
+                others={detail.guideOptions.others.map(toOption)}
               />
 
               <div className="border-line flex flex-col gap-3 border-t pt-5">
@@ -366,12 +425,14 @@ export default async function AdminDepartureDetailPage({
               <p className="text-muted text-sm">{t("history.empty")}</p>
             ) : (
               <ol className="flex flex-col gap-3 text-sm">
-                {detail.history.map(({ log, actorName }) => {
+                {detail.history.map(({ log, actorName, guideName }) => {
                   const verb = log.action.split(".")[1] as
                     "assigned" | "unassigned" | "noted" | "notified";
+                  const about = historyDetail(t, verb, log.details, guideName);
                   return (
                     <li key={log.id} className="border-line border-l-2 pl-3">
                       <p className="font-medium">{tActions(`departure.${verb}`)}</p>
+                      {about && <p className="text-ink-soft text-xs break-words">{about}</p>}
                       <p className="text-muted text-xs">
                         {actorName ?? t("history.system")} &middot;{" "}
                         <time dateTime={log.createdAt.toISOString()}>
@@ -388,6 +449,36 @@ export default async function AdminDepartureDetailPage({
       </div>
     </div>
   );
+}
+
+/**
+ * One line on what a history entry did: which guide was assigned or released,
+ * where the manifest went. Details come from the database, so types are checked.
+ */
+function historyDetail(
+  t: Awaited<ReturnType<typeof getTranslations<"adminDepartures">>>,
+  verb: "assigned" | "unassigned" | "noted" | "notified",
+  details: Record<string, unknown> | null,
+  guideName: string | null,
+): string | null {
+  switch (verb) {
+    case "assigned":
+      return guideName ? t("history.guide", { name: guideName }) : null;
+    case "unassigned":
+      return guideName ? t("history.previousGuide", { name: guideName }) : null;
+    case "noted":
+      return details?.cleared === true ? t("history.noteCleared") : null;
+    case "notified": {
+      const email = typeof details?.email === "string" ? details.email : null;
+      const participants = typeof details?.participants === "number" ? details.participants : 0;
+      if (!email) return guideName ? t("history.guide", { name: guideName }) : null;
+      return guideName
+        ? t("history.sentToGuide", { name: guideName, email, participants })
+        : t("history.sentTo", { email, participants });
+    }
+    default:
+      return null;
+  }
 }
 
 /** Short WhatsApp summary for the guide; the full manifest goes by email. */

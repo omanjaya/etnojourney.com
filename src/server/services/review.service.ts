@@ -9,8 +9,8 @@ import { paginate } from "@/lib/pagination";
 import { reviewRepository, type AdminReviewFilters } from "@/server/repositories/review.repository";
 import { DomainError } from "./errors";
 import {
-  applyReviewDelta,
   arrangeReviewPhotos,
+  nextTourAggregate,
   REVIEW_PHOTO_MAX_EDGE,
   REVIEW_PHOTO_QUALITY,
   reviewEligibility,
@@ -113,7 +113,12 @@ export const reviewService = {
 
       await reviewRepository.insertPhotos(tx, review.id, arranged.photos);
 
-      const next = applyReviewDelta(aggregate, input.rating, 1);
+      const next = nextTourAggregate({
+        current: aggregate,
+        rating: input.rating,
+        direction: 1,
+        published: await reviewRepository.publishedRatingStats(tx, booking.tourId),
+      });
       await reviewRepository.updateTourAggregate(tx, booking.tourId, next.rating, next.count);
       return { review, tourSlug: aggregate.slug };
     });
@@ -223,20 +228,41 @@ export const reviewService = {
     return { review, hadReply: before.reply !== null };
   },
 
-  /** Hides or restores a review and adjusts the tour aggregate accordingly. */
-  async setPublished(reviewId: number, isPublished: boolean) {
+  /**
+   * Hides or restores a review under a row lock, adjusts the tour aggregate
+   * and audits the change in the same transaction. `changed` is false (and
+   * nothing is logged) when the review already was in that state, e.g. a
+   * click from a stale tab.
+   */
+  async setPublished(reviewId: number, isPublished: boolean, actorId: string) {
     return db.transaction(async (tx) => {
-      const review = await reviewRepository.findById(tx, reviewId);
+      const review = await reviewRepository.lockById(tx, reviewId);
       if (!review) throw new DomainError("notFound");
-      if (review.isPublished === isPublished) return { review, tourSlug: null };
+      if (review.isPublished === isPublished) return { review, changed: false };
 
       const aggregate = await reviewRepository.lockTourAggregate(tx, review.tourId);
       if (!aggregate) throw new DomainError("notFound");
 
       const updated = await reviewRepository.setPublished(tx, reviewId, isPublished);
-      const next = applyReviewDelta(aggregate, review.rating, isPublished ? 1 : -1);
+      const direction = isPublished ? 1 : -1;
+      const next = nextTourAggregate({
+        current: aggregate,
+        rating: review.rating,
+        direction,
+        published: await reviewRepository.publishedRatingStats(tx, review.tourId),
+      });
       await reviewRepository.updateTourAggregate(tx, review.tourId, next.rating, next.count);
-      return { review: updated, tourSlug: aggregate.slug };
+      await auditService.record(
+        {
+          actorId,
+          action: isPublished ? "review.published" : "review.hidden",
+          entityType: "review",
+          entityId: reviewId,
+          details: { tour: aggregate.slug, author: review.authorName, rating: review.rating },
+        },
+        tx,
+      );
+      return { review: updated, changed: true };
     });
   },
 };

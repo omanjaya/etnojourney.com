@@ -10,10 +10,11 @@ import {
   guides,
   payments,
   tours,
-  user,
+  type BookingStatus,
   type DepartureAssignment,
 } from "@/server/db/schema";
-import { ACTIVE_STATUSES } from "@/server/services/booking.rules";
+import type { LocalizedText } from "@/lib/i18n-text";
+import { DEPARTURE_STATUSES } from "@/server/services/departure.rules";
 
 export type DepartureFilters = {
   /** Travel date range, inclusive, YYYY-MM-DD. */
@@ -27,7 +28,8 @@ export type DepartureFilters = {
 /** Hard cap on agenda rows; a 120-day range across every tour stays well below it. */
 const AGENDA_LIMIT = 1000;
 
-const activeBooking = inArray(bookings.status, [...ACTIVE_STATUSES]);
+/** Cancelled bookings never make a departure; completed ones keep past trips listed. */
+const departureBooking = inArray(bookings.status, [...DEPARTURE_STATUSES]);
 
 /** Joins a booking row to its departure's assignment (if any). */
 const assignmentJoin = and(
@@ -43,7 +45,7 @@ const withoutGuideCondition = or(
 
 function agendaConditions(filters: DepartureFilters): SQL | undefined {
   return and(
-    activeBooking,
+    departureBooking,
     gte(bookings.travelDate, filters.from),
     lte(bookings.travelDate, filters.to),
     filters.tourId ? eq(bookings.tourId, filters.tourId) : undefined,
@@ -51,8 +53,12 @@ function agendaConditions(filters: DepartureFilters): SQL | undefined {
   );
 }
 
-const sumWhere = (status: "confirmed" | "pending") =>
-  sql<number>`coalesce(sum(${bookings.participants}) filter (where ${bookings.status} = ${status}), 0)::int`;
+/** Seats of bookings in `statuses` (completed trips count with the confirmed ones). */
+const sumWhere = (statuses: readonly BookingStatus[]) =>
+  sql<number>`coalesce(sum(${bookings.participants}) filter (where ${inArray(bookings.status, [...statuses])}), 0)::int`;
+
+/** Another departure this guide is assigned to whose days overlap the one being staffed. */
+export type BusyDeparture = { tourId: number; tourTitle: LocalizedText; date: string };
 
 /** Paid attempt first, otherwise the most recent one. */
 const latestPaymentStatus = sql<string | null>`(
@@ -85,8 +91,8 @@ export const departureRepository = {
   },
 
   /**
-   * The agenda in one aggregate query: active bookings grouped per tour and
-   * date, joined to the tour, destination, assignment and guide. Grouping by
+   * The agenda in one aggregate query: bookings that are not cancelled, grouped
+   * per tour and date, joined to the tour, destination, assignment and guide. Grouping by
    * the joined tables' primary keys lets Postgres select their other columns.
    */
   agenda(filters: DepartureFilters) {
@@ -98,9 +104,10 @@ export const departureRepository = {
         tourTitle: tours.title,
         capacity: tours.maxParticipants,
         destinationName: destinations.name,
-        confirmed: sumWhere("confirmed"),
-        pending: sumWhere("pending"),
+        confirmed: sumWhere(["confirmed", "completed"]),
+        pending: sumWhere(["pending"]),
         bookings: sql<number>`count(${bookings.id})::int`,
+        durationDays: tours.durationDays,
         guideId: departureAssignments.guideId,
         guideName: guides.name,
         guideActive: guides.isActive,
@@ -158,6 +165,7 @@ export const departureRepository = {
         title: tours.title,
         meetingPoint: tours.meetingPoint,
         capacity: tours.maxParticipants,
+        durationDays: tours.durationDays,
         destinationId: destinations.id,
         destinationName: destinations.name,
       })
@@ -168,7 +176,7 @@ export const departureRepository = {
       .then((rows) => rows[0]);
   },
 
-  /** The departure's assignment with its guide and the person who assigned it. */
+  /** The departure's assignment with its guide. */
   findAssignment(tourId: number, date: string) {
     return db
       .select({
@@ -181,11 +189,9 @@ export const departureRepository = {
           email: guides.email,
           isActive: guides.isActive,
         },
-        assignedByName: user.name,
       })
       .from(departureAssignments)
       .leftJoin(guides, eq(guides.id, departureAssignments.guideId))
-      .leftJoin(user, eq(user.id, departureAssignments.assignedBy))
       .where(and(eq(departureAssignments.tourId, tourId), eq(departureAssignments.date, date)))
       .limit(1)
       .then((rows) => rows[0]);
@@ -227,8 +233,34 @@ export const departureRepository = {
   /**
    * Guides that can be assigned: every active guide (plus `includeId`, the
    * current one, even if deactivated), flagged when they cover `destinationId`.
+   * `busyWith` lists the guide's other departures whose days overlap
+   * `departure` (from its start to `end`, the trip's last day), counting
+   * only departures that still have a booking that is not cancelled.
    */
-  listGuideOptions(destinationId: number, includeId: number | null) {
+  listGuideOptions(
+    destinationId: number,
+    includeId: number | null,
+    departure: { tourId: number; date: string; end: string },
+  ) {
+    // Qualified by hand: the subquery aliases a second copy of the assignments.
+    const busyWith = sql<BusyDeparture[]>`coalesce((
+      select json_agg(
+        json_build_object('tourId', "other"."tour_id", 'tourTitle', "other_tour"."title", 'date', "other"."date")
+        order by "other"."date", "other"."tour_id"
+      )
+      from "departure_assignments" as "other"
+      join "tours" as "other_tour" on "other_tour"."id" = "other"."tour_id"
+      where "other"."guide_id" = "guides"."id"
+        and not ("other"."tour_id" = ${departure.tourId} and "other"."date" = ${departure.date}::date)
+        and "other"."date" <= ${departure.end}::date
+        and "other"."date" + (greatest("other_tour"."duration_days", 1) - 1) >= ${departure.date}::date
+        and exists (
+          select 1 from "bookings"
+          where "bookings"."tour_id" = "other"."tour_id"
+            and "bookings"."travel_date" = "other"."date"
+            and "bookings"."status" <> 'cancelled'
+        )
+    ), '[]'::json)`;
     return db
       .select({
         id: guides.id,
@@ -240,6 +272,7 @@ export const departureRepository = {
           where ${guideDestinations.guideId} = ${guides.id}
             and ${guideDestinations.destinationId} = ${destinationId}
         )`,
+        busyWith,
       })
       .from(guides)
       .where(
@@ -248,6 +281,16 @@ export const departureRepository = {
           : or(eq(guides.isActive, true), eq(guides.id, includeId)),
       )
       .orderBy(asc(guides.name));
+  },
+
+  /** Names of these guides (deactivated ones included), for the departure history. */
+  async guideNames(ids: readonly number[]): Promise<Map<number, string>> {
+    if (ids.length === 0) return new Map();
+    const rows = await db
+      .select({ id: guides.id, name: guides.name })
+      .from(guides)
+      .where(inArray(guides.id, [...ids]));
+    return new Map(rows.map((row) => [row.id, row.name]));
   },
 
   findGuide(id: number, tx: DbExecutor = db) {

@@ -87,22 +87,56 @@ export function isSelectable(state: DayState): boolean {
   return state === "available" || state === "limited";
 }
 
-/** Combines seats already taken and closed dates with the rules into a month view. */
+/** Last date of a trip starting on `start` (a day tour, or one in hours, ends the same day). */
+export function tripEndDate(start: string, durationDays: number): string {
+  return addDays(start, Math.max(1, durationDays) - 1);
+}
+
+/**
+ * Whether a trip of `durationDays` starting on `start` runs into a closed
+ * date: a two-day tour cannot leave the day before a closed day.
+ */
+export function isSpanClosed(
+  start: string,
+  durationDays: number,
+  closed: ReadonlySet<string>,
+): boolean {
+  for (let day = start, end = tripEndDate(start, durationDays); day <= end; day = addDays(day, 1)) {
+    if (closed.has(day)) return true;
+  }
+  return false;
+}
+
+/**
+ * Combines seats already taken and closed dates with the rules into a month
+ * view. A start date is closed when any day of the trip is.
+ */
 export function buildMonthAvailability(params: {
   month: string;
   today: string;
   capacity: number;
   taken: ReadonlyMap<string, number>;
-  /** Dates closed for this tour, either for the tour itself or for all tours. */
+  /**
+   * Dates closed for this tour, either for the tour itself or for all tours,
+   * up to the last day a trip starting this month could run on.
+   */
   closed?: ReadonlySet<string>;
+  /** Trip length in days (default 1). */
+  durationDays?: number;
 }): MonthAvailability {
-  const { month, today, capacity, taken, closed } = params;
+  const { month, today, capacity, taken, closed, durationDays = 1 } = params;
   return {
     month,
     capacity,
     days: daysInMonth(month).map((date) => {
       const raw = Math.max(0, capacity - (taken.get(date) ?? 0));
-      const state = dayState({ date, today, seatsLeft: raw, capacity, closed: closed?.has(date) });
+      const state = dayState({
+        date,
+        today,
+        seatsLeft: raw,
+        capacity,
+        closed: closed ? isSpanClosed(date, durationDays, closed) : false,
+      });
       const bookable = state === "full" || state === "limited" || state === "available";
       return { date, state, seatsLeft: bookable ? raw : 0 };
     }),
@@ -117,6 +151,14 @@ export const MAX_CLOSURE_DAYS = 92;
 export type ClosureScope = { tourId: number | null; date: string };
 
 /**
+ * Audit entity id of one close or reopen action over a range:
+ * `${tourId}:${from}..${to}`, with `all` for an all-tours closure.
+ */
+export function closureEntityId(tourId: number | null, from: string, to: string): string {
+  return `${tourId ?? "all"}:${from}..${to}`;
+}
+
+/**
  * Whether `tourId` is closed on `date`: a closure for that tour or one for
  * all tours (`tourId: null`) on the same date.
  */
@@ -126,6 +168,21 @@ export function isClosedOn(
   date: string,
 ): boolean {
   return closures.some((c) => c.date === date && (c.tourId === null || c.tourId === tourId));
+}
+
+/**
+ * The first closure (by input order) that applies to `tourId` on a date in
+ * `[from, to]`, e.g. any day of a multi-day trip.
+ */
+export function closureDuring<T extends ClosureScope>(
+  closures: readonly T[],
+  tourId: number,
+  from: string,
+  to: string,
+): T | undefined {
+  return closures.find(
+    (c) => c.date >= from && c.date <= to && (c.tourId === null || c.tourId === tourId),
+  );
 }
 
 /** Every date a tour is closed on, from closures for it and for all tours. */
@@ -217,6 +274,44 @@ export function groupClosures<T extends ClosureRow>(rows: readonly T[]): Closure
     }
   }
   return groups.sort((a, b) => a.from.localeCompare(b.from) || a.rows[0].id - b.rows[0].id);
+}
+
+/** Departures linked from the close panel; the rest are reachable through the agenda. */
+export const AFFECTED_DEPARTURES_SHOWN = 5;
+
+/**
+ * Bookings that keep their seats when a range is closed, from the departures
+ * (tour + start date) whose trips overlap it: totals, the first few
+ * departures to link to, how many more there are, and the start-date range
+ * that covers them all (for the agenda link).
+ */
+export function summarizeAffected<T extends { date: string; seats: number; bookings: number }>(
+  departures: readonly T[],
+  shown: number = AFFECTED_DEPARTURES_SHOWN,
+): {
+  bookings: number;
+  seats: number;
+  departures: T[];
+  more: number;
+  range: { from: string; to: string } | null;
+} {
+  let bookings = 0;
+  let seats = 0;
+  let from: string | null = null;
+  let to: string | null = null;
+  for (const departure of departures) {
+    bookings += departure.bookings;
+    seats += departure.seats;
+    if (from === null || departure.date < from) from = departure.date;
+    if (to === null || departure.date > to) to = departure.date;
+  }
+  return {
+    bookings,
+    seats,
+    departures: departures.slice(0, shown),
+    more: Math.max(0, departures.length - shown),
+    range: from && to ? { from, to } : null,
+  };
 }
 
 export type DayLoad = { seats: number; bookings: number };

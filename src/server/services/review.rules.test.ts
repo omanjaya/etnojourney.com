@@ -3,6 +3,7 @@ import {
   applyReviewDelta,
   arrangeReviewPhotos,
   isReviewPhotoPath,
+  nextTourAggregate,
   REVIEW_PHOTOS_MAX,
   reviewEligibility,
   reviewPhotoReceiptPayload,
@@ -43,12 +44,30 @@ describe("applyReviewDelta", () => {
     expect(applyReviewDelta({ rating: 0, count: 0 }, 4, 1)).toEqual({ rating: 4, count: 1 });
   });
 
-  it("reverses an addition when the review is hidden", () => {
+  it("reverses an addition exactly when the review is hidden", () => {
     const added = applyReviewDelta({ rating: 4.5, count: 2 }, 2, 1);
     expect(added).toEqual({ rating: 3.7, count: 3 });
-    const removed = applyReviewDelta(added, 2, -1);
-    expect(removed.count).toBe(2);
-    expect(removed.rating).toBeCloseTo(4.6, 5);
+    expect(applyReviewDelta(added, 2, -1)).toEqual({ rating: 4.5, count: 2 });
+  });
+
+  it("does not drift when low ratings are hidden one by one", () => {
+    let aggregate = { rating: 0, count: 0 };
+    for (const rating of [1, 1, 3]) aggregate = applyReviewDelta(aggregate, rating, 1);
+    expect(aggregate).toEqual({ rating: 1.7, count: 3 });
+    aggregate = applyReviewDelta(aggregate, 1, -1);
+    expect(aggregate).toEqual({ rating: 2, count: 2 });
+    expect(applyReviewDelta(aggregate, 1, -1)).toEqual({ rating: 3, count: 1 });
+  });
+
+  it("returns to the start after any hide and show cycle of up to 10 reviews", () => {
+    const ratings = [5, 4, 4, 2, 5, 3, 1, 5, 4];
+    let aggregate = { rating: 0, count: 0 };
+    for (const rating of ratings) aggregate = applyReviewDelta(aggregate, rating, 1);
+    const start = aggregate;
+    for (const rating of ratings) {
+      aggregate = applyReviewDelta(applyReviewDelta(aggregate, rating, -1), rating, 1);
+    }
+    expect(aggregate).toEqual(start);
   });
 
   it("resets to zero when the last review is removed", () => {
@@ -59,6 +78,69 @@ describe("applyReviewDelta", () => {
   it("clamps into the 0..5 range", () => {
     expect(applyReviewDelta({ rating: 5, count: 2 }, 1, -1).rating).toBe(5);
     expect(applyReviewDelta({ rating: 1, count: 2 }, 5, -1).rating).toBe(0);
+  });
+});
+
+describe("nextTourAggregate", () => {
+  it("recomputes from the published reviews when they are all the tour has", () => {
+    // Ratings 1, 1, 3; both 1-star reviews hidden: only the 3 is left.
+    expect(
+      nextTourAggregate({
+        current: { rating: 1.7, count: 3 },
+        rating: 1,
+        direction: -1,
+        published: { sum: 4, count: 2 },
+      }),
+    ).toEqual({ rating: 2, count: 2 });
+    expect(
+      nextTourAggregate({
+        current: { rating: 2.1, count: 2 },
+        rating: 1,
+        direction: -1,
+        published: { sum: 3, count: 1 },
+      }),
+    ).toEqual({ rating: 3, count: 1 });
+  });
+
+  it("repairs a drifted rating on the next change", () => {
+    expect(
+      nextTourAggregate({
+        current: { rating: 3.2, count: 1 },
+        rating: 5,
+        direction: 1,
+        published: { sum: 8, count: 2 },
+      }),
+    ).toEqual({ rating: 4, count: 2 });
+  });
+
+  it("adds the first review and empties the aggregate when the last one is hidden", () => {
+    expect(
+      nextTourAggregate({
+        current: { rating: 0, count: 0 },
+        rating: 4,
+        direction: 1,
+        published: { sum: 4, count: 1 },
+      }),
+    ).toEqual({ rating: 4, count: 1 });
+    expect(
+      nextTourAggregate({
+        current: { rating: 4, count: 1 },
+        rating: 4,
+        direction: -1,
+        published: { sum: 0, count: 0 },
+      }),
+    ).toEqual({ rating: 0, count: 0 });
+  });
+
+  it("keeps a curated history (more reviews counted than rows) and applies the delta", () => {
+    expect(
+      nextTourAggregate({
+        current: { rating: 4.9, count: 128 },
+        rating: 3,
+        direction: 1,
+        published: { sum: 13, count: 3 },
+      }),
+    ).toEqual(applyReviewDelta({ rating: 4.9, count: 128 }, 3, 1));
   });
 });
 

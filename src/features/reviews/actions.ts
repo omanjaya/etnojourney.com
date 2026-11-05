@@ -71,17 +71,13 @@ export async function setReviewPublishedAction(
 
   return runAction(async () => {
     const actor = await assertPermission("reviews.manage");
-    const { review } = await reviewService.setPublished(
+    // The service audits the change in its transaction (and skips a no-op).
+    const { review, changed } = await reviewService.setPublished(
       parsed.data.reviewId,
       parsed.data.isPublished,
+      actor.id,
     );
-    await auditService.record({
-      actorId: actor.id,
-      action: review.isPublished ? "review.published" : "review.hidden",
-      entityType: "review",
-      entityId: review.id,
-    });
-    revalidate.everything();
+    if (changed) revalidate.everything();
     return { isPublished: review.isPublished };
   });
 }

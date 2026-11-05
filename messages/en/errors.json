@@ -37,6 +37,8 @@
   "guideAccountDisabled": "This account is disabled. Enable it on the users page first.",
   "guideAccountLinked": "This account is already linked to another guide.",
   "guideAlreadyLinked": "This guide already has a portal account. Unlink it before linking another one.",
+  "guideLinkedRoleChange": "This account is a guide's partner portal login. Unlink it on the guide's page before changing its role.",
+  "partnerNeedsGuide": "The Partner role is given from a guide's page: open that guide and choose Link account.",
   "fields": {
     "guideNotesMax": "Notes can be at most 2000 characters.",
     "closurePast": "Past dates cannot be closed.",

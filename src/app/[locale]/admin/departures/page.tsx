@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   CalendarRange,
+  Lock,
   MailCheck,
   MapPin,
   SearchX,
@@ -184,11 +185,27 @@ export default async function AdminDeparturesPage({
                               ? t("agenda.guideInactive", { name: departure.guideName })
                               : t("agenda.noGuide")}
                           </Badge>
-                        ) : (
+                        ) : departure.guideName ? (
                           <span className="inline-flex min-w-0 items-center gap-1.5 text-sm font-medium">
                             <UserCheck className="text-leaf size-4 shrink-0" aria-hidden />
                             <span className="truncate">{departure.guideName}</span>
                           </span>
+                        ) : (
+                          // A past departure that ran without an assigned guide: history, not a to-do.
+                          <span className="text-muted text-sm">{t("agenda.noGuide")}</span>
+                        )}
+                        {departure.closed && (
+                          <Badge
+                            tone="gold"
+                            title={
+                              departure.closed.reason
+                                ? t("agenda.closedReason", { reason: departure.closed.reason })
+                                : undefined
+                            }
+                          >
+                            <Lock aria-hidden />
+                            {t("agenda.closed")}
+                          </Badge>
                         )}
                         {departure.hasNote && (
                           <span className="text-muted inline-flex" title={t("agenda.hasNote")}>

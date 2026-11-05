@@ -3,6 +3,7 @@ import { and, asc, eq } from "drizzle-orm";
 import { count, desc, inArray, isNull, or, sql, type SQL } from "drizzle-orm";
 import { db, type DbExecutor } from "@/server/db";
 import { auditLogs, user } from "@/server/db/schema";
+import type { LocalizedText } from "@/lib/i18n-text";
 
 export type NewAuditLog = typeof auditLogs.$inferInsert;
 
@@ -36,6 +37,32 @@ function auditConditions(filters: AuditLogFilters): SQL | undefined {
   );
 }
 
+/**
+ * The current name of the person or guide an entry is about, so the log
+ * reads "Pengguna Budi" rather than an internal id. Qualified by hand: a
+ * correlated subquery per entity type.
+ */
+const entityName = sql<string | null>`case
+  when "audit_logs"."entity_type" = 'user'
+    then (select "user"."name" from "user" where "user"."id" = "audit_logs"."entity_id")
+  when "audit_logs"."entity_type" = 'guide'
+    then (select "guides"."name" from "guides" where "guides"."id"::text = "audit_logs"."entity_id")
+end`;
+
+/**
+ * The current title of the tour a departure or closure entry is about (from
+ * `details.tourId`, stored by both), so the log says which tour was staffed
+ * or closed. The id is checked before the cast; null for other entries.
+ */
+const entityTour = sql<LocalizedText | null>`case
+  when "audit_logs"."entity_type" in ('departure', 'closure')
+    and "audit_logs"."details"->>'tourId' ~ '^[0-9]{1,9}$'
+    then (
+      select "tours"."title" from "tours"
+      where "tours"."id" = ("audit_logs"."details"->>'tourId')::int
+    )
+end`;
+
 export const auditRepository = {
   insert(entry: NewAuditLog, executor: DbExecutor = db) {
     return executor.insert(auditLogs).values(entry);
@@ -51,10 +78,16 @@ export const auditRepository = {
       .orderBy(asc(auditLogs.createdAt), asc(auditLogs.id));
   },
 
-  /** Activity log page: newest first, with the actor's name and role. */
+  /** Activity log page: newest first, with the actor's name and role, and the item's name. */
   list(filters: AuditLogFilters, limit: number, offset: number) {
     return db
-      .select({ log: auditLogs, actorName: user.name, actorRole: user.role })
+      .select({
+        log: auditLogs,
+        actorName: user.name,
+        actorRole: user.role,
+        entityName,
+        entityTour,
+      })
       .from(auditLogs)
       .leftJoin(user, eq(user.id, auditLogs.actorId))
       .where(auditConditions(filters))

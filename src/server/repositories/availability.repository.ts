@@ -9,8 +9,36 @@ export const availabilityRepository = {
   findTour(tourId: number) {
     return db.query.tours.findFirst({
       where: eq(tours.id, tourId),
-      columns: { id: true, maxParticipants: true, isPublished: true },
+      columns: { id: true, maxParticipants: true, isPublished: true, durationDays: true },
     });
+  },
+
+  /**
+   * Active bookings per departure (tour + start date) whose trip overlaps
+   * `[from, to]`, for one tour or for all tours (`null`): a three-day tour
+   * that left two days before `from` is still on the road. Earliest first.
+   */
+  affectedDepartures(tourId: number | null, from: string, to: string) {
+    return db
+      .select({
+        tourId: bookings.tourId,
+        tourTitle: tours.title,
+        date: bookings.travelDate,
+        seats: sql<number>`coalesce(sum(${bookings.participants}), 0)::int`,
+        bookings: count(),
+      })
+      .from(bookings)
+      .innerJoin(tours, eq(tours.id, bookings.tourId))
+      .where(
+        and(
+          tourId === null ? undefined : eq(bookings.tourId, tourId),
+          lte(bookings.travelDate, to),
+          sql`${bookings.travelDate} + (greatest(${tours.durationDays}, 1) - 1) >= ${from}::date`,
+          inArray(bookings.status, [...ACTIVE_STATUSES]),
+        ),
+      )
+      .groupBy(bookings.tourId, bookings.travelDate, tours.id)
+      .orderBy(asc(bookings.travelDate), asc(tours.slug));
   },
 
   /** Seats held by active bookings per date in `[from, to]`, in one grouped query. */

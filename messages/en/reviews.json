@@ -59,7 +59,7 @@
       "published": "Live"
     },
     "source": {
-      "traveller": "Traveller",
+      "traveller": "Guest",
       "curated": "Curated"
     },
     "toggle": "Publish review by {author}",

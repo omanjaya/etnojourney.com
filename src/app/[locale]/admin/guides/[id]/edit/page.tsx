@@ -72,7 +72,8 @@ export default async function EditGuidePage({
         }
       />
 
-      <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem]">
+      {/* One column: the form needs the full width on laptops (a side panel squeezed its fields). */}
+      <div className="grid gap-8">
         <GuideForm
           mode="edit"
           guideId={guide.id}
@@ -89,14 +90,24 @@ export default async function EditGuidePage({
           }}
         />
 
-        <aside className="xl:sticky xl:top-8 xl:self-start">
+        <aside className="max-w-2xl">
           <section className="border-line rounded-(--radius-card) border bg-white p-5 sm:p-6">
             <h2 className="mb-2 text-xl">{ta("title")}</h2>
             <p className="text-muted mb-4 text-sm">{ta("description")}</p>
             {canLink ? (
               <GuideAccountControl
                 guideId={guide.id}
-                account={account ? { name: account.name, email: account.email } : null}
+                account={
+                  account
+                    ? {
+                        id: account.id,
+                        name: account.name,
+                        email: account.email,
+                        isPartner: account.role === "partner",
+                        disabled: account.disabledAt !== null,
+                      }
+                    : null
+                }
               />
             ) : account ? (
               <p className="text-sm">

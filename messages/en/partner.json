@@ -38,7 +38,7 @@
     "changeHint": "Something to update? Contact the EtnoJourney team."
   },
   "departures": {
-    "travellers": "{participants, plural, one {# guest} other {# guests}} in {bookings, plural, one {# booking} other {# bookings}}",
+    "travellers": "{participants, plural, one {# guest} other {# guests}} in {bookings, plural, one {# booking} other {# bookings}}{pending, plural, =0 {} other {, # awaiting confirmation}}",
     "open": "View guest list"
   },
   "manifest": {
@@ -49,11 +49,12 @@
     "days": "{count, plural, one {# day} other {# days}}",
     "hours": "{count, plural, one {# hour} other {# hours}}",
     "travellers": "Guests",
-    "travellersValue": "{participants, plural, one {# person} other {# people}} in {bookings, plural, one {# booking} other {# bookings}}",
+    "travellersValue": "{participants, plural, one {# person} other {# people}} in {bookings, plural, one {# booking} other {# bookings}}{pending, plural, =0 {} other {, # awaiting confirmation}}",
     "noteTitle": "Operational note",
     "title": "Guest list",
-    "emptyTitle": "No confirmed guests yet",
-    "emptyDescription": "Confirmed bookings appear here.",
+    "pending": "Awaiting confirmation",
+    "emptyTitle": "No guests yet",
+    "emptyDescription": "Guests who book this departure appear here.",
     "columns": {
       "code": "Booking code",
       "contact": "Contact",

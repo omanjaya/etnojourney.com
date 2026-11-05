@@ -131,6 +131,50 @@
       "guide": "Guide",
       "departure": "Departure"
     },
+    "dateRange": "{from} to {to}",
+    "allTours": "all tours",
+    "itemOfTour": "{tour}, {item}",
+    "details": {
+      "tour": "Tour",
+      "rating": "Stars",
+      "guideName": "Guide",
+      "date": "Date",
+      "from": "From",
+      "to": "To",
+      "status": "New status",
+      "days": "Days",
+      "reason": "Reason",
+      "email": "Email",
+      "participants": "Travellers",
+      "bookings": "Active bookings",
+      "rangeBookings": "Active bookings",
+      "rescheduleCount": "Times rescheduled",
+      "daysBefore": "Days before travel",
+      "paid": "Paid",
+      "percent": "Refund",
+      "amount": "Amount",
+      "refundAmount": "Refund amount",
+      "orderId": "Order no.",
+      "note": "Note",
+      "change": "Change",
+      "fields": "Fields changed",
+      "active": "Active"
+    },
+    "changes": {
+      "added": "Added",
+      "edited": "Edited",
+      "removed": "Removed",
+      "created": "Created",
+      "updated": "Updated"
+    },
+    "creditFields": {
+      "title": "Title",
+      "author": "Author",
+      "license": "License",
+      "licenseUrl": "License link",
+      "source": "Source name",
+      "sourceUrl": "Source link"
+    },
     "empty": {
       "title": "Nothing recorded yet",
       "description": "Back-office changes will be listed here as they happen."

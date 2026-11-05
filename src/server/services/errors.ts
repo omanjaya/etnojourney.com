@@ -42,7 +42,9 @@ export type DomainErrorCode =
   | "guideAccountBackoffice"
   | "guideAccountDisabled"
   | "guideAccountLinked"
-  | "guideAlreadyLinked";
+  | "guideAlreadyLinked"
+  | "guideLinkedRoleChange"
+  | "partnerNeedsGuide";
 
 export class DomainError extends Error {
   constructor(

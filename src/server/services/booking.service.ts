@@ -25,6 +25,7 @@ import {
   UNPAID_HOLD_HOURS,
   type RefundMode,
 } from "./booking.rules";
+import { manifestChangedBy } from "./departure.rules";
 import { DomainError, type DomainErrorCode } from "./errors";
 import { paymentService } from "./payment.service";
 import { auditService } from "./audit.service";
@@ -157,7 +158,7 @@ export const bookingService = {
         maxParticipants: tour.maxParticipants,
       });
 
-      return insertWithUniqueCode(tx, {
+      const booking = await insertWithUniqueCode(tx, {
         userId,
         tourId: tour.id,
         travelDate: input.travelDate,
@@ -168,6 +169,9 @@ export const bookingService = {
         contactPhone: input.contactPhone,
         notes: input.notes || null,
       });
+      // A new guest on the departure: the guide's copy of the manifest is out of date.
+      await departureRepository.markManifestStale(tx, tour.id, [input.travelDate]);
+      return booking;
     });
   },
 
@@ -219,6 +223,8 @@ export const bookingService = {
       }
 
       const updated = await bookingRepository.updateStatusWith(tx, booking.id, "cancelled");
+      await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
+
       const refundAmount = await flagCancelledPayments(
         tx,
         live,
@@ -387,6 +393,9 @@ export const bookingService = {
           refund = { mode, refundAmount };
         }
       }
+      if (manifestChangedBy(booking.status, status)) {
+        await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
+      }
       // Same transaction: the change and its audit entry land together or not at all.
       await auditService.record(
         {
@@ -428,6 +437,8 @@ export const bookingService = {
         const hold = booking && (await bookingRepository.holdState(tx, booking.id));
         if (!booking || !hold || !isStaleHold(hold, now)) return false;
         await bookingRepository.updateStatusWith(tx, booking.id, "cancelled");
+        // The emailed manifest lists pending guests too, so it is now out of date.
+        await departureRepository.markManifestStale(tx, booking.tourId, [booking.travelDate]);
         await auditService.record(
           {
             actorId: null,

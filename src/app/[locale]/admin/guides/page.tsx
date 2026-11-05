@@ -1,4 +1,4 @@
-import { Pencil, Plus, SearchX, UserRoundCheck } from "lucide-react";
+import { Pencil, Plus, SearchX, TriangleAlert, UserRoundCheck } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { PAGE_SIZE, parsePage } from "@/lib/pagination";
@@ -46,15 +46,24 @@ export default async function AdminGuidesPage({
   const statusBadge = (active: boolean) => (
     <Badge tone={active ? "leaf" : "neutral"}>{active ? t("active") : t("inactive")}</Badge>
   );
-  const accountCell = (email: string | null) =>
-    email ? (
-      <span className="inline-flex items-center gap-1.5 break-all">
-        <UserRoundCheck className="text-leaf size-4 shrink-0" aria-hidden />
-        {email}
+  // Linked, but the portal won't open: the account is no longer a partner, or is disabled.
+  const accountCell = (guide: (typeof rows)[number]) => {
+    if (!guide.accountEmail) return <span className="text-muted">{t("noAccount")}</span>;
+    const usable = guide.accountRole === "partner" && !guide.accountDisabled;
+    return (
+      <span className="inline-flex flex-col gap-0.5">
+        <span className="inline-flex items-center gap-1.5 break-all">
+          {usable ? (
+            <UserRoundCheck className="text-leaf size-4 shrink-0" aria-hidden />
+          ) : (
+            <TriangleAlert className="size-4 shrink-0 text-[#8a6420]" aria-hidden />
+          )}
+          {guide.accountEmail}
+        </span>
+        {!usable && <span className="text-xs text-[#8a6420]">{t("accountBlocked")}</span>}
       </span>
-    ) : (
-      <span className="text-muted">{t("noAccount")}</span>
     );
+  };
 
   return (
     <>
@@ -120,7 +129,7 @@ export default async function AdminGuidesPage({
                   </div>
                   <div>
                     <dt className="text-muted text-xs">{t("columns.account")}</dt>
-                    <dd>{accountCell(guide.accountEmail)}</dd>
+                    <dd>{accountCell(guide)}</dd>
                   </div>
                 </dl>
                 <Button asChild variant="outline" size="sm" className="mt-3 h-10 w-full">
@@ -176,7 +185,7 @@ export default async function AdminGuidesPage({
                     </td>
                     <td className="text-ink-soft px-5 py-4">{languages(guide.languages)}</td>
                     <td className="px-5 py-4">{statusBadge(guide.isActive)}</td>
-                    <td className="max-w-60 px-5 py-4">{accountCell(guide.accountEmail)}</td>
+                    <td className="max-w-60 px-5 py-4">{accountCell(guide)}</td>
                     <td className="px-5 py-4">
                       <div className="flex justify-end">
                         <Button asChild variant="outline" size="sm">
