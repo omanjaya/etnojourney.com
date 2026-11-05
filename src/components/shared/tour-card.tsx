@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ArrowUpRight, Clock, MapPin, Mountain, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { durationMessage } from "@/lib/duration";
 import { formatCurrency } from "@/lib/format";
 import { localize } from "@/lib/i18n-text";
 import { provinceLabel } from "@/lib/provinces";
@@ -131,7 +132,7 @@ export function TourCard({
         <div className="text-ink-soft mt-3 flex min-w-0 items-center gap-x-4 overflow-hidden text-sm whitespace-nowrap">
           <span className="inline-flex items-center gap-1.5">
             <Clock className="text-muted size-4" aria-hidden />
-            {t("days", { count: tour.durationDays })}
+            {t(durationMessage(tour).key, { count: durationMessage(tour).count })}
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Users className="text-muted size-4" aria-hidden />

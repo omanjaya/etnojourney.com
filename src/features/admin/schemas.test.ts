@@ -109,6 +109,26 @@ describe("tourFormSchema practical info", () => {
   });
 });
 
+describe("tourFormSchema duration in hours", () => {
+  it("treats an empty hours field as a full day", () => {
+    const parsed = tourFormSchema.safeParse({ ...validTour, durationHours: "" });
+    expect(parsed.success && parsed.data.durationHours).toBe(null);
+  });
+
+  it("accepts hours on a same-day tour", () => {
+    const parsed = tourFormSchema.safeParse({ ...validTour, durationHours: 4 });
+    expect(parsed.success && parsed.data.durationHours).toBe(4);
+  });
+
+  it("rejects hours on a multi-day tour or outside 1-12", () => {
+    expect(
+      tourFormSchema.safeParse({ ...validTour, durationDays: 2, durationHours: 4 }).success,
+    ).toBe(false);
+    expect(tourFormSchema.safeParse({ ...validTour, durationHours: 13 }).success).toBe(false);
+    expect(tourFormSchema.safeParse({ ...validTour, durationHours: 0 }).success).toBe(false);
+  });
+});
+
 const validDestination = {
   slug: "uji",
   name: "Uji",

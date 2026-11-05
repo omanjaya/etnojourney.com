@@ -55,7 +55,10 @@ tail -n 50 deploy.log
 ```
 
 The catalogue was loaded once with `SEED_MODE=content` (no demo accounts or
-bookings); it refuses to run again once bookings exist. Make the owner an
+bookings); it refuses to run again once bookings exist. New destinations and
+tours added to `content/` later go in with the insert-only
+`scripts/content/sync.ts` (dry run first, then `--apply`), see
+`content/README.md`. Make the owner an
 admin after they register: `npx tsx scripts/make-admin.ts <email>` with
 `DATABASE_URL` pointing at the database through an SSH tunnel
 (`ssh -L 5442:127.0.0.1:5442 root@76.13.23.20`).

@@ -148,6 +148,8 @@
       "selectDestination": "Pilih destinasi",
       "category": "Kategori",
       "durationDays": "Durasi (hari)",
+      "durationHours": "Durasi (jam)",
+      "durationHoursHint": "Opsional, hanya untuk tur 1 hari yang lebih pendek dari sehari penuh.",
       "pricePerPerson": "Harga per orang (IDR)",
       "maxParticipants": "Maks. peserta",
       "meetingPoint": "Titik kumpul",

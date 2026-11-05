@@ -47,6 +47,7 @@
     "meetingPoint": "Meeting point",
     "duration": "Duration",
     "days": "{count, plural, one {# day} other {# days}}",
+    "hours": "{count, plural, one {# hour} other {# hours}}",
     "travellers": "Guests",
     "travellersValue": "{participants, plural, one {# person} other {# people}} in {bookings, plural, one {# booking} other {# bookings}}",
     "noteTitle": "Operational note",

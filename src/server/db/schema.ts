@@ -151,6 +151,8 @@ export const tours = pgTable(
     description: jsonb("description").$type<LocalizedText>().notNull(),
     category: tourCategory("category").notNull(),
     durationDays: integer("duration_days").notNull(),
+    /** Length of a same-day tour in hours (shown instead of "1 day"); null = full day(s). */
+    durationHours: integer("duration_hours"),
     pricePerPerson: integer("price_per_person").notNull(),
     maxParticipants: integer("max_participants").notNull(),
     rating: numeric("rating", { precision: 2, scale: 1, mode: "number" }).notNull().default(0),
@@ -177,6 +179,10 @@ export const tours = pgTable(
     index("tours_category_idx").on(t.category),
     check("tours_price_positive", sql`${t.pricePerPerson} > 0`),
     check("tours_duration_positive", sql`${t.durationDays} > 0`),
+    check(
+      "tours_duration_hours_same_day",
+      sql`${t.durationHours} is null or (${t.durationDays} = 1 and ${t.durationHours} between 1 and 12)`,
+    ),
     check("tours_capacity_positive", sql`${t.maxParticipants} > 0`),
   ],
 );

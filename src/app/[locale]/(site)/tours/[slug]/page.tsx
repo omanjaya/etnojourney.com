@@ -22,6 +22,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { localize, type LocalizedText } from "@/lib/i18n-text";
+import { durationMessage } from "@/lib/duration";
 import { formatCurrency } from "@/lib/format";
 import { provinceLabel } from "@/lib/provinces";
 import { localizedUrl, pageMetadata, siteUrl } from "@/lib/seo";
@@ -189,8 +190,9 @@ export default async function TourDetailPage({
     reviewService.publicPhotosByReview(tour.reviews.map((review) => review.id)),
   ]);
 
+  const duration = durationMessage(tour);
   const facts = [
-    { icon: Clock, label: t("duration"), value: tc("days", { count: tour.durationDays }) },
+    { icon: Clock, label: t("duration"), value: tc(duration.key, { count: duration.count }) },
     {
       icon: Users,
       label: t("groupSize"),

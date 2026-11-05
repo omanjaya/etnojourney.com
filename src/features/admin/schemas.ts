@@ -89,38 +89,48 @@ export function parseAdminListQuery(raw: RawParams): { q?: string } {
   return adminListQuerySchema.parse(flatten(raw));
 }
 
-export const tourFormSchema = z.object({
-  slug: z
-    .string()
-    .trim()
-    .min(1, "required")
-    .max(80, "slug")
-    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug"),
-  destinationId: intIn(1, Number.MAX_SAFE_INTEGER),
-  title: localized(120),
-  summary: localized(300),
-  description: localized(5000),
-  category: z.enum(tourCategory.enumValues, { error: "required" }),
-  durationDays: intIn(1, 30),
-  pricePerPerson: intIn(1, 1_000_000_000),
-  maxParticipants: intIn(1, 100),
-  meetingPoint: z.string().trim().min(2, "required").max(200, "invalid"),
-  coverImage: imageSource,
-  gallery: z.array(imageSource).max(12, "invalid"),
-  highlights: z.array(localized(160)).max(12, "invalid"),
-  included: z.array(localized(160)).max(20, "invalid"),
-  // Practical "before you go" info (limits match src/server/db/content.ts).
-  difficulty: z.enum(tourDifficulty.enumValues, { error: "required" }),
-  notIncluded: z.array(localized(160)).max(6, "invalid"),
-  whatToBring: z.array(localized(160)).max(8, "invalid"),
-  etiquette: z.array(localized(200)).max(6, "invalid"),
-  isPublished: z.boolean(),
-  isFeatured: z.boolean(),
-  itinerary: z
-    .array(z.object({ title: localized(120), description: localized(1500) }))
-    .min(1, "required")
-    .max(30, "invalid"),
-});
+export const tourFormSchema = z
+  .object({
+    slug: z
+      .string()
+      .trim()
+      .min(1, "required")
+      .max(80, "slug")
+      .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "slug"),
+    destinationId: intIn(1, Number.MAX_SAFE_INTEGER),
+    title: localized(120),
+    summary: localized(300),
+    description: localized(5000),
+    category: z.enum(tourCategory.enumValues, { error: "required" }),
+    durationDays: intIn(1, 30),
+    /** Same-day tours only; empty means the tour fills the day(s). */
+    durationHours: z.preprocess(
+      (v) => (v === "" || v === undefined ? null : v),
+      intIn(1, 12).nullable(),
+    ),
+    pricePerPerson: intIn(1, 1_000_000_000),
+    maxParticipants: intIn(1, 100),
+    meetingPoint: z.string().trim().min(2, "required").max(200, "invalid"),
+    coverImage: imageSource,
+    gallery: z.array(imageSource).max(12, "invalid"),
+    highlights: z.array(localized(160)).max(12, "invalid"),
+    included: z.array(localized(160)).max(20, "invalid"),
+    // Practical "before you go" info (limits match src/server/db/content.ts).
+    difficulty: z.enum(tourDifficulty.enumValues, { error: "required" }),
+    notIncluded: z.array(localized(160)).max(6, "invalid"),
+    whatToBring: z.array(localized(160)).max(8, "invalid"),
+    etiquette: z.array(localized(200)).max(6, "invalid"),
+    isPublished: z.boolean(),
+    isFeatured: z.boolean(),
+    itinerary: z
+      .array(z.object({ title: localized(120), description: localized(1500) }))
+      .min(1, "required")
+      .max(30, "invalid"),
+  })
+  .refine((t) => t.durationHours === null || t.durationDays === 1, {
+    message: "invalid",
+    path: ["durationHours"],
+  });
 
 export type TourFormValues = z.input<typeof tourFormSchema>;
 

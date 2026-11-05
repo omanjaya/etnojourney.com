@@ -43,6 +43,7 @@ export default async function EditTourPage({
     description: tour.description,
     category: tour.category,
     durationDays: tour.durationDays,
+    durationHours: tour.durationHours ?? "",
     pricePerPerson: tour.pricePerPerson,
     maxParticipants: tour.maxParticipants,
     meetingPoint: tour.meetingPoint,

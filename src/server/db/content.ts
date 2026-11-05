@@ -39,6 +39,8 @@ export const tourContent = z
     summary: text,
     description: text,
     durationDays: z.number().int().min(1).max(14),
+    /** Same-day tours only: length in hours, shown instead of "1 day". */
+    durationHours: z.number().int().min(1).max(12).optional(),
     pricePerPerson: z.number().int().min(100_000),
     maxParticipants: z.number().int().min(2).max(20),
     coverImage: imagePath,
@@ -60,6 +62,10 @@ export const tourContent = z
   .refine((t) => t.itinerary.length === t.durationDays, {
     message: "itinerary must have one entry per day",
     path: ["itinerary"],
+  })
+  .refine((t) => t.durationHours === undefined || t.durationDays === 1, {
+    message: "durationHours is only for same-day tours (durationDays 1)",
+    path: ["durationHours"],
   });
 
 export const regionContent = z.object({

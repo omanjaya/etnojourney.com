@@ -85,6 +85,13 @@
       "when": 1790948721224,
       "tag": "0011_tour_operations",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1793875942220,
+      "tag": "0012_tour_duration_hours",
+      "breakpoints": true
     }
   ]
 }
